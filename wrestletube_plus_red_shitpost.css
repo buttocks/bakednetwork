@@ -1,0 +1,511 @@
+
+
+/* Wrestling CSS file 6.21.2021 */
+
+
+/* Style and Color Settings */
+.well {
+    background:rgba(255, 255, 255, 0.225);
+    border-radius:5px;
+    padding:5px;
+}
+
+#messagebuffer, #chatinput, #chatheader {
+    background-color:#000 !important;
+}
+
+div.modal-body, div.modal-header, div.modal-footer {
+    background:rgba(0, 0, 0, 0.7);
+    border-radius:5px;
+    padding:5px;
+    border: 1px solid #13131c;
+    border-color: #505050;
+}
+
+div#nav-collapsible.collapse.navbar-collapse,#wrap,#footer,.modal-content,table {
+    background-image:url('https://i.imgur.com/ijkJOAX.png')!important;
+    background-color:#000000!important;
+    background-attachment:fixed;
+    background-position:center;
+    background-repeat: no-repeat; 
+    background-size: 100% auto;
+}
+
+.videolist li {
+    background-color: rgba(0, 0, 0, 0.79);
+    border: 1px solid #13131c;
+    border-color: #505050;
+}
+
+#header img {
+   width: 80%;
+   height: auto;}
+.pm-panel,
+.pm-panel-placeholder {
+    min-width: 480px
+}
+
+a.qe_title {
+   color: #fcfcf0;
+   font-size: 10pt;
+   text-rendering: optimizeLegibility;
+}
+
+.qe_blame {
+   float: right;
+   padding-right: 3px;
+}
+.channel-emote[title*=tjp] {
+  transition: 1s;
+    -webkit-filter: blur(10px);
+    -moz-filter:    blur(10px);
+    -ms-filter:     blur(10px); 
+    -o-filter:      blur(10px); 
+    filter:         blur(10px);
+}
+
+.channel-emote[title*=tjp]:hover {
+  transition: 1s;
+    -webkit-filter: blur(0px);
+    -moz-filter:    blur(0px);
+    -ms-filter:     blur(0px); 
+    -o-filter:      blur(0px); 
+    filter:         blur(0px);
+}
+.channel-emote {
+    max-height:80px;
+}
+
+#messagebuffer video { max-width: 100%; }
+video.webm {
+    display: inline;
+    vertical-align: middle;
+    max-height: 260px;
+}
+
+input.form-control[type="text"], input.form-control[type="password"], input.form-control[type="email"], textarea.form-control, #messagebuffer, #userlist {
+    background-color: rgba(0, 0, 0, 0.79)!important;
+    border-color: #505050;
+}
+
+/* Other CSS Graphics and Tricks and Such */
+
+.greentext {
+    color:#00fff9, -webkit-animation: color-change 6s infinite;
+    -moz-animation: color-change 6s infinite;
+    -o-animation: color-change 6s infinite;
+    -ms-animation: color-change 6s infinite;
+    animation: color-change 6s infinite;
+    font-weight:700;
+}
+
+@-webkit-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+     90% { color: #00ff85 }
+     100% { color: #00ffd2 }
+     
+         
+}
+@-moz-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+
+}
+@-ms-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+}
+@-o-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+}
+@keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }   
+}
+
+.tilt-f,
+.tilt-r,
+.mirror-x,
+.mirror-y { display: inline; }
+
+.tilt-f img.channel-emote:not([data-spoiled="false"]) { transform: rotate(-45deg); }
+.tilt-r img.channel-emote:not([data-spoiled="false"]) { transform: rotate( 45deg); }
+
+.mirror-x img:not([data-spoiled="false"]) { transform: scaleX(-1); }
+.mirror-y img:not([data-spoiled="false"]) { transform: scaleY(-1); }
+
+.mirror-y .mirror-x img:not([data-spoiled="false"]) , 
+.mirror-x .mirror-y img:not([data-spoiled="false"]) { transform: rotate(180deg); }
+
+.mirror-x .tilt-f img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-f .mirror-x img.channel-emote:not([data-spoiled="false"]) { transform: scaleX(-1) rotate(-45deg); }
+
+.mirror-y .tilt-f img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-f .mirror-y img.channel-emote:not([data-spoiled="false"]) { transform: scaleY(-1) rotate(-45deg); }
+
+.mirror-x .tilt-r img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-r .mirror-x img.channel-emote:not([data-spoiled="false"]) { transform: scaleX(-1) rotate( 45deg); }
+
+.mirror-y .tilt-r img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-r .mirror-y img.channel-emote:not([data-spoiled="false"]) { transform: scaleY(-1) rotate( 45deg); }
+
+.tilt-f .mirror-y .mirror-x img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-f .mirror-x .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-f .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-f .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-y .mirror-x .tilt-f img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .mirror-y .tilt-f img.channel-emote:not([data-spoiled="false"]) { transform: rotate(135deg); }
+
+.tilt-r .mirror-y .mirror-x img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-r .mirror-x .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-r .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-r .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-y .mirror-x .tilt-r img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .mirror-y .tilt-r img.channel-emote:not([data-spoiled="false"])  { transform: rotate(225deg); }
+
+
+.image-blur {
+  transition: 1s;
+    -webkit-filter: blur(5px);
+    -moz-filter:    blur(5px);
+    -ms-filter:     blur(5px); 
+    -o-filter:      blur(5px); 
+    filter:         blur(5px);
+}
+
+.image-blur:hover {
+    -webkit-filter: blur(0px);
+    -moz-filter:    blur(0px);
+    -ms-filter:     blur(0px); 
+    -o-filter:      blur(0px); 
+    filter:         blur(0px);
+}
+
+@-webkit-keyframes anim-shake {
+    0%   { -webkit-transform: translate( 2px,  1px) rotate( 0deg); }
+    10%  { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20%  { -webkit-transform: translate(-3px,  0px) rotate( 1deg); }
+    30%  { -webkit-transform: translate( 0px,  2px) rotate( 0deg); }
+    40%  { -webkit-transform: translate( 1px, -1px) rotate( 1deg); }
+    50%  { -webkit-transform: translate(-1px,  2px) rotate(-1deg); }
+    60%  { -webkit-transform: translate(-3px,  1px) rotate( 0deg); }
+    70%  { -webkit-transform: translate( 2px,  1px) rotate(-1deg); }
+    80%  { -webkit-transform: translate(-1px, -1px) rotate( 1deg); }
+    90%  { -webkit-transform: translate( 2px,  2px) rotate( 0deg); }
+    100% { -webkit-transform: translate( 1px, -2px) rotate(-1deg); }
+}
+
+
+@keyframes anim-shake {
+    0%   { transform: translate( 2px,  1px) rotate( 0deg); }
+    10%  { transform: translate(-1px, -2px) rotate(-1deg); }
+    20%  { transform: translate(-3px,  0px) rotate( 1deg); }
+    30%  { transform: translate( 0px,  2px) rotate( 0deg); }
+    40%  { transform: translate( 1px, -1px) rotate( 1deg); }
+    50%  { transform: translate(-1px,  2px) rotate(-1deg); }
+    60%  { transform: translate(-3px,  1px) rotate( 0deg); }
+    70%  { transform: translate( 2px,  1px) rotate(-1deg); }
+    80%  { transform: translate(-1px, -1px) rotate( 1deg); }
+    90%  { transform: translate( 2px,  2px) rotate( 0deg); }
+    100% { transform: translate( 1px, -2px) rotate(-1deg); }
+}
+
+.image-shake {
+    display: inline-block;
+    -webkit-animation-name: anim-shake;
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-name: anim-shake;
+    animation-duration: 0.8s;
+    transform-origin: 50% 50%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+
+#header {
+    -moz-animation: headerAnim 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: headerAnim 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: headerAnim 0s ease-in 5s forwards;
+    /* Opera */
+    animation: headerAnim 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes headerAnim {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes headerAnim {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}
+
+@keyframes spunning {
+    from { transform: rotatey(0deg) }
+    to { transform: rotatey(360deg) }
+  }
+  .spun .channel-emote {
+    animation-name: spunning;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    /* linear | ease | ease-in | ease-out | ease-in-out */
+    animation-timing-function: ease-in-out;
+
+}
+
+.left {
+    text-align:center;
+    display:inline-block;
+    width:45%;
+}
+
+.right {
+    text-align:center;
+    display:inline-block;
+    width:45%;
+}
+
+.spoiler {
+    background: url("https://i.imgur.com/OHGKC0k.png") repeat scroll 0 0 #111118;
+    color: transparent;
+}
+ 
+.spoiler:hover {
+    background-image: url("../images/spoilers.png");
+    color: #FFFFFF;
+}
+ 
+.nick-hover > .spoiler {
+    background-color: #111118;
+}
+
+/* Hidden Buttons */
+
+#shuffleplaylist {
+    display: none;
+}
+
+#qlockbtn {
+    display: none;
+}
+
+#clearplaylist {
+    display: none;
+}
+
+
+/*.channel-emote {
+max-width:999999px;
+max-height:999999px;
+width: 75px;
+//height: 35;
+-webkit-transform: rotate(36000deg);
+transition: width 3s, height 3s, transform 3s;
+}*/
+
+.channel-emote:hover {
+//width: auto; //180px;
+//height: auto; //169px;
+max-width: 200px!important;
+max-height: 120px!important;
+transition: 2s;
+}
+
+
+/*
+HTML, BODY {TEXT-TRANSFORM: UPPERCASE;}
+ deathmatch mode
+
+div.linewrap div, .userlist_item, #usercount, #videowrap-header, #customSettingsModalTrigger, #newpollbtn, #emotelistbtn, #plcontrol, #showsearch, #showcustomembed, #mediarefresh , .qe_title, .qe_blame, .nav {
+    text-shadow:0px 3px 2px red, 0px 5px 5px red, 0px 10px 5px red, 0px 15px 5px red, 0px 17px 7px red;
+}  
+
+body, .btn {
+text-transform: uppercase !important;
+} */
+
+
+/* red_'s amazing shitpost.css filters */
+.inline {
+    display: inline-block;
+}
+
+.rainbow.fast:first-child,
+.bounce.fast:first-child,
+.marquee.fast:first-child,
+.spin.fast img {
+  -webkit-animation-duration:5s;
+}
+
+.rainbow.faster:first-child,
+.bounce.faster:first-child,
+.marquee.faster:first-child,
+.spin.faster img {
+  -webkit-animation-duration:3s;
+}
+
+.rainbow.fastest:first-child,
+.bounce.fastest:first-child,
+.marquee.fastest:first-child,
+.spin.fastest img {
+  -webkit-animation-duration:1s;
+}
+
+.rainbow.reverse:first-child, 
+.bounce.reverse:first-child, 
+.marquee.reverse:first-child, 
+.spin.reverse img {
+  -webkit-animation-direction: reverse;
+}
+
+.bounce,
+.marquee {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.spin img {
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration:20s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes rotate {
+  from {-webkit-transform:rotate(0deg);}
+  to {  -webkit-transform:rotate(360deg);}
+}
+
+
+@-webkit-keyframes marquee {
+  from { left: calc(100% + 200px) }
+  to { left: -200px }
+}
+
+.marquee:first-child {
+   position: relative;
+  -webkit-animation-name: marquee;
+  -webkit-animation-duration:20s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes bounce {
+  0%, 100% { left: 100% }
+  50% { left: 0% }
+}
+
+.bounce:first-child {
+   position: relative;
+  -webkit-animation-name: bounce;
+  -webkit-animation-duration:20s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+}
+
+.rainbow {
+  -webkit-animation-name: rainbow;
+  -webkit-animation-duration:20s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes rainbow {
+  0%, 100% { filter: hue-rotate(0deg) }
+  50% { filter: hue-rotate(360deg) }
+}
+
+.moneyshot {
+    z-index: 1;
+    position: relative;
+    display: inline-block;
+}
+
+.moneyshot:before {
+    content: "";
+    background-image: url(https://i.imgur.com/wfJZkpg.gif);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 100;
+    background-size: cover;
+}
+
+.moneyshot .channel-emote {
+    position: relative;
+    z-index: 10;
+}
+
+.car:before {
+    content: "";
+    background-image: url('https://i.imgur.com/nHoWvPu.png');
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    z-index: 100;
+    background-size: cover;
+    bottom: 0;
+    left: calc(50% - 120px);
+}
+
+.car {
+    position: relative;
+    display: flex;
+    padding-bottom: 65px;
+    justify-content: center;
+    min-width: 230px;
+}
+
+/*
+ * Fix for the scroll bar on user messages
+ */
+#messagebuffer div[class*="chat-msg-"] {
+     overflow: hidden;
+}

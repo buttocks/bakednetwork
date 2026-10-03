@@ -2689,3 +2689,196 @@ div#userlist {
 	font-size: 90% !important;
 	line-height: 1.12 !important;
 }
+
+/* =========================================================
+   USERNAME FLAIR RESET — CONSISTENT SIZE / DISTINCT THEMES
+   ========================================================= */
+
+/* All custom names use the same visual size in the user list */
+#userlist [class*=userlist-],
+.userlist-buttocks,
+.userlist-tootblan,
+.userlist-RDH_BOT9000,
+.userlist-2sweetxander {
+	font-size: 100% !important;
+	line-height: 1.18 !important;
+	letter-spacing: normal !important;
+}
+
+/* Chat usernames also stay consistent */
+.chat-msg-buttocks .username,
+.chat-msg-tootblan .username,
+.chat-msg-RDH_BOT9000 .username,
+.chat-msg-2sweetxander .username {
+	font-size: 100% !important;
+}
+
+/* ---------------------------------------------------------
+   TOOTBLAN — exaggerated red/cyan cyber glitch
+   --------------------------------------------------------- */
+.chat-msg-tootblan .username,
+.userlist-tootblan {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		90deg,
+		#00ffff 0%,
+		#7ff8ff 32%,
+		#ffffff 47%,
+		#ff4b9a 60%,
+		#ff174f 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #00ffff !important;
+	font-weight: 900 !important;
+	text-shadow:
+		-2px 1px 0 rgba(255,18,70,.72),
+		2px -1px 0 rgba(0,255,255,.72),
+		0 0 5px rgba(0,255,255,.42),
+		0 0 10px rgba(255,0,120,.28) !important;
+	animation: tootblanMegaGlitch 3.1s infinite steps(1,end) !important;
+}
+
+@keyframes tootblanMegaGlitch {
+	0%, 84%, 100% {
+		transform: translate(0,0) skewX(0);
+		filter: none;
+	}
+	85% {
+		transform: translate(-1px,0) skewX(-2deg);
+	}
+	86% {
+		transform: translate(2px,0) skewX(1deg);
+		filter: hue-rotate(14deg);
+	}
+	87% {
+		transform: translate(-1px,1px);
+	}
+	88% {
+		transform: translate(0,0);
+	}
+	95% {
+		text-shadow:
+			-3px 1px 0 rgba(255,18,70,.80),
+			3px -1px 0 rgba(0,255,255,.84),
+			0 0 8px rgba(0,255,255,.52),
+			0 0 12px rgba(255,0,120,.36);
+	}
+}
+
+/* ---------------------------------------------------------
+   BUTTOCKS — electric storm / lightning theme
+   --------------------------------------------------------- */
+.chat-msg-buttocks .username,
+.userlist-buttocks {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		180deg,
+		#ffffff 0%,
+		#d8f3ff 20%,
+		#7fdcff 48%,
+		#4e8dff 72%,
+		#875cff 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #8edfff !important;
+	font-weight: 900 !important;
+	text-shadow:
+		0 0 4px rgba(180,235,255,.75),
+		0 0 9px rgba(70,165,255,.55),
+		0 0 16px rgba(105,80,255,.34),
+		1px 1px 0 rgba(0,0,0,.72) !important;
+	animation: buttocksStorm 4.2s infinite ease-in-out !important;
+}
+
+.chat-msg-buttocks .username:before,
+.userlist-buttocks:before {
+	content: "⚡" !important;
+	display: inline-block !important;
+	margin-right: 3px !important;
+	-webkit-text-fill-color: initial !important;
+	color: #d9f7ff !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-shadow:
+		0 0 5px rgba(255,255,255,.85),
+		0 0 10px rgba(80,180,255,.75),
+		0 0 16px rgba(90,80,255,.45) !important;
+	animation: buttocksLightning 2.7s infinite steps(1,end) !important;
+}
+
+@keyframes buttocksStorm {
+	0%, 100% { filter: brightness(1); }
+	50% { filter: brightness(1.12); }
+}
+
+@keyframes buttocksLightning {
+	0%, 88%, 100% { opacity: 1; transform: scale(1); }
+	89% { opacity: .35; transform: scale(.96); }
+	90% { opacity: 1; transform: scale(1.08); }
+	91% { opacity: .55; }
+	92% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------------------------------------------------------
+   RDH_BOT9000 — terminal / AI core
+   --------------------------------------------------------- */
+.chat-msg-RDH_BOT9000 .username,
+.userlist-RDH_BOT9000 {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		180deg,
+		#eaffea 0%,
+		#8dff9c 35%,
+		#2eff63 68%,
+		#00b83d 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #55ff7a !important;
+	font-weight: 900 !important;
+	text-transform: uppercase !important;
+	text-shadow:
+		0 0 4px rgba(90,255,120,.55),
+		0 0 9px rgba(0,230,70,.35),
+		1px 1px 0 rgba(0,0,0,.72) !important;
+	animation: rdhBotScan 2.6s infinite ease-in-out !important;
+}
+
+.chat-msg-RDH_BOT9000 .username:before,
+.userlist-RDH_BOT9000:before {
+	content: "⌬" !important;
+	display: inline-block !important;
+	margin-right: 3px !important;
+	-webkit-text-fill-color: initial !important;
+	color: #7dff9a !important;
+	font-style: normal !important;
+	font-weight: 900 !important;
+	text-shadow:
+		0 0 5px rgba(100,255,130,.70),
+		0 0 10px rgba(0,220,75,.42) !important;
+	animation: rdhBotCore 1.8s infinite ease-in-out !important;
+}
+
+.chat-msg-RDH_BOT9000 .username:after,
+.userlist-RDH_BOT9000:after {
+	content: none !important;
+	display: none !important;
+}
+
+@keyframes rdhBotScan {
+	0%, 100% { filter: brightness(1); }
+	50% { filter: brightness(1.18) saturate(1.08); }
+}
+
+@keyframes rdhBotCore {
+	0%, 100% { opacity: .75; transform: rotate(0deg); }
+	50% { opacity: 1; transform: rotate(90deg); }
+}

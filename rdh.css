@@ -1272,3 +1272,18 @@ overflow: visible;
 	background: url(https://i.ibb.co/X2gKByk/rNrr5QF.gif) no-repeat;
 	background-size: cover;
 }
+
+/* RDH bot identity */
+.chat-msg-RDH_BOT9000 .username:before,
+.userlist-RDH_BOT9000:before {
+	content: "🤖";
+	display: inline-block;
+	margin-right: 4px;
+	color: #66ccff;
+	text-shadow:
+		0 0 4px #66ccff,
+		0 0 8px #3399ff,
+		0 0 12px #0066ff;
+	font-style: normal;
+	font-weight: normal;
+}

@@ -1273,7 +1273,6 @@ overflow: visible;
 	background-size: cover;
 }
 
-/* RDH bot identity */
 .chat-msg-RDH_BOT9000 .username:before,
 .userlist-RDH_BOT9000:before {
 	content: "🤖";
@@ -1289,7 +1288,6 @@ overflow: visible;
 }
 
 
-/* Compact RDH bot name in user list */
 .userlist-RDH_BOT9000 {
 	font-size: 90%;
 	letter-spacing: -0.4px;
@@ -2145,3 +2143,115 @@ a#logout.navbar-link:hover {
 		padding: 9px 10px !important;
 	}
 }
+
+/* RDH_BOT9000 — glitchy cyber bot */
+.chat-msg-RDH_BOT9000 .username,
+.userlist-RDH_BOT9000 {
+	position: relative;
+	display: inline-block;
+	background: linear-gradient(
+		180deg,
+		#f5ffff 0%,
+		#9cf7ff 28%,
+		#42d7ff 58%,
+		#0c8dff 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #66eaff !important;
+	font-weight: 900 !important;
+	letter-spacing: .65px !important;
+	text-transform: uppercase !important;
+	text-shadow:
+		-1px 0 0 rgba(255, 0, 170, .55),
+		1px 0 0 rgba(0, 255, 255, .65),
+		0 0 5px rgba(90, 235, 255, .45),
+		0 0 11px rgba(25, 160, 255, .30) !important;
+	animation: rdhBotGlitch 3.8s infinite steps(1, end);
+}
+
+/* robot icon */
+.chat-msg-RDH_BOT9000 .username:before,
+.userlist-RDH_BOT9000:before {
+	content: "🤖";
+	display: inline-block;
+	margin-right: 4px;
+	-webkit-text-fill-color: initial !important;
+	color: #9af6ff !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-shadow:
+		-1px 0 0 rgba(255,0,170,.45),
+		1px 0 0 rgba(0,255,255,.55),
+		0 0 7px rgba(80,220,255,.42) !important;
+	animation: rdhBotIconPulse 2.4s ease-in-out infinite;
+}
+
+/* compact bot tag */
+.chat-msg-RDH_BOT9000 .username:after,
+.userlist-RDH_BOT9000:after {
+	content: " [BOT]";
+	display: inline-block;
+	margin-left: 3px;
+	font-size: 72%;
+	letter-spacing: .9px;
+	-webkit-text-fill-color: initial !important;
+	color: #ff4fd8 !important;
+	font-weight: 800 !important;
+	text-shadow:
+		0 0 4px rgba(255,79,216,.50),
+		0 0 8px rgba(255,0,170,.28) !important;
+}
+
+/* subtle glitch jumps */
+@keyframes rdhBotGlitch {
+	0%, 88%, 100% {
+		transform: translate(0, 0);
+		filter: none;
+	}
+	89% {
+		transform: translate(-1px, 0);
+		filter: hue-rotate(8deg);
+	}
+	90% {
+		transform: translate(1px, 0);
+	}
+	91% {
+		transform: translate(0, -1px);
+	}
+	92% {
+		transform: translate(0, 0);
+	}
+	96% {
+		text-shadow:
+			-2px 0 0 rgba(255,0,170,.65),
+			2px 0 0 rgba(0,255,255,.70),
+			0 0 8px rgba(90,235,255,.50);
+	}
+}
+
+/* tiny robot pulse */
+@keyframes rdhBotIconPulse {
+	0%, 100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.06);
+		opacity: .88;
+	}
+}
+
+/* keep it compact in the user list */
+.userlist-RDH_BOT9000 {
+	font-size: 88% !important;
+	letter-spacing: .25px !important;
+	white-space: nowrap !important;
+}
+
+/* chat version can be a touch louder */
+.chat-msg-RDH_BOT9000 .username {
+	font-size: 108% !important;
+}
+

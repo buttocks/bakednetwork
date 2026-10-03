@@ -1150,11 +1150,11 @@ overflow: visible;
 	display: none;
 }
 .chat-msg-buttocks .username {
-	color: inherit !important;
 	background: url(https://i.ibb.co/Lzh7c8r/butt.gif);
 	background-size: 100%;
-	color: transparent!important;
+	color: transparent !important;
 	-webkit-background-clip: text;
+	background-clip: text;
 	font-size: 110%;
 	font-weight: 700;
 	text-shadow: -2px -2px 10px #d2d2d2, -2px -2px 10px #d2d2d2;

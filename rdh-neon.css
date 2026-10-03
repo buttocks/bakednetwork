@@ -2598,3 +2598,94 @@ html body .navbar-nav > li > a {
 	font-size: 110% !important;
 }
 
+/* =========================================================
+   USERLIST TIGHTEN + TOOTBLAN FLASH PASS
+   ========================================================= */
+
+/* Tighten the left user list overall */
+div#userlist {
+	padding-top: 4px !important;
+	padding-bottom: 4px !important;
+}
+
+#userlist [class*=userlist-] {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	line-height: 1.18 !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+/* Keep RDH bot compact */
+.userlist-RDH_BOT9000 {
+	font-size: 84% !important;
+	letter-spacing: 0 !important;
+	line-height: 1.12 !important;
+	transform: none !important;
+}
+
+.userlist-RDH_BOT9000:before {
+	margin-right: 2px !important;
+	transform: scale(.92) !important;
+}
+
+/* Tootblan — brighter electric cyan with a punchier glitch */
+.chat-msg-tootblan .username,
+.userlist-tootblan {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		90deg,
+		#dfffff 0%,
+		#7ffcff 28%,
+		#12eaff 55%,
+		#5aa7ff 78%,
+		#d94cff 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #39f3ff !important;
+	font-weight: 900 !important;
+	letter-spacing: .35px !important;
+	text-shadow:
+		-1px 0 0 rgba(255, 55, 190, .55),
+		1px 0 0 rgba(0, 255, 255, .72),
+		0 0 5px rgba(0, 235, 255, .62),
+		0 0 10px rgba(90, 165, 255, .40),
+		0 0 14px rgba(217, 76, 255, .22) !important;
+	animation: tootblanFlash 2.8s infinite steps(1,end) !important;
+}
+
+@keyframes tootblanFlash {
+	0%, 82%, 100% {
+		transform: translate(0,0);
+		filter: brightness(1);
+	}
+	83% {
+		transform: translate(-1px,0);
+	}
+	84% {
+		transform: translate(1px,0);
+		filter: brightness(1.25);
+	}
+	85% {
+		transform: translate(0,-1px);
+	}
+	86% {
+		transform: translate(0,0);
+	}
+	93% {
+		filter: brightness(1.35) saturate(1.2);
+	}
+}
+
+/* Slightly louder tootblan in chat, still compact in user list */
+.chat-msg-tootblan .username {
+	font-size: 108% !important;
+}
+
+.userlist-tootblan {
+	font-size: 90% !important;
+	line-height: 1.12 !important;
+}

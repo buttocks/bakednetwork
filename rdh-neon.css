@@ -1711,3 +1711,165 @@ progress {
 		padding: 6px 7px !important;
 	}
 }
+
+/* =========================================================
+   RDH NEON — HEADER / LAYOUT FINISHING PASS
+   ========================================================= */
+
+/* Replace the legacy MOTD logo artwork with a CSS-built neon identity. */
+#motd img {
+	display: none !important;
+}
+
+#motd {
+	position: relative !important;
+	padding-top: 18px !important;
+	padding-bottom: 12px !important;
+	min-height: 0 !important;
+}
+
+#motd:before {
+	content: "REAL DAD'S\A HIDEOUT";
+	white-space: pre;
+	display: block;
+	text-align: center;
+	font-family: "Arial Black", "Segoe UI Black", Impact, sans-serif;
+	font-size: clamp(34px, 5vw, 72px);
+	line-height: .82;
+	letter-spacing: -2px;
+	font-style: italic;
+	font-weight: 900;
+	color: #f5fbfc;
+	text-shadow:
+		3px 3px 0 #071013,
+		0 0 3px #14e3e3,
+		0 0 10px rgba(20,227,227,.52),
+		0 0 24px rgba(20,227,227,.25);
+	margin: 0 auto 10px;
+}
+
+#motd:after {
+	content: "◉  WRESTLING PODCAST CENTRAL  ◉";
+	display: block;
+	text-align: center;
+	margin: 0 auto 10px;
+	color: var(--rdh-cyan-soft);
+	font-weight: 700;
+	font-size: 12px;
+	letter-spacing: 4px;
+	text-shadow: 0 0 8px rgba(20,227,227,.30);
+}
+
+/* Make the header area compact instead of consuming a huge vertical block. */
+#motd .well,
+#motd > center,
+#motd center {
+	min-height: 0 !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	padding-top: 4px !important;
+	padding-bottom: 4px !important;
+}
+
+#motd br {
+	line-height: .35 !important;
+}
+
+/* Pull the actual room content upward. */
+#motd + .row,
+#motd ~ .row:first-of-type,
+#mainpage > .row {
+	margin-top: 14px !important;
+}
+
+/* Chat gets a little more breathing room. */
+#chatwrap,
+#chatcolumn,
+#leftpane {
+	min-width: 0;
+}
+
+#messagebuffer {
+	font-size: 13px !important;
+}
+
+/* Calm playlist typography — keep cyan as an accent, not a floodlight. */
+.videolist li,
+.videolist li a,
+.queue_entry,
+.queue_entry a {
+	color: #d6e5e8 !important;
+}
+
+.videolist li:hover,
+.videolist li:hover a {
+	color: #f4ffff !important;
+}
+
+.queue_active,
+.queue_active a,
+.queue_active .qe_title {
+	color: #ffffff !important;
+}
+
+.qe_title,
+a.qe_title {
+	color: #d9e7e9 !important;
+	font-weight: 600 !important;
+}
+
+/* Keep timestamps/durations quieter. */
+.qe_time,
+.qe_blame,
+.videolist .pull-right,
+.videolist small {
+	color: #819aa0 !important;
+}
+
+/* Slightly stronger panel separation. */
+#chatwrap,
+#videowrap,
+#playlist,
+#queue,
+#queuerow {
+	border-radius: var(--rdh-radius) !important;
+}
+
+/* Reduce excess blank vertical space around the media row. */
+#queuerow {
+	margin-top: 14px !important;
+	margin-bottom: 18px !important;
+}
+
+/* Utility controls should sit visually behind primary content. */
+#chatcontrols .btn,
+#plcontrols .btn,
+#plcontrol .btn {
+	font-size: 12px !important;
+	padding: 3px 8px !important;
+}
+
+/* A subtle broadcast-line detail under the MOTD. */
+#motd {
+	background:
+		linear-gradient(90deg,
+			transparent 0%,
+			rgba(20,227,227,.05) 20%,
+			rgba(20,227,227,.11) 50%,
+			rgba(20,227,227,.05) 80%,
+			transparent 100%),
+		linear-gradient(180deg, #0d2027, #071217) !important;
+}
+
+/* Mobile / narrow viewport logo correction */
+@media (max-width: 700px) {
+	#motd:before {
+		font-size: 34px;
+		letter-spacing: -1px;
+	}
+
+	#motd:after {
+		font-size: 9px;
+		letter-spacing: 2px;
+	}
+}

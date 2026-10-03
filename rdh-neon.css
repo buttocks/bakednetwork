@@ -3051,3 +3051,70 @@ div#userlist {
 #useritem-RDH_BOT9000 .glyphicon-time {
 	display: none !important;
 }
+
+/* =========================================================
+   USERLIST FLOW CLEANUP
+   ========================================================= */
+
+/* Consistent compact stack */
+#userlist {
+	padding: 4px 5px !important;
+}
+
+#userlist .userlist_item,
+#userlist > div {
+	min-height: 18px !important;
+	line-height: 18px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* Align every username to the same baseline */
+#userlist [class*=userlist-] {
+	display: inline-block !important;
+	vertical-align: middle !important;
+	line-height: 18px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+/* Normalize rank/AFK/status glyph spacing */
+#userlist .glyphicon,
+#userlist [class^="glyphicon-"],
+#userlist [class*=" glyphicon-"] {
+	width: 16px !important;
+	min-width: 16px !important;
+	margin: 0 3px 0 0 !important;
+	padding: 0 !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	line-height: 18px !important;
+}
+
+/* Bot icon stays inline without widening its row */
+#useritem-RDH_BOT9000 .userlist-RDH_BOT9000:before {
+	display: inline-block !important;
+	width: 16px !important;
+	margin: 0 3px 0 0 !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	line-height: 18px !important;
+}
+
+/* Keep bot last, but with normal row spacing */
+#useritem-RDH_BOT9000 {
+	order: 9999 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	min-height: 18px !important;
+	line-height: 18px !important;
+}
+
+/* Remove any stray top/bottom spacing from custom flair */
+#userlist .userlist-buttocks,
+#userlist .userlist-tootblan,
+#userlist .userlist-RDH_BOT9000,
+#userlist .userlist-2sweetxander {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}

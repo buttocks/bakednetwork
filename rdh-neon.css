@@ -3118,3 +3118,24 @@ div#userlist {
 	margin-top: 0 !important;
 	margin-bottom: 0 !important;
 }
+
+/* =========================================================
+   MOTD HOUSE RULES BUTTON
+   ========================================================= */
+
+#motd #rdh-rules-btn {
+	display: inline-block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+	margin: 8px auto 2px !important;
+}
+
+#motd #rdh-rules {
+	display: none;
+	margin-top: 10px !important;
+	line-height: 1.7 !important;
+}
+
+#motd #rdh-rules.rdh-rules-open {
+	display: block !important;
+}

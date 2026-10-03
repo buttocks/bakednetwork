@@ -3043,3 +3043,11 @@ div#userlist {
 #useritem-RDH_BOT9000 .userlist-RDH_BOT9000 {
 	line-height: 1.12 !important;
 }
+
+/* =========================================================
+   USERLIST CLEANUP — hide AFK clock marker
+   ========================================================= */
+
+#userlist .glyphicon-time {
+	display: none !important;
+}

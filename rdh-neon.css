@@ -2938,3 +2938,24 @@ div#userlist {
 .chat-msg-buttocks .username {
 	animation: buttocksStorm 4.2s infinite ease-in-out !important;
 }
+
+/* =========================================================
+   USERLIST ORDER — keep RDH bot at the bottom
+   ========================================================= */
+
+#userlist {
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: stretch !important;
+}
+
+/* Normal users keep their natural order */
+#userlist > * {
+	order: 0;
+}
+
+/* Bot always sits after everyone else */
+#useritem-RDH_BOT9000 {
+	order: 9999 !important;
+	margin-top: 2px !important;
+}

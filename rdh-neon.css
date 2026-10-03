@@ -1192,12 +1192,6 @@ overflow: visible;
 	font-weight: 600;
 }
 
-.chat-msg-tootblan .username,
-.userlist-tootblan {
-	color: rgba(0, 255, 255, .8)!important;
-	text-shadow: 4px 2px red;
-}
-
 .chat-msg-SecretsOfWrestling .username,
 .userlist-SecretsOfWrestling {
 	color: #ff8c00!important;
@@ -2454,3 +2448,153 @@ html body .navbar-nav > li > a {
 	content: none !important;
 	display: none !important;
 }
+
+/* =========================================================
+   TOOTBLAN = FORMER BOT FLAIR
+   RDH_BOT9000 = CYBERPUNK GLITCH
+   ========================================================= */
+
+/* tootblan inherits the bot's former cold-cyan cyber styling */
+.chat-msg-tootblan .username,
+.userlist-tootblan {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		180deg,
+		#f5ffff 0%,
+		#9cf7ff 28%,
+		#42d7ff 58%,
+		#0c8dff 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #66eaff !important;
+	font-weight: 900 !important;
+	letter-spacing: .45px !important;
+	text-shadow:
+		-1px 0 0 rgba(255, 0, 170, .45),
+		1px 0 0 rgba(0, 255, 255, .60),
+		0 0 5px rgba(90, 235, 255, .42),
+		0 0 11px rgba(25, 160, 255, .28) !important;
+	animation: tootblanCyberGlitch 3.8s infinite steps(1, end) !important;
+}
+
+@keyframes tootblanCyberGlitch {
+	0%, 88%, 100% {
+		transform: translate(0, 0);
+		filter: none;
+	}
+	89% {
+		transform: translate(-1px, 0);
+		filter: hue-rotate(8deg);
+	}
+	90% {
+		transform: translate(1px, 0);
+	}
+	91% {
+		transform: translate(0, -1px);
+	}
+	92% {
+		transform: translate(0, 0);
+	}
+}
+
+/* RDH_BOT9000 — stronger cyberpunk split-color glitch */
+.chat-msg-RDH_BOT9000 .username,
+.userlist-RDH_BOT9000 {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		90deg,
+		#00ffff 0%,
+		#7ff8ff 35%,
+		#ffffff 48%,
+		#ff4b9a 58%,
+		#ff174f 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #00ffff !important;
+	font-weight: 900 !important;
+	letter-spacing: .55px !important;
+	text-transform: uppercase !important;
+	text-shadow:
+		-2px 1px 0 rgba(255, 18, 70, .72),
+		2px -1px 0 rgba(0, 255, 255, .72),
+		0 0 5px rgba(0, 255, 255, .42),
+		0 0 10px rgba(255, 0, 120, .28) !important;
+	animation: rdhCyberSplit 3.1s infinite steps(1, end) !important;
+}
+
+.chat-msg-RDH_BOT9000 .username:before,
+.userlist-RDH_BOT9000:before {
+	content: "🤖" !important;
+	display: inline-block !important;
+	margin-right: 3px !important;
+	-webkit-text-fill-color: initial !important;
+	color: #6ffaff !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-shadow:
+		-1px 1px 0 rgba(255, 18, 70, .60),
+		1px -1px 0 rgba(0, 255, 255, .70),
+		0 0 6px rgba(0, 255, 255, .42) !important;
+	animation: rdhCyberBotPulse 1.9s ease-in-out infinite !important;
+}
+
+.chat-msg-RDH_BOT9000 .username:after,
+.userlist-RDH_BOT9000:after {
+	content: none !important;
+	display: none !important;
+}
+
+@keyframes rdhCyberSplit {
+	0%, 84%, 100% {
+		transform: translate(0, 0) skewX(0);
+		filter: none;
+	}
+	85% {
+		transform: translate(-1px, 0) skewX(-2deg);
+	}
+	86% {
+		transform: translate(2px, 0) skewX(1deg);
+		filter: hue-rotate(14deg);
+	}
+	87% {
+		transform: translate(-1px, 1px);
+	}
+	88% {
+		transform: translate(0, 0);
+	}
+	95% {
+		text-shadow:
+			-3px 1px 0 rgba(255, 18, 70, .78),
+			3px -1px 0 rgba(0, 255, 255, .82),
+			0 0 8px rgba(0, 255, 255, .52),
+			0 0 12px rgba(255, 0, 120, .34);
+	}
+}
+
+@keyframes rdhCyberBotPulse {
+	0%, 100% {
+		transform: scale(1);
+		filter: brightness(1);
+	}
+	50% {
+		transform: scale(1.07);
+		filter: brightness(1.25);
+	}
+}
+
+.userlist-RDH_BOT9000,
+.userlist-tootblan {
+	font-size: 88% !important;
+	white-space: nowrap !important;
+}
+
+.chat-msg-RDH_BOT9000 .username {
+	font-size: 110% !important;
+}
+

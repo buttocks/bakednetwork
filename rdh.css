@@ -1149,7 +1149,8 @@ overflow: visible;
 .chat-msg-PerrySaturnsHairpiec .username {
 	display: none;
 }
-.chat-msg-buttocks .username {
+.chat-msg-buttocks .username,
+.userlist-buttocks {
 	background: url(https://i.ibb.co/Lzh7c8r/butt.gif);
 	background-size: 100%;
 	color: transparent !important;
@@ -1159,10 +1160,6 @@ overflow: visible;
 	font-weight: 700;
 	text-shadow: -2px -2px 10px #d2d2d2, -2px -2px 10px #d2d2d2;
 }
-#useritem-buttocks {
-	display: none;
-}
-
 .chat-msg-LeopAque .username,
 .userlist-LeopAque {
 	color: inherit !important;

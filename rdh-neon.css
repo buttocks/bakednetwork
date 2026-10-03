@@ -2882,3 +2882,59 @@ div#userlist {
 	0%, 100% { opacity: .75; transform: rotate(0deg); }
 	50% { opacity: 1; transform: rotate(90deg); }
 }
+
+/* =========================================================
+   USERLIST SIZE FIX — exact uniform footprint
+   ========================================================= */
+
+#userlist .userlist-buttocks,
+#userlist .userlist-tootblan,
+#userlist .userlist-RDH_BOT9000,
+#userlist .userlist-2sweetxander,
+#userlist .userlist-BatChest,
+#userlist .userlist-emerpus,
+#userlist .userlist-Hacktsu {
+	font-size: inherit !important;
+	line-height: inherit !important;
+	font-style: normal !important;
+	letter-spacing: normal !important;
+	transform: none !important;
+	vertical-align: baseline !important;
+}
+
+/* Keep animated flair from moving/resizing names in the user list */
+#userlist .userlist-RDH_BOT9000,
+#userlist .userlist-tootblan,
+#userlist .userlist-buttocks {
+	animation-name: none !important;
+}
+
+/* Icons stay inline and compact */
+#userlist .userlist-RDH_BOT9000:before,
+#userlist .userlist-buttocks:before {
+	font-size: .92em !important;
+	line-height: 1 !important;
+	vertical-align: baseline !important;
+	transform: none !important;
+	animation: none !important;
+	margin-right: 3px !important;
+}
+
+/* Bot specifically: no oversized uppercase footprint */
+#userlist .userlist-RDH_BOT9000 {
+	text-transform: none !important;
+	font-weight: 700 !important;
+}
+
+/* Keep the more animated versions in chat only */
+.chat-msg-RDH_BOT9000 .username {
+	animation: rdhBotScan 2.6s infinite ease-in-out !important;
+}
+
+.chat-msg-tootblan .username {
+	animation: tootblanMegaGlitch 3.1s infinite steps(1,end) !important;
+}
+
+.chat-msg-buttocks .username {
+	animation: buttocksStorm 4.2s infinite ease-in-out !important;
+}

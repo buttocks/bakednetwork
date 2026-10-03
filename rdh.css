@@ -1299,3 +1299,21 @@ overflow: visible;
 .userlist-RDH_BOT9000:before {
 	margin-right: 2px;
 }
+
+/* RDH emote sizing + delayed hover zoom */
+.channel-emote {
+	display: inline-block;
+	max-width: 200px;
+	max-height: 120px;
+	object-fit: contain;
+	transition: transform 1.5s ease;
+	transform-origin: center center;
+	z-index: 1;
+}
+
+.channel-emote[data-big="true"]:hover {
+	transform: scale(1.5);
+	transition-delay: 1.5s;
+	z-index: 9999;
+}
+

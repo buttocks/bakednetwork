@@ -2188,21 +2188,6 @@ a#logout.navbar-link:hover {
 	animation: rdhBotIconPulse 2.4s ease-in-out infinite;
 }
 
-/* compact bot tag */
-.chat-msg-RDH_BOT9000 .username:after,
-.userlist-RDH_BOT9000:after {
-	content: " [BOT]";
-	display: inline-block;
-	margin-left: 3px;
-	font-size: 72%;
-	letter-spacing: .9px;
-	-webkit-text-fill-color: initial !important;
-	color: #ff4fd8 !important;
-	font-weight: 800 !important;
-	text-shadow:
-		0 0 4px rgba(255,79,216,.50),
-		0 0 8px rgba(255,0,170,.28) !important;
-}
 
 /* subtle glitch jumps */
 @keyframes rdhBotGlitch {
@@ -2460,4 +2445,12 @@ html body .navbar-nav > li > a {
 
 #motd:after {
 	margin-bottom: 2px !important;
+}
+
+
+/* RDH bot compact cleanup */
+.chat-msg-RDH_BOT9000 .username:after,
+.userlist-RDH_BOT9000:after {
+	content: none !important;
+	display: none !important;
 }

@@ -2425,3 +2425,39 @@ html body .navbar-nav > li > a {
 		padding-bottom: 12px !important;
 	}
 }
+
+/* =========================================================
+   RDH MOTD CLEANUP — keep welcome + registration only
+   ========================================================= */
+
+/* Hide MOTD utility buttons such as Links, Rules, Schedule and Events */
+#motd .btn,
+#motd button,
+#motd a.btn,
+#motd .btn-group {
+	display: none !important;
+}
+
+/* Keep the welcome text and normal registration link visible */
+#motd a:not(.btn) {
+	display: inline !important;
+}
+
+/* Tighten the remaining MOTD content */
+#motd,
+#motd .well,
+#motd > center,
+#motd center {
+	padding-top: 6px !important;
+	padding-bottom: 6px !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+#motd br {
+	display: none !important;
+}
+
+#motd:after {
+	margin-bottom: 2px !important;
+}

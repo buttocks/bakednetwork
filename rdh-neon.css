@@ -1973,3 +1973,58 @@ a#logout.navbar-link:hover {
 .chat-msg-buttocks .username {
 	font-size: 118% !important;
 }
+
+/* =========================================================
+   RDH NAV LOGO — NEW NEON BRAND
+   ========================================================= */
+
+/* Hide the old embedded navbar logo image */
+.navbar-brand img,
+.navbar-header .navbar-brand > img {
+	display: none !important;
+}
+
+/* Use the new RDH logo in the top-left navigation */
+.navbar-brand {
+	display: block !important;
+	width: 230px !important;
+	height: 46px !important;
+	min-height: 46px !important;
+	padding: 0 !important;
+	margin: 0 12px 0 6px !important;
+	background-image: url("https://i.imgur.com/2FGHoc1.png") !important;
+	background-repeat: no-repeat !important;
+	background-position: left center !important;
+	background-size: contain !important;
+	text-indent: -9999px !important;
+	overflow: hidden !important;
+	white-space: nowrap !important;
+}
+
+/* Give the logo enough room without making the whole bar bulky */
+.navbar,
+.navbar-inverse,
+.navbar-header {
+	min-height: 46px !important;
+}
+
+.navbar-nav > li > a {
+	min-height: 46px !important;
+	padding-top: 13px !important;
+	padding-bottom: 13px !important;
+	line-height: 20px !important;
+}
+
+@media (max-width: 900px) {
+	.navbar-brand {
+		width: 180px !important;
+		height: 42px !important;
+		min-height: 42px !important;
+	}
+
+	.navbar,
+	.navbar-inverse,
+	.navbar-header {
+		min-height: 42px !important;
+	}
+}

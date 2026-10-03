@@ -3029,3 +3029,17 @@ div#userlist {
 	margin-bottom: 0 !important;
 	align-self: stretch !important;
 }
+
+/* =========================================================
+   FINAL BOT ROW GAP TRIM
+   ========================================================= */
+
+#useritem-RDH_BOT9000 {
+	margin-top: -5px !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+#useritem-RDH_BOT9000 .userlist-RDH_BOT9000 {
+	line-height: 1.12 !important;
+}

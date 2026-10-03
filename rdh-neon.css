@@ -3045,9 +3045,9 @@ div#userlist {
 }
 
 /* =========================================================
-   USERLIST CLEANUP — hide AFK clock marker
+   USERLIST CLEANUP — hide AFK clock only for RDH bot
    ========================================================= */
 
-#userlist .glyphicon-time {
+#useritem-RDH_BOT9000 .glyphicon-time {
 	display: none !important;
 }

@@ -3004,3 +3004,28 @@ div#userlist {
 			0 0 11px rgba(255, 70, 210, .50);
 	}
 }
+
+/* =========================================================
+   USERLIST BOT SPACING FIX
+   Keep bot last without pushing it to the bottom of the panel.
+   ========================================================= */
+
+#userlist {
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: flex-start !important;
+	align-items: stretch !important;
+}
+
+#userlist > * {
+	flex: 0 0 auto !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+#useritem-RDH_BOT9000 {
+	order: 9999 !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	align-self: stretch !important;
+}

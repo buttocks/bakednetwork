@@ -2255,3 +2255,124 @@ a#logout.navbar-link:hover {
 	font-size: 108% !important;
 }
 
+/* =========================================================
+   RDH NAVBAR FINAL OVERRIDE
+   Beats legacy #nav-collapsible Bootstrap/gold rules.
+   ========================================================= */
+
+html body .navbar,
+html body .navbar-inverse,
+html body #navbar,
+html body .navbar-header,
+html body div#nav-collapsible.collapse.navbar-collapse,
+html body #nav-collapsible,
+html body .navbar .container,
+html body .navbar .container-fluid {
+	background: #061014 !important;
+	background-color: #061014 !important;
+	background-image: none !important;
+	filter: none !important;
+	box-shadow: none !important;
+}
+
+html body .navbar,
+html body .navbar-inverse {
+	border: 0 !important;
+	border-bottom: 1px solid rgba(20,227,227,.34) !important;
+	box-shadow: 0 3px 14px rgba(0,0,0,.34) !important;
+}
+
+/* Remove inherited gradients from every nav cell */
+html body .navbar-nav,
+html body .navbar-nav > li,
+html body .navbar-nav > li > a,
+html body .navbar-inverse .navbar-nav > li > a {
+	background: transparent !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	filter: none !important;
+}
+
+html body .navbar-nav > li > a {
+	color: #a6c4ca !important;
+	border-left: 1px solid rgba(20,227,227,.08) !important;
+}
+
+html body .navbar-nav > li > a:hover,
+html body .navbar-nav > li > a:focus {
+	background: #0c252d !important;
+	background-image: none !important;
+	color: #73ffff !important;
+}
+
+html body .navbar-inverse .navbar-nav > .active > a,
+html body .navbar-inverse .navbar-nav > .active > a:hover,
+html body .navbar-inverse .navbar-nav > .active > a:focus {
+	background: #10313a !important;
+	background-image: none !important;
+	color: #ffffff !important;
+	box-shadow: inset 0 -2px 0 var(--rdh-cyan) !important;
+}
+
+/* Navbar logo: render image on a blend layer so black becomes invisible */
+html body .navbar-brand {
+	position: relative !important;
+	width: 132px !important;
+	height: 40px !important;
+	min-height: 40px !important;
+	padding: 0 !important;
+	margin: 0 6px 0 4px !important;
+	background: none !important;
+	background-image: none !important;
+	overflow: hidden !important;
+	text-indent: -9999px !important;
+}
+
+html body .navbar-brand:before {
+	content: "" !important;
+	position: absolute !important;
+	inset: 2px 4px !important;
+	display: block !important;
+	background-image: url("https://i.imgur.com/2FGHoc1.png") !important;
+	background-repeat: no-repeat !important;
+	background-position: left center !important;
+	background-size: contain !important;
+	mix-blend-mode: screen !important;
+	pointer-events: none !important;
+}
+
+/* Hide any legacy logo image node */
+html body .navbar-brand img,
+html body .navbar-header .navbar-brand > img {
+	display: none !important;
+}
+
+/* Compact alignment */
+html body .navbar,
+html body .navbar-inverse,
+html body .navbar-header,
+html body div#nav-collapsible.collapse.navbar-collapse {
+	min-height: 40px !important;
+}
+
+html body .navbar-nav {
+	margin: 0 !important;
+}
+
+html body .navbar-nav > li > a {
+	min-height: 40px !important;
+	line-height: 20px !important;
+	padding: 10px 14px !important;
+}
+
+@media (max-width: 900px) {
+	html body .navbar-brand {
+		width: 112px !important;
+		height: 38px !important;
+		min-height: 38px !important;
+	}
+
+	html body .navbar-brand:before {
+		inset: 2px 3px !important;
+	}
+}

@@ -1873,3 +1873,103 @@ a.qe_title {
 		letter-spacing: 2px;
 	}
 }
+
+/* =========================================================
+   RDH NEON — TOP BAR + BUTTOCKS IDENTITY PATCH
+   ========================================================= */
+
+/* Top navigation bar: stronger, cleaner, and actually part of the theme */
+#navbar,
+.navbar,
+.navbar-inverse,
+.navbar-fixed-top,
+.navbar-static-top {
+	background: linear-gradient(180deg, #0c1b22 0%, #071116 100%) !important;
+	border: 0 !important;
+	border-bottom: 1px solid rgba(20,227,227,.28) !important;
+	box-shadow:
+		0 3px 14px rgba(0,0,0,.34),
+		inset 0 -1px 0 rgba(20,227,227,.05) !important;
+	min-height: 42px !important;
+}
+
+.navbar .container,
+.navbar .container-fluid {
+	background: transparent !important;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a,
+.navbar a,
+a#logout.navbar-link,
+#welcome {
+	color: #9db8be !important;
+	text-shadow: none !important;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus,
+.navbar-inverse .navbar-brand:hover,
+.navbar a:hover,
+a#logout.navbar-link:hover {
+	color: var(--rdh-cyan-soft) !important;
+	background: rgba(20,227,227,.06) !important;
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>.active>a:focus {
+	color: #fff !important;
+	background: rgba(20,227,227,.10) !important;
+	box-shadow: inset 0 -2px 0 var(--rdh-cyan) !important;
+}
+
+/* Make dropdown caret/icons match the neon treatment */
+.navbar .caret {
+	border-top-color: #77cfd1 !important;
+	border-bottom-color: #77cfd1 !important;
+}
+
+/* Buttocks: weed-green identity, clearly separate from the cyan theme */
+.chat-msg-buttocks .username,
+.userlist-buttocks {
+	background: linear-gradient(
+		180deg,
+		#eaff71 0%,
+		#9dff3f 30%,
+		#45dc3d 65%,
+		#1d9f35 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #8cff4a !important;
+	font-size: 110% !important;
+	font-weight: 900 !important;
+	letter-spacing: .25px !important;
+	text-shadow:
+		0 0 4px rgba(150,255,70,.45),
+		0 0 10px rgba(70,220,60,.34),
+		0 0 18px rgba(40,160,50,.24),
+		1px 1px 0 rgba(0,0,0,.70) !important;
+}
+
+/* Weed leaf marker */
+.chat-msg-buttocks .username:before,
+.userlist-buttocks:before {
+	content: "🍃";
+	display: inline-block;
+	margin-right: 4px;
+	-webkit-text-fill-color: initial !important;
+	color: #83ff5a !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-shadow:
+		0 0 4px rgba(130,255,90,.55),
+		0 0 9px rgba(50,210,70,.38) !important;
+}
+
+/* Slight extra emphasis in chat only */
+.chat-msg-buttocks .username {
+	font-size: 118% !important;
+}

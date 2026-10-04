@@ -418,3 +418,24 @@
             $chatline.trigger("focus");
         });
 })();
+
+/* ---------------------------------------------------------
+   Auto-collapse MOTD after 20 seconds
+   --------------------------------------------------------- */
+(function () {
+    var motdTimer = null;
+
+    function scheduleMotdCollapse() {
+        clearTimeout(motdTimer);
+
+        motdTimer = setTimeout(function () {
+            var $motd = $("#motd");
+
+            if ($motd.length && $motd.is(":visible")) {
+                $motd.stop(true, true).slideUp(350);
+            }
+        }, 20000);
+    }
+
+    scheduleMotdCollapse();
+})();

@@ -3177,3 +3177,32 @@ div#userlist {
 #motd details summary::-webkit-details-marker {
 	display: none !important;
 }
+
+/* =========================================================
+   RABITE USER ICON
+   ========================================================= */
+
+.userlist-rabite:before,
+.chat-msg-rabite .username:before {
+	content: "" !important;
+	display: inline-block !important;
+	width: 18px !important;
+	height: 18px !important;
+	margin-right: 4px !important;
+	vertical-align: middle !important;
+	background-image: url("https://i.imgur.com/WLl2Z2F.png") !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	background-size: contain !important;
+	filter: none !important;
+	transform: none !important;
+	animation: none !important;
+}
+
+/* Keep the user-list version compact and aligned with the existing rows */
+#userlist .userlist-rabite:before {
+	width: 16px !important;
+	height: 16px !important;
+	margin-right: 3px !important;
+	vertical-align: middle !important;
+}

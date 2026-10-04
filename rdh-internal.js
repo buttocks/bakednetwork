@@ -420,22 +420,43 @@
 })();
 
 /* ---------------------------------------------------------
-   Auto-collapse MOTD after 20 seconds
+   RDH modern migration layer
+   Loads from the same GitHub/jsDelivr revision as this file.
    --------------------------------------------------------- */
 (function () {
-    var motdTimer = null;
-
-    function scheduleMotdCollapse() {
-        clearTimeout(motdTimer);
-
-        motdTimer = setTimeout(function () {
-            var $motd = $("#motd");
-
-            if ($motd.length && $motd.is(":visible")) {
-                $motd.stop(true, true).slideUp(350);
-            }
-        }, 20000);
+    if (window[CHANNEL.name] && window[CHANNEL.name].modernLoaderStarted) {
+        return;
     }
 
-    scheduleMotdCollapse();
+    window[CHANNEL.name] = window[CHANNEL.name] || {};
+    window[CHANNEL.name].modernLoaderStarted = true;
+
+    var scripts = document.getElementsByTagName("script");
+    var thisSrc = "";
+
+    for (var i = scripts.length - 1; i >= 0; i--) {
+        var src = scripts[i].src || "";
+        if (/\/rdh-internal\.js(?:\?|$)/.test(src)) {
+            thisSrc = src;
+            break;
+        }
+    }
+
+    if (!thisSrc) {
+        console.warn("[RDH] Could not determine rdh-internal.js URL; modern layer not loaded.");
+        return;
+    }
+
+    var modernSrc = thisSrc.replace(
+        /rdh-internal\.js(?:\?.*)?$/,
+        "rdh-modern.js"
+    );
+
+    $.getScript(modernSrc)
+        .done(function () {
+            console.info("[RDH] Modern migration layer loaded:", modernSrc);
+        })
+        .fail(function (_, status, error) {
+            console.error("[RDH] Modern migration layer failed:", status, error);
+        });
 })();

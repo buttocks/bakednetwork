@@ -3205,4 +3205,6 @@ div#userlist {
 	height: 16px !important;
 	margin-right: 3px !important;
 	vertical-align: middle !important;
+	position: relative !important;
+	top: 2px !important;
 }

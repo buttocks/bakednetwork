@@ -3425,5 +3425,5 @@ div#userlist {
    ========================================================= */
 
 .popover:has(.playlist-thumbnail) {
-	transform: translateX(-72px) !important;
+	transform: translateX(-150px) !important;
 }

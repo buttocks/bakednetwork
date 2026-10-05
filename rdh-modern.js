@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.9",
+        version: "0.1.10",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -243,7 +243,7 @@
             // relying on punctuation-sensitive regexes because older playlist
             // titles use several inconsistent naming formats.
             if (/^WOR\b/.test(upper) || upper.includes("WRESTLING OBSERVER RADIO")) return "wor";
-            if (/^WOL\b/.test(upper) || upper.includes("WRESTLING OBSERVER LIVE")) return "wol";
+            if (/(?:^|[^A-Z0-9])WOL(?:[^A-Z0-9]|$)/.test(upper) || upper.includes("WRESTLING OBSERVER LIVE")) return "wol";
             if (/^F4D\b/.test(upper) || upper.includes("FILTHY FOUR DAILY") || upper.includes("FIGURE FOUR DAILY")) return "f4d";
             if (upper.startsWith("AFTER DARK")) return "ad";
             if (upper.startsWith("LTB&H") || upper.startsWith("LTBH") || upper.startsWith("LTB & H")) return "ltbh";

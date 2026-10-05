@@ -207,6 +207,81 @@
         }
     });
 
+
+
+    /* ---------------------------------------------------------
+       Playlist premium title highlighter
+       Marks the recurring shows people come to RDH for.
+       --------------------------------------------------------- */
+    modern.register("premiumPlaylist", {
+        observer: null,
+        timer: null,
+
+        patterns: [
+            /(^|[^a-z0-9])WOR([^a-z0-9]|$)/i,
+            /(^|[^a-z0-9])B\s*&\s*V([^a-z0-9]|$)/i,
+            /(^|[^a-z0-9])LTBH([^a-z0-9]|$)/i,
+            /castrating\s+the\s+marks/i
+        ],
+
+        isPremiumTitle: function (title) {
+            return this.patterns.some(function (pattern) {
+                return pattern.test(title);
+            });
+        },
+
+        scan: function () {
+            const self = this;
+
+            $("#queue li.queue_entry, #queue .queue_entry").each(function () {
+                const $entry = $(this);
+                const $title = $entry.find(".qe_title").first();
+                const title = ($title.length ? $title.text() : $entry.text()).trim();
+                const premium = self.isPremiumTitle(title);
+
+                $entry.toggleClass("rdh-premium-video", premium);
+
+                if ($title.length) {
+                    $title.toggleClass("rdh-premium-title", premium);
+                }
+            });
+        },
+
+        scheduleScan: function () {
+            const self = this;
+            clearTimeout(self.timer);
+            self.timer = setTimeout(function () {
+                self.scan();
+            }, 80);
+        },
+
+        start: function () {
+            const self = this;
+            self.scan();
+
+            const queue = document.getElementById("queue");
+            if (!queue) return;
+
+            self.observer = new MutationObserver(function () {
+                self.scheduleScan();
+            });
+
+            self.observer.observe(queue, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+        },
+
+        stop: function () {
+            clearTimeout(this.timer);
+            if (this.observer) this.observer.disconnect();
+            this.observer = null;
+            $("#queue .rdh-premium-video").removeClass("rdh-premium-video");
+            $("#queue .rdh-premium-title").removeClass("rdh-premium-title");
+        }
+    });
+
     /*
      * SAFE MIGRATION FLAGS
      *
@@ -216,6 +291,7 @@
     modern.start("diagnostics");
     modern.start("emotes");
     modern.start("motdCollapse");
+    modern.start("premiumPlaylist");
 
     console.info(
         "[RDH Modern] Migration layer loaded. Legacy module loader remains intact."

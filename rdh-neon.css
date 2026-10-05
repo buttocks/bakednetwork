@@ -3392,3 +3392,29 @@ div#userlist {
 		filter: brightness(1.35);
 	}
 }
+
+
+/* =========================================================
+   RDH PLAYLIST HOVER PREVIEW SAFETY
+   Keep action buttons clickable above legacy thumbnail previews.
+   ========================================================= */
+
+#queue .queue_entry .qbtn-play,
+#queue .queue_entry .qbtn-next,
+#queue .queue_entry .qbtn-delete,
+#queue .queue_entry .qbtn-tmp,
+#queue .queue_entry .btn-group,
+#queue .queue_entry .btn {
+	position: relative !important;
+	z-index: 12000 !important;
+}
+
+/* Known/likely legacy thumbnail containers should never steal the mouse. */
+#queue .queue_entry .qe_thumbnail,
+#queue .queue_entry .queue-thumbnail,
+#queue .queue_entry .playlist-thumbnail,
+#queue .queue_entry .thumbnail-preview,
+#queue .queue_entry .video-thumbnail-preview {
+	pointer-events: none !important;
+	z-index: 11000 !important;
+}

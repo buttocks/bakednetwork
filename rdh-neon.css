@@ -3270,6 +3270,22 @@ div#userlist {
 	color: #9df7ff !important;
 }
 
+
+/* Bryan, Shawn & Craig */
+#queue .queue_entry.rdh-featured-bsc {
+	background: linear-gradient(90deg, rgba(90,205,255,.11), transparent 65%) !important;
+	box-shadow: inset 3px 0 0 rgba(100,215,255,.92) !important;
+}
+#queue .queue_entry.rdh-featured-bsc:before {
+	content: "BSC" !important;
+	color: #001a22 !important;
+	background: #7edcff !important;
+	box-shadow: 0 0 6px rgba(90,205,255,.34) !important;
+}
+#queue .queue_entry.rdh-featured-bsc .qe_title {
+	color: #b9ecff !important;
+}
+
 /* Lance Storm / Bryan Alvarez / LTBH */
 #queue .queue_entry.rdh-featured-ltbh {
 	background: linear-gradient(90deg, rgba(151,92,255,.12), transparent 65%) !important;
@@ -3369,6 +3385,7 @@ div#userlist {
 /* Current state wins for row background; show identity remains in its badge */
 #queue .queue_entry.queue_active.rdh-featured-wor,
 #queue .queue_entry.queue_active.rdh-featured-bv,
+#queue .queue_entry.queue_active.rdh-featured-bsc,
 #queue .queue_entry.queue_active.rdh-featured-ltbh,
 #queue .queue_entry.queue_active.rdh-featured-ctm {
 	background:

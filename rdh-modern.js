@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.4",
+        version: "0.1.5",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -228,8 +228,29 @@
         ],
 
         getType: function (title) {
+            const raw = String(title || "");
+            const normalized = raw
+                .replace(/\u00a0/g, " ")
+                .replace(/[–—]/g, "-")
+                .replace(/\s+/g, " ")
+                .trim();
+            const upper = normalized.toUpperCase();
+
+            // Direct recurring-show aliases first. These intentionally avoid
+            // relying on punctuation-sensitive regexes because older playlist
+            // titles use several inconsistent naming formats.
+            if (/^WOR\b/.test(upper) || upper.includes("WRESTLING OBSERVER RADIO")) return "wor";
+            if (/^F4D\b/.test(upper) || upper.includes("FILTHY FOUR DAILY")) return "f4d";
+            if (upper.startsWith("AFTER DARK")) return "ad";
+            if (upper.startsWith("LTB&H") || upper.startsWith("LTBH") || upper.startsWith("LTB & H")) return "ltbh";
+            if (upper.startsWith("BIG VINNY V")) return "bvv";
+            if (/^BVT\b/.test(upper)) return "bv";
+            if (/^B\s*&\s*V\b/.test(upper)) return "bv";
+            if (/^BRYAN\s*(?:&|AND)\s+/.test(upper)) return "bv";
+            if (upper.includes("CASTRATING THE MARKS")) return "ctm";
+
             for (let i = 0; i < this.types.length; i++) {
-                if (this.types[i].pattern.test(title)) return this.types[i].key;
+                if (this.types[i].pattern.test(normalized)) return this.types[i].key;
             }
             return "";
         },

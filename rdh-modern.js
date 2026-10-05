@@ -210,48 +210,45 @@
 
 
     /* ---------------------------------------------------------
-       Playlist premium title highlighter
-       Marks the recurring shows people come to RDH for.
+       Playlist featured-show identifiers
+       Gives each recurring RDH show its own compact visual marker.
        --------------------------------------------------------- */
     modern.register("premiumPlaylist", {
         observer: null,
         timer: null,
 
-        patterns: [
-            /(^|[^a-z0-9])WOR([^a-z0-9]|$)/i,
-            /(^|[^a-z0-9])B\s*&\s*V([^a-z0-9]|$)/i,
-            /(^|[^a-z0-9])LTBH([^a-z0-9]|$)/i,
-            /castrating\s+the\s+marks/i
+        types: [
+            { key: "wor",  pattern: /(^|[^a-z0-9])WOR([^a-z0-9]|$)/i },
+            { key: "bv",   pattern: /(^|[^a-z0-9])B\s*&\s*V([^a-z0-9]|$)/i },
+            { key: "ltbh", pattern: /(^|[^a-z0-9])LTBH([^a-z0-9]|$)/i },
+            { key: "ctm",  pattern: /castrating\s+the\s+marks/i }
         ],
 
-        isPremiumTitle: function (title) {
-            return this.patterns.some(function (pattern) {
-                return pattern.test(title);
-            });
+        getType: function (title) {
+            for (let i = 0; i < this.types.length; i++) {
+                if (this.types[i].pattern.test(title)) return this.types[i].key;
+            }
+            return "";
         },
 
         scan: function () {
             const self = this;
+            const typeClasses = "rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-ltbh rdh-featured-ctm";
 
             $("#queue li.queue_entry, #queue .queue_entry").each(function () {
                 const $entry = $(this);
                 const $title = $entry.find(".qe_title").first();
                 const title = ($title.length ? $title.text() : $entry.text()).trim();
-                const premium = self.isPremiumTitle(title);
-                const hasPremium = $entry.hasClass("rdh-premium-video");
+                const type = self.getType(title);
+                const wantedClass = type ? "rdh-featured-" + type : "";
 
-                // Only touch the DOM when the state actually changes.
-                // This avoids MutationObserver feedback loops that can make
-                // legacy playlist hover previews flicker.
-                if (premium !== hasPremium) {
-                    $entry.toggleClass("rdh-premium-video", premium);
-                }
+                const hasCorrectState =
+                    (!!type === $entry.hasClass("rdh-featured")) &&
+                    (!type || $entry.hasClass(wantedClass));
 
-                if ($title.length) {
-                    const titleHasPremium = $title.hasClass("rdh-premium-title");
-                    if (premium !== titleHasPremium) {
-                        $title.toggleClass("rdh-premium-title", premium);
-                    }
+                if (!hasCorrectState) {
+                    $entry.removeClass(typeClasses);
+                    if (type) $entry.addClass("rdh-featured " + wantedClass);
                 }
             });
         },
@@ -286,8 +283,8 @@
             clearTimeout(this.timer);
             if (this.observer) this.observer.disconnect();
             this.observer = null;
-            $("#queue .rdh-premium-video").removeClass("rdh-premium-video");
-            $("#queue .rdh-premium-title").removeClass("rdh-premium-title");
+            $("#queue .rdh-featured, #queue [class*='rdh-featured-']")
+                .removeClass("rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-ltbh rdh-featured-ctm");
         }
     });
 

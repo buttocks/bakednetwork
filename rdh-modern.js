@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.2",
+        version: "0.1.3",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -219,8 +219,10 @@
 
         types: [
             { key: "wor",  pattern: /(?:^|[^a-z0-9])WOR(?:[^a-z0-9]|$)|wrestling\s+observer\s+radio/i },
-            { key: "bv",   pattern: /(?:^|[^a-z0-9])B\s*&\s*V(?:[^a-z0-9]|$)|^\s*bryan\s*(?:&|and)\s+/i },
-            { key: "ltbh", pattern: /(?:^|[^a-z0-9])LTBH(?:[^a-z0-9]|$)|lance\s+storm.*bryan\s+alvarez/i },
+            { key: "f4d",  pattern: /(?:^|[^a-z0-9])F4D(?:[^a-z0-9]|$)|filthy\s+four\s+daily/i },
+            { key: "ad",   pattern: /(?:^|[^a-z0-9])AFTER\s+DARK(?:\s+RADIO)?(?:[^a-z0-9]|$)/i },
+            { key: "ltbh", pattern: /(?:^|[^a-z0-9])LTB\s*&?\s*H(?:[^a-z0-9]|$)|lance\s+storm.*bryan\s+alvarez/i },
+            { key: "bv",   pattern: /(?:^|[^a-z0-9])B\s*&\s*V(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])BVT(?:[^a-z0-9]|$)|big\s+vinny\s+v|^\s*bryan\s*(?:&|and)\s+/i },
             { key: "ctm",  pattern: /castrating\s+the\s+marks/i }
         ],
 
@@ -233,7 +235,7 @@
 
         scan: function () {
             const self = this;
-            const typeClasses = "rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-bsc rdh-featured-ltbh rdh-featured-ctm";
+            const typeClasses = "rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc";
 
             $("#queue li.queue_entry, #queue .queue_entry").each(function () {
                 const $entry = $(this);
@@ -284,7 +286,7 @@
             if (this.observer) this.observer.disconnect();
             this.observer = null;
             $("#queue .rdh-featured, #queue [class*='rdh-featured-']")
-                .removeClass("rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-ltbh rdh-featured-ctm rdh-featured-bsc");
+                .removeClass("rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc");
         }
     });
 

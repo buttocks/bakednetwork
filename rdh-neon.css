@@ -3208,3 +3208,51 @@ div#userlist {
 	position: relative !important;
 	top: 2px !important;
 }
+
+
+/* =========================================================
+   RDH PREMIUM PLAYLIST HIGHLIGHT
+   WOR / B&V / LTBH / Castrating the Marks
+   ========================================================= */
+
+#queue .queue_entry.rdh-premium-video {
+	position: relative !important;
+	border-color: rgba(255, 190, 40, .72) !important;
+	background:
+		linear-gradient(90deg,
+			rgba(255, 175, 20, .14) 0%,
+			rgba(255, 210, 80, .07) 45%,
+			rgba(0, 225, 240, .035) 100%) !important;
+	box-shadow:
+		inset 3px 0 0 rgba(255, 188, 35, .95),
+		inset 0 0 14px rgba(255, 180, 20, .08),
+		0 0 7px rgba(255, 165, 20, .10) !important;
+}
+
+#queue .queue_entry.rdh-premium-video .qe_title {
+	color: #ffe28a !important;
+	font-weight: 900 !important;
+	text-shadow:
+		0 0 4px rgba(255, 195, 55, .45),
+		0 0 8px rgba(255, 145, 0, .22) !important;
+}
+
+#queue .queue_entry.rdh-premium-video .qe_title:before {
+	content: "★ PREMIUM  " !important;
+	color: #ffbe32 !important;
+	font-size: .82em !important;
+	font-weight: 900 !important;
+	letter-spacing: .45px !important;
+	text-transform: uppercase !important;
+	text-shadow:
+		0 0 4px rgba(255, 190, 45, .70),
+		0 0 8px rgba(255, 120, 0, .30) !important;
+}
+
+/* Keep the active-video state obvious while retaining premium branding */
+#queue .queue_entry.queue_active.rdh-premium-video {
+	box-shadow:
+		inset 3px 0 0 #ffd25a,
+		inset 0 0 16px rgba(255, 205, 70, .10),
+		0 0 8px rgba(255, 190, 50, .16) !important;
+}

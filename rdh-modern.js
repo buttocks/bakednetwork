@@ -238,11 +238,20 @@
                 const $title = $entry.find(".qe_title").first();
                 const title = ($title.length ? $title.text() : $entry.text()).trim();
                 const premium = self.isPremiumTitle(title);
+                const hasPremium = $entry.hasClass("rdh-premium-video");
 
-                $entry.toggleClass("rdh-premium-video", premium);
+                // Only touch the DOM when the state actually changes.
+                // This avoids MutationObserver feedback loops that can make
+                // legacy playlist hover previews flicker.
+                if (premium !== hasPremium) {
+                    $entry.toggleClass("rdh-premium-video", premium);
+                }
 
                 if ($title.length) {
-                    $title.toggleClass("rdh-premium-title", premium);
+                    const titleHasPremium = $title.hasClass("rdh-premium-title");
+                    if (premium !== titleHasPremium) {
+                        $title.toggleClass("rdh-premium-title", premium);
+                    }
                 }
             });
         },

@@ -3299,3 +3299,96 @@ div#userlist {
 #queue .queue_entry.rdh-featured-ctm .qe_title {
 	color: #ffb4d7 !important;
 }
+
+
+/* =========================================================
+   RDH CURRENT PLAYING IDENTIFIER
+   Deliberately different from WOR / B&V / LTBH / CTM markers.
+   ========================================================= */
+
+#queue .queue_entry.queue_active {
+	position: relative !important;
+	background:
+		linear-gradient(90deg,
+			rgba(0, 235, 255, .18) 0%,
+			rgba(0, 140, 175, .10) 48%,
+			rgba(0, 35, 45, .04) 100%) !important;
+	border-top: 1px solid rgba(95, 245, 255, .48) !important;
+	border-bottom: 1px solid rgba(95, 245, 255, .48) !important;
+	box-shadow:
+		inset 4px 0 0 #35f1ff,
+		inset 0 0 14px rgba(0, 225, 255, .10),
+		0 0 7px rgba(0, 220, 255, .13) !important;
+}
+
+/* Current title stays bright/neutral instead of inheriting a show's color */
+#queue .queue_entry.queue_active .qe_title {
+	color: #f4feff !important;
+	text-shadow:
+		0 0 4px rgba(115, 245, 255, .46),
+		0 0 8px rgba(0, 210, 240, .18) !important;
+}
+
+/* Tiny play marker — visually different from the show abbreviation badges */
+#queue .queue_entry.queue_active:after {
+	content: "▶" !important;
+	position: absolute !important;
+	left: 8px !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	color: #5ef6ff !important;
+	font-size: 10px !important;
+	line-height: 1 !important;
+	text-shadow:
+		0 0 5px rgba(70, 245, 255, .85),
+		0 0 9px rgba(0, 210, 255, .40) !important;
+	z-index: 3 !important;
+	animation: rdhCurrentPulse 1.8s ease-in-out infinite !important;
+}
+
+/* Normal rows need room for the current-play marker */
+#queue .queue_entry.queue_active:not(.rdh-featured) {
+	padding-left: 24px !important;
+}
+
+/* Featured rows already have a show badge on the left.
+   Move the current-play arrow just outside that badge instead of replacing it. */
+#queue .queue_entry.queue_active.rdh-featured {
+	padding-left: 54px !important;
+}
+
+#queue .queue_entry.queue_active.rdh-featured:after {
+	left: 39px !important;
+}
+
+/* Keep each show's compact badge visible on the current video */
+#queue .queue_entry.queue_active.rdh-featured:before {
+	filter: brightness(1.08) saturate(1.05) !important;
+}
+
+/* Current state wins for row background; show identity remains in its badge */
+#queue .queue_entry.queue_active.rdh-featured-wor,
+#queue .queue_entry.queue_active.rdh-featured-bv,
+#queue .queue_entry.queue_active.rdh-featured-ltbh,
+#queue .queue_entry.queue_active.rdh-featured-ctm {
+	background:
+		linear-gradient(90deg,
+			rgba(0, 235, 255, .18) 0%,
+			rgba(0, 140, 175, .10) 48%,
+			rgba(0, 35, 45, .04) 100%) !important;
+	box-shadow:
+		inset 4px 0 0 #35f1ff,
+		inset 0 0 14px rgba(0, 225, 255, .10),
+		0 0 7px rgba(0, 220, 255, .13) !important;
+}
+
+@keyframes rdhCurrentPulse {
+	0%, 100% {
+		opacity: .72;
+		filter: brightness(1);
+	}
+	50% {
+		opacity: 1;
+		filter: brightness(1.35);
+	}
+}

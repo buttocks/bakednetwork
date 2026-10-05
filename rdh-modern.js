@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.1",
+        version: "0.1.2",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -219,8 +219,7 @@
 
         types: [
             { key: "wor",  pattern: /(?:^|[^a-z0-9])WOR(?:[^a-z0-9]|$)|wrestling\s+observer\s+radio/i },
-            { key: "bv",   pattern: /(?:^|[^a-z0-9])B\s*&\s*V(?:[^a-z0-9]|$)|bryan\s*(?:&|and)\s*vinny/i },
-            { key: "bsc",  pattern: /bryan\s*(?:&|and)\s*shawn\s*(?:&|and)\s*craig/i },
+            { key: "bv",   pattern: /(?:^|[^a-z0-9])B\s*&\s*V(?:[^a-z0-9]|$)|^\s*bryan\s*(?:&|and)\s+/i },
             { key: "ltbh", pattern: /(?:^|[^a-z0-9])LTBH(?:[^a-z0-9]|$)|lance\s+storm.*bryan\s+alvarez/i },
             { key: "ctm",  pattern: /castrating\s+the\s+marks/i }
         ],
@@ -285,7 +284,7 @@
             if (this.observer) this.observer.disconnect();
             this.observer = null;
             $("#queue .rdh-featured, #queue [class*='rdh-featured-']")
-                .removeClass("rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-bsc rdh-featured-ltbh rdh-featured-ctm");
+                .removeClass("rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-ltbh rdh-featured-ctm rdh-featured-bsc");
         }
     });
 

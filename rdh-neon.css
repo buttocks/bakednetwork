@@ -3271,6 +3271,37 @@ div#userlist {
 }
 
 
+/* Filthy Four Daily */
+#queue .queue_entry.rdh-featured-f4d {
+	background: linear-gradient(90deg, rgba(255,135,60,.11), transparent 65%) !important;
+	box-shadow: inset 3px 0 0 rgba(255,145,65,.92) !important;
+}
+#queue .queue_entry.rdh-featured-f4d:before {
+	content: "F4D" !important;
+	color: #281000 !important;
+	background: #ff9c57 !important;
+	box-shadow: 0 0 6px rgba(255,135,60,.34) !important;
+}
+#queue .queue_entry.rdh-featured-f4d .qe_title {
+	color: #ffc49a !important;
+}
+
+/* After Dark */
+#queue .queue_entry.rdh-featured-ad {
+	background: linear-gradient(90deg, rgba(75,135,255,.11), transparent 65%) !important;
+	box-shadow: inset 3px 0 0 rgba(85,150,255,.92) !important;
+}
+#queue .queue_entry.rdh-featured-ad:before {
+	content: "AD" !important;
+	color: #00142d !important;
+	background: #76a8ff !important;
+	box-shadow: 0 0 6px rgba(75,135,255,.34) !important;
+}
+#queue .queue_entry.rdh-featured-ad .qe_title {
+	color: #b7d2ff !important;
+}
+
+
 
 /* Lance Storm / Bryan Alvarez / LTBH */
 #queue .queue_entry.rdh-featured-ltbh {
@@ -3372,7 +3403,9 @@ div#userlist {
 #queue .queue_entry.queue_active.rdh-featured-wor,
 #queue .queue_entry.queue_active.rdh-featured-bv,
 #queue .queue_entry.queue_active.rdh-featured-ltbh,
-#queue .queue_entry.queue_active.rdh-featured-ctm {
+#queue .queue_entry.queue_active.rdh-featured-ctm,
+#queue .queue_entry.queue_active.rdh-featured-f4d,
+#queue .queue_entry.queue_active.rdh-featured-ad {
 	background:
 		linear-gradient(90deg,
 			rgba(0, 235, 255, .18) 0%,

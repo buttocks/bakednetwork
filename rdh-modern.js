@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.8",
+        version: "0.1.9",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -220,6 +220,7 @@
 
         types: [
             { key: "wor",  pattern: /(?:^|[^a-z0-9])WOR(?:[^a-z0-9]|$)|wrestling\s+observer\s+radio/i },
+            { key: "wol",  pattern: /(?:^|[^a-z0-9])WOL(?:[^a-z0-9]|$)|wrestling\s+observer\s+live/i },
             { key: "f4d",  pattern: /(?:^|[^a-z0-9])F4D(?:[^a-z0-9]|$)|filthy\s+four\s+daily/i },
             { key: "ad",   pattern: /(?:^|[^a-z0-9])AFTER\s+DARK(?:\s+RADIO)?(?:[^a-z0-9]|$)/i },
             { key: "ltbh", pattern: /(?:^|[^a-z0-9])LTB\s*&?\s*H(?:[^a-z0-9]|$)|lance\s+storm.*bryan\s+alvarez/i },
@@ -242,6 +243,7 @@
             // relying on punctuation-sensitive regexes because older playlist
             // titles use several inconsistent naming formats.
             if (/^WOR\b/.test(upper) || upper.includes("WRESTLING OBSERVER RADIO")) return "wor";
+            if (/^WOL\b/.test(upper) || upper.includes("WRESTLING OBSERVER LIVE")) return "wol";
             if (/^F4D\b/.test(upper) || upper.includes("FILTHY FOUR DAILY") || upper.includes("FIGURE FOUR DAILY")) return "f4d";
             if (upper.startsWith("AFTER DARK")) return "ad";
             if (upper.startsWith("LTB&H") || upper.startsWith("LTBH") || upper.startsWith("LTB & H")) return "ltbh";
@@ -259,7 +261,7 @@
 
         scan: function () {
             const self = this;
-            const typeClasses = "rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc";
+            const typeClasses = "rdh-featured rdh-featured-wor rdh-featured-wol rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc";
 
             $("#queue li.queue_entry, #queue .queue_entry").each(function () {
                 const $entry = $(this);
@@ -318,7 +320,7 @@
             if (this.observer) this.observer.disconnect();
             this.observer = null;
             $("#queue .rdh-featured, #queue [class*='rdh-featured-']")
-                .removeClass("rdh-featured rdh-featured-wor rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc");
+                .removeClass("rdh-featured rdh-featured-wor rdh-featured-wol rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc");
         }
     });
 

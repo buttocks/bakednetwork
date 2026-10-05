@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.5",
+        version: "0.1.6",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -216,6 +216,7 @@
     modern.register("premiumPlaylist", {
         observer: null,
         timer: null,
+        interval: null,
 
         types: [
             { key: "wor",  pattern: /(?:^|[^a-z0-9])WOR(?:[^a-z0-9]|$)|wrestling\s+observer\s+radio/i },
@@ -240,7 +241,7 @@
             // relying on punctuation-sensitive regexes because older playlist
             // titles use several inconsistent naming formats.
             if (/^WOR\b/.test(upper) || upper.includes("WRESTLING OBSERVER RADIO")) return "wor";
-            if (/^F4D\b/.test(upper) || upper.includes("FILTHY FOUR DAILY")) return "f4d";
+            if (/^F4D\b/.test(upper) || upper.includes("FILTHY FOUR DAILY") || upper.includes("FIGURE FOUR DAILY")) return "f4d";
             if (upper.startsWith("AFTER DARK")) return "ad";
             if (upper.startsWith("LTB&H") || upper.startsWith("LTBH") || upper.startsWith("LTB & H")) return "ltbh";
             if (upper.startsWith("BIG VINNY V")) return "bvv";
@@ -289,22 +290,30 @@
             const self = this;
             self.scan();
 
-            const queue = document.getElementById("queue");
-            if (!queue) return;
-
+            // Watch the whole page rather than one queue node. Baked can replace
+            // or virtualize playlist DOM while scrolling, which otherwise leaves
+            // newly-rendered rows untagged.
             self.observer = new MutationObserver(function () {
                 self.scheduleScan();
             });
 
-            self.observer.observe(queue, {
+            self.observer.observe(document.body, {
                 childList: true,
                 subtree: true,
                 characterData: true
             });
+
+            // Periodic safety scan catches virtualized/reused rows even if the
+            // site mutates attributes/properties without a useful DOM event.
+            self.interval = setInterval(function () {
+                self.scan();
+            }, 1000);
         },
 
         stop: function () {
             clearTimeout(this.timer);
+            clearInterval(this.interval);
+            this.interval = null;
             if (this.observer) this.observer.disconnect();
             this.observer = null;
             $("#queue .rdh-featured, #queue [class*='rdh-featured-']")

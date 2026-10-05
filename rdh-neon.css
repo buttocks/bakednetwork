@@ -3394,8 +3394,6 @@ div#userlist {
 }
 
 
-/* =========================================================
-   RDH PLAYLIST HOVER PREVIEW SAFETY
    Keep action buttons clickable above legacy thumbnail previews.
    ========================================================= */
 
@@ -3417,4 +3415,15 @@ div#userlist {
 #queue .queue_entry .video-thumbnail-preview {
 	pointer-events: none !important;
 	z-index: 11000 !important;
+}
+
+
+/* =========================================================
+   RDH PLAYLIST THUMBNAIL POSITION ONLY
+   Move the legacy thumbnail preview left so it clears controls.
+   No hover/control behavior changes.
+   ========================================================= */
+
+.popover:has(.playlist-thumbnail) {
+	transform: translateX(-72px) !important;
 }

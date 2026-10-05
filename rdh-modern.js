@@ -268,28 +268,8 @@
             const queue = document.getElementById("queue");
             if (!queue) return;
 
-            self.observer = new MutationObserver(function (mutations) {
-                // Ignore temporary hover-preview DOM changes from the legacy
-                // playlist module. Scanning ~999 rows every time a thumbnail
-                // appears/disappears can make that preview flicker.
-                const needsScan = mutations.some(function (mutation) {
-                    if (mutation.type === "characterData") {
-                        return !!$(mutation.target).closest(".qe_title").length;
-                    }
-
-                    if (mutation.type !== "childList") return false;
-
-                    const nodes = Array.prototype.slice.call(mutation.addedNodes || [])
-                        .concat(Array.prototype.slice.call(mutation.removedNodes || []));
-
-                    return nodes.some(function (node) {
-                        if (!node || node.nodeType !== 1) return false;
-                        if (node.matches && node.matches(".queue_entry")) return true;
-                        return !!(node.querySelector && node.querySelector(".queue_entry"));
-                    });
-                });
-
-                if (needsScan) self.scheduleScan();
+            self.observer = new MutationObserver(function () {
+                self.scheduleScan();
             });
 
             self.observer.observe(queue, {

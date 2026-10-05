@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.6",
+        version: "0.1.7",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -231,6 +231,7 @@
         getType: function (title) {
             const raw = String(title || "");
             const normalized = raw
+                .replace(/[\u200B-\u200D\uFEFF]/g, "")
                 .replace(/\u00a0/g, " ")
                 .replace(/[–—]/g, "-")
                 .replace(/\s+/g, " ")
@@ -245,7 +246,7 @@
             if (upper.startsWith("AFTER DARK")) return "ad";
             if (upper.startsWith("LTB&H") || upper.startsWith("LTBH") || upper.startsWith("LTB & H")) return "ltbh";
             if (upper.startsWith("BIG VINNY V")) return "bvv";
-            if (/^BVT\b/.test(upper)) return "bv";
+            if (/(?:^|[^A-Z0-9])BVT(?:[^A-Z0-9]|$)/.test(upper)) return "bv";
             if (/^B\s*&\s*V\b/.test(upper)) return "bv";
             if (/^BRYAN\s*(?:&|AND)\s+/.test(upper)) return "bv";
             if (upper.includes("CASTRATING THE MARKS")) return "ctm";

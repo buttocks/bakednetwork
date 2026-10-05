@@ -3496,3 +3496,27 @@ div#userlist {
 .popover:has(.playlist-thumbnail) {
 	transform: translateX(-150px) !important;
 }
+
+
+/* =========================================================
+   RDH CHAT MEDIA ROW COMPACTION
+   Keep image/GIF posts from turning into large full-width
+   highlighted slabs while preserving the media itself.
+   ========================================================= */
+
+#messagebuffer [class*="chat-msg"]:has(img:not(.channel-emote)) {
+	background: transparent !important;
+	padding-top: 1px !important;
+	padding-bottom: 1px !important;
+	min-height: 0 !important;
+}
+
+#messagebuffer [class*="chat-msg"]:has(img:not(.channel-emote)):hover {
+	background: rgba(20,227,227,.02) !important;
+}
+
+#messagebuffer [class*="chat-msg"] img:not(.channel-emote) {
+	vertical-align: middle !important;
+	margin-top: 2px !important;
+	margin-bottom: 2px !important;
+}

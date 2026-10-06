@@ -3498,25 +3498,22 @@ div#userlist {
 }
 
 
+
+
 /* =========================================================
-   RDH CHAT MEDIA ROW COMPACTION
-   Keep image/GIF posts from turning into large full-width
-   highlighted slabs while preserving the media itself.
+   LEOPAQUE — restore usual animated userlist name
    ========================================================= */
-
-#messagebuffer [class*="chat-msg"]:has(img:not(.channel-emote)) {
-	background: transparent !important;
-	padding-top: 1px !important;
-	padding-bottom: 1px !important;
-	min-height: 0 !important;
-}
-
-#messagebuffer [class*="chat-msg"]:has(img:not(.channel-emote)):hover {
-	background: rgba(20,227,227,.02) !important;
-}
-
-#messagebuffer [class*="chat-msg"] img:not(.channel-emote) {
-	vertical-align: middle !important;
-	margin-top: 2px !important;
-	margin-bottom: 2px !important;
+#userlist .userlist-LeopAque,
+#useritem-LeopAque .userlist-LeopAque {
+	display: inline-block !important;
+	background-image: url("https://i.imgur.com/AkCXAAJ.gif") !important;
+	background-repeat: repeat !important;
+	background-position: center !important;
+	background-size: 100% 100% !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: transparent !important;
+	font-weight: 700 !important;
+	text-shadow: none !important;
 }

@@ -3517,3 +3517,75 @@ div#userlist {
 	font-weight: 700 !important;
 	text-shadow: none !important;
 }
+
+
+/* =========================================================
+   PLOS — cosmic plasma flair
+   ========================================================= */
+.chat-msg-PLOS .username,
+.userlist-PLOS {
+	position: relative !important;
+	display: inline-block !important;
+	background: linear-gradient(
+		90deg,
+		#8cf7ff 0%,
+		#58b7ff 24%,
+		#b56cff 52%,
+		#ff5fd2 76%,
+		#9efaff 100%
+	) !important;
+	-webkit-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	color: #9efaff !important;
+	font-weight: 900 !important;
+	text-shadow:
+		0 0 4px rgba(90,190,255,.55),
+		0 0 9px rgba(181,108,255,.38),
+		0 0 14px rgba(255,95,210,.22) !important;
+}
+
+/* little UFO marker */
+.chat-msg-PLOS .username:before,
+.userlist-PLOS:before {
+	content: "🛸" !important;
+	display: inline-block !important;
+	margin-right: 4px !important;
+	-webkit-text-fill-color: initial !important;
+	color: #8cf7ff !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-shadow:
+		0 0 4px rgba(140,247,255,.75),
+		0 0 8px rgba(181,108,255,.40) !important;
+}
+
+/* animated shimmer in chat, compact/static in the user list */
+.chat-msg-PLOS .username {
+	background-size: 220% 100% !important;
+	animation: rdhPlosPlasma 3.2s linear infinite !important;
+}
+
+@keyframes rdhPlosPlasma {
+	0%   { background-position: 0% 50%; filter: brightness(1); }
+	50%  { background-position: 100% 50%; filter: brightness(1.18); }
+	100% { background-position: 0% 50%; filter: brightness(1); }
+}
+
+#userlist .userlist-PLOS {
+	font-size: inherit !important;
+	line-height: inherit !important;
+	letter-spacing: normal !important;
+	transform: none !important;
+	animation: none !important;
+	vertical-align: baseline !important;
+}
+
+#userlist .userlist-PLOS:before {
+	font-size: .92em !important;
+	line-height: 1 !important;
+	vertical-align: baseline !important;
+	transform: none !important;
+	animation: none !important;
+	margin-right: 3px !important;
+}

@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.13",
+        version: "0.1.14",
         modules: {},
         state: {},
         register: function (name, module) {

@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.12",
+        version: "0.1.13",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -250,7 +250,7 @@
             if (upper.startsWith("BIG VINNY V") || /(?:^|[^A-Z0-9])BVV(?:[^A-Z0-9]|$)/.test(upper)) return "bvv";
             if (/(?:^|[^A-Z0-9])BVT(?:[^A-Z0-9]|$)/.test(upper)) return "bv";
             if (/^B\s*&\s*V\b/.test(upper)) return "bv";
-            if (/^BRYAN\s*(?:&|AND)\s+/.test(upper)) return "bv";
+            if (/^BRYAN\s*(?:&|AND)\s+/.test(upper) || /(?:^|\b)BRYAN\s*(?:&|AND)\s+VINNY(?:\s+SHOW)?\b/.test(upper)) return "bv";
             if (upper.includes("CASTRATING THE MARKS")) return "ctm";
 
             for (let i = 0; i < this.types.length; i++) {

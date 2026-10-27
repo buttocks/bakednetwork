@@ -1081,3 +1081,200 @@ body {
         min-height: 42px !important;
     }
 }
+
+
+/* =========================================================
+   WID V3 CONTROL ROW CLEANUP
+   ========================================================= */
+
+/* Navbar: actual fixed-top behavior is enforced by V3 JS. */
+body {
+    padding-top: 0 !important;
+}
+
+#mainpage {
+    padding-top: 48px !important;
+}
+
+nav.navbar,
+.navbar {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+}
+
+/* Chat input + Unimoji + Colors share one row. */
+#wid-v3-chat-input-row {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+#wid-v3-chat-input-row #chatline {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 32px !important;
+    margin: 0 !important;
+    border-radius: 4px !important;
+}
+
+#wid-v3-chat-tools {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+}
+
+#wid-v3-chat-tools > *,
+#wid-v3-chat-tools .btn-group {
+    float: none !important;
+    position: relative !important;
+    margin: 0 !important;
+}
+
+#wid-v3-chat-tools button,
+#wid-v3-chat-tools .btn {
+    height: 32px !important;
+    min-height: 32px !important;
+    margin: 0 !important;
+    padding: 4px 10px !important;
+}
+
+/* Embiggen stays beside Macros and uses the same compact control sizing. */
+#leftcontrols {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+}
+
+#leftcontrols #textEmotes,
+#leftcontrols [data-wid-v3-restored="1"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+#leftcontrols #textEmotes > button,
+#leftcontrols [data-wid-v3-restored="1"] > button,
+#leftcontrols [data-wid-v3-restored="1"].btn {
+    height: 27px !important;
+    min-height: 27px !important;
+    padding: 3px 8px !important;
+}
+
+/* Right-side playlist/media controls: normalize old legacy sizing. */
+#rightcontrols {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+}
+
+#plcontrol,
+#videocontrols {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    float: none !important;
+    margin: 0 !important;
+}
+
+#plcontrol > button,
+#videocontrols > button,
+#rightcontrols .btn-group > button {
+    height: 27px !important;
+    min-height: 27px !important;
+    vertical-align: middle !important;
+    margin: 0 !important;
+}
+
+/* Text-labelled controls keep natural width. */
+#showmediaurl,
+#showsearch,
+#clearplaylist,
+#mediarefresh {
+    width: auto !important;
+    min-width: 44px !important;
+    padding: 3px 8px !important;
+}
+
+/* Icon-only playlist/video controls stay square and stop stretching. */
+#showcustomembed,
+#showplaylistmanager,
+#shuffleplaylist,
+#qlockbtn,
+#shrinkplaylist,
+#hidePlaylist,
+#fullscreenbtn,
+#getplaylist,
+#voteskip,
+#scroll-btn,
+#showrecent,
+#volumeButtonDown,
+#volumeButtonUp {
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#plcontrol .glyphicon,
+#videocontrols .glyphicon,
+#rightcontrols .glyphicon {
+    margin: 0 !important;
+    line-height: 1 !important;
+    top: 0 !important;
+}
+
+/* Legacy quality/volume helper controls should match the same height. */
+#quickQuality,
+#quickQuality > button,
+#volumeButtonIndicator {
+    height: 27px !important;
+    min-height: 27px !important;
+    line-height: 20px !important;
+}
+
+/* Keep requested WID artwork visible behind the channel. */
+html,
+body {
+    background-color: #050708 !important;
+    background-image: url("https://i.postimg.cc/jdR7Ymgg/zombich.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: center top !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+#wrap,
+#footer {
+    background-color: rgba(5,8,10,.72) !important;
+    background-image: none !important;
+}
+
+@media (max-width: 900px) {
+    #mainpage {
+        padding-top: 44px !important;
+    }
+
+    #wid-v3-chat-input-row {
+        flex-wrap: wrap !important;
+    }
+
+    #wid-v3-chat-tools {
+        width: 100% !important;
+    }
+
+    #rightcontrols {
+        flex-wrap: wrap !important;
+    }
+}

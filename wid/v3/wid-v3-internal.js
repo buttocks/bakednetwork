@@ -1,8 +1,8 @@
 /*!
- **|  Baked.live Channel: WID V2.0 Internal Script
+ **|  Baked.live Channel: WID V3 Internal Script
  **|
- **|  All code written by Xaekai except where otherwise noted.
- **|  Copyright 2014-2016 All Rights Reserved
+ **|  WID channel code maintained and customized by the channel team.
+ **|  Includes selected legacy modules/components originally written by Xaekai.
  **|
  **@preserve
  */

@@ -310,3 +310,132 @@ $("#emotelistbtn").text("Macros");
     $(cleanup);
     setTimeout(cleanup, 500);
 })();
+
+
+/* =========================================================
+   WID V3 EMOTE RESIZER + CHAT HELPERS
+   Restores the old oversized-emote detection/hover behavior
+   without affecting ordinary .pic embeds.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    if (!window.jQuery) return;
+    var $ = window.jQuery;
+
+    var NORMAL_MAX_W = 160;
+    var NORMAL_MAX_H = 80;
+    var BIG_TEST_W = 200;
+    var BIG_TEST_H = 120;
+    var HOVER_MAX_W = 420;
+    var HOVER_MAX_H = 300;
+
+    function fitWithin(w, h, maxW, maxH) {
+        if (!w || !h) return { w:maxW, h:maxH };
+        var scale = Math.min(1, maxW / w, maxH / h);
+        return {
+            w: Math.max(1, Math.round(w * scale)),
+            h: Math.max(1, Math.round(h * scale))
+        };
+    }
+
+    function tagEmote(img) {
+        if (!img || img.nodeType !== 1) return;
+        if (!img.classList.contains("channel-emote")) return;
+
+        /* The schedule emote already has its own explicit large sizing rule. */
+        if ((img.getAttribute("title") || "").toLowerCase() === "widschedule") {
+            return;
+        }
+
+        function inspect() {
+            var w = img.naturalWidth || 0;
+            var h = img.naturalHeight || 0;
+
+            if (w > BIG_TEST_W || h > BIG_TEST_H) {
+                var hover = fitWithin(w, h, HOVER_MAX_W, HOVER_MAX_H);
+                img.setAttribute("data-big", "true");
+                img.style.setProperty("--wid-emote-hover-w", hover.w + "px");
+                img.style.setProperty("--wid-emote-hover-h", hover.h + "px");
+            } else {
+                img.removeAttribute("data-big");
+                img.style.removeProperty("--wid-emote-hover-w");
+                img.style.removeProperty("--wid-emote-hover-h");
+            }
+        }
+
+        if (img.complete && img.naturalWidth) {
+            inspect();
+        } else if (!img.dataset.widResizeBound) {
+            img.dataset.widResizeBound = "1";
+            img.addEventListener("load", inspect, { passive:true });
+        }
+    }
+
+    function scanEmotes(root) {
+        root = root || document;
+
+        if (root.matches && root.matches(".channel-emote")) {
+            tagEmote(root);
+        }
+
+        if (root.querySelectorAll) {
+            root.querySelectorAll(".channel-emote").forEach(tagEmote);
+        }
+    }
+
+    function startObserver() {
+        scanEmotes(document);
+
+        var buffer = document.getElementById("messagebuffer");
+        if (!buffer) return;
+
+        var observer = new MutationObserver(function (records) {
+            records.forEach(function (record) {
+                record.addedNodes.forEach(function (node) {
+                    if (node.nodeType === 1) scanEmotes(node);
+                });
+            });
+        });
+
+        observer.observe(buffer, {
+            childList:true,
+            subtree:true
+        });
+    }
+
+    /* Click emote -> append emote name to the chat box. */
+    $("#chatwrap")
+        .off("click.widV3EmoteInsert", ".channel-emote")
+        .on("click.widV3EmoteInsert", ".channel-emote", function (e) {
+            e.preventDefault();
+            var name = $(this).attr("title");
+            var $chat = $("#chatline");
+            if (!name || !$chat.length) return;
+
+            $chat.val(($chat.val() || "") + name + " ");
+            $chat.focus();
+        });
+
+    /* Click username -> append username to the chat box. */
+    $("#messagebuffer")
+        .off("click.widV3UserInsert", ".username")
+        .on("click.widV3UserInsert", ".username", function (e) {
+            e.preventDefault();
+            var name = $(this).text();
+            var $chat = $("#chatline");
+            if (!name || !$chat.length) return;
+
+            $chat.val(($chat.val() || "") + name + " ");
+            $chat.focus();
+        });
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startObserver, { once:true });
+    } else {
+        startObserver();
+    }
+
+    setTimeout(function () { scanEmotes(document); }, 750);
+    setTimeout(function () { scanEmotes(document); }, 2000);
+})();

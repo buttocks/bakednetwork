@@ -168,3 +168,116 @@ $("#emotelistbtn").text("Macros");
     $(applyWidV3);
     setTimeout(applyWidV3, 1500);
 })();
+
+
+/* =========================================================
+   WID V3 EMBIGGEN BUTTON PERSISTENCE
+   Preserve Xaekai's original button + click handler when the
+   emote menu rebuild temporarily removes it from the DOM.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    var savedEmbiggenButton = null;
+    var observer = null;
+    var restoreTimer = null;
+
+    function labelOf(el) {
+        if (!el) return "";
+        return [
+            el.textContent || "",
+            el.getAttribute && (el.getAttribute("title") || ""),
+            el.getAttribute && (el.getAttribute("aria-label") || ""),
+            el.value || ""
+        ].join(" ").replace(/\s+/g, " ").trim();
+    }
+
+    function findLiveEmbiggenButton() {
+        var nodes = document.querySelectorAll(
+            'button, a.btn, input[type="button"], input[type="submit"]'
+        );
+
+        for (var i = 0; i < nodes.length; i++) {
+            if (/embiggen/i.test(labelOf(nodes[i]))) {
+                return nodes[i];
+            }
+        }
+        return null;
+    }
+
+    function getControlsHost() {
+        var macros = document.getElementById("emotelistbtn");
+
+        if (macros && macros.parentNode) {
+            return macros.parentNode;
+        }
+
+        return document.getElementById("chatcontrols")
+            || document.getElementById("leftcontrols")
+            || document.querySelector(".chat-controls")
+            || null;
+    }
+
+    function rememberOrRestore() {
+        var live = findLiveEmbiggenButton();
+
+        if (live) {
+            savedEmbiggenButton = live;
+            return;
+        }
+
+        if (!savedEmbiggenButton) {
+            return;
+        }
+
+        if (document.documentElement.contains(savedEmbiggenButton)) {
+            return;
+        }
+
+        var host = getControlsHost();
+        if (!host || !document.documentElement.contains(host)) {
+            return;
+        }
+
+        var macros = document.getElementById("emotelistbtn");
+
+        if (macros && macros.parentNode === host) {
+            if (macros.nextSibling) {
+                host.insertBefore(savedEmbiggenButton, macros.nextSibling);
+            } else {
+                host.appendChild(savedEmbiggenButton);
+            }
+        } else {
+            host.appendChild(savedEmbiggenButton);
+        }
+
+        console.info("[WID V3] Restored Embiggen emote button.");
+    }
+
+    function scheduleRestore() {
+        if (restoreTimer) {
+            clearTimeout(restoreTimer);
+        }
+
+        restoreTimer = setTimeout(rememberOrRestore, 60);
+    }
+
+    function start() {
+        rememberOrRestore();
+
+        observer = new MutationObserver(scheduleRestore);
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        /* Backup check for old module code that mutates outside normal hooks. */
+        setInterval(rememberOrRestore, 1000);
+    }
+
+    if (document.body) {
+        start();
+    } else {
+        $(start);
+    }
+})();

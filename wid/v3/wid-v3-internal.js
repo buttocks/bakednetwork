@@ -137,3 +137,198 @@ $("#showmediaurl").text("Add");
 $("#clearplaylist").text("Clear");
 $("#mediarefresh").text("Refresh Media");
 $("#emotelistbtn").text("Macros");
+
+
+/* =========================================================
+   WID V3 CONTROL STABILIZER
+   Uses the original WID module controls; only preserves and
+   repositions their existing DOM nodes/handlers.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    if (!window.jQuery) {
+        return;
+    }
+
+    var $ = window.jQuery;
+    var embiggenTemplate = null;
+    var maintenanceTimer = null;
+
+    function labelText(el) {
+        if (!el) return "";
+        return [
+            el.textContent || "",
+            el.value || "",
+            el.getAttribute && (el.getAttribute("title") || ""),
+            el.getAttribute && (el.getAttribute("aria-label") || "")
+        ].join(" ").replace(/\s+/g, " ").trim();
+    }
+
+    function findControl(pattern) {
+        var nodes = document.querySelectorAll(
+            'button, a.btn, input[type="button"], input[type="submit"]'
+        );
+
+        for (var i = 0; i < nodes.length; i++) {
+            if (pattern.test(labelText(nodes[i]))) {
+                return nodes[i];
+            }
+        }
+
+        return null;
+    }
+
+    function movableControl(el) {
+        var $el = $(el);
+        var $group = $el.closest(".btn-group");
+
+        if ($group.length && $group.find(el).length) {
+            return $group;
+        }
+
+        var $parent = $el.parent();
+        if ($parent.length && $parent.children(".dropdown-menu").length) {
+            return $parent;
+        }
+
+        return $el;
+    }
+
+    function ensureChatInputTools() {
+        var $chatline = $("#chatline");
+        if (!$chatline.length) return;
+
+        var $form = $chatline.closest("form");
+        if (!$form.length) return;
+
+        var $row = $("#wid-v3-chat-input-row");
+        if (!$row.length) {
+            $row = $('<div id="wid-v3-chat-input-row"></div>');
+            $chatline.before($row);
+            $row.append($chatline);
+            $row.append('<div id="wid-v3-chat-tools"></div>');
+        } else if (!$chatline.closest("#wid-v3-chat-input-row").length) {
+            $row.prepend($chatline);
+        }
+
+        var $tools = $("#wid-v3-chat-tools");
+
+        var unimoji = findControl(/^Unimoji\b/i);
+        if (unimoji) {
+            var $u = movableControl(unimoji);
+            if (!$u.closest("#wid-v3-chat-tools").length) {
+                $tools.append($u);
+            }
+        }
+
+        var colors = findControl(/^Colors?\b/i);
+        if (colors) {
+            var $c = movableControl(colors);
+            if (!$c.closest("#wid-v3-chat-tools").length) {
+                $tools.append($c);
+            }
+        }
+    }
+
+    function findEmbiggenButton() {
+        return findControl(/Embiggen\s+emote\s+list/i);
+    }
+
+    function captureEmbiggen() {
+        var button = findEmbiggenButton();
+        if (!button) return;
+
+        if ($(button).closest('[data-wid-v3-restored="1"]').length) {
+            return;
+        }
+
+        var $container = $("#textEmotes");
+        var $source;
+
+        if ($container.length && $.contains($container[0], button)) {
+            $source = $container;
+        } else {
+            $source = $(button);
+        }
+
+        embiggenTemplate = $source.clone(true, true);
+        embiggenTemplate.removeAttr("data-wid-v3-restored");
+    }
+
+    function restoreEmbiggen() {
+        var live = findEmbiggenButton();
+
+        if (live) {
+            captureEmbiggen();
+            return;
+        }
+
+        if (!embiggenTemplate) {
+            return;
+        }
+
+        var $brokenContainer = $("#textEmotes");
+        if ($brokenContainer.length && !findEmbiggenButton()) {
+            $brokenContainer.remove();
+        }
+
+        var $clone = embiggenTemplate.clone(true, true);
+        $clone.attr("data-wid-v3-restored", "1");
+
+        var $macros = $("#emotelistbtn");
+        if ($macros.length) {
+            $clone.insertAfter($macros);
+        } else if ($("#leftcontrols").length) {
+            $("#leftcontrols").append($clone);
+        }
+
+        console.info("[WID V3] Restored Embiggen emote control.");
+    }
+
+    function ensureNavbarTop() {
+        var $nav = $("nav.navbar").first();
+        if (!$nav.length) {
+            $nav = $(".navbar").first();
+        }
+
+        if (!$nav.length) return;
+
+        if ($nav.parent()[0] !== document.body) {
+            $nav.detach().prependTo("body");
+        }
+
+        $nav.addClass("navbar-fixed-top");
+    }
+
+    function maintain() {
+        ensureNavbarTop();
+        ensureChatInputTools();
+        restoreEmbiggen();
+    }
+
+    function start() {
+        captureEmbiggen();
+        maintain();
+
+        var observer = new MutationObserver(function () {
+            clearTimeout(maintenanceTimer);
+            maintenanceTimer = setTimeout(maintain, 80);
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        setInterval(maintain, 750);
+    }
+
+    if (document.body) {
+        setTimeout(start, 400);
+    } else {
+        $(function () {
+            setTimeout(start, 400);
+        });
+    }
+})();

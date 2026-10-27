@@ -3589,3 +3589,50 @@ div#userlist {
 	animation: none !important;
 	margin-right: 3px !important;
 }
+
+
+/* =========================================================
+   RDH TEMPORARY PLAYLIST IDENTIFIER
+   Permanent rows keep their normal/show colors.
+   Temporary rows get an amber tint + TEMP marker.
+   ========================================================= */
+
+/* Always give temp rows a visible amber edge, including featured/current rows. */
+#queue .queue_entry.queue_temp {
+	border-right: 3px solid rgba(255, 164, 66, .95) !important;
+}
+
+/* Plain temp rows get a clearly different amber-tinted background. */
+#queue .queue_entry.queue_temp:not(.rdh-featured):not(.queue_active) {
+	background:
+		linear-gradient(90deg,
+			rgba(255, 154, 55, .16) 0%,
+			rgba(90, 54, 18, .10) 48%,
+			rgba(20, 33, 39, .96) 100%) !important;
+}
+
+#queue .queue_entry.queue_temp:not(.rdh-featured):not(.queue_active) .qe_title {
+	color: #ffd39a !important;
+}
+
+/* Put a compact TEMP chip beside the duration so show badges remain untouched. */
+#queue .queue_entry.queue_temp .qe_time:before {
+	content: "TEMP" !important;
+	display: inline-block !important;
+	margin-right: 6px !important;
+	padding: 0 4px !important;
+	border-radius: 3px !important;
+	background: #ff9f43 !important;
+	color: #241300 !important;
+	font-size: 8px !important;
+	line-height: 12px !important;
+	font-weight: 900 !important;
+	letter-spacing: .35px !important;
+	vertical-align: 1px !important;
+	box-shadow: 0 0 5px rgba(255, 145, 45, .28) !important;
+}
+
+/* Current temp item keeps the cyan playing treatment but retains amber identity. */
+#queue .queue_entry.queue_active.queue_temp {
+	border-right-color: #ffb35f !important;
+}

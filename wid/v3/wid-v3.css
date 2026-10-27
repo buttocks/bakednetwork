@@ -512,7 +512,7 @@ html,
 body {
     background:
         linear-gradient(rgba(5, 7, 8, .84), rgba(5, 7, 8, .92)),
-        url("https://i.postimg.cc/vTwmNPnv/zombich.png") center top / cover fixed no-repeat !important;
+        url("https://i.postimg.cc/jdR7Ymgg/zombich.png") center top / cover fixed no-repeat !important;
     color: var(--wid3-text) !important;
 }
 
@@ -862,4 +862,29 @@ textarea.form-control:focus {
     .navbar-brand {
         min-width: 90px !important;
     }
+}
+
+
+/* =========================================================
+   WID V3 LEGACY EMOTE CONTROL COMPAT
+   Leave the original V2 emote/Embiggen controls visible and
+   let the legacy JS own their behavior.
+   ========================================================= */
+#textEmotes {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#textEmotes > button,
+#emotelistbtn {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#textEmotes > button {
+    background-image: linear-gradient(to top, #a78bf7, #4a1ba2, #161258) !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    padding: 8px 20px !important;
 }

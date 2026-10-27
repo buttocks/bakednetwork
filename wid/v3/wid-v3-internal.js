@@ -179,58 +179,6 @@ $("#emotelistbtn").text("Macros");
         return null;
     }
 
-    function movableControl(el) {
-        var $el = $(el);
-        var $group = $el.closest(".btn-group");
-
-        if ($group.length && $group.find(el).length) {
-            return $group;
-        }
-
-        var $parent = $el.parent();
-        if ($parent.length && $parent.children(".dropdown-menu").length) {
-            return $parent;
-        }
-
-        return $el;
-    }
-
-    function ensureChatInputTools() {
-        var $chatline = $("#chatline");
-        if (!$chatline.length) return;
-
-        var $form = $chatline.closest("form");
-        if (!$form.length) return;
-
-        var $row = $("#wid-v3-chat-input-row");
-        if (!$row.length) {
-            $row = $('<div id="wid-v3-chat-input-row"></div>');
-            $chatline.before($row);
-            $row.append($chatline);
-            $row.append('<div id="wid-v3-chat-tools"></div>');
-        } else if (!$chatline.closest("#wid-v3-chat-input-row").length) {
-            $row.prepend($chatline);
-        }
-
-        var $tools = $("#wid-v3-chat-tools");
-
-        var unimoji = findControl(/^Unimoji\b/i);
-        if (unimoji) {
-            var $u = movableControl(unimoji);
-            if (!$u.closest("#wid-v3-chat-tools").length) {
-                $tools.append($u);
-            }
-        }
-
-        var colors = findControl(/^Colors?\b/i);
-        if (colors) {
-            var $c = movableControl(colors);
-            if (!$c.closest("#wid-v3-chat-tools").length) {
-                $tools.append($c);
-            }
-        }
-    }
-
     function findEmbiggenButton() {
         return findControl(/Embiggen\s+emote\s+list/i);
     }
@@ -303,7 +251,6 @@ $("#emotelistbtn").text("Macros");
 
     function maintain() {
         ensureNavbarTop();
-        ensureChatInputTools();
         restoreEmbiggen();
     }
 

@@ -279,3 +279,34 @@ $("#emotelistbtn").text("Macros");
         });
     }
 })();
+
+
+/* WID V3 STALE CHAT WRAPPER CLEANUP
+   Only undoes wrappers created by older V3 test builds. */
+(function () {
+    "use strict";
+    if (!window.jQuery) return;
+    var $ = window.jQuery;
+
+    function cleanup() {
+        var $row = $("#wid-v3-chat-input-row");
+        if (!$row.length) return;
+
+        var $chat = $("#chatline");
+        var $form = $row.closest("form");
+
+        if ($chat.length && $form.length) {
+            $chat.detach().prependTo($form);
+        }
+
+        $("#wid-v3-chat-tools").children().each(function () {
+            $(this).detach().appendTo("#leftcontrols");
+        });
+
+        $("#wid-v3-chat-tools").remove();
+        $row.remove();
+    }
+
+    $(cleanup);
+    setTimeout(cleanup, 500);
+})();

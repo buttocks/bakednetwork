@@ -1218,3 +1218,33 @@ body {
     top: 0 !important;
     line-height: 1 !important;
 }
+
+
+/* =========================================================
+   WID V3 ORIGINAL LOWER-PANEL ART RESTORE
+   Restore the two small decorative images from the original
+   WID V2 user/chat area after later V3 background resets.
+   ========================================================= */
+
+/* Original user-list artwork. */
+#userlist {
+    background-color: rgba(0, 0, 0, .79) !important;
+    background-image:
+        linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+        url("https://i.postimg.cc/fyPsnDQ6/chatlogo.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: bottom center !important;
+    background-size: 80% auto !important;
+}
+
+/* Original chat/message-buffer artwork.
+   V2 contained the direct Imgur PNG in comments; use that direct asset. */
+#messagebuffer {
+    background-color: rgba(0, 0, 0, .79) !important;
+    background-image:
+        linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.10)),
+        url("https://i.imgur.com/rXZilGO.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: contain !important;
+}

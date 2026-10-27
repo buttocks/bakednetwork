@@ -1248,3 +1248,40 @@ body {
     background-position: center center !important;
     background-size: contain !important;
 }
+
+
+/* =========================================================
+   WID V3 EMOTE RESIZER
+   Large channel emotes stay compact until hovered.
+   ========================================================= */
+
+#messagebuffer .channel-emote:not([title="widschedule"]) {
+    max-width: 160px !important;
+    max-height: 80px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+}
+
+/* Only naturally oversized emotes get the grow-on-hover behavior. */
+#messagebuffer .channel-emote[data-big="true"] {
+    cursor: zoom-in !important;
+    position: relative !important;
+    z-index: 2 !important;
+    transition:
+        max-width .22s ease,
+        max-height .22s ease,
+        filter .22s ease,
+        box-shadow .22s ease !important;
+    transform-origin: left center !important;
+}
+
+#messagebuffer .channel-emote[data-big="true"]:hover {
+    max-width: var(--wid-emote-hover-w, 420px) !important;
+    max-height: var(--wid-emote-hover-h, 300px) !important;
+    z-index: 50 !important;
+    filter: brightness(1.04) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.55) !important;
+    cursor: zoom-out !important;
+}

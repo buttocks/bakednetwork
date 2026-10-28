@@ -469,8 +469,9 @@ $("#emotelistbtn").text("Macros");
 
 /* =========================================================
    WID V3 BROKEN EMOTE SCRUBBER
-   Removes known dead provider/error-image emotes from the
-   client-side emote list so broken tiles are not shown.
+   Removes exact known dead emotes and learns provider-level
+   static error-image dimensions so matching dead tiles from
+   the same host are also removed.
    ========================================================= */
 (function () {
     "use strict";
@@ -486,6 +487,22 @@ $("#emotelistbtn").text("Macros");
         "https://i.ibb.co/VpqQ7wPf/1704508202861-removebg-preview-ezgif-com-crop.png"
     ];
 
+    var providerRefs = {
+        imgur: [
+            "https://i.imgur.com/uoS0qOm.gif",
+            "https://imgur.com/bR75s4Q.gif"
+        ],
+        imgbb: [
+            "https://i.ibb.co/wRLkpVs/ezgif-com-gif-maker-26.gif",
+            "https://i.ibb.co/VpqQ7wPf/1704508202861-removebg-preview-ezgif-com-crop.png"
+        ]
+    };
+
+    var providerSignatures = {
+        imgur: [],
+        imgbb: []
+    };
+
     function normalize(url) {
         return String(url || "")
             .replace(/^http:\/\//i, "https://")
@@ -493,10 +510,70 @@ $("#emotelistbtn").text("Macros");
             .toLowerCase();
     }
 
+    function providerFor(url) {
+        var value = normalize(url);
+
+        if (/https:\/\/(?:i\.)?imgur\.com\//i.test(value)) {
+            return "imgur";
+        }
+
+        if (/https:\/\/i\.ibb\.co\//i.test(value)) {
+            return "imgbb";
+        }
+
+        return "";
+    }
+
+    function signatureFor(img) {
+        if (!img || !img.naturalWidth || !img.naturalHeight) return "";
+        return String(img.naturalWidth) + "x" + String(img.naturalHeight);
+    }
+
     var broken = {};
     brokenSources.forEach(function (url) {
         broken[normalize(url)] = true;
     });
+
+    function addProviderSignature(provider, sig) {
+        if (!provider || !sig) return;
+        if (providerSignatures[provider].indexOf(sig) === -1) {
+            providerSignatures[provider].push(sig);
+        }
+    }
+
+    function learnProviderSignatures(done) {
+        var pending = 0;
+
+        Object.keys(providerRefs).forEach(function (provider) {
+            providerRefs[provider].forEach(function (url) {
+                pending++;
+
+                var probe = new Image();
+
+                function finish() {
+                    var sig = signatureFor(probe);
+                    if (sig) addProviderSignature(provider, sig);
+
+                    pending--;
+                    if (pending === 0 && typeof done === "function") {
+                        done();
+                    }
+                }
+
+                probe.onload = finish;
+                probe.onerror = function () {
+                    pending--;
+                    if (pending === 0 && typeof done === "function") {
+                        done();
+                    }
+                };
+
+                probe.src = url;
+            });
+        });
+
+        if (!pending && typeof done === "function") done();
+    }
 
     function isBrokenSource(img) {
         if (!img) return false;
@@ -506,7 +583,15 @@ $("#emotelistbtn").text("Macros");
         var a = normalize(raw);
         var b = normalize(resolved);
 
-        return !!(broken[a] || broken[b]);
+        if (broken[a] || broken[b]) return true;
+
+        var provider = providerFor(resolved || raw);
+        if (!provider) return false;
+
+        var sig = signatureFor(img);
+        if (!sig) return false;
+
+        return providerSignatures[provider].indexOf(sig) !== -1;
     }
 
     function removeTile(img) {
@@ -534,7 +619,17 @@ $("#emotelistbtn").text("Macros");
         );
 
         images.forEach(function (img) {
-            if (isBrokenSource(img)) removeTile(img);
+            function check() {
+                if (isBrokenSource(img)) removeTile(img);
+            }
+
+            if (img.complete && img.naturalWidth) {
+                check();
+            } else {
+                $(img)
+                    .off("load" + ns)
+                    .one("load" + ns, check);
+            }
         });
     }
 
@@ -545,6 +640,12 @@ $("#emotelistbtn").text("Macros");
 
     $(function () {
         scrubEmoteUi();
+
+        learnProviderSignatures(function () {
+            scrubEmoteUi();
+            setTimeout(scrubEmoteUi, 150);
+        });
+
         setTimeout(scrubEmoteUi, 500);
         setTimeout(scrubEmoteUi, 1500);
     });
@@ -554,6 +655,7 @@ $("#emotelistbtn").text("Macros");
         .on("shown.bs.modal" + ns, "#emotelist", function () {
             scrubEmoteUi();
             setTimeout(scrubEmoteUi, 100);
+            setTimeout(scrubEmoteUi, 300);
         })
         .on("click" + ns, "#emotelistbtn", function () {
             setTimeout(scrubEmoteUi, 200);

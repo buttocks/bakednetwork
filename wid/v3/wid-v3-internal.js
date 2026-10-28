@@ -140,106 +140,155 @@ $("#emotelistbtn").text("Macros");
 
 
 /* =========================================================
-   WID V3 CONTROL STABILIZER
-   Uses the original WID module controls; only preserves and
-   repositions their existing DOM nodes/handlers.
+   WID V3 LEGACY EMBIGGEN KEEPER
+   Ported from the proven RDH v0.1.27 strategy.
+   Preserve only the real working Pink Horse Embiggen button.
+   No observers, no polling, no #textEmotes/Unimoji movement.
    ========================================================= */
 (function () {
     "use strict";
 
-    if (!window.jQuery) {
-        return;
-    }
-
+    if (!window.jQuery) return;
     var $ = window.jQuery;
-    var embiggenTemplate = null;
-    var maintenanceTimer = null;
+    var ns = ".widV3LegacyEmbiggen";
+    var template = null;
 
-    function labelText(el) {
-        if (!el) return "";
+    function buttonText($el) {
         return [
-            el.textContent || "",
-            el.value || "",
-            el.getAttribute && (el.getAttribute("title") || ""),
-            el.getAttribute && (el.getAttribute("aria-label") || "")
-        ].join(" ").replace(/\s+/g, " ").trim();
+            $el.text(),
+            $el.attr("title"),
+            $el.attr("aria-label"),
+            $el.val()
+        ].filter(Boolean).join(" ");
     }
 
-    function findControl(pattern) {
-        var nodes = document.querySelectorAll(
-            'button, a.btn, input[type="button"], input[type="submit"]'
-        );
+    function findButton() {
+        var $found = $();
 
-        for (var i = 0; i < nodes.length; i++) {
-            if (pattern.test(labelText(nodes[i]))) {
-                return nodes[i];
+        $("button, a.btn, input[type='button']").each(function () {
+            var $el = $(this);
+            if (/embiggen\s+emote\s+list/i.test(buttonText($el))) {
+                $found = $el;
+                return false;
             }
-        }
+        });
 
-        return null;
+        return $found;
     }
 
-    function findEmbiggenButton() {
-        return findControl(/Embiggen\s+emote\s+list/i);
+    function captureTemplate() {
+        var $live = findButton();
+        if (!$live.length) return;
+
+        $live.addClass("wid-v3-legacy-embiggen");
+        template = $live.clone(true, true);
+        template
+            .removeAttr("id")
+            .removeClass("hidden invisible")
+            .addClass("wid-v3-legacy-embiggen")
+            .prop("hidden", false)
+            .attr("aria-hidden", "false")
+            .css({
+                display: "",
+                visibility: "",
+                opacity: ""
+            });
     }
 
-    function captureEmbiggen() {
-        var button = findEmbiggenButton();
-        if (!button) return;
-
-        if ($(button).closest('[data-wid-v3-restored="1"]').length) {
-            return;
-        }
-
-        var $container = $("#textEmotes");
-        var $source;
-
-        if ($container.length && $.contains($container[0], button)) {
-            $source = $container;
-        } else {
-            $source = $(button);
-        }
-
-        embiggenTemplate = $source.clone(true, true);
-        embiggenTemplate.removeAttr("data-wid-v3-restored");
-    }
-
-    function restoreEmbiggen() {
-        var live = findEmbiggenButton();
-
-        if (live) {
-            captureEmbiggen();
-            return;
-        }
-
-        if (!embiggenTemplate) {
-            return;
-        }
-
-        var $brokenContainer = $("#textEmotes");
-        if ($brokenContainer.length && !findEmbiggenButton()) {
-            $brokenContainer.remove();
-        }
-
-        var $clone = embiggenTemplate.clone(true, true);
-        $clone.attr("data-wid-v3-restored", "1");
-
+    function placeLiveButton() {
+        var $live = findButton();
         var $macros = $("#emotelistbtn");
-        if ($macros.length) {
-            $clone.insertAfter($macros);
-        } else if ($("#leftcontrols").length) {
-            $("#leftcontrols").append($clone);
+
+        if (!$live.length || !$macros.length) return;
+
+        $live
+            .addClass("wid-v3-legacy-embiggen")
+            .removeClass("hidden invisible")
+            .prop("hidden", false)
+            .attr("aria-hidden", "false")
+            .css({
+                display: "",
+                visibility: "",
+                opacity: ""
+            })
+            .detach()
+            .insertAfter($macros);
+
+        captureTemplate();
+    }
+
+    function restoreIfMissing() {
+        var $macros = $("#emotelistbtn");
+        if (!$macros.length) return;
+
+        var $live = findButton();
+        if ($live.length) {
+            placeLiveButton();
+            return;
         }
 
-        console.info("[WID V3] Restored Embiggen emote control.");
+        if (!template || !template.length) return;
+
+        template.clone(true, true)
+            .removeAttr("id")
+            .removeClass("hidden invisible")
+            .addClass("wid-v3-legacy-embiggen")
+            .prop("hidden", false)
+            .attr("aria-hidden", "false")
+            .css({
+                display: "",
+                visibility: "",
+                opacity: ""
+            })
+            .insertAfter($macros);
     }
+
+    function start() {
+        setTimeout(placeLiveButton, 300);
+
+        $(document)
+            .off(ns)
+            .on("mousedown" + ns + " pointerdown" + ns, "button, a.btn, input[type='button']", function () {
+                var $el = $(this);
+                if (/embiggen\s+emote\s+list/i.test(buttonText($el))) {
+                    captureTemplate();
+                }
+            })
+            .on("click" + ns, "button, a.btn, input[type='button']", function () {
+                var $el = $(this);
+                if (/embiggen\s+emote\s+list/i.test(buttonText($el))) {
+                    setTimeout(restoreIfMissing, 0);
+                    setTimeout(restoreIfMissing, 100);
+                }
+            })
+            .on("hidden.bs.modal" + ns, "#emotelist", function () {
+                setTimeout(restoreIfMissing, 0);
+            })
+            .on("shown.bs.modal" + ns, "#emotelist", function () {
+                setTimeout(captureTemplate, 0);
+            })
+            .on("click" + ns, "#emotelistbtn", function () {
+                setTimeout(placeLiveButton, 200);
+            });
+    }
+
+    if (document.body) {
+        start();
+    } else {
+        $(start);
+    }
+})();
+
+/* Keep WID's navbar pinned without tying it to an observer/polling loop. */
+(function () {
+    "use strict";
+
+    if (!window.jQuery) return;
+    var $ = window.jQuery;
 
     function ensureNavbarTop() {
         var $nav = $("nav.navbar").first();
-        if (!$nav.length) {
-            $nav = $(".navbar").first();
-        }
-
+        if (!$nav.length) $nav = $(".navbar").first();
         if (!$nav.length) return;
 
         if ($nav.parent()[0] !== document.body) {
@@ -249,35 +298,12 @@ $("#emotelistbtn").text("Macros");
         $nav.addClass("navbar-fixed-top");
     }
 
-    function maintain() {
+    $(function () {
         ensureNavbarTop();
-        restoreEmbiggen();
-    }
-
-    function start() {
-        captureEmbiggen();
-        maintain();
-
-        var observer = new MutationObserver(function () {
-            clearTimeout(maintenanceTimer);
-            maintenanceTimer = setTimeout(maintain, 80);
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-
-        setInterval(maintain, 750);
-    }
-
-    if (document.body) {
-        setTimeout(start, 400);
-    } else {
-        $(function () {
-            setTimeout(start, 400);
-        });
-    }
+        setTimeout(ensureNavbarTop, 500);
+        setTimeout(ensureNavbarTop, 1500);
+        setTimeout(ensureNavbarTop, 3000);
+    });
 })();
 
 

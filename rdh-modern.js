@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.21",
+        version: "0.1.22",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -420,14 +420,10 @@
                     event.stopPropagation();
 
                     const $modal = $("#emotelist");
-                    if (!$modal.length) return;
+                    if (!$modal.length || !$modal.is(":visible")) return;
 
                     $modal.addClass("rdh-emotelist-large");
                     self.syncButton();
-
-                    if (!$modal.is(":visible")) {
-                        $modal.modal("show");
-                    }
                 })
                 .on("click" + self.namespace, "#emotelistbtn", function () {
                     setTimeout(function () {

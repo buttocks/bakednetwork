@@ -3656,9 +3656,6 @@ div#userlist {
     white-space: nowrap !important;
 }
 
-#rdh-embiggen-btn.active {
-    border-color: #27d8e8 !important;
-}
 
 #emotelist.rdh-emotelist-large .modal-dialog {
     width: min(1180px, calc(100vw - 40px)) !important;

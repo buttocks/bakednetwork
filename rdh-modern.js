@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.16",
+        version: "0.1.17",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -130,7 +130,9 @@
 
             self.observer.observe(document.body, {
                 childList: true,
-                subtree: true
+                subtree: true,
+                attributes: true,
+                attributeFilter: ["style", "class", "hidden", "aria-hidden"]
             });
         },
 
@@ -390,6 +392,7 @@
 
                 $btn.on("click.rdhEmbiggen", function (event) {
                     event.preventDefault();
+                    event.stopPropagation();
 
                     const $modal = $("#emotelist");
                     if (!$modal.length) return;
@@ -406,12 +409,31 @@
             const $macros = $("#emotelistbtn");
             const $left = $("#leftcontrols");
 
+            /* Keep the control outside legacy #textEmotes wrappers. */
             if ($macros.length) {
                 if (!$btn.parent().is($macros.parent()) || !$btn.prev().is($macros)) {
                     $btn.detach().insertAfter($macros);
                 }
             } else if ($left.length && !$btn.closest("#leftcontrols").length) {
                 $btn.detach().appendTo($left);
+            }
+
+            /* Old emote code sometimes hides controls instead of removing them. */
+            $btn
+                .removeClass("hidden invisible")
+                .attr("aria-hidden", "false")
+                .prop("hidden", false)
+                .css({
+                    display: "inline-flex",
+                    visibility: "visible",
+                    opacity: "1"
+                });
+
+            if ($left.length) {
+                $left
+                    .removeClass("hidden invisible")
+                    .attr("aria-hidden", "false")
+                    .prop("hidden", false);
             }
 
             self.updateButton();
@@ -433,13 +455,44 @@
 
             self.interval = setInterval(function () {
                 self.ensureButton();
-            }, 1000);
+            }, 500);
 
             $(document)
-                .off("shown.bs.modal.rdhEmbiggen hidden.bs.modal.rdhEmbiggen", "#emotelist")
-                .on("shown.bs.modal.rdhEmbiggen hidden.bs.modal.rdhEmbiggen", "#emotelist", function () {
+                .off("click.rdhEmbiggenRecovery", "#emotelistbtn")
+                .on("click.rdhEmbiggenRecovery", "#emotelistbtn", function () {
                     self.ensureButton();
+                    setTimeout(function () {
+                        self.ensureButton();
+                    }, 0);
+                    setTimeout(function () {
+                        self.ensureButton();
+                    }, 100);
+                    setTimeout(function () {
+                        self.ensureButton();
+                    }, 400);
                 });
+
+            $(document)
+                .off(
+                    "show.bs.modal.rdhEmbiggen shown.bs.modal.rdhEmbiggen hide.bs.modal.rdhEmbiggen hidden.bs.modal.rdhEmbiggen",
+                    "#emotelist"
+                )
+                .on(
+                    "show.bs.modal.rdhEmbiggen shown.bs.modal.rdhEmbiggen hide.bs.modal.rdhEmbiggen hidden.bs.modal.rdhEmbiggen",
+                    "#emotelist",
+                    function () {
+                        self.ensureButton();
+                        requestAnimationFrame(function () {
+                            self.ensureButton();
+                        });
+                        setTimeout(function () {
+                            self.ensureButton();
+                        }, 50);
+                        setTimeout(function () {
+                            self.ensureButton();
+                        }, 250);
+                    }
+                );
         },
 
         stop: function () {
@@ -449,7 +502,7 @@
             if (this.observer) this.observer.disconnect();
             this.observer = null;
 
-            $(document).off(".rdhEmbiggen");
+            $(document).off(".rdhEmbiggen").off(".rdhEmbiggenRecovery");
             $("#" + this.buttonId).off(".rdhEmbiggen").remove();
             $("#emotelist").removeClass("rdh-emotelist-large");
         }

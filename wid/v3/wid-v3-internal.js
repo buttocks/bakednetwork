@@ -465,3 +465,98 @@ $("#emotelistbtn").text("Macros");
     setTimeout(function () { scanEmotes(document); }, 750);
     setTimeout(function () { scanEmotes(document); }, 2000);
 })();
+
+
+/* =========================================================
+   WID V3 BROKEN EMOTE SCRUBBER
+   Removes known dead provider/error-image emotes from the
+   client-side emote list so broken tiles are not shown.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    if (!window.jQuery) return;
+    var $ = window.jQuery;
+    var ns = ".widV3BrokenEmotes";
+
+    var brokenSources = [
+        "https://i.imgur.com/uoS0qOm.gif",
+        "https://i.ibb.co/wRLkpVs/ezgif-com-gif-maker-26.gif",
+        "https://imgur.com/bR75s4Q.gif",
+        "https://i.ibb.co/VpqQ7wPf/1704508202861-removebg-preview-ezgif-com-crop.png"
+    ];
+
+    function normalize(url) {
+        return String(url || "")
+            .replace(/^http:\/\//i, "https://")
+            .replace(/\/$/, "")
+            .toLowerCase();
+    }
+
+    var broken = {};
+    brokenSources.forEach(function (url) {
+        broken[normalize(url)] = true;
+    });
+
+    function isBrokenSource(img) {
+        if (!img) return false;
+
+        var raw = img.getAttribute("src") || "";
+        var resolved = img.src || raw;
+        var a = normalize(raw);
+        var b = normalize(resolved);
+
+        return !!(broken[a] || broken[b]);
+    }
+
+    function removeTile(img) {
+        var $img = $(img);
+
+        var $tile = $img.closest(
+            "td, li, .emote, .emote-item, .emotelist-item, .thumbnail, .well"
+        );
+
+        if ($tile.length) {
+            $tile.first().remove();
+        } else {
+            $img.remove();
+        }
+    }
+
+    function scrub(root) {
+        var scope = root && root.querySelectorAll ? root : document;
+        var images = [];
+
+        if (scope.nodeName === "IMG") images.push(scope);
+        Array.prototype.push.apply(
+            images,
+            scope.querySelectorAll ? scope.querySelectorAll("img") : []
+        );
+
+        images.forEach(function (img) {
+            if (isBrokenSource(img)) removeTile(img);
+        });
+    }
+
+    function scrubEmoteUi() {
+        var modal = document.getElementById("emotelist");
+        if (modal) scrub(modal);
+    }
+
+    $(function () {
+        scrubEmoteUi();
+        setTimeout(scrubEmoteUi, 500);
+        setTimeout(scrubEmoteUi, 1500);
+    });
+
+    $(document)
+        .off(ns)
+        .on("shown.bs.modal" + ns, "#emotelist", function () {
+            scrubEmoteUi();
+            setTimeout(scrubEmoteUi, 100);
+        })
+        .on("click" + ns, "#emotelistbtn", function () {
+            setTimeout(scrubEmoteUi, 200);
+            setTimeout(scrubEmoteUi, 500);
+        });
+})();

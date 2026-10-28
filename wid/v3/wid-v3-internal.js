@@ -468,17 +468,23 @@ $("#emotelistbtn").text("Macros");
 
 
 /* =========================================================
-   WID V3 BROKEN EMOTE SCRUBBER
-   Removes exact known dead emotes and learns provider-level
-   static error-image dimensions so matching dead tiles from
-   the same host are also removed.
+   WID V3 BROKEN EMOTE RECORD CLEANER
+   Deletes broken emote ENTRIES from the channel rather than
+   merely hiding their tiles in the emote list.
+
+   Exact known dead URLs are removed immediately. For other
+   Imgur/imgbb emotes, provider placeholder dimensions are
+   learned from multiple known-dead examples; automatic removal
+   only activates when the examples agree on one signature.
    ========================================================= */
 (function () {
     "use strict";
 
-    if (!window.jQuery) return;
+    if (!window.jQuery || !window.socket || !window.CHANNEL) return;
+
     var $ = window.jQuery;
-    var ns = ".widV3BrokenEmotes";
+    var ns = ".widV3BrokenEmoteRecords";
+    var removed = Object.create(null);
 
     var brokenSources = [
         "https://i.imgur.com/uoS0qOm.gif",
@@ -498,9 +504,9 @@ $("#emotelistbtn").text("Macros");
         ]
     };
 
-    var providerSignatures = {
-        imgur: [],
-        imgbb: []
+    var providerSignature = {
+        imgur: "",
+        imgbb: ""
     };
 
     function normalize(url) {
@@ -529,136 +535,176 @@ $("#emotelistbtn").text("Macros");
         return String(img.naturalWidth) + "x" + String(img.naturalHeight);
     }
 
-    var broken = {};
+    var exactBroken = Object.create(null);
     brokenSources.forEach(function (url) {
-        broken[normalize(url)] = true;
+        exactBroken[normalize(url)] = true;
     });
 
-    function addProviderSignature(provider, sig) {
-        if (!provider || !sig) return;
-        if (providerSignatures[provider].indexOf(sig) === -1) {
-            providerSignatures[provider].push(sig);
+    function emoteUrl(emote) {
+        if (!emote) return "";
+        return emote.image || emote.url || emote.src || "";
+    }
+
+    function emoteKey(emote) {
+        return String(
+            (emote && (emote.name || emote.code || emote.id)) ||
+            emoteUrl(emote) ||
+            ""
+        );
+    }
+
+    function removeEntry(emote, reason) {
+        if (!emote) return;
+
+        var key = emoteKey(emote);
+        if (!key || removed[key]) return;
+
+        removed[key] = true;
+
+        console.warn(
+            "[WID V3] Removing broken emote entry:",
+            emote.name || key,
+            reason || ""
+        );
+
+        socket.emit("removeEmote", emote);
+    }
+
+    function loadSignature(url, done) {
+        var probe = new Image();
+        var finished = false;
+
+        function finish(sig) {
+            if (finished) return;
+            finished = true;
+            done(sig || "");
         }
+
+        probe.onload = function () {
+            finish(signatureFor(probe));
+        };
+
+        probe.onerror = function () {
+            finish("");
+        };
+
+        probe.src = url;
+    }
+
+    function learnProvider(provider, urls, done) {
+        var signatures = [];
+        var pending = urls.length;
+
+        if (!pending) {
+            done();
+            return;
+        }
+
+        urls.forEach(function (url) {
+            loadSignature(url, function (sig) {
+                if (sig) signatures.push(sig);
+
+                pending--;
+                if (pending > 0) return;
+
+                /* Only trust a provider-wide placeholder signature when
+                   every known-dead reference agrees. */
+                if (
+                    signatures.length === urls.length &&
+                    signatures.every(function (value) {
+                        return value === signatures[0];
+                    })
+                ) {
+                    providerSignature[provider] = signatures[0];
+                    console.info(
+                        "[WID V3] Learned broken " + provider +
+                        " placeholder signature:",
+                        signatures[0]
+                    );
+                }
+
+                done();
+            });
+        });
     }
 
     function learnProviderSignatures(done) {
-        var pending = 0;
+        var providers = Object.keys(providerRefs);
+        var pending = providers.length;
 
-        Object.keys(providerRefs).forEach(function (provider) {
-            providerRefs[provider].forEach(function (url) {
-                pending++;
+        if (!pending) {
+            done();
+            return;
+        }
 
-                var probe = new Image();
-
-                function finish() {
-                    var sig = signatureFor(probe);
-                    if (sig) addProviderSignature(provider, sig);
-
-                    pending--;
-                    if (pending === 0 && typeof done === "function") {
-                        done();
-                    }
-                }
-
-                probe.onload = finish;
-                probe.onerror = function () {
-                    pending--;
-                    if (pending === 0 && typeof done === "function") {
-                        done();
-                    }
-                };
-
-                probe.src = url;
+        providers.forEach(function (provider) {
+            learnProvider(provider, providerRefs[provider], function () {
+                pending--;
+                if (!pending) done();
             });
         });
-
-        if (!pending && typeof done === "function") done();
     }
 
-    function isBrokenSource(img) {
-        if (!img) return false;
+    function scanChannelEmotes() {
+        var emotes = Array.isArray(CHANNEL.emotes)
+            ? CHANNEL.emotes.slice()
+            : [];
 
-        var raw = img.getAttribute("src") || "";
-        var resolved = img.src || raw;
-        var a = normalize(raw);
-        var b = normalize(resolved);
+        emotes.forEach(function (emote) {
+            var url = emoteUrl(emote);
+            var normalized = normalize(url);
 
-        if (broken[a] || broken[b]) return true;
+            if (!url) return;
 
-        var provider = providerFor(resolved || raw);
-        if (!provider) return false;
-
-        var sig = signatureFor(img);
-        if (!sig) return false;
-
-        return providerSignatures[provider].indexOf(sig) !== -1;
-    }
-
-    function removeTile(img) {
-        var $img = $(img);
-
-        var $tile = $img.closest(
-            "td, li, .emote, .emote-item, .emotelist-item, .thumbnail, .well"
-        );
-
-        if ($tile.length) {
-            $tile.first().remove();
-        } else {
-            $img.remove();
-        }
-    }
-
-    function scrub(root) {
-        var scope = root && root.querySelectorAll ? root : document;
-        var images = [];
-
-        if (scope.nodeName === "IMG") images.push(scope);
-        Array.prototype.push.apply(
-            images,
-            scope.querySelectorAll ? scope.querySelectorAll("img") : []
-        );
-
-        images.forEach(function (img) {
-            function check() {
-                if (isBrokenSource(img)) removeTile(img);
+            if (exactBroken[normalized]) {
+                removeEntry(emote, "known dead URL");
+                return;
             }
 
-            if (img.complete && img.naturalWidth) {
-                check();
-            } else {
-                $(img)
-                    .off("load" + ns)
-                    .one("load" + ns, check);
-            }
+            var provider = providerFor(url);
+            var expected = provider && providerSignature[provider];
+
+            if (!provider || !expected) return;
+
+            var probe = new Image();
+
+            probe.onload = function () {
+                if (signatureFor(probe) === expected) {
+                    removeEntry(
+                        emote,
+                        provider + " static error placeholder"
+                    );
+                }
+            };
+
+            /* A transient load error alone is NOT enough to delete an emote. */
+            probe.src = url;
         });
     }
 
-    function scrubEmoteUi() {
-        var modal = document.getElementById("emotelist");
-        if (modal) scrub(modal);
+    function runCleanup() {
+        scanChannelEmotes();
     }
 
     $(function () {
-        scrubEmoteUi();
+        /* Exact known dead entries can be removed immediately. */
+        runCleanup();
 
+        /* Then learn safe provider signatures and remove matching records. */
         learnProviderSignatures(function () {
-            scrubEmoteUi();
-            setTimeout(scrubEmoteUi, 150);
+            runCleanup();
         });
 
-        setTimeout(scrubEmoteUi, 500);
-        setTimeout(scrubEmoteUi, 1500);
+        setTimeout(runCleanup, 1500);
     });
 
+    /* Re-run only on explicit emote-list use; no observers or polling. */
     $(document)
         .off(ns)
-        .on("shown.bs.modal" + ns, "#emotelist", function () {
-            scrubEmoteUi();
-            setTimeout(scrubEmoteUi, 100);
-            setTimeout(scrubEmoteUi, 300);
-        })
         .on("click" + ns, "#emotelistbtn", function () {
-            setTimeout(scrubEmoteUi, 200);
-            setTimeout(scrubEmoteUi, 500);
+            setTimeout(runCleanup, 250);
+        })
+        .on("shown.bs.modal" + ns, "#emotelist", function () {
+            setTimeout(runCleanup, 100);
         });
 })();

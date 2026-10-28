@@ -3640,21 +3640,23 @@ div#userlist {
 
 
 
+
+
 /* =========================================================
-   RDH LEGACY EMBIGGEN CONTROL
-   Keep the original Pink Horse control visible beside Macros.
+   RDH LEGACY EMBIGGEN BUTTON ONLY
+   Do not style or reposition #textEmotes / Unimoji wrappers.
    ========================================================= */
-#leftcontrols > #textEmotes {
-    display: inline-block !important;
+#leftcontrols > button[title*="Embiggen"],
+#leftcontrols > .btn[title*="Embiggen"] {
+    display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    margin-left: 5px !important;
-}
-
-#leftcontrols > #textEmotes > button,
-#leftcontrols > #textEmotes .btn {
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    min-width: 0 !important;
     height: 27px !important;
     min-height: 27px !important;
-    width: auto !important;
+    margin-left: 5px !important;
     white-space: nowrap !important;
 }

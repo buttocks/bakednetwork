@@ -3675,3 +3675,13 @@ div#userlist {
     height: auto !important;
     object-fit: contain !important;
 }
+
+
+/* =========================================================
+   RDH EMBIGGEN DUPLICATE CLEANUP
+   The Pink Horse legacy control is #textEmotes. RDH supplies
+   its own persistent replacement, so hide only the legacy copy.
+   ========================================================= */
+#textEmotes {
+    display: none !important;
+}

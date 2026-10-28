@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.26",
+        version: "0.1.27",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -447,6 +447,24 @@
 
                     if (/embiggen\s+emote\s+list/i.test(text)) {
                         self.captureTemplate();
+                    }
+                })
+                .on("click" + self.namespace, "button, a.btn, input[type='button']", function () {
+                    const $el = $(this);
+                    const text = [
+                        $el.text(),
+                        $el.attr("title"),
+                        $el.attr("aria-label"),
+                        $el.val()
+                    ].filter(Boolean).join(" ");
+
+                    if (/embiggen\s+emote\s+list/i.test(text)) {
+                        setTimeout(function () {
+                            self.restoreIfMissing();
+                        }, 0);
+                        setTimeout(function () {
+                            self.restoreIfMissing();
+                        }, 100);
                     }
                 })
                 .on("hidden.bs.modal" + self.namespace, "#emotelist", function () {

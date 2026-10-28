@@ -1285,3 +1285,24 @@ body {
     box-shadow: 0 8px 24px rgba(0,0,0,.55) !important;
     cursor: zoom-out !important;
 }
+
+
+/* =========================================================
+   WID V3 LEGACY EMBIGGEN BUTTON
+   Only the working Pink Horse button is preserved/restored.
+   Chat input, #textEmotes, Unimoji and Colors stay untouched.
+   ========================================================= */
+#leftcontrols > .wid-v3-legacy-embiggen {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 27px !important;
+    min-height: 27px !important;
+    margin-left: 5px !important;
+    padding: 2px 10px !important;
+    white-space: nowrap !important;
+}

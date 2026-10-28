@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.24",
+        version: "0.1.25",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -328,20 +328,18 @@
 
 
     /* ---------------------------------------------------------
-       Preserve the original working legacy Embiggen control.
-       We move the SAME live #textEmotes node during modal close
-       so its original Pink Horse event handlers survive.
-       No observers and no polling.
+       Preserve ONLY the original working Embiggen button.
+       Never move #textEmotes or any chat/unimoji wrapper.
+       Event-driven only: no observers, no polling.
        --------------------------------------------------------- */
     modern.register("legacyEmbiggenKeeper", {
         namespace: ".rdhLegacyEmbiggen",
         parkingId: "rdh-embiggen-parking",
+        savedButton: null,
 
-        getControl: function () {
-            const $wrap = $("#textEmotes").first();
-            if ($wrap.length) return $wrap;
-
+        findButton: function () {
             let $found = $();
+
             $("button, a.btn, input[type='button']").each(function () {
                 const $el = $(this);
                 const text = [
@@ -352,11 +350,11 @@
                 ].filter(Boolean).join(" ");
 
                 if (/embiggen\s+emote\s+list/i.test(text)) {
-                    const $candidate = $el.closest("#textEmotes");
-                    $found = $candidate.length ? $candidate : $el;
+                    $found = $el;
                     return false;
                 }
             });
+
             return $found;
         },
 
@@ -366,20 +364,28 @@
                 $parking = $("<div/>", {
                     id: this.parkingId,
                     "aria-hidden": "true"
-                }).css({
-                    display: "none"
-                }).appendTo("body");
+                }).css("display", "none").appendTo("body");
             }
             return $parking;
         },
 
+        captureButton: function () {
+            const $live = this.findButton();
+            if ($live.length) {
+                this.savedButton = $live;
+            }
+            return this.savedButton && this.savedButton.length
+                ? this.savedButton
+                : $();
+        },
+
         placeAfterMacros: function () {
-            const $control = this.getControl();
+            const $button = this.captureButton();
             const $macros = $("#emotelistbtn");
 
-            if (!$control.length || !$macros.length) return;
+            if (!$button.length || !$macros.length) return;
 
-            $control
+            $button
                 .removeClass("hidden invisible")
                 .prop("hidden", false)
                 .attr("aria-hidden", "false")
@@ -392,11 +398,11 @@
                 .insertAfter($macros);
         },
 
-        parkControl: function () {
-            const $control = this.getControl();
-            if (!$control.length) return;
+        parkButton: function () {
+            const $button = this.captureButton();
+            if (!$button.length) return;
 
-            $control.detach().appendTo(this.ensureParking());
+            $button.detach().appendTo(this.ensureParking());
         },
 
         start: function () {
@@ -409,7 +415,7 @@
             $(document)
                 .off(self.namespace)
                 .on("hide.bs.modal" + self.namespace, "#emotelist", function () {
-                    self.parkControl();
+                    self.parkButton();
                 })
                 .on("hidden.bs.modal" + self.namespace, "#emotelist", function () {
                     setTimeout(function () {
@@ -432,6 +438,7 @@
             $(document).off(this.namespace);
             this.placeAfterMacros();
             $("#" + this.parkingId).remove();
+            this.savedButton = null;
         }
     });
 

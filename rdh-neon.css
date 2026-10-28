@@ -3697,3 +3697,33 @@ div#userlist {
         max-height: 100px !important;
     }
 }
+
+
+/* =========================================================
+   RDH EMBIGGEN VISIBILITY HARDENING
+   Legacy emote code may toggle inline display/hidden states.
+   Keep our independent RDH control visible after reopen.
+   ========================================================= */
+#leftcontrols #rdh-embiggen-btn,
+#rdh-embiggen-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    width: auto !important;
+    height: 27px !important;
+    min-height: 27px !important;
+    max-height: 27px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+}
+
+#rdh-embiggen-btn[hidden],
+#rdh-embiggen-btn.hidden,
+#rdh-embiggen-btn.invisible,
+#rdh-embiggen-btn[aria-hidden="true"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}

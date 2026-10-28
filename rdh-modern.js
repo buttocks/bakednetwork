@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.17",
+        version: "0.1.18",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -130,9 +130,7 @@
 
             self.observer.observe(document.body, {
                 childList: true,
-                subtree: true,
-                attributes: true,
-                attributeFilter: ["style", "class", "hidden", "aria-hidden"]
+                subtree: true
             });
         },
 
@@ -455,7 +453,7 @@
 
             self.interval = setInterval(function () {
                 self.ensureButton();
-            }, 500);
+            }, 1500);
 
             $(document)
                 .off("click.rdhEmbiggenRecovery", "#emotelistbtn")

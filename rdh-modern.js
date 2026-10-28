@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.23",
+        version: "0.1.24",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -325,25 +325,25 @@
     });
 
 
+
+
     /* ---------------------------------------------------------
-       Persistent Embiggen emote list control
-       Event-driven only: no observers, no polling.
+       Preserve the original working legacy Embiggen control.
+       We move the SAME live #textEmotes node during modal close
+       so its original Pink Horse event handlers survive.
+       No observers and no polling.
        --------------------------------------------------------- */
-    modern.register("embiggenEmotes", {
-        buttonId: "rdh-embiggen-btn",
-        namespace: ".rdhEmbiggen",
+    modern.register("legacyEmbiggenKeeper", {
+        namespace: ".rdhLegacyEmbiggen",
+        parkingId: "rdh-embiggen-parking",
 
-        removeLegacyControl: function () {
-            $("#textEmotes").each(function () {
-                const text = ($(this).text() || "").trim();
-                if (/embiggen\s+emote\s+list/i.test(text)) {
-                    $(this).remove();
-                }
-            });
+        getControl: function () {
+            const $wrap = $("#textEmotes").first();
+            if ($wrap.length) return $wrap;
 
-            $("button, a.btn, input[type='button']").each((_, el) => {
-                if (el.id === this.buttonId) return;
-                const $el = $(el);
+            let $found = $();
+            $("button, a.btn, input[type='button']").each(function () {
+                const $el = $(this);
                 const text = [
                     $el.text(),
                     $el.attr("title"),
@@ -352,109 +352,86 @@
                 ].filter(Boolean).join(" ");
 
                 if (/embiggen\s+emote\s+list/i.test(text)) {
-                    const $wrap = $el.closest("#textEmotes");
-                    if ($wrap.length) $wrap.remove();
-                    else $el.remove();
+                    const $candidate = $el.closest("#textEmotes");
+                    $found = $candidate.length ? $candidate : $el;
+                    return false;
                 }
             });
+            return $found;
         },
 
-        syncButton: function () {
-            const $btn = $("#" + this.buttonId);
-            if (!$btn.length) return;
-
-            $btn
-                .removeClass("active")
-                .removeAttr("aria-pressed");
-
-            if ($btn.text() !== "Embiggen emote list") {
-                $btn.text("Embiggen emote list");
+        ensureParking: function () {
+            let $parking = $("#" + this.parkingId);
+            if (!$parking.length) {
+                $parking = $("<div/>", {
+                    id: this.parkingId,
+                    "aria-hidden": "true"
+                }).css({
+                    display: "none"
+                }).appendTo("body");
             }
+            return $parking;
         },
 
-        ensureButton: function () {
-            this.removeLegacyControl();
-
-            let $btn = $("#" + this.buttonId);
-            if (!$btn.length) {
-                $btn = $("<button/>", {
-                    id: this.buttonId,
-                    type: "button",
-                    class: "btn btn-sm btn-default",
-                    text: "Embiggen emote list",
-                    title: "Make the current emote list larger"
-                });
-            }
-
+        placeAfterMacros: function () {
+            const $control = this.getControl();
             const $macros = $("#emotelistbtn");
-            const $left = $("#leftcontrols");
 
-            if ($macros.length) {
-                $btn.detach().insertAfter($macros);
-            } else if ($left.length) {
-                $btn.detach().appendTo($left);
-            }
+            if (!$control.length || !$macros.length) return;
 
-            $btn
+            $control
                 .removeClass("hidden invisible")
                 .prop("hidden", false)
                 .attr("aria-hidden", "false")
                 .css({
-                    display: "inline-flex",
-                    visibility: "visible",
-                    opacity: "1"
-                });
+                    display: "",
+                    visibility: "",
+                    opacity: ""
+                })
+                .detach()
+                .insertAfter($macros);
+        },
 
-            this.syncButton();
+        parkControl: function () {
+            const $control = this.getControl();
+            if (!$control.length) return;
+
+            $control.detach().appendTo(this.ensureParking());
         },
 
         start: function () {
             const self = this;
 
-            self.ensureButton();
+            setTimeout(function () {
+                self.placeAfterMacros();
+            }, 300);
 
             $(document)
                 .off(self.namespace)
-                .on("click" + self.namespace, "#" + self.buttonId, function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    const $modal = $("#emotelist");
-                    if (!$modal.length || !$modal.is(":visible")) return;
-
-                    $modal.addClass("rdh-emotelist-large");
-                    self.syncButton();
+                .on("hide.bs.modal" + self.namespace, "#emotelist", function () {
+                    self.parkControl();
+                })
+                .on("hidden.bs.modal" + self.namespace, "#emotelist", function () {
+                    setTimeout(function () {
+                        self.placeAfterMacros();
+                    }, 0);
+                })
+                .on("shown.bs.modal" + self.namespace, "#emotelist", function () {
+                    setTimeout(function () {
+                        self.placeAfterMacros();
+                    }, 0);
                 })
                 .on("click" + self.namespace, "#emotelistbtn", function () {
                     setTimeout(function () {
-                        self.ensureButton();
-                    }, 150);
-                })
-                .on(
-                    "shown.bs.modal" + self.namespace,
-                    "#emotelist",
-                    function () {
-                        setTimeout(function () {
-                            self.ensureButton();
-                        }, 50);
-                    }
-                )
-                .on(
-                    "hidden.bs.modal" + self.namespace,
-                    "#emotelist",
-                    function () {
-                        $("#emotelist").removeClass("rdh-emotelist-large");
-                        setTimeout(function () {
-                            self.ensureButton();
-                        }, 50);
-                    }
-                );
+                        self.placeAfterMacros();
+                    }, 200);
+                });
         },
 
         stop: function () {
             $(document).off(this.namespace);
-            $("#" + this.buttonId).remove();
-            $("#emotelist").removeClass("rdh-emotelist-large");
+            this.placeAfterMacros();
+            $("#" + this.parkingId).remove();
         }
     });
 
@@ -468,7 +445,7 @@
     modern.start("emotes");
     modern.start("motdCollapse");
     modern.start("premiumPlaylist");
-    modern.start("embiggenEmotes");
+    modern.start("legacyEmbiggenKeeper");
 
     console.info(
         "[RDH Modern] Migration layer loaded. Legacy module loader remains intact."

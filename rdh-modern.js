@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.20",
+        version: "0.1.21",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -363,13 +363,13 @@
             const $btn = $("#" + this.buttonId);
             if (!$btn.length) return;
 
-            const large = $("#emotelist").hasClass("rdh-emotelist-large");
             $btn
-                .toggleClass("active", large)
-                .attr("aria-pressed", large ? "true" : "false");
+                .removeClass("active")
+                .removeAttr("aria-pressed");
 
-            const label = large ? "Normal emote list" : "Embiggen emote list";
-            if ($btn.text() !== label) $btn.text(label);
+            if ($btn.text() !== "Embiggen emote list") {
+                $btn.text("Embiggen emote list");
+            }
         },
 
         ensureButton: function () {
@@ -382,8 +382,7 @@
                     type: "button",
                     class: "btn btn-sm btn-default",
                     text: "Embiggen emote list",
-                    title: "Toggle a larger emote list",
-                    "aria-pressed": "false"
+                    title: "Make the current emote list larger"
                 });
             }
 
@@ -423,7 +422,7 @@
                     const $modal = $("#emotelist");
                     if (!$modal.length) return;
 
-                    $modal.toggleClass("rdh-emotelist-large");
+                    $modal.addClass("rdh-emotelist-large");
                     self.syncButton();
 
                     if (!$modal.is(":visible")) {
@@ -436,9 +435,19 @@
                     }, 150);
                 })
                 .on(
-                    "shown.bs.modal" + self.namespace + " hidden.bs.modal" + self.namespace,
+                    "shown.bs.modal" + self.namespace,
                     "#emotelist",
                     function () {
+                        setTimeout(function () {
+                            self.ensureButton();
+                        }, 50);
+                    }
+                )
+                .on(
+                    "hidden.bs.modal" + self.namespace,
+                    "#emotelist",
+                    function () {
+                        $("#emotelist").removeClass("rdh-emotelist-large");
                         setTimeout(function () {
                             self.ensureButton();
                         }, 50);

@@ -442,7 +442,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.19",
+        version: "0.1.15",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -723,41 +723,31 @@
             // Watch the whole page rather than one queue node. Baked can replace
             // or virtualize playlist DOM while scrolling, which otherwise leaves
             // newly-rendered rows untagged.
+            self.observer = new MutationObserver(function () {
+                self.scheduleScan();
+            });
+
+            self.observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+
+            // Periodic safety scan catches virtualized/reused rows even if the
+            // site mutates attributes/properties without a useful DOM event.
             self.interval = setInterval(function () {
-                self.ensureButton();
-            }, 5000);
-
-            $(document)
-                .off("click.rdhEmbiggenRecovery", "#emotelistbtn")
-                .on("click.rdhEmbiggenRecovery", "#emotelistbtn", function () {
-                    setTimeout(function () {
-                        self.ensureButton();
-                    }, 100);
-                });
-
-            $(document)
-                .off(
-                    "shown.bs.modal.rdhEmbiggen hidden.bs.modal.rdhEmbiggen",
-                    "#emotelist"
-                )
-                .on(
-                    "shown.bs.modal.rdhEmbiggen hidden.bs.modal.rdhEmbiggen",
-                    "#emotelist",
-                    function () {
-                        setTimeout(function () {
-                            self.ensureButton();
-                        }, 100);
-                    }
-                );
+                self.scan();
+            }, 1000);
         },
 
         stop: function () {
+            clearTimeout(this.timer);
             clearInterval(this.interval);
             this.interval = null;
-
-            $(document).off(".rdhEmbiggen").off(".rdhEmbiggenRecovery");
-            $("#" + this.buttonId).off(".rdhEmbiggen").remove();
-            $("#emotelist").removeClass("rdh-emotelist-large");
+            if (this.observer) this.observer.disconnect();
+            this.observer = null;
+            $("#queue .rdh-featured, #queue [class*='rdh-featured-']")
+                .removeClass("rdh-featured rdh-featured-wor rdh-featured-wol rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc");
         }
     });
 
@@ -771,7 +761,6 @@
     modern.start("emotes");
     modern.start("motdCollapse");
     modern.start("premiumPlaylist");
-    modern.start("embiggenEmotes");
 
     console.info(
         "[RDH Modern] Migration layer loaded. Legacy module loader remains intact."

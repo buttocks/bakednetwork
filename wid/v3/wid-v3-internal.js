@@ -480,7 +480,11 @@ $("#emotelistbtn").text("Macros");
 (function () {
     "use strict";
 
-    if (!window.jQuery || !window.socket || !window.CHANNEL) return;
+    if (!window.jQuery || !window.socket || !window.CHANNEL || !window.CLIENT) return;
+
+    /* Channel JS runs for everyone. Only moderator-or-higher clients should
+       issue permanent emote removal requests. */
+    if (Number(CLIENT.rank || 0) < 2) return;
 
     var $ = window.jQuery;
     var ns = ".widV3BrokenEmoteRecords";

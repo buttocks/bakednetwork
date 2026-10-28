@@ -3642,12 +3642,13 @@ div#userlist {
 
 
 
+
+
 /* =========================================================
-   RDH LEGACY EMBIGGEN BUTTON ONLY
-   Do not style or reposition #textEmotes / Unimoji wrappers.
+   RDH LEGACY EMBIGGEN BUTTON
+   Only the button is styled; chat/unimoji wrappers are untouched.
    ========================================================= */
-#leftcontrols > button[title*="Embiggen"],
-#leftcontrols > .btn[title*="Embiggen"] {
+#leftcontrols > .rdh-legacy-embiggen {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;

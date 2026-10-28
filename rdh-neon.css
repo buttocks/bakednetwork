@@ -3636,3 +3636,64 @@ div#userlist {
 #queue .queue_entry.queue_active.queue_temp {
 	border-right-color: #ffb35f !important;
 }
+
+
+/* =========================================================
+   RDH PERSISTENT EMBIGGEN EMOTE LIST
+   ========================================================= */
+
+#rdh-embiggen-btn {
+    margin-left: 5px !important;
+    white-space: nowrap !important;
+}
+
+#rdh-embiggen-btn.active {
+    border-color: rgba(93, 236, 255, .85) !important;
+    box-shadow: 0 0 8px rgba(93, 236, 255, .22) !important;
+}
+
+/* Normal Baked emote list stays compact. */
+#emotelist .emotelist-table img,
+#emotelist img.channel-emote {
+    max-width: 90px !important;
+    max-height: 70px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    transition: max-width .15s ease, max-height .15s ease !important;
+}
+
+/* Embiggen mode enlarges the existing modal rather than creating a new menu. */
+#emotelist.rdh-emotelist-large .modal-dialog {
+    width: min(1180px, calc(100vw - 40px)) !important;
+    max-width: 1180px !important;
+}
+
+#emotelist.rdh-emotelist-large .modal-body {
+    max-height: calc(100vh - 180px) !important;
+    overflow-y: auto !important;
+}
+
+#emotelist.rdh-emotelist-large .emotelist-table img,
+#emotelist.rdh-emotelist-large img.channel-emote {
+    max-width: 180px !important;
+    max-height: 135px !important;
+}
+
+#emotelist.rdh-emotelist-large .emotelist-table td {
+    padding: 8px !important;
+    vertical-align: middle !important;
+}
+
+@media (max-width: 700px) {
+    #emotelist.rdh-emotelist-large .modal-dialog {
+        width: calc(100vw - 16px) !important;
+        margin: 8px !important;
+    }
+
+    #emotelist.rdh-emotelist-large .emotelist-table img,
+    #emotelist.rdh-emotelist-large img.channel-emote {
+        max-width: 130px !important;
+        max-height: 100px !important;
+    }
+}

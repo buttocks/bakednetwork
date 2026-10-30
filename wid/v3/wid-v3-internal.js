@@ -684,3 +684,75 @@ $("#emotelistbtn").text("Macros");
             setTimeout(runCleanup, 100);
         });
 })();
+
+/* =========================================================
+   WID V3 POLL CENTERING — GEOMETRY-SCOPED
+   Detect the actual cinema arrangement (wide video/narrow chat)
+   without guessing the external layout module's class names.
+   No polling, reparenting, or broad mutation observers.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    if (window.__widV3PollCinemaDetector) return;
+    window.__widV3PollCinemaDetector = true;
+
+    var cssClass = "wid-v3-cinema-poll";
+    var framePending = false;
+
+    function update() {
+        framePending = false;
+        var chat = document.getElementById("chatwrap");
+        var video = document.getElementById("videowrap");
+        if (!chat || !video || !document.body) return;
+
+        var width = document.documentElement.clientWidth || window.innerWidth;
+        var cw = chat.getBoundingClientRect().width;
+        var vw = video.getBoundingClientRect().width;
+
+        // In normal WID, both panels are substantial columns.
+        // In cinema, video occupies most of the screen and chat is narrow.
+        var cinema = width >= 800 &&
+                     cw >= 120 && vw >= 480 &&
+                     cw / width < 0.34 &&
+                     vw / width > 0.63 &&
+                     vw > cw * 2;
+
+        document.body.classList.toggle(cssClass, cinema);
+    }
+
+    function schedule() {
+        if (framePending) return;
+        framePending = true;
+        requestAnimationFrame(update);
+    }
+
+    function init() {
+        var chat = document.getElementById("chatwrap");
+        var video = document.getElementById("videowrap");
+        if (!chat || !video) return;
+
+        schedule();
+        window.addEventListener("resize", schedule, {passive: true});
+
+        if (window.ResizeObserver) {
+            var resizeObserver = new ResizeObserver(schedule);
+            resizeObserver.observe(chat);
+            resizeObserver.observe(video);
+            window.__widV3PollCinemaResizeObserver = resizeObserver;
+        }
+
+        document.addEventListener("click", function (event) {
+            if (event.target.closest("nav, .navbar, [id*='layout'], [class*='layout']")) {
+                setTimeout(schedule, 50);
+                setTimeout(schedule, 350);
+            }
+        }, false);
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init, {once: true});
+    } else {
+        init();
+    }
+})();

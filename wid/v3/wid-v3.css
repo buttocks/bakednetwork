@@ -1306,3 +1306,30 @@ body {
     padding: 2px 10px !important;
     white-space: nowrap !important;
 }
+
+/* =========================================================
+   WID V3 POLL IMAGE CONTAINMENT
+   Keep poll images/macros within their own poll content.
+   Does not change chat emote hover resizing or its handlers.
+   ========================================================= */
+#pollwrap .poll-menu img,
+#pollwrap .well img,
+#pollwrap .option img,
+#pollwrap .channel-emote {
+    display: inline-block !important;
+    position: static !important;
+    float: none !important;
+    max-width: min(100%, 180px) !important;
+    max-height: 110px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+    transform: none !important;
+    z-index: auto !important;
+}
+#pollwrap .option,
+#pollwrap .well {
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+}

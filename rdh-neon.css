@@ -3661,3 +3661,23 @@ div#userlist {
     margin-left: 5px !important;
     white-space: nowrap !important;
 }
+
+/* =========================================================
+   RDH CINEMA USERLIST LAYOUT
+   The original cinema convention marks #wrap as .cinema.
+   Preserve normal-mode userlist. No JS, no polling.
+   ========================================================= */
+#wrap.cinema #userlist,
+#wrap.cinema #userlisttoggle {
+    display: none !important;
+}
+#wrap.cinema #chatwrap #messagebuffer {
+    display: block !important;
+    float: none !important;
+    clear: both !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+}

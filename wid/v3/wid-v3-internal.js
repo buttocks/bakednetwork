@@ -712,3 +712,88 @@ $("#emotelistbtn").text("Macros");
             setTimeout(runCleanup, 100);
         });
 })();
+/* =========================================================
+   WID V3 CINEMA VIEW TRACKER
+   The site's layout modules can switch to a wide-player
+   cinema arrangement without supplying a stable CSS class.
+   Detect the wide player/narrow chat geometry and scope
+   userlist hiding to that view only. No polling/DOM mutations.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    if (window.__widV3CinemaTracker) return;
+    window.__widV3CinemaTracker = true;
+
+    function isCinema() {
+        var wrap = document.getElementById("wrap");
+        var video = document.getElementById("videowrap");
+        var chat = document.getElementById("chatwrap");
+        if (!video || !chat) return false;
+
+        if (
+            (wrap && (wrap.classList.contains("cinema") ||
+                      wrap.classList.contains("cinema-mode"))) ||
+            document.documentElement.classList.contains("cinema") ||
+            document.body.classList.contains("cinema") ||
+            document.body.classList.contains("cinema-mode")
+        ) return true;
+
+        var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        var playerWidth = video.getBoundingClientRect().width;
+        var chatWidth = chat.getBoundingClientRect().width;
+
+        /* Cinema is the distinct ~80/20 split seen in WID.
+           Require BOTH columns to be visible to avoid treating
+           fullscreen/video-only mode as cinema. */
+        return vw >= 1050 &&
+               playerWidth > 500 &&
+               chatWidth > 145 &&
+               (playerWidth / vw) >= 0.70 &&
+               (chatWidth / vw) <= 0.30 &&
+               playerWidth >= chatWidth * 2.2;
+    }
+
+    var scheduled = false;
+    function syncCinema() {
+        scheduled = false;
+        var active = isCinema();
+        if (document.body.classList.contains("wid-v3-cinema-mode") !== active) {
+            document.body.classList.toggle("wid-v3-cinema-mode", active);
+        }
+    }
+
+    function scheduleSync() {
+        if (scheduled) return;
+        scheduled = true;
+        window.requestAnimationFrame(syncCinema);
+    }
+
+    function init() {
+        if (!document.getElementById("videowrap") ||
+            !document.getElementById("chatwrap")) return;
+
+        scheduleSync();
+        window.addEventListener("resize", scheduleSync, {passive:true});
+
+        if (window.ResizeObserver) {
+            var ro = new ResizeObserver(scheduleSync);
+            ro.observe(document.getElementById("videowrap"));
+            ro.observe(document.getElementById("chatwrap"));
+            window.__widV3CinemaResizeObserver = ro;
+        }
+
+        /* Layout menu can change classes after its click handler runs. */
+        document.addEventListener("click", function (event) {
+            if (event.target.closest(".navbar, #layoutmenu, #layout-btn")) {
+                window.setTimeout(scheduleSync, 200);
+            }
+        }, false);
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init, {once:true});
+    } else {
+        init();
+    }
+})();

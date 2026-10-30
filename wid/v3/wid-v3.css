@@ -1275,3 +1275,19 @@ table {
     padding: 2px 10px !important;
     white-space: nowrap !important;
 }
+/* =========================================================
+   WID V3 CINEMA POLL CENTERING
+   The Pink Horse theatre layout pins live poll cards at a
+   fixed top/left offset. Override only that positioning,
+   and only while its theatre mode is active.
+   ========================================================= */
+body.theatre-mode #pollwrap.tmode div.active:not(.dismissed),
+body.theatre-mode #pollwrap.tmode2 div.active:not(.dismissed) {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 11000 !important;
+}

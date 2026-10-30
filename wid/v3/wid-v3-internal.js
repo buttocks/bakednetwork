@@ -279,34 +279,6 @@ $("#emotelistbtn").text("Macros");
     }
 })();
 
-/* Keep WID's navbar pinned without tying it to an observer/polling loop. */
-(function () {
-    "use strict";
-
-    if (!window.jQuery) return;
-    var $ = window.jQuery;
-
-    function ensureNavbarTop() {
-        var $nav = $("nav.navbar").first();
-        if (!$nav.length) $nav = $(".navbar").first();
-        if (!$nav.length) return;
-
-        if ($nav.parent()[0] !== document.body) {
-            $nav.detach().prependTo("body");
-        }
-
-        $nav.addClass("navbar-fixed-top");
-    }
-
-    $(function () {
-        ensureNavbarTop();
-        setTimeout(ensureNavbarTop, 500);
-        setTimeout(ensureNavbarTop, 1500);
-        setTimeout(ensureNavbarTop, 3000);
-    });
-})();
-
-
 /* WID V3 STALE CHAT WRAPPER CLEANUP
    Only undoes wrappers created by older V3 test builds. */
 (function () {

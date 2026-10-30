@@ -684,3 +684,163 @@ $("#emotelistbtn").text("Macros");
             setTimeout(runCleanup, 100);
         });
 })();
+/* =========================================================
+   WID V3 CINEMA POLL — LIVE ELEMENT POSITIONER
+   Pink Horse layout dynamically injects !important rules for
+   active polls; apply viewport-centered inline-important styles
+   directly to the existing poll card. Never move the poll DOM.
+   Restore its exact original inline values when cinema ends.
+   No intervals; observers limited to poll/layout state.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    if (window.__widV3CinemaPollPositioner) return;
+    window.__widV3CinemaPollPositioner = true;
+
+    var root = null;
+    var current = null;
+    var saved = null;
+    var pending = false;
+    var properties = [
+        "position", "top", "left", "right", "bottom",
+        "transform", "margin", "z-index", "max-height", "overflow-y"
+    ];
+
+    function inCinema() {
+        if (!root || !document.body) return false;
+        if (root.classList.contains("tmode") ||
+            root.classList.contains("tmode2") ||
+            document.body.classList.contains("theatre-mode")) {
+            return true;
+        }
+
+        /* Fallback for modified Baked layouts which retain the
+           wide-player/narrow-chat arrangement without those classes. */
+        var video = document.getElementById("videowrap");
+        var chat = document.getElementById("chatwrap");
+        if (!video || !chat) return false;
+
+        var viewport = document.documentElement.clientWidth || window.innerWidth;
+        var videoW = video.getBoundingClientRect().width;
+        var chatW = chat.getBoundingClientRect().width;
+        return viewport >= 900 &&
+            videoW >= viewport * 0.69 &&
+            chatW > 110 && chatW <= viewport * 0.31 &&
+            videoW >= chatW * 2.15;
+    }
+
+    function activePoll() {
+        if (!root) return null;
+        return root.querySelector(".well.active:not(.dismissed)") ||
+               root.querySelector("div.active:not(.dismissed)");
+    }
+
+    function remember(poll) {
+        var record = {};
+        properties.forEach(function (key) {
+            record[key] = {
+                value: poll.style.getPropertyValue(key),
+                priority: poll.style.getPropertyPriority(key)
+            };
+        });
+        return record;
+    }
+
+    function restore() {
+        if (!current || !saved) return;
+        var node = current;
+        properties.forEach(function (key) {
+            var state = saved[key];
+            if (state.value) {
+                node.style.setProperty(key, state.value, state.priority);
+            } else {
+                node.style.removeProperty(key);
+            }
+        });
+        current = null;
+        saved = null;
+    }
+
+    function set(poll, key, value) {
+        if (poll.style.getPropertyValue(key) !== value ||
+            poll.style.getPropertyPriority(key) !== "important") {
+            poll.style.setProperty(key, value, "important");
+        }
+    }
+
+    function positionPoll() {
+        pending = false;
+        var poll = activePoll();
+        if (!inCinema() || !poll) {
+            restore();
+            return;
+        }
+
+        if (current !== poll) {
+            restore();
+            current = poll;
+            saved = remember(poll);
+        }
+
+        /* Inline !important wins over the module's late hardcss rules. */
+        set(poll, "position", "fixed");
+        set(poll, "top", "50vh");
+        set(poll, "left", "50vw");
+        set(poll, "right", "auto");
+        set(poll, "bottom", "auto");
+        set(poll, "transform", "translate(-50%, -50%)");
+        set(poll, "margin", "0px");
+        set(poll, "z-index", "11000");
+        set(poll, "max-height", "calc(100vh - 36px)");
+        set(poll, "overflow-y", "auto");
+    }
+
+    function schedule() {
+        if (pending) return;
+        pending = true;
+        window.requestAnimationFrame(positionPoll);
+    }
+
+    function start() {
+        if (root) return;
+        root = document.getElementById("pollwrap");
+        if (!root) return;
+
+        var pollObserver = new MutationObserver(schedule);
+        pollObserver.observe(root, {
+            childList: true, subtree: true,
+            attributes: true, attributeFilter: ["class"]
+        });
+
+        var layoutObserver = new MutationObserver(schedule);
+        [document.body, document.getElementById("chatwrap"),
+         document.getElementById("videowrap")].forEach(function (node) {
+            if (node) layoutObserver.observe(node, {
+                attributes: true, attributeFilter: ["class"]
+            });
+        });
+
+        if (window.ResizeObserver) {
+            var ro = new ResizeObserver(schedule);
+            ["chatwrap", "videowrap"].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) ro.observe(el);
+            });
+            window.__widV3CinemaPollResize = ro;
+        }
+
+        window.addEventListener("resize", schedule, {passive: true});
+        window.__widV3CinemaPollObservers = [pollObserver, layoutObserver];
+        schedule();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start, {once: true});
+    } else {
+        start();
+    }
+    /* Allow asynchronous layout modules to finish their first setup. */
+    window.setTimeout(start, 600);
+    window.setTimeout(schedule, 1000);
+})();

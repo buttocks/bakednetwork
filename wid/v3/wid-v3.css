@@ -1277,11 +1277,15 @@ table {
 }
 
 /* =========================================================
-   WID V3 CINEMA POLL — CENTER ACTIVE CARD
-   Scope is set by a read-only layout check. Normal WID polls
-   and the original cinema/player layout stay unchanged.
+   WID V3 THEATRE / CINEMA POLL CENTER
+   Pink Horse theatre layout sets #pollwrap.tmode/.tmode2 and
+   positions their active poll near the top-left. Override the
+   actual cinema-only selectors; normal polls are untouched.
+   Do not change player/chat/nav or move DOM elements.
    ========================================================= */
-body.wid-v3-cinema-poll #pollwrap > .well.active {
+html body #pollwrap.tmode div.well.active:not(.dismissed),
+html body #pollwrap.tmode2 div.well.active:not(.dismissed),
+html body.theatre-mode #pollwrap div.well.active:not(.dismissed) {
     position: fixed !important;
     top: 50vh !important;
     left: 50vw !important;
@@ -1289,19 +1293,23 @@ body.wid-v3-cinema-poll #pollwrap > .well.active {
     bottom: auto !important;
     transform: translate(-50%, -50%) !important;
     margin: 0 !important;
-    width: min(520px, calc(100vw - 36px)) !important;
-    max-width: calc(100vw - 36px) !important;
-    max-height: calc(100vh - 36px) !important;
+    width: min(460px, calc(100vw - 32px)) !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 32px) !important;
+    max-height: calc(100vh - 32px) !important;
     overflow-y: auto !important;
     box-sizing: border-box !important;
     z-index: 11000 !important;
-    background: rgba(14, 17, 20, .97) !important;
-    border: 1px solid rgba(232, 131, 41, .65) !important;
+    background: rgba(15, 18, 21, .97) !important;
+    border: 1px solid rgba(232, 131, 41, .6) !important;
     border-radius: 8px !important;
-    box-shadow: 0 18px 55px rgba(0, 0, 0, .8) !important;
+    box-shadow: 0 14px 45px rgba(0, 0, 0, .72) !important;
 }
 
-body.wid-v3-cinema-poll #pollwrap > .well.active img {
+/* Keep any image inside the *poll card* from forcing overflow. */
+#pollwrap.tmode div.well.active img,
+#pollwrap.tmode2 div.well.active img,
+body.theatre-mode #pollwrap div.well.active img {
     max-width: 100% !important;
     height: auto !important;
 }

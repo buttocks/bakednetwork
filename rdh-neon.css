@@ -3335,13 +3335,13 @@ div#userlist {
 
 
 
-/* Lance Storm / Bryan Alvarez / LTBH */
+/* Lions, Tigers, Bears & Head / Dirt / Disco — one show across both names */
 #queue .queue_entry.rdh-featured-ltbh {
 	background: linear-gradient(90deg, rgba(151,92,255,.12), transparent 65%) !important;
 	box-shadow: inset 3px 0 0 rgba(164,105,255,.92) !important;
 }
 #queue .queue_entry.rdh-featured-ltbh:before {
-	content: "LTBH" !important;
+	content: "LTB" !important;
 	color: #16052d !important;
 	background: #b88cff !important;
 	box-shadow: 0 0 6px rgba(155,95,255,.34) !important;

@@ -1238,17 +1238,25 @@ table {
     cursor: zoom-in !important;
     position: relative !important;
     z-index: 2 !important;
+    /* Hover-out shrinks smoothly without waiting another 3 seconds. */
     transition:
-        max-width .22s ease,
-        max-height .22s ease,
-        filter .22s ease,
-        box-shadow .22s ease !important;
+        max-width .35s ease,
+        max-height .35s ease,
+        filter .35s ease,
+        box-shadow .35s ease !important;
     transform-origin: left center !important;
 }
 
 #messagebuffer .channel-emote[data-big="true"]:hover {
     max-width: var(--wid-emote-hover-w, 420px) !important;
     max-height: var(--wid-emote-hover-h, 300px) !important;
+    /* Only begin expanding after 3 continuous seconds of hovering.
+       The size then grows over 1 second instead of jumping immediately. */
+    transition:
+        max-width 1s ease-in-out 3s,
+        max-height 1s ease-in-out 3s,
+        filter .35s ease 3s,
+        box-shadow .35s ease 3s !important;
     z-index: 50 !important;
     filter: brightness(1.04) !important;
     box-shadow: 0 8px 24px rgba(0,0,0,.55) !important;

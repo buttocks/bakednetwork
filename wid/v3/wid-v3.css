@@ -1302,7 +1302,7 @@ table {
 
 
 /* WID V3 CHAT-HEADER EMOTES TOGGLE
-   Match the other compact header chips. No orange/brown ring;
+   Match adjacent Chat Color's light chip. No orange/brown ring;
    preserve the underlying Pink Horse toggle click handler. */
 #EmotesToggle {
     display: inline-flex !important;
@@ -1322,9 +1322,9 @@ table {
     vertical-align: middle !important;
     border: 0 !important;
     border-radius: 3px !important;
-    background: #2b4350 !important;
+    background: #e8edf0 !important;
     background-image: none !important;
-    color: #fff !important;
+    color: #17242d !important;
     box-shadow: none !important;
     outline: none !important;
     text-shadow: none !important;
@@ -1332,9 +1332,9 @@ table {
 }
 #EmotesToggle:hover {
     border: 0 !important;
-    background: #3b5b6b !important;
+    background: #d1dee5 !important;
     background-image: none !important;
-    color: #fff !important;
+    color: #17242d !important;
     box-shadow: none !important;
 }
 /* Keep visible keyboard focus without reintroducing the brown border. */

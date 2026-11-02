@@ -1302,8 +1302,8 @@ table {
 
 
 /* WID V3 CHAT-HEADER EMOTES TOGGLE
-   Keep #EmotesToggle as compact as Name Color, Squee,
-   Smartscroll and Chat Color; do not resize Embiggen. */
+   Match the other compact header chips. No orange/brown ring;
+   preserve the underlying Pink Horse toggle click handler. */
 #EmotesToggle {
     display: inline-flex !important;
     align-items: center !important;
@@ -1317,9 +1317,28 @@ table {
     margin: 0 !important;
     padding: 0 6px !important;
     font-size: 10px !important;
-    line-height: 15px !important;
+    line-height: 17px !important;
     font-weight: 600 !important;
     vertical-align: middle !important;
+    border: 0 !important;
     border-radius: 3px !important;
+    background: #2b4350 !important;
+    background-image: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    outline: none !important;
+    text-shadow: none !important;
     white-space: nowrap !important;
+}
+#EmotesToggle:hover {
+    border: 0 !important;
+    background: #3b5b6b !important;
+    background-image: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+/* Keep visible keyboard focus without reintroducing the brown border. */
+#EmotesToggle:focus-visible {
+    outline: 2px solid #73c8e8 !important;
+    outline-offset: 2px !important;
 }

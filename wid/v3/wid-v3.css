@@ -536,12 +536,17 @@ nav.navbar:hover {
     box-shadow: 0 6px 22px rgba(0, 0, 0, .35) !important;
 }
 
+/* Keep the original logo, without reserving a wide empty brand area. */
 .navbar-brand {
-    min-width: 132px !important;
+    width: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     background-image: url("https://i.postimg.cc/fyPsnDQ6/chatlogo.png") !important;
-    background-size: contain !important;
+    background-size: auto 42px !important;
     background-repeat: no-repeat !important;
-    background-position: 12px center !important;
+    background-position: center center !important;
 }
 
 .navbar a,
@@ -860,7 +865,9 @@ textarea.form-control:focus {
     }
 
     .navbar-brand {
-        min-width: 90px !important;
+        width: 48px !important;
+        min-width: 48px !important;
+        max-width: 48px !important;
     }
 }
 

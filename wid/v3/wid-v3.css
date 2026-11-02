@@ -1257,11 +1257,11 @@ table {
 #messagebuffer .channel-emote[data-big="true"]:hover {
     max-width: var(--wid-emote-hover-w, 420px) !important;
     max-height: var(--wid-emote-hover-h, 300px) !important;
-    /* Only begin expanding after 3 continuous seconds of hovering.
-       The size then grows over 1 second instead of jumping immediately. */
+    /* Wait 3 continuous seconds, then expand gradually over 3 seconds.
+       Moving away still cancels the delay and shrinks promptly. */
     transition:
-        max-width 1s ease-in-out 3s,
-        max-height 1s ease-in-out 3s,
+        max-width 3s ease-in-out 3s,
+        max-height 3s ease-in-out 3s,
         filter .35s ease 3s,
         box-shadow .35s ease 3s !important;
     z-index: 50 !important;

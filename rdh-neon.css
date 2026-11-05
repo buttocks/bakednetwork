@@ -3689,3 +3689,30 @@ div#userlist {
 #motd details[open] > summary::after {
     content: " — Collapse ▲";
 }
+
+/* RDH MOTD: restore CyTube's native full-panel minus/plus toggle. */
+#motdwrap {
+    position: relative !important;
+}
+#motdwrap #togglemotd {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    top: 8px !important;
+    right: 12px !important;
+    z-index: 20 !important;
+    padding: 3px 7px !important;
+    background: rgba(0, 28, 35, .85) !important;
+    color: #8ff6ff !important;
+    border: 1px solid rgba(27, 191, 212, .65) !important;
+    border-radius: 4px !important;
+    text-shadow: none !important;
+    cursor: pointer !important;
+}
+#motdwrap #togglemotd:hover,
+#motdwrap #togglemotd:focus {
+    opacity: 1 !important;
+    color: #fff !important;
+    background: rgba(0, 76, 87, .95) !important;
+}

@@ -3681,3 +3681,11 @@ div#userlist {
     margin-right: 0 !important;
     box-sizing: border-box !important;
 }
+
+/* RDH MOTD HOUSE RULES COLLAPSE CONTROL */
+#motd details > summary::after {
+    content: " ▼";
+}
+#motd details[open] > summary::after {
+    content: " — Collapse ▲";
+}

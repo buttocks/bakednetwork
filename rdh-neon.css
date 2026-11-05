@@ -3682,12 +3682,16 @@ div#userlist {
     box-sizing: border-box !important;
 }
 
-/* RDH MOTD HOUSE RULES COLLAPSE CONTROL */
+/* RDH MOTD HOUSE RULES COLLAPSE CONTROL
+   The MOTD already supplies the arrow in its summary span. */
 #motd details > summary::after {
-    content: " ▼";
+    content: none !important;
 }
-#motd details[open] > summary::after {
-    content: " — Collapse ▲";
+#motd details[open] > summary > span:first-child {
+    display: none !important;
+}
+#motd details[open] > summary > span:nth-child(2) {
+    display: inline !important;
 }
 
 /* RDH MOTD: restore CyTube's native full-panel minus/plus toggle. */

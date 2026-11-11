@@ -3289,48 +3289,48 @@ div#userlist {
 
 /* Big Vinny V Show */
 #queue .queue_entry.rdh-featured-bvv {
-	background: linear-gradient(90deg, rgba(80,225,170,.11), transparent 65%) !important;
-	box-shadow: inset 3px 0 0 rgba(90,235,180,.92) !important;
+	background: linear-gradient(90deg, rgba(65,115,255,.12), transparent 65%) !important;
+	box-shadow: inset 3px 0 0 rgba(87,139,255,.95) !important;
 }
 #queue .queue_entry.rdh-featured-bvv:before {
 	content: "BVV" !important;
-	color: #002219 !important;
-	background: #72e7b8 !important;
-	box-shadow: 0 0 6px rgba(80,225,170,.34) !important;
+	color: #06132b !important;
+	background: #598cff !important;
+	box-shadow: 0 0 6px rgba(89,140,255,.38) !important;
 }
 #queue .queue_entry.rdh-featured-bvv .qe_title {
-	color: #b9f7dd !important;
+	color: #b5caff !important;
 }
 
 
 /* Filthy Four Daily */
 #queue .queue_entry.rdh-featured-f4d {
-	background: linear-gradient(90deg, rgba(255,135,60,.11), transparent 65%) !important;
-	box-shadow: inset 3px 0 0 rgba(255,145,65,.92) !important;
+	background: linear-gradient(90deg, rgba(171,235,63,.11), transparent 65%) !important;
+	box-shadow: inset 3px 0 0 rgba(187,244,77,.94) !important;
 }
 #queue .queue_entry.rdh-featured-f4d:before {
 	content: "F4D" !important;
-	color: #281000 !important;
-	background: #ff9c57 !important;
-	box-shadow: 0 0 6px rgba(255,135,60,.34) !important;
+	color: #182600 !important;
+	background: #c4ef68 !important;
+	box-shadow: 0 0 6px rgba(171,235,63,.35) !important;
 }
 #queue .queue_entry.rdh-featured-f4d .qe_title {
-	color: #ffc49a !important;
+	color: #ddffa4 !important;
 }
 
 /* After Dark */
 #queue .queue_entry.rdh-featured-ad {
-	background: linear-gradient(90deg, rgba(75,135,255,.11), transparent 65%) !important;
-	box-shadow: inset 3px 0 0 rgba(85,150,255,.92) !important;
+	background: linear-gradient(90deg, rgba(255,90,104,.11), transparent 65%) !important;
+	box-shadow: inset 3px 0 0 rgba(255,100,110,.94) !important;
 }
 #queue .queue_entry.rdh-featured-ad:before {
 	content: "AD" !important;
-	color: #00142d !important;
-	background: #76a8ff !important;
-	box-shadow: 0 0 6px rgba(75,135,255,.34) !important;
+	color: #2a080b !important;
+	background: #ff747b !important;
+	box-shadow: 0 0 6px rgba(255,90,104,.34) !important;
 }
 #queue .queue_entry.rdh-featured-ad .qe_title {
-	color: #b7d2ff !important;
+	color: #ffb8be !important;
 }
 
 

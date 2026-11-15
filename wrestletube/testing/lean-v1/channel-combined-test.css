@@ -601,7 +601,7 @@ background-size:cover;
       color: #FF00C8!important; 
 }
 /* Test-only spoiler readability: show the original graphic while concealed; remove it on hover. */
-.spoiler{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png");background-repeat:no-repeat;background-position:left center;background-color:#111118;color:transparent;}
+.spoiler{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png");background-repeat:repeat;background-position:left center;background-color:#111118;color:transparent;}
 .spoiler:hover{background-image:none;background-color:#111118;color:#fff;}
-.spoiler a{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png")!important;background-repeat:no-repeat!important;color:transparent!important;}
+.spoiler a{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png")!important;background-repeat:repeat!important;color:transparent!important;}
 .spoiler:hover a{background-image:none!important;color:#fff!important;}

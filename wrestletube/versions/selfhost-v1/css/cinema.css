@@ -1,0 +1,131 @@
+/* Cinema Chat Mode */
+body.cinemachat #motdwrap     { display: none; }
+body.cinemachat #queue        { display: none; }
+body.cinemachat #footer       { display: none; }
+body.cinemachat #currenttitle { display: none; }
+body.cinemachat .toggle-label { display: none; }
+body.cinemachat .dropLabel    { display: none; }
+body.cinemachat #videowrap-header { display: none; }
+
+#cinemasizeinc,
+#cinemasizedec,
+#cinematoggle {
+    position: fixed !important;
+    top: 0 !important;
+    font-size: 16px !important;
+    padding: 1px 5px !important;
+    border: 2px solid rgba(255,255,255,0.5) !important;
+    z-index:3000;
+    cursor:pointer;
+}
+
+#cinematoggle  { right: 2px; }
+#cinemasizeinc { right: 31px; }
+#cinemasizedec { right: 60px; }
+
+body.cinemachat #cinematoggle {
+    text-shadow: 0 0 3px white;
+}
+
+body.cinemachat.synchtube #cinematoggle {
+    right: calc(%WIDTH% + 2px);
+}
+
+body.cinemachat #chatwrap {
+    position:fixed !important;
+    top:0 !important;
+    padding:0px !important;
+    width: %WIDTH% !important;
+    height:100% !important;
+    z-index:3001 !important;
+    background-color:#222222 !important;
+}
+body.cinemachat:not(.synchtube) #chatwrap { left:0 !important; }
+body.cinemachat.synchtube #chatwrap { right:0 !important; }
+
+body.cinemachat #chatwrap #messagebuffer,
+body.cinemachat #chatwrap #userlist {
+    height: calc(100% - 59px) !important;
+}
+
+body.cinemachat #chatline {
+    width:calc(100% - 1px) !important;
+    position: relative !important;
+}
+body.cinemachat:not(.synchtube) #chatline { left: 0px !important; }
+body.cinemachat.synchtube #chatline { right: 0px !important; }
+
+
+
+body.cinemachat #videowrap .embed-responsive {
+    height:100% !important;
+    width: 100% !important;
+    top: 0 !important;
+}
+body.cinemachat:not(.synchtube) #videowrap .embed-responsive { right: 0 !important; }
+body.cinemachat.synchtube #videowrap .embed-responsive { left: 0 !important; }
+
+body.cinemachat #videowrap {
+    position: fixed !important;
+    top: 0 !important;
+    padding:0 !important;
+    z-index: 3000 !important;
+    background-color:black;
+    height:100% !important;
+    width: calc(100% - %WIDTH%) !important;
+}
+body.cinemachat:not(.synchtube) #videowrap { right: 0 !important; }
+body.cinemachat.synchtube #videowrap { left: 0 !important; }
+
+
+body.cinemachat #pmbar {
+    width: calc(100% - %WIDTH%) !important;
+    bottom: 42px;
+}
+body.cinemachat:not(.synchtube) #pmbar { left: %WIDTH%; }
+
+
+
+
+body.cinemachat #pmbar .panel-heading {
+    opacity: 0.8;
+    background-color: rgba(0,0,0,0.5);
+}
+
+body.cinemachat #pmbar .panel {
+    opacity: 0.8;
+    background-color: rgba(0,0,0,0.5);
+}
+
+body.cinemachat .pm-panel:hover {
+    border-color: #bbb;
+}
+body.cinemachat #pmbar .panel:hover {
+    opacity: 0.9;
+    background-color: rgba(0,0,0,0.77);
+}
+
+/* Active poll atop the video  */
+body.cinemachat #pollwrap div.active:not(.dismissed) {
+    position:fixed !important;
+    top:  12px !important;
+    z-index:9999 !important;
+    min-width: 400px;
+    opacity: 0.8;
+    background-color: rgba(0,0,0,0.77);
+}
+
+body.cinemachat:not(.synchtube) #pollwrap div.active:not(.dismissed) {
+    left: calc(%WIDTH% + 32px) !important;
+}
+body.cinemachat.synchtube #pollwrap div.active:not(.dismissed) {
+    left: 32px !important;
+}
+
+body:not(.cinemachat) #pollwrap .dismiss {
+    display: none;
+}
+
+body.cinemachat.cinema-nopoll #pollwrap {
+    display: none!important;
+}

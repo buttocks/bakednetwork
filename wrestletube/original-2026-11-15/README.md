@@ -12,11 +12,17 @@ This directory preserves source files supplied for the WrestleTube channel. No c
 
 All three files were read back from GitHub after uploading and compared character-for-character with the supplied source.
 
-## Other existing production sources (not yet copied)
+## Added original snapshot files
 
-- Channel internal JavaScript: supplied inline in chat. To make a *byte-exact* original archive, export it directly from the channel editor as a .js or .txt file. Do not silently reconstruct it from escaped chat formatting.
-- External CSS: `https://baked.live/css/wtube.css` — supplied live URL, not downloaded or mirrored in this snapshot.
-- Xaekai's module dependencies are still loaded from `https://resources.pink.horse/js/` by the existing channel JavaScript. No external module source was bundled in this snapshot.
+- `channel-internal.js`: user's unescaped inline JavaScript, archived as provided and read-back verified. As it was supplied in chat rather than as a raw file upload, a byte-for-byte file-export comparison remains unavailable.
+- `external-wtube.css`: CSS from the user's external CSS paste. Only the surrounding Markdown code fence was removed to make a usable .css asset; CSS code itself was not reformatted or changed. GitHub content read-back verified.
+- `external-wtube-supplied.md`: the complete original Markdown upload, code fences included, archived unmodified and read-back verified.
+
+## Outstanding upstream module dependencies
+
+- Original external CSS live URL: `https://baked.live/css/wtube.css`. **Live channel unchanged.** This repository's external-wtube.css is an archived copy, not yet an active hosting URL.
+- The internal JS references 25 named Xaekai modules at `https://resources.pink.horse/js/`. These are **not yet mirrored**. The upstream endpoints were not reachable from our environment, so their source contents could not be authenticated.
+- Before a self-hosted loader is activated, obtain and verify each required module's source files, check permission to redistribute Xaekai's copyrighted code, validate cross-file dependencies and expected loading order, and test hosting before changing a single live URL.
 
 ## Editing / rollback policy
 

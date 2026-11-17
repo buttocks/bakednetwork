@@ -1,9 +1,9 @@
 /* Baked.live / CyTube Playlist Tools v1.0 — reusable, no external dependencies. */
 (function () {
   'use strict';
-  if (window.BakedPlaylistToolsV1) return;
-  window.BakedPlaylistToolsV1 = true;
   if (!/\/(tv|r)\//i.test(location.pathname)) return;
+  if (window.BakedPlaylistToolsV1 && document.getElementById('bpt-root')) return;
+  window.BakedPlaylistToolsV1 = true;
 
   const KEY = 'bpt-protected:' + location.pathname.toLowerCase();
   const S = { open:false, selecting:false, selected:new Set(), busy:false, cancel:false, count:0, observer:null, seenQueue:null };
@@ -223,6 +223,25 @@
     } catch (error) { status('Stopped after ' + sent + ' requests: ' + String(error.message || error)); }
     finally { S.busy=false; id('cancel').hidden=true; update(); }
   }
+
+  function mountPlaylistToolbarButton() {
+    if (document.getElementById('bpt-toolbar')) return;
+    const nativeClear = document.querySelector('#clearplaylist');
+    const toolbar = nativeClear?.parentElement ||
+      document.querySelector('#playlistcontrols') ||
+      document.querySelector('#videocontrols');
+    if (!toolbar) return;
+    const button = document.createElement('button');
+    button.id = 'bpt-toolbar';
+    button.type = 'button';
+    button.className = 'btn btn-sm btn-default';
+    button.textContent = '✂ Playlist Tools';
+    button.title = 'Batch delete, remove duplicates, manage playlist';
+    button.addEventListener('click', () => id('open').click());
+    if (nativeClear && nativeClear.parentElement === toolbar)
+      nativeClear.insertAdjacentElement('afterend', button);
+    else toolbar.appendChild(button);
+  }
   id('open').addEventListener('click', () => {root.classList.add('bpt-visible'); S.open=true; update();});
   id('close').addEventListener('click', () => {root.classList.remove('bpt-visible'); S.open=false;});
   id('mode').addEventListener('change', setMode);
@@ -252,6 +271,8 @@
     update();
   }
   attachQueue();
-  setInterval(() => {attachQueue();if (S.open && !S.busy) preview();}, 2500);
+  mountPlaylistToolbarButton();
+  setInterval(() => {attachQueue();mountPlaylistToolbarButton();if (S.open && !S.busy) preview();}, 2500);
   setMode();
 })();
+/* Playlist tools toolbar addition v1.3.0; independent of channel skin. */

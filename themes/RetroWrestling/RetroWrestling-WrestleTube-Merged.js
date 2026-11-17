@@ -1,127 +1,21 @@
-/* RetroWrestling × WrestleTube — stable merged external JS v1.2.0
- * Load once as Baked.live External Javascript. No separate playlist/theme JS required.
- * Includes WrestleTube Xaekai features, reusable playlist tools, and RetroWrestling arena.
- * Original WrestleTube branding intentionally left out; channel-specific graphics preserved.
+/* RetroWrestling + WrestleTube v1.3.0
+ * Unified external JS, stable playlist tools and classic WrestleTube features.
+ * Playlist and arena UI initialize before legacy modules.
  */
-(function () {
-  'use strict';
-  function bootRetroWrestling() {
-    if (window.RetroWrestlingMergedV12) return;
-    if (!document.body) return;
-    window.RetroWrestlingMergedV12 = true;
-    document.documentElement.setAttribute('data-rw-merged-version', '1.2.0');
-
-    // The original Xaekai loader requires window[CHANNEL.name]. Its initializer
-    // was accidentally removed when the old WrestleTube branding was stripped.
-    // Each subsystem starts separately: one legacy-module failure cannot block UI.
-    try {
-      if (window.CHANNEL && window.CHANNEL.name) {
-        window[window.CHANNEL.name] = window[window.CHANNEL.name] || {};
-        /* --- WrestleTube enhancements --- */
-/*!
- **|  Baked.live Channel: WTTTV Internal Script
- **|
- **|  All code written by Xaekai except where otherwise noted.
- **|  Copyright 2014-2016 All Rights Reserved
- **|
- **@preserve
- */
-// Original WTTTV branding/favicon intentionally omitted for RetroWrestling.
-// Preserve the current tube's own channel branding and favicon.
-if (!document.getElementById("scroll-btn")) {
-var scrollbtn = $('<button id="scroll-btn" class="btn btn-sm btn-default" title="Scroll playlist to current item" />')
-  .append('<span class="glyphicon glyphicon-hand-right" />')
-  .prependTo("#videocontrols")
-  .on("click", function() {
-    if (typeof scrollQueue === "function") scrollQueue();
-  });
-}
-
-/*!
- **|   Xaekai's Sequenced Module Loader
- **|
-**@preserve
-*/
-({options:{designator:{prefix:"geek-",delay:90*1e3},playlist:{collapse:true,inlineBlame:true,moveReporting:true,quickQuality:false,recentMedia:true,simpleLeader:true,syncCheck:true,thumbnails:true,timeEstimates:true,volumeControl:false},chatext:{persistIgnore:true,smartScroll:true,maxMessages:120},userlist:{autoHider:true},various:{notepad:true,emoteToggle:true},whispers:{joins:false,parts:false}},modules:{settings:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_settings.min.js",done:true},audio:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_audiolib.js",done:true},privmsg:{active:1,rank:1,url:"https://resources.pink.horse/js/module_privmsg.min.js",done:true},whispers:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_whispers.min.js",done:true,cache:false},userlist:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_userlist.min.js",done:true},md5hash:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_md5.min.js",done:true},designator:{active:0,rank:-1,url:"https://resources.pink.horse/js/module_designator.min.js",done:true},playlist:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_playlist.min.js",done:true},notifier:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_alerts.min.js",done:true},chatline:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_chatline.min.js",done:true},chatext:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_chatext.min.js",done:true},chatcolor:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_chatcolor.min.js",done:true},colormap:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_colormap.min.js",done:true},unimoji:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_unimoji.min.js",done:true},dectalk:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_tts.min.js",done:true},hotkeys:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_hotkeys.min.js",done:true},layout:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_layout.min.js",done:true},various:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_various.min.js",done:true},embedmedia:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_embedmedia.min.js",done:true},chaticons:{active:0,rank:-1,url:"https://resources.pink.horse/js/module_chaticons.min.js",done:true},ci_library:{active:0,rank:-1,url:"https://resources.pink.horse/js/library_chaticons.min.js",done:true,cache:false},AvtrClient:{active:0,rank:-1,url:"https://resources.pink.horse/js/AvatarClient.min.js",done:true},fancysheet:{active:0,rank:-1,url:"https://resources.pink.horse/js/custom_fancysheet.min.js",done:true},time:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_time.min.js",done:true},search:{active:0,rank:-1,url:"https://resources.pink.horse/js/module_search.min.js",done:true}},getScript:function(url,success,cache=true){return jQuery.ajax({url:url,cache:cache,success:success,type:"GET",dataType:"script"})},initialize:function(){if(CLIENT.modules){return}else{CLIENT.modules=this}window[CHANNEL.name].modulesOptions=this.options;console.info("[XaeModule]","Begin Loading.");this.index=Object.keys(this.modules);this.sequencerLoader();this.cache=false},sequencerLoader:function(){if(this.state.prev){setTimeout(this.modules[this.state.prev].done,0);this.state.prev=""}if(this.state.pos>=this.index.length){return console.info("[XaeModule]","Loading Complete.")}var currKey=this.index[this.state.pos];if(this.state.pos<this.index.length){if(this.modules[currKey].active){if(this.modules[currKey].rank<=CLIENT.rank){console.info("[XaeModule]","Loading:",currKey);this.state.prev=currKey;this.state.pos++;let cache=typeof this.modules[currKey].cache=="undefined"?this.cache:this.modules[currKey].cache;this.getScript(this.modules[currKey].url,this.sequencerLoader.bind(this),cache)}else{if(this.modules[currKey].rank===0&&CLIENT.rank===-1){(function(module){socket.once("login",data=>{if(data.success){this.getScript(module.url,false,this.cache)}})})(this.modules[currKey])}this.state.pos++;this.sequencerLoader()}}else{this.state.pos++;this.sequencerLoader()}}},state:{prev:"",pos:0}}).initialize();
-
-
-/*
- ** Navbar Autohider
- */
-$("#navbar-autohide").remove();
-(function() {
-
-    if ($("#navbar-autohide").length)
-        return
-
-    $("<style>")
-        .prop("id", "navbar-autohide")
-        .attr("type", "text/css")
-        .appendTo("head")
-        .text("\
-\
-@media screen and (min-width: 1024px){\
-    nav.navbar:not(:hover) { opacity: 0.15; transition: opacity .5s ease-out;}\
-    nav.navbar:hover { opacity: 1.00; transition: opacity .3s ease-out;}\
-}\
-\
-");
-
-})();
-
-
-setInterval(function(){
-    USEROPTS.sort_rank = 1;
-    USEROPTS.sort_afk = 1;
-    USEROPTS.layout = "fluid";
-},1000);
-USEROPTS.qbtn_hide = "true";
-
-$("#showchansettings").text("Mod Menu");
-$(".server-msg-reconnect").text("Welcome to WrestleTube! Please add wrestling related videos to the playlist!");
-$(".server-msg-disconnect").text("Your Connection Is Bad!");
-$("#showsearch").text("Search");
-$("#showmediaurl").text("Add");
-$("#clearplaylist").text("Clear");
-$("#mediarefresh").text("Refresh Media");
-$("#emotelistbtn").text("Macros");
-
-/* click .channel-emote and append to chat input line */ 
-$('#chatwrap').on('click', '.channel-emote', function(e) {
-     e.preventDefault();
-
-     var $emote = $(this);
-     var $chatline = $('#chatline');
-
-     $chatline.val($chatline.val() + $emote.attr('title') + ' ');
-});
-
-/* click .username and append to chat input line with a colon */ 
-$('#messagebuffer').on('click', '.username', function(e) {
-     e.preventDefault();
-
-     var $username = $(this);
-     var $chatline = $('#chatline');
-
-     $chatline.val($chatline.val() + $username.text() + ' ');
-});
-
-
-      } else {
-        console.warn('[RetroWrestling] CHANNEL not ready; legacy modules skipped.');
-      }
-    } catch (error) {
-      console.error('[RetroWrestling] Legacy WrestleTube module error; continuing with playlist and arena:', error);
-    }
-
-    try {
-      /* --- Portable playlist tools --- */
+(function(){
+'use strict';
+if(!/\/tv\/RetroWrestling\/?$/i.test(location.pathname))return;
+function boot(){
+  if(window.RetroWrestlingMergedV13 || !document.body)return;
+  window.RetroWrestlingMergedV13=true;
+  document.documentElement.dataset.rwMergedVersion='1.3.0';
+  try{
 /* Baked.live / CyTube Playlist Tools v1.0 — reusable, no external dependencies. */
 (function () {
   'use strict';
-  if (window.BakedPlaylistToolsV1) return;
-  window.BakedPlaylistToolsV1 = true;
   if (!/\/(tv|r)\//i.test(location.pathname)) return;
+  if (window.BakedPlaylistToolsV1 && document.getElementById('bpt-root')) return;
+  window.BakedPlaylistToolsV1 = true;
 
   const KEY = 'bpt-protected:' + location.pathname.toLowerCase();
   const S = { open:false, selecting:false, selected:new Set(), busy:false, cancel:false, count:0, observer:null, seenQueue:null };
@@ -341,6 +235,26 @@ $('#messagebuffer').on('click', '.username', function(e) {
     } catch (error) { status('Stopped after ' + sent + ' requests: ' + String(error.message || error)); }
     finally { S.busy=false; id('cancel').hidden=true; update(); }
   }
+
+  // Visible Batch Delete button beside CyTube's native playlist actions.
+  function mountPlaylistToolbarButton() {
+    if (document.getElementById('bpt-toolbar')) return;
+    const nativeClear = document.querySelector('#clearplaylist');
+    const toolbar = nativeClear?.parentElement ||
+      document.querySelector('#playlistcontrols') ||
+      document.querySelector('#videocontrols');
+    if (!toolbar) return;
+    const button = document.createElement('button');
+    button.id = 'bpt-toolbar';
+    button.type = 'button';
+    button.className = 'btn btn-sm btn-default';
+    button.textContent = '✂ Playlist Tools';
+    button.title = 'Batch delete, remove duplicates, manage playlist';
+    button.addEventListener('click', () => id('open').click());
+    if (nativeClear && nativeClear.parentElement === toolbar)
+      nativeClear.insertAdjacentElement('afterend', button);
+    else toolbar.appendChild(button);
+  }
   id('open').addEventListener('click', () => {root.classList.add('bpt-visible'); S.open=true; update();});
   id('close').addEventListener('click', () => {root.classList.remove('bpt-visible'); S.open=false;});
   id('mode').addEventListener('change', setMode);
@@ -370,21 +284,16 @@ $('#messagebuffer').on('click', '.username', function(e) {
     update();
   }
   attachQueue();
-  setInterval(() => {attachQueue();if (S.open && !S.busy) preview();}, 2500);
+  mountPlaylistToolbarButton();
+  setInterval(() => {attachQueue();mountPlaylistToolbarButton();if (S.open && !S.busy) preview();}, 2500);
   setMode();
 })();
-
-
-    } catch (error) {
-      console.error('[RetroWrestling] Playlist tools startup error:', error);
-    }
-
-    try {
-      /* --- Arena controls --- */
+  }catch(e){console.error('[RetroWrestling] Playlist startup:',e);}
+  try{
 /* RetroWrestling arena UI v1.0. Add separate PlaylistTools-Standalone.js for management. */
 (function () {
   'use strict';
-  if (window.RetroWrestlingArenaV1) return;
+  if (window.RetroWrestlingArenaV1 && document.getElementById('rw-header')) return;
   window.RetroWrestlingArenaV1 = true;
   if (!/\/tv\/RetroWrestling\/?$/i.test(location.pathname)) return;
   const header = document.createElement('section');
@@ -400,7 +309,9 @@ $('#messagebuffer').on('click', '.username', function(e) {
   <button id="rw-bell" type="button">◉ Ring Bell</button><button id="rw-focus" type="button">◧ Focus</button>
   <button id="rw-lights" type="button">✦ Effects</button><button id="rw-tools" type="button">⚙ Playlist Tools</button></div>
   <div id="rw-ticker">WELCOME TO THE ARENA · CLASSIC WRESTLING · THE MAIN EVENT STARTS HERE</div>`;
-  document.body.insertBefore(header,document.body.firstChild);
+  const navbar = document.querySelector('nav.navbar, .navbar');
+  if (navbar) navbar.insertAdjacentElement('afterend', header);
+  else document.body.insertBefore(header,document.body.firstChild);
   const button = name => header.querySelector('#rw-'+name);
   let muted=false,focus=false;
   try {muted=localStorage.getItem('rw-effects-disabled')==='yes';}catch(_e){}
@@ -453,16 +364,96 @@ $('#messagebuffer').on('click', '.username', function(e) {
   update();setInterval(update,3000);
   setInterval(()=>{button('ticker').textContent=slogans[ticker++%slogans.length]+' · '+last.toUpperCase().slice(0,110);},9000);
 })();
+  }catch(e){console.error('[RetroWrestling] Arena startup:',e);}
+  setTimeout(function(){
+    try{
+      if (!window.CHANNEL?.name || !window.CLIENT)return;
+      window[window.CHANNEL.name] = window[window.CHANNEL.name] || {};
+/*!
+ **|  Baked.live Channel: WTTTV Internal Script
+ **|
+ **|  All code written by Xaekai except where otherwise noted.
+ **|  Copyright 2014-2016 All Rights Reserved
+ **|
+ **@preserve
+ */
+// Keep existing RetroWrestling channel branding and favicon.
+if (!document.getElementById('scroll-btn')) { var scrollbtn = $('<button id="scroll-btn" class="btn btn-sm btn-default" title="Scroll playlist to current item" />')
+  .append('<span class="glyphicon glyphicon-hand-right" />')
+  .prependTo("#videocontrols")
+  .on("click", function() {
+    if (typeof scrollQueue === 'function') scrollQueue();
+  });
+}
 
-    } catch (error) {
-      console.error('[RetroWrestling] Arena controls startup error:', error);
-    }
-    console.info('[RetroWrestling] Merged v1.2.0 loaded; playlist and arena modules attempted.');
-  }
+/*!
+ **|   Xaekai's Sequenced Module Loader
+ **|
+**@preserve
+*/
+({options:{designator:{prefix:"geek-",delay:90*1e3},playlist:{collapse:true,inlineBlame:true,moveReporting:true,quickQuality:false,recentMedia:true,simpleLeader:true,syncCheck:true,thumbnails:true,timeEstimates:true,volumeControl:false},chatext:{persistIgnore:true,smartScroll:true,maxMessages:120},userlist:{autoHider:true},various:{notepad:true,emoteToggle:true},whispers:{joins:false,parts:false}},modules:{settings:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_settings.min.js",done:true},audio:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_audiolib.js",done:true},privmsg:{active:1,rank:1,url:"https://resources.pink.horse/js/module_privmsg.min.js",done:true},whispers:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_whispers.min.js",done:true,cache:false},userlist:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_userlist.min.js",done:true},md5hash:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_md5.min.js",done:true},designator:{active:0,rank:-1,url:"https://resources.pink.horse/js/module_designator.min.js",done:true},playlist:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_playlist.min.js",done:true},notifier:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_alerts.min.js",done:true},chatline:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_chatline.min.js",done:true},chatext:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_chatext.min.js",done:true},chatcolor:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_chatcolor.min.js",done:true},colormap:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_colormap.min.js",done:true},unimoji:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_unimoji.min.js",done:true},dectalk:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_tts.min.js",done:true},hotkeys:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_hotkeys.min.js",done:true},layout:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_layout.min.js",done:true},various:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_various.min.js",done:true},embedmedia:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_embedmedia.min.js",done:true},chaticons:{active:0,rank:-1,url:"https://resources.pink.horse/js/module_chaticons.min.js",done:true},ci_library:{active:0,rank:-1,url:"https://resources.pink.horse/js/library_chaticons.min.js",done:true,cache:false},AvtrClient:{active:0,rank:-1,url:"https://resources.pink.horse/js/AvatarClient.min.js",done:true},fancysheet:{active:0,rank:-1,url:"https://resources.pink.horse/js/custom_fancysheet.min.js",done:true},time:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_time.min.js",done:true},search:{active:0,rank:-1,url:"https://resources.pink.horse/js/module_search.min.js",done:true}},getScript:function(url,success,cache=true){return jQuery.ajax({url:url,cache:cache,success:success,type:"GET",dataType:"script"})},initialize:function(){if(CLIENT.modules){return}else{CLIENT.modules=this}window[CHANNEL.name].modulesOptions=this.options;console.info("[XaeModule]","Begin Loading.");this.index=Object.keys(this.modules);this.sequencerLoader();this.cache=false},sequencerLoader:function(){if(this.state.prev){setTimeout(this.modules[this.state.prev].done,0);this.state.prev=""}if(this.state.pos>=this.index.length){return console.info("[XaeModule]","Loading Complete.")}var currKey=this.index[this.state.pos];if(this.state.pos<this.index.length){if(this.modules[currKey].active){if(this.modules[currKey].rank<=CLIENT.rank){console.info("[XaeModule]","Loading:",currKey);this.state.prev=currKey;this.state.pos++;let cache=typeof this.modules[currKey].cache=="undefined"?this.cache:this.modules[currKey].cache;this.getScript(this.modules[currKey].url,this.sequencerLoader.bind(this),cache)}else{if(this.modules[currKey].rank===0&&CLIENT.rank===-1){(function(module){socket.once("login",data=>{if(data.success){this.getScript(module.url,false,this.cache)}})})(this.modules[currKey])}this.state.pos++;this.sequencerLoader()}}else{this.state.pos++;this.sequencerLoader()}}},state:{prev:"",pos:0}}).initialize();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bootRetroWrestling, {once:true});
-  } else {
-    bootRetroWrestling();
-  }
+
+/*
+ ** Navbar Autohider
+ */
+$("#navbar-autohide").remove();
+(function() {
+
+    if ($("#navbar-autohide").length)
+        return
+
+    $("<style>")
+        .prop("id", "navbar-autohide")
+        .attr("type", "text/css")
+        .appendTo("head")
+        .text("\
+\
+@media screen and (min-width: 1024px){\
+    nav.navbar:not(:hover) { opacity: 0.15; transition: opacity .5s ease-out;}\
+    nav.navbar:hover { opacity: 1.00; transition: opacity .3s ease-out;}\
+}\
+\
+");
+
+})();
+
+
+/* Respect user's saved Baked.live layout rather than forcing it every second. */
+/* Keep playlist buttons visible. */
+
+$("#showchansettings").text("Mod Menu");
+$(".server-msg-reconnect").text("Welcome to WrestleTube! Please add wrestling related videos to the playlist!");
+$(".server-msg-disconnect").text("Your Connection Is Bad!");
+$("#showsearch").text("Search");
+$("#showmediaurl").text("Add");
+$("#clearplaylist").text("Clear");
+$("#mediarefresh").text("Refresh Media");
+$("#emotelistbtn").text("Macros");
+
+/* click .channel-emote and append to chat input line */ 
+$('#chatwrap').on('click', '.channel-emote', function(e) {
+     e.preventDefault();
+
+     var $emote = $(this);
+     var $chatline = $('#chatline');
+
+     $chatline.val($chatline.val() + $emote.attr('title') + ' ');
+});
+
+/* click .username and append to chat input line with a colon */ 
+$('#messagebuffer').on('click', '.username', function(e) {
+     e.preventDefault();
+
+     var $username = $(this);
+     var $chatline = $('#chatline');
+
+     $chatline.val($chatline.val() + $username.text() + ' ');
+});
+    }catch(e){console.error('[RetroWrestling] Legacy enhancement error:',e);}
+  },200);
+  console.info('[RetroWrestling] v1.3.0 loaded; playlist toolbar and arena initializing.');
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
+else boot();
 })();

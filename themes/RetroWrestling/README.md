@@ -1,32 +1,53 @@
-# RetroWrestling Classic Arena v1.0
+# RetroWrestling — Classic Arena (WrestleTube Merge)
 
-A championship-arena skin and modular playlist-management controls for the [Baked.live RetroWrestling channel](https://baked.live/tv/RetroWrestling).
+Championship-style RetroWrestling skin with the original WrestleTube enhancements and reusable playlist-management tools.
 
-## Files
+## Install — Baked.live Channel Settings > Admin Settings
 
-- `RetroWrestling.css` — channel CSS.
-- `RetroWrestling.js` — combined RetroWrestling theme script and playlist tools; paste this in the channel JavaScript editor.
-- `RetroWrestling-Theme.js` — theme logic without playlist tools, for developers / separate integration.
-- `PlaylistTools-Standalone.js` — reusable playlist tools for other tubes, no RetroWrestling visuals.
+**External CSS (direct CDN URL):**
 
-**Installing RetroWrestling:** Back up any existing channel CSS and JS in the channel editor before replacing them. Paste `RetroWrestling.css` in CSS and `RetroWrestling.js` in JavaScript, save, then refresh. Do not append the standalone playlist module to `RetroWrestling.js`, since it is already included.
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/themes/RetroWrestling/RetroWrestling.css
 
-**Installing on another tube:** Append `PlaylistTools-Standalone.js` to the existing channel JavaScript after backing it up. If the channel exceeds the inline JS limit, host your combined script through the channel's External JavaScript setting. Do not replace the other tube's existing features.
+**External JavaScript (direct CDN URL, WrestleTube merged):**
 
-## Playlist tools
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/themes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
 
-- Select individual entries, delete last N, remove duplicates, title search, position range, remove all except currently playing.
-- Protect currently playing and first N entries (N saved separately per channel).
-- Preview before deletion, confirmation, extra typed confirmation for 20+ items, stop pending requests.
-- Export playlist information as JSON. Export is **reference only**, not a restorable backup.
-- Requires server-side `playlistdelete` and `seeplaylist` permissions; uses CyTube-style `delete` socket events.
+1. Save a backup of any existing internal/external channel CSS and JavaScript.
+2. Replace the External CSS and External JavaScript inputs with the **exact full URLs above**. Remove any accidentally appended tracking text (for example `?utm_source`).
+3. Do not also load `RetroWrestling.js`, `RetroWrestling-Theme.js`, or `PlaylistTools-Standalone.js`: the merged file already contains both feature modules.
+4. Close Channel Settings and hard-refresh (**Ctrl+Shift+R**).
+5. Confirm the red/gold arena banner and the **Playlist Tools** button appear. For playlist deletion, log in with a moderator/owner account.
 
-**Safety:** Never use on a channel you are not authorized to moderate. No automatic deletion takes place on installation. Live moderator-account behavior is not yet verified; test on a disposable playlist first.
+### Why not raw.githubusercontent.com?
 
-## Relationship to supplied 2022 JavaScript
+GitHub's raw host can serve JS/CSS with `Content-Type: text/plain` and `X-Content-Type-Options: nosniff`, so browsers reject those files when loaded as scripts/stylesheets. jsDelivr provides correctly typed, direct-use GitHub CDN URLs.
 
-The shared `java2022.js` contains a module loader referencing an external `Playlistbatchdelete.js` at Dropbox. That separate file was not accessible for inspection. The playlist module here is a newly authored implementation, **not a copy or verified re-creation** of the external Dropbox batch-delete module. The legacy script also uses an assortment of unrelated Xaekai `resources.pink.horse` modules. None are bundled or silently loaded here.
+If the screen still looks unchanged after refreshing, check Baked.live user/account preferences for **Ignore Channel CSS** and **Ignore Channel Javascript**, and inspect the browser DevTools Console/Network for blocked external file requests.
+
+## Source files
+
+- `RetroWrestling.css` — the arena skin, dark red/gold styling, video, chat and queue.
+- `RetroWrestling-WrestleTube-Merged.js` — **recommended** combined external JS, including original WrestleTube Xaekai modules, chat/username shortcuts, navbar behavior, playlist-scroll button, arena controls and playlist manager.
+- `RetroWrestling.js` — theme and playlist manager without original WrestleTube modules (alternate, not used when merged file is active).
+- `RetroWrestling-Theme.js` — arena controls only.
+- `../../modules/PlaylistTools-Standalone.js` — playlist-management module for other tubes.
+
+**Standalone module direct URL for other tubes:**
+
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/modules/PlaylistTools-Standalone.js
+
+Append to a different tube's *existing* JS rather than overwriting the tube's JavaScript. Do not load twice.
+
+## Playlist tools / safety
+
+Selected entries, last N, duplicate media, title matches, position ranges, or all except currently playing. User can protect first N queue entries, preview targets, export playlist metadata JSON, confirm before deleting, and stop sending further delete requests. Deletions require server-side playlist delete permissions; no deletion happens automatically. Exported JSON is **not** a restorable full backup, and deleted entries cannot be recovered by reverting the script.
+
+This build is syntax checked; in-channel execution and live deletion still require hands-on verification using a disposable playlist.
+
+## Source note
+
+The shared legacy 2022 JS references a separate Dropbox `Playlistbatchdelete.js`, whose contents were not available for inspection. This project uses an independent playlist manager. The original WrestleTube script from `wrestletube/original-2026-11-15/channel-internal.js` was merged while omitting its old channel-specific logo and favicon so RetroWrestling's branding stays intact.
 
 ## Rollback
 
-Restore the original CSS and JavaScript saved from your channel editor. Playlist entries removed by moderators through the tools are not restored by this rollback.
+Restore the previous channel CSS/JS references or editor backups. Changes made to the playlist itself are not reversible by changing scripts.

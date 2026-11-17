@@ -1,0 +1,51 @@
+/* RetroWrestling: Classic Championship Arena v1.0 */
+:root {--rw-red:#c91f2c;--rw-red2:#8f101e;--rw-gold:#f0c76b;--rw-gold2:#b78a30;--rw-ink:#100d17;--rw-mid:#201522;--rw-light:#fff2d0}
+html,body{background:#0d0a11!important;color:#f4ebda!important}
+body{background-image:radial-gradient(ellipse 80% 40% at 50% 0%,#8719237c,transparent 65%),repeating-linear-gradient(90deg,transparent 0 70px,#ffffff04 71px 72px),linear-gradient(135deg,#160e19,#09080d 70%)!important;background-attachment:fixed!important}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.14;background:repeating-linear-gradient(0deg,#fff1 0 1px,transparent 1px 5px)}
+body>*{position:relative}
+.navbar,.navbar-default,.navbar-inverse,#navbar{background:linear-gradient(180deg,#3b1622,#180e19)!important;border-color:#b48b3c!important;box-shadow:0 2px 15px #000a!important}
+.navbar a,.navbar-brand,.navbar-nav>li>a{color:#efca71!important;text-shadow:0 1px #000!important}
+.navbar-nav>li>a:hover,.dropdown-menu>li>a:hover{background:#8f1d29!important;color:white!important}
+.dropdown-menu,.modal-content{background:#1b1620!important;border:1px solid #c19a48!important;color:#f7e7c7!important}
+.dropdown-menu>li>a{color:#f5dda7!important}
+#rw-header{position:relative;isolation:isolate;max-width:1500px;margin:12px auto 14px;background:linear-gradient(120deg,#2a101b 0%,#841c2e 35%,#271222 72%,#140e18 100%);border:3px solid var(--rw-gold2);border-radius:8px;box-shadow:0 0 0 1px #12080e,0 8px 30px #000b,inset 0 0 0 2px #ffffff14;overflow:hidden}
+#rw-header:before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(115deg,transparent 0 33px,#fff1 34px 35px,transparent 36px 74px),radial-gradient(circle at 50% -40%,#ffe4a258,transparent 50%);pointer-events:none}
+.rw-headtop{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 19px 12px}
+.rw-crown{font-weight:1000;font-size:clamp(19px,3.5vw,35px);letter-spacing:.085em;line-height:1.12;color:#f4d58a;text-shadow:2px 2px #000,0 0 15px #000d,-1px -1px #e9433b;text-transform:uppercase}
+.rw-kicker{color:#fff5d3;font:700 11px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.25em;text-transform:uppercase}
+.rw-headright{text-align:right;white-space:nowrap;color:#ffe39c;font-weight:900;font-size:12px}
+.rw-live{display:inline-flex;gap:6px;align-items:center;padding:5px 9px;background:#140c15b8;border:1px solid #ecc77d;border-radius:3px;letter-spacing:.15em}
+.rw-dot{width:8px;height:8px;display:inline-block;border-radius:50%;background:#ff4b55;box-shadow:0 0 8px #f44}
+.rw-now{font-size:13px;padding:10px 18px;background:#130e16ba;border-top:1px solid #b98e4b;border-bottom:1px solid #b98e4b;display:flex;gap:12px;align-items:center}
+.rw-now>strong{color:#f2cc6e;letter-spacing:.1em;white-space:nowrap}.rw-now>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f9f1dc}
+.rw-controls{display:flex;gap:7px;flex-wrap:wrap;padding:10px 13px;align-items:center}
+.rw-controls button,.rw-controls a{display:inline-flex;align-items:center;justify-content:center;min-height:30px;border-radius:4px;border:1px solid #c8a04f!important;background:#261823!important;color:#ffe7a3!important;text-decoration:none!important;font:700 11px system-ui,Segoe UI,sans-serif;letter-spacing:.05em;padding:5px 11px;cursor:pointer}
+.rw-controls button:hover,.rw-controls a:hover{background:#8e1c2b!important;color:white!important;box-shadow:0 0 10px #d21d377a}
+#rw-ticker{border-top:1px solid #8f6327;color:#efcf8f;background:#0e0a11;padding:6px 11px;font:600 11px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.1em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#videowrap,#chatwrap,#playlist,#playlistwrap,#queue,#currenttitle,#userlist,#messagebuffer,#chatline{border-color:#925f34!important}
+#videowrap,#chatwrap,#playlistwrap{box-shadow:0 0 20px #0008}
+#currenttitle,.videowrap-header,.playlist-header,.queue-header{background:linear-gradient(90deg,#301723,#611b2d,#291521)!important;color:#ffe1a3!important;border-color:#a47e39!important}
+#queue{background:linear-gradient(#1a121b,#100e14)!important;color:#e7dfd0!important}
+#queue .queue_entry{background:transparent!important;color:#f0e6d3!important;border-bottom:1px solid #ffffff19!important;transition:background .15s}
+#queue .queue_entry:nth-child(even){background:#ffffff08!important}
+#queue .queue_entry:hover{background:#9c243342!important}
+#queue .queue_entry.queue_active{background:linear-gradient(90deg,#951d34,#391522)!important;box-shadow:inset 3px 0 #f5c56b!important;color:#fff6df!important}
+#messagebuffer{background:#130f18!important;color:#eadfd3!important}
+#messagebuffer .chat-msg:nth-child(even){background:#ffffff05}
+#chatline,#chatline input,textarea.form-control,input.form-control{background:#160f19!important;color:#f8e9db!important;border-color:#795733!important}
+#chatline:focus,.form-control:focus{box-shadow:0 0 0 2px #b18d44!important}
+.btn-primary,.btn-success{background:#8e2330!important;border-color:#dfb75d!important;color:white!important}
+.btn-primary:hover,.btn-success:hover{background:#b52c39!important}
+.btn-default{background:#26202c!important;border-color:#8b633b!important;color:#f0dfb2!important}
+.btn-danger{background:#9e2936!important;border-color:#f0a44c!important}
+.panel,.well{background:#211720!important;border:1px solid #7f592f!important;color:#f2e4cf!important}
+a{color:#f2c66e}a:hover{color:#fff0ac}
+hr{border-color:#6e4a29}
+body.rw-lights-off #rw-header:before,body.rw-lights-off:before{display:none}
+body.rw-lights-off #rw-header{box-shadow:0 7px 14px #0007}
+body.rw-focus #chatwrap{filter:saturate(.55);opacity:.42;transition:opacity .18s}
+body.rw-focus #chatwrap:hover,body.rw-focus #chatwrap:focus-within{filter:none;opacity:1}
+body.rw-focus #videowrap{box-shadow:0 0 0 2px #e9be5a,0 0 45px #f1a34439}
+@media(max-width:650px){#rw-header{margin:7px 5px 12px}.rw-headtop{padding:11px}.rw-headright{font-size:10px}.rw-kicker{font-size:9px;letter-spacing:.1em}.rw-now{padding:8px 11px;font-size:11px;gap:6px}.rw-controls{padding:8px;gap:5px}.rw-controls button,.rw-controls a{font-size:10px;padding:4px 7px}}
+@media(prefers-reduced-motion:reduce){#queue .queue_entry,body.rw-focus #chatwrap{transition:none}}

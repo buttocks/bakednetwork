@@ -8,14 +8,14 @@ Championship-style RetroWrestling skin with the original WrestleTube enhancement
 
 https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/themes/RetroWrestling/RetroWrestling.css
 
-**External JavaScript (direct CDN URL, WrestleTube merged):**
+**External JavaScript (direct CDN URL, WrestleTube merged v1.2.0; cache-safe commit URL):**
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/themes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@f52aa459d0e77af674954df2de5891304c01c72d/themes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
 
 1. Save a backup of any existing internal/external channel CSS and JavaScript.
 2. Replace the External CSS and External JavaScript inputs with the **exact full URLs above**. Remove any accidentally appended tracking text (for example `?utm_source`).
 3. Do not also load `RetroWrestling.js`, `RetroWrestling-Theme.js`, or `PlaylistTools-Standalone.js`: the merged file already contains both feature modules.
-4. Close Channel Settings and hard-refresh (**Ctrl+Shift+R**).
+4. Close Channel Settings and hard-refresh (**Ctrl+Shift+R**). Ensure **Options > Script Access** allows this channel's JavaScript; **Ignore Channel Javascript** must be unchecked.
 5. Confirm the red/gold arena banner and the **Playlist Tools** button appear. For playlist deletion, log in with a moderator/owner account.
 
 ### Why not raw.githubusercontent.com?
@@ -42,7 +42,7 @@ Append to a different tube's *existing* JS rather than overwriting the tube's Ja
 
 Selected entries, last N, duplicate media, title matches, position ranges, or all except currently playing. User can protect first N queue entries, preview targets, export playlist metadata JSON, confirm before deleting, and stop sending further delete requests. Deletions require server-side playlist delete permissions; no deletion happens automatically. Exported JSON is **not** a restorable full backup, and deleted entries cannot be recovered by reverting the script.
 
-This build is syntax checked; in-channel execution and live deletion still require hands-on verification using a disposable playlist.
+This v1.2.0 build corrects a missing `window[CHANNEL.name]` initializer that stopped the legacy loader and thereby prevented later UI from running. Legacy, playlist, and arena subsystems now boot independently after DOM readiness. The merged code passes JavaScript syntax checks; in-channel execution and live deletion still require hands-on verification using a disposable playlist.
 
 ## Source note
 

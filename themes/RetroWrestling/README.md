@@ -1,16 +1,21 @@
-# RetroWrestling — WrestleTube Merge v1.3.0
+# RetroWrestling — WrestleTube Merge v1.3.1
 
 ## Current direct URLs (Baked.live Admin Settings)
 
 **External CSS:**
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@cea57d4c13fbd283a754aa8ed11f6c977d73dce0/themes/RetroWrestling/RetroWrestling.css
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4db74f48a295941564e203c6e26a04043cc0d8a7/themes/RetroWrestling/RetroWrestling.css
 
 **External Javascript:**
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@cea57d4c13fbd283a754aa8ed11f6c977d73dce0/themes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4db74f48a295941564e203c6e26a04043cc0d8a7/themes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
 
 Save both fields (changes automatically saved), then hard-refresh the channel with Ctrl+Shift+R. If a **Script Access** prompt appears, allow this channel's script; check that **Ignore Channel Javascript** is not enabled in Options. If the CSS changes but the arena header and buttons do not appear, the browser is not running the JS — check script access or the DevTools Console/Network for a blocked request.
+
+## v1.3.1 corrections
+
+- Fixed old WrestleTube welcome notice in RetroWrestling's merged JavaScript, including stale message replacement if another channel script overwrites it.
+- Adjusted chat header, status notice, message lines, playlist title and uploader spacing.
 
 ## Features
 
@@ -32,7 +37,7 @@ Save both fields (changes automatically saved), then hard-refresh the channel wi
 
 Reusable Playlist Tools module (other tubes only):
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@cea57d4c13fbd283a754aa8ed11f6c977d73dce0/modules/PlaylistTools-Standalone.js
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4db74f48a295941564e203c6e26a04043cc0d8a7/modules/PlaylistTools-Standalone.js
 
 Do **not** include the standalone module again alongside the merged RetroWrestling JS, or load earlier versions simultaneously.
 

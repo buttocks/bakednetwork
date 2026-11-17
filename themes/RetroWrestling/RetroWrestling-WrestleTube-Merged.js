@@ -1,4 +1,4 @@
-/* RetroWrestling + WrestleTube v1.3.0
+/* RetroWrestling + WrestleTube v1.3.1
  * Unified external JS, stable playlist tools and classic WrestleTube features.
  * Playlist and arena UI initialize before legacy modules.
  */
@@ -8,7 +8,18 @@ if(!/\/tv\/RetroWrestling\/?$/i.test(location.pathname))return;
 function boot(){
   if(window.RetroWrestlingMergedV13 || !document.body)return;
   window.RetroWrestlingMergedV13=true;
-  document.documentElement.dataset.rwMergedVersion='1.3.0';
+  document.documentElement.dataset.rwMergedVersion='1.3.1';
+
+  // The channel might still have the old WrestleTube internal JS enabled.
+  // Rewrite only its stale welcome notice, leaving real server status intact.
+  const rwWelcome = 'Welcome to RetroWrestling! Enjoy the classics and add your favorite wrestling videos!';
+  function correctOldWelcome() {
+    document.querySelectorAll('.server-msg-reconnect').forEach(function(node){
+      if (/welcome to wrestletube/i.test(node.textContent || '')) node.textContent = rwWelcome;
+    });
+  }
+  correctOldWelcome();
+  setInterval(correctOldWelcome, 3000);
   try{
 /* Baked.live / CyTube Playlist Tools v1.0 — reusable, no external dependencies. */
 (function () {
@@ -423,7 +434,7 @@ $("#navbar-autohide").remove();
 /* Keep playlist buttons visible. */
 
 $("#showchansettings").text("Mod Menu");
-$(".server-msg-reconnect").text("Welcome to WrestleTube! Please add wrestling related videos to the playlist!");
+$(".server-msg-reconnect").text("Welcome to RetroWrestling! Enjoy the classics and add your favorite wrestling videos!");
 $(".server-msg-disconnect").text("Your Connection Is Bad!");
 $("#showsearch").text("Search");
 $("#showmediaurl").text("Add");
@@ -452,7 +463,7 @@ $('#messagebuffer').on('click', '.username', function(e) {
 });
     }catch(e){console.error('[RetroWrestling] Legacy enhancement error:',e);}
   },200);
-  console.info('[RetroWrestling] v1.3.0 loaded; playlist toolbar and arena initializing.');
+  console.info('[RetroWrestling] v1.3.1 loaded; playlist toolbar and arena initializing.');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
 else boot();

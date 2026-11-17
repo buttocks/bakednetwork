@@ -1,10 +1,23 @@
-/* RetroWrestling + WrestleTube merged JavaScript v1.1
- * Includes classic WrestleTube enhancements, portable playlist tools, arena UI.
- * Host as External JavaScript; this exceeds the 20KB internal editor limit.
- * Do not simultaneously load RetroWrestling.js or PlaylistTools-Standalone.js.
+/* RetroWrestling × WrestleTube — stable merged external JS v1.2.0
+ * Load once as Baked.live External Javascript. No separate playlist/theme JS required.
+ * Includes WrestleTube Xaekai features, reusable playlist tools, and RetroWrestling arena.
+ * Original WrestleTube branding intentionally left out; channel-specific graphics preserved.
  */
+(function () {
+  'use strict';
+  function bootRetroWrestling() {
+    if (window.RetroWrestlingMergedV12) return;
+    if (!document.body) return;
+    window.RetroWrestlingMergedV12 = true;
+    document.documentElement.setAttribute('data-rw-merged-version', '1.2.0');
 
-/* --- WrestleTube legacy channel enhancements --- */
+    // The original Xaekai loader requires window[CHANNEL.name]. Its initializer
+    // was accidentally removed when the old WrestleTube branding was stripped.
+    // Each subsystem starts separately: one legacy-module failure cannot block UI.
+    try {
+      if (window.CHANNEL && window.CHANNEL.name) {
+        window[window.CHANNEL.name] = window[window.CHANNEL.name] || {};
+        /* --- WrestleTube enhancements --- */
 /*!
  **|  Baked.live Channel: WTTTV Internal Script
  **|
@@ -93,7 +106,16 @@ $('#messagebuffer').on('click', '.username', function(e) {
      $chatline.val($chatline.val() + $username.text() + ' ');
 });
 
-/* --- Portable playlist manager --- */
+
+      } else {
+        console.warn('[RetroWrestling] CHANNEL not ready; legacy modules skipped.');
+      }
+    } catch (error) {
+      console.error('[RetroWrestling] Legacy WrestleTube module error; continuing with playlist and arena:', error);
+    }
+
+    try {
+      /* --- Portable playlist tools --- */
 /* Baked.live / CyTube Playlist Tools v1.0 — reusable, no external dependencies. */
 (function () {
   'use strict';
@@ -352,7 +374,13 @@ $('#messagebuffer').on('click', '.username', function(e) {
   setMode();
 })();
 
-/* --- RetroWrestling arena UI --- */
+
+    } catch (error) {
+      console.error('[RetroWrestling] Playlist tools startup error:', error);
+    }
+
+    try {
+      /* --- Arena controls --- */
 /* RetroWrestling arena UI v1.0. Add separate PlaylistTools-Standalone.js for management. */
 (function () {
   'use strict';
@@ -424,4 +452,17 @@ $('#messagebuffer').on('click', '.username', function(e) {
   }
   update();setInterval(update,3000);
   setInterval(()=>{button('ticker').textContent=slogans[ticker++%slogans.length]+' · '+last.toUpperCase().slice(0,110);},9000);
+})();
+
+    } catch (error) {
+      console.error('[RetroWrestling] Arena controls startup error:', error);
+    }
+    console.info('[RetroWrestling] Merged v1.2.0 loaded; playlist and arena modules attempted.');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootRetroWrestling, {once:true});
+  } else {
+    bootRetroWrestling();
+  }
 })();

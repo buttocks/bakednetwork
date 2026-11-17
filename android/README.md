@@ -1,5 +1,7 @@
 # Baked Live for Android
 
+**Created by keatingfish.**
+
 **Baked Live v1.10** is a Baked.live room viewer for **Android phones, Android tablets, Android TV, and Google TV**.
 
 > **Platforms:** The Baked Live app installs on Android phones, tablets, and TVs only. There is no Windows, macOS, or desktop app. A computer's web browser can be used for the casting and chat companion features described below.

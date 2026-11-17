@@ -4,6 +4,8 @@ Baked.live channel themes, scripts, and related projects.
 
 ## Baked Live — Android app
 
+**Created by keatingfish.**
+
 **For Android phones, Android tablets, Android TV, and Google TV.** Watch Baked.live rooms, switch between channels, and use casting and chat controls.
 
 **[Download Baked Live v1.10 APK](https://grindhouse.b-cdn.net/baked-live-1.10.apk)**

@@ -6,13 +6,13 @@
 
 > **Platforms:** The Baked Live app installs on Android phones, tablets, and TVs only. There is no Windows, macOS, or desktop app. A computer's web browser can be used for the casting and chat companion features described below.
 
-**[Download Baked Live v1.10 APK](https://grindhouse.b-cdn.net/baked-live-1.10.apk)**
+**[Download Baked Live v1.10 APK from GitHub](https://github.com/buttocks/bakednetwork/releases/download/v1.10/baked-live-1.10.apk)** · [Release notes and checksum](https://github.com/buttocks/bakednetwork/releases/tag/v1.10)
 
 Sign in using your [baked.live](https://baked.live) account. New accounts must be registered at baked.live in a web browser.
 
 ## Install on a phone or tablet
 
-1. Download the [APK](https://grindhouse.b-cdn.net/baked-live-1.10.apk) on your Android phone or tablet.
+1. Download the [APK](https://github.com/buttocks/bakednetwork/releases/download/v1.10/baked-live-1.10.apk) on your Android phone or tablet.
 2. Open the downloaded file.
 3. If Android blocks the install, open the prompted **Settings** page, enable **Allow from this source** for the browser or file manager you used, then return.
    - Manual path on many devices: **Settings > Apps > Special app access > Install unknown apps**, then choose your browser or Files app.
@@ -28,7 +28,7 @@ No Android developer options are required. After installing, you can turn off **
 2. Allow Downloader to install apps under **Settings > Apps > Security & restrictions > Unknown sources**. On some devices this is under **Device Preferences > Security & restrictions**, or **Special app access > Install unknown apps**.
 3. Open Downloader and enter:
    
-   `https://grindhouse.b-cdn.net/baked-live-1.10.apk`
+   `https://github.com/buttocks/bakednetwork/releases/download/v1.10/baked-live-1.10.apk`
 4. Select **Go**, install the APK, then open Baked Live and sign in.
 
 Developer options are not required.
@@ -106,4 +106,4 @@ If the connection drops, reopening Baked Live can resume the existing cast witho
 
 ---
 
-The APK is distributed from the linked download host; it is **not stored in this GitHub repository**. This page documents the Android release and its browser-based companion features.
+The APK is **hosted on GitHub Releases**, not committed to the Git source tree. The original [CDN download](https://grindhouse.b-cdn.net/baked-live-1.10.apk) is also available as a mirror. This page documents the Android release and its browser-based companion features.

@@ -8,7 +8,7 @@ Baked.live channel themes, scripts, and related projects.
 
 **For Android phones, Android tablets, Android TV, and Google TV.** Watch Baked.live rooms, switch between channels, and use casting and chat controls.
 
-**[Download Baked Live v1.10 APK](https://grindhouse.b-cdn.net/baked-live-1.10.apk)**
+**[Download Baked Live v1.10 APK](https://github.com/buttocks/bakednetwork/releases/download/v1.10/baked-live-1.10.apk)** · [GitHub Release v1.10](https://github.com/buttocks/bakednetwork/releases/tag/v1.10)
 
 **[Installation guide, TV remote controls, casting and chat instructions](android/README.md)**
 

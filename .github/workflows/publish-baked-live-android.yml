@@ -1,0 +1,62 @@
+name: Publish Baked Live Android APK
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-baked-live-android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Upload v1.10 APK to GitHub Releases
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the Android APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --retry-delay 3 \
+            --output baked-live-1.10.apk \
+            'https://grindhouse.b-cdn.net/baked-live-1.10.apk'
+          test "$(stat -c%s baked-live-1.10.apk)" -gt 100000
+          unzip -tqq baked-live-1.10.apk
+          unzip -Z -1 baked-live-1.10.apk | grep -qx 'AndroidManifest.xml'
+          sha256sum baked-live-1.10.apk | tee SHA256SUMS.txt
+
+      - name: Create or update GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          cat > RELEASE_NOTES.md <<'EOF'
+          # Baked Live v1.10 for Android
+
+          **Created by keatingfish.**
+
+          Baked Live is an Android application for Android phones, Android tablets,
+          Android TV, and Google TV.
+
+          Download **baked-live-1.10.apk** from the Assets section below.
+
+          For installation instructions, TV remote controls, casting, and chat:
+          https://github.com/buttocks/bakednetwork/blob/main/android/README.md
+
+          A baked.live account is required; register at https://baked.live
+          using a browser.
+
+          This release contains the Android APK. Browser-based companion
+          features on computers do not mean a desktop application is available.
+          EOF
+          if gh release view v1.10 >/dev/null 2>&1; then
+            gh release upload v1.10 baked-live-1.10.apk SHA256SUMS.txt --clobber
+          else
+            gh release create v1.10 baked-live-1.10.apk SHA256SUMS.txt \
+              --target "${GITHUB_SHA}" \
+              --title 'Baked Live v1.10 (Android)' \
+              --notes-file RELEASE_NOTES.md
+          fi

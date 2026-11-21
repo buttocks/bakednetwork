@@ -3730,54 +3730,8 @@ div#userlist {
     }
 }
 
-/* =========================================================
-   MOTD NATIVE TOGGLE VISIBILITY
-   Keep CyTube's real glyphicon plus/minus toggle clickable above
-   the MOTD panel in both its expanded and collapsed states.
-   ========================================================= */
-#motdwrap {
-    position: relative !important;
-}
-
-#motdwrap > #togglemotd.close {
-    position: absolute !important;
-    top: 2px !important;
-    right: 11px !important;
-    z-index: 100 !important;
-    float: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 20px !important;
-    height: 18px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    opacity: .52 !important;
-    filter: none !important;
-    color: #c0cfd2 !important;
-    background: transparent !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    pointer-events: auto !important;
-}
-
-#motdwrap > #togglemotd.close > .glyphicon {
-    color: inherit !important;
-    font-size: 12px !important;
-    line-height: 1 !important;
-}
-
-#motdwrap > #togglemotd.close > .glyphicon-minus {
-    color: #f2fdff !important;
-    font-size: 14px !important;
-    text-shadow: 0 0 3px rgba(125, 246, 255, .65) !important;
-}
-
-#motdwrap > #togglemotd.close:hover,
-#motdwrap > #togglemotd.close:focus-visible {
-    opacity: .9 !important;
-    color: #effcff !important;
+/* MOTD native plus/minus: hot pink only; preserve default sizing and placement. */
+#togglemotd.close {
+    color: #ff1493 !important;
+    opacity: 1 !important;
 }

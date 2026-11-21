@@ -15,7 +15,7 @@
 
     const modern = RDH.modern = {
         loaded: true,
-        version: "0.1.27",
+        version: "0.1.28",
         modules: {},
         state: {},
         register: function (name, module) {
@@ -214,6 +214,103 @@
     });
 
 
+
+    /* ---------------------------------------------------------
+       MOTD newsletter and House Rules dropdowns.
+       Reuses the existing links and House Rules details element.
+       --------------------------------------------------------- */
+    modern.register("motdDropdowns", {
+        observer: null,
+
+        apply: function () {
+            const motd = document.getElementById("motd");
+            if (!motd || motd.querySelector("#rdh-motd-actions")) return;
+
+            const rules = Array.from(motd.querySelectorAll("details")).find(function (entry) {
+                const summary = entry.querySelector("summary");
+                return summary && /house rules/i.test(summary.textContent);
+            });
+            if (!rules) return;
+
+            // Find the newsletter heading as a text node, not a layout-dependent selector.
+            const walker = document.createTreeWalker(motd, 4);
+            let titleNode = null;
+            let node;
+            while ((node = walker.nextNode())) {
+                if (/^latest newsletters:?$/i.test(node.textContent.trim())) {
+                    titleNode = node;
+                    break;
+                }
+            }
+            if (!titleNode || !titleNode.parentElement) return;
+
+            // Keep all existing PDF links and the chat-command note intact.
+            let panel = null;
+            for (let candidate = titleNode.parentElement;
+                 candidate && candidate !== motd;
+                 candidate = candidate.parentElement) {
+                if (candidate.contains(rules)) break;
+                const linkNames = Array.from(candidate.querySelectorAll("a[href]"))
+                    .map(function (a) { return a.textContent.toLowerCase(); });
+                if (linkNames.some(function (s) { return s.includes("wrestling observer newsletter"); }) &&
+                    linkNames.some(function (s) { return s.includes("pro wrestling torch newsletter"); })) {
+                    panel = candidate;
+                    break;
+                }
+            }
+            if (!panel || !panel.parentNode) return;
+
+            const controls = document.createElement("div");
+            controls.id = "rdh-motd-actions";
+
+            const newsletters = document.createElement("details");
+            newsletters.id = "rdh-newsletters";
+            const summary = document.createElement("summary");
+            summary.appendChild(document.createTextNode("Latest Newsletters"));
+            const caret = document.createElement("span");
+            caret.className = "rdh-news-caret";
+            caret.setAttribute("aria-hidden", "true");
+            caret.textContent = "▾";
+            summary.appendChild(caret);
+
+            const content = document.createElement("div");
+            content.className = "rdh-newsletter-content";
+            panel.classList.add("rdh-newsletter-original");
+            const heading = titleNode.parentElement;
+            if (heading !== panel && heading.textContent.trim().toLowerCase() === "latest newsletters") {
+                heading.classList.add("rdh-newsletter-old-title");
+            } else if (heading === panel) {
+                titleNode.textContent = "";
+            }
+
+            panel.parentNode.insertBefore(controls, panel);
+            content.appendChild(panel);
+            newsletters.appendChild(summary);
+            newsletters.appendChild(content);
+            controls.appendChild(newsletters);
+            controls.appendChild(rules);
+
+            // Both controls start folded; native details manages their toggling.
+            newsletters.open = false;
+            rules.open = false;
+        },
+
+        start: function () {
+            const motd = document.getElementById("motd");
+            if (!motd) return;
+            this.apply();
+            const self = this;
+            this.observer = new MutationObserver(function () {
+                if (!motd.querySelector("#rdh-motd-actions")) self.apply();
+            });
+            this.observer.observe(motd, { childList: true, subtree: true });
+        },
+
+        stop: function () {
+            if (this.observer) this.observer.disconnect();
+            this.observer = null;
+        }
+    });
 
     /* ---------------------------------------------------------
        Playlist featured-show identifiers
@@ -508,6 +605,7 @@
     modern.start("diagnostics");
     modern.start("emotes");
     modern.start("motdCollapse");
+    modern.start("motdDropdowns");
     modern.start("premiumPlaylist");
     modern.start("legacyEmbiggenKeeper");
 

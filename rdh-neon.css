@@ -3735,3 +3735,10 @@ div#userlist {
     color: #ff1493 !important;
     opacity: 1 !important;
 }
+
+/* The native icon spans need their own color override in this theme. */
+#togglemotd .glyphicon-minus,
+#togglemotd .glyphicon-plus {
+    color: #ff1493 !important;
+    opacity: 1 !important;
+}

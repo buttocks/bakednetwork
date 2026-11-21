@@ -3694,29 +3694,38 @@ div#userlist {
     display: inline !important;
 }
 
-/* RDH MOTD: restore CyTube's native full-panel minus/plus toggle. */
-#motdwrap {
-    position: relative !important;
+/* =========================================================
+   RDH UNREAD PRIVATE MESSAGE ALERT
+   CyTube uses .panel-primary for collapsed PMs with unread messages.
+   Opening the PM returns it to .panel-default and stops the flash.
+   ========================================================= */
+#pmbar .pm-panel.panel-primary {
+    border-color: #ff5e96 !important;
 }
-#motdwrap #togglemotd {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: absolute !important;
-    top: 8px !important;
-    right: 12px !important;
-    z-index: 20 !important;
-    padding: 3px 7px !important;
-    background: rgba(0, 28, 35, .85) !important;
-    color: #8ff6ff !important;
-    border: 1px solid rgba(27, 191, 212, .65) !important;
-    border-radius: 4px !important;
-    text-shadow: none !important;
-    cursor: pointer !important;
-}
-#motdwrap #togglemotd:hover,
-#motdwrap #togglemotd:focus {
-    opacity: 1 !important;
+
+#pmbar .pm-panel.panel-primary > .panel-heading {
+    background: #e72362 !important;
+    background-image: none !important;
+    border-color: #ff8ab3 !important;
     color: #fff !important;
-    background: rgba(0, 76, 87, .95) !important;
+    text-shadow: 0 1px 2px #370018 !important;
+    animation: rdhUnreadPmFlash 1.05s steps(1, end) infinite !important;
+}
+
+@keyframes rdhUnreadPmFlash {
+    0%, 49% {
+        filter: brightness(1.5);
+        box-shadow: 0 0 0 2px #ff93ba, 0 0 19px 4px rgba(255, 48, 112, .85);
+    }
+    50%, 100% {
+        filter: brightness(.72);
+        box-shadow: 0 0 0 1px #52142d, 0 0 3px rgba(255, 48, 112, .25);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #pmbar .pm-panel.panel-primary > .panel-heading {
+        animation: none !important;
+        box-shadow: 0 0 0 2px #ff93ba, 0 0 12px rgba(255, 48, 112, .8) !important;
+    }
 }

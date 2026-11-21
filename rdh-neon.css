@@ -3741,15 +3741,15 @@ div#userlist {
 
 #motdwrap > #togglemotd.close {
     position: absolute !important;
-    top: 10px !important;
+    top: 2px !important;
     right: 11px !important;
     z-index: 100 !important;
     float: none !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 25px !important;
-    height: 25px !important;
+    width: 20px !important;
+    height: 18px !important;
     padding: 0 !important;
     margin: 0 !important;
     opacity: .52 !important;

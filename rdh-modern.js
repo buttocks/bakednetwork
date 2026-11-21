@@ -196,7 +196,13 @@
             this.timer = setTimeout(function () {
                 const $motd = $("#motd");
                 if ($motd.length && $motd.is(":visible")) {
-                    $motd.stop(true, true).slideUp(350);
+                    const $toggle = $("#togglemotd");
+                    if ($toggle.length) {
+                        // Let CyTube synchronize the native plus/minus icon.
+                        $toggle.trigger("click");
+                    } else {
+                        $motd.stop(true, true).slideUp(350);
+                    }
                 }
             }, 20000);
         },

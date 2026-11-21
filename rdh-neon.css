@@ -3730,18 +3730,9 @@ div#userlist {
     }
 }
 
-/* MOTD native plus/minus: hot pink only; preserve default sizing and placement. */
+/* Native MOTD toggle: keep above expanded content and inset 5px from the right. */
 #togglemotd.close {
-    /* Above the positioned #motd panel, without changing native float/size. */
     position: relative !important;
     z-index: 10 !important;
-    color: #ff1493 !important;
-    opacity: 1 !important;
-}
-
-/* The native icon spans need their own color override in this theme. */
-#togglemotd .glyphicon-minus,
-#togglemotd .glyphicon-plus {
-    color: #ff1493 !important;
-    opacity: 1 !important;
+    margin-right: 5px !important;
 }

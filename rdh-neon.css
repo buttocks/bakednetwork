@@ -3770,6 +3770,12 @@ div#userlist {
     line-height: 1 !important;
 }
 
+#motdwrap > #togglemotd.close > .glyphicon-minus {
+    color: #f2fdff !important;
+    font-size: 14px !important;
+    text-shadow: 0 0 3px rgba(125, 246, 255, .65) !important;
+}
+
 #motdwrap > #togglemotd.close:hover,
 #motdwrap > #togglemotd.close:focus-visible {
     opacity: .9 !important;

@@ -3736,3 +3736,101 @@ div#userlist {
     z-index: 10 !important;
     margin-right: 5px !important;
 }
+
+
+/* =========================================================
+   RDH MOTD SIDE-BY-SIDE DROPDOWNS
+   Newsletter links and House Rules remain independent.
+   ========================================================= */
+#motd #rdh-motd-actions {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 920px !important;
+    margin: 8px auto 4px !important;
+    padding: 0 !important;
+}
+
+#motd #rdh-motd-actions > details {
+    flex: 0 0 auto !important;
+    width: 176px !important;
+    max-width: calc(100vw - 36px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#motd #rdh-motd-actions > details[open] {
+    width: min(390px, calc(100vw - 36px)) !important;
+}
+
+#motd #rdh-motd-actions > details > summary {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    width: 100% !important;
+    min-height: 34px !important;
+    margin: 0 !important;
+    padding: 7px 10px !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+    background: rgba(2, 37, 44, .75) !important;
+    border: 1px solid rgba(0, 204, 225, .72) !important;
+    border-radius: 6px !important;
+    color: #a1f9ff !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    text-decoration: none !important;
+}
+
+#motd #rdh-motd-actions > details > summary:hover,
+#motd #rdh-motd-actions > details > summary:focus-visible {
+    background: rgba(0, 72, 82, .85) !important;
+    border-color: #49f6ff !important;
+}
+
+#motd #rdh-motd-actions > details > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 8px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+#motd #rdh-motd-actions .rdh-newsletter-original {
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-align: center !important;
+}
+
+#motd #rdh-motd-actions .rdh-newsletter-old-title {
+    display: none !important;
+}
+
+#motd #rdh-motd-actions #rdh-newsletters > summary > .rdh-news-caret {
+    display: inline-block !important;
+    line-height: 1 !important;
+    transition: transform .15s ease !important;
+}
+
+#motd #rdh-motd-actions #rdh-newsletters[open] > summary > .rdh-news-caret {
+    display: inline-block !important;
+    transform: rotate(180deg) !important;
+}
+
+@media (max-width: 520px) {
+    #motd #rdh-motd-actions > details {
+        width: min(176px, calc((100vw - 40px) / 2)) !important;
+    }
+    #motd #rdh-motd-actions > details[open] {
+        width: calc(100vw - 36px) !important;
+    }
+}

@@ -1,4 +1,4 @@
-/* WWE / WWF Ringside — Baked.live channel skin v1.0
+/* WWE / WWF Ringside — Baked.live channel skin v1.2
    External Javascript URL: host this file as JS (e.g. jsDelivr + GitHub).
    Designed for Baked.live/CyTube channel pages. No external dependencies.
 */
@@ -8,8 +8,9 @@
   if (window.__wweWwfSkinV1) return;
   window.__wweWwfSkinV1 = true;
 
-  const PREFIX = 'wwf';
+  // Visual layer only: the self-hosted WrestleTube module loader remains in channel-internal.js.
   const key = 'baked-wwf-style:' + location.pathname.toLowerCase();
+  const marksKey = 'baked-wwf-marks:' + location.pathname.toLowerCase();
   const select = (selector, parent = document) => parent.querySelector(selector);
   const fallback = 'The next main event is being lined up…';
   const slogans = [
@@ -64,6 +65,10 @@
     header.setAttribute('aria-label', 'WWE and WWF channel controls');
     header.innerHTML = `
       <div class="wwf-hero">
+        <div class="wwf-watermarks" aria-hidden="true">
+          <img class="wwf-mark wwf-mark-classic" src="https://upload.wikimedia.org/wikipedia/commons/6/68/World_Wrestling_Federation_block_logo.svg" alt="" decoding="async">
+          <img class="wwf-mark wwf-mark-modern" src="https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg" alt="" decoding="async">
+        </div>
         <div class="wwf-hero-title">
           <div class="wwf-overline">BAKED.LIVE // RINGSIDE BROADCAST</div>
           <div class="wwf-brand"><span class="wwf-brand-old">WWF</span><span class="wwf-vs">/</span><span class="wwf-brand-new">WWE</span><span class="wwf-brand-tail">TV</span></div>
@@ -78,7 +83,11 @@
         <button type="button" data-wwf="queue">☰ MATCH CARD</button>
         <button type="button" data-wwf="current">⌖ FIND PLAYING</button>
         <button type="button" data-wwf="theme" aria-pressed="false">◈ ERA: ATTITUDE</button>
+        <button type="button" data-wwf="marks" aria-pressed="true" title="Show or hide WWF/WWE background logos">★ LOGOS ON</button>
         <button type="button" data-wwf="focus" aria-pressed="false">▣ CINEMA</button>
+        <button type="button" data-wwf="mod" class="wwf-module-action" hidden>⚙ MOD MENU</button>
+        <button type="button" data-wwf="macros" class="wwf-module-action" hidden>☻ MACROS</button>
+        <button type="button" data-wwf="search" class="wwf-module-action" hidden>⌕ SEARCH</button>
         <button type="button" data-wwf="share">↗ SHARE</button>
       </nav>
       <div class="wwf-ticker" aria-live="off"><b>RINGSIDE WIRE</b><span id="wwf-ticker-text">${slogans[0]}</span></div>`;
@@ -98,11 +107,45 @@
       saveStyle(mode);
     }
     setTheme(loadStyle());
+    let marksVisible = true;
+    try { marksVisible = localStorage.getItem(marksKey) !== 'off'; } catch (_) { /* optional */ }
+    function setMarks(visible) {
+      marksVisible = visible;
+      document.body.classList.toggle('wwf-hide-marks', !visible);
+      button('marks').textContent = visible ? '★ LOGOS ON' : '☆ LOGOS OFF';
+      button('marks').setAttribute('aria-pressed', String(visible));
+      try { localStorage.setItem(marksKey, visible ? 'on' : 'off'); } catch (_) { /* optional */ }
+    }
+    setMarks(marksVisible);
+    button('marks').addEventListener('click', () => setMarks(!marksVisible));
+
+    // Existing WrestleTube controls are the authority; never reimplement their handlers.
+    const moduleControls = { mod: '#showchansettings', macros: '#emotelistbtn', search: '#showsearch' };
+    function activateExistingControl(action) {
+      const source = select(moduleControls[action]);
+      if (source && !header.contains(source)) source.click();
+    }
+    Object.keys(moduleControls).forEach(action => {
+      button(action).addEventListener('click', () => activateExistingControl(action));
+    });
+    function updateModuleShortcuts() {
+      for (const [action, selector] of Object.entries(moduleControls)) {
+        const nativeButton = select(selector);
+        button(action).hidden = !nativeButton || nativeButton === button(action);
+      }
+    }
+    updateModuleShortcuts();
 
     button('watch').addEventListener('click', () => goTo('#videowrap'));
     button('chat').addEventListener('click', () => goTo('#chatwrap', '#chatline'));
     button('queue').addEventListener('click', () => goTo('#queue'));
     button('current').addEventListener('click', () => {
+      // Prefer the original WTTTV scrollQueue() implementation if loaded.
+      if (typeof window.scrollQueue === 'function') {
+        try { window.scrollQueue(); return; } catch (_) { /* fall back to DOM */ }
+      }
+      const existing = select('#scroll-btn');
+      if (existing && !header.contains(existing)) { existing.click(); return; }
       const current = select('#queue .queue_entry.queue_active') || select('#queue .queue_active');
       if (current) current.scrollIntoView({ behavior: 'smooth', block: 'center' });
       else goTo('#queue');
@@ -149,6 +192,7 @@
         select('#wwf-status', header).textContent = title ? 'ON AIR' : 'STANDBY';
         header.classList.toggle('wwf-playing', Boolean(title));
       }
+      updateModuleShortcuts();
       const count = select('#usercount')?.textContent?.trim();
       select('#wwf-fans', header).textContent = count ? `${count} RINGSIDE` : 'RINGSIDE';
     }

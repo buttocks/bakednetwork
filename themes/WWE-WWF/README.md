@@ -1,42 +1,43 @@
-# WWE / WWF Ringside — Baked.live tube package
+# WWE / WWF Ringside v1.2 — Baked.live
 
-A standalone theme for a WWE/WWF Baked.live channel. Built separately from existing WrestleTube/RetroWrestling files. No WWE logos, downloaded media, or third-party modules are embedded.
+A standalone WWE/WWF visual skin that works **beside** WrestleTube's existing channel logic. New filter shortcuts are namespaced to prevent them from hijacking ordinary emote names.
 
-## Contents
+## Existing channel functions — keep these
 
-- `skin.css` — WWE/WWF arena look, responsive dark red/gold styling; optional modern mode.
-- `skin.js` — top arena banner, now-playing status, watch/chat/playlist shortcuts, current-video locator, Attitude/Modern switch, cinema toggle, share link, clickable spoiler reveals.
-- `filters.json` — 53 enabled Baked.live Chat Filters in the proven `{name,source,flags,replace,active,filterlinks}` array format: WWE/WWF/RAW/SmackDown chips, moves, wrestlers, crowd chants, promo/heel/face markup, spoiler tags.
-- `Publish-to-GitHub.ps1` and `RUN-PUBLISH.cmd` — optional one-time publisher for the existing `buttocks/bakednetwork` repository. Requires Git and GitHub push authentication; does NOT touch any live tube settings.
+Keep the existing self-hosted channel-internal.js from this release **in its current channel slot**:
 
-## Easiest installation: GitHub-hosted CSS/JS
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/channel-internal.js
 
-1. Open this ZIP's extracted directory and double-click `RUN-PUBLISH.cmd`, **or** publish the three files manually under `themes/WWE-WWF/` in the `buttocks/bakednetwork` repo.
-2. In your WWE/WWF tube's Baked.live channel administration settings, use **External CSS** and **External Javascript** URLs. After publication, the URL patterns will be:
+It contains the original 25 Xaekai module definitions, `scrollQueue()`, chat username/emote clicking, navbar autohide, and native button behavior. The WWE/WWF `skin.js` supplies only the new UI, reusing the original scroll and native buttons where available. Do not load two separate copies of the module loader.
 
-   External CSS:
-   `https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/themes/WWE-WWF/skin.css`
+## Files
 
-   External Javascript:
-   `https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@main/themes/WWE-WWF/skin.js`
+- `skin.css`: Original WrestleTube external chat-effect CSS followed by the WWE/WWF dark arena skin, with real WWF and WWE background logo watermarks and a toggle.
+- `skin.js`: Arena UI, now-playing, the Attitude/Modern theme toggle, logos toggle, cinema mode, shortcuts to native Mod Menu, Macros and Search, and share button.
+- `filters.json`: **206 filters**: the **153 original WrestleTube rules in their original order and unchanged**, then **53 new WWE/WWF rules**. This is an importable Baked.live/CyTube-style JSON array.
 
-   The publisher also prints **commit-pinned URLs**, which are recommended for an initial tested release. **These URLs will not work until the files are published to GitHub.**
-3. Leave the tube's **internal CSS and JavaScript empty** if using this package alone. Do not also load `RetroWrestling-WrestleTube-Merged.js` in the same channel, which would duplicate interface elements.
-4. Back up any existing chat filters. Load `filters.json` using the tube's Chat Filters import/paste facility. Importing may replace existing rules; merge intentionally if you want to keep old rules. The CSS/JS URLs **do not** automatically import chat filters.
-5. Save settings, allow the channel script if your browser prompts, and hard refresh the tube (`Ctrl+Shift+R`). Make sure **Ignore Channel Javascript** is off.
+## Chat filters — avoiding emote collisions
 
-## Example chat commands
+The new **47 chat-shortcut rules no longer use `:wwf:`, `:rko:`, `:what:` etc.** Those short tokens could already be actual channel emote names. Instead, each new shortcut has two equivalent, isolated forms:
 
-- `:wwf:` · `:wwe:` · `:raw:` · `:smackdown:` · `:mania:` · `:316:` · `:rko:` · `:taker:`
-- `:what:` · `:wooo:` · `:yes:` · `:acknowledge:` · `:thisisawesome:`
-- `[promo]Let me tell you something![/promo]`
-- `[heel]BOOOOO[/heel]`
-- `[face]LET'S GO![/face]`
-- `[chant]THIS IS AWESOME[/chant]`
-- `[spoiler]Match result here[/spoiler]` (click to reveal)
+- **Named** `:wtfx_wwf:`, `:wtfx_rko:`, `:wtfx_316:`, `:wtfx_what:`
+- **Numbered** `:wtfx001:`, `:wtfx016:`, `:wtfx015:`, `:wtfx037:` respectively
 
-**Notes:** Filters are intentional colon-token replacements, not automatic replacements of everyday wrestling words. The `:word:` macros may overlap with existing native emote shortcuts on some tubes; check before merging. No chat moderation, permissions, queue deletion, or video handling is changed by this package. If the channel already has a custom theme, back it up before switching.
+The numbers correspond to the order of the 47 new wrestling shortcuts in `filters.json`, not to original WrestleTube filters. The other six new formatting rules use `[promo]`, `[heel]`, `[face]`, `[gold]`, `[chant]`, and `[ringspoiler]` tags. `[ringspoiler]` avoids the original `[spoiler]` filter. The original 153 rules are preserved as-is; some of them are intentionally emote-specific and were not renamed.
 
-## Local validation
+Aliases have been checked against the **153 preserved legacy filter patterns**: no legacy filter that compiles as a JavaScript RegExp matches any new alias. Actual channel emotes should still be checked against the namespaced aliases if you add new emotes later.
 
-The JavaScript was checked with `node --check`. All filter regular expressions were compiled as JavaScript RegExps. Live behavior still needs a browser test in the target Baked.live tube, particularly filter import and current-video status.
+**Replace** the channel's current filter JSON with this merged array after making a backup; do not append the 206 rules to an already-installed set or you will duplicate filters. CSS and JS URLs do not import filters automatically.
+
+## Logos
+
+- Historic WWF block logo: https://commons.wikimedia.org/wiki/File:World_Wrestling_Federation_block_logo.svg
+- Modern WWE white logo: https://commons.wikimedia.org/wiki/File:WWE_white_logo.svg
+
+They are displayed via Wikimedia Commons SVG URLs as low-opacity background graphics. These remain third-party trademarks, used here for an unofficial fan channel, with no WWE affiliation implied.
+
+## Installation and validation
+
+Use the pinned commit `skin.js` and `skin.css` URLs shown in the release chat in the external JavaScript and external CSS settings of your WWE/WWF Baked.live tube. Keep the original channel internal JavaScript where it already lives. Hard-refresh after saving, and test Mod Menu, emotes, the filter import, chat effects, logos and queue scrolling in a test session.
+
+The revised JS passes `node --check` and the new rule regexps validate under JavaScript. Six preserved legacy rules have unsupported PCRE syntax in JavaScript; these old rules were left unchanged rather than silently rewritten. Live channel testing is still required.

@@ -1,275 +1,118 @@
-/* WWE / WWF Ringside — Baked.live channel skin v1.6
-   External Javascript URL: host this file as JS (e.g. jsDelivr + GitHub).
-   Designed for Baked.live/CyTube channel pages. No external dependencies.
+/* WWF / WWE v2.0 — WrestleTube engine port, adapted for this channel.
+ * Original Xaekai module loader and chat/playlist implementations preserved.
+ */
+(function(win,doc){
+ if(!(win.location.pathname.startsWith('/tv/')||win.location.pathname.startsWith('/r/')))return;
+ if(win.__wwfWweEnginePortStarted)return;
+ win.__wwfWweEnginePortStarted=true;
+ const eraKey='wwf-wwe-era:'+win.location.pathname.toLowerCase();
+ const logosKey='wwf-wwe-logos:'+win.location.pathname.toLowerCase();
+ const eras={"wwwf":{"label":"WWWF · CLASSIC","years":"1963–1979"},"golden":{"label":"WWF · GOLDEN","years":"1982–1993"},"newgen":{"label":"WWF · NEW GENERATION","years":"1993–1997"},"attitude":{"label":"WWF · ATTITUDE","years":"1997–2002"},"modern":{"label":"WWE · MODERN","years":"2002–NOW"}};
+ function mountEra(){
+  if(doc.getElementById('wwf-era-picker'))return;
+  const nav=doc.querySelector('nav.navbar');if(!nav)return;
+  const item=doc.createElement('li');item.id='wwf-era-picker';
+  item.innerHTML='<label for="wwf-era-select">ERA</label><select id="wwf-era-select" aria-label="Wrestling era theme"><option value="wwwf">WWWF · CLASSIC</option><option value="golden">WWF · GOLDEN</option><option value="newgen">WWF · NEW GENERATION</option><option value="attitude">WWF · ATTITUDE</option><option value="modern">WWE · MODERN</option></select><button type="button" id="wwf-logo-switch" title="Toggle background logos">★ LOGOS</button>';
+  const navList=nav.querySelector('ul.navbar-nav')||nav.querySelector('ul.nav');
+  if(navList)navList.appendChild(item);else nav.appendChild(item);
+  const strip=doc.createElement('div');strip.id='wwf-era-strip';
+  strip.innerHTML='<span class="wwf-name">WWF <b>/</b> WWE</span><span id="wwf-era-title">ATTITUDE ERA</span><small id="wwf-era-years">1997–2002</small><span class="wwf-era-logos">WWWF · WWF · WWE</span>';
+  nav.insertAdjacentElement('afterend',strip);
+  const choose=doc.getElementById('wwf-era-select'),logos=doc.getElementById('wwf-logo-switch');
+  let era='attitude',visible=true;
+  try{const stored=win.localStorage.getItem(eraKey);if(eras[stored])era=stored;visible=win.localStorage.getItem(logosKey)!=='off';}catch(_){}
+  function applyEra(which){
+   which=eras[which]?which:'attitude';doc.body.dataset.wwfEra=which;choose.value=which;
+   doc.getElementById('wwf-era-title').textContent=eras[which].label;
+   doc.getElementById('wwf-era-years').textContent=eras[which].years;
+   try{win.localStorage.setItem(eraKey,which);}catch(_){}
+  }
+  function applyLogos(on){
+   doc.body.classList.toggle('wwf-logos-off',!on);
+   logos.textContent=on?'★ LOGOS':'☆ LOGOS';logos.setAttribute('aria-pressed',String(on));
+   try{win.localStorage.setItem(logosKey,on?'on':'off');}catch(_){}
+  }
+  choose.addEventListener('change',()=>applyEra(choose.value));
+  logos.addEventListener('click',()=>applyLogos(doc.body.classList.contains('wwf-logos-off')));
+  applyEra(era);applyLogos(visible);
+ }
+ function mount(){
+  if(!win.jQuery||!win.CHANNEL||!win.CLIENT||!win.USEROPTS||
+     !doc.querySelector('nav.navbar')||!doc.querySelector('#chatwrap')||
+     !doc.querySelector('#videocontrols'))return false;
+  if(win.__wwfWweEnginePortMounted)return true;
+  win.__wwfWweEnginePortMounted=true;
+  win.__wwfWweCinemaCss="/* Cinema Chat Mode */\nbody.cinemachat #motdwrap     { display: none; }\nbody.cinemachat #queue        { display: none; }\nbody.cinemachat #footer       { display: none; }\nbody.cinemachat #currenttitle { display: none; }\nbody.cinemachat .toggle-label { display: none; }\nbody.cinemachat .dropLabel    { display: none; }\nbody.cinemachat #videowrap-header { display: none; }\n\n#cinemasizeinc,\n#cinemasizedec,\n#cinematoggle {\n    position: fixed !important;\n    top: 0 !important;\n    font-size: 16px !important;\n    padding: 1px 5px !important;\n    border: 2px solid rgba(255,255,255,0.5) !important;\n    z-index:3000;\n    cursor:pointer;\n}\n\n#cinematoggle  { right: 2px; }\n#cinemasizeinc { right: 31px; }\n#cinemasizedec { right: 60px; }\n\nbody.cinemachat #cinematoggle {\n    text-shadow: 0 0 3px white;\n}\n\nbody.cinemachat.synchtube #cinematoggle {\n    right: calc(%WIDTH% + 2px);\n}\n\nbody.cinemachat #chatwrap {\n    position:fixed !important;\n    top:0 !important;\n    padding:0px !important;\n    width: %WIDTH% !important;\n    height:100% !important;\n    z-index:3001 !important;\n    background-color:#222222 !important;\n}\nbody.cinemachat:not(.synchtube) #chatwrap { left:0 !important; }\nbody.cinemachat.synchtube #chatwrap { right:0 !important; }\n\nbody.cinemachat #chatwrap #messagebuffer,\nbody.cinemachat #chatwrap #userlist {\n    height: calc(100% - 59px) !important;\n}\n\nbody.cinemachat #chatline {\n    width:calc(100% - 1px) !important;\n    position: relative !important;\n}\nbody.cinemachat:not(.synchtube) #chatline { left: 0px !important; }\nbody.cinemachat.synchtube #chatline { right: 0px !important; }\n\n\n\nbody.cinemachat #videowrap .embed-responsive {\n    height:100% !important;\n    width: 100% !important;\n    top: 0 !important;\n}\nbody.cinemachat:not(.synchtube) #videowrap .embed-responsive { right: 0 !important; }\nbody.cinemachat.synchtube #videowrap .embed-responsive { left: 0 !important; }\n\nbody.cinemachat #videowrap {\n    position: fixed !important;\n    top: 0 !important;\n    padding:0 !important;\n    z-index: 3000 !important;\n    background-color:black;\n    height:100% !important;\n    width: calc(100% - %WIDTH%) !important;\n}\nbody.cinemachat:not(.synchtube) #videowrap { right: 0 !important; }\nbody.cinemachat.synchtube #videowrap { left: 0 !important; }\n\n\nbody.cinemachat #pmbar {\n    width: calc(100% - %WIDTH%) !important;\n    bottom: 42px;\n}\nbody.cinemachat:not(.synchtube) #pmbar { left: %WIDTH%; }\n\n\n\n\nbody.cinemachat #pmbar .panel-heading {\n    opacity: 0.8;\n    background-color: rgba(0,0,0,0.5);\n}\n\nbody.cinemachat #pmbar .panel {\n    opacity: 0.8;\n    background-color: rgba(0,0,0,0.5);\n}\n\nbody.cinemachat .pm-panel:hover {\n    border-color: #bbb;\n}\nbody.cinemachat #pmbar .panel:hover {\n    opacity: 0.9;\n    background-color: rgba(0,0,0,0.77);\n}\n\n/* Active poll atop the video  */\nbody.cinemachat #pollwrap div.active:not(.dismissed) {\n    position:fixed !important;\n    top:  12px !important;\n    z-index:9999 !important;\n    min-width: 400px;\n    opacity: 0.8;\n    background-color: rgba(0,0,0,0.77);\n}\n\nbody.cinemachat:not(.synchtube) #pollwrap div.active:not(.dismissed) {\n    left: calc(%WIDTH% + 32px) !important;\n}\nbody.cinemachat.synchtube #pollwrap div.active:not(.dismissed) {\n    left: 32px !important;\n}\n\nbody:not(.cinemachat) #pollwrap .dismiss {\n    display: none;\n}\n\nbody.cinemachat.cinema-nopoll #pollwrap {\n    display: none!important;\n}\n";
+  (function(){
+/*!
+ **|  Baked.live Channel: WTTTV Internal Script
+ **|
+ **|  All code written by Xaekai except where otherwise noted.
+ **|  Copyright 2014-2016 All Rights Reserved
+ **|
+ **@preserve
+ */
+// WWF/WWE branding only: all WrestleTube/Xaekai modules remain intact.
+if (!this[CHANNEL.name]) this[CHANNEL.name]={};
+$(".navbar-brand").css({"background-image":"none","min-width":"0"}).html('<strong class="wwf-nav-brand">WWF <span>/</span> WWE</strong>');
+if (!document.getElementById('scroll-btn')) $('<button id="scroll-btn" class="btn btn-sm btn-default" title="Scroll playlist to current item" />')
+  .append('<span class="glyphicon glyphicon-hand-right" />')
+  .prependTo("#videocontrols")
+  .on("click", function() {
+    if(typeof scrollQueue==='function')scrollQueue(); else document.querySelector('#queue .queue_entry.queue_active')?.scrollIntoView({block:'center'});
+  });
+
+/*!
+ **|   Xaekai's Sequenced Module Loader
+ **|
+**@preserve
 */
-(function () {
-  'use strict';
-  if (!/^\/(?:tv|r)\/[^/]+\/?$/i.test(location.pathname)) return;
-  if (window.__wweWwfSkinV1) return;
-  window.__wweWwfSkinV1 = true;
+({options:{designator:{prefix:"geek-",delay:90*1e3},playlist:{collapse:true,inlineBlame:true,moveReporting:true,quickQuality:false,recentMedia:true,simpleLeader:true,syncCheck:true,thumbnails:true,timeEstimates:true,volumeControl:false},chatext:{persistIgnore:true,smartScroll:true,maxMessages:120},userlist:{autoHider:true},various:{notepad:true,emoteToggle:true},whispers:{joins:false,parts:false}},modules:{settings:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_settings.min.js",done:true},audio:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_audiolib.js",done:true},privmsg:{active:1,rank:1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_privmsg.min.js",done:true},whispers:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_whispers.min.js",done:true,cache:false},userlist:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_userlist.min.js",done:true},md5hash:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_md5.min.js",done:true},designator:{active:0,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_designator.min.js",done:true},playlist:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_playlist.min.js",done:true},notifier:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_alerts.min.js",done:true},chatline:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_chatline.min.js",done:true},chatext:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_chatext.min.js",done:true},chatcolor:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_chatcolor.min.js",done:true},colormap:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_colormap.min.js",done:true},unimoji:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_unimoji.min.js",done:true},dectalk:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_tts.min.js",done:true},hotkeys:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_hotkeys.min.js",done:true},layout:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@dd49db59f589867f66742021ddcb81c7b160d40c/themes/WWE-WWF/legacy-layout.js",done:true},various:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_various.min.js",done:true},embedmedia:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_embedmedia.min.js",done:true},chaticons:{active:0,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_chaticons.min.js",done:true},ci_library:{active:0,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/library_chaticons.min.js",done:true,cache:false},AvtrClient:{active:0,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/AvatarClient.min.js",done:true},fancysheet:{active:0,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/custom_fancysheet.min.js",done:true},time:{active:1,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_time.min.js",done:true},search:{active:0,rank:-1,url:"https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_search.min.js",done:true}},getScript:function(url,success,cache=true){return jQuery.ajax({url:url,cache:cache,success:success,type:"GET",dataType:"script"})},initialize:function(){if(CLIENT.modules){return}else{CLIENT.modules=this}window[CHANNEL.name].modulesOptions=this.options;console.info("[XaeModule]","Begin Loading.");this.index=Object.keys(this.modules);this.sequencerLoader();this.cache=false},sequencerLoader:function(){if(this.state.prev){setTimeout(this.modules[this.state.prev].done,0);this.state.prev=""}if(this.state.pos>=this.index.length){return console.info("[XaeModule]","Loading Complete.")}var currKey=this.index[this.state.pos];if(this.state.pos<this.index.length){if(this.modules[currKey].active){if(this.modules[currKey].rank<=CLIENT.rank){console.info("[XaeModule]","Loading:",currKey);this.state.prev=currKey;this.state.pos++;let cache=typeof this.modules[currKey].cache=="undefined"?this.cache:this.modules[currKey].cache;this.getScript(this.modules[currKey].url,this.sequencerLoader.bind(this),cache)}else{if(this.modules[currKey].rank===0&&CLIENT.rank===-1){(function(module){socket.once("login",data=>{if(data.success){this.getScript(module.url,false,this.cache)}})})(this.modules[currKey])}this.state.pos++;this.sequencerLoader()}}else{this.state.pos++;this.sequencerLoader()}}},state:{prev:"",pos:0}}).initialize();
 
-  // Visual layer only: the self-hosted WrestleTube module loader remains in channel-internal.js.
-  const key = 'baked-wwf-style:' + location.pathname.toLowerCase();
-  const marksKey = 'baked-wwf-marks:' + location.pathname.toLowerCase();
-  const select = (selector, parent = document) => parent.querySelector(selector);
-  const fallback = 'The next main event is being lined up…';
-  const slogans = [
-    'THEN • NOW • FOREVER • TOGETHER',
-    'THE ATTITUDE ERA NEVER DIES',
-    'FROM MONDAY NIGHT RAW TO WRESTLEMANIA',
-    'CLASSIC WWF • MODERN WWE • ALL ERAS',
-    'IF YOU SMELL WHAT THE CHAT IS COOKING'
-  ];
-  let tick = 0;
-  let lastTitle = '';
 
-  function saveStyle(mode) {
-    try { localStorage.setItem(key, mode); } catch (_) { /* storage optional */ }
-  }
-  function loadStyle() {
-    try { return localStorage.getItem(key) === 'modern' ? 'modern' : 'attitude'; }
-    catch (_) { return 'attitude'; }
-  }
-  function showTemporary(el, text, defaultText) {
-    el.textContent = text;
-    window.setTimeout(() => { if (el.isConnected) el.textContent = defaultText; }, 1800);
-  }
-  function goTo(selector, focusSelector) {
-    const target = select(selector);
-    if (!target) return;
-    target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-    if (focusSelector) {
-      const input = select(focusSelector);
-      if (input) window.setTimeout(() => input.focus({ preventScroll: true }), 180);
-    }
-  }
-  function nowPlaying() {
-    const possibilities = [
-      select('#currenttitle')?.textContent,
-      select('#queue .queue_entry.queue_active .qe_title')?.textContent,
-      select('#queue .queue_active .qe_title')?.textContent,
-      select('#currentmedia .qe_title')?.textContent
-    ];
-    for (const value of possibilities) {
-      const title = (value || '').replace(/^\s*(?:now playing|currently playing)\s*:?\s*/i, '').trim();
-      if (title && !/^(?:nothing playing|no video|no media|loading\.{0,3})$/i.test(title)) return title;
-    }
-    return '';
-  }
+/*
+ ** Navbar Autohider
+ */
+USEROPTS.sort_rank = 1;
+USEROPTS.sort_afk = 1;
+USEROPTS.qbtn_hide = "true";
 
-  function mount() {
-    if (select('#wwf-arena')) return;
-    if (!document.body) return;
-    const header = document.createElement('section');
-    header.id = 'wwf-arena';
-    header.setAttribute('aria-label', 'WWE and WWF channel controls');
-    header.innerHTML = `
-      <div class="wwf-hero">
-        <div class="wwf-watermarks" aria-hidden="true">
-          <img class="wwf-mark wwf-mark-wwwf" src="https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1971-1979.png" alt="" decoding="async" loading="lazy">
-          <img class="wwf-mark wwf-mark-classic" src="https://upload.wikimedia.org/wikipedia/commons/6/68/World_Wrestling_Federation_block_logo.svg" alt="" decoding="async">
-          <img class="wwf-mark wwf-mark-newgen" src="https://upload.wikimedia.org/wikipedia/commons/7/7f/WWF_New_Gen_Logo.svg" alt="" decoding="async" loading="lazy">
-          <img class="wwf-mark wwf-mark-modern" src="https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg" alt="" decoding="async">
-        </div>
-        <div class="wwf-hero-title">
-          <div class="wwf-overline">BAKED.LIVE // RINGSIDE BROADCAST</div>
-          <div class="wwf-brand"><span class="wwf-brand-old">WWF</span><span class="wwf-vs">/</span><span class="wwf-brand-new">WWE</span><span class="wwf-brand-tail">TV</span></div>
-          <div class="wwf-subtitle">THE GOLDEN ERA. THE ATTITUDE ERA. THE NEW ERA.</div>
-        </div>
-        <div class="wwf-on-air" role="status"><span class="wwf-status-dot"></span><span id="wwf-status">STANDBY</span><small id="wwf-fans">RINGSIDE</small></div>
-      </div>
-      <div class="wwf-now"><span class="wwf-now-label">NOW SHOWING</span><span id="wwf-track" title="Currently playing">${fallback}</span></div>
-      <nav class="wwf-actions" aria-label="Channel shortcuts">
-        <button type="button" data-wwf="queue">☰ MATCH CARD</button>
-        <button type="button" data-wwf="theme" aria-pressed="false">◈ ERA: ATTITUDE</button>
-        <button type="button" data-wwf="marks" aria-pressed="true" title="Show or hide WWF/WWE background logos">★ LOGOS ON</button>
-        <button type="button" data-wwf="macros" class="wwf-module-action" hidden>☻ MACROS</button>
-        <button type="button" data-wwf="share">↗ SHARE</button>
-      </nav>
-      <div class="wwf-ticker" aria-live="off"><b>RINGSIDE WIRE</b><span id="wwf-ticker-text">${slogans[0]}</span></div>`;
+$(".server-msg-reconnect").text("Welcome to WWF / WWE! Please add wrestling-related videos.");
+$(".server-msg-disconnect").text("Your Connection Is Bad!");
+$("#showmediaurl").text("Add");
+$("#clearplaylist").text("Clear");
+$("#mediarefresh").text("Refresh Media");
+$("#emotelistbtn").text("Macros");
 
-    const navbar = select('nav.navbar');
-    const main = select('#main') || select('#mainpage') || select('#content');
-    if (navbar && navbar.parentNode) navbar.insertAdjacentElement('afterend', header);
-    else if (main && main.parentNode) main.parentNode.insertBefore(header, main);
-    else document.body.insertBefore(header, document.body.firstChild);
+/* click .channel-emote and append to chat input line */ 
+$('#chatwrap').on('click', '.channel-emote', function(e) {
+     e.preventDefault();
 
-    const button = action => select(`[data-wwf="${action}"]`, header);
-    function setTheme(mode) {
-      document.body.classList.toggle('wwf-modern', mode === 'modern');
-      document.body.classList.toggle('wwf-attitude', mode !== 'modern');
-      button('theme').textContent = mode === 'modern' ? '◈ ERA: MODERN' : '◈ ERA: ATTITUDE';
-      button('theme').setAttribute('aria-pressed', String(mode === 'modern'));
-      saveStyle(mode);
-    }
-    setTheme(loadStyle());
-    let marksVisible = true;
-    try { marksVisible = localStorage.getItem(marksKey) !== 'off'; } catch (_) { /* optional */ }
-    function setMarks(visible) {
-      marksVisible = visible;
-      document.body.classList.toggle('wwf-hide-marks', !visible);
-      button('marks').textContent = visible ? '★ LOGOS ON' : '☆ LOGOS OFF';
-      button('marks').setAttribute('aria-pressed', String(visible));
-      try { localStorage.setItem(marksKey, visible ? 'on' : 'off'); } catch (_) { /* optional */ }
-    }
-    setMarks(marksVisible);
-    button('marks').addEventListener('click', () => setMarks(!marksVisible));
+     var $emote = $(this);
+     var $chatline = $('#chatline');
 
-    // Existing WrestleTube controls are the authority; never reimplement their handlers.
-    const moduleControls = { macros: '#emotelistbtn' };
-    function activateExistingControl(action) {
-      const source = select(moduleControls[action]);
-      if (source && !header.contains(source)) source.click();
-    }
-    Object.keys(moduleControls).forEach(action => {
-      button(action).addEventListener('click', () => activateExistingControl(action));
-    });
-    function updateModuleShortcuts() {
-      for (const [action, selector] of Object.entries(moduleControls)) {
-        const nativeButton = select(selector);
-        button(action).hidden = !nativeButton || nativeButton === button(action);
-      }
-    }
-    updateModuleShortcuts();
+     $chatline.val($chatline.val() + $emote.attr('title') + ' ');
+});
 
-    button('theme').addEventListener('click', () => setTheme(document.body.classList.contains('wwf-modern') ? 'attitude' : 'modern'));
-    // Original WrestleTube / Xaekai Extended Layout addon (lazy on first click).
-    // No custom video positioning, body observer, repeated fetch, or fake mode.
-    const addonUrl = 'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_layout.min.js';
-    let cinemaLoad = null;
-    let cinemaLink = null;
-    function getOriginalToggle() {
-      return document.getElementById('cinematoggle') && document.getElementById('cinemaStyle')
-        ? document.getElementById('cinematoggle') : null;
-    }
-    function getLayoutMenu() {
-      return Array.from(document.querySelectorAll('.dropdown-menu')).find(menu =>
-        Array.from(menu.querySelectorAll('a')).some(link =>
-          /^(chat only|remove video)$/i.test(link.textContent.trim())));
-    }
-    function menuLabel() {
-      if (cinemaLink) cinemaLink.textContent =
-        document.body.classList.contains('cinemachat') ? 'Exit Cinema Mode' : 'Cinema Mode';
-    }
-    function installCinemaMenu() {
-      const menu = getLayoutMenu();
-      if (!menu) return;
-      // The Xaekai module also adds a menu item. Only our one interactive
-      // entry should remain, while the original module owns the layout.
-      menu.querySelectorAll('a[onclick*="cinematoggle"]').forEach(link => link.closest('li')?.remove());
-      let link = menu.querySelector('#wwf-layout-cinema');
-      if (link) { cinemaLink = link; menuLabel(); return; }
-      const row = document.createElement('li');
-      row.id = 'wwf-layout-cinema-row';
-      link = document.createElement('a');
-      link.id = 'wwf-layout-cinema';
-      link.href = '#';
-      link.textContent = 'Cinema Mode';
-      link.addEventListener('click', async event => {
-        event.preventDefault();
-        let nativeToggle = getOriginalToggle();
-        if (!nativeToggle) {
-          link.textContent = 'Loading Cinema…';
-          const ready = await ensureCinemaAddon();
-          nativeToggle = ready ? getOriginalToggle() : null;
-        }
-        if (nativeToggle) {
-          nativeToggle.click();
-          menuLabel();
-        } else {
-          link.textContent = 'Cinema unavailable — check content blocker';
-        }
-      });
-      row.appendChild(link);
-      menu.appendChild(row);
-      cinemaLink = link;
-      menuLabel();
-    }
-    function ensureCinemaAddon() {
-      if (getOriginalToggle()) return Promise.resolve(true);
-      if (cinemaLoad) return cinemaLoad;
-      cinemaLoad = new Promise(resolve => {
-        if (!window.jQuery || !window.CLIENT || !window.CHANNEL ||
-            !document.getElementById('videowrap') || !document.getElementById('chatwrap')) {
-          resolve(false); return;
-        }
-        let checks = 0;
-        const check = () => {
-          installCinemaMenu();
-          if (getOriginalToggle()) { resolve(true); return; }
-          if (++checks >= 12) { resolve(false); return; }
-          window.setTimeout(check, 350);
-        };
-        if (window.CLIENT.cinemaMode || document.getElementById('wwf-original-layout-module')) {
-          check(); return;
-        }
-        const script = document.createElement('script');
-        script.id = 'wwf-original-layout-module';
-        script.src = addonUrl;
-        script.async = true;
-        script.addEventListener('load', check, {once:true});
-        script.addEventListener('error', () => {console.warn('[Ringside] Cinema addon blocked or unavailable'); resolve(false);},{once:true});
-        document.head.appendChild(script);
-      });
-      return cinemaLoad;
-    }
-    installCinemaMenu();
-    window.setTimeout(installCinemaMenu, 900);
-    window.setTimeout(installCinemaMenu, 2300);
-    document.addEventListener('click', event => {
-      const t = event.target;
-      if (!(t instanceof Element)) return;
-      const b = t.closest('a,button');
-      if (b && /^layout$/i.test((b.textContent || '').trim())) installCinemaMenu();
-      if (t.closest('#cinematoggle')) menuLabel();
-    });
-    button('share').addEventListener('click', async () => {
-      const url = location.origin + location.pathname;
-      try {
-        if (!navigator.clipboard?.writeText) throw Error('Clipboard unavailable');
-        await navigator.clipboard.writeText(url);
-        showTemporary(button('share'), '✓ COPIED', '↗ SHARE');
-      } catch (_) {
-        window.prompt('Copy channel link:', url);
-      }
-    });
+/* click .username and append to chat input line with a colon */ 
+$('#messagebuffer').on('click', '.username', function(e) {
+     e.preventDefault();
 
-    // Click-to-reveal spoiler filters. No message text is modified by this script.
-    const chat = select('#messagebuffer');
-    if (chat) {
-      chat.addEventListener('click', event => {
-        const spoiler = event.target.closest('.wwf-spoiler');
-        if (!spoiler || !chat.contains(spoiler)) return;
-        spoiler.classList.toggle('wwf-revealed');
-      });
-      chat.addEventListener('keydown', event => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        const spoiler = event.target.closest('.wwf-spoiler');
-        if (spoiler && chat.contains(spoiler)) { event.preventDefault(); spoiler.classList.toggle('wwf-revealed'); }
-      });
-    }
+     var $username = $(this);
+     var $chatline = $('#chatline');
 
-    // Non-destructive text updates. Does not replace the existing channel module loader.
-    function refresh() {
-      if (!header.isConnected) return;
-      const title = nowPlaying();
-      if (title !== lastTitle) {
-        lastTitle = title;
-        select('#wwf-track', header).textContent = title || fallback;
-        select('#wwf-status', header).textContent = title ? 'ON AIR' : 'STANDBY';
-        header.classList.toggle('wwf-playing', Boolean(title));
-      }
-      updateModuleShortcuts();
-      const count = select('#usercount')?.textContent?.trim();
-      select('#wwf-fans', header).textContent = count ? `${count} RINGSIDE` : 'RINGSIDE';
-    }
-    refresh();
-    const refreshTimer = window.setInterval(refresh, 4000);
-    const tickerTimer = window.setInterval(() => {
-      if (!header.isConnected) { window.clearInterval(refreshTimer); window.clearInterval(tickerTimer); return; }
-      select('#wwf-ticker-text', header).textContent = slogans[(++tick) % slogans.length];
-    }, 10000);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true });
-  else mount();
-})();
+     $chatline.val($chatline.val() + $username.text() + ' ');
+});
+  }).call(win);
+  mountEra();
+  return true;
+ }
+ let attempts=0;
+ function boot(){
+  if(mount())return;
+  if(++attempts<=48)win.setTimeout(boot,250);
+  else console.warn('[WWF/WWE] Channel controls unavailable; port did not start.');
+ }
+ if(doc.readyState==='loading')doc.addEventListener('DOMContentLoaded',boot,{once:true});
+ else boot();
+})(window,document);

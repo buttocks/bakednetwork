@@ -1,167 +1,613 @@
-/* Original WrestleTube chat filter effects, copied verbatim as styling baseline. */
-*{font-family:Verdana,sans-serif}.shout{color:#fc0}.well{background:rgba(255,255,255,.225);border-radius:5px;padding:5px}#chatheader,#chatinput,#messagebuffer{background-color:#000!important}div.modal-body,div.modal-footer,div.modal-header{background:rgba(0,0,0,.7);border-radius:5px;padding:5px;border:1px solid #13131c;border-color:#505050}#footer,#wrap,.modal-content,div#nav-collapsible.collapse.navbar-collapse,table{background-color:#000!important;background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:100% auto}.videolist li{background-color:rgba(0,0,0,.79);border:1px solid #13131c;border-color:#505050}#header img{width:80%;height:auto}.pm-panel,.pm-panel-placeholder{min-width:480px}a.qe_title{color:#fcfcf0;font-size:10pt;text-rendering:optimizeLegibility}.qe_blame{float:right;padding-right:3px}.channel-emote[title*=]{transition:1s;-webkit-filter:blur(10px);-moz-filter:blur(10px);-ms-filter:blur(10px);-o-filter:blur(10px);filter:blur(10px)}.channel-emote[title*=]:hover{transition:1s;-webkit-filter:blur(0);-moz-filter:blur(0);-ms-filter:blur(0);-o-filter:blur(0);filter:blur(0)}.channel-emote{max-height:80px}#messagebuffer video{max-width:100%}video.webm{display:inline;vertical-align:middle;max-height:260px}#messagebuffer,#userlist,input.form-control[type=email],input.form-control[type=password],input.form-control[type=text],textarea.form-control{background-color:rgba(0,0,0,.79)!important;border-color:#505050}.greentext{color:#00fff9,-webkit-animation: color-change 6s infinite;-moz-animation:color-change 6s infinite;-o-animation:color-change 6s infinite;-ms-animation:color-change 6s infinite;animation:color-change 6s infinite;font-weight:700}@-webkit-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}90%{color:#00ff85}100%{color:#00ffd2}}@-moz-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}@-ms-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}@-o-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}@keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}.mirror-x,.mirror-y,.tilt-f,.tilt-r{display:inline}.tilt-f img.channel-emote:not([data-spoiled=false]){transform:rotate(-45deg)}.tilt-r img.channel-emote:not([data-spoiled=false]){transform:rotate(45deg)}.mirror-x img:not([data-spoiled=false]){transform:scaleX(-1)}.mirror-y img:not([data-spoiled=false]){transform:scaleY(-1)}.mirror-x .mirror-y img:not([data-spoiled=false]),.mirror-y .mirror-x img:not([data-spoiled=false]){transform:rotate(180deg)}.mirror-x .tilt-f img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-x img.channel-emote:not([data-spoiled=false]){transform:scaleX(-1) rotate(-45deg)}.mirror-y .tilt-f img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-y img.channel-emote:not([data-spoiled=false]){transform:scaleY(-1) rotate(-45deg)}.mirror-x .tilt-r img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-x img.channel-emote:not([data-spoiled=false]){transform:scaleX(-1) rotate(45deg)}.mirror-y .tilt-r img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-y img.channel-emote:not([data-spoiled=false]){transform:scaleY(-1) rotate(45deg)}.mirror-x .mirror-y .tilt-f img.channel-emote:not([data-spoiled=false]),.mirror-x .tilt-f .mirror-y img.channel-emote:not([data-spoiled=false]),.mirror-y .mirror-x .tilt-f img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-x .mirror-y img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-y .mirror-x img.channel-emote:not([data-spoiled=false]){transform:rotate(135deg)}.mirror-x .mirror-y .tilt-r img.channel-emote:not([data-spoiled=false]),.mirror-x .tilt-r .mirror-y img.channel-emote:not([data-spoiled=false]),.mirror-y .mirror-x .tilt-r img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-x .mirror-y img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-y .mirror-x img.channel-emote:not([data-spoiled=false]){transform:rotate(225deg)}.image-blur{transition:1s;-webkit-filter:blur(5px);-moz-filter:blur(5px);-ms-filter:blur(5px);-o-filter:blur(5px);filter:blur(5px)}.image-blur:hover{-webkit-filter:blur(0);-moz-filter:blur(0);-ms-filter:blur(0);-o-filter:blur(0);filter:blur(0)}@-webkit-keyframes anim-shake{0%{-webkit-transform:translate(2px,1px) rotate(0)}10%{-webkit-transform:translate(-1px,-2px) rotate(-1deg)}20%{-webkit-transform:translate(-3px,0) rotate(1deg)}30%{-webkit-transform:translate(0,2px) rotate(0)}40%{-webkit-transform:translate(1px,-1px) rotate(1deg)}50%{-webkit-transform:translate(-1px,2px) rotate(-1deg)}60%{-webkit-transform:translate(-3px,1px) rotate(0)}70%{-webkit-transform:translate(2px,1px) rotate(-1deg)}80%{-webkit-transform:translate(-1px,-1px) rotate(1deg)}90%{-webkit-transform:translate(2px,2px) rotate(0)}100%{-webkit-transform:translate(1px,-2px) rotate(-1deg)}}@keyframes anim-shake{0%{transform:translate(2px,1px) rotate(0)}10%{transform:translate(-1px,-2px) rotate(-1deg)}20%{transform:translate(-3px,0) rotate(1deg)}30%{transform:translate(0,2px) rotate(0)}40%{transform:translate(1px,-1px) rotate(1deg)}50%{transform:translate(-1px,2px) rotate(-1deg)}60%{transform:translate(-3px,1px) rotate(0)}70%{transform:translate(2px,1px) rotate(-1deg)}80%{transform:translate(-1px,-1px) rotate(1deg)}90%{transform:translate(2px,2px) rotate(0)}100%{transform:translate(1px,-2px) rotate(-1deg)}}.image-shake{display:inline-block;-webkit-animation-name:anim-shake;-webkit-animation-duration:.8s;-webkit-transform-origin:50% 50%;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;animation-name:anim-shake;animation-duration:.8s;transform-origin:50% 50%;animation-iteration-count:infinite;animation-timing-function:linear}#header{-moz-animation:headerAnim 0s ease-in 5s forwards;-webkit-animation:headerAnim 0s ease-in 5s forwards;-o-animation:headerAnim 0s ease-in 5s forwards;animation:headerAnim 0s ease-in 5s forwards;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}@keyframes headerAnim{to{width:0;height:0;overflow:hidden}}@-webkit-keyframes headerAnim{to{width:0;height:0;visibility:hidden}}@keyframes spunning{from{transform:rotatey(0)}to{transform:rotatey(360deg)}}.spun .channel-emote{animation-name:spunning;animation-duration:1.5s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}.left{text-align:center;display:inline-block;width:45%}.right{text-align:center;display:inline-block;width:45%}.spoiler{background:url(https://i.imgur.com/OHGKC0k.png) repeat scroll 0 0 #111118;color:transparent}.spoiler:hover{background-image:url(../images/spoilers.png);color:#fff}.nick-hover>.spoiler{background-color:#111118}#shuffleplaylist{display:none}.home{display:none}#qlockbtn{display:none}#clearplaylist{display:none}.channel-emote:hover{width:auto;height:auto;max-width:200px!important;max-height:120px!important;transition:2s}.inline{display:inline-block}.bounce.fast:first-child,.marquee.fast:first-child,.morph.fast:first-child,.rainbow.fast:first-child,.spin.fast img{-webkit-animation-duration:5s}.bounce.faster:first-child,.marquee.faster:first-child,.morph.faster:first-child,.rainbow.faster:first-child,.spin.faster img{-webkit-animation-duration:3s}.bounce.fastest:first-child,.marquee.fastest:first-child,.morph.fastest:first-child,.rainbow.fastest:first-child,.spin.fastest img{-webkit-animation-duration:1s}.bounce.reverse:first-child,.marquee.reverse:first-child,.rainbow.reverse:first-child,.spin.reverse img{-webkit-animation-direction:reverse}.bounce,.marquee{width:100%;position:relative;overflow:hidden;display:flex}.spin img{-webkit-animation-name:rotate;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}.bounce.slow:first-child,.marquee.slow:first-child,.morph.slow:first-child,.rainbow.slow:first-child,.spin.slow img{-webkit-animation-duration:30s}.bounce.slower:first-child,.marquee.slower:first-child,.morph.slower:first-child,.rainbow.slower:first-child,.spin.slower img{-webkit-animation-duration:45s}.bounce.slowest:first-child,.marquee.slowest:first-child,.morph.slowest:first-child,.rainbow.slowest:first-child,.spin.slowest img{-webkit-animation-duration:60s}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0)}to{-webkit-transform:rotate(360deg)}}@-webkit-keyframes marquee{from{left:calc(100% + 200px)}to{left:-200px}}.marquee:first-child{position:relative;-webkit-animation-name:marquee;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}@-webkit-keyframes bounce{0%,100%{left:100%}50%{left:0}}.bounce:first-child{position:relative;-webkit-animation-name:bounce;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}.rainbow{-webkit-animation-name:rainbow;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}@-webkit-keyframes rainbow{0%,100%{filter:hue-rotate(0)}50%{filter:hue-rotate(360deg)}}.moneyshot{z-index:1;position:relative;display:inline-block}.moneyshot:before{content:"";background-image:url(https://i.imgur.com/wfJZkpg.gif);width:100%;height:100%;position:absolute;z-index:100;background-size:cover}.moneyshot .channel-emote{position:relative;z-index:10}.car:before{content:"";background-image:url(https://i.imgur.com/Uuif8Px.png);width:200px;height:100px;position:absolute;z-index:100;background-size:cover;bottom:0;left:calc(50% - 120px)}.car{position:relative;display:flex;padding-bottom:65px;justify-content:center;min-width:230px}.train:before{content:"";background-image:url(https://i.imgur.com/HsnQEfl.png);width:200px;height:100px;position:absolute;z-index:100;background-size:cover;bottom:0;left:calc(50% - 120px)}.train{position:relative;display:flex;padding-bottom:65px;justify-content:center;min-width:230px}.morph{display:inline-block;min-height:96px;min-width:96px;position:relative;vertical-align:middle}.morph .morph-1,.morph .morph-2{position:absolute;left:0;top:0;height:96px;width:96px!important;display:inline-block}.morph img{height:96px;width:96px!important;display:inline-block;position:absolute}.morph .morph-1{z-index:10;-webkit-animation-name:morph-1;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite}.morph .morph-2{z-index:5;-webkit-animation-name:morph-2;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite}@-webkit-keyframes morph-1{0%,100%{opacity:1}50%{opacity:0}}@-webkit-keyframes morph-2{0%,100%{opacity:0}50%{opacity:1}}.breaking-news{background-image:url(https://i.imgur.com/r4xuKW1.png);width:600px;height:338px;position:relative}.breaking-news .breaking-news-header{text-transform:uppercase;font-family:sans-serif;font-weight:bolder;position:absolute;padding:.5rem;color:#fff;background-color:orange;left:25px;top:227px;font-size:18px}.breaking-news .breaking-news-story{text-transform:uppercase;font-family:sans-serif;font-weight:bolder;position:absolute;padding:.5rem;color:#000;background-color:#fff;left:25px;top:263px;width:546px;max-height:3.6em;overflow:hidden}.breaking-news .breaking-news-image-wrapper{position:absolute;top:36px;left:306px;width:265px;height:225px;font-size:0}.breaking-news .breaking-news-image-wrapper img{object-fit:cover;width:100%;height:100%;max-width:unset;max-height:unset}.tv-wrapper{display:inline-block;vertical-align:middle;position:relative;width:120px;height:80px;z-index:1}.tv-wrapper .tv{width:120px;height:80px;position:absolute;left:0;top:0;background-size:cover;z-index:0}.tv-wrapper .tv-image-wrapper{position:absolute;z-index:-1;font-size:0;width:68px;height:45px;left:49px}.tv-wrapper .tv-image-wrapper :first-child{object-fit:cover;height:100%;width:100%;max-height:unset;max-width:unset}.tv.remote-hand{background-image:url(https://i.imgur.com/3JHxblm.png)}.tv.emotional-reach{background-image:url(https://i.imgur.com/tL3JoLx.png)}.tv.raptured-in-yellow-socks{background-image:url(https://i.imgur.com/l89KVJ5.png)}#messagebuffer div[class*=chat-msg-]{overflow:hidden}.chat-msg-Gallios .username,.userlist-Gallios{color:#02b8cc!important}.userlist-Gallios:before{content:"";display:block;width:16px;height:16px;float:left;background:url(https://i.imgur.com/O10q7DI.png) no-repeat;background-size:cover}.chat-msg-Gallixos .timestamp{display:none}.chat-msg-Mami .username,.userlist-Mami{color:#5015bd!important}.spoiler a{background:url(https://i.imgur.com/OHGKC0k.png) repeat scroll 0 0 #111118!important;color:transparent!important}.spoiler:hover a{background-image:url("")!important;color:#fff!important}.nah{z-index:1;position:relative;display:inline-block}.nah:before{content:"";background-image:url(https://imgur.com/ui2UQjn.gif);width:100%;height:100%;position:absolute;display:flex;z-index:100;background-repeat:no-repeat;background-position:bottom right}.nah .channel-emote{position:relative;z-index:10}.cancelled{z-index:1;position:relative;display:inline-block}.cancelled:before{content:"";background-image:url(https://i.imgur.com/ehx3mhH.png);width:100%;height:100%;min-width:114px;position:absolute;display:flex;z-index:100;background-repeat:no-repeat;background-position:center}.cancelled .channel-emote{position:relative;z-index:10;overflow:visible}.cozy:before{content:"";background-image:url(https://i.imgur.com/kfGgwKh.png);width:240px;height:80px;position:absolute;z-index:100;background-size:cover;bottom:0;left:calc(50% - 120px)}.cozy{position:relative;display:flex;padding-bottom:65px;justify-content:center;min-width:230px}.marks img{width:75%;height:auto}.qe_blame{float:right;display:none}#scroll-btn{position:absolute;left:-30px}.chat-msg-server{display:none}#viewport{height:100vh;width:100vw;position:fixed;top:0;left:0;pointer-events:none;z-index:9999}#viewport #bouncy_logo{position:absolute;width:5%}
+*{font-family:Verdana,sans-serif}.shout{color:#fc0}.well{background:rgba(255,255,255,.225);border-radius:5px;padding:5px}#chatheader,#chatinput,#messagebuffer{background-color:#000!important}div.modal-body,div.modal-footer,div.modal-header{background:rgba(0,0,0,.7);border-radius:5px;padding:5px;border:1px solid #13131c;border-color:#505050}#footer,#wrap,.modal-content,div#nav-collapsible.collapse.navbar-collapse,table{background-color:#000!important;background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:100% auto}.videolist li{background-color:rgba(0,0,0,.79);border:1px solid #13131c;border-color:#505050}#header img{width:80%;height:auto}.pm-panel,.pm-panel-placeholder{min-width:480px}a.qe_title{color:#fcfcf0;font-size:10pt;text-rendering:optimizeLegibility}.qe_blame{float:right;padding-right:3px}.channel-emote[title*=]{transition:1s;-webkit-filter:blur(10px);-moz-filter:blur(10px);-ms-filter:blur(10px);-o-filter:blur(10px);filter:blur(10px)}.channel-emote[title*=]:hover{transition:1s;-webkit-filter:blur(0);-moz-filter:blur(0);-ms-filter:blur(0);-o-filter:blur(0);filter:blur(0)}.channel-emote{max-height:80px}#messagebuffer video{max-width:100%}video.webm{display:inline;vertical-align:middle;max-height:260px}#messagebuffer,#userlist,input.form-control[type=email],input.form-control[type=password],input.form-control[type=text],textarea.form-control{background-color:rgba(0,0,0,.79)!important;border-color:#505050}.greentext{color:#00fff9,-webkit-animation: color-change 6s infinite;-moz-animation:color-change 6s infinite;-o-animation:color-change 6s infinite;-ms-animation:color-change 6s infinite;animation:color-change 6s infinite;font-weight:700}@-webkit-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}90%{color:#00ff85}100%{color:#00ffd2}}@-moz-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}@-ms-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}@-o-keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}@keyframes color-change{10%{color:#00fff9}20%{color:#032eff}30%{color:#bd03ff}40%{color:#ff1f1f}50%{color:#ffa700}60%{color:#fdff00}70%{color:#56ff00}80%{color:#00ce2d}}.mirror-x,.mirror-y,.tilt-f,.tilt-r{display:inline}.tilt-f img.channel-emote:not([data-spoiled=false]){transform:rotate(-45deg)}.tilt-r img.channel-emote:not([data-spoiled=false]){transform:rotate(45deg)}.mirror-x img:not([data-spoiled=false]){transform:scaleX(-1)}.mirror-y img:not([data-spoiled=false]){transform:scaleY(-1)}.mirror-x .mirror-y img:not([data-spoiled=false]),.mirror-y .mirror-x img:not([data-spoiled=false]){transform:rotate(180deg)}.mirror-x .tilt-f img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-x img.channel-emote:not([data-spoiled=false]){transform:scaleX(-1) rotate(-45deg)}.mirror-y .tilt-f img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-y img.channel-emote:not([data-spoiled=false]){transform:scaleY(-1) rotate(-45deg)}.mirror-x .tilt-r img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-x img.channel-emote:not([data-spoiled=false]){transform:scaleX(-1) rotate(45deg)}.mirror-y .tilt-r img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-y img.channel-emote:not([data-spoiled=false]){transform:scaleY(-1) rotate(45deg)}.mirror-x .mirror-y .tilt-f img.channel-emote:not([data-spoiled=false]),.mirror-x .tilt-f .mirror-y img.channel-emote:not([data-spoiled=false]),.mirror-y .mirror-x .tilt-f img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-x .mirror-y img.channel-emote:not([data-spoiled=false]),.tilt-f .mirror-y .mirror-x img.channel-emote:not([data-spoiled=false]){transform:rotate(135deg)}.mirror-x .mirror-y .tilt-r img.channel-emote:not([data-spoiled=false]),.mirror-x .tilt-r .mirror-y img.channel-emote:not([data-spoiled=false]),.mirror-y .mirror-x .tilt-r img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-x .mirror-y img.channel-emote:not([data-spoiled=false]),.tilt-r .mirror-y .mirror-x img.channel-emote:not([data-spoiled=false]){transform:rotate(225deg)}.image-blur{transition:1s;-webkit-filter:blur(5px);-moz-filter:blur(5px);-ms-filter:blur(5px);-o-filter:blur(5px);filter:blur(5px)}.image-blur:hover{-webkit-filter:blur(0);-moz-filter:blur(0);-ms-filter:blur(0);-o-filter:blur(0);filter:blur(0)}@-webkit-keyframes anim-shake{0%{-webkit-transform:translate(2px,1px) rotate(0)}10%{-webkit-transform:translate(-1px,-2px) rotate(-1deg)}20%{-webkit-transform:translate(-3px,0) rotate(1deg)}30%{-webkit-transform:translate(0,2px) rotate(0)}40%{-webkit-transform:translate(1px,-1px) rotate(1deg)}50%{-webkit-transform:translate(-1px,2px) rotate(-1deg)}60%{-webkit-transform:translate(-3px,1px) rotate(0)}70%{-webkit-transform:translate(2px,1px) rotate(-1deg)}80%{-webkit-transform:translate(-1px,-1px) rotate(1deg)}90%{-webkit-transform:translate(2px,2px) rotate(0)}100%{-webkit-transform:translate(1px,-2px) rotate(-1deg)}}@keyframes anim-shake{0%{transform:translate(2px,1px) rotate(0)}10%{transform:translate(-1px,-2px) rotate(-1deg)}20%{transform:translate(-3px,0) rotate(1deg)}30%{transform:translate(0,2px) rotate(0)}40%{transform:translate(1px,-1px) rotate(1deg)}50%{transform:translate(-1px,2px) rotate(-1deg)}60%{transform:translate(-3px,1px) rotate(0)}70%{transform:translate(2px,1px) rotate(-1deg)}80%{transform:translate(-1px,-1px) rotate(1deg)}90%{transform:translate(2px,2px) rotate(0)}100%{transform:translate(1px,-2px) rotate(-1deg)}}.image-shake{display:inline-block;-webkit-animation-name:anim-shake;-webkit-animation-duration:.8s;-webkit-transform-origin:50% 50%;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;animation-name:anim-shake;animation-duration:.8s;transform-origin:50% 50%;animation-iteration-count:infinite;animation-timing-function:linear}#header{-moz-animation:headerAnim 0s ease-in 5s forwards;-webkit-animation:headerAnim 0s ease-in 5s forwards;-o-animation:headerAnim 0s ease-in 5s forwards;animation:headerAnim 0s ease-in 5s forwards;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards}@keyframes headerAnim{to{width:0;height:0;overflow:hidden}}@-webkit-keyframes headerAnim{to{width:0;height:0;visibility:hidden}}@keyframes spunning{from{transform:rotatey(0)}to{transform:rotatey(360deg)}}.spun .channel-emote{animation-name:spunning;animation-duration:1.5s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}.left{text-align:center;display:inline-block;width:45%}.right{text-align:center;display:inline-block;width:45%}.spoiler{background:url(https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png) repeat scroll 0 0 #111118;color:transparent}.spoiler:hover{background-image:none;color:#fff}.nick-hover>.spoiler{background-color:#111118}#shuffleplaylist{display:none}.home{display:none}#qlockbtn{display:none}#clearplaylist{display:none}.channel-emote:hover{width:auto;height:auto;max-width:200px!important;max-height:120px!important;transition:2s}.inline{display:inline-block}.bounce.fast:first-child,.marquee.fast:first-child,.morph.fast:first-child,.rainbow.fast:first-child,.spin.fast img{-webkit-animation-duration:5s}.bounce.faster:first-child,.marquee.faster:first-child,.morph.faster:first-child,.rainbow.faster:first-child,.spin.faster img{-webkit-animation-duration:3s}.bounce.fastest:first-child,.marquee.fastest:first-child,.morph.fastest:first-child,.rainbow.fastest:first-child,.spin.fastest img{-webkit-animation-duration:1s}.bounce.reverse:first-child,.marquee.reverse:first-child,.rainbow.reverse:first-child,.spin.reverse img{-webkit-animation-direction:reverse}.bounce,.marquee{width:100%;position:relative;overflow:hidden;display:flex}.spin img{-webkit-animation-name:rotate;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}.bounce.slow:first-child,.marquee.slow:first-child,.morph.slow:first-child,.rainbow.slow:first-child,.spin.slow img{-webkit-animation-duration:30s}.bounce.slower:first-child,.marquee.slower:first-child,.morph.slower:first-child,.rainbow.slower:first-child,.spin.slower img{-webkit-animation-duration:45s}.bounce.slowest:first-child,.marquee.slowest:first-child,.morph.slowest:first-child,.rainbow.slowest:first-child,.spin.slowest img{-webkit-animation-duration:60s}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0)}to{-webkit-transform:rotate(360deg)}}@-webkit-keyframes marquee{from{left:calc(100% + 200px)}to{left:-200px}}.marquee:first-child{position:relative;-webkit-animation-name:marquee;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}@-webkit-keyframes bounce{0%,100%{left:100%}50%{left:0}}.bounce:first-child{position:relative;-webkit-animation-name:bounce;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}.rainbow{-webkit-animation-name:rainbow;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear}@-webkit-keyframes rainbow{0%,100%{filter:hue-rotate(0)}50%{filter:hue-rotate(360deg)}}.moneyshot{z-index:1;position:relative;display:inline-block}.moneyshot:before{content:"";background-image:url(https://i.imgur.com/wfJZkpg.gif);width:100%;height:100%;position:absolute;z-index:100;background-size:cover}.moneyshot .channel-emote{position:relative;z-index:10}.car:before{content:"";background-image:url(https://i.imgur.com/Uuif8Px.png);width:200px;height:100px;position:absolute;z-index:100;background-size:cover;bottom:0;left:calc(50% - 120px)}.car{position:relative;display:flex;padding-bottom:65px;justify-content:center;min-width:230px}.train:before{content:"";background-image:url(https://i.imgur.com/HsnQEfl.png);width:200px;height:100px;position:absolute;z-index:100;background-size:cover;bottom:0;left:calc(50% - 120px)}.train{position:relative;display:flex;padding-bottom:65px;justify-content:center;min-width:230px}.morph{display:inline-block;min-height:96px;min-width:96px;position:relative;vertical-align:middle}.morph .morph-1,.morph .morph-2{position:absolute;left:0;top:0;height:96px;width:96px!important;display:inline-block}.morph img{height:96px;width:96px!important;display:inline-block;position:absolute}.morph .morph-1{z-index:10;-webkit-animation-name:morph-1;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite}.morph .morph-2{z-index:5;-webkit-animation-name:morph-2;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite}@-webkit-keyframes morph-1{0%,100%{opacity:1}50%{opacity:0}}@-webkit-keyframes morph-2{0%,100%{opacity:0}50%{opacity:1}}.breaking-news{background-image:url(https://i.imgur.com/r4xuKW1.png);width:600px;height:338px;position:relative}.breaking-news .breaking-news-header{text-transform:uppercase;font-family:sans-serif;font-weight:bolder;position:absolute;padding:.5rem;color:#fff;background-color:orange;left:25px;top:227px;font-size:18px}.breaking-news .breaking-news-story{text-transform:uppercase;font-family:sans-serif;font-weight:bolder;position:absolute;padding:.5rem;color:#000;background-color:#fff;left:25px;top:263px;width:546px;max-height:3.6em;overflow:hidden}.breaking-news .breaking-news-image-wrapper{position:absolute;top:36px;left:306px;width:265px;height:225px;font-size:0}.breaking-news .breaking-news-image-wrapper img{object-fit:cover;width:100%;height:100%;max-width:unset;max-height:unset}.tv-wrapper{display:inline-block;vertical-align:middle;position:relative;width:120px;height:80px;z-index:1}.tv-wrapper .tv{width:120px;height:80px;position:absolute;left:0;top:0;background-size:cover;z-index:0}.tv-wrapper .tv-image-wrapper{position:absolute;z-index:-1;font-size:0;width:68px;height:45px;left:49px}.tv-wrapper .tv-image-wrapper :first-child{object-fit:cover;height:100%;width:100%;max-height:unset;max-width:unset}.tv.remote-hand{background-image:url(https://i.imgur.com/3JHxblm.png)}.tv.emotional-reach{background-image:url(https://i.imgur.com/tL3JoLx.png)}.tv.raptured-in-yellow-socks{background-image:url(https://i.imgur.com/l89KVJ5.png)}#messagebuffer div[class*=chat-msg-]{overflow:hidden}.chat-msg-Gallios .username,.userlist-Gallios{color:#02b8cc!important}.userlist-Gallios:before{content:"";display:block;width:16px;height:16px;float:left;background:url(https://i.imgur.com/O10q7DI.png) no-repeat;background-size:cover}.chat-msg-Gallixos .timestamp{display:none}.chat-msg-Mami .username,.userlist-Mami{color:#5015bd!important}.spoiler a{background:url(https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png) repeat scroll 0 0 #111118!important;color:transparent!important}.spoiler:hover a{background-image:none!important;color:#fff!important}.nah{z-index:1;position:relative;display:inline-block}.nah:before{content:"";background-image:url(https://imgur.com/ui2UQjn.gif);width:100%;height:100%;position:absolute;display:flex;z-index:100;background-repeat:no-repeat;background-position:bottom right}.nah .channel-emote{position:relative;z-index:10}.cancelled{z-index:1;position:relative;display:inline-block}.cancelled:before{content:"";background-image:url(https://i.imgur.com/ehx3mhH.png);width:100%;height:100%;min-width:114px;position:absolute;display:flex;z-index:100;background-repeat:no-repeat;background-position:center}.cancelled .channel-emote{position:relative;z-index:10;overflow:visible}.cozy:before{content:"";background-image:url(https://i.imgur.com/kfGgwKh.png);width:240px;height:80px;position:absolute;z-index:100;background-size:cover;bottom:0;left:calc(50% - 120px)}.cozy{position:relative;display:flex;padding-bottom:65px;justify-content:center;min-width:230px}.marks img{width:75%;height:auto}.qe_blame{float:right;display:none}#scroll-btn{position:absolute;left:-30px}.chat-msg-server{display:none}#viewport{height:100vh;width:100vw;position:fixed;top:0;left:0;pointer-events:none;z-index:9999}#viewport #bouncy_logo{position:absolute;width:5%}
 
-/* New WWE / WWF arena styling overrides start here. */
-/* WWE / WWF Ringside — Baked.live channel skin v1.2
-   Black / red / gold Attitude default; switch to modern graphite / electric-red.
-   Compatible with the accompanying skin.js and filters.json.
-*/
-:root {
-  --wwf-bg:#0e0d10; --wwf-panel:#1a181b; --wwf-panel2:#272127;
-  --wwf-red:#bc1c2c; --wwf-red2:#ef4a54; --wwf-gold:#e7bc64;
-  --wwf-text:#f6eee5; --wwf-muted:#b6a8a0; --wwf-stroke:#644142;
-  --wwf-glow:rgba(188,28,44,.32);
+.plat {
+    background: url(https://i.imgur.com/pWLTAID.gif);
+    background-size: 100%;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    font-size: 110%;
+    font-weight: bold;
+    text-shadow: -2px -2px 10px #d2d2d2, -2px -2px 10px #d2d2d2;
 }
-body.wwf-modern {
-  --wwf-bg:#0a0c11; --wwf-panel:#161b24; --wwf-panel2:#222a36;
-  --wwf-red:#ea263e; --wwf-red2:#ff596a; --wwf-gold:#dfe3eb;
-  --wwf-text:#f4f6fa; --wwf-muted:#b1bac7; --wwf-stroke:#536070;
-  --wwf-glow:rgba(234,38,62,.29);
+
+.gold {
+    background: url(https://i.imgur.com/pWLTAID.gif);
+    background-size: 100%;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    font-size: 110%;
+    font-weight: bold;
+    text-shadow: -2px -2px 10px #d2d2d2, -2px -2px 10px #d2d2d2;
 }
+
+.silver {
+    background: url(https://i.imgur.com/pWLTAID.gif);
+    background-size: 100%;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    font-size: 110%;
+    font-weight: bold;
+    text-shadow: -2px -2px 10px #d2d2d2, -2px -2px 10px #d2d2d2;
+}
+
+.head2 {
+text-align:center;
+}
+
+/* Wrestling CSS file 6.21.2021 */
+* {
+font-family: Verdana, sans-serif;
+}
+
+.shout { color: #FFCC00; }
+
+/* Style and Color Settings */
+
+a.qe_title {
+   color: #fcfcf0;
+   font-size: 10pt;
+   text-rendering: optimizeLegibility;
+}
+
+.qe_blame {
+   float: right;
+   padding-right: 3px;
+}
+.channel-emote[title*=] {
+  transition: 1s;
+    -webkit-filter: blur(10px);
+    -moz-filter:    blur(10px);
+    -ms-filter:     blur(10px); 
+    -o-filter:      blur(10px); 
+    filter:         blur(10px);
+}
+
+.channel-emote[title*=]:hover {
+  transition: 1s;
+    -webkit-filter: blur(0px);
+    -moz-filter:    blur(0px);
+    -ms-filter:     blur(0px); 
+    -o-filter:      blur(0px); 
+    filter:         blur(0px);
+}
+.channel-emote {
+    max-height:80px;
+}
+
+#messagebuffer video { max-width: 100%; }
+video.webm {
+    display: inline;
+    vertical-align: middle;
+    max-height: 260px;
+}
+
+input.form-control[type="text"], input.form-control[type="password"], input.form-control[type="email"], textarea.form-control, #messagebuffer, #userlist {
+    background-color: rgba(0, 0, 0, 0.79)!important;
+    border-color: #505050;
+}
+
+
+
+
+/* Other CSS Graphics and Tricks and Such */
+
+.greentext {
+    color:#00fff9, -webkit-animation: color-change 6s infinite;
+    -moz-animation: color-change 6s infinite;
+    -o-animation: color-change 6s infinite;
+    -ms-animation: color-change 6s infinite;
+    animation: color-change 6s infinite;
+    font-weight:700;
+}
+
+@-webkit-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+     90% { color: #00ff85 }
+     100% { color: #00ffd2 }
+     
+         
+}
+@-moz-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+
+}
+@-ms-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+}
+@-o-keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }
+}
+@keyframes color-change {
+     10% { color: #00fff9 }
+     20% { color: #032eff }
+     30% { color: #bd03ff }
+     40% { color: #ff1f1f }
+     50% { color: #ffa700 }
+     60% { color: #fdff00 }
+     70% { color: #56ff00 }
+     80% { color: #00ce2d }   
+}
+
+.tilt-f,
+.tilt-r,
+.mirror-x,
+.mirror-y { display: inline; }
+
+.tilt-f img.channel-emote:not([data-spoiled="false"]) { transform: rotate(-45deg); }
+.tilt-r img.channel-emote:not([data-spoiled="false"]) { transform: rotate( 45deg); }
+
+.mirror-x img:not([data-spoiled="false"]) { transform: scaleX(-1); }
+.mirror-y img:not([data-spoiled="false"]) { transform: scaleY(-1); }
+
+.mirror-y .mirror-x img:not([data-spoiled="false"]) , 
+.mirror-x .mirror-y img:not([data-spoiled="false"]) { transform: rotate(180deg); }
+
+.mirror-x .tilt-f img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-f .mirror-x img.channel-emote:not([data-spoiled="false"]) { transform: scaleX(-1) rotate(-45deg); }
+
+.mirror-y .tilt-f img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-f .mirror-y img.channel-emote:not([data-spoiled="false"]) { transform: scaleY(-1) rotate(-45deg); }
+
+.mirror-x .tilt-r img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-r .mirror-x img.channel-emote:not([data-spoiled="false"]) { transform: scaleX(-1) rotate( 45deg); }
+
+.mirror-y .tilt-r img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-r .mirror-y img.channel-emote:not([data-spoiled="false"]) { transform: scaleY(-1) rotate( 45deg); }
+
+.tilt-f .mirror-y .mirror-x img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-f .mirror-x .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-f .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-f .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-y .mirror-x .tilt-f img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .mirror-y .tilt-f img.channel-emote:not([data-spoiled="false"]) { transform: rotate(135deg); }
+
+.tilt-r .mirror-y .mirror-x img.channel-emote:not([data-spoiled="false"]) , 
+.tilt-r .mirror-x .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-r .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .tilt-r .mirror-y img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-y .mirror-x .tilt-r img.channel-emote:not([data-spoiled="false"]) , 
+.mirror-x .mirror-y .tilt-r img.channel-emote:not([data-spoiled="false"])  { transform: rotate(225deg); }
+
+
+.image-blur {
+  transition: 1s;
+    -webkit-filter: blur(5px);
+    -moz-filter:    blur(5px);
+    -ms-filter:     blur(5px); 
+    -o-filter:      blur(5px); 
+    filter:         blur(5px);
+}
+
+.image-blur:hover {
+    -webkit-filter: blur(0px);
+    -moz-filter:    blur(0px);
+    -ms-filter:     blur(0px); 
+    -o-filter:      blur(0px); 
+    filter:         blur(0px);
+}
+
+@-webkit-keyframes anim-shake {
+    0%   { -webkit-transform: translate( 2px,  1px) rotate( 0deg); }
+    10%  { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20%  { -webkit-transform: translate(-3px,  0px) rotate( 1deg); }
+    30%  { -webkit-transform: translate( 0px,  2px) rotate( 0deg); }
+    40%  { -webkit-transform: translate( 1px, -1px) rotate( 1deg); }
+    50%  { -webkit-transform: translate(-1px,  2px) rotate(-1deg); }
+    60%  { -webkit-transform: translate(-3px,  1px) rotate( 0deg); }
+    70%  { -webkit-transform: translate( 2px,  1px) rotate(-1deg); }
+    80%  { -webkit-transform: translate(-1px, -1px) rotate( 1deg); }
+    90%  { -webkit-transform: translate( 2px,  2px) rotate( 0deg); }
+    100% { -webkit-transform: translate( 1px, -2px) rotate(-1deg); }
+}
+
+
+@keyframes anim-shake {
+    0%   { transform: translate( 2px,  1px) rotate( 0deg); }
+    10%  { transform: translate(-1px, -2px) rotate(-1deg); }
+    20%  { transform: translate(-3px,  0px) rotate( 1deg); }
+    30%  { transform: translate( 0px,  2px) rotate( 0deg); }
+    40%  { transform: translate( 1px, -1px) rotate( 1deg); }
+    50%  { transform: translate(-1px,  2px) rotate(-1deg); }
+    60%  { transform: translate(-3px,  1px) rotate( 0deg); }
+    70%  { transform: translate( 2px,  1px) rotate(-1deg); }
+    80%  { transform: translate(-1px, -1px) rotate( 1deg); }
+    90%  { transform: translate( 2px,  2px) rotate( 0deg); }
+    100% { transform: translate( 1px, -2px) rotate(-1deg); }
+}
+
+.image-shake {
+    display: inline-block;
+    -webkit-animation-name: anim-shake;
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-name: anim-shake;
+    animation-duration: 0.8s;
+    transform-origin: 50% 50%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+
+#header {
+    -moz-animation: headerAnim 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: headerAnim 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: headerAnim 0s ease-in 5s forwards;
+    /* Opera */
+    animation: headerAnim 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes headerAnim {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes headerAnim {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}
+
+@keyframes spunning {
+    from { transform: rotatey(0deg) }
+    to { transform: rotatey(360deg) }
+  }
+  .spun .channel-emote {
+    animation-name: spunning;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    /* linear | ease | ease-in | ease-out | ease-in-out */
+    animation-timing-function: ease-in-out;
+}
+
+.left {
+    text-align:center;
+    display:inline-block;
+    width:45%;
+}
+
+.right {
+    text-align:center;
+    display:inline-block;
+    width:45%;
+}
+
+.spoiler {
+    background: url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png") repeat scroll 0 0 #111118;
+    color: transparent;
+}
+ 
+.spoiler:hover {
+    background-image: none;
+    color: #FFFFFF;
+}
+ 
+.nick-hover > .spoiler {
+    background-color: #111118;
+}
+
+/* Hidden Buttons */
+
+#shuffleplaylist {
+    display: none;
+}
+
+.home {
+    display: none;
+}
+
+#qlockbtn {
+    display: none;
+}
+
+#clearplaylist {
+    display: none;
+}
+
+/*.channel-emote {
+max-width:999999px;
+max-height:999999px;
+width: 75px;
+//height: 35;
+-webkit-transform: rotate(36000deg);
+transition: width 3s, height 3s, transform 3s;
+}*/
+
+.channel-emote:hover {
+    width: auto;
+    height: auto;
+    max-width: 200px!important;
+    max-height: 120px!important;
+    transition: 2s;
+}
+
+/*
+HTML, BODY {TEXT-TRANSFORM: UPPERCASE;}
+ deathmatch mode
+
+div.linewrap div, .userlist_item, #usercount, #videowrap-header, #customSettingsModalTrigger, #newpollbtn, #emotelistbtn, #plcontrol, #showsearch, #showcustomembed, #mediarefresh , .qe_title, .qe_blame, .nav {
+    text-shadow:0px 3px 2px red, 0px 5px 5px red, 0px 10px 5px red, 0px 15px 5px red, 0px 17px 7px red;
+}  
+
+body, .btn {
+text-transform: uppercase !important;
+} */
+
+
+
+/*
+ * Fix for the scroll bar on user messages
+ */
+
+#messagebuffer div[class*="chat-msg-"] {
+     overflow: hidden;
+}
+
+/* Viola */
+.userlist-Mami,
+.chat-msg-Mami .username { color: rgb(80, 21, 189) !important; }
+
+/* Keatingfish */
+/* Keatingfish */
+/* --- Vaporwave Base Styles --- */
+.userlist-Keatingfish, 
+#useritem-Keatingfish .linewrap strong, 
+.chat-msg-Keatingfish .username {
+    color: #00ffff !important; 
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 15px;
+    z-index: 5;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    animation: vapor-timing-cycle 5s infinite linear;
+}
+
+.chat-msg-Keatingfish .timestamp { display: none; }
+
+/* --- THE PINK OVERTAKE (High Z-Index) --- */
+.userlist-Keatingfish::before,
+#useritem-Keatingfish .linewrap strong::before,
+.chat-msg-Keatingfish .username::before {
+    content: "Keatingfish"; 
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    color: #ff00ff; 
+    z-index: 10; /* Sits on top of the Blue */
+    opacity: 0;
+    animation: pink-overtake 5s infinite linear;
+}
+
+/* --- THE WHITE FLASH --- */
+.userlist-Keatingfish::after,
+#useritem-Keatingfish .linewrap strong::after,
+.chat-msg-Keatingfish .username::after {
+    content: "Keatingfish";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    color: #ffffff; 
+    z-index: 11;
+    opacity: 0;
+    mix-blend-mode: overlay;
+    animation: white-timing-shred 5s infinite linear;
+}
+
+/* --- THE PHYSICS --- */
+
+@keyframes vapor-timing-cycle {
+    0%, 20% { transform: translate(0) scale(1) skew(0); filter: brightness(1); opacity: 1; }
+    /* Middle Burst */
+    22% { transform: translate(-8px, 1px); filter: brightness(1.5); }
+    28% { transform: translate(8px, -1px) skewX(8deg); }
+    35% { transform: translate(-4px, 0); filter: contrast(2); }
+    44% { transform: translate(0) scale(1); }
+    45%, 80% { transform: translate(0); opacity: 1; }
+    /* End Collapse */
+    82% { transform: scaleY(0.5) translateY(10px) translateX(-5px); filter: brightness(2); }
+    88% { transform: scaleY(1.8) skewX(-15deg) translateX(5px); }
+    94% { transform: scaleY(0.1) scaleX(1.5); filter: blur(2px); opacity: 0.8; }
+    98%, 100% { transform: scaleY(0); opacity: 0; }
+}
+
+@keyframes pink-overtake {
+    0%, 20% { opacity: 0; mix-blend-mode: screen; }
+    /* Middle Burst Shredding */
+    22% { opacity: 1; clip-path: inset(10% 0 70% 0); transform: translateX(-15px); }
+    28% { opacity: 1; clip-path: inset(55% 0 5% 0);  transform: translateX(12px); }
+    34% { opacity: 1; clip-path: inset(30% 0 45% 0); transform: translateX(-18px); }
+    40% { opacity: 1; clip-path: inset(70% 0 10% 0); transform: translateX(10px); }
+    44% { opacity: 0; }
+    
+    45%, 80% { opacity: 0; }
+    
+    /* THE END OVERTAKE: Pink swallows the Blue */
+    82% { 
+        opacity: 1; 
+        clip-path: inset(0 0 0 0); /* Full height, no more shreds */
+        mix-blend-mode: normal;    /* Cover the blue entirely */
+        transform: translateX(-10px) scaleY(0.5); 
+        filter: brightness(1.2);
+    }
+    88% { 
+        opacity: 1; 
+        transform: translateX(8px) scaleY(1.8) skewX(-10deg); 
+        filter: contrast(2);
+    }
+    94% { 
+        opacity: 1; 
+        transform: scaleX(2) scaleY(0.2); 
+        filter: blur(2px) brightness(2); 
+    }
+    98%, 100% { opacity: 0; transform: scaleY(0); }
+}
+
+@keyframes white-timing-shred {
+    0%, 25% { opacity: 0; }
+    26% { opacity: 0.8; clip-path: inset(70% 0 10% 0); transform: translateX(10px); }
+    44% { opacity: 0; }
+    45%, 82% { opacity: 0; }
+    /* Final burnout flash over the pink */
+    83% { opacity: 1; clip-path: inset(20% 0 60% 0); transform: translateX(12px); }
+    92% { opacity: 0.6; filter: blur(1px); transform: scaleX(1.5); }
+    100% { opacity: 0; }
+}
+
+/* Rabite */
+.userlist-rabite:before { 
+        content: ""; 
+    display: block; 
+    width: 20px; 
+    height: 16px; 
+    float: left; 
+    background:url("https://i.ibb.co/RpqKN3Kv/Rabite.webp") no-repeat; 
+    background-size: cover;
+}
+.userlist-rabite, #useritem-rabite .linewrap strong, .chat-msg-rabite .username {
+    color: #ffe135 !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    text-shadow: 0px -2px 11px #ffe135, 0px 2px 11px #ffe135;
+}
+
+.userlist-Schneemann, #useritem-Schneemann .linewrap strong, .chat-msg-Schneemann .username {
+    background: url(https://i.imgur.com/pWLTAID.gif);
+    background-size: 100%;
+    color: transparent !important;
+    -webkit-background-clip: text;
+    font-size: 110%;
+    font-weight: bold;
+    text-shadow: -2px -2px 10px #d2d2d2, -2px -2px 10px #d2d2d2;
+}
+
+
+
 body {
-  background-color:var(--wwf-bg)!important;
-  background-image:
-    linear-gradient(105deg,rgba(11,10,14,.68),rgba(11,10,14,.73)),
-    url("https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1971-1979.png"),
-    url("https://upload.wikimedia.org/wikipedia/commons/6/68/World_Wrestling_Federation_block_logo.svg"),
-    url("https://upload.wikimedia.org/wikipedia/commons/7/7f/WWF_New_Gen_Logo.svg"),
-    url("https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg"),
-    url("https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1963-1971.png")!important;
-  background-repeat:no-repeat!important;
-  background-position:center,left 2vw top 12rem,right 3vw top 12rem,
-    left 4vw bottom 5vh,right 5vw bottom 5vh,center top 43vh!important;
-  background-size:cover,clamp(180px,25vw,390px) auto,clamp(170px,27vw,400px) auto,
-    clamp(160px,22vw,320px) auto,clamp(150px,20vw,300px) auto,clamp(220px,30vw,500px) auto!important;
-  background-attachment:fixed!important;
-  color:var(--wwf-text)!important;
+    background-color: #000000;
+    /* background:url("https://www.fg-a.com/halloween-bgs/2022-jack-o-lanterns-dark-night-th.jpg"); 
+    background-size: auto; */
 }
-body #wrap {background-color:rgba(13,11,17,.65)!important; background-image:none!important;}
-body.wwf-hide-marks {
-  background-image:linear-gradient(105deg,#101013,#150e13)!important;
+
+.well {
+    background-color: #000000;
 }
-body.wwf-hide-marks #wrap {background-color:#101013!important;}
-body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
-  background:radial-gradient(circle at 50% -10%,rgba(178,29,36,.13),transparent 55%),
-    repeating-linear-gradient(125deg,transparent 0 38px,rgba(255,255,255,.008) 39px 40px); }
-a { color:var(--wwf-gold); }
-a:hover { color:#fff2d3; }
 
-/* The main broadcast banner */
-#wwf-arena { width:calc(100% - 22px); max-width:1600px; margin:12px auto 15px;
-  border:1px solid var(--wwf-stroke); box-shadow:0 12px 34px #000a,0 0 32px var(--wwf-glow);
-  background:#101013; color:var(--wwf-text); font:14px/1.4 system-ui,Segoe UI,Arial,sans-serif;
-  position:relative; isolation:isolate; overflow:hidden; border-radius:7px; }
-#wwf-arena, #wwf-arena * { box-sizing:border-box; }
-#wwf-arena::before { content:""; pointer-events:none; position:absolute; z-index:-1;
-  top:0; right:-8%; width:52%; height:120px; opacity:.18;
-  background:repeating-linear-gradient(-55deg,transparent 0 13px,#e7a96a 14px 15px,transparent 16px 24px); }
-/* The banner watermarks sit UNDER the control labels; actual verified SVG logos. */
-#wwf-arena .wwf-watermarks {position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:.25;}
-#wwf-arena .wwf-mark {position:absolute;display:block;max-width:24%;height:100%;object-fit:contain;pointer-events:none;user-select:none;mix-blend-mode:screen;}
-#wwf-arena .wwf-mark-wwwf {left:1%;top:-6%;max-width:24%;opacity:.95;transform:rotate(-7deg);}
-#wwf-arena .wwf-mark-classic {left:26%;top:-10%;max-width:22%;filter:invert(1) grayscale(1);opacity:.64;}
-#wwf-arena .wwf-mark-newgen {right:25%;top:2%;max-width:22%;filter:invert(1) grayscale(1);opacity:.72;}
-#wwf-arena .wwf-mark-modern {right:2%;top:1%;max-width:23%;opacity:.92;transform:rotate(8deg);}
-#wwf-arena .wwf-hero-title, #wwf-arena .wwf-on-air {position:relative; z-index:1;}
-body.wwf-hide-marks #wwf-arena .wwf-watermarks {display:none;}
-#wwf-arena .wwf-hero {position:relative; isolation:isolate; display:flex; justify-content:space-between; align-items:center;
-  gap:16px; min-height:114px; padding:17px 24px 15px;
-  background:linear-gradient(112deg,#130e13 0%,#4e141c 47%,#130f14 100%);
-  border-bottom:3px solid var(--wwf-red); }
-#wwf-arena .wwf-overline { color:#f5cf93; font-size:10px; letter-spacing:.28em;
-  font-weight:900; margin-bottom:3px; }
-#wwf-arena .wwf-brand { line-height:1; display:flex; align-items:baseline;
-  white-space:nowrap; font-size:clamp(34px,6.5vw,66px); font-weight:1000;
-  letter-spacing:-.065em; transform:skewX(-6deg); text-shadow:2px 3px 0 #07070a,0 0 18px #0008; }
-#wwf-arena .wwf-brand-old { color:#f1d18d; }
-#wwf-arena .wwf-vs { color:#fff; margin:0 .18em; font-weight:500; }
-#wwf-arena .wwf-brand-new { color:#f8f9fb; }
-#wwf-arena .wwf-brand-tail { margin-left:.3em; font-size:.34em; letter-spacing:.18em;
-  color:#ff5b65; border:2px solid #ef5b63; padding:.15em .3em; transform:skewX(6deg); }
-#wwf-arena .wwf-subtitle { color:#f5e0c3; font-size:10px; letter-spacing:.17em;
-  margin-top:7px; font-weight:800; }
-#wwf-arena .wwf-on-air { flex:0 0 auto; border:1px solid #d58772;
-  padding:12px 16px 10px; min-width:125px; text-align:center;
-  background:#120d12b0; color:#fff4dc; font-weight:950; letter-spacing:.12em;
-  border-radius:4px; box-shadow:inset 0 0 17px #0009; font-size:13px; }
-#wwf-arena .wwf-status-dot { display:inline-block; height:8px; width:8px;
-  background:#777; border-radius:50%; margin-right:7px; vertical-align:middle; }
-#wwf-arena.wwf-playing .wwf-status-dot { background:#f3444a; box-shadow:0 0 9px #f3444a77; }
-#wwf-arena .wwf-on-air small { display:block; font-size:10px; letter-spacing:.1em;
-  margin-top:5px; color:#c7b9ad; font-weight:700; }
-#wwf-arena .wwf-now { display:flex; gap:15px; align-items:center;
-  padding:10px 22px; background:linear-gradient(90deg,#240f14,#100f14);
-  border-bottom:1px solid var(--wwf-stroke); }
-#wwf-arena .wwf-now-label { font-size:10px; color:var(--wwf-gold);
-  letter-spacing:.12em; font-weight:950; white-space:nowrap; }
-#wwf-arena #wwf-track { font-size:13px; color:#fff1e6; font-weight:600;
-  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; min-width:0; }
-#wwf-arena .wwf-actions { display:flex; align-items:center; flex-wrap:wrap;
-  gap:7px; padding:11px 16px; background:linear-gradient(90deg,#171317,#23181d,#171317); }
-#wwf-arena .wwf-actions button[hidden] {display:none!important;}
-#wwf-arena .wwf-actions button { flex:0 0 auto; appearance:none; border:1px solid #8e4546;
-  border-radius:4px; min-height:31px; padding:6px 10px; cursor:pointer;
-  font:900 11px/1.1 system-ui,Segoe UI,Arial,sans-serif; letter-spacing:.045em;
-  background:linear-gradient(180deg,#4e2129,#2d161d); color:#ffe7c6;
-  transition:background-color .18s,border-color .18s,transform .18s; }
-#wwf-arena .wwf-actions button:hover { background:#8a202f; border-color:#f4bd67; color:white; transform:translateY(-1px); }
-#wwf-arena .wwf-actions button:focus-visible { outline:2px solid #ffdb89; outline-offset:2px; }
-#wwf-arena .wwf-actions button[aria-pressed="true"] { background:#b22a36; color:white; border-color:#f0c77c; }
-#wwf-arena .wwf-ticker { display:flex; align-items:center; gap:16px; font:800 10px/1.5 ui-monospace,Consolas,monospace;
-  letter-spacing:.11em; padding:7px 17px; border-top:1px solid #7d3139;
-  color:#ecddc8; background:#0c0b10; }
-#wwf-arena .wwf-ticker b { flex:0 0 auto; color:#ff6570; }
-#wwf-arena .wwf-ticker span { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
-body.wwf-modern #wwf-arena .wwf-hero { background:linear-gradient(115deg,#101620,#52111e 55%,#151a23); }
-body.wwf-modern #wwf-arena .wwf-brand-old { color:#d2d8e4; }
-body.wwf-modern #wwf-arena .wwf-overline { color:#d1d8e6; }
-body.wwf-modern #wwf-arena .wwf-actions button { background:linear-gradient(180deg,#353e4d,#1d2430); border-color:#586375; }
-body.wwf-modern #wwf-arena .wwf-actions button:hover { background:#b31c35; }
+#navigation
+    {
+            width:100%;
+            background-color:rgb(66,66,66);
+            color:white;
+            height:30px;
+            text-align:left;
+            padding-top: 2px;
+    }
+    
+    
+    #navigation a
+    {
+            font-size:14px;
+            vertical-align:center;
+            padding-left:30px;
+            padding-right:30px;
+            color:white;
+            text-align:center;
+            text-decoration:none;
+    }
 
-/* Baked.live/CyTube structure */
-nav.navbar { background:linear-gradient(90deg,#121016,#39151c,#161119)!important;
-  border-color:var(--wwf-stroke)!important; }
-.navbar-brand { font-weight:900!important; color:var(--wwf-gold)!important; }
-#videowrap,#chatwrap,#playlistwrap { border:1px solid var(--wwf-stroke)!important;
-  box-shadow:0 5px 25px #0008; background:var(--wwf-panel)!important; }
-#chatheader,#currenttitle,#playlistcontrols,#videocontrols,.videowrap-header,
-.playlist-header,.queue-header { background:linear-gradient(95deg,#41151e,#1f1b23)!important;
-  color:var(--wwf-text)!important; border-color:var(--wwf-stroke)!important; }
-#queue { background:var(--wwf-panel)!important; color:var(--wwf-text)!important; }
-#queue .queue_entry { color:var(--wwf-text)!important; background:transparent!important;
-  border-bottom:1px solid #ffffff13!important; padding:3px 6px; }
-#queue .queue_entry:nth-child(even) { background:#ffffff07!important; }
-#queue .queue_entry:hover { background:#8d1b3033!important; }
-#queue .queue_entry.queue_active { background:linear-gradient(90deg,#8c1b28,#351b24)!important;
-  box-shadow:inset 4px 0 var(--wwf-gold)!important; color:#fff8ed!important; }
-#queue .qe_blame { color:var(--wwf-muted)!important; display:initial!important; }
-/* Xaekai modules and WTTTV shortcuts retain their original handlers. */
-#scroll-btn {position:static!important;left:auto!important; margin:0 4px!important;
-  background:linear-gradient(180deg,#70333a,#2f171b)!important;
-  color:var(--wwf-gold)!important; border:1px solid var(--wwf-gold)!important;}
-#showchansettings,#emotelistbtn,#showsearch,#showmediaurl,#mediarefresh {
-  border-color:var(--wwf-stroke)!important;
+#navigation2
+    {
+            width:100%;
+            background-color:rgb(66,66,66);
+            color:white;
+            height:30px;
+            text-align:right;
+            padding-top: 2px;
+    }
+    
+    
+    #navigation2 a
+    {
+            font-size:14px;
+            vertical-align:center;
+            padding-left:30px;
+            padding-right:30px;
+            color:white;
+            text-align:center;
+            text-decoration:none;
+    }
+
+ #navigation a:hover
+    {
+            color:blue;
+    }
+
+
+
+img.discordimage {
+    display: initial; !important
 }
-#chatwrap .username, #messagebuffer .channel-emote {cursor:pointer;}
-#messagebuffer .channel-emote:hover {filter:brightness(1.18);}
-#userlist,.userlist {background-color:var(--wwf-panel)!important; color:var(--wwf-text)!important;}
-#messagebuffer .server-msg-reconnect {border:1px solid var(--wwf-stroke); background:#351b26;
-  border-radius:3px; margin:4px 0 8px; padding:6px 9px; color:var(--wwf-gold);}
 
-#messagebuffer { background:var(--wwf-panel)!important; color:var(--wwf-text)!important;
-  padding:7px!important; }
-#messagebuffer .chat-msg:nth-child(even) { background:#ffffff05; }
-#chatline,textarea.form-control,input.form-control,select.form-control { background:var(--wwf-panel2)!important;
-  color:var(--wwf-text)!important; border-color:var(--wwf-stroke)!important; }
-#chatline:focus,.form-control:focus { outline:1px solid var(--wwf-gold)!important;
-  box-shadow:0 0 0 2px #e9ba6933!important; }
-.panel,.well,.modal-content { background:var(--wwf-panel)!important;
-  border-color:var(--wwf-stroke)!important; color:var(--wwf-text)!important; }
-.btn-default { background:#312832!important; border-color:#835356!important; color:#eee2d9!important; }
-.btn-primary,.btn-success { background:#a72332!important; border-color:#d66b65!important; color:white!important; }
-.btn-danger { background:#932937!important; border-color:#e28a80!important; }
-.btn:hover { filter:brightness(1.12); }
+.well
+ {
+    background: rgba(0, 0, 0, .225); 
+    border-radius: 5px;
+    padding: 5px;
+}
 
+/*
+#chatwrap{
+background:url("https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1JlC4T.img?w=768&h=511&m=6&x=262&y=173&s=262&d=262");
+background-size:cover;
+} */
+
+.chat-msg-YouBestPlayChuggo .username {
+      color: #FF00C8!important; 
+}
+/* Test-only spoiler readability: show the original graphic while concealed; remove it on hover. */
+.spoiler{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png");background-repeat:repeat;background-position:left center;background-color:#111118;color:transparent;}
+.spoiler:hover{background-image:none;background-color:#111118;color:#fff;}
+.spoiler a{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9545a33964cc1633e559d2f429eceda3e7109bc4/wrestletube/testing/lean-v1/images/spoilers.png")!important;background-repeat:repeat!important;color:transparent!important;}
+.spoiler:hover a{background-image:none!important;color:#fff!important;}
+
+
+/* Preserved WW* wrestling filter effects */
 /* Optional chat filters, kept separate from core Baked chat functionality */
 #messagebuffer .wwf-fx { font-weight:900; letter-spacing:.02em; }
 #messagebuffer .wwf-chip { display:inline-block; vertical-align:baseline; padding:1px 7px;
@@ -182,30 +628,99 @@ nav.navbar { background:linear-gradient(90deg,#121016,#39151c,#161119)!important
 #messagebuffer .wwf-spoiler.wwf-revealed { color:#fff4e6!important;
   user-select:text; background:#614355; }
 #messagebuffer .wwf-spoiler:focus-visible { outline:2px solid #ffe4a0; }
-@media(max-width:780px) {
-  #wwf-arena { width:calc(100% - 12px); margin:7px auto 10px; }
-  #wwf-arena .wwf-hero { padding:12px 13px; gap:7px; min-height:91px; }
-  #wwf-arena .wwf-watermarks {opacity:.16;}
-  body {background-position:center,left -4rem top 10rem,right -4rem top 10rem,left -4rem bottom 5rem,right -4rem bottom 5rem,center center!important;}
-  #wwf-arena .wwf-overline { letter-spacing:.13em; font-size:9px; }
-  #wwf-arena .wwf-subtitle { letter-spacing:.045em; font-size:9px; }
-  #wwf-arena .wwf-on-air { padding:9px 6px; min-width:92px; font-size:11px; }
-  #wwf-arena .wwf-on-air small { font-size:9px; }
-  #wwf-arena .wwf-now { padding:8px 11px; gap:8px; }
-  #wwf-arena .wwf-actions { gap:5px; padding:8px; }
-  #wwf-arena .wwf-actions button { min-height:30px; padding:6px 8px; font-size:10px; }
-  #wwf-arena .wwf-ticker { padding:6px 10px; gap:8px; }
-}
-@media(max-width:430px) {
-  #wwf-arena .wwf-brand { font-size:clamp(26px,8vw,40px); }
-  #wwf-arena .wwf-brand-tail { display:none; }
-  #wwf-arena .wwf-on-air { min-width:73px; }
-  #wwf-arena .wwf-on-air small { display:none; }
-  #wwf-arena .wwf-subtitle { max-width:200px; }
-}
-@media(prefers-reduced-motion:reduce) {
-  #wwf-arena .wwf-actions button { transition:none; }
-}
 
-/* Cinema screen positions belong solely to the original Xaekai module. */
-body.cinemachat #wwf-arena {display:none!important;}
+/* Era palettes over the working WrestleTube page; no custom cinema positioning. */
+body[data-wwf-era] {--ww-bg:#080809;--ww-panel:#121213;--ww-panel2:#211416;--ww-accent:#d21523;--ww-highlight:#eee;--ww-text:#f6f6f6;--ww-muted:#c2bbbb;--ww-shade:rgba(4,4,5,.83);}
+body[data-wwf-era=wwwf] {--ww-bg:#261e14;--ww-panel:#302315;--ww-panel2:#4a3520;--ww-accent:#b59059;--ww-highlight:#ffe0a2;--ww-text:#fff1d9;--ww-muted:#d9c3a0;--ww-shade:rgba(29,21,12,.78);}
+body[data-wwf-era=golden] {--ww-bg:#260908;--ww-panel:#301115;--ww-panel2:#5a1c1c;--ww-accent:#d52426;--ww-highlight:#ffe34e;--ww-text:#fff7df;--ww-muted:#f3cea6;--ww-shade:rgba(34,8,10,.78);}
+body[data-wwf-era=newgen] {--ww-bg:#101b40;--ww-panel:#161a51;--ww-panel2:#32317d;--ww-accent:#367ce7;--ww-highlight:#ffe945;--ww-text:#f1f5ff;--ww-muted:#b9c8f0;--ww-shade:rgba(15,18,47,.80);}
+body[data-wwf-era=attitude] {--ww-bg:#080809;--ww-panel:#121213;--ww-panel2:#261318;--ww-accent:#d21523;--ww-highlight:#f6f6f6;--ww-text:#f6f6f6;--ww-muted:#c2bbbb;--ww-shade:rgba(4,4,5,.82);}
+body[data-wwf-era=modern] {--ww-bg:#111821;--ww-panel:#181f2b;--ww-panel2:#2c3442;--ww-accent:#e52338;--ww-highlight:#f4f6f9;--ww-text:#f6f8fc;--ww-muted:#b9c1cb;--ww-shade:rgba(10,16,24,.84);}
+body[data-wwf-era] {
+ color:var(--ww-text)!important;background-color:var(--ww-bg)!important;
+ background-image:linear-gradient(110deg,var(--ww-shade),var(--ww-shade)),
+   url("https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1963-1971.png"),
+   url("https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1971-1979.png"),
+   url("https://upload.wikimedia.org/wikipedia/commons/6/68/World_Wrestling_Federation_block_logo.svg"),
+   url("https://upload.wikimedia.org/wikipedia/commons/7/7f/WWF_New_Gen_Logo.svg"),
+   url("https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg")!important;
+ background-position:center,left 2vw top 12rem,right 3vw top 13rem,
+   left 2vw bottom 9vh,right 2vw bottom 9vh,center top 42vh!important;
+ background-size:cover,clamp(170px,24vw,340px) auto,clamp(170px,25vw,360px) auto,
+   clamp(200px,28vw,430px) auto,clamp(170px,24vw,350px) auto,
+   clamp(150px,22vw,300px) auto!important;
+ background-repeat:no-repeat!important;background-attachment:scroll!important;
+}
+body[data-wwf-era] #wrap {background-color:var(--ww-bg)!important;background-image:none!important;opacity:.96;}
+body[data-wwf-era] nav.navbar {
+ opacity:1!important;background:linear-gradient(90deg,var(--ww-bg),var(--ww-panel),var(--ww-bg))!important;
+ border-bottom:3px solid var(--ww-accent)!important;box-shadow:0 3px 14px #0009;
+}
+body[data-wwf-era] nav.navbar .navbar-brand {
+ min-width:0!important;background-image:none!important;color:var(--ww-text)!important;
+ font:900 20px/1.4 Impact,"Arial Black",system-ui!important;letter-spacing:.06em;
+}
+body[data-wwf-era] .wwf-nav-brand span {color:var(--ww-accent);}
+body[data-wwf-era] nav.navbar .nav>li>a {color:var(--ww-text)!important;}
+body[data-wwf-era] nav.navbar .nav>li>a:hover,
+body[data-wwf-era] nav.navbar .nav>.open>a {background:var(--ww-panel2)!important;color:var(--ww-highlight)!important;}
+body[data-wwf-era] nav.navbar .dropdown-menu {background:var(--ww-panel)!important;border-color:var(--ww-accent)!important;}
+body[data-wwf-era] nav.navbar .dropdown-menu a {color:var(--ww-text)!important;}
+body[data-wwf-era] nav.navbar .dropdown-menu a:hover {background:var(--ww-panel2)!important;color:var(--ww-highlight)!important;}
+body[data-wwf-era]:not(.cinemachat) #chatwrap,
+body[data-wwf-era]:not(.cinemachat) #videowrap,
+body[data-wwf-era]:not(.cinemachat) #playlistwrap {
+ background-color:var(--ww-panel)!important;border-color:var(--ww-accent)!important;
+}
+body[data-wwf-era] #chatheader,body[data-wwf-era] #currenttitle,
+body[data-wwf-era] #videocontrols,body[data-wwf-era] #playlistcontrols {
+ color:var(--ww-highlight)!important;background:var(--ww-panel2)!important;border-color:var(--ww-accent)!important;
+}
+body[data-wwf-era] #messagebuffer,body[data-wwf-era] #queue,body[data-wwf-era] #userlist {
+ background:var(--ww-panel)!important;color:var(--ww-text)!important;
+}
+body[data-wwf-era] #queue .queue_entry.queue_active {border-left:4px solid var(--ww-accent)!important;background:var(--ww-panel2)!important;}
+body[data-wwf-era] #chatline,body[data-wwf-era] input.form-control,body[data-wwf-era] textarea.form-control {
+ background:var(--ww-panel2)!important;color:var(--ww-text)!important;border-color:var(--ww-accent)!important;
+}
+body[data-wwf-era] #wwf-era-strip {
+ display:flex;align-items:center;gap:15px;min-height:39px;flex-wrap:wrap;padding:6px 18px;
+ background:linear-gradient(90deg,var(--ww-panel),var(--ww-panel2),var(--ww-bg));
+ border-bottom:2px solid var(--ww-accent);color:var(--ww-highlight);
+ font:bold 12px/1.35 system-ui,Arial,sans-serif;letter-spacing:.1em;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-name {font:950 19px Impact,"Arial Black",sans-serif;letter-spacing:.045em;color:var(--ww-text);}
+body[data-wwf-era] #wwf-era-strip .wwf-name b {color:var(--ww-accent);}
+body[data-wwf-era] #wwf-era-strip #wwf-era-years {font-size:10px;color:var(--ww-muted);}
+body[data-wwf-era] #wwf-era-strip .wwf-era-logos {margin-left:auto;opacity:.55;font-weight:900;}
+body[data-wwf-era=attitude] #wwf-era-strip {
+ background:repeating-linear-gradient(-25deg,#100d0e 0 12px,#211416 13px 20px);
+ border-bottom:3px solid #c81422;
+}
+body[data-wwf-era=attitude] #wwf-era-title {color:#fff;text-shadow:2px 2px #ad0e1e;font:950 15px Impact,"Arial Black",sans-serif;}
+body[data-wwf-era=newgen] #wwf-era-title {color:#ffdf39;text-shadow:2px 2px #1450a2;}
+body[data-wwf-era=golden] #wwf-era-title {color:#ffe34e;text-shadow:2px 2px #bd0f20;}
+body[data-wwf-era=wwwf] #wwf-era-title {color:#ffe2a3;font-family:Georgia,serif;}
+body[data-wwf-era] #wwf-era-picker {
+ display:inline-flex;align-items:center;gap:6px;padding:5px 8px;background:var(--ww-panel);color:var(--ww-highlight);
+}
+body[data-wwf-era] #wwf-era-picker label {font:900 10px system-ui,Arial;letter-spacing:.09em;margin:0;}
+body[data-wwf-era] #wwf-era-select {
+ max-width:190px;height:28px;border:1px solid var(--ww-accent);border-radius:3px;
+ background:var(--ww-bg);color:var(--ww-text);font:bold 11px system-ui,Arial;cursor:pointer;
+}
+body[data-wwf-era] #wwf-logo-switch {
+ padding:5px 9px;min-height:28px;border:1px solid var(--ww-accent);border-radius:3px;
+ background:var(--ww-panel2);color:var(--ww-highlight);font:bold 10px system-ui,Arial;cursor:pointer;
+}
+body[data-wwf-era].wwf-logos-off {background-image:none!important;}
+body[data-wwf-era].wwf-logos-off #wwf-era-strip .wwf-era-logos {display:none;}
+body[data-wwf-era].cinemachat {background:#000!important;}
+body[data-wwf-era].cinemachat #wwf-era-strip {display:none!important;}
+body[data-wwf-era].cinemachat #wrap {background:transparent!important;opacity:1;}
+@media(max-width:720px) {
+ body[data-wwf-era] #wwf-era-strip {gap:9px;padding:7px 9px;}
+ body[data-wwf-era] #wwf-era-strip .wwf-era-logos {display:none;}
+ body[data-wwf-era] #wwf-era-picker {width:100%;justify-content:flex-end;}
+ body[data-wwf-era] #wwf-era-select {max-width:155px;flex:1;}
+}

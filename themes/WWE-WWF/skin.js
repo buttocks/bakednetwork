@@ -1,4 +1,4 @@
-/* WWE / WWF Ringside — Baked.live channel skin v1.2
+/* WWE / WWF Ringside — Baked.live channel skin v1.4
    External Javascript URL: host this file as JS (e.g. jsDelivr + GitHub).
    Designed for Baked.live/CyTube channel pages. No external dependencies.
 */
@@ -87,9 +87,24 @@
         <button type="button" data-wwf="focus" aria-pressed="false">▣ CINEMA</button>
         <button type="button" data-wwf="mod" class="wwf-module-action" hidden>⚙ MOD MENU</button>
         <button type="button" data-wwf="macros" class="wwf-module-action" hidden>☻ MACROS</button>
-        <button type="button" data-wwf="search" class="wwf-module-action" hidden>⌕ SEARCH</button>
+        <button type="button" data-wwf="search" aria-expanded="false" aria-controls="wwf-search-panel">⌕ SEARCH</button>
         <button type="button" data-wwf="share">↗ SHARE</button>
       </nav>
+      <section id="wwf-search-panel" class="wwf-search-panel" aria-label="Search wrestling media and playlist" hidden>
+        <form id="wwf-search-form" class="wwf-search-form">
+          <label for="wwf-search-query">SEARCH</label>
+          <select id="wwf-search-provider" aria-label="Search where">
+            <option value="youtube">YouTube videos</option>
+            <option value="queue">Current playlist</option>
+            <option value="google">Google</option>
+            <option value="imdb">IMDb</option>
+          </select>
+          <input id="wwf-search-query" type="search" autocomplete="off" maxlength="240" placeholder="Search for wrestling videos…" required>
+          <button type="submit" class="wwf-search-go">SEARCH</button>
+          <button type="button" data-wwf-search-close aria-label="Close search">✕</button>
+        </form>
+        <div id="wwf-search-results" role="status" aria-live="polite"></div>
+      </section>
       <div class="wwf-ticker" aria-live="off"><b>RINGSIDE WIRE</b><span id="wwf-ticker-text">${slogans[0]}</span></div>`;
 
     const navbar = select('nav.navbar');
@@ -120,7 +135,7 @@
     button('marks').addEventListener('click', () => setMarks(!marksVisible));
 
     // Existing WrestleTube controls are the authority; never reimplement their handlers.
-    const moduleControls = { mod: '#showchansettings', macros: '#emotelistbtn', search: '#showsearch' };
+    const moduleControls = { mod: '#showchansettings', macros: '#emotelistbtn' };
     function activateExistingControl(action) {
       const source = select(moduleControls[action]);
       if (source && !header.contains(source)) source.click();
@@ -135,6 +150,125 @@
       }
     }
     updateModuleShortcuts();
+
+    // Search is self-contained: the original WrestleTube under-chat search module
+    // is disabled in its loader, and a #showsearch control may have no handler.
+    // Never alter the original channel module configuration just to open search.
+    const searchPanel = select('#wwf-search-panel', header);
+    const searchInput = select('#wwf-search-query', header);
+    const searchResults = select('#wwf-search-results', header);
+    const searchProvider = select('#wwf-search-provider', header);
+    function toggleSearch(open) {
+      searchPanel.hidden = !open;
+      button('search').setAttribute('aria-expanded', String(open));
+      if (open) window.requestAnimationFrame(() => searchInput.focus());
+    }
+    button('search').addEventListener('click', () => toggleSearch(searchPanel.hidden));
+    select('[data-wwf-search-close]', header).addEventListener('click', () => toggleSearch(false));
+    searchInput.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { event.preventDefault(); toggleSearch(false); button('search').focus(); }
+    });
+    searchProvider.addEventListener('change', () => {
+      searchResults.replaceChildren();
+      searchInput.placeholder = searchProvider.value === 'queue'
+        ? 'Find a title in the loaded playlist…'
+        : searchProvider.value === 'youtube' ? 'Search for wrestling videos…' : 'Enter search terms…';
+    });
+    select('#wwf-search-form', header).addEventListener('submit', event => {
+      event.preventDefault();
+      const query = searchInput.value.trim();
+      if (!query) { searchInput.focus(); return; }
+      searchResults.replaceChildren();
+      if (searchProvider.value === 'queue') {
+        const entries = Array.from(document.querySelectorAll('#queue .queue_entry'));
+        const term = query.toLocaleLowerCase();
+        const matches = entries.filter(entry => (entry.querySelector('.qe_title')?.textContent || entry.textContent || '').toLocaleLowerCase().includes(term));
+        const summary = document.createElement('p');
+        summary.textContent = matches.length
+          ? matches.length + ' matching playlist item' + (matches.length === 1 ? '' : 's')
+          : 'No matches in the currently loaded playlist.';
+        searchResults.appendChild(summary);
+        for (const entry of matches.slice(0, 30)) {
+          const result = document.createElement('button');
+          result.type = 'button';
+          result.className = 'wwf-search-result';
+          result.textContent = (entry.querySelector('.qe_title')?.textContent || entry.textContent || '').trim().slice(0, 160);
+          result.addEventListener('click', () => {
+            document.querySelectorAll('#queue .wwf-search-hit').forEach(el => el.classList.remove('wwf-search-hit'));
+            entry.classList.add('wwf-search-hit');
+            if (document.body.classList.contains('wwf-cinema-fallback')) setFallbackCinema(false);
+            entry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+          searchResults.appendChild(result);
+        }
+        return;
+      }
+      const encoded = encodeURIComponent(query);
+      const target = searchProvider.value === 'google'
+        ? 'https://www.google.com/search?q=' + encoded
+        : searchProvider.value === 'imdb'
+          ? 'https://www.imdb.com/find/?q=' + encoded
+          : 'https://www.youtube.com/results?search_query=' + encoded;
+      // Search is a direct user action; no third-party scripts or permissions.
+      window.open(target, '_blank', 'noopener,noreferrer');
+      const summary = document.createElement('p');
+      summary.textContent = 'Opened ' + searchProvider.selectedOptions[0].text + ' results in a new tab.';
+      searchResults.appendChild(summary);
+    });
+
+    // Use WrestleTube's real Xaekai cinema toggle whenever its layout module
+    // is installed. If it is not loaded on this channel, supply an equivalent
+    // split-screen cinema mode instead of merely dimming the chat.
+    const cinemaWidthKey = 'baked-wwf-cinema-width:' + location.pathname.toLowerCase();
+    let cinemaWidth = 20;
+    try {
+      const stored = Number(localStorage.getItem(cinemaWidthKey));
+      if (Number.isFinite(stored) && stored >= 15 && stored <= 32) cinemaWidth = Math.round(stored);
+    } catch (_) { /* storage optional */ }
+    const cinemaControls = document.createElement('div');
+    cinemaControls.id = 'wwf-cinema-fallback-controls';
+    cinemaControls.setAttribute('aria-label', 'Cinema mode controls');
+    cinemaControls.innerHTML = '<button type="button" data-wwf-cinema="decrease" title="Narrower cinema chat" aria-label="Narrower cinema chat">−</button>' +
+      '<button type="button" data-wwf-cinema="increase" title="Wider cinema chat" aria-label="Wider cinema chat">+</button>' +
+      '<button type="button" data-wwf-cinema="exit" title="Exit cinema mode" aria-label="Exit cinema mode">✕ EXIT CINEMA</button>';
+    document.body.appendChild(cinemaControls);
+    function updateCinemaUI() {
+      const on = document.body.classList.contains('cinemachat');
+      const ctl = button('focus');
+      ctl.textContent = on ? '▣ EXIT CINEMA' : '▣ CINEMA';
+      ctl.setAttribute('aria-pressed', String(on));
+    }
+    function updateCinemaWidth(next) {
+      cinemaWidth = Math.max(15, Math.min(32, next));
+      document.body.style.setProperty('--wwf-cinema-chat-width', cinemaWidth + 'vw');
+      try { localStorage.setItem(cinemaWidthKey, String(cinemaWidth)); } catch (_) { /* optional */ }
+    }
+    function setFallbackCinema(on) {
+      document.body.classList.toggle('wwf-cinema-fallback', on);
+      document.body.classList.toggle('cinemachat', on);
+      if (typeof window.handleWindowResize === 'function') {
+        try { window.handleWindowResize(); } catch (_) { /* layout helper optional */ }
+      }
+      updateCinemaUI();
+    }
+    updateCinemaWidth(cinemaWidth);
+    cinemaControls.addEventListener('click', event => {
+      const action = event.target.closest('[data-wwf-cinema]')?.getAttribute('data-wwf-cinema');
+      if (action === 'exit') setFallbackCinema(false);
+      else if (action === 'increase') updateCinemaWidth(cinemaWidth + 1);
+      else if (action === 'decrease') updateCinemaWidth(cinemaWidth - 1);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.body.classList.contains('wwf-cinema-fallback')) setFallbackCinema(false);
+    });
+    const cinemaObserver = new MutationObserver(() => {
+      if (!document.body.classList.contains('cinemachat')) {
+        document.body.classList.remove('wwf-cinema-fallback');
+      }
+      updateCinemaUI();
+    });
+    cinemaObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    updateCinemaUI();
 
     button('watch').addEventListener('click', () => goTo('#videowrap'));
     button('chat').addEventListener('click', () => goTo('#chatwrap', '#chatline'));
@@ -152,9 +286,17 @@
     });
     button('theme').addEventListener('click', () => setTheme(document.body.classList.contains('wwf-modern') ? 'attitude' : 'modern'));
     button('focus').addEventListener('click', () => {
-      const enabled = document.body.classList.toggle('wwf-cinema');
-      button('focus').textContent = enabled ? '▣ EXIT CINEMA' : '▣ CINEMA';
-      button('focus').setAttribute('aria-pressed', String(enabled));
+      if (document.body.classList.contains('wwf-cinema-fallback')) {
+        setFallbackCinema(false);
+        return;
+      }
+      const nativeToggle = document.querySelector('#cinematoggle');
+      if (nativeToggle && nativeToggle !== button('focus')) {
+        nativeToggle.click();
+        updateCinemaUI();
+        return;
+      }
+      setFallbackCinema(!document.body.classList.contains('cinemachat'));
     });
     button('share').addEventListener('click', async () => {
       const url = location.origin + location.pathname;

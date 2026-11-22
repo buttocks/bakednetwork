@@ -1,4 +1,4 @@
-# WWE / WWF Ringside v1.3 — Baked.live
+# WWE / WWF Ringside v1.4 — Baked.live
 
 A standalone WWE/WWF visual skin that works **beside** WrestleTube's existing channel logic. New filter shortcuts use ordinary emote-style names with collision-safe numbered suffixes.
 
@@ -90,3 +90,10 @@ They are displayed via Wikimedia Commons SVG URLs as low-opacity background grap
 Use the pinned commit `skin.js` and `skin.css` URLs shown in the release chat in the external JavaScript and external CSS settings of your WWE/WWF Baked.live tube. Keep the original channel internal JavaScript where it already lives. Hard-refresh after saving, and test Mod Menu, emotes, the filter import, chat effects, logos and queue scrolling in a test session.
 
 The revised JS passes `node --check` and the new rule regexps validate under JavaScript. Six preserved legacy rules have unsupported PCRE syntax in JavaScript; these old rules were left unchanged rather than silently rewritten. Live channel testing is still required.
+
+## v1.4 — Cinema and Search fixes
+
+- **Cinema** uses the existing Xaekai `#cinematoggle` when that module is available. If not, the skin supplies a *real* video/chat split layout (`cinemachat`), with 15–32vw chat-width +/− controls, ESC-to-exit, and normal layout restoration.
+- **Search** opens an independent search panel regardless of whether the original disabled Underchat Search module is installed. Choose YouTube, the current Baked playlist, Google, or IMDb. Playlist matches are clickable and highlighted in the queue.
+- The WWF and WWE logos, chat filters, and original WrestleTube channel functions are unchanged.
+- Update **both** External JavaScript and External CSS URLs to the same new pinned commit. Hard refresh to clear cached assets.

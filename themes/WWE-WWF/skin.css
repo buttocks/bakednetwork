@@ -179,12 +179,6 @@ nav.navbar { background:linear-gradient(90deg,#121016,#39151c,#161119)!important
 #messagebuffer .wwf-spoiler.wwf-revealed { color:#fff4e6!important;
   user-select:text; background:#614355; }
 #messagebuffer .wwf-spoiler:focus-visible { outline:2px solid #ffe4a0; }
-body.wwf-cinema #chatwrap,body.wwf-cinema #playlistwrap {
-  opacity:.42; filter:saturate(.65); transition:opacity .2s; }
-body.wwf-cinema #chatwrap:hover,body.wwf-cinema #chatwrap:focus-within,
-body.wwf-cinema #playlistwrap:hover,body.wwf-cinema #playlistwrap:focus-within { opacity:1; filter:none; }
-body.wwf-cinema #videowrap { box-shadow:0 0 0 2px var(--wwf-gold),0 0 38px var(--wwf-glow); }
-
 @media(max-width:780px) {
   #wwf-arena { width:calc(100% - 12px); margin:7px auto 10px; }
   #wwf-arena .wwf-hero { padding:12px 13px; gap:7px; min-height:91px; }
@@ -207,109 +201,76 @@ body.wwf-cinema #videowrap { box-shadow:0 0 0 2px var(--wwf-gold),0 0 38px var(-
   #wwf-arena .wwf-subtitle { max-width:200px; }
 }
 @media(prefers-reduced-motion:reduce) {
-  #wwf-arena .wwf-actions button,body.wwf-cinema #chatwrap,body.wwf-cinema #playlistwrap { transition:none; }
+  #wwf-arena .wwf-actions button { transition:none; }
 }
-
-/* WWE / WWF Ringside v1.4 — working search and authentic split-screen cinema */
-/* These selectors only affect Ringside controls; existing channel search and
-   Xaekai cinema remain in charge when installed. */
-#wwf-arena .wwf-search-panel[hidden] { display:none!important; }
-#wwf-arena .wwf-search-panel {
-  padding:12px 16px;
-  border-top:1px solid #8e4546;
-  background:linear-gradient(110deg,#20191f,#351a24);
-  color:#f8e9d9;
+/* v1.5 cinema: a fixed split view with no scripted resize loop.
+   Applied only when Xaekai's native cinema module is absent. */
+#wwf-cinema-controls[hidden] {display:none!important;}
+#wwf-cinema-controls {
+  display:flex!important;align-items:center!important;gap:5px!important;
+  position:fixed!important;top:8px!important;right:8px!important;
+  z-index:2147483000!important;pointer-events:auto!important;
 }
-#wwf-arena .wwf-search-form {
-  display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;
+#wwf-cinema-controls button {
+  display:inline-block!important;min-height:35px!important;min-width:35px!important;
+  padding:6px 10px!important;appearance:none!important;pointer-events:auto!important;
+  border:1px solid #d6b37b!important;border-radius:4px!important;
+  font:bold 12px/1.2 system-ui,Arial,sans-serif!important;
+  background:#311720!important;color:#ffeacb!important;cursor:pointer!important;
 }
-#wwf-arena .wwf-search-form label {margin:0 3px 0 0;letter-spacing:.09em;color:#f6cb81;font-size:12px;}
-#wwf-arena .wwf-search-form select,
-#wwf-arena .wwf-search-form input {
-  min-height:34px;padding:6px 9px;max-width:100%;border:1px solid #88545a;
-  border-radius:4px;background:#16191f;color:#fff5e4;
+#wwf-cinema-controls button:hover,
+#wwf-cinema-controls button:focus-visible {background:#912b42!important;outline:2px solid #eecf97!important;}
+body.cinemachat #wwf-arena,
+body.wwf-cinema-owned #wwf-arena {display:none!important;}
+body.wwf-cinema-owned {overflow:hidden!important;}
+body.wwf-cinema-owned nav.navbar,
+body.wwf-cinema-owned #motdwrap,
+body.wwf-cinema-owned #queue,
+body.wwf-cinema-owned #footer,
+body.wwf-cinema-owned #currenttitle,
+body.wwf-cinema-owned #videowrap-header,
+body.wwf-cinema-owned .toggle-label {display:none!important;}
+body.wwf-cinema-owned #videowrap,
+body.wwf-cinema-owned #chatwrap {
+  position:fixed!important;top:0!important;bottom:0!important;
+  min-height:0!important;max-height:100vh!important;height:100vh!important;
+  margin:0!important;padding:0!important;float:none!important;
+  border:0!important;border-radius:0!important;box-sizing:border-box!important;
+  max-width:none!important;box-shadow:none!important;
 }
-#wwf-arena .wwf-search-form input {flex:1 1 220px;min-width:110px;}
-#wwf-arena .wwf-search-form select {flex:0 1 160px;}
-#wwf-arena .wwf-search-form button {
-  padding:7px 12px;min-height:34px;cursor:pointer;border-radius:4px;
-  border:1px solid #ba6468;color:#fff4db;background:#5c1d2b;font-weight:800;
+body.wwf-cinema-owned #videowrap {
+  left:var(--wwf-cinema-width,20vw)!important;right:0!important;
+  width:calc(100vw - var(--wwf-cinema-width,20vw))!important;
+  z-index:3000!important;background:#000!important;
 }
-#wwf-arena .wwf-search-form button:hover {background:#9a2639;}
-#wwf-arena #wwf-search-results {display:flex;flex-direction:column;gap:4px;max-height:210px;overflow:auto;}
-#wwf-arena #wwf-search-results:empty {display:none;}
-#wwf-arena #wwf-search-results p {margin:7px 0 0;font-size:12px;color:#e6cfbb;}
-#wwf-arena #wwf-search-results .wwf-search-result {
-  background:#261b27;color:#f4e7dd;border:1px solid #57333d;
-  padding:5px 8px;text-align:left;font:600 12px/1.4 system-ui,Arial,sans-serif;
-  cursor:pointer;
-}
-#wwf-arena #wwf-search-results .wwf-search-result:hover {background:#562433;border-color:#be7982;}
-#queue .wwf-search-hit {outline:2px solid #ffd27b!important;outline-offset:-2px;}
-/* Hide the arena header while cinema mode is playing; native cinema controls
-   stay on screen when the Xaekai module is available. */
-body.cinemachat #wwf-arena {display:none!important;}
-
-/* Only enable fallback layout when Xaekai cinema is absent. */
-/* Chat width comes from the saved --wwf-cinema-chat-width inline variable. */
-body.wwf-cinema-fallback.cinemachat nav.navbar,
-body.wwf-cinema-fallback.cinemachat #motdwrap,
-body.wwf-cinema-fallback.cinemachat #queue,
-body.wwf-cinema-fallback.cinemachat #footer,
-body.wwf-cinema-fallback.cinemachat #currenttitle,
-body.wwf-cinema-fallback.cinemachat #videowrap-header,
-body.wwf-cinema-fallback.cinemachat .toggle-label {display:none!important;}
-body.wwf-cinema-fallback.cinemachat #videowrap,
-body.wwf-cinema-fallback.cinemachat #chatwrap {
-  position:fixed!important;top:0!important;bottom:0!important;height:100vh!important;
-  border:0!important;margin:0!important;float:none!important;
-  border-radius:0!important;max-width:none!important;min-height:0!important;
-}
-body.wwf-cinema-fallback.cinemachat #videowrap {
-  left:var(--wwf-cinema-chat-width)!important;right:0!important;
-  width:calc(100vw - var(--wwf-cinema-chat-width))!important;
-  z-index:3000!important;background:#000!important;padding:0!important;
-}
-body.wwf-cinema-fallback.cinemachat #chatwrap {
+body.wwf-cinema-owned #chatwrap {
   left:0!important;right:auto!important;
-  width:var(--wwf-cinema-chat-width)!important;
-  z-index:3001!important;background:#18161d!important;
-  display:flex!important;flex-direction:column!important;padding:0!important;
+  width:var(--wwf-cinema-width,20vw)!important;
+  z-index:3001!important;background:#151218!important;
 }
-body.wwf-cinema-fallback.cinemachat.synchtube #chatwrap {left:auto!important;right:0!important;}
-body.wwf-cinema-fallback.cinemachat.synchtube #videowrap {left:0!important;right:var(--wwf-cinema-chat-width)!important;}
-body.wwf-cinema-fallback.cinemachat #videowrap .embed-responsive,
-body.wwf-cinema-fallback.cinemachat #videowrap #ytapiplayer,
-body.wwf-cinema-fallback.cinemachat #videowrap iframe {
-  width:100%!important;height:100%!important;min-height:0!important;
+body.wwf-cinema-owned.synchtube #chatwrap {right:0!important;left:auto!important;}
+body.wwf-cinema-owned.synchtube #videowrap {left:0!important;right:var(--wwf-cinema-width,20vw)!important;}
+body.wwf-cinema-owned #videowrap .embed-responsive {
+  position:absolute!important;inset:0!important;box-sizing:border-box!important;
+  width:100%!important;height:100%!important;
+  padding:0!important;margin:0!important;min-height:0!important;
 }
-body.wwf-cinema-fallback.cinemachat #chatwrap #messagebuffer,
-body.wwf-cinema-fallback.cinemachat #chatwrap #userlist {
-  flex:1 1 auto!important;height:calc(100vh - 85px)!important;max-height:none!important;
-  overflow-y:auto!important;min-height:40px!important;
+body.wwf-cinema-owned #videowrap iframe,
+body.wwf-cinema-owned #videowrap video,
+body.wwf-cinema-owned #videowrap #ytapiplayer {
+  position:absolute!important;top:0!important;left:0!important;
+  width:100%!important;height:100%!important;
+  max-width:100%!important;max-height:100%!important;
 }
-body.wwf-cinema-fallback.cinemachat #chatline {width:100%!important;min-height:32px!important;}
-body.wwf-cinema-fallback.cinemachat #pmbar {width:calc(100vw - var(--wwf-cinema-chat-width))!important;}
-body.wwf-cinema-fallback.cinemachat #pollwrap div.active:not(.dismissed) {
-  position:fixed!important;left:calc(var(--wwf-cinema-chat-width) + 30px)!important;
-  top:12px!important;z-index:3400!important;max-width:calc(100vw - var(--wwf-cinema-chat-width) - 60px);
+body.wwf-cinema-owned #chatwrap #messagebuffer,
+body.wwf-cinema-owned #chatwrap #userlist {
+  height:calc(100vh - 62px)!important;max-height:none!important;
+  overflow-y:auto!important;
 }
-body.wwf-cinema-fallback.cinemachat.synchtube #pollwrap div.active:not(.dismissed) {left:30px!important;}
-#wwf-cinema-fallback-controls {display:none;}
-body.wwf-cinema-fallback.cinemachat #wwf-cinema-fallback-controls {
-  display:flex!important;position:fixed!important;right:10px;top:10px;
-  gap:5px;z-index:3900!important;align-items:center;
+body.wwf-cinema-owned #chatline {width:100%!important;}
+body.wwf-cinema-owned #pmbar {width:calc(100vw - var(--wwf-cinema-width,20vw))!important;}
+body.wwf-cinema-owned #pollwrap div.active:not(.dismissed) {
+  position:fixed!important;top:12px!important;z-index:3050!important;
+  left:calc(var(--wwf-cinema-width,20vw) + 32px)!important;
 }
-#wwf-cinema-fallback-controls button {
-  min-height:30px;padding:5px 9px;border:1px solid #c4af9a;
-  background:#1f151fe8;color:#ffe2ac;font:bold 12px system-ui,Arial,sans-serif;
-  cursor:pointer;border-radius:4px;
-}
-#wwf-cinema-fallback-controls button:hover {background:#8b2339;color:white;}
-body.wwf-cinema-fallback #cinematoggle,
-body.wwf-cinema-fallback #cinemasizeinc,
-body.wwf-cinema-fallback #cinemasizedec {display:none!important;}
-@media(max-width:700px) {
-  body.wwf-cinema-fallback.cinemachat #chatwrap {min-width:120px;}
-  #wwf-arena .wwf-search-form select {flex:1 1 145px;}
-}
+body.wwf-cinema-owned.synchtube #pollwrap div.active:not(.dismissed) {left:32px!important;}

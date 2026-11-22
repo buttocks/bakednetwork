@@ -1,4 +1,4 @@
-# WWE / WWF Ringside v1.4 — Baked.live
+# WWE / WWF Ringside v1.5 — Baked.live
 
 A standalone WWE/WWF visual skin that works **beside** WrestleTube's existing channel logic. New filter shortcuts use ordinary emote-style names with collision-safe numbered suffixes.
 
@@ -13,7 +13,7 @@ It contains the original 25 Xaekai module definitions, `scrollQueue()`, chat use
 ## Files
 
 - `skin.css`: Original WrestleTube external chat-effect CSS followed by the WWE/WWF dark arena skin, with real WWF and WWE background logo watermarks and a toggle.
-- `skin.js`: Arena UI, now-playing, the Attitude/Modern theme toggle, logos toggle, cinema mode, shortcuts to native Mod Menu, Macros and Search, and share button.
+- `skin.js`: Arena UI, now-playing, the Attitude/Modern theme toggle, logos toggle, cinema mode, shortcuts to native Mod Menu and Macros, and share button.
 - `filters.json`: **206 filters**: the **153 original WrestleTube rules in their original order and unchanged**, then **53 new WWE/WWF rules**. This is an importable Baked.live/CyTube-style JSON array.
 
 ## Chat filters — normal triggers without emote collisions
@@ -91,9 +91,20 @@ Use the pinned commit `skin.js` and `skin.css` URLs shown in the release chat in
 
 The revised JS passes `node --check` and the new rule regexps validate under JavaScript. Six preserved legacy rules have unsupported PCRE syntax in JavaScript; these old rules were left unchanged rather than silently rewritten. Live channel testing is still required.
 
-## v1.4 — Cinema and Search fixes
 
-- **Cinema** uses the existing Xaekai `#cinematoggle` when that module is available. If not, the skin supplies a *real* video/chat split layout (`cinemachat`), with 15–32vw chat-width +/− controls, ESC-to-exit, and normal layout restoration.
-- **Search** opens an independent search panel regardless of whether the original disabled Underchat Search module is installed. Choose YouTube, the current Baked playlist, Google, or IMDb. Playlist matches are clickable and highlighted in the queue.
-- The WWF and WWE logos, chat filters, and original WrestleTube channel functions are unchanged.
-- Update **both** External JavaScript and External CSS URLs to the same new pinned commit. Hard refresh to clear cached assets.
+## v1.5 — Cinema slowdown and redundant Search fix
+
+Previous v1.4's custom cinema fallback created a page-wide MutationObserver,
+interacted with the page's resize handling, and included a duplicate Search.
+That build has been replaced by a lightweight, click-driven cinema controller.
+
+- No `MutationObserver`, resize dispatch, or 4-second cinema mode polling.
+- Prefer original Xaekai cinema controls when `#cinematoggle` and `#cinemaStyle` exist.
+- Otherwise use a split chat/video viewport with a single CSS class, +/− chat width, and a direct Exit button (or Escape). It does not modify the original channel module loader.
+- Removed the redundant Search button and panel. The playlist's own search is retained.
+- Kept existing WWF/WWE logos, queue, player, and the original 206-rule merged filters.
+
+**Install both v1.5 pinned external CSS and external JS URLs.** If Firefox is
+slow on v1.4, first clear the old External JavaScript field and refresh. Restore
+the original version to roll back. Live Baked/Firefox extension testing remains
+necessary; an extension-specific performance problem is not ruled out.

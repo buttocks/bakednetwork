@@ -1,4 +1,4 @@
-/* WWE / WWF Ringside — Baked.live channel skin v1.4
+/* WWE / WWF Ringside — Baked.live channel skin v1.5
    External Javascript URL: host this file as JS (e.g. jsDelivr + GitHub).
    Designed for Baked.live/CyTube channel pages. No external dependencies.
 */
@@ -87,24 +87,8 @@
         <button type="button" data-wwf="focus" aria-pressed="false">▣ CINEMA</button>
         <button type="button" data-wwf="mod" class="wwf-module-action" hidden>⚙ MOD MENU</button>
         <button type="button" data-wwf="macros" class="wwf-module-action" hidden>☻ MACROS</button>
-        <button type="button" data-wwf="search" aria-expanded="false" aria-controls="wwf-search-panel">⌕ SEARCH</button>
         <button type="button" data-wwf="share">↗ SHARE</button>
       </nav>
-      <section id="wwf-search-panel" class="wwf-search-panel" aria-label="Search wrestling media and playlist" hidden>
-        <form id="wwf-search-form" class="wwf-search-form">
-          <label for="wwf-search-query">SEARCH</label>
-          <select id="wwf-search-provider" aria-label="Search where">
-            <option value="youtube">YouTube videos</option>
-            <option value="queue">Current playlist</option>
-            <option value="google">Google</option>
-            <option value="imdb">IMDb</option>
-          </select>
-          <input id="wwf-search-query" type="search" autocomplete="off" maxlength="240" placeholder="Search for wrestling videos…" required>
-          <button type="submit" class="wwf-search-go">SEARCH</button>
-          <button type="button" data-wwf-search-close aria-label="Close search">✕</button>
-        </form>
-        <div id="wwf-search-results" role="status" aria-live="polite"></div>
-      </section>
       <div class="wwf-ticker" aria-live="off"><b>RINGSIDE WIRE</b><span id="wwf-ticker-text">${slogans[0]}</span></div>`;
 
     const navbar = select('nav.navbar');
@@ -151,125 +135,6 @@
     }
     updateModuleShortcuts();
 
-    // Search is self-contained: the original WrestleTube under-chat search module
-    // is disabled in its loader, and a #showsearch control may have no handler.
-    // Never alter the original channel module configuration just to open search.
-    const searchPanel = select('#wwf-search-panel', header);
-    const searchInput = select('#wwf-search-query', header);
-    const searchResults = select('#wwf-search-results', header);
-    const searchProvider = select('#wwf-search-provider', header);
-    function toggleSearch(open) {
-      searchPanel.hidden = !open;
-      button('search').setAttribute('aria-expanded', String(open));
-      if (open) window.requestAnimationFrame(() => searchInput.focus());
-    }
-    button('search').addEventListener('click', () => toggleSearch(searchPanel.hidden));
-    select('[data-wwf-search-close]', header).addEventListener('click', () => toggleSearch(false));
-    searchInput.addEventListener('keydown', event => {
-      if (event.key === 'Escape') { event.preventDefault(); toggleSearch(false); button('search').focus(); }
-    });
-    searchProvider.addEventListener('change', () => {
-      searchResults.replaceChildren();
-      searchInput.placeholder = searchProvider.value === 'queue'
-        ? 'Find a title in the loaded playlist…'
-        : searchProvider.value === 'youtube' ? 'Search for wrestling videos…' : 'Enter search terms…';
-    });
-    select('#wwf-search-form', header).addEventListener('submit', event => {
-      event.preventDefault();
-      const query = searchInput.value.trim();
-      if (!query) { searchInput.focus(); return; }
-      searchResults.replaceChildren();
-      if (searchProvider.value === 'queue') {
-        const entries = Array.from(document.querySelectorAll('#queue .queue_entry'));
-        const term = query.toLocaleLowerCase();
-        const matches = entries.filter(entry => (entry.querySelector('.qe_title')?.textContent || entry.textContent || '').toLocaleLowerCase().includes(term));
-        const summary = document.createElement('p');
-        summary.textContent = matches.length
-          ? matches.length + ' matching playlist item' + (matches.length === 1 ? '' : 's')
-          : 'No matches in the currently loaded playlist.';
-        searchResults.appendChild(summary);
-        for (const entry of matches.slice(0, 30)) {
-          const result = document.createElement('button');
-          result.type = 'button';
-          result.className = 'wwf-search-result';
-          result.textContent = (entry.querySelector('.qe_title')?.textContent || entry.textContent || '').trim().slice(0, 160);
-          result.addEventListener('click', () => {
-            document.querySelectorAll('#queue .wwf-search-hit').forEach(el => el.classList.remove('wwf-search-hit'));
-            entry.classList.add('wwf-search-hit');
-            if (document.body.classList.contains('wwf-cinema-fallback')) setFallbackCinema(false);
-            entry.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          });
-          searchResults.appendChild(result);
-        }
-        return;
-      }
-      const encoded = encodeURIComponent(query);
-      const target = searchProvider.value === 'google'
-        ? 'https://www.google.com/search?q=' + encoded
-        : searchProvider.value === 'imdb'
-          ? 'https://www.imdb.com/find/?q=' + encoded
-          : 'https://www.youtube.com/results?search_query=' + encoded;
-      // Search is a direct user action; no third-party scripts or permissions.
-      window.open(target, '_blank', 'noopener,noreferrer');
-      const summary = document.createElement('p');
-      summary.textContent = 'Opened ' + searchProvider.selectedOptions[0].text + ' results in a new tab.';
-      searchResults.appendChild(summary);
-    });
-
-    // Use WrestleTube's real Xaekai cinema toggle whenever its layout module
-    // is installed. If it is not loaded on this channel, supply an equivalent
-    // split-screen cinema mode instead of merely dimming the chat.
-    const cinemaWidthKey = 'baked-wwf-cinema-width:' + location.pathname.toLowerCase();
-    let cinemaWidth = 20;
-    try {
-      const stored = Number(localStorage.getItem(cinemaWidthKey));
-      if (Number.isFinite(stored) && stored >= 15 && stored <= 32) cinemaWidth = Math.round(stored);
-    } catch (_) { /* storage optional */ }
-    const cinemaControls = document.createElement('div');
-    cinemaControls.id = 'wwf-cinema-fallback-controls';
-    cinemaControls.setAttribute('aria-label', 'Cinema mode controls');
-    cinemaControls.innerHTML = '<button type="button" data-wwf-cinema="decrease" title="Narrower cinema chat" aria-label="Narrower cinema chat">−</button>' +
-      '<button type="button" data-wwf-cinema="increase" title="Wider cinema chat" aria-label="Wider cinema chat">+</button>' +
-      '<button type="button" data-wwf-cinema="exit" title="Exit cinema mode" aria-label="Exit cinema mode">✕ EXIT CINEMA</button>';
-    document.body.appendChild(cinemaControls);
-    function updateCinemaUI() {
-      const on = document.body.classList.contains('cinemachat');
-      const ctl = button('focus');
-      ctl.textContent = on ? '▣ EXIT CINEMA' : '▣ CINEMA';
-      ctl.setAttribute('aria-pressed', String(on));
-    }
-    function updateCinemaWidth(next) {
-      cinemaWidth = Math.max(15, Math.min(32, next));
-      document.body.style.setProperty('--wwf-cinema-chat-width', cinemaWidth + 'vw');
-      try { localStorage.setItem(cinemaWidthKey, String(cinemaWidth)); } catch (_) { /* optional */ }
-    }
-    function setFallbackCinema(on) {
-      document.body.classList.toggle('wwf-cinema-fallback', on);
-      document.body.classList.toggle('cinemachat', on);
-      if (typeof window.handleWindowResize === 'function') {
-        try { window.handleWindowResize(); } catch (_) { /* layout helper optional */ }
-      }
-      updateCinemaUI();
-    }
-    updateCinemaWidth(cinemaWidth);
-    cinemaControls.addEventListener('click', event => {
-      const action = event.target.closest('[data-wwf-cinema]')?.getAttribute('data-wwf-cinema');
-      if (action === 'exit') setFallbackCinema(false);
-      else if (action === 'increase') updateCinemaWidth(cinemaWidth + 1);
-      else if (action === 'decrease') updateCinemaWidth(cinemaWidth - 1);
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && document.body.classList.contains('wwf-cinema-fallback')) setFallbackCinema(false);
-    });
-    const cinemaObserver = new MutationObserver(() => {
-      if (!document.body.classList.contains('cinemachat')) {
-        document.body.classList.remove('wwf-cinema-fallback');
-      }
-      updateCinemaUI();
-    });
-    cinemaObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    updateCinemaUI();
-
     button('watch').addEventListener('click', () => goTo('#videowrap'));
     button('chat').addEventListener('click', () => goTo('#chatwrap', '#chatline'));
     button('queue').addEventListener('click', () => goTo('#queue'));
@@ -285,19 +150,78 @@
       else goTo('#queue');
     });
     button('theme').addEventListener('click', () => setTheme(document.body.classList.contains('wwf-modern') ? 'attitude' : 'modern'));
-    button('focus').addEventListener('click', () => {
-      if (document.body.classList.contains('wwf-cinema-fallback')) {
-        setFallbackCinema(false);
+    // One cinema controller at a time. Prefer the native Xaekai module and
+    // use a CSS-only split layout if it is not loaded on this tube.
+    // No observer, custom resize dispatch, polling, or iframe reconstruction.
+    const cinemaKey = 'baked-wwf-cinema-width:' + location.pathname.toLowerCase();
+    let chatWidth = 20;
+    try {
+      const cached = Number(localStorage.getItem(cinemaKey));
+      if (Number.isFinite(cached) && cached >= 15 && cached <= 32) chatWidth = Math.round(cached);
+    } catch (_) { /* storage optional */ }
+    const cinemaPanel = document.createElement('div');
+    cinemaPanel.id = 'wwf-cinema-controls';
+    cinemaPanel.hidden = true;
+    cinemaPanel.setAttribute('role', 'group');
+    cinemaPanel.setAttribute('aria-label', 'Cinema mode controls');
+    cinemaPanel.innerHTML = '<button type="button" data-wwf-cinema="smaller" title="Narrower chat">−</button>' +
+      '<button type="button" data-wwf-cinema="bigger" title="Wider chat">+</button>' +
+      '<button type="button" data-wwf-cinema="exit" title="Exit cinema">✕ EXIT CINEMA</button>';
+    document.body.appendChild(cinemaPanel);
+    const cinemaActive = () => document.body.classList.contains('wwf-cinema-owned');
+    function syncCinemaTitle(on) {
+      button('focus').textContent = on ? '▣ EXIT CINEMA' : '▣ CINEMA';
+      button('focus').setAttribute('aria-pressed', String(on));
+    }
+    function resizeCinemaChat(next) {
+      chatWidth = Math.min(32, Math.max(15, Math.round(next)));
+      document.body.style.setProperty('--wwf-cinema-width', chatWidth + 'vw');
+      try { localStorage.setItem(cinemaKey, String(chatWidth)); } catch (_) { /* storage optional */ }
+    }
+    function setOwnCinema(on) {
+      if (cinemaActive() === on) return;
+      document.body.classList.toggle('wwf-cinema-owned', on);
+      cinemaPanel.hidden = !on;
+      syncCinemaTitle(on);
+    }
+    function findNativeCinemaToggle() {
+      const native = document.getElementById('cinematoggle');
+      return native && document.getElementById('cinemaStyle') ? native : null;
+    }
+    function toggleCinema() {
+      if (cinemaActive()) {
+        setOwnCinema(false);
         return;
       }
-      const nativeToggle = document.querySelector('#cinematoggle');
-      if (nativeToggle && nativeToggle !== button('focus')) {
-        nativeToggle.click();
-        updateCinemaUI();
+      const native = findNativeCinemaToggle();
+      if (native) {
+        native.click();
+        syncCinemaTitle(document.body.classList.contains('cinemachat'));
         return;
       }
-      setFallbackCinema(!document.body.classList.contains('cinemachat'));
+      if (!select('#videowrap') || !select('#chatwrap')) {
+        showTemporary(button('focus'), 'CINEMA UNAVAILABLE', '▣ CINEMA');
+        return;
+      }
+      setOwnCinema(true);
+    }
+    resizeCinemaChat(chatWidth);
+    cinemaPanel.querySelector('[data-wwf-cinema="smaller"]').addEventListener('click', event => {
+      event.preventDefault();
+      resizeCinemaChat(chatWidth - 1);
     });
+    cinemaPanel.querySelector('[data-wwf-cinema="bigger"]').addEventListener('click', event => {
+      event.preventDefault();
+      resizeCinemaChat(chatWidth + 1);
+    });
+    cinemaPanel.querySelector('[data-wwf-cinema="exit"]').addEventListener('click', event => {
+      event.preventDefault();
+      setOwnCinema(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && cinemaActive()) setOwnCinema(false);
+    });
+    button('focus').addEventListener('click', toggleCinema);
     button('share').addEventListener('click', async () => {
       const url = location.origin + location.pathname;
       try {

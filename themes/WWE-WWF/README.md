@@ -1,4 +1,4 @@
-# WWE / WWF Ringside v1.5 — Baked.live
+# WWE / WWF Ringside v1.6 — Baked.live
 
 A standalone WWE/WWF visual skin that works **beside** WrestleTube's existing channel logic. New filter shortcuts use ordinary emote-style names with collision-safe numbered suffixes.
 
@@ -108,3 +108,13 @@ That build has been replaced by a lightweight, click-driven cinema controller.
 slow on v1.4, first clear the old External JavaScript field and refresh. Restore
 the original version to roll back. Live Baked/Firefox extension testing remains
 necessary; an extension-specific performance problem is not ruled out.
+
+## v1.6 — Real Layout Cinema and complete WWE lineage wallpaper
+
+Removed the redundant toolbar controls **WATCH**, **CHAT**, **FIND PLAYING**, **CINEMA** and **MOD MENU**. Admin settings still exist in the native navbar. The archived original WrestleTube MOTD did not contain a mod menu control.
+
+**Layout → Cinema Mode** uses the genuine Xaekai Extended Layout module from `wrestletube-selfhost-v1-20261115`, loaded once on first use. It creates its original `cinemachat` video/chat split, size plus/minus controls, and command. The v1.4–v1.5 cinema fallback, resize/observer logic, and toolbar mode toggle are gone. A blocked module or its cinema CSS will report unavailable, not enter a fake mode.
+
+Added 1963–1971 WWWF, 1971–1979 WWWF globe, WWF block, WWF New Generation, and WWE imagery as subtle backgrounds. The **LOGOS ON** switch still hides the full set. The chat filters, playlist search, and internal module loader are unchanged.
+
+**Installation:** update both pinned CSS and JS fields to the same commit, hard refresh, and use the normal **Layout → Cinema Mode** menu item. Tests were static and JavaScript syntax; live Firefox/extension behavior still needs verification.

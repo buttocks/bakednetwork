@@ -1,4 +1,4 @@
-/* WWE / WWF Ringside — Baked.live channel skin v1.5
+/* WWE / WWF Ringside — Baked.live channel skin v1.6
    External Javascript URL: host this file as JS (e.g. jsDelivr + GitHub).
    Designed for Baked.live/CyTube channel pages. No external dependencies.
 */
@@ -66,7 +66,9 @@
     header.innerHTML = `
       <div class="wwf-hero">
         <div class="wwf-watermarks" aria-hidden="true">
+          <img class="wwf-mark wwf-mark-wwwf" src="https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1971-1979.png" alt="" decoding="async" loading="lazy">
           <img class="wwf-mark wwf-mark-classic" src="https://upload.wikimedia.org/wikipedia/commons/6/68/World_Wrestling_Federation_block_logo.svg" alt="" decoding="async">
+          <img class="wwf-mark wwf-mark-newgen" src="https://upload.wikimedia.org/wikipedia/commons/7/7f/WWF_New_Gen_Logo.svg" alt="" decoding="async" loading="lazy">
           <img class="wwf-mark wwf-mark-modern" src="https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg" alt="" decoding="async">
         </div>
         <div class="wwf-hero-title">
@@ -78,14 +80,9 @@
       </div>
       <div class="wwf-now"><span class="wwf-now-label">NOW SHOWING</span><span id="wwf-track" title="Currently playing">${fallback}</span></div>
       <nav class="wwf-actions" aria-label="Channel shortcuts">
-        <button type="button" data-wwf="watch">▶ WATCH</button>
-        <button type="button" data-wwf="chat">◉ CHAT</button>
         <button type="button" data-wwf="queue">☰ MATCH CARD</button>
-        <button type="button" data-wwf="current">⌖ FIND PLAYING</button>
         <button type="button" data-wwf="theme" aria-pressed="false">◈ ERA: ATTITUDE</button>
         <button type="button" data-wwf="marks" aria-pressed="true" title="Show or hide WWF/WWE background logos">★ LOGOS ON</button>
-        <button type="button" data-wwf="focus" aria-pressed="false">▣ CINEMA</button>
-        <button type="button" data-wwf="mod" class="wwf-module-action" hidden>⚙ MOD MENU</button>
         <button type="button" data-wwf="macros" class="wwf-module-action" hidden>☻ MACROS</button>
         <button type="button" data-wwf="share">↗ SHARE</button>
       </nav>
@@ -119,7 +116,7 @@
     button('marks').addEventListener('click', () => setMarks(!marksVisible));
 
     // Existing WrestleTube controls are the authority; never reimplement their handlers.
-    const moduleControls = { mod: '#showchansettings', macros: '#emotelistbtn' };
+    const moduleControls = { macros: '#emotelistbtn' };
     function activateExistingControl(action) {
       const source = select(moduleControls[action]);
       if (source && !header.contains(source)) source.click();
@@ -135,93 +132,97 @@
     }
     updateModuleShortcuts();
 
-    button('watch').addEventListener('click', () => goTo('#videowrap'));
-    button('chat').addEventListener('click', () => goTo('#chatwrap', '#chatline'));
-    button('queue').addEventListener('click', () => goTo('#queue'));
-    button('current').addEventListener('click', () => {
-      // Prefer the original WTTTV scrollQueue() implementation if loaded.
-      if (typeof window.scrollQueue === 'function') {
-        try { window.scrollQueue(); return; } catch (_) { /* fall back to DOM */ }
-      }
-      const existing = select('#scroll-btn');
-      if (existing && !header.contains(existing)) { existing.click(); return; }
-      const current = select('#queue .queue_entry.queue_active') || select('#queue .queue_active');
-      if (current) current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      else goTo('#queue');
-    });
     button('theme').addEventListener('click', () => setTheme(document.body.classList.contains('wwf-modern') ? 'attitude' : 'modern'));
-    // One cinema controller at a time. Prefer the native Xaekai module and
-    // use a CSS-only split layout if it is not loaded on this tube.
-    // No observer, custom resize dispatch, polling, or iframe reconstruction.
-    const cinemaKey = 'baked-wwf-cinema-width:' + location.pathname.toLowerCase();
-    let chatWidth = 20;
-    try {
-      const cached = Number(localStorage.getItem(cinemaKey));
-      if (Number.isFinite(cached) && cached >= 15 && cached <= 32) chatWidth = Math.round(cached);
-    } catch (_) { /* storage optional */ }
-    const cinemaPanel = document.createElement('div');
-    cinemaPanel.id = 'wwf-cinema-controls';
-    cinemaPanel.hidden = true;
-    cinemaPanel.setAttribute('role', 'group');
-    cinemaPanel.setAttribute('aria-label', 'Cinema mode controls');
-    cinemaPanel.innerHTML = '<button type="button" data-wwf-cinema="smaller" title="Narrower chat">−</button>' +
-      '<button type="button" data-wwf-cinema="bigger" title="Wider chat">+</button>' +
-      '<button type="button" data-wwf-cinema="exit" title="Exit cinema">✕ EXIT CINEMA</button>';
-    document.body.appendChild(cinemaPanel);
-    const cinemaActive = () => document.body.classList.contains('wwf-cinema-owned');
-    function syncCinemaTitle(on) {
-      button('focus').textContent = on ? '▣ EXIT CINEMA' : '▣ CINEMA';
-      button('focus').setAttribute('aria-pressed', String(on));
+    // Original WrestleTube / Xaekai Extended Layout addon (lazy on first click).
+    // No custom video positioning, body observer, repeated fetch, or fake mode.
+    const addonUrl = 'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/js/module_layout.min.js';
+    let cinemaLoad = null;
+    let cinemaLink = null;
+    function getOriginalToggle() {
+      return document.getElementById('cinematoggle') && document.getElementById('cinemaStyle')
+        ? document.getElementById('cinematoggle') : null;
     }
-    function resizeCinemaChat(next) {
-      chatWidth = Math.min(32, Math.max(15, Math.round(next)));
-      document.body.style.setProperty('--wwf-cinema-width', chatWidth + 'vw');
-      try { localStorage.setItem(cinemaKey, String(chatWidth)); } catch (_) { /* storage optional */ }
+    function getLayoutMenu() {
+      return Array.from(document.querySelectorAll('.dropdown-menu')).find(menu =>
+        Array.from(menu.querySelectorAll('a')).some(link =>
+          /^(chat only|remove video)$/i.test(link.textContent.trim())));
     }
-    function setOwnCinema(on) {
-      if (cinemaActive() === on) return;
-      document.body.classList.toggle('wwf-cinema-owned', on);
-      cinemaPanel.hidden = !on;
-      syncCinemaTitle(on);
+    function menuLabel() {
+      if (cinemaLink) cinemaLink.textContent =
+        document.body.classList.contains('cinemachat') ? 'Exit Cinema Mode' : 'Cinema Mode';
     }
-    function findNativeCinemaToggle() {
-      const native = document.getElementById('cinematoggle');
-      return native && document.getElementById('cinemaStyle') ? native : null;
+    function installCinemaMenu() {
+      const menu = getLayoutMenu();
+      if (!menu) return;
+      // The Xaekai module also adds a menu item. Only our one interactive
+      // entry should remain, while the original module owns the layout.
+      menu.querySelectorAll('a[onclick*="cinematoggle"]').forEach(link => link.closest('li')?.remove());
+      let link = menu.querySelector('#wwf-layout-cinema');
+      if (link) { cinemaLink = link; menuLabel(); return; }
+      const row = document.createElement('li');
+      row.id = 'wwf-layout-cinema-row';
+      link = document.createElement('a');
+      link.id = 'wwf-layout-cinema';
+      link.href = '#';
+      link.textContent = 'Cinema Mode';
+      link.addEventListener('click', async event => {
+        event.preventDefault();
+        let nativeToggle = getOriginalToggle();
+        if (!nativeToggle) {
+          link.textContent = 'Loading Cinema…';
+          const ready = await ensureCinemaAddon();
+          nativeToggle = ready ? getOriginalToggle() : null;
+        }
+        if (nativeToggle) {
+          nativeToggle.click();
+          menuLabel();
+        } else {
+          link.textContent = 'Cinema unavailable — check content blocker';
+        }
+      });
+      row.appendChild(link);
+      menu.appendChild(row);
+      cinemaLink = link;
+      menuLabel();
     }
-    function toggleCinema() {
-      if (cinemaActive()) {
-        setOwnCinema(false);
-        return;
-      }
-      const native = findNativeCinemaToggle();
-      if (native) {
-        native.click();
-        syncCinemaTitle(document.body.classList.contains('cinemachat'));
-        return;
-      }
-      if (!select('#videowrap') || !select('#chatwrap')) {
-        showTemporary(button('focus'), 'CINEMA UNAVAILABLE', '▣ CINEMA');
-        return;
-      }
-      setOwnCinema(true);
+    function ensureCinemaAddon() {
+      if (getOriginalToggle()) return Promise.resolve(true);
+      if (cinemaLoad) return cinemaLoad;
+      cinemaLoad = new Promise(resolve => {
+        if (!window.jQuery || !window.CLIENT || !window.CHANNEL ||
+            !document.getElementById('videowrap') || !document.getElementById('chatwrap')) {
+          resolve(false); return;
+        }
+        let checks = 0;
+        const check = () => {
+          installCinemaMenu();
+          if (getOriginalToggle()) { resolve(true); return; }
+          if (++checks >= 12) { resolve(false); return; }
+          window.setTimeout(check, 350);
+        };
+        if (window.CLIENT.cinemaMode || document.getElementById('wwf-original-layout-module')) {
+          check(); return;
+        }
+        const script = document.createElement('script');
+        script.id = 'wwf-original-layout-module';
+        script.src = addonUrl;
+        script.async = true;
+        script.addEventListener('load', check, {once:true});
+        script.addEventListener('error', () => {console.warn('[Ringside] Cinema addon blocked or unavailable'); resolve(false);},{once:true});
+        document.head.appendChild(script);
+      });
+      return cinemaLoad;
     }
-    resizeCinemaChat(chatWidth);
-    cinemaPanel.querySelector('[data-wwf-cinema="smaller"]').addEventListener('click', event => {
-      event.preventDefault();
-      resizeCinemaChat(chatWidth - 1);
+    installCinemaMenu();
+    window.setTimeout(installCinemaMenu, 900);
+    window.setTimeout(installCinemaMenu, 2300);
+    document.addEventListener('click', event => {
+      const t = event.target;
+      if (!(t instanceof Element)) return;
+      const b = t.closest('a,button');
+      if (b && /^layout$/i.test((b.textContent || '').trim())) installCinemaMenu();
+      if (t.closest('#cinematoggle')) menuLabel();
     });
-    cinemaPanel.querySelector('[data-wwf-cinema="bigger"]').addEventListener('click', event => {
-      event.preventDefault();
-      resizeCinemaChat(chatWidth + 1);
-    });
-    cinemaPanel.querySelector('[data-wwf-cinema="exit"]').addEventListener('click', event => {
-      event.preventDefault();
-      setOwnCinema(false);
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && cinemaActive()) setOwnCinema(false);
-    });
-    button('focus').addEventListener('click', toggleCinema);
     button('share').addEventListener('click', async () => {
       const url = location.origin + location.pathname;
       try {

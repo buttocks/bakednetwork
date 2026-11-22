@@ -21,18 +21,21 @@ body.wwf-modern {
 body {
   background-color:var(--wwf-bg)!important;
   background-image:
-    linear-gradient(105deg,rgba(11,10,14,.93),rgba(11,10,14,.96)),
+    linear-gradient(105deg,rgba(11,10,14,.68),rgba(11,10,14,.73)),
+    url("https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1971-1979.png"),
     url("https://upload.wikimedia.org/wikipedia/commons/6/68/World_Wrestling_Federation_block_logo.svg"),
-    url("https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg")!important;
+    url("https://upload.wikimedia.org/wikipedia/commons/7/7f/WWF_New_Gen_Logo.svg"),
+    url("https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg"),
+    url("https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1963-1971.png")!important;
   background-repeat:no-repeat!important;
-  background-position:center,left 1.5rem top 12rem,right 1.5rem top 12rem!important;
-  background-size:cover,clamp(240px,33vw,540px) auto,clamp(230px,27vw,440px) auto!important;
+  background-position:center,left 2vw top 12rem,right 3vw top 12rem,
+    left 4vw bottom 5vh,right 5vw bottom 5vh,center top 43vh!important;
+  background-size:cover,clamp(180px,25vw,390px) auto,clamp(170px,27vw,400px) auto,
+    clamp(160px,22vw,320px) auto,clamp(150px,20vw,300px) auto,clamp(220px,30vw,500px) auto!important;
   background-attachment:fixed!important;
   color:var(--wwf-text)!important;
 }
-/* The archived WrestleTube CSS paints #wrap solid black. Keep it translucent
-   so the two watermark logos remain visible beyond the arena banner. */
-body #wrap {background-color:rgba(13,11,17,.86)!important; background-image:none!important;}
+body #wrap {background-color:rgba(13,11,17,.65)!important; background-image:none!important;}
 body.wwf-hide-marks {
   background-image:linear-gradient(105deg,#101013,#150e13)!important;
 }
@@ -53,12 +56,12 @@ a:hover { color:#fff2d3; }
   top:0; right:-8%; width:52%; height:120px; opacity:.18;
   background:repeating-linear-gradient(-55deg,transparent 0 13px,#e7a96a 14px 15px,transparent 16px 24px); }
 /* The banner watermarks sit UNDER the control labels; actual verified SVG logos. */
-#wwf-arena .wwf-watermarks {position:absolute; inset:0; z-index:0; overflow:hidden;
-  pointer-events:none; display:flex; justify-content:space-between; align-items:center; padding:0 12%; opacity:.22;}
-#wwf-arena .wwf-mark {display:block; width:auto; height:100%; max-width:36%; object-fit:contain;
-  pointer-events:none; user-select:none;}
-#wwf-arena .wwf-mark-classic {filter:invert(1) grayscale(1) contrast(1.3); opacity:.85; transform:rotate(-9deg) scale(1.2);}
-#wwf-arena .wwf-mark-modern {mix-blend-mode:screen; opacity:.87; transform:rotate(10deg) scale(1.13);}
+#wwf-arena .wwf-watermarks {position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:.25;}
+#wwf-arena .wwf-mark {position:absolute;display:block;max-width:24%;height:100%;object-fit:contain;pointer-events:none;user-select:none;mix-blend-mode:screen;}
+#wwf-arena .wwf-mark-wwwf {left:1%;top:-6%;max-width:24%;opacity:.95;transform:rotate(-7deg);}
+#wwf-arena .wwf-mark-classic {left:26%;top:-10%;max-width:22%;filter:invert(1) grayscale(1);opacity:.64;}
+#wwf-arena .wwf-mark-newgen {right:25%;top:2%;max-width:22%;filter:invert(1) grayscale(1);opacity:.72;}
+#wwf-arena .wwf-mark-modern {right:2%;top:1%;max-width:23%;opacity:.92;transform:rotate(8deg);}
 #wwf-arena .wwf-hero-title, #wwf-arena .wwf-on-air {position:relative; z-index:1;}
 body.wwf-hide-marks #wwf-arena .wwf-watermarks {display:none;}
 #wwf-arena .wwf-hero {position:relative; isolation:isolate; display:flex; justify-content:space-between; align-items:center;
@@ -182,8 +185,8 @@ nav.navbar { background:linear-gradient(90deg,#121016,#39151c,#161119)!important
 @media(max-width:780px) {
   #wwf-arena { width:calc(100% - 12px); margin:7px auto 10px; }
   #wwf-arena .wwf-hero { padding:12px 13px; gap:7px; min-height:91px; }
-  #wwf-arena .wwf-watermarks {padding:0 7%;opacity:.13;}
-  body {background-position:center,left -4rem top 10rem,right -4rem top 10rem!important;}
+  #wwf-arena .wwf-watermarks {opacity:.16;}
+  body {background-position:center,left -4rem top 10rem,right -4rem top 10rem,left -4rem bottom 5rem,right -4rem bottom 5rem,center center!important;}
   #wwf-arena .wwf-overline { letter-spacing:.13em; font-size:9px; }
   #wwf-arena .wwf-subtitle { letter-spacing:.045em; font-size:9px; }
   #wwf-arena .wwf-on-air { padding:9px 6px; min-width:92px; font-size:11px; }
@@ -203,74 +206,6 @@ nav.navbar { background:linear-gradient(90deg,#121016,#39151c,#161119)!important
 @media(prefers-reduced-motion:reduce) {
   #wwf-arena .wwf-actions button { transition:none; }
 }
-/* v1.5 cinema: a fixed split view with no scripted resize loop.
-   Applied only when Xaekai's native cinema module is absent. */
-#wwf-cinema-controls[hidden] {display:none!important;}
-#wwf-cinema-controls {
-  display:flex!important;align-items:center!important;gap:5px!important;
-  position:fixed!important;top:8px!important;right:8px!important;
-  z-index:2147483000!important;pointer-events:auto!important;
-}
-#wwf-cinema-controls button {
-  display:inline-block!important;min-height:35px!important;min-width:35px!important;
-  padding:6px 10px!important;appearance:none!important;pointer-events:auto!important;
-  border:1px solid #d6b37b!important;border-radius:4px!important;
-  font:bold 12px/1.2 system-ui,Arial,sans-serif!important;
-  background:#311720!important;color:#ffeacb!important;cursor:pointer!important;
-}
-#wwf-cinema-controls button:hover,
-#wwf-cinema-controls button:focus-visible {background:#912b42!important;outline:2px solid #eecf97!important;}
-body.cinemachat #wwf-arena,
-body.wwf-cinema-owned #wwf-arena {display:none!important;}
-body.wwf-cinema-owned {overflow:hidden!important;}
-body.wwf-cinema-owned nav.navbar,
-body.wwf-cinema-owned #motdwrap,
-body.wwf-cinema-owned #queue,
-body.wwf-cinema-owned #footer,
-body.wwf-cinema-owned #currenttitle,
-body.wwf-cinema-owned #videowrap-header,
-body.wwf-cinema-owned .toggle-label {display:none!important;}
-body.wwf-cinema-owned #videowrap,
-body.wwf-cinema-owned #chatwrap {
-  position:fixed!important;top:0!important;bottom:0!important;
-  min-height:0!important;max-height:100vh!important;height:100vh!important;
-  margin:0!important;padding:0!important;float:none!important;
-  border:0!important;border-radius:0!important;box-sizing:border-box!important;
-  max-width:none!important;box-shadow:none!important;
-}
-body.wwf-cinema-owned #videowrap {
-  left:var(--wwf-cinema-width,20vw)!important;right:0!important;
-  width:calc(100vw - var(--wwf-cinema-width,20vw))!important;
-  z-index:3000!important;background:#000!important;
-}
-body.wwf-cinema-owned #chatwrap {
-  left:0!important;right:auto!important;
-  width:var(--wwf-cinema-width,20vw)!important;
-  z-index:3001!important;background:#151218!important;
-}
-body.wwf-cinema-owned.synchtube #chatwrap {right:0!important;left:auto!important;}
-body.wwf-cinema-owned.synchtube #videowrap {left:0!important;right:var(--wwf-cinema-width,20vw)!important;}
-body.wwf-cinema-owned #videowrap .embed-responsive {
-  position:absolute!important;inset:0!important;box-sizing:border-box!important;
-  width:100%!important;height:100%!important;
-  padding:0!important;margin:0!important;min-height:0!important;
-}
-body.wwf-cinema-owned #videowrap iframe,
-body.wwf-cinema-owned #videowrap video,
-body.wwf-cinema-owned #videowrap #ytapiplayer {
-  position:absolute!important;top:0!important;left:0!important;
-  width:100%!important;height:100%!important;
-  max-width:100%!important;max-height:100%!important;
-}
-body.wwf-cinema-owned #chatwrap #messagebuffer,
-body.wwf-cinema-owned #chatwrap #userlist {
-  height:calc(100vh - 62px)!important;max-height:none!important;
-  overflow-y:auto!important;
-}
-body.wwf-cinema-owned #chatline {width:100%!important;}
-body.wwf-cinema-owned #pmbar {width:calc(100vw - var(--wwf-cinema-width,20vw))!important;}
-body.wwf-cinema-owned #pollwrap div.active:not(.dismissed) {
-  position:fixed!important;top:12px!important;z-index:3050!important;
-  left:calc(var(--wwf-cinema-width,20vw) + 32px)!important;
-}
-body.wwf-cinema-owned.synchtube #pollwrap div.active:not(.dismissed) {left:32px!important;}
+
+/* Cinema screen positions belong solely to the original Xaekai module. */
+body.cinemachat #wwf-arena {display:none!important;}

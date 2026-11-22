@@ -1,4 +1,4 @@
-/* WWF / WWE v2.0 — WrestleTube engine port, adapted for this channel.
+/* WWF / WWE v2.1 — WrestleTube engine port, adapted for this channel.
  * Original Xaekai module loader and chat/playlist implementations preserved.
  */
 (function(win,doc){
@@ -16,8 +16,16 @@
   const navList=nav.querySelector('ul.navbar-nav')||nav.querySelector('ul.nav');
   if(navList)navList.appendChild(item);else nav.appendChild(item);
   const strip=doc.createElement('div');strip.id='wwf-era-strip';
-  strip.innerHTML='<span class="wwf-name">WWF <b>/</b> WWE</span><span id="wwf-era-title">ATTITUDE ERA</span><small id="wwf-era-years">1997–2002</small><span class="wwf-era-logos">WWWF · WWF · WWE</span>';
-  nav.insertAdjacentElement('afterend',strip);
+  strip.innerHTML="<div class=\"wwf-banner-heading\"><span class=\"wwf-name\">WWF <b>/</b> WWE</span><strong id=\"wwf-era-title\">WWF · ATTITUDE</strong><small id=\"wwf-era-years\">1997–2002</small><span class=\"wwf-banner-hint\">THE HISTORY OF WRESTLING</span></div><div class=\"wwf-logo-gallery\" aria-label=\"WWWF WWF and WWE logo eras\"><button type=\"button\" class=\"wwf-era-card\" data-wwf-card=\"wwwf\" aria-pressed=\"false\" title=\"Show WWWF 1963 theme\"><span class=\"wwf-era-art\"><span class=\"wwf-logo-backup\" aria-hidden=\"true\">WWWF</span><img src=\"https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1963-1971.png\" loading=\"eager\" decoding=\"async\" alt=\"Original WWWF 1963 logo\"></span><span class=\"wwf-era-card-name\">WWWF 1963</span><small>EARLY YEARS</small></button><button type=\"button\" class=\"wwf-era-card\" data-wwf-card=\"wwwf\" aria-pressed=\"false\" title=\"Show WWWF 1971 theme\"><span class=\"wwf-era-art\"><span class=\"wwf-logo-backup\" aria-hidden=\"true\">WWWF</span><img src=\"https://loodibee.com/wp-content/uploads/World-Wide-Wrestling-Federation-WWWF-Logo-1971-1979.png\" loading=\"eager\" decoding=\"async\" alt=\"WWWF 1971 globe logo\"></span><span class=\"wwf-era-card-name\">WWWF 1971</span><small>THE GLOBE</small></button><button type=\"button\" class=\"wwf-era-card\" data-wwf-card=\"golden\" aria-pressed=\"false\" title=\"Show WWF GOLDEN theme\"><span class=\"wwf-era-art\"><span class=\"wwf-logo-backup\" aria-hidden=\"true\">WWF</span><img src=\"https://loodibee.com/wp-content/uploads/World-Wrestling-Federation-WWF-Logo-1985-1998-3D.png\" loading=\"eager\" decoding=\"async\" alt=\"Classic 1980s WWF gold blue 3D logo\"></span><span class=\"wwf-era-card-name\">WWF GOLDEN</span><small>1980s CLASSICS</small></button><button type=\"button\" class=\"wwf-era-card\" data-wwf-card=\"newgen\" aria-pressed=\"false\" title=\"Show NEW GENERATION theme\"><span class=\"wwf-era-art\"><span class=\"wwf-logo-backup\" aria-hidden=\"true\">WWF</span><img src=\"https://upload.wikimedia.org/wikipedia/commons/7/7f/WWF_New_Gen_Logo.svg\" loading=\"eager\" decoding=\"async\" alt=\"WWF New Generation logo\"></span><span class=\"wwf-era-card-name\">NEW GENERATION</span><small>1993–1997</small></button><button type=\"button\" class=\"wwf-era-card\" data-wwf-card=\"attitude\" aria-pressed=\"false\" title=\"Show ATTITUDE ERA theme\"><span class=\"wwf-era-art\"><span class=\"wwf-logo-backup\" aria-hidden=\"true\">WWF</span><img src=\"https://prowrestlingstories.com/wp-content/uploads/2019/09/WWF-Attitude-Era-Scratch-Logo.jpg\" loading=\"eager\" decoding=\"async\" alt=\"WWF Attitude Era scratch logo\"></span><span class=\"wwf-era-card-name\">ATTITUDE ERA</span><small>1997–2002</small></button><button type=\"button\" class=\"wwf-era-card\" data-wwf-card=\"modern\" aria-pressed=\"false\" title=\"Show WWE MODERN theme\"><span class=\"wwf-era-art\"><span class=\"wwf-logo-backup\" aria-hidden=\"true\">WWE</span><img src=\"https://upload.wikimedia.org/wikipedia/commons/d/df/WWE_white_logo.svg\" loading=\"eager\" decoding=\"async\" alt=\"Modern white WWE logo\"></span><span class=\"wwf-era-card-name\">WWE MODERN</span><small>2002–NOW</small></button></div>";
+  // Insert directly above Baked's main chat/player row. Background wallpaper
+  // painted on body used to disappear behind opaque #wrap panels.
+  const content=doc.getElementById('main') || doc.getElementById('mainpage') || doc.querySelector('#chatwrap')?.parentElement;
+  if(content && content.parentNode) content.parentNode.insertBefore(strip,content);
+  else nav.insertAdjacentElement('afterend',strip);
+  // Failed third-party images still show a readable era logo title.
+  strip.querySelectorAll('.wwf-era-card img').forEach(img=>{
+    img.addEventListener('error',()=>img.closest('.wwf-era-card')?.classList.add('wwf-logo-failed'),{once:true});
+  });
   const choose=doc.getElementById('wwf-era-select'),logos=doc.getElementById('wwf-logo-switch');
   let era='attitude',visible=true;
   try{const stored=win.localStorage.getItem(eraKey);if(eras[stored])era=stored;visible=win.localStorage.getItem(logosKey)!=='off';}catch(_){}
@@ -25,6 +33,9 @@
    which=eras[which]?which:'attitude';doc.body.dataset.wwfEra=which;choose.value=which;
    doc.getElementById('wwf-era-title').textContent=eras[which].label;
    doc.getElementById('wwf-era-years').textContent=eras[which].years;
+   strip.querySelectorAll('[data-wwf-card]').forEach(card=>{
+     card.setAttribute('aria-pressed',String(card.dataset.wwfCard===which));
+   });
    try{win.localStorage.setItem(eraKey,which);}catch(_){}
   }
   function applyLogos(on){
@@ -33,6 +44,10 @@
    try{win.localStorage.setItem(logosKey,on?'on':'off');}catch(_){}
   }
   choose.addEventListener('change',()=>applyEra(choose.value));
+  strip.addEventListener('click',event=>{
+   const card=event.target.closest('[data-wwf-card]');
+   if(card && strip.contains(card))applyEra(card.dataset.wwfCard);
+  });
   logos.addEventListener('click',()=>applyLogos(doc.body.classList.contains('wwf-logos-off')));
   applyEra(era);applyLogos(visible);
  }

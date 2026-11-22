@@ -724,3 +724,120 @@ body[data-wwf-era].cinemachat #wrap {background:transparent!important;opacity:1;
  body[data-wwf-era] #wwf-era-picker {width:100%;justify-content:flex-end;}
  body[data-wwf-era] #wwf-era-select {max-width:155px;flex:1;}
 }
+
+
+/* v2.1 — A REAL, VISIBLE LOGO GALLERY, not wallpaper hidden behind #wrap.
+   Standalone banner above the native main/player row. No interference with
+   Xaekai layout, playlist, video, chat or Cinema geometry. */
+body[data-wwf-era]:not(.cinemachat) #wwf-era-strip {
+  display:block!important;position:relative!important;z-index:2!important;
+  visibility:visible!important;opacity:1!important;
+  float:none!important;clear:both!important;isolation:isolate!important;
+  width:calc(100% - 22px)!important;max-width:none!important;
+  margin:4px auto 12px!important;padding:0!important;
+  background:#09090b!important;border:2px solid var(--ww-accent)!important;
+  border-radius:6px!important;box-shadow:0 4px 18px rgba(0,0,0,.7)!important;
+  overflow:visible!important;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-banner-heading {
+  display:flex;align-items:center;gap:14px;min-height:36px;
+  padding:5px 14px;color:var(--ww-text);background:var(--ww-panel2);
+  border-bottom:2px solid var(--ww-accent);font:bold 13px/1.3 system-ui,Arial,sans-serif;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-name {
+  color:var(--ww-text);font:1000 22px/1.1 Impact,"Arial Black",sans-serif;
+  letter-spacing:.08em;text-shadow:2px 2px #000;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-name b {color:var(--ww-accent);}
+body[data-wwf-era] #wwf-era-strip #wwf-era-title {
+  font:900 15px/1.2 Impact,"Arial Black",sans-serif;
+  letter-spacing:.11em;color:var(--ww-highlight);text-shadow:none;
+}
+body[data-wwf-era] #wwf-era-strip #wwf-era-years {color:var(--ww-muted);font-size:10px;}
+body[data-wwf-era] #wwf-era-strip .wwf-banner-hint {
+  margin-left:auto;font-size:10px;color:var(--ww-muted);letter-spacing:.16em;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-logo-gallery {
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:8px;padding:9px 12px 10px;
+  background:repeating-linear-gradient(116deg,#080809 0 32px,#111012 33px 60px);
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-card {
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:0;min-height:112px;padding:5px 5px 7px;
+  background:linear-gradient(180deg,#181719,#0a0a0c);
+  border:1px solid #535058;border-radius:5px;box-shadow:inset 0 1px #ffffff17;
+  cursor:pointer;color:#eae7e7;appearance:none;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-card:hover,
+body[data-wwf-era] #wwf-era-strip .wwf-era-card:focus-visible {
+  border-color:var(--ww-highlight);outline:2px solid var(--ww-accent);
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-card[aria-pressed="true"] {
+  border:2px solid var(--ww-accent);background:var(--ww-panel2);
+  box-shadow:inset 0 0 0 1px var(--ww-highlight),0 0 14px color-mix(in srgb,var(--ww-accent) 45%,transparent);
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-art {
+  position:relative;display:flex;align-items:center;justify-content:center;
+  width:100%;height:72px;min-height:72px;overflow:hidden;background:#050507;
+  border-radius:3px;margin:0 0 4px;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-art img {
+  display:block;position:relative;z-index:2;
+  width:100%;height:100%;max-width:100%;max-height:100%;
+  object-fit:contain;object-position:center;
+  opacity:1!important;filter:none!important;
+  pointer-events:none;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-logo-backup {
+  display:block;position:absolute;inset:0;z-index:1;
+  text-align:center;align-content:center;font:1000 32px/1 Impact,"Arial Black",sans-serif;
+  letter-spacing:-.035em;color:#f2f2f2;text-shadow:2px 2px var(--ww-accent);
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-card.wwf-logo-failed img {display:none!important;}
+body[data-wwf-era] #wwf-era-strip .wwf-era-card-name {
+  font:900 11px/1.25 system-ui,Arial,sans-serif;text-align:center;
+  letter-spacing:.035em;color:#f4f1f1;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-era-card small {
+  color:#bdb7b7;font:700 9px/1.2 system-ui,Arial,sans-serif;
+  letter-spacing:.035em;margin-top:2px;
+}
+body[data-wwf-era].wwf-logos-off #wwf-era-strip .wwf-logo-gallery {
+  display:none!important;
+}
+/* The era switch remains available in the navbar when logos are hidden. */
+body[data-wwf-era=wwwf] #wwf-era-strip .wwf-logo-gallery {
+  background:repeating-linear-gradient(90deg,#292015 0 38px,#1a130e 38px 70px);
+}
+body[data-wwf-era=golden] #wwf-era-strip .wwf-logo-gallery {
+  background:repeating-linear-gradient(115deg,#250b0b 0 42px,#481512 43px 74px);
+}
+body[data-wwf-era=newgen] #wwf-era-strip .wwf-logo-gallery {
+  background:repeating-linear-gradient(115deg,#141951 0 30px,#30275f 31px 57px);
+}
+body[data-wwf-era=attitude] #wwf-era-strip .wwf-logo-gallery {
+  background:repeating-linear-gradient(135deg,#060606 0 31px,#181013 32px 61px);
+}
+body[data-wwf-era=modern] #wwf-era-strip .wwf-logo-gallery {
+  background:repeating-linear-gradient(115deg,#10151d 0 32px,#19202c 33px 65px);
+}
+body[data-wwf-era].cinemachat #wwf-era-strip {display:none!important;}
+@media(max-width:1000px) {
+ body[data-wwf-era] #wwf-era-strip .wwf-logo-gallery {
+   grid-template-columns:repeat(3,minmax(0,1fr));
+ }
+}
+@media(max-width:540px) {
+ body[data-wwf-era] #wwf-era-strip .wwf-logo-gallery {
+   display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;
+   padding:8px;
+ }
+ body[data-wwf-era] #wwf-era-strip .wwf-era-card {
+   flex:0 0 140px;scroll-snap-align:start;
+ }
+ body[data-wwf-era] #wwf-era-strip .wwf-banner-hint {display:none;}
+ body[data-wwf-era] #wwf-era-strip .wwf-banner-heading {gap:7px;padding:6px 8px;}
+ body[data-wwf-era] #wwf-era-strip #wwf-era-title {font-size:11px;}
+ body[data-wwf-era] #wwf-era-strip .wwf-name {font-size:17px;}
+}

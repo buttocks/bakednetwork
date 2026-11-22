@@ -1,0 +1,164 @@
+/* WWE / WWF Ringside — Baked.live channel skin v1.0
+   Black / red / gold Attitude default; switch to modern graphite / electric-red.
+   Compatible with the accompanying skin.js and filters.json.
+*/
+:root {
+  --wwf-bg:#0e0d10; --wwf-panel:#1a181b; --wwf-panel2:#272127;
+  --wwf-red:#bc1c2c; --wwf-red2:#ef4a54; --wwf-gold:#e7bc64;
+  --wwf-text:#f6eee5; --wwf-muted:#b6a8a0; --wwf-stroke:#644142;
+  --wwf-glow:rgba(188,28,44,.32);
+}
+body.wwf-modern {
+  --wwf-bg:#0a0c11; --wwf-panel:#161b24; --wwf-panel2:#222a36;
+  --wwf-red:#ea263e; --wwf-red2:#ff596a; --wwf-gold:#dfe3eb;
+  --wwf-text:#f4f6fa; --wwf-muted:#b1bac7; --wwf-stroke:#536070;
+  --wwf-glow:rgba(234,38,62,.29);
+}
+body { background:var(--wwf-bg)!important; color:var(--wwf-text)!important; }
+body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background:radial-gradient(circle at 50% -10%,rgba(178,29,36,.13),transparent 55%),
+    repeating-linear-gradient(125deg,transparent 0 38px,rgba(255,255,255,.008) 39px 40px); }
+a { color:var(--wwf-gold); }
+a:hover { color:#fff2d3; }
+
+/* The main broadcast banner */
+#wwf-arena { width:calc(100% - 22px); max-width:1600px; margin:12px auto 15px;
+  border:1px solid var(--wwf-stroke); box-shadow:0 12px 34px #000a,0 0 32px var(--wwf-glow);
+  background:#101013; color:var(--wwf-text); font:14px/1.4 system-ui,Segoe UI,Arial,sans-serif;
+  position:relative; isolation:isolate; overflow:hidden; border-radius:7px; }
+#wwf-arena, #wwf-arena * { box-sizing:border-box; }
+#wwf-arena::before { content:""; pointer-events:none; position:absolute; z-index:-1;
+  top:0; right:-8%; width:52%; height:120px; opacity:.18;
+  background:repeating-linear-gradient(-55deg,transparent 0 13px,#e7a96a 14px 15px,transparent 16px 24px); }
+#wwf-arena .wwf-hero { display:flex; justify-content:space-between; align-items:center;
+  gap:16px; min-height:114px; padding:17px 24px 15px;
+  background:linear-gradient(112deg,#130e13 0%,#4e141c 47%,#130f14 100%);
+  border-bottom:3px solid var(--wwf-red); }
+#wwf-arena .wwf-overline { color:#f5cf93; font-size:10px; letter-spacing:.28em;
+  font-weight:900; margin-bottom:3px; }
+#wwf-arena .wwf-brand { line-height:1; display:flex; align-items:baseline;
+  white-space:nowrap; font-size:clamp(34px,6.5vw,66px); font-weight:1000;
+  letter-spacing:-.065em; transform:skewX(-6deg); text-shadow:2px 3px 0 #07070a,0 0 18px #0008; }
+#wwf-arena .wwf-brand-old { color:#f1d18d; }
+#wwf-arena .wwf-vs { color:#fff; margin:0 .18em; font-weight:500; }
+#wwf-arena .wwf-brand-new { color:#f8f9fb; }
+#wwf-arena .wwf-brand-tail { margin-left:.3em; font-size:.34em; letter-spacing:.18em;
+  color:#ff5b65; border:2px solid #ef5b63; padding:.15em .3em; transform:skewX(6deg); }
+#wwf-arena .wwf-subtitle { color:#f5e0c3; font-size:10px; letter-spacing:.17em;
+  margin-top:7px; font-weight:800; }
+#wwf-arena .wwf-on-air { flex:0 0 auto; border:1px solid #d58772;
+  padding:12px 16px 10px; min-width:125px; text-align:center;
+  background:#120d12b0; color:#fff4dc; font-weight:950; letter-spacing:.12em;
+  border-radius:4px; box-shadow:inset 0 0 17px #0009; font-size:13px; }
+#wwf-arena .wwf-status-dot { display:inline-block; height:8px; width:8px;
+  background:#777; border-radius:50%; margin-right:7px; vertical-align:middle; }
+#wwf-arena.wwf-playing .wwf-status-dot { background:#f3444a; box-shadow:0 0 9px #f3444a77; }
+#wwf-arena .wwf-on-air small { display:block; font-size:10px; letter-spacing:.1em;
+  margin-top:5px; color:#c7b9ad; font-weight:700; }
+#wwf-arena .wwf-now { display:flex; gap:15px; align-items:center;
+  padding:10px 22px; background:linear-gradient(90deg,#240f14,#100f14);
+  border-bottom:1px solid var(--wwf-stroke); }
+#wwf-arena .wwf-now-label { font-size:10px; color:var(--wwf-gold);
+  letter-spacing:.12em; font-weight:950; white-space:nowrap; }
+#wwf-arena #wwf-track { font-size:13px; color:#fff1e6; font-weight:600;
+  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; min-width:0; }
+#wwf-arena .wwf-actions { display:flex; align-items:center; flex-wrap:wrap;
+  gap:7px; padding:11px 16px; background:linear-gradient(90deg,#171317,#23181d,#171317); }
+#wwf-arena .wwf-actions button { flex:0 0 auto; appearance:none; border:1px solid #8e4546;
+  border-radius:4px; min-height:31px; padding:6px 10px; cursor:pointer;
+  font:900 11px/1.1 system-ui,Segoe UI,Arial,sans-serif; letter-spacing:.045em;
+  background:linear-gradient(180deg,#4e2129,#2d161d); color:#ffe7c6;
+  transition:background-color .18s,border-color .18s,transform .18s; }
+#wwf-arena .wwf-actions button:hover { background:#8a202f; border-color:#f4bd67; color:white; transform:translateY(-1px); }
+#wwf-arena .wwf-actions button:focus-visible { outline:2px solid #ffdb89; outline-offset:2px; }
+#wwf-arena .wwf-actions button[aria-pressed="true"] { background:#b22a36; color:white; border-color:#f0c77c; }
+#wwf-arena .wwf-ticker { display:flex; align-items:center; gap:16px; font:800 10px/1.5 ui-monospace,Consolas,monospace;
+  letter-spacing:.11em; padding:7px 17px; border-top:1px solid #7d3139;
+  color:#ecddc8; background:#0c0b10; }
+#wwf-arena .wwf-ticker b { flex:0 0 auto; color:#ff6570; }
+#wwf-arena .wwf-ticker span { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+body.wwf-modern #wwf-arena .wwf-hero { background:linear-gradient(115deg,#101620,#52111e 55%,#151a23); }
+body.wwf-modern #wwf-arena .wwf-brand-old { color:#d2d8e4; }
+body.wwf-modern #wwf-arena .wwf-overline { color:#d1d8e6; }
+body.wwf-modern #wwf-arena .wwf-actions button { background:linear-gradient(180deg,#353e4d,#1d2430); border-color:#586375; }
+body.wwf-modern #wwf-arena .wwf-actions button:hover { background:#b31c35; }
+
+/* Baked.live/CyTube structure */
+nav.navbar { background:linear-gradient(90deg,#121016,#39151c,#161119)!important;
+  border-color:var(--wwf-stroke)!important; }
+.navbar-brand { font-weight:900!important; color:var(--wwf-gold)!important; }
+#videowrap,#chatwrap,#playlistwrap { border:1px solid var(--wwf-stroke)!important;
+  box-shadow:0 5px 25px #0008; background:var(--wwf-panel)!important; }
+#chatheader,#currenttitle,#playlistcontrols,#videocontrols,.videowrap-header,
+.playlist-header,.queue-header { background:linear-gradient(95deg,#41151e,#1f1b23)!important;
+  color:var(--wwf-text)!important; border-color:var(--wwf-stroke)!important; }
+#queue { background:var(--wwf-panel)!important; color:var(--wwf-text)!important; }
+#queue .queue_entry { color:var(--wwf-text)!important; background:transparent!important;
+  border-bottom:1px solid #ffffff13!important; padding:3px 6px; }
+#queue .queue_entry:nth-child(even) { background:#ffffff07!important; }
+#queue .queue_entry:hover { background:#8d1b3033!important; }
+#queue .queue_entry.queue_active { background:linear-gradient(90deg,#8c1b28,#351b24)!important;
+  box-shadow:inset 4px 0 var(--wwf-gold)!important; color:#fff8ed!important; }
+#queue .qe_blame { color:var(--wwf-muted)!important; }
+#messagebuffer { background:var(--wwf-panel)!important; color:var(--wwf-text)!important;
+  padding:7px!important; }
+#messagebuffer .chat-msg:nth-child(even) { background:#ffffff05; }
+#chatline,textarea.form-control,input.form-control,select.form-control { background:var(--wwf-panel2)!important;
+  color:var(--wwf-text)!important; border-color:var(--wwf-stroke)!important; }
+#chatline:focus,.form-control:focus { outline:1px solid var(--wwf-gold)!important;
+  box-shadow:0 0 0 2px #e9ba6933!important; }
+.panel,.well,.modal-content { background:var(--wwf-panel)!important;
+  border-color:var(--wwf-stroke)!important; color:var(--wwf-text)!important; }
+.btn-default { background:#312832!important; border-color:#835356!important; color:#eee2d9!important; }
+.btn-primary,.btn-success { background:#a72332!important; border-color:#d66b65!important; color:white!important; }
+.btn-danger { background:#932937!important; border-color:#e28a80!important; }
+.btn:hover { filter:brightness(1.12); }
+
+/* Optional chat filters, kept separate from core Baked chat functionality */
+#messagebuffer .wwf-fx { font-weight:900; letter-spacing:.02em; }
+#messagebuffer .wwf-chip { display:inline-block; vertical-align:baseline; padding:1px 7px;
+  border:1px solid #ad4b55; border-radius:3px; background:#411923;
+  color:#ffe6d7; font-size:.94em; line-height:1.4; text-shadow:0 1px #000a; }
+#messagebuffer .wwf-chip--gold { border-color:#d2ac64; background:#4a351e; color:#ffdfa0; }
+#messagebuffer .wwf-chip--steel { border-color:#9cabb9; background:#273543; color:#ecf4ff; }
+#messagebuffer .wwf-chip--green { border-color:#6eac82; background:#213c2b; color:#caffd7; }
+#messagebuffer .wwf-chants { display:inline; color:#f4c777; font-weight:950; letter-spacing:.1em; text-transform:uppercase; }
+#messagebuffer .wwf-mic { color:#ff9c9c; font-style:italic; font-weight:700; }
+#messagebuffer .wwf-face { color:#9fe5c1; font-weight:850; }
+#messagebuffer .wwf-heel { color:#ff8e9d; font-weight:850; }
+#messagebuffer .wwf-gold { color:#f2cb70; font-weight:850; }
+#messagebuffer .wwf-spoiler { color:transparent!important; background:#4d4951;
+  border-radius:3px; padding:0 3px; cursor:pointer; user-select:none;
+  text-shadow:none!important; }
+#messagebuffer .wwf-spoiler:hover,#messagebuffer .wwf-spoiler:focus-visible,
+#messagebuffer .wwf-spoiler.wwf-revealed { color:#fff4e6!important;
+  user-select:text; background:#614355; }
+#messagebuffer .wwf-spoiler:focus-visible { outline:2px solid #ffe4a0; }
+body.wwf-cinema #chatwrap,body.wwf-cinema #playlistwrap {
+  opacity:.42; filter:saturate(.65); transition:opacity .2s; }
+body.wwf-cinema #chatwrap:hover,body.wwf-cinema #chatwrap:focus-within,
+body.wwf-cinema #playlistwrap:hover,body.wwf-cinema #playlistwrap:focus-within { opacity:1; filter:none; }
+body.wwf-cinema #videowrap { box-shadow:0 0 0 2px var(--wwf-gold),0 0 38px var(--wwf-glow); }
+
+@media(max-width:780px) {
+  #wwf-arena { width:calc(100% - 12px); margin:7px auto 10px; }
+  #wwf-arena .wwf-hero { padding:12px 13px; gap:7px; min-height:91px; }
+  #wwf-arena .wwf-overline { letter-spacing:.13em; font-size:9px; }
+  #wwf-arena .wwf-subtitle { letter-spacing:.045em; font-size:9px; }
+  #wwf-arena .wwf-on-air { padding:9px 6px; min-width:92px; font-size:11px; }
+  #wwf-arena .wwf-on-air small { font-size:9px; }
+  #wwf-arena .wwf-now { padding:8px 11px; gap:8px; }
+  #wwf-arena .wwf-actions { gap:5px; padding:8px; }
+  #wwf-arena .wwf-actions button { min-height:30px; padding:6px 8px; font-size:10px; }
+  #wwf-arena .wwf-ticker { padding:6px 10px; gap:8px; }
+}
+@media(max-width:430px) {
+  #wwf-arena .wwf-brand { font-size:clamp(26px,8vw,40px); }
+  #wwf-arena .wwf-brand-tail { display:none; }
+  #wwf-arena .wwf-on-air { min-width:73px; }
+  #wwf-arena .wwf-on-air small { display:none; }
+  #wwf-arena .wwf-subtitle { max-width:200px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #wwf-arena .wwf-actions button,body.wwf-cinema #chatwrap,body.wwf-cinema #playlistwrap { transition:none; }
+}

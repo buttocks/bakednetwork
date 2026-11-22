@@ -1,0 +1,426 @@
+[
+  {
+    "name": "Wrestling: wwf",
+    "source": ":wwf:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">★ WWF CLASSICS ★</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: wwe",
+    "source": ":wwe:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">WWE ★</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: raw",
+    "source": ":raw:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">MONDAY NIGHT RAW</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: smackdown",
+    "source": ":smackdown:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">SMACKDOWN!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: nxt",
+    "source": ":nxt:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">NXT</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: attitude",
+    "source": ":attitude:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">ATTITUDE ERA</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: mania",
+    "source": ":mania:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">WRESTLEMANIA ★</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: rumble",
+    "source": ":rumble:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">ROYAL RUMBLE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: survivor",
+    "source": ":survivor:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">SURVIVOR SERIES</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: mitb",
+    "source": ":mitb:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">MONEY IN THE BANK</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: ecw",
+    "source": ":ecw:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">E C DUB!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: wcw",
+    "source": ":wcw:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">WCW MONDAY NITRO</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: nwo",
+    "source": ":nwo:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">nWo 4 LIFE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: dx",
+    "source": ":dx:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">SUCK IT! ✕</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: 316",
+    "source": ":316:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">AUSTIN 3:16</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: rko",
+    "source": ":rko:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">RKO OUTTA NOWHERE!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: stunner",
+    "source": ":stunner:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">STONE COLD STUNNER</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: tombstone",
+    "source": ":tombstone:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">TOMBSTONE PILEDRIVER</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: peopleselbow",
+    "source": ":peopleselbow:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">THE PEOPLE'S ELBOW</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: frogplash",
+    "source": ":frogplash:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">FIVE-STAR FROG SPLASH</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: rock",
+    "source": ":rock:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">IF YA SMELL…</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: austin",
+    "source": ":austin:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">HELL YEAH!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: taker",
+    "source": ":taker:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">REST IN PEACE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: cena",
+    "source": ":cena:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">YOU CAN'T SEE ME</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: hbk",
+    "source": ":hbk:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">SWEET CHIN MUSIC</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: bret",
+    "source": ":bret:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">BEST THERE IS • BEST THERE WAS</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: orton",
+    "source": ":orton:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">THE VIPER</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: tripleh",
+    "source": ":tripleh:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">THE GAME</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: hulkamania",
+    "source": ":hulkamania:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">HULKAMANIA RUNS WILD</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: headtable",
+    "source": ":headtable:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">ACKNOWLEDGE YOUR TRIBAL CHIEF</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: heelturn",
+    "source": ":heelturn:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip\">☠ HEEL TURN</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: facepop",
+    "source": ":facepop:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">★ BABYFACE POP</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: jobber",
+    "source": ":jobber:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">ENHANCEMENT TALENT</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: botch",
+    "source": ":botch:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">BOTCHAMANIA</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: ppv",
+    "source": ":ppv:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">★ PREMIUM LIVE EVENT ★</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Wrestling: dingding",
+    "source": ":dingding:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">🔔 DING DING!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: what",
+    "source": ":what:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">WHAT?!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: wooo",
+    "source": ":wooo:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">WOOOO!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: yes",
+    "source": ":yes:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">YES! YES! YES!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: no",
+    "source": ":no:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">NO! NO! NO!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: thisisawesome",
+    "source": ":thisisawesome:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">THIS IS AWESOME!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: fightforever",
+    "source": ":fightforever:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">FIGHT FOREVER!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: holyshit",
+    "source": ":holyshit:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">HOLY SH*T!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: youcantseeme",
+    "source": ":youcantseeme:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">YOU CAN'T SEE ME!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: acknowledge",
+    "source": ":acknowledge:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">ACKNOWLEDGE ME!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: restinpeace",
+    "source": ":restinpeace:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">REST… IN… PEACE.</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Crowd: letsgo",
+    "source": ":letsgo:",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">LET’S GO!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Markup: [promo]",
+    "source": "\\[promo\\]([^<>\\r\\n]{1,180}?)\\[/promo\\]",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-mic\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Markup: [heel]",
+    "source": "\\[heel\\]([^<>\\r\\n]{1,180}?)\\[/heel\\]",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-heel\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Markup: [face]",
+    "source": "\\[face\\]([^<>\\r\\n]{1,180}?)\\[/face\\]",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-face\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Markup: [gold]",
+    "source": "\\[gold\\]([^<>\\r\\n]{1,180}?)\\[/gold\\]",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-gold\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Markup: [chant]",
+    "source": "\\[chant\\]([^<>\\r\\n]{1,100}?)\\[/chant\\]",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-chants\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Markup: [spoiler]",
+    "source": "\\[spoiler\\]([^<>\\r\\n]{1,240}?)\\[/spoiler\\]",
+    "flags": "gi",
+    "replace": "<span class=\"wwf-spoiler\" role=\"button\" tabindex=\"0\" title=\"Click to reveal spoiler\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  }
+]

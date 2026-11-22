@@ -1224,376 +1224,376 @@
     "filterlinks": false
   },
   {
-    "name": "WWE FX 001 — wwf",
-    "source": ":(?:wtfx_wwf|wtfx001):",
+    "name": "Wrestling: wwf4",
+    "source": ":wwf4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">★ WWF CLASSICS ★</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 002 — wwe",
-    "source": ":(?:wtfx_wwe|wtfx002):",
+    "name": "Wrestling: wwe4",
+    "source": ":wwe4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">WWE ★</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 003 — raw",
-    "source": ":(?:wtfx_raw|wtfx003):",
+    "name": "Wrestling: raw",
+    "source": ":raw:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">MONDAY NIGHT RAW</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 004 — smackdown",
-    "source": ":(?:wtfx_smackdown|wtfx004):",
+    "name": "Wrestling: smackdown",
+    "source": ":smackdown:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">SMACKDOWN!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 005 — nxt",
-    "source": ":(?:wtfx_nxt|wtfx005):",
+    "name": "Wrestling: nxt5",
+    "source": ":nxt5:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">NXT</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 006 — attitude",
-    "source": ":(?:wtfx_attitude|wtfx006):",
+    "name": "Wrestling: attitude2",
+    "source": ":attitude2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">ATTITUDE ERA</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 007 — mania",
-    "source": ":(?:wtfx_mania|wtfx007):",
+    "name": "Wrestling: mania",
+    "source": ":mania:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">WRESTLEMANIA ★</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 008 — rumble",
-    "source": ":(?:wtfx_rumble|wtfx008):",
+    "name": "Wrestling: rumble2",
+    "source": ":rumble2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">ROYAL RUMBLE</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 009 — survivor",
-    "source": ":(?:wtfx_survivor|wtfx009):",
+    "name": "Wrestling: survivor2",
+    "source": ":survivor2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">SURVIVOR SERIES</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 010 — mitb",
-    "source": ":(?:wtfx_mitb|wtfx010):",
+    "name": "Wrestling: mitb2",
+    "source": ":mitb2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">MONEY IN THE BANK</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 011 — ecw",
-    "source": ":(?:wtfx_ecw|wtfx011):",
+    "name": "Wrestling: ecw3",
+    "source": ":ecw3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">E C DUB!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 012 — wcw",
-    "source": ":(?:wtfx_wcw|wtfx012):",
+    "name": "Wrestling: wcw4",
+    "source": ":wcw4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">WCW MONDAY NITRO</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 013 — nwo",
-    "source": ":(?:wtfx_nwo|wtfx013):",
+    "name": "Wrestling: nwo3",
+    "source": ":nwo3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">nWo 4 LIFE</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 014 — dx",
-    "source": ":(?:wtfx_dx|wtfx014):",
+    "name": "Wrestling: dx3",
+    "source": ":dx3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">SUCK IT! ✕</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 015 — 316",
-    "source": ":(?:wtfx_316|wtfx015):",
+    "name": "Wrestling: 316",
+    "source": ":316:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">AUSTIN 3:16</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 016 — rko",
-    "source": ":(?:wtfx_rko|wtfx016):",
+    "name": "Wrestling: rko4",
+    "source": ":rko4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">RKO OUTTA NOWHERE!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 017 — stunner",
-    "source": ":(?:wtfx_stunner|wtfx017):",
+    "name": "Wrestling: stunner4",
+    "source": ":stunner4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">STONE COLD STUNNER</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 018 — tombstone",
-    "source": ":(?:wtfx_tombstone|wtfx018):",
+    "name": "Wrestling: tombstone2",
+    "source": ":tombstone2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">TOMBSTONE PILEDRIVER</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 019 — peopleselbow",
-    "source": ":(?:wtfx_peopleselbow|wtfx019):",
+    "name": "Wrestling: peopleselbow",
+    "source": ":peopleselbow:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">THE PEOPLE'S ELBOW</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 020 — frogplash",
-    "source": ":(?:wtfx_frogplash|wtfx020):",
+    "name": "Wrestling: frogplash",
+    "source": ":frogplash:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">FIVE-STAR FROG SPLASH</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 021 — rock",
-    "source": ":(?:wtfx_rock|wtfx021):",
+    "name": "Wrestling: rock3",
+    "source": ":rock3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">IF YA SMELL…</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 022 — austin",
-    "source": ":(?:wtfx_austin|wtfx022):",
+    "name": "Wrestling: austin10",
+    "source": ":austin10:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">HELL YEAH!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 023 — taker",
-    "source": ":(?:wtfx_taker|wtfx023):",
+    "name": "Wrestling: taker4",
+    "source": ":taker4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">REST IN PEACE</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 024 — cena",
-    "source": ":(?:wtfx_cena|wtfx024):",
+    "name": "Wrestling: cena2",
+    "source": ":cena2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">YOU CAN'T SEE ME</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 025 — hbk",
-    "source": ":(?:wtfx_hbk|wtfx025):",
+    "name": "Wrestling: hbk5",
+    "source": ":hbk5:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">SWEET CHIN MUSIC</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 026 — bret",
-    "source": ":(?:wtfx_bret|wtfx026):",
+    "name": "Wrestling: bret3",
+    "source": ":bret3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">BEST THERE IS • BEST THERE WAS</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 027 — orton",
-    "source": ":(?:wtfx_orton|wtfx027):",
+    "name": "Wrestling: orton",
+    "source": ":orton:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">THE VIPER</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 028 — tripleh",
-    "source": ":(?:wtfx_tripleh|wtfx028):",
+    "name": "Wrestling: tripleh3",
+    "source": ":tripleh3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">THE GAME</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 029 — hulkamania",
-    "source": ":(?:wtfx_hulkamania|wtfx029):",
+    "name": "Wrestling: hulkamania2",
+    "source": ":hulkamania2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">HULKAMANIA RUNS WILD</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 030 — headtable",
-    "source": ":(?:wtfx_headtable|wtfx030):",
+    "name": "Wrestling: headtable",
+    "source": ":headtable:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">ACKNOWLEDGE YOUR TRIBAL CHIEF</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 031 — heelturn",
-    "source": ":(?:wtfx_heelturn|wtfx031):",
+    "name": "Wrestling: heelturn",
+    "source": ":heelturn:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip\">☠ HEEL TURN</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 032 — facepop",
-    "source": ":(?:wtfx_facepop|wtfx032):",
+    "name": "Wrestling: facepop",
+    "source": ":facepop:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--green\">★ BABYFACE POP</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 033 — jobber",
-    "source": ":(?:wtfx_jobber|wtfx033):",
+    "name": "Wrestling: jobber3",
+    "source": ":jobber3:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">ENHANCEMENT TALENT</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 034 — botch",
-    "source": ":(?:wtfx_botch|wtfx034):",
+    "name": "Wrestling: botch6",
+    "source": ":botch6:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--steel\">BOTCHAMANIA</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 035 — ppv",
-    "source": ":(?:wtfx_ppv|wtfx035):",
+    "name": "Wrestling: ppv",
+    "source": ":ppv:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">★ PREMIUM LIVE EVENT ★</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 036 — dingding",
-    "source": ":(?:wtfx_dingding|wtfx036):",
+    "name": "Wrestling: dingding",
+    "source": ":dingding:",
     "flags": "gi",
     "replace": "<span class=\"wwf-fx wwf-chip wwf-chip--gold\">🔔 DING DING!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 037 — what",
-    "source": ":(?:wtfx_what|wtfx037):",
+    "name": "Wrestling: what4",
+    "source": ":what4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">WHAT?!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 038 — wooo",
-    "source": ":(?:wtfx_wooo|wtfx038):",
+    "name": "Wrestling: wooo",
+    "source": ":wooo:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">WOOOO!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 039 — yes",
-    "source": ":(?:wtfx_yes|wtfx039):",
+    "name": "Wrestling: yes4",
+    "source": ":yes4:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">YES! YES! YES!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 040 — no",
-    "source": ":(?:wtfx_no|wtfx040):",
+    "name": "Wrestling: no7",
+    "source": ":no7:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">NO! NO! NO!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 041 — thisisawesome",
-    "source": ":(?:wtfx_thisisawesome|wtfx041):",
+    "name": "Wrestling: thisisawesome",
+    "source": ":thisisawesome:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">THIS IS AWESOME!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 042 — fightforever",
-    "source": ":(?:wtfx_fightforever|wtfx042):",
+    "name": "Wrestling: fightforever",
+    "source": ":fightforever:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">FIGHT FOREVER!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 043 — holyshit",
-    "source": ":(?:wtfx_holyshit|wtfx043):",
+    "name": "Wrestling: holyshit2",
+    "source": ":holyshit2:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">HOLY SH*T!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 044 — youcantseeme",
-    "source": ":(?:wtfx_youcantseeme|wtfx044):",
+    "name": "Wrestling: youcantseeme",
+    "source": ":youcantseeme:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">YOU CAN'T SEE ME!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 045 — acknowledge",
-    "source": ":(?:wtfx_acknowledge|wtfx045):",
+    "name": "Wrestling: acknowledge",
+    "source": ":acknowledge:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">ACKNOWLEDGE ME!</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 046 — restinpeace",
-    "source": ":(?:wtfx_restinpeace|wtfx046):",
+    "name": "Wrestling: restinpeace",
+    "source": ":restinpeace:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">REST… IN… PEACE.</span>",
     "active": true,
     "filterlinks": false
   },
   {
-    "name": "WWE FX 047 — letsgo",
-    "source": ":(?:wtfx_letsgo|wtfx047):",
+    "name": "Wrestling: letsgo",
+    "source": ":letsgo:",
     "flags": "gi",
     "replace": "<span class=\"wwf-chants\">LET’S GO!</span>",
     "active": true,

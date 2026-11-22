@@ -1,6 +1,6 @@
-# WWE / WWF Ringside v1.2 — Baked.live
+# WWE / WWF Ringside v1.3 — Baked.live
 
-A standalone WWE/WWF visual skin that works **beside** WrestleTube's existing channel logic. New filter shortcuts are namespaced to prevent them from hijacking ordinary emote names.
+A standalone WWE/WWF visual skin that works **beside** WrestleTube's existing channel logic. New filter shortcuts use ordinary emote-style names with collision-safe numbered suffixes.
 
 ## Existing channel functions — keep these
 
@@ -16,18 +16,67 @@ It contains the original 25 Xaekai module definitions, `scrollQueue()`, chat use
 - `skin.js`: Arena UI, now-playing, the Attitude/Modern theme toggle, logos toggle, cinema mode, shortcuts to native Mod Menu, Macros and Search, and share button.
 - `filters.json`: **206 filters**: the **153 original WrestleTube rules in their original order and unchanged**, then **53 new WWE/WWF rules**. This is an importable Baked.live/CyTube-style JSON array.
 
-## Chat filters — avoiding emote collisions
+## Chat filters — normal triggers without emote collisions
 
-The new **47 chat-shortcut rules no longer use `:wwf:`, `:rko:`, `:what:` etc.** Those short tokens could already be actual channel emote names. Instead, each new shortcut has two equivalent, isolated forms:
+The **47 new wrestling shortcuts** use standard emote-style triggers. Where an emote already owns a name, the filter uses the next unused numeric suffix, following existing channel conventions (for example, `:wwf4:`, `:rko4:`, `:what4:`). A name such as `:316:` remains available if the uploaded channel-emote list does not already claim it.
 
-- **Named** `:wtfx_wwf:`, `:wtfx_rko:`, `:wtfx_316:`, `:wtfx_what:`
-- **Numbered** `:wtfx001:`, `:wtfx016:`, `:wtfx015:`, `:wtfx037:` respectively
+The names were checked against the **8,183 emotes in the supplied November 22, 2026 export** and the active original filter rules that can be compiled as JavaScript regular expressions. No new shortcut exactly duplicates an emote or collides with a tested active legacy regex. Six historical PCRE-only legacy regexes were left unchanged.
 
-The numbers correspond to the order of the 47 new wrestling shortcuts in `filters.json`, not to original WrestleTube filters. The other six new formatting rules use `[promo]`, `[heel]`, `[face]`, `[gold]`, `[chant]`, and `[ringspoiler]` tags. `[ringspoiler]` avoids the original `[spoiler]` filter. The original 153 rules are preserved as-is; some of them are intentionally emote-specific and were not renamed.
+The old `wtfx_` and `wtfx001`-style aliases are **replaced**, not retained. You do not need special prefixes or arbitrary sequence numbers to use new effects.
 
-Aliases have been checked against the **153 preserved legacy filter patterns**: no legacy filter that compiles as a JavaScript RegExp matches any new alias. Actual channel emotes should still be checked against the namespaced aliases if you add new emotes later.
+| Existing emote or old trigger | New filter trigger |
+|---|---|
+| `:wwf:` | `:wwf4:` |
+| `:wwe:` | `:wwe4:` |
+| `:raw:` | `:raw:` |
+| `:smackdown:` | `:smackdown:` |
+| `:nxt:` | `:nxt5:` |
+| `:attitude:` | `:attitude2:` |
+| `:mania:` | `:mania:` |
+| `:rumble:` | `:rumble2:` |
+| `:survivor:` | `:survivor2:` |
+| `:mitb:` | `:mitb2:` |
+| `:ecw:` | `:ecw3:` |
+| `:wcw:` | `:wcw4:` |
+| `:nwo:` | `:nwo3:` |
+| `:dx:` | `:dx3:` |
+| `:316:` | `:316:` |
+| `:rko:` | `:rko4:` |
+| `:stunner:` | `:stunner4:` |
+| `:tombstone:` | `:tombstone2:` |
+| `:peopleselbow:` | `:peopleselbow:` |
+| `:frogplash:` | `:frogplash:` |
+| `:rock:` | `:rock3:` |
+| `:austin:` | `:austin10:` |
+| `:taker:` | `:taker4:` |
+| `:cena:` | `:cena2:` |
+| `:hbk:` | `:hbk5:` |
+| `:bret:` | `:bret3:` |
+| `:orton:` | `:orton:` |
+| `:tripleh:` | `:tripleh3:` |
+| `:hulkamania:` | `:hulkamania2:` |
+| `:headtable:` | `:headtable:` |
+| `:heelturn:` | `:heelturn:` |
+| `:facepop:` | `:facepop:` |
+| `:jobber:` | `:jobber3:` |
+| `:botch:` | `:botch6:` |
+| `:ppv:` | `:ppv:` |
+| `:dingding:` | `:dingding:` |
+| `:what:` | `:what4:` |
+| `:wooo:` | `:wooo:` |
+| `:yes:` | `:yes4:` |
+| `:no:` | `:no7:` |
+| `:thisisawesome:` | `:thisisawesome:` |
+| `:fightforever:` | `:fightforever:` |
+| `:holyshit:` | `:holyshit2:` |
+| `:youcantseeme:` | `:youcantseeme:` |
+| `:acknowledge:` | `:acknowledge:` |
+| `:restinpeace:` | `:restinpeace:` |
+| `:letsgo:` | `:letsgo:` |
 
-**Replace** the channel's current filter JSON with this merged array after making a backup; do not append the 206 rules to an already-installed set or you will duplicate filters. CSS and JS URLs do not import filters automatically.
+The other six formatting rules use `[promo]`, `[heel]`, `[face]`, `[gold]`, `[chant]`, and `[ringspoiler]`. `[ringspoiler]` avoids overlapping the old `[spoiler]` filter.
+
+**Import the new merged file by replacing the channel's current filters, not appending it to an existing 206-rule import.** CSS and JS links don't import filters automatically.
 
 ## Logos
 

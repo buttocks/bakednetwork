@@ -59,8 +59,8 @@
     doc.querySelector('#queue .queue_entry.queue_active .qe_title')?.textContent,
     doc.querySelector('#queue .queue_active .qe_title')?.textContent
    ];
-   const showing=sources.map(s=>(s||'').replace(/^\\s*(?:currently playing|now playing)\\s*:?\\s*/i,'').trim())
-    .find(s=>s && !/^(?:no video|nothing playing|loading\\.{0,3})$/i.test(s))||'';
+   const showing=sources.map(s=>(s||'').replace(/^\s*(?:currently playing|now playing)\s*:?\s*/i,'').trim())
+    .find(s=>s && !/^(?:no video|nothing playing|loading\.{0,3})$/i.test(s))||'';
    const title=strip.querySelector('#wwf-restored-track');
    const state=strip.querySelector('#wwf-live-state');
    if(title && title.textContent!==(showing||'The next main event is being lined up…')){

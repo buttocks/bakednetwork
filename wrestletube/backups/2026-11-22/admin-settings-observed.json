@@ -1,0 +1,14 @@
+{
+  "backup_date": "2026-11-22",
+  "source": "User-provided Baked.live admin settings screenshot and subsequent exact CDN links; screenshot text may be cropped",
+  "page_title_visible": "WrestleTube - We Watch Wrestling | Discord @ discord.gg/baked | You can bypass locks with a tier",
+  "external_css": "https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@2dabdd69d4ed232daab36b06b2dab0525780f2ad/wrestletube/testing/lean-v1/channel-combined-test.css",
+  "external_javascript": "https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/channel-internal.js",
+  "list_channel_publicly": true,
+  "vip_only_channel": false,
+  "block_connections_from_tor": true,
+  "block_anonymous_users": false,
+  "allow_ascii_control_characters": false,
+  "maximum_videos_per_user": 5,
+  "note": "Password deliberately not captured or stored. Field visibility may be limited by screenshot clipping."
+}

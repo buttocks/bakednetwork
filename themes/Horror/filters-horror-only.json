@@ -1,0 +1,258 @@
+[
+  {
+    "name": "Horror: horrortube",
+    "source": ":horrortube:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-title\" title=\"The room's own late-night broadcast title\">HORROR TUBE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: slasher",
+    "source": ":slasher:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-blood\" title=\"A blood-red slasher movie title\">SLASHER SEASON</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: finalgirl",
+    "source": ":finalgirl:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-silver\" title=\"Survivor badge\">FINAL GIRL</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: bloodmoon",
+    "source": ":bloodmoon:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-blood\" title=\"Crimson moon warning\">BLOOD MOON</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: possessed",
+    "source": ":possessed:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-ghost\" title=\"Haunted purple lettering\">POSSESSED</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: creepy",
+    "source": ":creepy:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-ghost\" title=\"A creepy alert\">SOMETHING IS WRONG</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: jumpscare",
+    "source": ":jumpscare:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-warning\" title=\"A sudden, bold jump-scare label (no flashing)\">JUMP SCARE!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: midnight",
+    "source": ":midnight:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-silver\" title=\"Midnight screening tag\">AFTER MIDNIGHT</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: vhs",
+    "source": ":vhs:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-vhs\" title=\"Retro found-tape badge\">● REC  VHS</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: haunted",
+    "source": ":haunted:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-ghost\" title=\"Ghostly message label\">HAUNTED</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: deadinside",
+    "source": ":deadinside:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-silver\" title=\"Cold, unsettling text\">DEAD INSIDE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: vampire",
+    "source": ":vampire:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-blood\" title=\"Blood-red vampire badge\">VAMPIRE HOURS</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: zombie",
+    "source": ":zombie:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-toxic\" title=\"Undead-green badge\">THE UNDEAD</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: foundfootage",
+    "source": ":foundfootage:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-vhs\" title=\"Camcorder-style film tag\">FOUND FOOTAGE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: itsalive",
+    "source": ":itsalive:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-toxic\" title=\"Mad-scientist announcement\">IT'S ALIVE!</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: dontlook",
+    "source": ":dontlook:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-warning\" title=\"Ominous warning\">DON'T LOOK</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: behindyou",
+    "source": ":behindyou:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-warning\" title=\"Something is lurking behind you\">BEHIND YOU</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: watchout",
+    "source": ":watchout:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-warning\" title=\"A danger warning\">WATCH OUT</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: redrum",
+    "source": ":redrum:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-blood\" title=\"A reversed-message-inspired title\">REDRUM</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: paranormal",
+    "source": ":paranormal:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-ghost\" title=\"Unexplained-activity tag\">PARANORMAL ACTIVITY</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: bodyhorror",
+    "source": ":bodyhorror:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-blood\" title=\"Visceral cinema badge\">BODY HORROR</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: screamqueen",
+    "source": ":screamqueen:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-silver\" title=\"Classic horror heroine title\">SCREAM QUEEN</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: survive",
+    "source": ":survive:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-toxic\" title=\"Survival ribbon\">SURVIVOR</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: ouija",
+    "source": ":ouija:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-ghost\" title=\"Old spirit-board lettering\">OUIJA BOARD</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: suspense",
+    "source": ":suspense:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-silver\" title=\"Theatrical suspense title\">SUSPENSE</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror: theend",
+    "source": ":theend:",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-chip horror-vhs\" title=\"An ominous end card\">THE END...?</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror Markup: [hwhisper]",
+    "source": "\\[hwhisper\\]([^<>\\r\\n]{1,180}?)\\[\\/hwhisper\\]",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-text horror-whisper\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror Markup: [hglitch]",
+    "source": "\\[hglitch\\]([^<>\\r\\n]{1,180}?)\\[\\/hglitch\\]",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-text horror-glitch\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror Markup: [hblood]",
+    "source": "\\[hblood\\]([^<>\\r\\n]{1,180}?)\\[\\/hblood\\]",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-text horror-blood\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror Markup: [hstatic]",
+    "source": "\\[hstatic\\]([^<>\\r\\n]{1,180}?)\\[\\/hstatic\\]",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-text horror-static\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror Markup: [hspoiler]",
+    "source": "\\[hspoiler\\]([^<>\\r\\n]{1,180}?)\\[\\/hspoiler\\]",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-text horror-spoiler\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  },
+  {
+    "name": "Horror Markup: [hnight]",
+    "source": "\\[hnight\\]([^<>\\r\\n]{1,180}?)\\[\\/hnight\\]",
+    "flags": "gi",
+    "replace": "<span class=\"horror-fx horror-text horror-night\">\\1</span>",
+    "active": true,
+    "filterlinks": false
+  }
+]

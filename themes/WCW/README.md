@@ -1,4 +1,4 @@
-# WCW Tube — WrestleTube original import v1.0
+# WCW Tube — WrestleTube original import v1.1
 
 A simple **WCW / Monday Nitro skin** using WrestleTube's original CSS and JavaScript engine. No extra controls, no custom filter rules, and no newly invented emotes.
 
@@ -17,3 +17,7 @@ A simple **WCW / Monday Nitro skin** using WrestleTube's original CSS and JavaSc
 5. Hard-refresh (Ctrl+F5) and test Layout → Cinema Mode, playlist controls, chat emotes and original filters.
 
 No live Baked.live settings were changed. External emote image/GIF URLs still point to the original hosts; the images themselves are not backed up. The original WrestleTube export contains some older regexes that are intentionally preserved as-is. Original WrestleTube and WWF/WWE files are untouched.
+
+## v1.1 — Fixed cut-off top broadcast header
+
+Baked's fixed navbar can cover the upper part of the WCW logo/banner. The WCW JavaScript now measures the navbar/banner overlap twice during initial rendering and adds only the missing top margin. WCW's banner keeps its full height. This does not scroll the page, alter any player/chat layouts, create observers, or change Xaekai Cinema, playlist, emotes, or chat filters. Replace both CSS and JS with v1.1 pinned links and hard-refresh.

@@ -633,3 +633,18 @@ body:not(.cinemachat) #chatwrap,body:not(.cinemachat) #videowrap,body:not(.cinem
 #queue .queue_entry.queue_active{background:#244666!important;border-left:3px solid var(--wcw-gold)!important;}
 body.cinemachat #wcw-banner{display:none!important;}
 @media(max-width:720px){#wcw-banner{gap:8px;padding:8px 9px;min-height:61px;}#wcw-banner .wcw-mark{width:100px;max-height:45px;}#wcw-banner .wcw-watermark{display:none;}#wcw-banner .wcw-broadcast-text strong{font-size:clamp(12px,3vw,18px);}#wcw-banner .wcw-broadcast-text small{font-size:9px;letter-spacing:0;}}
+
+
+/* v1.1: keep the WCW banner's full height below the fixed Baked navbar.
+   Precise overlap spacing is measured once in skin.js, not continuously. */
+#wcw-banner {
+ box-sizing:border-box!important;
+ height:auto!important;
+ min-height:84px!important;
+ z-index:1;
+}
+#wcw-banner .wcw-mark {flex:0 0 auto;align-self:center;}
+#wcw-banner .wcw-broadcast-text {min-width:0;}
+@media(max-width:720px) {
+ #wcw-banner {min-height:66px!important;}
+}

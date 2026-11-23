@@ -1,4 +1,4 @@
-/* WCW Tube v1.0: original WrestleTube/Xaekai channel engine, WCW styling only. */
+/* WCW Tube v1.1: original WrestleTube/Xaekai channel engine, WCW styling only. */
 (function(w,d){
  if(!/^\/(tv|r)\//i.test(w.location.pathname)||w.__wcwTubeRunning)return;
  w.__wcwTubeRunning=true;
@@ -72,6 +72,25 @@ $('#messagebuffer').on('click', '.username', function(e) {
      banner.id='wcw-banner';
      banner.innerHTML="<img class=\"wcw-mark\" src=\"https://upload.wikimedia.org/wikipedia/commons/3/3a/WCW_%281988-1999%29_Logo.svg\" alt=\"WCW\" decoding=\"async\"><div class=\"wcw-broadcast-text\"><strong>WORLD CHAMPIONSHIP WRESTLING</strong><small>MONDAY NITRO · THUNDER · SATURDAY NIGHT</small></div><img class=\"wcw-watermark\" src=\"https://upload.wikimedia.org/wikipedia/commons/8/82/WCW_%281999-2001%29_Logo.svg\" alt=\"\" decoding=\"async\" loading=\"lazy\">";
      nav.insertAdjacentElement('afterend',banner);
+     // Baked's fixed navbar occupies the top of the viewport but may not
+     // reserve document flow space. If it overlaps the banner, add precisely
+     // the missing space. Never touch native layout, cinema, or scroll state.
+     function clearNavbarOverlap(){
+       if(!banner.isConnected || !nav.isConnected)return;
+       const bar=nav.getBoundingClientRect();
+       const box=banner.getBoundingClientRect();
+       const horizontalOverlap=bar.left<box.right && bar.right>box.left;
+       if(!horizontalOverlap || bar.bottom<=box.top+2 || bar.top>=box.bottom)return;
+       // Reserve the navbar height on first render. Account for any existing
+       // margin so applying the fix twice never accumulates empty space.
+       const current=parseFloat(w.getComputedStyle(banner).marginTop)||7;
+       const gap=Math.ceil(bar.bottom-box.top+9);
+       if(gap>0){
+         banner.style.setProperty('margin-top',(current+gap)+'px');
+       }
+     }
+     w.requestAnimationFrame(clearNavbarOverlap);
+     w.setTimeout(clearNavbarOverlap,350);
    }
    return true;
  }

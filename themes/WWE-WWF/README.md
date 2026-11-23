@@ -1,4 +1,4 @@
-# WWF/WWE — WrestleTube port v2.2
+# WWF/WWE — WrestleTube port v2.3
 
 The new skin uses the original WrestleTube channel CSS and JavaScript instead of the old custom Ringside UI.
 
@@ -28,3 +28,7 @@ The previous background collage was covered by WrestleTube's opaque page contain
 ## v2.2 — Restore the original Ringside header
 
 Restored the prominent original **WWF / WWE TV** hero with red/dark arena styling, BAKED.LIVE Ringside Broadcast overline, On Air viewer indicator, Now Showing bar, and Ringside Wire. The v2.1 six-card era logo gallery remains directly beneath this banner, so historic logos are visible without making the chat or video transparent. No duplicate Watch, Chat, Find Playing, Search, Cinema, or Mod Menu buttons have been reintroduced. The ported WrestleTube/Xaekai loader, original Cinema module, emotes, playlist and 206 filters remain unchanged.
+
+## v2.3 — Fix collapsed header, placement, stale version conflicts
+
+The earlier header was inserted before `#main`, which can put it **above the navbar** on some Baked.live layouts. It is now inserted directly after the native navbar, keeps the original large WWF/WWE TV Ringside hero, and shows six era logo cards. A small **v2.3** marker in Ringside Wire confirms that the new JavaScript is actually running. When an older External CSS remains cached, the script injects only its own header/gallery styling as a temporary compatibility fallback; the original chat/video/cinema module CSS is not duplicated. When an old WWF/WWE port is already running, v2.3 replaces only its visual header without starting the Xaekai module loader a second time. Keep the existing 206 filters.

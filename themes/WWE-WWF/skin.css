@@ -972,3 +972,21 @@ body[data-wwf-era].cinemachat #wwf-era-strip {display:none!important;}
  body[data-wwf-era] #wwf-era-strip .wwf-restored-onair small {display:none;}
  body[data-wwf-era] #wwf-era-strip .wwf-restored-wire > span {display:none;}
 }
+
+
+/* v2.3 diagnostics: distinguish the rebuilt header from the old one-line bar */
+body[data-wwf-visual-version="2.3"] #wwf-era-strip {
+  display:block!important;
+  box-sizing:border-box!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin:8px auto 12px!important;
+}
+body[data-wwf-era] #wwf-era-strip .wwf-build-label {
+  margin-left:auto;padding:2px 5px;border-radius:3px;
+  font:800 10px/1.2 ui-monospace,monospace;letter-spacing:.04em;
+  border:1px solid var(--ww-accent);color:var(--ww-muted);
+  background:var(--ww-bg);
+}
+body[data-wwf-era].cinemachat #wwf-era-strip {display:none!important;}

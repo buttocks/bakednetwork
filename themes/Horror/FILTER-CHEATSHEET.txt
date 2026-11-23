@@ -1,0 +1,45 @@
+HORROR TUBE — CHAT FILTER CHEAT SHEET
+These filters only work after an admin imports filters.json.
+Use the navbar's ☾ HORROR EFFECTS dropdown to insert any trigger.
+
+== HORROR STAMPS ==
+:horrortube:           HORROR TUBE — The room's own late-night broadcast title
+:slasher:              SLASHER SEASON — A blood-red slasher movie title
+:finalgirl:            FINAL GIRL — Survivor badge
+:bloodmoon:            BLOOD MOON — Crimson moon warning
+:possessed:            POSSESSED — Haunted purple lettering
+:creepy:               SOMETHING IS WRONG — A creepy alert
+:jumpscare:            JUMP SCARE! — A sudden, bold jump-scare label (no flashing)
+:midnight:             AFTER MIDNIGHT — Midnight screening tag
+:vhs:                  ● REC  VHS — Retro found-tape badge
+:haunted:              HAUNTED — Ghostly message label
+:deadinside:           DEAD INSIDE — Cold, unsettling text
+:vampire:              VAMPIRE HOURS — Blood-red vampire badge
+:zombie:               THE UNDEAD — Undead-green badge
+:foundfootage:         FOUND FOOTAGE — Camcorder-style film tag
+:itsalive:             IT'S ALIVE! — Mad-scientist announcement
+:dontlook:             DON'T LOOK — Ominous warning
+:behindyou:            BEHIND YOU — Something is lurking behind you
+:watchout:             WATCH OUT — A danger warning
+:redrum:               REDRUM — A reversed-message-inspired title
+:paranormal:           PARANORMAL ACTIVITY — Unexplained-activity tag
+:bodyhorror:           BODY HORROR — Visceral cinema badge
+:screamqueen:          SCREAM QUEEN — Classic horror heroine title
+:survive:              SURVIVOR — Survival ribbon
+:ouija:                OUIJA BOARD — Old spirit-board lettering
+:suspense:             SUSPENSE — Theatrical suspense title
+:theend:               THE END...? — An ominous end card
+
+== TEXT EFFECTS ==
+[hwhisper]...[/hwhisper]              WHISPER — Subtle whispering text
+[hglitch]...[/hglitch]                GLITCH — Unsettling glitch-styled text
+[hblood]...[/hblood]                  BLOOD LETTERS — A blood-red message
+[hstatic]...[/hstatic]                STATIC — TV static lettering
+[hspoiler]...[/hspoiler]              HIDDEN SPOILER — Blurred text that reveals on hover/focus
+[hnight]...[/hnight]                  NIGHT VISION — Green night-vision message
+
+Example: [hglitch]IT'S BEHIND YOU[/hglitch]
+Example: [hspoiler]The killer is revealed[/hspoiler]
+
+Do not import the 153-rule WrestleTube source directly: it contains wrestling,
+personalized, and broad spam rules. Horror filters.json contains the clean selection.

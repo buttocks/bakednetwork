@@ -2,31 +2,36 @@
   "schema": 1,
   "channels": {
     "luchatube/lucha": {
-      "archive_cursor": 1,
+      "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.ia.mp4",
-        "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4"
+        "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4",
+        "https://archive.org/download/syuri-c-vs-kira-iwgp-title-cmll-njpw-lucha-kingdom-2026.11.16/Syuri%20%28c%29%20vs%20Kira%20~%20IWGP%20Title%20~%20CMLL-NJPW%20Lucha%20Kingdom%20%282026.11.16%29%5B1080p30%5D.mp4"
       ],
-      "last_scan": "2026-11-24T17:47:53.753252+00:00",
-      "last_added": "2026-11-24T17:47:53.753209+00:00"
+      "last_scan": "2026-11-24T17:51:42.905555+00:00",
+      "last_added": "2026-11-24T17:51:42.905518+00:00"
     },
     "NJPW/classics": {
-      "archive_cursor": 1,
+      "archive_cursor": 2,
       "seen": [
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
-        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4"
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
+        "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.05.24a-NJPW-WPW-OP-5.26OA-Masa%20Saito%2C%20Shinya%20Hashimoto%2C%20Koji%20Kitao%20VS%20Big%20Van%20Vader%2C%20Crusher%20Bam%20Bam%20Bigelow%2C%20Steve%20Williams.mp4",
+        "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.05.24b-NJPW-Choshu%20VS%20Fighting%20Spirit%203%20Musketeers%20Single%203%20Match%20Series%20%231-Riki%20Choshu%20VS%20Keiji%20Muto.mp4"
       ],
-      "last_scan": "2026-11-24T17:47:55.844162+00:00",
-      "last_added": "2026-11-24T17:47:55.844138+00:00"
+      "last_scan": "2026-11-24T17:51:45.480980+00:00",
+      "last_added": "2026-11-24T17:51:45.480952+00:00"
     },
     "NJPW/events": {
-      "archive_cursor": 1,
+      "archive_cursor": 2,
       "seen": [
         "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
-        "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4"
+        "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
+        "https://archive.org/download/njpw-tanahashi-jam-2-by-cs-2026.11.19-49007292/NJPW%20TANAHASHI%20JAM%202%20by%20CS%E3%83%86%E3%83%AC%E6%9C%9D%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%202026.11.19%20%5B49007292%5D.mp4",
+        "https://archive.org/download/natsupoi-shingo-takagi-vs-chihiro-hashimoto-jeff-cobb-njpw-2026.11.20/Natsupoi%20%26%20Shingo%20Takagi%20vs%20Chihiro%20Hashimoto%20%26%20Jeff%20Cobb%20~%20NJPW%20%282026.11.20%29%5B1080p30%5D.mp4"
       ],
-      "last_scan": "2026-11-24T17:47:59.325857+00:00",
-      "last_added": "2026-11-24T17:47:59.325834+00:00"
+      "last_scan": "2026-11-24T17:51:47.906314+00:00",
+      "last_added": "2026-11-24T17:51:47.906287+00:00"
     }
   }
 }

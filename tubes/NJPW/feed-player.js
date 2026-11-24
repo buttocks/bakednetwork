@@ -9,26 +9,43 @@ if(!/^[a-z0-9-]{1,32}$/.test(channel)){statusText.textContent='Invalid channel';
 let catalog=null,track=null,muted=true,guideOpen=false,loading=false;
 let activeKey='',lastStatus=null,bad=new Set();
 let cachedOrder=null,cachedDay='';
-// Shared tube default: show overlays for a few seconds, then fade over video.
-const OVERLAY_IDLE_MS=6500;
+// Every Baked TV player: hide passive overlays while video plays, reveal on
+// pointer/hover/keyboard, and keep them visible for active controls and errors.
+const OVERLAY_START_MS=5500,OVERLAY_REVEAL_MS=3200;
 let overlayTimer=null;
-let keyboardNavigation=false;
-function showOverlays(){
-  document.body.classList.remove('overlay-idle');
+let keyboardNavigation=false,hoveringControls=false;
+function scheduleOverlayFade(delay=OVERLAY_REVEAL_MS){
   clearTimeout(overlayTimer);
   if(guideOpen||!status.hidden||video.paused)return;
   overlayTimer=setTimeout(()=>{
-    if(guideOpen||!status.hidden||video.paused)return;
-    // Keep controls visible while a keyboard user is working with them.
+    if(guideOpen||!status.hidden||video.paused||hoveringControls)return;
     if(keyboardNavigation&&document.activeElement?.closest('header,#guide'))return;
     document.body.classList.add('overlay-idle');
-  },OVERLAY_IDLE_MS);
+  },delay);
+}
+function showOverlays(delay=OVERLAY_REVEAL_MS){
+  document.body.classList.remove('overlay-idle');
+  scheduleOverlayFade(delay);
+}
+for(const zone of ['header','#hotspot-top','#hotspot-bottom']){
+  const node=document.querySelector(zone);
+  if(!node)continue;
+  node.addEventListener('pointerenter',()=>{
+    hoveringControls=zone==='header';keyboardNavigation=false;
+    showOverlays();
+  });
+  node.addEventListener('pointerleave',()=>{
+    hoveringControls=false;
+    showOverlays(1200);
+  });
 }
 document.addEventListener('pointermove',()=>{keyboardNavigation=false;showOverlays()},{passive:true});
 document.addEventListener('pointerdown',()=>{keyboardNavigation=false;showOverlays()},{passive:true});
 document.addEventListener('touchstart',()=>{keyboardNavigation=false;showOverlays()},{passive:true});
 document.addEventListener('keydown',()=>{keyboardNavigation=true;showOverlays()});
 document.addEventListener('focusin',()=>showOverlays());
+video.addEventListener('pause',()=>showOverlays());
+video.addEventListener('playing',()=>showOverlays(OVERLAY_START_MS));
 
 const pad=n=>String(n).padStart(2,'0');
 function message(s){status.hidden=false;statusText.textContent=s;showOverlays()}
@@ -130,7 +147,7 @@ function onFailure(){
   setTimeout(()=>tune(true),1500);
 }
 video.addEventListener('error',onFailure);
-video.addEventListener('playing',()=>{status.hidden=true;loading=false;showOverlays()});
+video.addEventListener('playing',()=>{status.hidden=true;loading=false;showOverlays(OVERLAY_START_MS)});
 video.addEventListener('ended',()=>{bad.add(select(new Date(),false)?.p?.url);tune(true)});
 $('audio').onclick=()=>{
   muted=!muted;renderControls();

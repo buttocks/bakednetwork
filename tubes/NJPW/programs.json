@@ -1,0 +1,211 @@
+{
+  "schema": 1,
+  "seed": "njpw-bakednetwork-original-20261124",
+  "source_note": "Curated starting catalog from publicly accessible Internet Archive stream references. Availability and reuse rights must be independently verified.",
+  "channels": {
+    "classics": {
+      "name": "NJPW CLASSICS",
+      "description": "Classic New Japan matches and early Strong Style era.",
+      "programs": [
+        {
+          "title": "Antonio Inoki vs. Jesse Ventura",
+          "episode": "Apr 21, 1982",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.04.21d-NJPW-Special%20Match-Antonio%20Inoki%20VS%20Jesse%20Ventura.mp4",
+          "duration": 1341,
+          "source": "Internet Archive",
+          "source_channel": "Antonio Inoki Network"
+        },
+        {
+          "title": "Antonio Inoki & Tatsumi Fujinami vs. Dick Murdoch & El Canek",
+          "episode": "Jul 2, 1982",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.07.02c-NJPW-Antonio%20Inoki%20%26%20Tatsumi%20Fujinami%20VS%20Dick%20Murdoch%20%26%20El%20Canek.mp4",
+          "duration": 1059,
+          "source": "Internet Archive",
+          "source_channel": "Antonio Inoki Network"
+        },
+        {
+          "title": "Antonio Inoki & Hulk Hogan vs. Sgt. Slaughter & Ed Leslie",
+          "episode": "Aug 27, 1982",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.08.27c-NJPW-Antonio%20Inoki%20%26%20Hulk%20Hogan%20VS%20Sgt.%20Slaughter%20%26%20Ed%20Leslie.mp4",
+          "duration": 1124,
+          "source": "Internet Archive",
+          "source_channel": "Antonio Inoki Network"
+        },
+        {
+          "title": "Antonio Inoki vs. Rusher Kimura",
+          "episode": "Oct 1, 1982",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.10.01d-NJPW-Special%20Match-Antonio%20Inoki%20VS%20Rusher%20Kimura.mp4",
+          "duration": 1081,
+          "source": "Internet Archive",
+          "source_channel": "Antonio Inoki Network"
+        },
+        {
+          "title": "Keiji Muto, Masahiro Chono vs. The Great Kokena, Wild Samoan",
+          "episode": "NJPW World Pro-Wrestling · Jul 19, 1990",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.07.19d-NJPW-IWGP%20Tag%20Championship%20Match-Keiji%20Muto%2C%20Masahiro%20Chono%20%28C-V2%29%20VS%20The%20Great%20Kokena%2C%20Wild%20Samoan.mp4",
+          "duration": 1048,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Pro-Wrestling"
+        },
+        {
+          "title": "Wres vs. Judo",
+          "episode": "NJPW World Pro-Wrestling · Jul 22, 1990",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.07.22e-NJPW-Pro-Wres%20VS%20Judo-Japan-Soviet%20Different%20Seed%20Martial%20Arts%20Battle-Shinya%20Hashimoto%20VS%20Alexey%20Tyurin.mp4",
+          "duration": 970,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Pro-Wrestling"
+        },
+        {
+          "title": "Shinya Hashimoto, Keiji Muto, Masahiro Chono vs. Big Van Vader, Crusher Bam Bam…",
+          "episode": "NJPW World Pro-Wrestling · Aug 16, 1990",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.08.16d-NJPW-Shinya%20Hashimoto%2C%20Keiji%20Muto%2C%20Masahiro%20Chono%20VS%20Big%20Van%20Vader%2C%20Crusher%20Bam%20Bam%20Bigelow%2C%20The%20Soultaker.mp4",
+          "duration": 1150,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Pro-Wrestling"
+        },
+        {
+          "title": "Shiro Koshinaka, Kengo Kimura, Akira Nogami, Akitoshi Saito vs. Masahiro Chono,…",
+          "episode": "NJPW World Pro-Wrestling · Jan 26, 1998",
+          "url": "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.01.26f-NJPW-Shiro%20Koshinaka%2C%20Kengo%20Kimura%2C%20Akira%20Nogami%2C%20Akitoshi%20Saito%20VS%20Masahiro%20Chono%2C%20Hiroyoshi%20Tenzan%2C%20Tatsutoshi%20Goto%2C%20Michiyoshi%20Ohara.mp4",
+          "duration": 1062,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Pro-Wrestling"
+        }
+      ]
+    },
+    "events": {
+      "name": "NJPW EVENT ARCHIVE",
+      "description": "Classic and modern NJPW event broadcasts and tournament cards.",
+      "programs": [
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 13",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt13.ia.mp4",
+          "duration": 3110,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 15",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt15.ia.mp4",
+          "duration": 880,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 16",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt16.ia.mp4",
+          "duration": 121,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 17",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt17.ia.mp4",
+          "duration": 1164,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW G1 Climax 35",
+          "episode": "Aug 17, 2025",
+          "url": "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.ia.mp4",
+          "duration": 11652,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax"
+        },
+        {
+          "title": "NJPW G1 Climax 36",
+          "episode": "Day 19 · Aug 16, 2026",
+          "url": "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.ia.mp4",
+          "duration": 12945,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 2",
+          "episode": "Apr 1, 2008 · Part 1",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt1.ia.mp4",
+          "duration": 7767,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 2",
+          "episode": "Apr 1, 2008 · Part 2",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt2.ia.mp4",
+          "duration": 8044,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 20",
+          "episode": "Jan 4, 2026",
+          "url": "https://archive.org/download/njpw-wrestle-kingdom-20-in-tokyo-dome-04-01-26/NJPW%20Wrestle%20Kingdom%2020%20In%20Tokyo%20Dome%2004-01-26.ia.mp4",
+          "duration": 19695,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom"
+        },
+        {
+          "title": "NJPW Wrestling Dontaku 2026",
+          "episode": "Apr 20, 2026",
+          "url": "https://archive.org/download/njpw.-road.-to.-wrestling.-dontaku.-2026.04.26.-ja.-720p.-web.h-264-hc_202605/NJPW.Road.To.Wrestling.Dontaku.2026.04.20.EN.720p.WEB.h264-HC.mp4",
+          "duration": 10645,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestling Dontaku"
+        },
+        {
+          "title": "NJPW Wrestling Dontaku 2026",
+          "episode": "Apr 26, 2026",
+          "url": "https://archive.org/download/njpw.-road.-to.-wrestling.-dontaku.-2026.04.26.-ja.-720p.-web.h-264-hc_202605/NJPW.Road.To.Wrestling.Dontaku.2026.04.26.JA.720p.WEB.h264-HC.mp4",
+          "duration": 8870,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestling Dontaku"
+        },
+        {
+          "title": "NJPW Wrestling Dontaku 2026",
+          "episode": "May 3, 2026",
+          "url": "https://archive.org/download/njpw.-road.-to.-wrestling.-dontaku.-2026.04.26.-ja.-720p.-web.h-264-hc_202605/NJPW.Wrestling.Dontaku.2026.05.03.EN.720p.WEB.h264-HC.mp4",
+          "duration": 13221,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestling Dontaku"
+        },
+        {
+          "title": "NJPW Dominion 2021",
+          "episode": "Day 2 · Jun 2, 2021",
+          "url": "https://archive.org/download/njpw-road-to-dominion-day-2-02-06-21/NJPW%20Road%20To%20Dominion%20Day%202%2002-06-21.mp4",
+          "duration": 7479,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW Best Of The Super Junior 33 Day 11",
+          "episode": "Jun 2, 2026",
+          "url": "https://archive.org/download/njpw-best-of-the-super-junior-33-day-11-02-06-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2011%2002-06-26.ia.mp4",
+          "duration": 8596,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW Collision Day 4",
+          "episode": "May 28, 2021",
+          "url": "https://archive.org/download/njpw-collision-2021-day-4-28-05-21/NJPW%20Collision%202021%20Day%204%2028-05-21.mp4",
+          "duration": 4145,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW Best Of The Super Junior 33 Day 10",
+          "episode": "May 30, 2026",
+          "url": "https://archive.org/download/njpw-best-of-the-super-junior-33-day-10-30-05-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2010%2030-05-26.ia.mp4",
+          "duration": 9101,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        }
+      ]
+    }
+  }
+}

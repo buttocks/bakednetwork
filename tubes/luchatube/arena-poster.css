@@ -81,28 +81,45 @@ body .container, #mainpage { max-width: none; }
   padding: 0 !important;
   min-height: 0 !important;
 }
-/* Source logo is 660x378px but actual artwork ends at y=224.
-   Crop its transparent lower 154px in the display container, retaining
-   the original large mask and LUCHA TUBE lettering without empty layout. */
+/* CSS-only brand rendering. The source PNG is 660x378 with transparent
+   space below y=224. The mask is centered ~20px left of the lettering in
+   the original bitmap. Render each piece independently, perfectly aligned,
+   without touching welcome text, house rules, registration link or MOTD HTML. */
 #motdwrap #motd > .head2 > center:first-child {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
   height: 153px !important;
+  min-height: 0 !important;
   overflow: hidden !important;
   margin: 0 !important;
   padding: 0 !important;
   line-height: 0 !important;
 }
-#motdwrap #motd img[src*="GQsScF2"] {
-  display: inline-block !important;
+#motdwrap #motd > .head2 > center:first-child > img[src*="GQsScF2"] {
+  display: none !important;
+}
+#motdwrap #motd > .head2 > center:first-child::before,
+#motdwrap #motd > .head2 > center:first-child::after {
+  content: "" !important;
+  display: block !important;
+  flex: 0 0 auto !important;
   width: 450px !important;
-  max-width: 450px !important;
-  max-height: none !important;
-  height: auto !important;
-  object-fit: contain;
-  vertical-align: top !important;
-  /* The transparent source graphic has its visible mask/text slightly left
-     of its image canvas center. Move only the graphic, not the banner. */
+  max-width: none !important;
+  background-image: url("https://i.imgur.com/GQsScF2.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: 450px auto !important;
+}
+#motdwrap #motd > .head2 > center:first-child::before {
+  height: 99px !important;
+  background-position: center top !important;
   transform: translateX(14px);
+}
+#motdwrap #motd > .head2 > center:first-child::after {
+  height: 54px !important;
+  background-position: center -99px !important;
+  transform: none;
 }
 #motdwrap #motd > .head2 > .head2 {
   margin-top: 0 !important;
@@ -125,24 +142,39 @@ body .container, #mainpage { max-width: none; }
   line-height: 1.2 !important;
 }
 @media (max-width: 767px) {
-  #motdwrap #motd > .head2 > center:first-child {
-    height: 105px !important;
-  }
-  #motdwrap #motd img[src*="GQsScF2"] {
+  #motdwrap #motd > .head2 > center:first-child { height: 105px !important; }
+  #motdwrap #motd > .head2 > center:first-child::before,
+  #motdwrap #motd > .head2 > center:first-child::after {
     width: 310px !important;
-    max-width: min(310px, 88vw) !important;
-    max-height: none !important;
+    background-size: 310px auto !important;
+  }
+  #motdwrap #motd > .head2 > center:first-child::before {
+    height: 68px !important;
     transform: translateX(9px);
   }
-  #motdwrap #motd > .head2 > .head2 { margin-top: 0 !important; }
+  #motdwrap #motd > .head2 > center:first-child::after {
+    height: 37px !important;
+    background-position: center -68px !important;
+  }
   #motdwrap #motd > .head2 > .head2 > h4 {
     margin: 2px 0 3px !important;
     font-size: 11px !important;
   }
 }
 @media (max-width: 352px) {
-  #motdwrap #motd > .head2 > center:first-child {
-    height: 92px !important;
+  #motdwrap #motd > .head2 > center:first-child { height: 92px !important; }
+  #motdwrap #motd > .head2 > center:first-child::before,
+  #motdwrap #motd > .head2 > center:first-child::after {
+    width: 270px !important;
+    background-size: 270px auto !important;
+  }
+  #motdwrap #motd > .head2 > center:first-child::before {
+    height: 59px !important;
+    transform: translateX(8px);
+  }
+  #motdwrap #motd > .head2 > center:first-child::after {
+    height: 33px !important;
+    background-position: center -59px !important;
   }
 }
 

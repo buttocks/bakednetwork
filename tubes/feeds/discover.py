@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Lightweight scheduled program discovery for all managed Baked TV channels.
-Source preference: Archive direct videos, then official embeddable YouTube.
+Source preference: official embeddable YouTube, then Archive direct videos.
 The repository stores only metadata. Every catalog is bounded and deduplicated.
 """
 from __future__ import annotations
@@ -140,9 +140,9 @@ def refresh_one(entry,defaults,record):
     seen=record.setdefault("seen",[])
     if not isinstance(seen,list):seen=[]
     skip=set(seen)
-    sources=[("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),
-              defaults["max_archive_per_run"]),
-             ("YouTube",youtube(entry,defaults),defaults["max_youtube_per_run"])]
+    sources=[("YouTube",youtube(entry,defaults),defaults["max_youtube_per_run"]),
+             ("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),
+              defaults["max_archive_per_run"])]
     additions=[]
     for source,candidates,limit in sources:
         n=0
@@ -175,7 +175,7 @@ def main():
     config=load(CONFIG);state=load(STATE)
     defaults=config["defaults"]
     assert config["schema"]==1 and state["schema"]==1
-    assert defaults["source_priority"]==["Internet Archive","YouTube"]
+    assert defaults["source_priority"]==["YouTube","Internet Archive"]
     assert 20<=defaults["max_catalog_items"]<=200
     assert 1<=defaults["max_new_per_channel_per_run"]<=5
     added=0

@@ -2,12 +2,12 @@
   "schema": 1,
   "defaults": {
     "source_priority": [
-      "Internet Archive",
-      "YouTube"
+      "YouTube",
+      "Internet Archive"
     ],
     "max_new_per_channel_per_run": 3,
     "max_archive_per_run": 2,
-    "max_youtube_per_run": 2,
+    "max_youtube_per_run": 3,
     "max_catalog_items": 90,
     "min_duration_seconds": 420,
     "max_duration_seconds": 14400,

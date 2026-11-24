@@ -50,10 +50,35 @@ function shuffle(list,key){
   for(let i=a.length-1;i>0;i--){const j=rnd()%(i+1);[a[i],a[j]]=[a[j],a[i]]}
   return a;
 }
+function weightedLineup(programs,key){
+  const unique=[...new Map(programs.map(p=>[p.url,p])).values()];
+  const yt=shuffle(unique.filter(p=>p.source==='YouTube'),key+'|youtube');
+  const archive=shuffle(unique.filter(p=>p.source!=='YouTube'),key+'|archive');
+  if(!yt.length||!archive.length)return shuffle(unique,key);
+  const queues=[yt,archive], used=[0,0], seconds=[0,0], result=[];
+  // Build a deterministic full-program cycle long enough to cover a UTC day
+  // and at least the duration of the underlying catalog. Reuse each source
+  // only after its own shuffled queue has been exhausted.
+  const horizon=Math.max(86400,unique.reduce((sum,p)=>sum+p.duration,0));
+  while(seconds[0]+seconds[1]<horizon){
+    const total=seconds[0]+seconds[1];
+    const a=queues[0][used[0]%queues[0].length];
+    const b=queues[1][used[1]%queues[1].length];
+    // Choose the next complete program closest to the 60% YouTube time target.
+    const errorY=Math.abs(seconds[0]+a.duration-.6*(total+a.duration));
+    const errorA=Math.abs(seconds[0]-.6*(total+b.duration));
+    let i=errorY<=errorA?0:1;
+    // Avoid adjacent identical programs when another source is available.
+    if(result.at(-1)?.url===queues[i][used[i]%queues[i].length].url)i=1-i;
+    const p=queues[i][used[i]++%queues[i].length];
+    seconds[i]+=p.duration;result.push(p);
+  }
+  return result;
+}
 function select(date=new Date()){
   const utcDay=date.toISOString().slice(0,10);
   if(utcDay!==day){
-    day=utcDay;ordered=shuffle(track?.programs||[],channel+'|'+utcDay);
+    day=utcDay;ordered=weightedLineup(track?.programs||[],channel+'|'+utcDay);
   }
   if(!ordered.length)return null;
   const start=Date.parse(utcDay+'T00:00:00Z');
@@ -84,7 +109,7 @@ function guide(date=new Date()){
     const contents=document.createElement('div'),title=document.createElement('b'),details=document.createElement('small');
     title.textContent=p.title;details.textContent=p.episode||p.source_channel||p.source;
     contents.append(title,details);li.append(time,contents);list.append(li);
-    when+=(p.duration-(i===0?item.seek:0))*1000;
+    when+=p.duration*1000;
   }
 }
 function setOverlay(p){
@@ -127,7 +152,7 @@ function failCurrent(reason='Source temporarily unavailable'){
   stopYT();clearTimeout(playbackTimer);
   showStatus(reason+' — tuning another match…');
   activeUrl='';
-  if(track&&bad.size>=track.programs.length){
+  if(track&&track.programs.every(p=>bad.has(p.url))){
     showStatus('All program sources are temporarily unavailable. Rechecking shortly.');
     setTimeout(()=>{bad.clear();tune(true)},45000);
   }else setTimeout(()=>tune(true),900);

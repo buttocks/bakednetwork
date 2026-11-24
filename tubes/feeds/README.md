@@ -48,3 +48,7 @@ must never dim, pause or interrupt the actual video.
 
 Use this behavior on every new Baked TV-owned embed, with per-channel colors
 and branding retained.
+
+## Wrestling source mix
+
+The shared player schedules whole programs toward 60% YouTube and 40% Internet Archive by duration, using a deterministic UTC-day lineup. When only one source is present it uses that source. Source discovery prefers official YouTube. Actual playback can differ because of outages, ads, catalog availability, and day boundaries. SlamVision is separate.

@@ -108,12 +108,18 @@ export async function refreshNJPWMotdSkin({page,request,initial}){
     throw Error('Links still visible after update');
   const metrics=await page.evaluate(()=>{
     const r=sel=>{const e=document.querySelector(sel);const b=e?.getBoundingClientRect();return b?{width:Math.round(b.width),height:Math.round(b.height)}:null;};
+    const banner=document.querySelector('#motdwrap')?.getBoundingClientRect();
+    const logo=document.querySelector('#motdwrap #header img')?.getBoundingClientRect();
+    const logoCenterOffsetPx=banner&&logo?
+      Math.round((logo.left+logo.width/2)-(banner.left+banner.width/2)):null;
     return {motd:r('#motdwrap'),logo:r('#motdwrap #header img'),
+      logoCenterOffsetPx,
       rules:r('#motdwrap [data-target="#rules"]'),
       linksCount:document.querySelectorAll('#motdwrap [data-target="#links"],#motdwrap #links').length};
   });
-  if(metrics.linksCount!==0||!metrics.logo||!metrics.rules)
-    throw Error('Visual verification failed; inspect live NJPW banner');
+  if(metrics.linksCount!==0||!metrics.logo||!metrics.rules ||
+     metrics.logoCenterOffsetPx===null || Math.abs(metrics.logoCenterOffsetPx)>3)
+    throw Error('Visual verification failed: NJPW lion logo must be centered to within 3px');
   await page.screenshot({path:DIR+'/njpw-compact-skin-preview.png',fullPage:false,animations:'disabled'});
   return {
     request_id:request.request_id,channel:request.channel,action:request.action,

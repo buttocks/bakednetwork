@@ -9,8 +9,29 @@ if(!/^[a-z0-9-]{1,32}$/.test(channel)){statusText.textContent='Invalid channel';
 let catalog=null,track=null,muted=true,guideOpen=false,loading=false;
 let activeKey='',lastStatus=null,bad=new Set();
 let cachedOrder=null,cachedDay='';
+// Shared tube default: show overlays for a few seconds, then fade over video.
+const OVERLAY_IDLE_MS=6500;
+let overlayTimer=null;
+let keyboardNavigation=false;
+function showOverlays(){
+  document.body.classList.remove('overlay-idle');
+  clearTimeout(overlayTimer);
+  if(guideOpen||!status.hidden||video.paused)return;
+  overlayTimer=setTimeout(()=>{
+    if(guideOpen||!status.hidden||video.paused)return;
+    // Keep controls visible while a keyboard user is working with them.
+    if(keyboardNavigation&&document.activeElement?.closest('header,#guide'))return;
+    document.body.classList.add('overlay-idle');
+  },OVERLAY_IDLE_MS);
+}
+document.addEventListener('pointermove',()=>{keyboardNavigation=false;showOverlays()},{passive:true});
+document.addEventListener('pointerdown',()=>{keyboardNavigation=false;showOverlays()},{passive:true});
+document.addEventListener('touchstart',()=>{keyboardNavigation=false;showOverlays()},{passive:true});
+document.addEventListener('keydown',()=>{keyboardNavigation=true;showOverlays()});
+document.addEventListener('focusin',()=>showOverlays());
+
 const pad=n=>String(n).padStart(2,'0');
-function message(s){status.hidden=false;statusText.textContent=s}
+function message(s){status.hidden=false;statusText.textContent=s;showOverlays()}
 function dayKey(date){return date.toISOString().slice(0,10)}
 function seed(x){let s=2166136261;for(const c of x){s^=c.charCodeAt(0);s=Math.imul(s,16777619)}return s>>>0}
 function shuffle(items,day){
@@ -109,7 +130,7 @@ function onFailure(){
   setTimeout(()=>tune(true),1500);
 }
 video.addEventListener('error',onFailure);
-video.addEventListener('playing',()=>{status.hidden=true;loading=false});
+video.addEventListener('playing',()=>{status.hidden=true;loading=false;showOverlays()});
 video.addEventListener('ended',()=>{bad.add(select(new Date(),false)?.p?.url);tune(true)});
 $('audio').onclick=()=>{
   muted=!muted;renderControls();
@@ -120,6 +141,7 @@ $('guide-toggle').onclick=()=>{
   guideOpen=!guideOpen;$('guide').hidden=!guideOpen;
   $('guide-toggle').setAttribute('aria-expanded',String(guideOpen));
   if(guideOpen)scheduleGuide(new Date());
+  showOverlays();
 };
 async function refresh(){
   try{

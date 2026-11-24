@@ -27,7 +27,13 @@ export async function deploySkin({page,request,initial}){
 
   const newLayer=(await fs.readFile(CSS_PATH,'utf8')).trim();
   if(newLayer.length<1500||newLayer.length>11500)throw Error('Invalid CSS layer length');
-  if(/background-image\s*:\s*url\(/i.test(newLayer))throw Error('Managed CSS cannot replace background art');
+  // The original, backed-up MOTD logo is the only approved CSS image asset.
+  // Reject any additional remote CSS URLs or imports.
+  const approvedLogo='https://i.imgur.com/GQsScF2.png';
+  const uses=[...newLayer.matchAll(/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/gi)]
+    .map(match=>match[1]);
+  if(uses.length!==2||uses.some(url=>url!==approvedLogo))
+    throw Error('Managed CSS may reference only the two approved original logo slices');
   if(/@import/i.test(newLayer))throw Error('Managed CSS cannot add remote style imports');
   let target;
   const start=before.css.indexOf(BEGIN),end=before.css.indexOf(END);
@@ -59,25 +65,40 @@ export async function deploySkin({page,request,initial}){
     }));
     if(state.css===target){
       if(sha(state.js)!==sha(before.js))throw Error('JavaScript changed during CSS deployment');
-      // Confirm rendered geometry, not only that the server stored CSS.
+      // Confirm two independently positioned CSS-rendered logo slices.
       const logoLayout=await page.evaluate(()=>{
         const banner=document.querySelector('#motdwrap');
-        const img=document.querySelector('#motdwrap #motd img[src*="GQsScF2"]');
-        const cropped=document.querySelector('#motdwrap #motd > .head2 > center:first-child');
+        const source=document.querySelector('#motdwrap #motd > .head2 > center:first-child');
+        const sourceImage=source?.querySelector('img[src*="GQsScF2"]');
         const welcome=document.querySelector('#motdwrap #motd > .head2 > .head2 > h4');
-        const rect=el=>el?el.getBoundingClientRect():null;
-        const b=rect(banner),i=rect(img),c=rect(cropped),w=rect(welcome);
-        return {bannerHeight:b?Math.round(b.height):null,
-          logoImageWidth:i?Math.round(i.width):null,
-          logoImageHeight:i?Math.round(i.height):null,
-          visibleLogoHeight:c?Math.round(c.height):null,
+        const rules=document.querySelector('#motdwrap [data-target="#rules"]');
+        const b=banner?.getBoundingClientRect(),c=source?.getBoundingClientRect();
+        const w=welcome?.getBoundingClientRect();
+        const mask=source?getComputedStyle(source,'::before'):null;
+        const wordmark=source?getComputedStyle(source,'::after'):null;
+        return {
+          bannerHeight:b?Math.round(b.height):null,
+          logoRegionHeight:c?Math.round(c.height):null,
+          originalImageHidden:sourceImage?getComputedStyle(sourceImage).display==='none':false,
+          maskHeight:mask?parseFloat(mask.height):null,
+          wordmarkHeight:wordmark?parseFloat(wordmark.height):null,
+          maskBackground:mask?.backgroundImage||'',
+          wordmarkBackground:wordmark?.backgroundImage||'',
+          maskTransform:mask?.transform||'',
+          wordmarkTransform:wordmark?.transform||'',
           welcomeGap:c&&w?Math.round(w.top-c.bottom):null,
-          croppedOverflow:cropped?getComputedStyle(cropped).overflow:null};
+          rulesPreserved:!!rules,
+          croppedOverflow:source?getComputedStyle(source).overflow:null,
+          visibleText:welcome?.innerText||''
+        };
       });
-      if(logoLayout.logoImageWidth===null||logoLayout.visibleLogoHeight===null)
-        throw Error('MOTD logo elements not found; CSS stored but visual verification failed');
-      if(logoLayout.croppedOverflow!=='hidden')
-        throw Error('Logo image overflow not clipped as expected');
+      if(!logoLayout.originalImageHidden||!logoLayout.rulesPreserved||
+         !logoLayout.maskBackground.includes('GQsScF2')||
+         !logoLayout.wordmarkBackground.includes('GQsScF2')||
+         logoLayout.maskTransform==='none'||logoLayout.wordmarkTransform!=='none'||
+         logoLayout.croppedOverflow!=='hidden'||
+         !Number.isFinite(logoLayout.logoRegionHeight))
+        throw Error('Live CSS logo did not render as two independent slices; review screenshot');
       await page.screenshot({path:'tubes/bridge/luchatube-arena-poster-preview.png',
         fullPage:false,animations:'disabled',timeout:20000});
       return {request_id:request.request_id,channel:request.channel,action:request.action,

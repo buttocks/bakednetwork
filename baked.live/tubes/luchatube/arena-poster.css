@@ -1,0 +1,270 @@
+/*
+ * LUCHA TUBE — Arena Poster / Clásico v1.0
+ * Managed enhancement layer. Original Lucha Tube CSS remains above this block.
+ * No background images, logo URLs, channel scripts or emotes are replaced.
+ * Rollback: remove the block between the two managed markers.
+ */
+:root {
+  --lt-ink: #14100e;
+  --lt-shadow: rgba(10,7,6,.9);
+  --lt-cream: #fff0c7;
+  --lt-aged: #e3c88f;
+  --lt-gold: #d9a94f;
+  --lt-red: #9f2222;
+  --lt-green: #1f693e;
+}
+body {
+  color: var(--lt-cream);
+  font-family: "Trebuchet MS", "Arial Narrow", Arial, sans-serif;
+}
+body .container, #mainpage { max-width: none; }
+#mainpage { padding-bottom: 24px; }
+/* The original Mexican lucha/wrestler collage remains the page backdrop. */
+#motdwrap {
+  position: relative;
+  margin: 10px 0 14px !important;
+  padding: 10px 15px 12px !important;
+  opacity: 1 !important;
+  border: 3px solid var(--lt-gold) !important;
+  border-radius: 3px !important;
+  background:
+    repeating-linear-gradient(0deg, transparent 0, transparent 4px,
+       rgba(20,9,6,.035) 5px, transparent 6px),
+    linear-gradient(90deg, rgba(17,95,49,.90), rgba(26,16,11,.94) 28%,
+      rgba(25,16,11,.94) 72%, rgba(139,24,19,.90)) !important;
+  box-shadow: 0 0 0 2px #1c0d07, 0 9px 28px rgba(0,0,0,.72),
+    inset 0 0 0 2px rgba(255,232,174,.26) !important;
+  text-align: center;
+}
+#motdwrap::before {
+  content: "LUCHA LIBRE · EN VIVO · LUCHA LIBRE";
+  display: block;
+  margin: -4px 12px 5px;
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(228,185,105,.46);
+  color: var(--lt-aged);
+  font: 900 10px/1.3 "Arial Black", Impact, sans-serif;
+  letter-spacing: .24em;
+  text-shadow: 1px 2px 1px #170a08;
+}
+#motdwrap #motd { color: var(--lt-cream); }
+#motdwrap #motd img {
+  max-width: min(94%, 450px);
+  height: auto;
+}
+#motdwrap #motd h4 {
+  margin: 5px 0 7px !important;
+  font: 800 14px/1.4 "Trebuchet MS", Arial, sans-serif;
+  letter-spacing: .025em;
+  color: #ffdc7e;
+  text-shadow: 0 1px 2px #090707, 0 0 9px #000;
+}
+#motdwrap #motd a { color: #fff0bf; text-decoration: underline; }
+#motdwrap #motd > center { margin-bottom: 3px; }
+/* Compact Lucha masthead: original art and image URL stay untouched.
+   Limit the existing 450px-wide MOTD graphic and its transparent whitespace. */
+#motdwrap {
+  padding: 4px 12px 7px !important;
+  margin: 4px 0 8px !important;
+  min-height: 0 !important;
+}
+#motdwrap::before {
+  padding: 2px 6px 3px !important;
+  margin: 0 5px 2px !important;
+  font-size: 9px !important;
+  letter-spacing: .13em !important;
+}
+#motdwrap #motd,
+#motdwrap #motd > .head2,
+#motdwrap #motd > .head2 > .head2 {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+/* Source logo is 660x378px but actual artwork ends at y=224.
+   Crop its transparent lower 154px in the display container, retaining
+   the original large mask and LUCHA TUBE lettering without empty layout. */
+#motdwrap #motd > .head2 > center:first-child {
+  display: block !important;
+  height: 153px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+#motdwrap #motd img[src*="GQsScF2"] {
+  display: inline-block !important;
+  width: 450px !important;
+  max-width: 450px !important;
+  max-height: none !important;
+  height: auto !important;
+  object-fit: contain;
+  vertical-align: top !important;
+}
+#motdwrap #motd > .head2 > .head2 {
+  margin-top: 0 !important;
+}
+#motdwrap #motd > .head2 > .head2 > h4 {
+  margin: 2px 0 3px !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+}
+#motdwrap #motd > .head2 > .head2 > center {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+#motdwrap #motd > .head2 > .head2 > center > .btn {
+  padding: 4px 10px !important;
+  min-height: 0 !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+@media (max-width: 767px) {
+  #motdwrap #motd > .head2 > center:first-child {
+    height: 105px !important;
+  }
+  #motdwrap #motd img[src*="GQsScF2"] {
+    width: 310px !important;
+    max-width: min(310px, 88vw) !important;
+    max-height: none !important;
+  }
+  #motdwrap #motd > .head2 > .head2 { margin-top: 0 !important; }
+  #motdwrap #motd > .head2 > .head2 > h4 {
+    margin: 2px 0 3px !important;
+    font-size: 11px !important;
+  }
+}
+@media (max-width: 352px) {
+  #motdwrap #motd > .head2 > center:first-child {
+    height: 92px !important;
+  }
+}
+
+/* The original image URLs, banner logos and modal links are unchanged. */
+#motdwrap .btn,
+#chatwrap .btn, #videowrap .btn, #playlistwrap .btn {
+  border: 1px solid #c49c57 !important;
+  border-radius: 2px !important;
+  color: #ffe8b5 !important;
+  font-weight: 800 !important;
+  letter-spacing: .03em;
+  text-shadow: 0 1px 2px #000;
+  background: linear-gradient(#443027, #241812) !important;
+  box-shadow: inset 0 1px rgba(255,230,169,.22), 0 2px 3px #0007;
+  transition: background-color .15s, border-color .15s;
+}
+#motdwrap .btn:hover,
+#chatwrap .btn:hover, #videowrap .btn:hover, #playlistwrap .btn:hover {
+  background: linear-gradient(#754025, #452019) !important;
+  border-color: #ffe2a0 !important;
+}
+#chatwrap, #videowrap {
+  background: rgba(18,12,11,.91) !important;
+  border: 2px solid rgba(200,151,73,.90);
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px rgba(30,13,9,.95),
+    0 8px 24px rgba(0,0,0,.65), inset 0 0 0 1px #e5c08422;
+  padding: 6px 9px 11px;
+}
+#chatwrap { border-top-color: #22794c; }
+#videowrap { border-top-color: #a62a25; }
+#chatheader, #videowrap-header, #plmeta, #pad_notes_wrap {
+  position: relative;
+  padding: 7px 12px !important;
+  margin: 0 0 5px;
+  border-top: 1px solid #f2d49b !important;
+  border-bottom: 3px double #e4b569 !important;
+  border-radius: 1px !important;
+  color: #fff0b9 !important;
+  background: linear-gradient(98deg, #145331 0%, #21331f 17%,
+    #261812 49%, #5d1d17 83%, #a82c22 100%) !important;
+  font: 900 12px/1.25 "Arial Black", Impact, sans-serif;
+  letter-spacing: .065em;
+  text-shadow: 1px 2px #160b07 !important;
+}
+#chatheader a, #videowrap-header a, #plmeta a {
+  color: #fff3c9 !important;
+}
+#messagebuffer, #userlist, #queue {
+  color: #f3e6cd !important;
+  background: rgba(13,10,12,.90) !important;
+  border: 1px solid rgba(191,149,83,.45) !important;
+  scrollbar-color: #9f6a36 #180f10;
+}
+#messagebuffer a, #userlist a, #queue a {
+  color: #f0c776;
+}
+#messagebuffer .username, #messagebuffer strong {
+  text-shadow: 0 1px #000;
+}
+#chatline, #guestname, #messagebuffer input, #userlist input,
+#mediaurl, .form-control {
+  border-color: #8f6e48;
+  border-radius: 2px;
+  background-color: #161013;
+  color: #fff0d5;
+}
+#chatline:focus, #guestname:focus, .form-control:focus {
+  border-color: #dfb366;
+  box-shadow: 0 0 0 1px rgba(238,184,96,.25);
+}
+#queue li.queue_entry,
+#queue .queue_entry, #playlistwrap .queue_entry {
+  border-bottom: 1px solid rgba(197,146,68,.3);
+  color: #f5e8d3;
+}
+#queue li.queue_entry:nth-child(odd) {
+  background: rgba(84,36,24,.20);
+}
+#queue li.queue_entry:hover {
+  background: rgba(135,69,31,.32);
+}
+#queue li.queue_active {
+  outline: 1px solid #cda362;
+  background: linear-gradient(90deg, rgba(35,95,53,.4),
+    rgba(150,37,31,.25)) !important;
+}
+#queue .qe_title, #queue li .qe_title {
+  font-weight: 700;
+  color: #f8d898 !important;
+}
+#queue .qe_blame { color: #c9ad88; }
+.navbar {
+  border-bottom: 3px double var(--lt-gold) !important;
+  box-shadow: 0 3px 14px rgba(0,0,0,.7);
+}
+.navbar a, .navbar .navbar-nav > li > a {
+  color: #f5e2bf !important;
+  font-weight: 700;
+}
+.navbar .navbar-nav > li > a:hover {
+  color: #ffca67 !important;
+  background: rgba(114,27,23,.4) !important;
+}
+.modal-content, .dropdown-menu, .popover, .well:not(#motdwrap) {
+  background: #231814;
+  color: #f5e1ba;
+  border: 1px solid #ae8246;
+  border-radius: 3px;
+}
+.modal-header, .modal-footer, .panel-heading {
+  background: linear-gradient(#4a221d, #1d1513) !important;
+  color: #f8e0ae;
+  border-color: #a78149;
+}
+.modal-content a, .dropdown-menu a { color: #f4cd87; }
+/* Preserve original responsive/chat controls and existing user script. */
+@media (max-width: 767px) {
+  #mainpage { padding-left: 6px !important; padding-right: 6px !important; }
+  #motdwrap { padding: 8px 6px !important; margin-bottom: 8px !important; }
+  #motdwrap::before { font-size: 8px; letter-spacing: .10em; }
+  #motdwrap #motd h4 { font-size: 12px; }
+  #chatwrap, #videowrap { margin-bottom: 10px; padding: 5px 6px 8px; }
+  #chatheader, #videowrap-header, #plmeta { padding: 6px 8px !important; }
+  .pm-panel, .pm-panel-placeholder { min-width: 0 !important; max-width: 95vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #motdwrap .btn, #chatwrap .btn, #videowrap .btn { transition: none; }
+}

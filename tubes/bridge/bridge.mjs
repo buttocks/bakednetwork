@@ -49,7 +49,7 @@ function validate(raw){
     if(raw.action==='clean_dead_emotes'&&(offset!==0||limit<6500))
       throw Error('Cleanup must check the full emote list');
     if(!Number.isInteger(offset)||offset<0||offset>15000||
-       !Number.isInteger(limit)||limit<1||limit>8000)throw Error('Invalid emote audit range');
+       !Number.isInteger(limit)||limit<1||limit>20000)throw Error('Invalid emote audit range');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,offset,limit};
   }
   if(raw.offset!==undefined||raw.limit!==undefined)throw Error('Audit range on non-emote operation');

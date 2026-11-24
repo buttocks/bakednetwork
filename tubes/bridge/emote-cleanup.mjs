@@ -36,9 +36,9 @@ export function retiredEmoteHostReason(raw){
     return null;
   }catch{return null;}
 }
-async function probe(req,url){
+async function probe(req,url,channel){
   const result={url,status:'unknown',first:null,verify:null,reason:''};
-  const retired=retiredEmoteHostReason(url);
+  const retired=channel==='luchatube'?retiredEmoteHostReason(url):null;
   if(retired){result.status='dead';result.reason=retired;return result;}
   async function check(method){
     const opts={timeout:TIMEOUT,maxRedirects:6,failOnStatusCode:false};
@@ -117,7 +117,7 @@ export async function auditEmoteUrls({page,request,initial}){
     for(;;){
       const i=next++;if(i>=tasks.length)return;
       const item=tasks[i];
-      tested[i]=item.url?await probe(req,item.url):
+      tested[i]=item.url?await probe(req,item.url,request.channel):
         {url:item.raw,status:'dead',reason:'invalid-image-url'};
       tested[i].names=item.names;
       tested[i].original=item.raw;
@@ -136,6 +136,12 @@ export async function auditEmoteUrls({page,request,initial}){
     statusCounts:{working:count('working'),dead:count('dead'),unknown:count('unknown')},
     noChangesMade:true};
   await fs.writeFile(FILE,JSON.stringify(report,null,2)+'\n');
+  const dir='tubes/bridge/backup/'+request.channel+'/macro-audit';
+  await fs.mkdir(dir,{recursive:true});
+  await fs.writeFile(dir+'/audit.json',JSON.stringify(report,null,2)+'\n');
+  const original=await page.evaluate(()=>window.CHANNEL.emotes.map(e=>({name:e.name,image:e.image,source:e.source})));
+  await fs.writeFile(dir+'/macros-original.json',JSON.stringify(original,null,2)+'\n');
+  console.log('Macro audit summary '+request.channel+' '+JSON.stringify({totalEmotes:report.totalEmotes,unique:report.totalUniqueUrls,checked:report.limit,offset:report.offset,counts:report.statusCounts}));
   return {request_id:request.request_id,channel:request.channel,action:request.action,
     status:'emotes-audited',checked:report.limit,totalEmotes:emotes.length,
     uniqueUrls:urls.length,start,counts:report.statusCounts,

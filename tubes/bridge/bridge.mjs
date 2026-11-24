@@ -10,7 +10,8 @@ import assert from 'node:assert/strict';
 
 const SITE='https://baked.live';
 const USERNAME='buttman-gpt';
-const CHANNELS=new Set(['luchatube','NJPW']);
+const CHANNELS=new Set(["luchatube","NJPW","WrestleTube","RetroWrestling","WWE-WWF","RDH","ScaryTube","WID","WCW"]);
+const ORIGINAL_CHANNELS=new Set(['luchatube','NJPW']);
 const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
 const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
@@ -30,7 +31,8 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
-  if(!['audit','audit_skin','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!['audit','audit_skin','audit_legacy_paths','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
   if(raw.action==='audit_playlist_media'){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');
@@ -51,7 +53,7 @@ function validate(raw){
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,offset,limit};
   }
   if(raw.offset!==undefined||raw.limit!==undefined)throw Error('Audit range on non-emote operation');
-  if(['audit','audit_skin','backup_skin','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes'].includes(raw.action)){
+  if(['audit','audit_skin','audit_legacy_paths','backup_skin','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Audit requests cannot contain mutations');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
   }
@@ -147,7 +149,7 @@ async function run(request){
     await login(page,password);
     await page.goto(SITE+'/tv/'+request.channel,{waitUntil:'domcontentloaded',timeout:45000});
     let initial=await waitFor(page,state=>state.connected&&state.loggedIn&&
-      String(state.username||'').toLowerCase()===USERNAME&&state.channel===request.channel,
+      String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
       'Could not confirm authenticated account and channel connection',30000);
     // Channel rank and playlist events can arrive after the login identity event.
     // Allow them to settle. Read-only audits also work when rank is insufficient;
@@ -194,6 +196,20 @@ async function run(request){
     if(request.action==='backup_skin'){
       const {backupCurrentSkin}=await import('./skin-backup.mjs');
       return await backupCurrentSkin({page,request,initial});
+    }
+    if(request.action==='audit_legacy_paths'){
+      const refs=await page.evaluate(()=>{
+        const c=window.CHANNEL||{};
+        const sources={css:c.css||'',js:c.js||'',motd:c.motd||'',options:c.opts||{},emotes:c.emotes||[],resources:[...document.querySelectorAll('script[src],link[href],img[src]')].map(e=>e.src||e.href||'')};
+        const found={};
+        for(const [key,value] of Object.entries(sources)){
+          const str=typeof value==='string'?value:JSON.stringify(value);
+          const matches=str.match(/https?:[^\s"'<>\\]+/g)||[];
+          found[key]=[...new Set(matches.filter(u=>/bakednetwork/i.test(u)&&/\/(?:themes|wid|wrestletube|modules)\/|\/rdh[^/]*\.(?:js|css)|\/CSS_RDH_6_28_22\.txt|\/wrestletube_plus_red_shitpost\.css/i.test(u)&&!u.includes('/tubes/')))];
+        }
+        return {legacy:found,emotesLoaded:Array.isArray(c.emotes)};
+      });
+      return {request_id:request.request_id,channel:request.channel,action:request.action,status:'audited',rank:initial.rank,admin_verified:Number.isFinite(initial.rank)&&initial.rank>=3,permissions:initial.permissions,items:before.length,...refs};
     }
     if(request.action==='audit_skin'){
       const skin=await page.evaluate(()=>{
@@ -311,9 +327,22 @@ function selfTest(){
 if(process.argv.includes('--self-test'))selfTest();
 else{
   try{
-    const request=validate(JSON.parse(await fs.readFile(REQUEST_PATH,'utf8')));
-    const result=await run(request);
-    await writeResult(result);
+    const raw=JSON.parse(await fs.readFile(REQUEST_PATH,'utf8'));
+    if(Array.isArray(raw)){
+      if(!raw.length||raw.length>10)throw Error('Invalid audit batch size');
+      const requests=raw.map(validate);
+      if(requests.some(r=>r.action!=='audit_legacy_paths'))throw Error('Batch limited to read-only legacy audit');
+      const results=[];
+      for(const request of requests){
+        try{const result=await run(request);results.push(result);console.log('Audit '+request.channel+' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length);}
+        catch(error){results.push({channel:request.channel,status:'failed',error:String(error.message||error).slice(0,200)});console.log('Audit '+request.channel+' failed');}
+        await fs.writeFile(OUTPUT_PATH,JSON.stringify({results},null,2)+'\n');
+      }
+    }else{
+      const request=validate(raw);
+      const result=await run(request);
+      await writeResult(result);
+    }
   }catch(error){
     // Never log environment variables, browser cookies, page HTML or login fields.
     console.error('Bridge failed: '+String(error.message||error).slice(0,400));

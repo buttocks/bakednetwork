@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "source_policy": "Only complete matches published by the official Lucha Libre AAA, WWE, or MLW channels; no clips, recaps, reuploads, downloads, or unofficial mirrors.",
+  "candidates": [
+    {
+      "id": "6C1B4K3cBSM",
+      "expected": "Rey Mysterio at the first edition of AAA Triplemanía",
+      "publisher": "Lucha Libre AAA"
+    },
+    {
+      "id": "XjOsicEgAvo",
+      "expected": "Psycho Clown and Pagano vs. Angel and Berto",
+      "publisher": "Lucha Libre AAA"
+    },
+    {
+      "id": "EiLODn-8bgA",
+      "expected": "Bardahl Cup",
+      "publisher": "Lucha Libre AAA"
+    },
+    {
+      "id": "ljxn7ofcYTM",
+      "expected": "La Secta vs. Mexican Power",
+      "publisher": "Lucha Libre AAA"
+    },
+    {
+      "id": "V68StZT8kqY",
+      "expected": "La Parka vs. L.A. Park",
+      "publisher": "Lucha Libre AAA"
+    },
+    {
+      "id": "ZFnltnk1uDs",
+      "expected": "La Parka, King of Kings 2014",
+      "publisher": "Lucha Libre AAA"
+    },
+    {
+      "id": "po8a7MWGzsg",
+      "expected": "Místico vs. Templario",
+      "publisher": "MLW"
+    },
+    {
+      "id": "fvm3vBW5P4I",
+      "expected": "El Grande Americano & Dominik Mysterio vs. Los Perros del Mal",
+      "publisher": "WWE"
+    }
+  ]
+}

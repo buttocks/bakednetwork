@@ -1,8 +1,6 @@
 {
   "schema": 1,
-  "request_id": "njpw_media_availability_audit_20261124_01",
+  "request_id": "njpw_remove_links_uniform_skin_20261124_01",
   "channel": "NJPW",
-  "action": "audit_playlist_media",
-  "offset": 0,
-  "limit": 1500
+  "action": "refresh_njpw_skin_motd"
 }

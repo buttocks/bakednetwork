@@ -1,48 +1,64 @@
-name: Refresh independent Lucha Libre lineup
+name: Refresh Baked TV catalogs (Archive + official YouTube)
+
 on:
   schedule:
-    - cron: '17 4 * * *'
+    - cron: '17 4,16 * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'tubes/luchatube/build-catalog.py'
+      - 'tubes/feeds/discovery.json'
+      - 'tubes/feeds/discover.py'
+      - 'tubes/feeds/player-core.js'
       - '.github/workflows/update-lucha-catalog.yml'
 
 permissions:
   contents: write
 
 concurrency:
-  group: lucha-catalog-update
+  group: baked-tv-program-discovery
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 11
     steps:
       - uses: actions/checkout@v4
-      - name: Expand Lucha schedule from archive video metadata
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install YouTube metadata discovery
+        run: python -m pip install --disable-pip-version-check 'yt-dlp>=2026.9.1'
+      - name: Validate and discover a few programs per feed
         run: |
-          python3 -m py_compile tubes/luchatube/build-catalog.py
-          python3 tubes/luchatube/build-catalog.py
-          python3 - <<'PY'
+          set -e
+          python -m py_compile tubes/feeds/discover.py
+          node --check tubes/feeds/player-core.js
+          python tubes/feeds/discover.py
+          python - <<'PY'
           import json
-          x=json.load(open('tubes/luchatube/programs.json'))
-          items=x['channels']['lucha']['programs']
-          assert len(items)>=4
-          assert len({i['url'] for i in items})==len(items)
-          assert all(i['url'].startswith('https://archive.org/download/') for i in items)
+          from pathlib import Path
+          c=json.load(open('tubes/feeds/discovery.json'))
+          cap=c['defaults']['max_catalog_items']
+          for ch in c['channels']:
+              path=Path('tubes')/ch['directory']/'programs.json'
+              programs=json.loads(path.read_text())['channels'][ch['key']]['programs']
+              assert len(programs) <= cap, f'{path} exceeds {cap}'
+              assert len({p['url'] for p in programs}) == len(programs)
+              assert all(p['source'] in ('YouTube', 'Internet Archive') for p in programs)
+              assert all(p['duration']>=60 for p in programs)
+              print(path, ch['key'],len(programs),'programs; limit',cap)
           PY
-      - name: Commit expanded schedule if new verified metadata is found
+      - name: Save bounded catalog changes if any
         run: |
-          git config user.name 'Baked TV Lineup Bot'
+          git config user.name 'Baked TV Discovery Bot'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add tubes/luchatube/programs.json
+          git add tubes/luchatube/programs.json tubes/NJPW/programs.json tubes/feeds/discovery-state.json
           if git diff --cached --quiet; then
-            echo 'Lucha catalog unchanged'
+            echo 'No catalog or discovery-state updates'
           else
-            git commit -m 'Expand independent Lucha TV match rotation'
+            git commit -m 'Refresh bounded Baked TV program catalogs'
             git pull --rebase origin main
             git push origin HEAD:main
           fi

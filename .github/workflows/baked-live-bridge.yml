@@ -19,7 +19,7 @@ jobs:
   update-iframe:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 90
     env:
       BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
       BAKED_BRIDGE_REQUEST: tubes/bridge/request.json
@@ -90,4 +90,4 @@ jobs:
             tubes/bridge/emote-url-cleanup.json
             tubes/bridge/emotes-before-cleanup.json
           if-no-files-found: ignore
-          retention-days: 7
+          retention-days: 30

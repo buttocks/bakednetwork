@@ -7,7 +7,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 
-const DIR='tubes/bridge/backup';
+const BACKUP_ROOT='tubes/bridge/backup';
 const MAX_ASSETS=180;
 const MAX_ASSET_BYTES=12*1024*1024;
 const MAX_TOTAL_BYTES=95*1024*1024;
@@ -56,6 +56,9 @@ function cssUrls(css,base){
 }
 
 export async function backupCurrentSkin({page,request,initial}){
+  if(!/^[a-zA-Z0-9_-]+$/.test(request.channel))throw Error('Invalid backup channel');
+  if(!Number.isFinite(initial.rank)||initial.rank<3)throw Error('Admin rank not verified for backup');
+  const DIR=path.join(BACKUP_ROOT,request.channel);
   await fs.mkdir(DIR+'/assets',{recursive:true});
   // Everything in the evaluation is READ ONLY. No emit(), admin changes,
   // public files, credential access, or playlist mutations.
@@ -161,6 +164,8 @@ export async function backupCurrentSkin({page,request,initial}){
   }
   for(const img of state.domImages)add(img.resolvedSrc||img.src,'dom-image');
   for(const [key,val] of Object.entries(external))if(val)add(val,key);
+  for(const emote of emoteList)add(emote.image,'emote');
+  for(const resource of state.resourceLinks)add(resource.url,'runtime-resource');
   // Resource links are documented but not downloaded: they include platform
   // libraries and are not necessarily part of the owner's skin.
   // Only CSS/MOTD/background artwork, DOM images and explicit external URLs.
@@ -262,5 +267,5 @@ export async function backupCurrentSkin({page,request,initial}){
     motdBytes:info.motdBytes,playlistItems:info.playlistItems,
     assetsFound:resources.length,assetsDownloaded:downloaded,
     missingAssets:resources.filter(r=>r.status!=='saved').map(r=>({url:r.url,reason:r.reason||r.status})),
-    cssSha256:info.cssSha256,jsSha256:info.jsSha256};
+    cssSha256:info.cssSha256,jsSha256:info.jsSha256,admin_verified:true,rank:initial.rank,backupDirectory:DIR};
 }

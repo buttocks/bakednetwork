@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "njpw_center_logo_20261124_02",
-  "channel": "NJPW",
-  "action": "refresh_njpw_skin_motd"
+  "request_id": "lucha_center_logo_20261124_01",
+  "channel": "luchatube",
+  "action": "deploy_skin"
 }

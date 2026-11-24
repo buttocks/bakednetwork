@@ -39,6 +39,7 @@ jobs:
           node --check tubes/bridge/bridge.mjs
           node --check tubes/bridge/skin-backup.mjs
           node --check tubes/bridge/skin-apply.mjs
+          node --check tubes/NJPW/refresh.mjs
           node --check tubes/bridge/motd-cleanup.mjs
           node --check tubes/bridge/emote-cleanup.mjs
           node --check tubes/bridge/playlist-audit.mjs
@@ -72,6 +73,11 @@ jobs:
             tubes/bridge/skin-preview.png
             tubes/bridge/motd-before-cleanup.html
             tubes/bridge/motd-after-cleanup.html
+            tubes/bridge/njpw-before-motd.html
+            tubes/bridge/njpw-after-motd.html
+            tubes/bridge/njpw-before-css.css
+            tubes/bridge/njpw-after-css.css
+            tubes/bridge/njpw-compact-skin-preview.png
             tubes/bridge/skin-before-deploy.css
             tubes/bridge/skin-after-deploy.css
             tubes/bridge/luchatube-arena-poster-preview.png

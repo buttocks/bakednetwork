@@ -31,7 +31,27 @@
 }
 #motdwrap #motd, #motdwrap #motd .head2,
 #motdwrap #motd center { margin: 0 !important; padding: 0 !important; }
+/* Center the NJPW lion artwork against the actual banner, not the
+   legacy header's inherited sizing/positioning. */
+#motdwrap #motd > center:first-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
 #motdwrap #motd #header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  float: none !important;
+  position: static !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  width: fit-content !important;
+  max-width: 100% !important;
   margin: 0 auto !important;
   padding: 0 !important;
   line-height: 0;

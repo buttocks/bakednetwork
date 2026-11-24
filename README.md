@@ -18,7 +18,7 @@ The Android app is **not a Windows or Mac application**. Computers can participa
 
 ## Baked.live tube management
 
-All new Baked.live tube skins, shared bridge code, audit tools and per-channel configurations live under **[baked.live/tubes](./baked.live/tubes/)**. Existing SlamVision players remain separate media dependencies. Original channel backups are kept private rather than committed here.
+All new Baked.live tube skins, shared bridge code, audit tools and per-channel configurations live under **[tubes](./tubes/)**. Existing SlamVision players remain separate media dependencies. Original channel backups are kept private rather than committed here.
 
 ## Channel themes and scripts
 

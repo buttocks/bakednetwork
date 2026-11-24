@@ -1,6 +1,6 @@
 # Tube JavaScript baseline policy
 
-WrestleTube's channel JavaScript is the **reference baseline** for the Baked.live tube family, managed in buttocks/bakednetwork under baked.live/tubes/.
+WrestleTube's channel JavaScript is the **reference baseline** for the Baked.live tube family, managed in buttocks/bakednetwork under tubes/.
 
 It is **not** a mandate to deploy byte-identical JavaScript to all tubes.
 Some tubes deliberately include additional or modified features.

@@ -4,14 +4,14 @@ on:
   push:
     branches: [main]
     paths:
-      - baked.live/tubes/bridge/bridge.mjs
-      - baked.live/tubes/bridge/skin-backup.mjs
-      - baked.live/tubes/bridge/skin-apply.mjs
-      - baked.live/tubes/bridge/TUBE-JS-BASELINE.md
-      - baked.live/tubes/bridge/motd-cleanup.mjs
-      - baked.live/tubes/bridge/playlist-audit.mjs
-      - baked.live/tubes/luchatube/arena-poster.css
-      - baked.live/tubes/bridge/emote-cleanup.mjs
+      - tubes/bridge/bridge.mjs
+      - tubes/bridge/skin-backup.mjs
+      - tubes/bridge/skin-apply.mjs
+      - tubes/bridge/TUBE-JS-BASELINE.md
+      - tubes/bridge/motd-cleanup.mjs
+      - tubes/bridge/playlist-audit.mjs
+      - tubes/luchatube/arena-poster.css
+      - tubes/bridge/emote-cleanup.mjs
       - .github/workflows/baked-live-bridge.yml
       - .github/workflows/baked-live-bridge-validate.yml
   workflow_dispatch:
@@ -30,11 +30,11 @@ jobs:
           node-version: '22'
       - name: Syntax and safety tests (no credentials)
         run: |
-          node --check baked.live/tubes/bridge/bridge.mjs
-          node --check baked.live/tubes/bridge/skin-backup.mjs
-          node --check baked.live/tubes/bridge/skin-apply.mjs
-          node --check baked.live/tubes/bridge/motd-cleanup.mjs
-          node --check baked.live/tubes/bridge/emote-cleanup.mjs
-          node --check baked.live/tubes/bridge/playlist-audit.mjs
-          node --input-type=module -e "import {isImgurRemovedPlaceholder as f} from './baked.live/tubes/bridge/emote-cleanup.mjs'; if (!f('https://i.imgur.com/removed.png') || !f('https://i.imgur.com/removed.png?token=1') || f('https://i.imgur.com/valid.png') || f('https://other.example/removed.png')) process.exit(1);"
-          node baked.live/tubes/bridge/bridge.mjs --self-test
+          node --check tubes/bridge/bridge.mjs
+          node --check tubes/bridge/skin-backup.mjs
+          node --check tubes/bridge/skin-apply.mjs
+          node --check tubes/bridge/motd-cleanup.mjs
+          node --check tubes/bridge/emote-cleanup.mjs
+          node --check tubes/bridge/playlist-audit.mjs
+          node --input-type=module -e "import {isImgurRemovedPlaceholder as f} from './tubes/bridge/emote-cleanup.mjs'; if (!f('https://i.imgur.com/removed.png') || !f('https://i.imgur.com/removed.png?token=1') || f('https://i.imgur.com/valid.png') || f('https://other.example/removed.png')) process.exit(1);"
+          node tubes/bridge/bridge.mjs --self-test

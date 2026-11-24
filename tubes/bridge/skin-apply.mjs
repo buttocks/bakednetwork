@@ -6,7 +6,7 @@ const END='/* END LUCHATUBE ARENA POSTER — MANAGED STYLE */';
 const ORIGINAL_CSS_SHA='fe4c66bf1dadfe13b5f7de6556c85bed2ad1c97ea3059f29c1416ed0a9ec6ba6';
 const ORIGINAL_JS_SHA='206f72fa8f6b4e6fd14714547b63605350da1e44a1f8cf0ea8b61b9c218d645b';
 const MAX_CSS=20000;
-const CSS_PATH='baked.live/tubes/luchatube/arena-poster.css';
+const CSS_PATH='tubes/luchatube/arena-poster.css';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 
 export async function deploySkin({page,request,initial}){
@@ -44,8 +44,8 @@ export async function deploySkin({page,request,initial}){
     target=before.css+'\n\n'+BEGIN+'\n'+newLayer+'\n'+END+'\n';
   }else throw Error('Incomplete managed marker found; refusing automatic update');
   if(target.length>MAX_CSS)throw Error('CSS would exceed CyTube 20KB limit');
-  await fs.writeFile('baked.live/tubes/bridge/skin-before-deploy.css',before.css,'utf8');
-  await fs.writeFile('baked.live/tubes/bridge/skin-after-deploy.css',target,'utf8');
+  await fs.writeFile('tubes/bridge/skin-before-deploy.css',before.css,'utf8');
+  await fs.writeFile('tubes/bridge/skin-after-deploy.css',target,'utf8');
 
   await page.evaluate(css=>{
     if(!window.socket?.connected)throw Error('Not connected to Baked.live');
@@ -78,7 +78,7 @@ export async function deploySkin({page,request,initial}){
         throw Error('MOTD logo elements not found; CSS stored but visual verification failed');
       if(logoLayout.croppedOverflow!=='hidden')
         throw Error('Logo image overflow not clipped as expected');
-      await page.screenshot({path:'baked.live/tubes/bridge/luchatube-arena-poster-preview.png',
+      await page.screenshot({path:'tubes/bridge/luchatube-arena-poster-preview.png',
         fullPage:false,animations:'disabled',timeout:20000});
       return {request_id:request.request_id,channel:request.channel,action:request.action,
         status:'deployed',originalCssSha256:sha(before.css),cssSha256:sha(target),

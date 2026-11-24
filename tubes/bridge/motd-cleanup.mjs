@@ -57,8 +57,8 @@ export async function cleanLuchaMotdLive({page,request,initial}){
   if(sha(state.motd)!==ORIGINAL_MOTD_SHA)
     throw Error('Live MOTD differs from original saved backup; not replacing unreviewed content');
   const cleaned=cleanLuchaMotd(state.motd);
-  await fs.writeFile('baked.live/tubes/bridge/motd-before-cleanup.html',state.motd,'utf8');
-  await fs.writeFile('baked.live/tubes/bridge/motd-after-cleanup.html',cleaned,'utf8');
+  await fs.writeFile('tubes/bridge/motd-before-cleanup.html',state.motd,'utf8');
+  await fs.writeFile('tubes/bridge/motd-after-cleanup.html',cleaned,'utf8');
   // Server-side permission check and HTML sanitization happen in Baked.live.
   await page.evaluate(motd=>{
     if(!window.socket?.connected)throw Error('Not connected to Baked.live');

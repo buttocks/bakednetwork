@@ -6,8 +6,8 @@
  */
 import fs from 'node:fs/promises';
 
-const OUTPUT='baked.live/tubes/bridge/playlist-media-audit.json';
-const SNAPSHOT='baked.live/tubes/bridge/playlist-before-cleanup.json';
+const OUTPUT='tubes/bridge/playlist-media-audit.json';
+const SNAPSHOT='tubes/bridge/playlist-before-cleanup.json';
 const TIMEOUT=12000;
 const CONCURRENCY=9;
 const TWO_DIGITS=2;

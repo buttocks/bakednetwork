@@ -4,7 +4,7 @@
  * rate limits, 403, DNS failures and transient server errors are NOT deletable.
  */
 import fs from 'node:fs/promises';
-const FILE='baked.live/tubes/bridge/emote-url-audit.json';
+const FILE='tubes/bridge/emote-url-audit.json';
 const CONCURRENCY=14;
 const TIMEOUT=7500;
 
@@ -162,7 +162,7 @@ export async function cleanDeadEmotes({page,request,initial}){
     name:e.name,image:e.image,source:e.source
   })));
   if(before.length!==report.totalEmotes)throw Error('Emote list changed during audit; refusing changes');
-  await fs.writeFile('baked.live/tubes/bridge/emotes-before-cleanup.json',JSON.stringify(before,null,2)+'\n');
+  await fs.writeFile('tubes/bridge/emotes-before-cleanup.json',JSON.stringify(before,null,2)+'\n');
   const byName=new Map();
   for(const e of before)byName.set(e.name,(byName.get(e.name)||0)+1);
   const eligible=entries.filter(e=>byName.get(e.name)===1&&
@@ -174,7 +174,7 @@ export async function cleanDeadEmotes({page,request,initial}){
   const log={requestId:request.request_id,channel:request.channel,
     beforeCount:before.length,verifiedDeadURLs:dead.length,
     eligibleCount:eligible.length,removed,skipped,completed:false};
-  const logPath='baked.live/tubes/bridge/emote-url-cleanup.json';
+  const logPath='tubes/bridge/emote-url-cleanup.json';
   await fs.writeFile(logPath,JSON.stringify(log,null,2)+'\n');
   for(const item of eligible){
     // Do not delete by name alone when the entry was modified or duplicated.
@@ -262,7 +262,7 @@ export async function removeLegacyUncertainEmotes({page,request,initial}){
   })));
   if(emotes.length<6000||emotes.length>6900)
     throw Error('Unexpected emote count; will not remove any entries');
-  await fs.writeFile('baked.live/tubes/bridge/emotes-before-legacy-cleanup.json',
+  await fs.writeFile('tubes/bridge/emotes-before-legacy-cleanup.json',
     JSON.stringify(emotes,null,2)+'\n');
   const countByName=new Map();
   for(const e of emotes)countByName.set(e.name,(countByName.get(e.name)||0)+1);
@@ -279,7 +279,7 @@ export async function removeLegacyUncertainEmotes({page,request,initial}){
     action:'remove_legacy_uncertain_emotes',beforeCount:emotes.length,
     selected:planned,removed:[],afterCount:null,completed:false,
     postimgPreserved:true};
-  const path='baked.live/tubes/bridge/legacy-emote-cleanup.json';
+  const path='tubes/bridge/legacy-emote-cleanup.json';
   await fs.writeFile(path,JSON.stringify(report,null,2)+'\n');
   for(const entry of planned){
     await page.evaluate(({name,image})=>new Promise((resolve,reject)=>{

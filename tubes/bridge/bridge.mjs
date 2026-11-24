@@ -2,7 +2,7 @@
 /**
  * Baked.live channel playlist bridge.
  * Runs only in a GitHub Actions runner with BAKED_LIVE_PASSWORD secret.
- * A commit to baked.live/tubes/bridge/request.json is the command transport.
+ * A commit to tubes/bridge/request.json is the command transport.
  * Only authorized channels/players are allowed. Default operation: audit.
  */
 import fs from 'node:fs/promises';
@@ -13,8 +13,8 @@ const USERNAME='buttman-gpt';
 const CHANNELS=new Set(['luchatube','NJPW']);
 const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
-const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'baked.live/tubes/bridge/request.json';
-const OUTPUT_PATH='baked.live/tubes/bridge/result.json';
+const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
+const OUTPUT_PATH='tubes/bridge/result.json';
 
 function safeUrl(value){
   if(typeof value!=='string' || value.length>600)throw Error('Invalid player URL');
@@ -136,7 +136,7 @@ async function login(page,password){
 }
 async function run(request){
   const password=process.env.BAKED_LIVE_PASSWORD;
-  if(!password)throw Error('Missing GitHub Actions secret BAKED_LIVE_PASSWORD; see baked.live/tubes/bridge/README.md');
+  if(!password)throw Error('Missing GitHub Actions secret BAKED_LIVE_PASSWORD; see tubes/bridge/README.md');
   const {chromium}=await import('playwright');
   const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
   let page;
@@ -217,8 +217,8 @@ async function run(request){
           computed,images};
       });
       // Exact CSS backup stays in a short-lived workflow artifact, not Git.
-      await fs.writeFile('baked.live/tubes/bridge/skin-css-backup.css',skin.css,'utf8');
-      await page.screenshot({path:'baked.live/tubes/bridge/skin-preview.png',fullPage:false,
+      await fs.writeFile('tubes/bridge/skin-css-backup.css',skin.css,'utf8');
+      await page.screenshot({path:'tubes/bridge/skin-preview.png',fullPage:false,
         animations:'disabled',timeout:20000});
       delete skin.css;
       return {request_id:request.request_id,channel:request.channel,action:request.action,

@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       # Changing this file is the only automatic command trigger.
-      - baked.live/tubes/bridge/request.json
+      - tubes/bridge/request.json
   workflow_dispatch:
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 15
     env:
       BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
-      BAKED_BRIDGE_REQUEST: baked.live/tubes/bridge/request.json
+      BAKED_BRIDGE_REQUEST: tubes/bridge/request.json
     steps:
       - name: Check out reviewed commands
         uses: actions/checkout@v4
@@ -36,20 +36,20 @@ jobs:
 
       - name: Validate bridge code and command
         run: |
-          node --check baked.live/tubes/bridge/bridge.mjs
-          node --check baked.live/tubes/bridge/skin-backup.mjs
-          node --check baked.live/tubes/bridge/skin-apply.mjs
-          node --check baked.live/tubes/bridge/motd-cleanup.mjs
-          node --check baked.live/tubes/bridge/emote-cleanup.mjs
-          node --check baked.live/tubes/bridge/playlist-audit.mjs
-          node --input-type=module -e "import {isImgurRemovedPlaceholder as f} from './baked.live/tubes/bridge/emote-cleanup.mjs'; if (!f('https://i.imgur.com/removed.png') || !f('https://i.imgur.com/removed.png?token=1') || f('https://i.imgur.com/valid.png') || f('https://other.example/removed.png')) process.exit(1);"
-          node baked.live/tubes/bridge/bridge.mjs --self-test
-          test -f baked.live/tubes/bridge/request.json || { echo 'No bridge request: contact maintainer to create it.'; exit 1; }
+          node --check tubes/bridge/bridge.mjs
+          node --check tubes/bridge/skin-backup.mjs
+          node --check tubes/bridge/skin-apply.mjs
+          node --check tubes/bridge/motd-cleanup.mjs
+          node --check tubes/bridge/emote-cleanup.mjs
+          node --check tubes/bridge/playlist-audit.mjs
+          node --input-type=module -e "import {isImgurRemovedPlaceholder as f} from './tubes/bridge/emote-cleanup.mjs'; if (!f('https://i.imgur.com/removed.png') || !f('https://i.imgur.com/removed.png?token=1') || f('https://i.imgur.com/valid.png') || f('https://other.example/removed.png')) process.exit(1);"
+          node tubes/bridge/bridge.mjs --self-test
+          test -f tubes/bridge/request.json || { echo 'No bridge request: contact maintainer to create it.'; exit 1; }
 
       - name: Check Baked.live account secret
         run: |
           if [ -z "$BAKED_LIVE_PASSWORD" ]; then
-            echo 'Configure repository secret BAKED_LIVE_PASSWORD first. See baked.live/tubes/bridge/README.md.'
+            echo 'Configure repository secret BAKED_LIVE_PASSWORD first. See tubes/bridge/README.md.'
             exit 1
           fi
 
@@ -59,7 +59,7 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Audit or update authorized channel iframe
-        run: node baked.live/tubes/bridge/bridge.mjs
+        run: node tubes/bridge/bridge.mjs
 
       - name: Attach action result (without credentials)
         if: always()
@@ -67,21 +67,21 @@ jobs:
         with:
           name: baked-live-bridge-result
           path: |
-            baked.live/tubes/bridge/result.json
-            baked.live/tubes/bridge/skin-css-backup.css
-            baked.live/tubes/bridge/skin-preview.png
-            baked.live/tubes/bridge/motd-before-cleanup.html
-            baked.live/tubes/bridge/motd-after-cleanup.html
-            baked.live/tubes/bridge/skin-before-deploy.css
-            baked.live/tubes/bridge/skin-after-deploy.css
-            baked.live/tubes/bridge/luchatube-arena-poster-preview.png
-            baked.live/tubes/bridge/legacy-emote-cleanup.json
-            baked.live/tubes/bridge/emotes-before-legacy-cleanup.json
-            baked.live/tubes/bridge/backup/
-            baked.live/tubes/bridge/emote-url-audit.json
-            baked.live/tubes/bridge/playlist-media-audit.json
-            baked.live/tubes/bridge/playlist-before-cleanup.json
-            baked.live/tubes/bridge/emote-url-cleanup.json
-            baked.live/tubes/bridge/emotes-before-cleanup.json
+            tubes/bridge/result.json
+            tubes/bridge/skin-css-backup.css
+            tubes/bridge/skin-preview.png
+            tubes/bridge/motd-before-cleanup.html
+            tubes/bridge/motd-after-cleanup.html
+            tubes/bridge/skin-before-deploy.css
+            tubes/bridge/skin-after-deploy.css
+            tubes/bridge/luchatube-arena-poster-preview.png
+            tubes/bridge/legacy-emote-cleanup.json
+            tubes/bridge/emotes-before-legacy-cleanup.json
+            tubes/bridge/backup/
+            tubes/bridge/emote-url-audit.json
+            tubes/bridge/playlist-media-audit.json
+            tubes/bridge/playlist-before-cleanup.json
+            tubes/bridge/emote-url-cleanup.json
+            tubes/bridge/emotes-before-cleanup.json
           if-no-files-found: ignore
           retention-days: 7

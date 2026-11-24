@@ -7,7 +7,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 
-const DIR='baked.live/tubes/bridge/backup';
+const DIR='tubes/bridge/backup';
 const MAX_ASSETS=180;
 const MAX_ASSET_BYTES=12*1024*1024;
 const MAX_TOTAL_BYTES=95*1024*1024;

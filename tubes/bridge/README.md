@@ -37,6 +37,6 @@ The deployment workflow has no write-token privilege for the repository; the use
 
 ## Source organization
 
-All new tube-management code, css/JS and administrative configuration belongs to `baked.live/tubes/`. Existing SlamVision video **player URLs** remain separate until an explicitly tested player migration.
+All new tube-management code, css/JS and administrative configuration belongs to `tubes/`. Existing SlamVision video **player URLs** remain separate until an explicitly tested player migration.
 
 For JavaScript, use WrestleTube as reference baseline **without overwriting** tube-specific features.

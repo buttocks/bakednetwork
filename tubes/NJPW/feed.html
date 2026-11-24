@@ -21,6 +21,10 @@ button:hover,button:focus-visible{background:#57231d}
 header{transition:opacity .8s ease,visibility 0s linear .8s}
 body.overlay-idle #now,body.overlay-idle header{opacity:0;visibility:hidden;pointer-events:none}
 body:not(.overlay-idle) #now,body:not(.overlay-idle) header{opacity:1;visibility:visible;transition-delay:0s}
+.overlay-hotspot{position:absolute;z-index:3;background:transparent;pointer-events:none}
+#hotspot-top{top:0;left:0;right:0;height:64px}
+#hotspot-bottom{bottom:0;left:0;right:0;height:85px}
+body.overlay-idle .overlay-hotspot{pointer-events:auto}
 #now small{font:800 10px system-ui;letter-spacing:.14em;color:#ecb759}
 #now h1{margin:5px 0 2px;font-size:clamp(16px,2.5vw,30px);font-weight:900;text-shadow:0 2px 4px #000}
 #now p{margin:0;font-size:12px;color:#f0d3a5}
@@ -41,6 +45,8 @@ body:not(.overlay-idle) #now,body:not(.overlay-idle) header{opacity:1;visibility
 <header><div class="controls"><button id="guide-toggle" type="button" aria-expanded="false">☰ TV Guide</button></div><div class="controls"><button id="audio" type="button">🔇 Unmute</button><button id="retune" type="button">↻ Retune</button></div></header>
 <aside id="guide" hidden aria-label="Channel program guide"><h2 id="guide-title">NJPW TV Guide</h2><ol id="guide-list"></ol><footer>Internet Archive source media. Schedules use UTC for shared timing; times shown locally. Playback may be restricted by the source.</footer></aside>
 <section id="now" aria-live="polite"><small id="channel-name">NJPW · DIRECT VIDEO</small><h1 id="program-name">Tuning…</h1><p id="program-details">Independent Baked TV feed</p></section>
-<script src="./feed-player.js"></script>
+<div class="overlay-hotspot" id="hotspot-top" aria-hidden="true"></div>
+<div class="overlay-hotspot" id="hotspot-bottom" aria-hidden="true"></div>
+<script src="./feed-player.js?v=overlay2-20261124"></script>
 </body>
 </html>

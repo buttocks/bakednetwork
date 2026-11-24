@@ -4,11 +4,11 @@
 
 **External CSS:**
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4db74f48a295941564e203c6e26a04043cc0d8a7/themes/RetroWrestling/RetroWrestling.css
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@72a28c8b075659e26dcd91d26f379b3ee460ff1b/tubes/RetroWrestling/RetroWrestling.css
 
 **External Javascript:**
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4db74f48a295941564e203c6e26a04043cc0d8a7/themes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@72a28c8b075659e26dcd91d26f379b3ee460ff1b/tubes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js
 
 Save both fields (changes automatically saved), then hard-refresh the channel with Ctrl+Shift+R. If a **Script Access** prompt appears, allow this channel's script; check that **Ignore Channel Javascript** is not enabled in Options. If the CSS changes but the arena header and buttons do not appear, the browser is not running the JS — check script access or the DevTools Console/Network for a blocked request.
 
@@ -33,11 +33,11 @@ Save both fields (changes automatically saved), then hard-refresh the channel wi
 - `RetroWrestling.css` — skin and v1.3 spacing refinements.
 - `RetroWrestling.js` — earlier alternate combined script (not the recommended version).
 - `RetroWrestling-Theme.js` — earlier standalone arena UI.
-- `../../modules/PlaylistTools-Standalone.js` — reusable module for other channels, separate from any theme.
+- `../shared/modules/PlaylistTools-Standalone.js` — reusable module for other channels, separate from any theme.
 
 Reusable Playlist Tools module (other tubes only):
 
-https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4db74f48a295941564e203c6e26a04043cc0d8a7/modules/PlaylistTools-Standalone.js
+https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@72a28c8b075659e26dcd91d26f379b3ee460ff1b/tubes/shared/modules/PlaylistTools-Standalone.js
 
 Do **not** include the standalone module again alongside the merged RetroWrestling JS, or load earlier versions simultaneously.
 

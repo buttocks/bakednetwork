@@ -3,12 +3,14 @@
     "classics": {
       "available": true,
       "badStreak": 0,
-      "goodStreak": 1
+      "goodStreak": 2,
+      "pageBadStreak": 0
     },
     "events": {
       "available": true,
       "badStreak": 0,
-      "goodStreak": 1
+      "goodStreak": 2,
+      "pageBadStreak": 0
     }
   },
   "schema": 1

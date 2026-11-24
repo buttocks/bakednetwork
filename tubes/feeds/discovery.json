@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "defaults": {
+    "source_priority": [
+      "Internet Archive",
+      "YouTube"
+    ],
+    "max_new_per_channel_per_run": 3,
+    "max_archive_per_run": 2,
+    "max_youtube_per_run": 2,
+    "max_catalog_items": 90,
+    "min_duration_seconds": 420,
+    "max_duration_seconds": 14400,
+    "rotation": "daily",
+    "keep_seed_programs": true,
+    "official_youtube_only": true
+  },
+  "channels": [
+    {
+      "directory": "luchatube",
+      "key": "lucha",
+      "archive_ids": [
+        "approved_match_picks_06_2025",
+        "20080309cmll-match-4-dark-angel-vs-amapola-c-for-the-cmll-world-women-s-championship"
+      ],
+      "archive_search": "mediatype:movies AND (title:\"CMLL\" OR title:\"Lucha Libre\" OR title:\"Triplemania\")",
+      "archive_title_pattern": "(?i)(cmll|lucha|aaa|tripleman[ií]a|vs?\\.?|match)",
+      "youtube_channels": [
+        {
+          "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+          "name": "Lucha Libre AAA"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|lucha)|lucha\\s*completa|episodio\\s*completo|combate\\s*completo|pelea\\s*completa|luchas\\s*completas)"
+    },
+    {
+      "directory": "NJPW",
+      "key": "classics",
+      "archive_ids": [
+        "njpw-world-pro-wrestling-1982-2-1983-60fps",
+        "njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw",
+        "fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling"
+      ],
+      "archive_search": "mediatype:movies AND (title:\"NJPW\" OR title:\"New Japan Pro Wrestling\")",
+      "archive_title_pattern": "(?i)(njpw|iwgp|wrestl|inoki|vs?\\.?)",
+      "youtube_channels": [
+        {
+          "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+          "name": "NEW JAPAN PRO-WRESTLING"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)"
+    },
+    {
+      "directory": "NJPW",
+      "key": "events",
+      "archive_ids": [
+        "njpw-g-1-climax-35-final-17-08-25",
+        "njpw-g-1-climax-36-day-19-16-08-26",
+        "njpw-wrestle-kingdom-20-in-tokyo-dome-04-01-26",
+        "njpw-23.9.2012-pt-13",
+        "njpw-best-of-the-super-junior-33-day-11-02-06-26",
+        "njpw-4.1.2008-pt-1"
+      ],
+      "archive_search": "mediatype:movies AND (title:\"NJPW\" OR title:\"G1 Climax\" OR title:\"Wrestle Kingdom\")",
+      "archive_title_pattern": "(?i)(njpw|g1|wrestle|iwgp|climax|vs?\\.?)",
+      "youtube_channels": [
+        {
+          "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+          "name": "NEW JAPAN PRO-WRESTLING"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)"
+    }
+  ]
+}

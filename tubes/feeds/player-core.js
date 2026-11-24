@@ -116,7 +116,11 @@ function youtubeAPI(){
 function stopYT(){
   ytPlaying=false;ytReady=false;
   if(yt){try{yt.destroy()}catch{}yt=null}
-  $('youtube-frame').replaceChildren();
+  // The iframe API may replace the placeholder element entirely.
+  if(!$('youtube-frame')){
+    const placeholder=document.createElement('div');
+    placeholder.id='youtube-frame';shell.replaceChildren(placeholder);
+  }else $('youtube-frame').replaceChildren();
 }
 function failCurrent(reason='Source temporarily unavailable'){
   const badUrl=activeUrl;if(badUrl)bad.add(badUrl);

@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "request_id": "lucha_audit_001",
+  "channel": "luchatube",
+  "action": "audit"
+}

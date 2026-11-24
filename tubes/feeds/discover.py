@@ -59,8 +59,15 @@ def archive(entry, defaults, cursor):
             name=f.get("name","")
             if not isinstance(name,str) or not re.search(r"\.(mp4|webm|m4v)$",name,re.I):continue
             if any(s in name.lower() for s in ("thumb","sample","trailer")):continue
+            if name.lower().endswith(".ia.mp4") or f.get("source") in ("derivative","metadata"):
+                continue
             title=re.sub(r"\s+"," ",name.rsplit(".",1)[0].replace("_"," ")).strip()
             if len(title)<10 or not titlematch.search(title):continue
+            # Mixed Archive items sometimes include unrelated wrestling. A generic
+            # "vs" is not sufficient evidence that a match belongs to Lucha Tube.
+            if entry["directory"]=="luchatube" and not re.search(
+                    r"\b(?:CMLL|AAA|Lucha\s+Libre|Tripleman[ií]a)\b",title,re.I):
+                continue
             try:seconds=int(float(f.get("length") or 0))
             except (ValueError,TypeError):continue
             if not defaults["min_duration_seconds"]<=seconds<=defaults["max_duration_seconds"]:continue

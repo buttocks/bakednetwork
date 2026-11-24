@@ -1,0 +1,48 @@
+name: Refresh independent Lucha Libre lineup
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/luchatube/build-catalog.py'
+      - '.github/workflows/update-lucha-catalog.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lucha-catalog-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Expand Lucha schedule from archive video metadata
+        run: |
+          python3 -m py_compile tubes/luchatube/build-catalog.py
+          python3 tubes/luchatube/build-catalog.py
+          python3 - <<'PY'
+          import json
+          x=json.load(open('tubes/luchatube/programs.json'))
+          items=x['channels']['lucha']['programs']
+          assert len(items)>=4
+          assert len({i['url'] for i in items})==len(items)
+          assert all(i['url'].startswith('https://archive.org/download/') for i in items)
+          PY
+      - name: Commit expanded schedule if new verified metadata is found
+        run: |
+          git config user.name 'Baked TV Lineup Bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tubes/luchatube/programs.json
+          if git diff --cached --quiet; then
+            echo 'Lucha catalog unchanged'
+          else
+            git commit -m 'Expand independent Lucha TV match rotation'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

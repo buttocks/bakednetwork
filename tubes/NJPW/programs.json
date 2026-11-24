@@ -70,6 +70,22 @@
           "duration": 1062,
           "source": "Internet Archive",
           "source_channel": "NJPW World Pro-Wrestling"
+        },
+        {
+          "title": "1982.01.01c-NJPW-Riki Choshu VS Animal Hamaguchi",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
+          "duration": 714,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "1982.01.01d-NJPW-WWF Jr. Heavyweight Throne Decisive Battle-Tiger Mask VS Dynamite Kid",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
+          "duration": 947,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
         }
       ]
     },
@@ -204,6 +220,22 @@
           "duration": 9101,
           "source": "Internet Archive",
           "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW G1 Climax 35 Final 17-08-25",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
+          "duration": 11652,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax 35 Final 17-08-25"
+        },
+        {
+          "title": "NJPW G1 Climax 36 Day 19 16-08-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
+          "duration": 12945,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax 36 Day 19 16-08-26"
         }
       ]
     }

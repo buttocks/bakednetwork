@@ -59,6 +59,12 @@ jobs:
             echo 'No catalog or discovery-state updates'
           else
             git commit -m 'Refresh bounded Baked TV program catalogs'
-            git pull --rebase origin main
+            # A concurrent operator edit can touch the same catalog. Preserve it
+            # and let the next scheduled scan retry rather than force-overwrite.
+            if ! git pull --rebase origin main; then
+              echo 'Concurrent edits: preserving remote catalog; next scheduled scan will retry.'
+              git rebase --abort || true
+              exit 0
+            fi
             git push origin HEAD:main
           fi

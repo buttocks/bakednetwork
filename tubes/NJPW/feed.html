@@ -17,7 +17,10 @@ button:hover,button:focus-visible{background:#57231d}
 #status[hidden]{display:none}
 #status strong{font:900 clamp(24px,5vw,46px)/1.1 Impact,"Arial Black",system-ui;letter-spacing:.06em}
 #status .accent{color:#f1ba48}#status small{max-width:670px;line-height:1.5;color:#d6bfa7}
-#now{position:absolute;z-index:2;bottom:0;left:0;right:0;padding:16px 18px 12px;background:linear-gradient(transparent,#050304df 60%,#050304ee);pointer-events:none;transition:opacity .35s}
+#now{position:absolute;z-index:2;bottom:0;left:0;right:0;padding:16px 18px 12px;background:linear-gradient(transparent,#050304df 60%,#050304ee);pointer-events:none;transition:opacity .8s ease,visibility 0s linear .8s}
+header{transition:opacity .8s ease,visibility 0s linear .8s}
+body.overlay-idle #now,body.overlay-idle header{opacity:0;visibility:hidden;pointer-events:none}
+body:not(.overlay-idle) #now,body:not(.overlay-idle) header{opacity:1;visibility:visible;transition-delay:0s}
 #now small{font:800 10px system-ui;letter-spacing:.14em;color:#ecb759}
 #now h1{margin:5px 0 2px;font-size:clamp(16px,2.5vw,30px);font-weight:900;text-shadow:0 2px 4px #000}
 #now p{margin:0;font-size:12px;color:#f0d3a5}
@@ -29,7 +32,7 @@ button:hover,button:focus-visible{background:#57231d}
 #guide b{font-size:12px}#guide li small{display:block;color:#aa8d7d;margin-top:2px}
 #guide footer{font-size:11px;padding:11px;color:#c0a68a}
 @media(max-width:550px){button{padding:7px 8px;font-size:11px}#now{padding:12px}#now h1{font-size:16px}}
-@media(prefers-reduced-motion:reduce){#now{transition:none}}
+@media(prefers-reduced-motion:reduce){#now,header{transition:none !important}}
 </style>
 </head>
 <body>

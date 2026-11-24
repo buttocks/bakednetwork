@@ -1,0 +1,53 @@
+name: Verify independent NJPW feeds
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/NJPW/feed.html'
+      - 'tubes/NJPW/feed-player.js'
+      - 'tubes/NJPW/programs.json'
+      - '.github/workflows/verify-owned-njpw-feeds.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-feeds:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source and channel catalogs
+        run: |
+          node --check tubes/NJPW/feed-player.js
+          python3 - <<'PY'
+          import json
+          j=json.load(open('tubes/NJPW/programs.json'))
+          for ident, c in j['channels'].items():
+              assert ident in ('classics','events')
+              assert len(c['programs']) >= 6
+              assert len({x['url'] for x in c['programs']})==len(c['programs'])
+              assert all(x['url'].startswith('https://archive.org/download/') for x in c['programs'])
+          print('Verified independent channels and source allowlist')
+          PY
+      - name: Check published GitHub Pages assets after deployment
+        run: |
+          set -e
+          base='https://buttocks.github.io/bakednetwork/tubes/NJPW'
+          for attempt in $(seq 1 18); do
+            if curl -fsSL --max-time 20 "${base}/feed.html?channel=classics" -o /tmp/njpw-feed.html && \
+               curl -fsSL --max-time 20 "${base}/feed-player.js" -o /tmp/njpw-player.js && \
+               curl -fsSL --max-time 20 "${base}/programs.json" -o /tmp/njpw-programs.json; then
+              if grep -q 'NJPW TV' /tmp/njpw-feed.html && grep -q 'Continuous' /tmp/njpw-feed.html /tmp/njpw-player.js 2>/dev/null || \
+                 grep -q 'CONTINUOUS PROGRAMMING' /tmp/njpw-player.js; then
+                python3 -m json.tool /tmp/njpw-programs.json >/dev/null
+                echo 'LIVE_GITHUB_PAGES_VERIFIED'
+                exit 0
+              fi
+            fi
+            echo "Page deployment not yet available (attempt ${attempt}/18)"
+            sleep 15
+          done
+          echo 'GitHub Pages feed URL could not be verified'
+          exit 1

@@ -36,3 +36,15 @@ Create a per-tube catalog, status checker, hosted iframe player, and then a
 registry entry only after the bot's admin rank and backup have been verified.
 If another tube needs different style or features, keep those in its own
 folder and do not overwrite WrestleTube-derived shared JS features.
+
+## Standard on-screen overlay behavior for all owned streams
+
+The **Now Playing** title and on-screen controls should appear when a stream starts
+or switches programs, then **fade away after about 6–7 seconds of playback**.
+Moving the mouse, tapping the video, or using the keyboard shows them again
+temporarily. Keep them visible while the TV Guide is open or playback needs
+attention, and respect the viewer's reduced-motion setting. Fading the overlay
+must never dim, pause or interrupt the actual video.
+
+Use this behavior on every new Baked TV-owned embed, with per-channel colors
+and branding retained.

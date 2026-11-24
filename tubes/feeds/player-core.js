@@ -186,7 +186,11 @@ video.addEventListener('playing',()=>{if(mode!=='archive')return;status.hidden=t
 video.addEventListener('pause',()=>{if(mode==='archive')reveal()});
 video.addEventListener('error',()=>{if(mode==='archive')failCurrent('Video source unavailable')});
 video.addEventListener('ended',()=>{if(mode==='archive'){bad.add(activeUrl);activeUrl='';tune(true)}});
-$('audio').onclick=()=>{muted=!muted;updateAudio();if(mode==='youtube'&&ytReady)try{yt.playVideo()}catch{};else video.play().catch(()=>{})};
+$('audio').onclick=()=>{
+  muted=!muted;updateAudio();
+  if(mode==='youtube'&&ytReady){try{yt.playVideo()}catch{}}
+  else if(mode==='archive')video.play().catch(()=>{});
+};
 $('retune').onclick=()=>{bad.clear();activeUrl='';tune(true)};
 $('guide-toggle').onclick=()=>{
   guideOpen=!guideOpen;$('guide').hidden=!guideOpen;

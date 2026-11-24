@@ -29,6 +29,17 @@ def check(url):
     except (OSError,TimeoutError,ValueError):
         return "unknown"
 
+def check_page(ident):
+    url="https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel="+ident
+    try:
+        req=urllib.request.Request(url,headers={"User-Agent":"BakedTVFeedHealth/1.0"},method="GET")
+        with urllib.request.urlopen(req,timeout=16) as response:
+            return "ok" if response.status==200 else "unknown"
+    except urllib.error.HTTPError as exc:
+        return "missing" if exc.code in (404,410,500,502,503,504) else "unknown"
+    except (OSError,TimeoutError,ValueError):
+        return "unknown"
+
 def main():
     source=json.loads(CATALOG.read_text(encoding="utf8"))
     state=json.loads(STATUS.read_text(encoding="utf8"))
@@ -43,11 +54,19 @@ def main():
         existing=state["channels"].setdefault(
             ident,{"available":None,"goodStreak":0,"badStreak":0})
         previous=dict(existing)
-        if ok>=1:
+        page=check_page(ident)
+        if page=="ok":
+            existing["pageBadStreak"]=0
+        elif page=="missing":
+            existing["pageBadStreak"]=min(2,existing.get("pageBadStreak",0)+1)
+        # Unknown HTTP/connection problems do not imply channel death.
+        if existing.get("pageBadStreak",0)>=2:
+            existing["available"]=False
+            existing["goodStreak"]=0
+        elif ok>=1 and page=="ok":
             existing["goodStreak"]=min(2,existing["goodStreak"]+1)
             existing["badStreak"]=0
-            if existing["goodStreak"]>=1:
-                existing["available"]=True
+            existing["available"]=True
         elif missing==len(urls) and len(urls)>=2:
             existing["goodStreak"]=0
             existing["badStreak"]=min(2,existing["badStreak"]+1)
@@ -58,7 +77,7 @@ def main():
             existing["goodStreak"]=0
             existing["badStreak"]=0
         if existing!=previous:changed=True
-        print(f"{ident}: ok={ok} missing={missing} unknown={unknown} -> available={existing['available']}")
+        print(f"{ident}: page={page} ok={ok} missing={missing} unknown={unknown} -> available={existing['available']}")
     if changed:
         STATUS.write_text(json.dumps(state,indent=2,sort_keys=True)+"\n",encoding="utf8")
     print("STATUS_CHANGED="+str(changed).lower())

@@ -22,6 +22,14 @@
       "previousUrls": [
         "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=events"
       ]
+    },
+    {
+      "tube": "luchatube",
+      "id": "lucha-libre",
+      "title": "BAKED TV — LUCHA LIBRE",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/luchatube/feed.html?channel=lucha&v=lucha1-20261124",
+      "statusFile": "tubes/luchatube/feed-status.json",
+      "statusKey": "lucha"
     }
   ]
 }

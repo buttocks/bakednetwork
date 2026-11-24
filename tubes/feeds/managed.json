@@ -5,17 +5,23 @@
       "tube": "NJPW",
       "id": "njpw-classics",
       "title": "BAKED TV — NJPW CLASSICS",
-      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=classics",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=classics&v=overlay2-20261124",
       "statusFile": "tubes/NJPW/feed-status.json",
-      "statusKey": "classics"
+      "statusKey": "classics",
+      "previousUrls": [
+        "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=classics"
+      ]
     },
     {
       "tube": "NJPW",
       "id": "njpw-events",
       "title": "BAKED TV — NJPW EVENT ARCHIVE",
-      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=events",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=events&v=overlay2-20261124",
       "statusFile": "tubes/NJPW/feed-status.json",
-      "statusKey": "events"
+      "statusKey": "events",
+      "previousUrls": [
+        "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=events"
+      ]
     }
   ]
 }

@@ -1,0 +1,132 @@
+/* NJPW Tube · Kings of Sports compact arena skin
+   CSS overlay only. Source artwork, logos and feature-specific JavaScript are preserved.
+   Original inline CSS remains above the managed block. */
+:root {
+  --njpw-gold: #efc35c;
+  --njpw-red: #b92822;
+  --njpw-ink: #121011;
+  --njpw-line: rgba(228,177,80,.72);
+}
+#motdwrap {
+  border: 2px solid #d7a744 !important;
+  border-radius: 3px !important;
+  margin: 6px 0 10px !important;
+  padding: 7px 12px 9px !important;
+  min-height: 0 !important;
+  color: #f7e9c7 !important;
+  background: linear-gradient(105deg, rgba(31,11,10,.96),rgba(14,12,12,.98) 48%,rgba(80,19,16,.91)) !important;
+  box-shadow: 0 0 0 2px #1a0908, 0 7px 22px rgba(0,0,0,.6), inset 0 0 0 1px #ffffff17;
+  text-align: center;
+}
+#motdwrap::before {
+  content: "KING OF SPORTS  ·  NEW JAPAN PRO-WRESTLING";
+  display: block;
+  color: var(--njpw-gold);
+  margin: 0 8px 3px;
+  padding: 0 5px 4px;
+  border-bottom: 1px solid rgba(242,185,78,.38);
+  font: 800 10px/1.3 "Arial Black",Impact,Arial,sans-serif;
+  letter-spacing: .16em;
+  text-shadow: 0 1px 2px #000;
+}
+#motdwrap #motd, #motdwrap #motd .head2,
+#motdwrap #motd center { margin: 0 !important; padding: 0 !important; }
+#motdwrap #motd #header {
+  margin: 0 auto !important;
+  padding: 0 !important;
+  line-height: 0;
+}
+#motdwrap #motd #header img {
+  display: inline-block !important;
+  height: auto !important;
+  max-height: 142px !important;
+  max-width: min(182px,68vw) !important;
+  width: auto !important;
+  object-fit: contain;
+  vertical-align: top;
+  filter: drop-shadow(0 2px 4px #0008);
+}
+#motdwrap #motd .head2 h4 {
+  margin: 5px 0 5px !important;
+  color: #ffdf9b !important;
+  font: 700 12px/1.35 "Trebuchet MS",Arial,sans-serif;
+  text-shadow: 0 1px #000;
+}
+#motdwrap #motd .head2 h4 a {
+  color: #ffe7a8 !important;
+  text-decoration: underline;
+}
+#motdwrap #motd .head2 button.btn {
+  padding: 4px 13px !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  border: 1px solid #d6aa54 !important;
+  border-radius: 2px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: #ffe1a7 !important;
+  background: linear-gradient(#632521,#291513) !important;
+  box-shadow: inset 0 1px #f6dbab38;
+}
+#motdwrap #motd .head2 button.btn:hover {
+  border-color: #ffdf96 !important;
+  background: linear-gradient(#98352e,#42201c) !important;
+}
+#chatwrap, #videowrap {
+  background: rgba(15,12,12,.92) !important;
+  border: 2px solid var(--njpw-line) !important;
+  border-top-color: var(--njpw-red) !important;
+  border-radius: 2px !important;
+  padding: 6px 8px 9px !important;
+  box-shadow: 0 0 0 1px #210d0c, 0 6px 20px #0008;
+}
+#chatheader, #videowrap-header, #plmeta {
+  padding: 7px 9px !important;
+  margin-bottom: 5px !important;
+  border: 1px solid #d4aa5f !important;
+  border-bottom: 2px solid #c03227 !important;
+  color: #ffe7af !important;
+  font: 800 12px/1.3 "Arial Black",Impact,Arial,sans-serif;
+  letter-spacing: .025em;
+  text-shadow: 0 1px 2px #000;
+  background: linear-gradient(95deg,#2a1714,#561b18 70%,#87221c) !important;
+}
+#messagebuffer, #userlist, #queue {
+  color: #f3e4c9 !important;
+  border: 1px solid rgba(192,146,75,.4) !important;
+  background: rgba(10,10,11,.9) !important;
+  scrollbar-color: #8c4435 #160e0d;
+}
+#queue li.queue_entry {
+  border-bottom: 1px solid rgba(196,153,91,.24) !important;
+}
+#queue li.queue_entry:nth-child(odd) {
+  background: rgba(78,30,24,.16) !important;
+}
+#queue li.queue_active {
+  background: linear-gradient(90deg,rgba(148,38,31,.34),rgba(84,52,19,.17)) !important;
+  outline: 1px solid #c49345;
+}
+#chatwrap .btn, #videowrap .btn, #playlistwrap .btn {
+  border: 1px solid #a7783c !important;
+  color: #ffe6b8 !important;
+  background: linear-gradient(#35201c,#1c1412) !important;
+  border-radius: 2px !important;
+  font-weight: 700 !important;
+}
+#chatwrap .btn:hover, #videowrap .btn:hover, #playlistwrap .btn:hover {
+  border-color: #ffd283 !important;
+  background: linear-gradient(#632c25,#321918) !important;
+}
+.navbar {border-bottom: 2px solid #ae3529 !important; box-shadow: 0 3px 12px #0008;}
+.navbar .navbar-nav > li > a {color: #f4dfb9 !important;}
+.modal-content {background: #1d1413 !important; border: 1px solid #c89c53; color: #f6e8cd;}
+.modal-header, .modal-footer {border-color: #94662f !important; background: #381c19 !important;}
+#chatline, .form-control {background-color: #161114; color: #fff0d8; border-color: #75563c;}
+@media(max-width:767px){
+  #motdwrap {padding: 5px 7px 7px !important; margin: 5px 0 7px !important;}
+  #motdwrap::before {font-size: 8px;letter-spacing:.075em;}
+  #motdwrap #motd #header img {max-height: 107px !important;max-width: min(145px,65vw) !important;}
+  #motdwrap #motd .head2 h4 {font-size: 11px !important;margin:4px 0 !important;}
+  #chatwrap,#videowrap {padding: 5px 5px 7px !important;}
+}

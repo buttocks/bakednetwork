@@ -1,10 +1,10 @@
 {
   "channels": {
     "lucha": {
-      "available": null,
+      "available": true,
       "badStreak": 0,
-      "goodStreak": 0,
-      "pageBadStreak": 1
+      "goodStreak": 1,
+      "pageBadStreak": 0
     }
   },
   "schema": 1

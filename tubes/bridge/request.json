@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "lucha_center_logo_20261124_01",
+  "request_id": "lucha_motd_to_css_backup_20261124_01",
   "channel": "luchatube",
-  "action": "deploy_skin"
+  "action": "backup_skin"
 }

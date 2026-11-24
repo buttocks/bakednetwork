@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "managed": [
+    {
+      "tube": "NJPW",
+      "id": "njpw-classics",
+      "title": "BAKED TV — NJPW CLASSICS",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=classics",
+      "statusFile": "tubes/NJPW/feed-status.json",
+      "statusKey": "classics"
+    },
+    {
+      "tube": "NJPW",
+      "id": "njpw-events",
+      "title": "BAKED TV — NJPW EVENT ARCHIVE",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/feed.html?channel=events",
+      "statusFile": "tubes/NJPW/feed-status.json",
+      "statusKey": "events"
+    }
+  ]
+}

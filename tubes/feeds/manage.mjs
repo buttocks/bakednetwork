@@ -115,7 +115,10 @@ async function main(){
             report.actions.push({feed:feed.id,result:'missing-add-permissions'});continue;
           }
           const response=await page.request.get(currentUrl,{timeout:20000,failOnStatusCode:false});
-          const ok=response.status()===200&&(await response.text()).includes('NJPW');
+          const body=await response.text();
+          const banner=feed.tube==='luchatube'?'LUCHA LIBRE':'NJPW';
+          const ok=response.status()===200&&body.includes(banner)&&
+            body.includes('id="video"')&&body.includes('player-core.js');
           await response.dispose();
           if(!ok){report.actions.push({feed:feed.id,result:'page-not-verified'});continue}
           await page.evaluate(({src,title})=>window.socket.emit('queue',{

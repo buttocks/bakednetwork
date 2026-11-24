@@ -1,66 +1,66 @@
 [
   {
     "schema": 1,
-    "request_id": "batch1_WCW_migrate_legacy_options_20261124",
-    "channel": "WCW",
+    "request_id": "batch2_RDH_migrate_legacy_options_20261124",
+    "channel": "RDH",
     "action": "migrate_legacy_options"
   },
   {
     "schema": 1,
-    "request_id": "batch1_WCW_clean_dead_emotes_20261124",
-    "channel": "WCW",
+    "request_id": "batch2_RDH_clean_dead_emotes_20261124",
+    "channel": "RDH",
     "action": "clean_dead_emotes",
     "offset": 0,
     "limit": 20000
   },
   {
     "schema": 1,
-    "request_id": "batch1_WCW_audit_playlist_media_20261124",
-    "channel": "WCW",
+    "request_id": "batch2_RDH_audit_playlist_media_20261124",
+    "channel": "RDH",
     "action": "audit_playlist_media",
     "offset": 0,
     "limit": 1500
   },
   {
     "schema": 1,
-    "request_id": "batch1_Wrestling_migrate_legacy_options_20261124",
-    "channel": "Wrestling",
+    "request_id": "batch2_WID_migrate_legacy_options_20261124",
+    "channel": "WID",
     "action": "migrate_legacy_options"
   },
   {
     "schema": 1,
-    "request_id": "batch1_Wrestling_clean_dead_emotes_20261124",
-    "channel": "Wrestling",
+    "request_id": "batch2_WID_clean_dead_emotes_20261124",
+    "channel": "WID",
     "action": "clean_dead_emotes",
     "offset": 0,
     "limit": 20000
   },
   {
     "schema": 1,
-    "request_id": "batch1_Wrestling_audit_playlist_media_20261124",
-    "channel": "Wrestling",
+    "request_id": "batch2_WID_audit_playlist_media_20261124",
+    "channel": "WID",
     "action": "audit_playlist_media",
     "offset": 0,
     "limit": 1500
   },
   {
     "schema": 1,
-    "request_id": "batch1_WWF-WWE_migrate_legacy_options_20261124",
-    "channel": "WWF-WWE",
+    "request_id": "batch2_ScaryTube_migrate_legacy_options_20261124",
+    "channel": "ScaryTube",
     "action": "migrate_legacy_options"
   },
   {
     "schema": 1,
-    "request_id": "batch1_WWF-WWE_clean_dead_emotes_20261124",
-    "channel": "WWF-WWE",
+    "request_id": "batch2_ScaryTube_clean_dead_emotes_20261124",
+    "channel": "ScaryTube",
     "action": "clean_dead_emotes",
     "offset": 0,
     "limit": 20000
   },
   {
     "schema": 1,
-    "request_id": "batch1_WWF-WWE_audit_playlist_media_20261124",
-    "channel": "WWF-WWE",
+    "request_id": "batch2_ScaryTube_audit_playlist_media_20261124",
+    "channel": "ScaryTube",
     "action": "audit_playlist_media",
     "offset": 0,
     "limit": 1500

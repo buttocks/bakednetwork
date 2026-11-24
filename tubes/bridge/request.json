@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "lucha_css_branded_header_20261124_01",
+  "request_id": "lucha_legacy_path_audit_20261124_01",
   "channel": "luchatube",
-  "action": "deploy_skin"
+  "action": "audit_skin"
 }

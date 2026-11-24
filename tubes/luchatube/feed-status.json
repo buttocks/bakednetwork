@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "channels": {
+    "lucha": {
+      "available": null,
+      "goodStreak": 0,
+      "badStreak": 0,
+      "pageBadStreak": 0
+    }
+  }
+}

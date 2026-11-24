@@ -158,10 +158,11 @@ export async function auditEmoteUrls({page,request,initial}){
 export async function cleanDeadEmotes({page,request,initial}){
   if(initial.rank<3||!initial.loggedIn)throw Error('Verified channel Admin required');
   if(request.offset!==0||request.limit<6500)throw Error('Cleanup requires full emote URL coverage');
+  if(String(initial.channel).toLowerCase()!==request.channel.toLowerCase())throw Error('Channel identity mismatch');
   await auditEmoteUrls({page,request,initial});
   const report=JSON.parse(await fs.readFile(FILE,'utf8'));
   if(report.limit<report.totalUniqueUrls)throw Error('Emote check did not cover all unique URLs');
-  const dead=report.results.filter(x=>x.status==='dead');
+  const dead=report.results.filter(x=>x.status==='dead'&&['confirmed-imgur-removed-placeholder','confirmed-http-404-or-410','confirmed-html-instead-of-image'].includes(x.reason));
   const entries=dead.flatMap(hit=>hit.names.map(name=>({
     name,oldUrl:hit.original,reason:hit.reason,index:hit.index
   })));
@@ -181,7 +182,10 @@ export async function cleanDeadEmotes({page,request,initial}){
   const log={requestId:request.request_id,channel:request.channel,
     beforeCount:before.length,verifiedDeadURLs:dead.length,
     eligibleCount:eligible.length,removed,skipped,completed:false};
-  const logPath='tubes/bridge/emote-url-cleanup.json';
+  const dir='tubes/bridge/backup/'+request.channel+'/macro-cleanup';
+  await fs.mkdir(dir,{recursive:true});
+  await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2)+'\n');
+  const logPath=dir+'/report.json';
   await fs.writeFile(logPath,JSON.stringify(log,null,2)+'\n');
   for(const item of eligible){
     // Do not delete by name alone when the entry was modified or duplicated.
@@ -222,6 +226,9 @@ export async function cleanDeadEmotes({page,request,initial}){
   log.completed=true;
   log.afterCount=await page.evaluate(()=>window.CHANNEL?.emotes?.length??null);
   log.checkedAt=report.checkedAt;
+  const after=await page.evaluate(()=>window.CHANNEL.emotes.map(e=>({name:e.name,image:e.image,source:e.source})));
+  await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2)+'\n');
+  console.log('Macro cleanup summary '+request.channel+' '+JSON.stringify({before:before.length,after:after.length,removed:removed.length,unknown:report.statusCounts.unknown}));
   await fs.writeFile(logPath,JSON.stringify(log,null,2)+'\n');
   return {request_id:request.request_id,channel:request.channel,
     action:request.action,status:'dead-emotes-cleaned',beforeCount:before.length,

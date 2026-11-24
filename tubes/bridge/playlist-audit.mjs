@@ -131,6 +131,10 @@ export async function auditPlaylistMedia({page,request,initial}){
     statusCounts:counts,results,noChangesMade:true
   };
   await fs.writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
+  const dir='tubes/bridge/backup/'+request.channel+'/playlist-audit';
+  await fs.mkdir(dir,{recursive:true});
+  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2)+'\n');
+  await fs.copyFile(SNAPSHOT,dir+'/before.json');
   console.log('Playlist audit complete: '+JSON.stringify(counts));
   return {request_id:request.request_id,channel:request.channel,action:request.action,
     status:'playlist-audited',playlistItems:report.playlistItems,

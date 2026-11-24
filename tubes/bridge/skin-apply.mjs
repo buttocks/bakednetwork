@@ -32,8 +32,8 @@ export async function deploySkin({page,request,initial}){
   const approvedLogo='https://i.imgur.com/GQsScF2.png';
   const uses=[...newLayer.matchAll(/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/gi)]
     .map(match=>match[1]);
-  if(uses.length!==2||uses.some(url=>url!==approvedLogo))
-    throw Error('Managed CSS may reference only the two approved original logo slices');
+  if(uses.length!==1||uses.some(url=>url!==approvedLogo))
+    throw Error('Managed CSS may reference only the approved original logo asset for both CSS slices');
   if(/@import/i.test(newLayer))throw Error('Managed CSS cannot add remote style imports');
   let target;
   const start=before.css.indexOf(BEGIN),end=before.css.indexOf(END);

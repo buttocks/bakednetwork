@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "njpw_central_repo_audit_20261124_01",
+  "request_id": "njpw_full_backup_20261124_01",
   "channel": "NJPW",
-  "action": "audit"
+  "action": "backup_skin"
 }

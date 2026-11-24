@@ -7,6 +7,8 @@ on:
       - tubes/bridge/bridge.mjs
       - tubes/bridge/skin-backup.mjs
       - tubes/bridge/skin-apply.mjs
+      - tubes/NJPW/refresh.mjs
+      - tubes/NJPW/arena-skin.css
       - tubes/bridge/TUBE-JS-BASELINE.md
       - tubes/bridge/motd-cleanup.mjs
       - tubes/bridge/playlist-audit.mjs
@@ -33,6 +35,7 @@ jobs:
           node --check tubes/bridge/bridge.mjs
           node --check tubes/bridge/skin-backup.mjs
           node --check tubes/bridge/skin-apply.mjs
+          node --check tubes/NJPW/refresh.mjs
           node --check tubes/bridge/motd-cleanup.mjs
           node --check tubes/bridge/emote-cleanup.mjs
           node --check tubes/bridge/playlist-audit.mjs

@@ -1,56 +1,14 @@
 [
   {
     "schema": 1,
-    "request_id": "full_backup_20261124_0",
+    "request_id": "retry_admin_20261124_0",
     "channel": "WrestleTube",
-    "action": "backup_skin"
+    "action": "audit_legacy_paths"
   },
   {
     "schema": 1,
-    "request_id": "full_backup_20261124_1",
-    "channel": "RetroWrestling",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_2",
+    "request_id": "retry_admin_20261124_1",
     "channel": "WWE-WWF",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_3",
-    "channel": "RDH",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_4",
-    "channel": "ScaryTube",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_5",
-    "channel": "WID",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_6",
-    "channel": "WCW",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_7",
-    "channel": "luchatube",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "full_backup_20261124_8",
-    "channel": "NJPW",
-    "action": "backup_skin"
+    "action": "audit_legacy_paths"
   }
 ]

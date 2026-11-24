@@ -9,6 +9,10 @@
 :root{font:14px system-ui,-apple-system,Segoe UI,sans-serif;color:#f8e8cb;background:#050505}
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden}
 video{position:absolute;inset:0;width:100%;height:100%;background:#000;object-fit:contain}
+#youtube-shell{position:absolute;inset:0;z-index:0;background:#000}
+#youtube-shell[hidden]{display:none!important}
+#youtube-frame,#youtube-shell iframe{width:100%;height:100%;display:block;border:0}
+#status{z-index:1}
 header{position:absolute;z-index:3;left:10px;right:10px;top:8px;display:flex;justify-content:space-between;gap:9px;pointer-events:none}
 .controls{display:flex;gap:7px;pointer-events:auto}
 button{font:700 12px system-ui;cursor:pointer;border:1px solid #ce9b4f;color:#ffe3a4;background:#241411ec;padding:8px 10px;border-radius:5px}
@@ -41,12 +45,13 @@ body.overlay-idle .overlay-hotspot{pointer-events:auto}
 </head>
 <body>
 <video id="video" playsinline autoplay muted preload="auto"></video>
+<div id="youtube-shell" hidden><div id="youtube-frame"></div></div>
 <div id="status" role="status"><strong><span class="accent">NJPW</span> TELEVISION</strong><small id="status-text">Tuning the channel…</small></div>
 <header><div class="controls"><button id="guide-toggle" type="button" aria-expanded="false">☰ TV Guide</button></div><div class="controls"><button id="audio" type="button">🔇 Unmute</button><button id="retune" type="button">↻ Retune</button></div></header>
-<aside id="guide" hidden aria-label="Channel program guide"><h2 id="guide-title">NJPW TV Guide</h2><ol id="guide-list"></ol><footer>Internet Archive source media. Schedules use UTC for shared timing; times shown locally. Playback may be restricted by the source.</footer></aside>
+<aside id="guide" hidden aria-label="Channel program guide"><h2 id="guide-title">NJPW TV Guide</h2><ol id="guide-list"></ol><footer>Internet Archive and official YouTube videos. Times shown locally; ads and embedding restrictions may apply.</footer></aside>
 <section id="now" aria-live="polite"><small id="channel-name">NJPW · DIRECT VIDEO</small><h1 id="program-name">Tuning…</h1><p id="program-details">Independent Baked TV feed</p></section>
 <div class="overlay-hotspot" id="hotspot-top" aria-hidden="true"></div>
 <div class="overlay-hotspot" id="hotspot-bottom" aria-hidden="true"></div>
-<script src="./feed-player.js?v=overlay2-20261124"></script>
+<script src="../feeds/player-core.js?v=mixed1-20261124"></script>
 </body>
 </html>

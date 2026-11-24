@@ -19,3 +19,6 @@ Resolve WID CSS using exact historical bytes, verify remaining legacy references
 First cleanup batch: https://github.com/buttocks/bakednetwork/actions/runs/45467435264
 Second cleanup batch: https://github.com/buttocks/bakednetwork/actions/runs/45468850602
 Original backups: runs 45458643814 and 45461441839 (expire 2026-12-24).
+
+## Cleanup staging — 2026-11-24
+Eight channels now have canonical external settings or already used them. WID remains pinned to its working historical URL (CDN byte mismatch). ScaryTube still references 85 macro assets and 25 runtime resources; preserve those paths. WrestleTube historical dependencies have been copied to the canonical tree. The staged cleanup removes 29 SHA-identical duplicates associated with channels whose live legacy audit returned zero. Historical pinned URLs remain available; review unpinned references before merging. Existing playlist iframe entries are outside cleanup scope.

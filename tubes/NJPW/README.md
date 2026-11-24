@@ -25,3 +25,11 @@ The [shared controller](../feeds/README.md) automatically adds these two iframes
 ## Source and rollback policy
 
 WrestleTube's JavaScript remains the shared reference, not a replacement for NJPW-specific features. Avoid duplicate inline modules. External script/style URLs remain unchanged without separate inspection. Archive recordings may have source-imposed playback and usage limitations.
+
+## Overlay behavior
+
+The on-screen program title and player controls **fade out 6.5 seconds after
+playback begins**, with an 800ms opacity transition. Mouse movement, touch and
+keyboard activity temporarily reveal them. Keep controls visible while the TV
+Guide is open or when playback errors require attention; reduced-motion
+preferences disable the transition. This applies to both NJPW-owned feeds.

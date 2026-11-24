@@ -1,38 +1,14 @@
 [
   {
     "schema": 1,
-    "request_id": "wid_exact_asset_plan_20261124",
+    "request_id": "historical_migrate_WID_20261124",
     "channel": "WID",
-    "action": "plan_legacy_options"
+    "action": "migrate_legacy_options"
   },
   {
     "schema": 1,
-    "request_id": "legacy_detail_WID_20261124",
-    "channel": "WID",
-    "action": "audit_legacy_paths"
-  },
-  {
-    "schema": 1,
-    "request_id": "legacy_detail_ScaryTube_20261124",
-    "channel": "ScaryTube",
-    "action": "audit_legacy_paths"
-  },
-  {
-    "schema": 1,
-    "request_id": "legacy_detail_Wrestling_20261124",
+    "request_id": "historical_migrate_Wrestling_20261124",
     "channel": "Wrestling",
-    "action": "audit_legacy_paths"
-  },
-  {
-    "schema": 1,
-    "request_id": "legacy_detail_WWF-WWE_20261124",
-    "channel": "WWF-WWE",
-    "action": "audit_legacy_paths"
-  },
-  {
-    "schema": 1,
-    "request_id": "legacy_detail_WCW_20261124",
-    "channel": "WCW",
-    "action": "audit_legacy_paths"
+    "action": "migrate_legacy_options"
   }
 ]

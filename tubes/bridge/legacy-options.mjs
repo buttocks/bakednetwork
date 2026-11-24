@@ -11,6 +11,8 @@ function replacement(raw){
  else if(u.hostname==='buttocks.github.io')old=u.pathname.match(/^\/bakednetwork\/(.+)$/)?.[1];
  if(!old)return null;
  try{old=decodeURIComponent(old)}catch{return null}
+ const exact={'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@449b0ca386f28e74287684899a7ddc54d8d23a2a/wid/v3/wid-v3.css':'tubes/WID/historical/449b0ca/v3/wid-v3.css','https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@wrestletube-selfhost-v1-20261115/wrestletube/versions/selfhost-v1/channel-internal.js':'tubes/WrestleTube/versions/selfhost-v1/channel-internal.js'};
+ if(Object.hasOwn(exact,raw))return 'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@a42f36c1592c75b51c6fdfcfe638c1215b6b3c51/'+exact[raw];
  if(!Object.hasOwn(map,old))return null;
  return 'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@'+CANONICAL+'/'+map[old].split('/').map(encodeURIComponent).join('/');
 }

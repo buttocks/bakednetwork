@@ -213,6 +213,11 @@ async function run(request){
         }
         return {legacy:found,emotesLoaded:Array.isArray(c.emotes)};
       });
+      const dir='tubes/bridge/backup/'+request.channel+'/legacy-audit';
+      await fs.mkdir(dir,{recursive:true});
+      await fs.writeFile(dir+'/references.json',JSON.stringify(refs,null,2)+'\n');
+      console.log('Legacy reference breakdown '+request.channel+' '+JSON.stringify(Object.fromEntries(Object.entries(refs.legacy).map(([k,v])=>[k,v.length]))));
+      for(const key of ['css','js','options'])for(const url of refs.legacy[key]||[]){try{const u=new URL(url);if(['cdn.jsdelivr.net','raw.githubusercontent.com','buttocks.github.io'].includes(u.hostname)&&!u.username&&!u.password)console.log('Legacy asset '+request.channel+' '+key+' '+u.origin+u.pathname)}catch{}}
       return {request_id:request.request_id,channel:request.channel,action:request.action,status:'audited',rank:initial.rank,admin_verified:Number.isFinite(initial.rank)&&initial.rank>=3,permissions:initial.permissions,items:before.length,...refs};
     }
     if(request.action==='audit_skin'){

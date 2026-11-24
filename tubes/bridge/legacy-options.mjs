@@ -22,21 +22,28 @@ export async function migrateLegacyOptions({page,request,initial}){
  if(!initial.loggedIn||initial.rank<3||String(initial.channel).toLowerCase()!==request.channel.toLowerCase())throw Error('Verified channel Admin required');
  const capture=()=>page.evaluate(()=>{const c=window.CHANNEL||{};return {css:c.css,js:c.js,motd:c.motd,externalcss:c.opts?.externalcss||'',externaljs:c.opts?.externaljs||'',options:Object.fromEntries(Object.entries(c.opts||{}).filter(([k])=>!/password|token|secret|session|credential|auth|cookie|private/i.test(k))),playlist:[...document.querySelectorAll('#queue .queue_entry')].map(el=>window.jQuery(el).data('uid')),playing:window.PL_CURRENT}});
  const before=await capture(),patch={},checks=[];
+ const dir='tubes/bridge/backup/'+request.channel+'/url-migration';
+ await fs.mkdir(dir,{recursive:true});
+ await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2)+'\n');
  const context=await page.context().browser().newContext();
  try{
   for(const key of ['externalcss','externaljs']){
    const old=before[key],next=replacement(old);
    if(!next||old===next)continue;
    const a=await digest(context.request,old),b=await digest(context.request,next);
-   if(a!==b)throw Error('Asset bytes differ for '+key+'; no changes made');
+   if(a!==b){
+    const u=new URL(old);console.log('Legacy mismatch '+request.channel+' '+key+' '+u.origin+u.pathname+' oldSHA='+a+' canonicalSHA='+b);
+    const response=await context.request.get(old,{timeout:20000,maxRedirects:0,failOnStatusCode:false});
+    try{if(!response.ok())throw Error('Original asset fetch failed');const bytes=await response.body();if(bytes.length>12000000||createHash('sha256').update(bytes).digest('hex')!==a)throw Error('Original asset changed during capture');await fs.writeFile(dir+'/'+key+'-original.'+(key==='externalcss'?'css':'js'),bytes)}finally{await response.dispose()}
+    checks.push({key,old,next,originalSha256:a,canonicalSha256:b,mismatch:true});
+    continue;
+   }
    patch[key]=next;checks.push({key,old,next,sha256:a});
   }
  }finally{await context.close()}
- const dir='tubes/bridge/backup/'+request.channel+'/url-migration';
- await fs.mkdir(dir,{recursive:true});
- await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2)+'\n');
  const result={channel:request.channel,action:request.action,checks,status:'planned',changed:0};
  await fs.writeFile(dir+'/report.json',JSON.stringify(result,null,2)+'\n');
+ if(checks.some(x=>x.mismatch)){result.status='asset-mismatch';await fs.writeFile(dir+'/report.json',JSON.stringify(result,null,2)+'\n');if(request.action!=='plan_legacy_options')throw Error('Asset bytes differ; original captured; no changes made');return result;}
  if(request.action==='plan_legacy_options'||!Object.keys(patch).length)return {...result,status:Object.keys(patch).length?'planned':'no-option-changes'};
  const current=await capture();
  if(current.externalcss!==before.externalcss||current.externaljs!==before.externaljs)throw Error('Options changed concurrently');

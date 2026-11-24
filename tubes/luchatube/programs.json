@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "seed": "lucha-bakednetwork-20261124",
+  "source_note": "Initial curated source links from the archived public Lucha broadcast listing. Program reuse/embedding rights should be confirmed with rights holders.",
+  "channels": {
+    "lucha": {
+      "name": "BAKED TV · LUCHA LIBRE",
+      "description": "Classic and recent Mexican lucha libre matches, rotating daily.",
+      "programs": [
+        {
+          "title": "Dark Angel vs. Amapola © For The World Women S Championship",
+          "episode": "Lucha",
+          "url": "https://archive.org/download/20080309cmll-match-4-dark-angel-vs-amapola-c-for-the-cmll-world-women-s-championship/20080309cmll_match4Dark%20Angel%20vs%20Amapola%20%C2%A9%20for%20the%20CMLL%20World%20Women_s%20Championship.mp4",
+          "duration": 1245,
+          "source": "Internet Archive",
+          "source_channel": "Lucha Libre"
+        },
+        {
+          "title": "Neon vs. Barbaro Cavernario",
+          "episode": "Lucha · Jun 2025",
+          "url": "https://archive.org/download/approved_match_picks_06_2025/%2806.07%29%20%7BCMLL%7D%20Neon%20vs.%20Barbaro%20Cavernario%20%5BBO3%5D%20%28Sabado%20De%20Coliseo%29.mp4",
+          "duration": 1267,
+          "source": "Internet Archive",
+          "source_channel": "Lucha Libre"
+        },
+        {
+          "title": "Mistico, Mascara Dorada, Neon, Atlantis Jr vs. Averno, Ultimo Guerrero, Euforia, Gran vs. Gran Guerrero",
+          "episode": "Lucha · Jun 2025",
+          "url": "https://archive.org/download/approved_match_picks_06_2025/%2806.13%29%20%7BCMLL%7D%20Mistico%2C%20Mascara%20Dorada%2C%20Neon%2C%20Atlantis%20Jr%20vs%20Averno%2C%20Ultimo%20Guerrero%2C%20Euforia%2C%20Gran%20Guerrero%20%20%5BB03%5D%20%28Viernes%20Espectacular%29.mp4",
+          "duration": 1480,
+          "source": "Internet Archive",
+          "source_channel": "Lucha Libre"
+        },
+        {
+          "title": "Templario vs. Titan",
+          "episode": "Lucha · Jun 2025",
+          "url": "https://archive.org/download/approved_match_picks_06_2025/%2806.13%29%20%7BCMLL%7D%20Templario%20vs.%20Titan%20%5BB03%5D%20%28Viernes%20Espectacular%29.mp4",
+          "duration": 1434,
+          "source": "Internet Archive",
+          "source_channel": "Lucha Libre"
+        }
+      ]
+    }
+  }
+}

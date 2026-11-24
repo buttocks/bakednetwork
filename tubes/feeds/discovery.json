@@ -31,7 +31,8 @@
           "name": "Lucha Libre AAA"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*(match|episode|lucha)|lucha\\s*completa|episodio\\s*completo|combate\\s*completo|pelea\\s*completa|luchas\\s*completas)"
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|lucha)|lucha\\s*completa|episodio\\s*completo|combate\\s*completo|pelea\\s*completa|luchas\\s*completas)",
+      "seed_count": 7
     },
     {
       "directory": "NJPW",
@@ -49,7 +50,8 @@
           "name": "NEW JAPAN PRO-WRESTLING"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)"
+      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
+      "seed_count": 8
     },
     {
       "directory": "NJPW",
@@ -70,7 +72,8 @@
           "name": "NEW JAPAN PRO-WRESTLING"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)"
+      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
+      "seed_count": 16
     }
   ]
 }

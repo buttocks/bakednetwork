@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "njpw_overlay_iframe_audit_20261124_01",
+  "request_id": "njpw_center_logo_20261124_02",
   "channel": "NJPW",
-  "action": "audit"
+  "action": "refresh_njpw_skin_motd"
 }

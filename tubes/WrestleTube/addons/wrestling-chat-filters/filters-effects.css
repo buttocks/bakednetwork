@@ -1,0 +1,21 @@
+/* WrestleTube wrestling chat effects addon — no global theme or JavaScript. */
+/* Optional chat filters, kept separate from core Baked chat functionality */
+#messagebuffer .wwf-fx { font-weight:900; letter-spacing:.02em; }
+#messagebuffer .wwf-chip { display:inline-block; vertical-align:baseline; padding:1px 7px;
+  border:1px solid #ad4b55; border-radius:3px; background:#411923;
+  color:#ffe6d7; font-size:.94em; line-height:1.4; text-shadow:0 1px #000a; }
+#messagebuffer .wwf-chip--gold { border-color:#d2ac64; background:#4a351e; color:#ffdfa0; }
+#messagebuffer .wwf-chip--steel { border-color:#9cabb9; background:#273543; color:#ecf4ff; }
+#messagebuffer .wwf-chip--green { border-color:#6eac82; background:#213c2b; color:#caffd7; }
+#messagebuffer .wwf-chants { display:inline; color:#f4c777; font-weight:950; letter-spacing:.1em; text-transform:uppercase; }
+#messagebuffer .wwf-mic { color:#ff9c9c; font-style:italic; font-weight:700; }
+#messagebuffer .wwf-face { color:#9fe5c1; font-weight:850; }
+#messagebuffer .wwf-heel { color:#ff8e9d; font-weight:850; }
+#messagebuffer .wwf-gold { color:#f2cb70; font-weight:850; }
+#messagebuffer .wwf-spoiler { color:transparent!important; background:#4d4951;
+  border-radius:3px; padding:0 3px; cursor:pointer; user-select:none;
+  text-shadow:none!important; }
+#messagebuffer .wwf-spoiler:hover,#messagebuffer .wwf-spoiler:focus-visible,
+#messagebuffer .wwf-spoiler.wwf-revealed { color:#fff4e6!important;
+  user-select:text; background:#614355; }
+#messagebuffer .wwf-spoiler:focus-visible { outline:2px solid #ffe4a0; }

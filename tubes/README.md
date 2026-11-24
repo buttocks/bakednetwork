@@ -26,3 +26,29 @@ Existing SlamVision players are currently published by `buttocks/suplex-baked-pl
 ## Access
 
 The GitHub Actions bridge in this repository requires the **repo-scoped** GitHub Actions secret `BAKED_LIVE_PASSWORD` before it can log in. Secrets and sensitive snapshots must never be committed. The request file in `bridge/request.json` triggers a single scoped operation, and results are attached as GitHub Actions artifacts (7-day retention). Do not publish complete channel backups in the public repo.
+
+## Consolidated tube asset library
+
+The following are the **canonical paths for new development**:
+
+- [RDH](./RDH/) — RDH styles, emote support and JavaScript variants.
+- [WrestleTube](./WrestleTube/) — original snapshots, dated backups, filter add-ons and the red theme.
+- [WID](./WID/) — WID v2/v3 styles, scripts and MOTD.
+- [RetroWrestling](./RetroWrestling/) — retro wrestling theme and merged WrestleTube script.
+- [WCW](./WCW/) — channel styles, filters and emote definitions.
+- [WWE-WWF](./WWE-WWF/) — WWF/WWE releases, theme, filters and JS.
+- [Horror](./Horror/) — horror skin, filters and effects.
+- [ScaryTube](./ScaryTube/) — ScaryTube skin, filters and emote assets.
+- [Shared modules](./shared/modules/) — reusable playlist tools.
+- [NJPW](./NJPW/) and [Lucha Tube](./luchatube/) — actively managed tube folders.
+- [Shared admin bridge](./bridge/) — authenticated management and backups.
+
+**Legacy URL compatibility:** The old root paths are retained unchanged for now.
+Some existing channel settings or jsDelivr links might still load those paths.
+Do not remove legacy copies until each affected live tube has been audited,
+its external URLs migrated and playback/features verified. Change new code in
+the canonical `tubes/` paths, with compatibility copies maintained as needed.
+No live channel configuration was changed by this organization commit.
+
+Original snapshots are archival. Do not interpret a copied backup as current
+live channel settings or deploy it without a fresh private backup.

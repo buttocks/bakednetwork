@@ -10,7 +10,7 @@ import assert from 'node:assert/strict';
 
 const SITE='https://baked.live';
 const USERNAME='buttman-gpt';
-const CHANNELS=new Set(["luchatube","NJPW","WrestleTube","RetroWrestling","WWE-WWF","RDH","ScaryTube","WID","WCW"]);
+const CHANNELS=new Set(["luchatube","NJPW","Wrestling","RetroWrestling","WWF-WWE","RDH","ScaryTube","WID","WCW"]);
 const ORIGINAL_CHANNELS=new Set(['luchatube','NJPW']);
 const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';

@@ -1,14 +1,14 @@
 [
   {
     "schema": 1,
-    "request_id": "retry_admin_20261124_0",
-    "channel": "WrestleTube",
-    "action": "audit_legacy_paths"
+    "request_id": "correct_slug_backup_20261124_0",
+    "channel": "Wrestling",
+    "action": "backup_skin"
   },
   {
     "schema": 1,
-    "request_id": "retry_admin_20261124_1",
-    "channel": "WWE-WWF",
-    "action": "audit_legacy_paths"
+    "request_id": "correct_slug_backup_20261124_1",
+    "channel": "WWF-WWE",
+    "action": "backup_skin"
   }
 ]

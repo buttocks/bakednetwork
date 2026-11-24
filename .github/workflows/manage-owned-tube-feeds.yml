@@ -6,7 +6,9 @@ on:
     branches: [main]
     paths:
       - 'tubes/NJPW/programs.json'
+      - 'tubes/luchatube/programs.json'
       - 'tubes/NJPW/check-sources.py'
+      - 'tubes/luchatube/check-sources.py'
       - 'tubes/feeds/managed.json'
       - 'tubes/feeds/manage.mjs'
       - '.github/workflows/manage-owned-tube-feeds.yml'
@@ -34,10 +36,15 @@ jobs:
         run: |
           node --check tubes/feeds/manage.mjs
           node --check tubes/NJPW/feed-player.js
+          node --check tubes/luchatube/feed-player.js
           python3 -m py_compile tubes/NJPW/check-sources.py
+          python3 -m py_compile tubes/luchatube/check-sources.py
+          python3 -m py_compile tubes/luchatube/build-catalog.py
           node tubes/feeds/manage.mjs --self-test
       - name: Check NJPW video sources conservatively
         run: python3 tubes/NJPW/check-sources.py
+      - name: Check Lucha Libre video sources conservatively
+        run: python3 tubes/luchatube/check-sources.py
       - name: Install browser for permissioned playlist reconciliation
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.1
@@ -49,11 +56,11 @@ jobs:
         run: |
           git config user.name 'Baked TV Feed Monitor'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add tubes/NJPW/feed-status.json
+          git add tubes/NJPW/feed-status.json tubes/luchatube/feed-status.json
           if git diff --cached --quiet; then
             echo 'No status changes'
           else
-            git commit -m 'Update confirmed NJPW feed availability'
+            git commit -m 'Update confirmed managed tube feed availability'
             git pull --rebase origin main
             git push origin HEAD:main
           fi

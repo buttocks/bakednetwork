@@ -1,0 +1,67 @@
+name: Manage owned Baked TV iframe feeds
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/NJPW/programs.json'
+      - 'tubes/NJPW/check-sources.py'
+      - 'tubes/feeds/managed.json'
+      - 'tubes/feeds/manage.mjs'
+      - '.github/workflows/manage-owned-tube-feeds.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: baked-live-iframe-bridge
+  cancel-in-progress: false
+
+jobs:
+  manage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify controller before contacting Baked.live
+        run: |
+          node --check tubes/feeds/manage.mjs
+          node --check tubes/NJPW/feed-player.js
+          python3 -m py_compile tubes/NJPW/check-sources.py
+          node tubes/feeds/manage.mjs --self-test
+      - name: Check NJPW video sources conservatively
+        run: python3 tubes/NJPW/check-sources.py
+      - name: Install browser for permissioned playlist reconciliation
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Remove confirmed offline / re-add recovered owned iframes
+        run: node tubes/feeds/manage.mjs
+      - name: Commit feed status changes if any
+        if: success()
+        run: |
+          git config user.name 'Baked TV Feed Monitor'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tubes/NJPW/feed-status.json
+          if git diff --cached --quiet; then
+            echo 'No status changes'
+          else
+            git commit -m 'Update confirmed NJPW feed availability'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Attach reconciliation snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: owned-tube-feed-management
+          path: tubes/feeds/last-reconcile.json
+          if-no-files-found: ignore
+          retention-days: 7

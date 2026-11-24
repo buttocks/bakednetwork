@@ -1,25 +1,28 @@
-# bakednetwork
+# Baked Network
 
-Baked.live channel themes, scripts, and related projects.
+Two separate projects in one repository.
 
-## Baked Live — Android app
+## 📱 Baked Live — Android application
 
-**Created by keatingfish.**
+**Created by keatingfish.** For Android phones, tablets, Android TV and Google TV.
 
-**For Android phones, Android tablets, Android TV, and Google TV.** Watch Baked.live rooms, switch between channels, and use casting and chat controls.
+- **[Download Baked Live v1.10 APK](https://github.com/buttocks/bakednetwork/releases/download/v1.10/baked-live-1.10.apk)**
+- [Installation, remote controls, casting and chat guide](android/README.md)
+- [Android release notes](https://github.com/buttocks/bakednetwork/releases/tag/v1.10)
 
-**[Download Baked Live v1.10 APK](https://github.com/buttocks/bakednetwork/releases/download/v1.10/baked-live-1.10.apk)** · [GitHub Release v1.10](https://github.com/buttocks/bakednetwork/releases/tag/v1.10)
+Requires a [Baked.live](https://baked.live) account. No desktop application; browser companion features are supported. Android release publishing is separate from tube management.
 
-**[Installation guide, TV remote controls, casting and chat instructions](android/README.md)**
+---
 
-A [baked.live](https://baked.live) account is needed for sign-in. Register using a web browser.
+## 📺 Baked.live tubes — channel management
 
-The Android app is **not a Windows or Mac application**. Computers can participate in supported casting/chat features through a web browser, with an Android phone, tablet, or TV hosting the session.
+**[Browse the tube project](tubes/README.md)** — channel skins, scripts, feeds, shared modules and administration bridge.
 
-## Baked.live tube management
+All new channel development belongs under `tubes/`. Existing legacy asset URLs remain available until live channel references are verified and migrated. SlamVision remains a separate media-source dependency.
 
-All new Baked.live tube skins, shared bridge code, audit tools, **the consolidated legacy theme library**, and per-channel configurations live under **[tubes](./tubes/)**. Existing SlamVision players remain separate media dependencies. Original channel backups are kept private rather than committed here.
+## Repository layout
 
-## Channel themes and scripts
-
-Existing channel-specific scripts and styles remain in their respective directories.
+- `android/` — Android application documentation and release links.
+- `tubes/` — canonical channel assets and management tools.
+- `.github/workflows/` — separate Android publishing and tube automation workflows.
+- Legacy root assets — compatibility only; do not edit for new development.

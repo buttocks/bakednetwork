@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "channels": {
+    "classics": {
+      "available": null,
+      "goodStreak": 0,
+      "badStreak": 0
+    },
+    "events": {
+      "available": null,
+      "goodStreak": 0,
+      "badStreak": 0
+    }
+  }
+}

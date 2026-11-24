@@ -83,8 +83,8 @@ async function probe(item,request){
   }
 }
 export async function auditPlaylistMedia({page,request,initial}){
-  if(initial.rank<3||initial.channel!==request.channel)
-    throw Error('Verified Lucha Tube Admin required to audit playlist');
+  if(initial.rank<3||String(initial.channel).toLowerCase()!==request.channel.toLowerCase())
+    throw Error('Verified channel Admin required to audit playlist');
   const state=await page.evaluate(()=>{
     const q=[...document.querySelectorAll('#queue .queue_entry')];
     return {

@@ -1,14 +1,8 @@
-[
-  {
-    "schema": 1,
-    "request_id": "correct_slug_backup_20261124_0",
-    "channel": "Wrestling",
-    "action": "backup_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "correct_slug_backup_20261124_1",
-    "channel": "WWF-WWE",
-    "action": "backup_skin"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "retro_emotes_audit_20261124_01",
+  "channel": "RetroWrestling",
+  "action": "audit_emotes",
+  "offset": 0,
+  "limit": 8000
+}

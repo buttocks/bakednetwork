@@ -32,7 +32,7 @@ function validate(raw){
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
   if(!['audit','audit_skin','audit_legacy_paths','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
-  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths'].includes(raw.action))throw Error('New channel is read-only until verified');
+  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
   if(raw.action==='audit_playlist_media'){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');

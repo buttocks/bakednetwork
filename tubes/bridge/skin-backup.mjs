@@ -162,9 +162,11 @@ export async function backupCurrentSkin({page,request,initial}){
   for(const value of Object.values(state.backgroundStyles)){
     for(const url of cssUrls(value.backgroundImage,state.page))add(url,'computed-background');
   }
-  for(const img of state.domImages)add(img.resolvedSrc||img.src,'dom-image');
+  const emoteUrls=new Set(emoteList.map(e=>okUrl(e.image)).filter(Boolean));
+  for(const img of state.domImages){const src=img.resolvedSrc||img.src;if(!emoteUrls.has(okUrl(src)))add(src,'dom-image');}
   for(const [key,val] of Object.entries(external))if(val)add(val,key);
-  for(const emote of emoteList)add(emote.image,'emote');
+  // Emotes are backed up as complete JSON, not downloaded images.
+
   for(const resource of state.resourceLinks)add(resource.url,'runtime-resource');
   // Resource links are documented but not downloaded: they include platform
   // libraries and are not necessarily part of the owner's skin.

@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "request_id": "njpw_full_emote_audit_20261124_01",
+  "request_id": "njpw_clean_dead_emotes_20261124_01",
   "channel": "NJPW",
-  "action": "audit_emotes",
+  "action": "clean_dead_emotes",
   "offset": 0,
   "limit": 7000
 }

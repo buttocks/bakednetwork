@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "channels": {
+    "luchatube/lucha": {
+      "archive_cursor": 0,
+      "seen": [],
+      "last_scan": null,
+      "last_added": null
+    },
+    "NJPW/classics": {
+      "archive_cursor": 0,
+      "seen": [],
+      "last_scan": null,
+      "last_added": null
+    },
+    "NJPW/events": {
+      "archive_cursor": 0,
+      "seen": [],
+      "last_scan": null,
+      "last_added": null
+    }
+  }
+}

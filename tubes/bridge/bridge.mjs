@@ -31,8 +31,8 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
-  if(!['audit','audit_skin','audit_legacy_paths','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
-  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel is read-only until verified');
+  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
   if(raw.action==='audit_playlist_media'){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');
@@ -53,7 +53,7 @@ function validate(raw){
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,offset,limit};
   }
   if(raw.offset!==undefined||raw.limit!==undefined)throw Error('Audit range on non-emote operation');
-  if(['audit','audit_skin','audit_legacy_paths','backup_skin','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes'].includes(raw.action)){
+  if(['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Audit requests cannot contain mutations');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
   }
@@ -196,6 +196,10 @@ async function run(request){
     if(request.action==='backup_skin'){
       const {backupCurrentSkin}=await import('./skin-backup.mjs');
       return await backupCurrentSkin({page,request,initial});
+    }
+    if(['plan_legacy_options','migrate_legacy_options'].includes(request.action)){
+      const {migrateLegacyOptions}=await import('./legacy-options.mjs');
+      return await migrateLegacyOptions({page,request,initial});
     }
     if(request.action==='audit_legacy_paths'){
       const refs=await page.evaluate(()=>{

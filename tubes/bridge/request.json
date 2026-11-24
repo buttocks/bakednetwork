@@ -1,18 +1,6 @@
-[
-  {
-    "schema": 1,
-    "request_id": "retro_emotes_retry_20261124",
-    "channel": "RetroWrestling",
-    "action": "audit_emotes",
-    "offset": 0,
-    "limit": 8000
-  },
-  {
-    "schema": 1,
-    "request_id": "retro_playlist_20261124",
-    "channel": "RetroWrestling",
-    "action": "audit_playlist_media",
-    "offset": 0,
-    "limit": 1500
-  }
-]
+{
+  "schema": 1,
+  "request_id": "retro_options_migrate_20261124",
+  "channel": "RetroWrestling",
+  "action": "migrate_legacy_options"
+}

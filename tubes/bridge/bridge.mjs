@@ -331,7 +331,7 @@ else{
     if(Array.isArray(raw)){
       if(!raw.length||raw.length>10)throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
-      if(requests.some(r=>!['audit_legacy_paths','backup_skin'].includes(r.action)))throw Error('Batch limited to read-only audit and backup');
+      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_emotes','audit_playlist_media'].includes(r.action)))throw Error('Batch limited to read-only audit and backup');
       const results=[];
       for(const request of requests){
         try{const result=await run(request);results.push(result);console.log('Read-only '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}

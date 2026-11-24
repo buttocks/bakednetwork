@@ -95,10 +95,11 @@ async function probe(req,url){
 export async function auditEmoteUrls({page,request,initial}){
   if(initial.rank<3)throw Error('Need Admin to audit emotes');
   const emotes=await page.evaluate(()=>{
-    const e=window.CHANNEL?.emotes||[];
+    const e=window.CHANNEL?.emotes;
+    if(!Array.isArray(e))return null;
     return e.map(x=>({name:String(x.name||''),image:String(x.image||'')}));
   });
-  if(!Array.isArray(emotes)||emotes.length<1)throw Error('Emote list not loaded; refusing audit');
+  if(!Array.isArray(emotes))throw Error('Emote list not loaded; refusing audit');
   const unique=new Map();
   for(const emote of emotes){
     const normalized=normalize(emote.image);

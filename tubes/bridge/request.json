@@ -1,6 +1,176 @@
-{
-  "schema": 1,
-  "request_id": "nwatna_queue_blame_20261125",
-  "channel": "NWA-TNA",
-  "action": "fix_nwatna_queue_blame"
-}
+[
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_luchatube",
+    "channel": "luchatube",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_NJPW",
+    "channel": "NJPW",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_Wrestling",
+    "channel": "Wrestling",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_RetroWrestling",
+    "channel": "RetroWrestling",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_WWF-WWE",
+    "channel": "WWF-WWE",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_RDH",
+    "channel": "RDH",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_ScaryTube",
+    "channel": "ScaryTube",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_WID",
+    "channel": "WID",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_WCW",
+    "channel": "WCW",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_joshi",
+    "channel": "joshi",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_puro",
+    "channel": "puro",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_ajpw",
+    "channel": "ajpw",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_Noah",
+    "channel": "Noah",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_wrestling2",
+    "channel": "wrestling2",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_indies",
+    "channel": "indies",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_shoot",
+    "channel": "shoot",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_wrestling3",
+    "channel": "wrestling3",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_Wrestling4",
+    "channel": "Wrestling4",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_boxing",
+    "channel": "boxing",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_DGalt",
+    "channel": "DGalt",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_DG",
+    "channel": "DG",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_wrestling5",
+    "channel": "wrestling5",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_NJPWALT",
+    "channel": "NJPWALT",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_rizin",
+    "channel": "rizin",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_sumo",
+    "channel": "sumo",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_NWA-TNA",
+    "channel": "NWA-TNA",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_joshi2",
+    "channel": "joshi2",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_MTV",
+    "channel": "MTV",
+    "action": "fix_queue_attribution"
+  },
+  {
+    "schema": 1,
+    "request_id": "queue_attribution_20261125_ddt",
+    "channel": "ddt",
+    "action": "fix_queue_attribution"
+  }
+]

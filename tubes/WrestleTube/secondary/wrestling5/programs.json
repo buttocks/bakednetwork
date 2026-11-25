@@ -581,6 +581,30 @@
           "duration": 4981,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "Antonio Inoki vs. Jesse Ventura",
+          "episode": "Apr 21, 1982",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.04.21d-NJPW-Special%20Match-Antonio%20Inoki%20VS%20Jesse%20Ventura.mp4",
+          "duration": 1341,
+          "source": "Internet Archive",
+          "source_channel": "Antonio Inoki Network"
+        },
+        {
+          "title": "Antonio Inoki vs. Rusher Kimura",
+          "episode": "Oct 1, 1982",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.10.01d-NJPW-Special%20Match-Antonio%20Inoki%20VS%20Rusher%20Kimura.mp4",
+          "duration": 1081,
+          "source": "Internet Archive",
+          "source_channel": "Antonio Inoki Network"
+        },
+        {
+          "title": "1982.01.01d-NJPW-WWF Jr. Heavyweight Throne Decisive Battle-Tiger Mask VS Dynamite Kid",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
+          "duration": 947,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
         }
       ]
     }

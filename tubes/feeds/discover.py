@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlencode, quote
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 from concurrent.futures import ThreadPoolExecutor
 import json, re, time, os
 
@@ -83,17 +84,36 @@ def youtube_api(entry,defaults,key):
     match=re.compile(entry["youtube_title_pattern"])
     found=[]
     def call(resource,params):
-        return get_json("https://www.googleapis.com/youtube/v3/"+resource+"?"+urlencode(dict(params,key=key))) or {}
+        url="https://www.googleapis.com/youtube/v3/"+resource+"?"+urlencode(dict(params,key=key))
+        try:
+            req=Request(url,headers={"Accept":"application/json","User-Agent":"BakedTVCatalog/1.0"})
+            with urlopen(req,timeout=15) as response:
+                data=json.loads(response.read(5_000_000))
+            print("YouTube API",resource,"HTTP 200 items",len(data.get("items",[])))
+            return data
+        except HTTPError as exc:
+            reason="unknown"
+            try:
+                obj=json.loads(exc.read(100000))
+                reason=str(obj.get("error",{}).get("errors",[{}])[0].get("reason","unknown"))
+            except Exception:pass
+            print("YouTube API",resource,"HTTP",exc.code,"reason",re.sub(r"[^A-Za-z0-9_-]","",reason)[:80])
+        except Exception as exc:
+            print("YouTube API",resource,"request failed",type(exc).__name__)
+        return {}
     for source in entry["youtube_channels"][:3]:
         if time.monotonic()-START>MAX_RUNTIME-30:break
         channel=source["id"]
         if not re.fullmatch(r"UC[A-Za-z0-9_-]{22}",channel):continue
         listing=call("channels",{"part":"contentDetails","id":channel})
         uploads=next((c.get("contentDetails",{}).get("relatedPlaylists",{}).get("uploads") for c in listing.get("items",[]) if c.get("id")==channel),None)
-        if not uploads:continue
+        if not uploads:
+            print("YouTube official channel unavailable",source["name"])
+            continue
         page=call("playlistItems",{"part":"snippet,contentDetails","playlistId":uploads,"maxResults":50})
         ids=[x.get("contentDetails",{}).get("videoId","") for x in page.get("items",[]) if match.search(x.get("snippet",{}).get("title",""))]
         ids=[v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)][:20]
+        print("YouTube title candidates",source["name"],len(ids))
         if not ids:continue
         videos=call("videos",{"part":"snippet,contentDetails,status","id":",".join(ids)})
         for v in videos.get("items",[]):
@@ -110,7 +130,10 @@ def youtube_api(entry,defaults,key):
 
 def youtube(entry,defaults):
     api_key=os.environ.get('YOUTUBE_DATA_API_KEY','').strip()
-    if api_key:return youtube_api(entry,defaults,api_key)
+    if api_key:
+        print("YouTube API secret configured:",entry["directory"]+"/"+entry["key"])
+        return youtube_api(entry,defaults,api_key)
+    print("YouTube API secret absent; using fallback")
     try:from yt_dlp import YoutubeDL
     except ImportError:return []
     match=re.compile(entry["youtube_title_pattern"])

@@ -2,7 +2,7 @@
   "schema": 1,
   "channels": {
     "luchatube/lucha": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.ia.mp4",
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4",
@@ -36,13 +36,14 @@
         "https://www.youtube.com/watch?v=82JeWxHpLQ4",
         "https://www.youtube.com/watch?v=AjIgQ_doK58",
         "https://www.youtube.com/watch?v=ocSS7FkmYtQ",
-        "https://www.youtube.com/watch?v=5osfZbQkf2U"
+        "https://www.youtube.com/watch?v=5osfZbQkf2U",
+        "https://www.youtube.com/watch?v=RmMf3KPfdl8"
       ],
-      "last_scan": "2026-11-25T21:19:39.748835+00:00",
-      "last_added": "2026-11-25T14:27:33.589939+00:00"
+      "last_scan": "2026-11-25T21:28:50.304426+00:00",
+      "last_added": "2026-11-25T21:28:50.304380+00:00"
     },
     "NJPW/classics": {
-      "archive_cursor": 1,
+      "archive_cursor": 2,
       "seen": [
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
@@ -100,13 +101,16 @@
         "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.07c-NJPW-IWGP%20Heavyweight%20Championship-Kensuke%20Sasaki%20%28C-V3%29%20VS%20Osamu%20Nishimura.mp4",
         "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.07d-NJPW-Antonio%20Inoki%20Retirement%20Match%20Announcement-World%20Pro-Wrestling-Fighting%20Spirit%20%2798%202.28OA-OP.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.22b-NJPW-Seiji%20Sakaguchi%20%26%20Riki%20Choshu%20VS%20Rusher%20Kimura%20%26%20Animal%20Hamaguchi.mp4",
-        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.22c-NJPW-Antonio%20Inoki%20%26%20Tatsumi%20Fujinami%20VS%20Abdullah%20the%20Butcher%20%26%20Bad%20News%20Allen.mp4"
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.22c-NJPW-Antonio%20Inoki%20%26%20Tatsumi%20Fujinami%20VS%20Abdullah%20the%20Butcher%20%26%20Bad%20News%20Allen.mp4",
+        "https://www.youtube.com/watch?v=v9Co3P1DzBI",
+        "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.07.05b-NJPW-Masahiro%20Chono%2C%20Kensuke%20Sasaki%20VS%20Brad%20Rheingans%2C%20Pegasus%20Kid.mp4",
+        "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.07.05c-NJPW-Keiji%20Muto%20VS%20Owen%20Hart.mp4"
       ],
-      "last_scan": "2026-11-25T21:19:42.604617+00:00",
-      "last_added": "2026-11-25T21:19:42.604562+00:00"
+      "last_scan": "2026-11-25T21:28:53.566351+00:00",
+      "last_added": "2026-11-25T21:28:53.566258+00:00"
     },
     "NJPW/events": {
-      "archive_cursor": 4,
+      "archive_cursor": 5,
       "seen": [
         "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
         "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
@@ -158,10 +162,12 @@
         "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt4.mp4",
         "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt5.mp4",
         "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt6.mp4",
-        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt7.mp4"
+        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt7.mp4",
+        "https://www.youtube.com/watch?v=v9Co3P1DzBI",
+        "https://archive.org/download/njpw-world-tag-league-2026-day-2-24-11-26/NJPW%20World%20Tag%20League%202026%20Day%202%2024-11-26.mp4"
       ],
-      "last_scan": "2026-11-25T21:19:43.815306+00:00",
-      "last_added": "2026-11-25T21:19:43.815252+00:00"
+      "last_scan": "2026-11-25T21:28:55.572356+00:00",
+      "last_added": "2026-11-25T21:28:55.572295+00:00"
     },
     "WCW/wcw": {
       "archive_cursor": 0,
@@ -212,10 +218,12 @@
         "https://www.youtube.com/watch?v=hquZnWBP4y8",
         "https://www.youtube.com/watch?v=k4UGdO-6BZ8",
         "https://www.youtube.com/watch?v=FXa5m8-Kmsg",
-        "https://www.youtube.com/watch?v=4gEX_vxh7tM"
+        "https://www.youtube.com/watch?v=4gEX_vxh7tM",
+        "https://www.youtube.com/watch?v=wfWM9cvG1ZE",
+        "https://www.youtube.com/watch?v=tqjCDm-tZos"
       ],
-      "last_added": "2026-11-25T21:19:47.407410+00:00",
-      "last_scan": "2026-11-25T21:19:47.407463+00:00"
+      "last_added": "2026-11-25T21:28:58.492571+00:00",
+      "last_scan": "2026-11-25T21:28:58.492614+00:00"
     },
     "WWE-WWF/wwf-wwe": {
       "archive_cursor": 0,
@@ -229,7 +237,7 @@
         "https://archive.org/download/wwf-survivor-series-89-original-broadcast/WWF%20Survivor%20Series%201989%20Original%20Broadcast.mp4"
       ],
       "last_added": "2026-11-25T14:27:27.448690+00:00",
-      "last_scan": "2026-11-25T21:19:36.797109+00:00"
+      "last_scan": "2026-11-25T21:28:45.487610+00:00"
     },
     "RetroWrestling/retro": {
       "archive_cursor": 0,
@@ -253,7 +261,7 @@
         "https://www.youtube.com/watch?v=aINnXZ85lTE"
       ],
       "last_added": "2026-11-25T01:59:30.060167+00:00",
-      "last_scan": "2026-11-25T21:19:50.642991+00:00"
+      "last_scan": "2026-11-25T21:29:00.823111+00:00"
     },
     "WrestleTube/wrestling": {
       "archive_cursor": 0,
@@ -318,10 +326,16 @@
         "https://www.youtube.com/watch?v=h85Ugd13DrI",
         "https://www.youtube.com/watch?v=FkbX6w0fFF0",
         "https://www.youtube.com/watch?v=YqSXEr5jCps",
-        "https://www.youtube.com/watch?v=saChePUQ-Ls"
+        "https://www.youtube.com/watch?v=saChePUQ-Ls",
+        "https://www.youtube.com/watch?v=Q2Cb6Erdpf4",
+        "https://www.youtube.com/watch?v=xWYUu-Ptt6E",
+        "https://www.youtube.com/watch?v=uo3Sd_1LQ78",
+        "https://www.youtube.com/watch?v=Ul7HB1dLy_M",
+        "https://www.youtube.com/watch?v=fWWa7rSlR2A",
+        "https://www.youtube.com/watch?v=XzA50Fv5JQI"
       ],
-      "last_added": "2026-11-25T21:19:51.919498+00:00",
-      "last_scan": "2026-11-25T21:19:51.919547+00:00"
+      "last_added": "2026-11-25T21:29:01.904762+00:00",
+      "last_scan": "2026-11-25T21:29:01.904809+00:00"
     },
     "NWA-TNA/nwa-tna": {
       "archive_cursor": 0,
@@ -336,14 +350,14 @@
         "https://archive.org/download/tna-impact-wrestling-05-11-26/TNA%20Impact%20Wrestling%2005-11-26.mp4"
       ],
       "last_added": "2026-11-25T19:19:12.797587+00:00",
-      "last_scan": "2026-11-25T21:19:54.612277+00:00"
+      "last_scan": "2026-11-25T21:29:03.692741+00:00"
     },
     "DDT/ddt": {
       "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/ddt-pro-wrestling-on-the-appartment-complex-24.08.2011/DDT%20Pro%20Wrestling%20on%20The%20Appartment%20Complex%20%2824.08.2011%29.mp4"
       ],
-      "last_scan": "2026-11-25T21:19:58.504978+00:00",
+      "last_scan": "2026-11-25T21:29:06.659121+00:00",
       "last_added": "2026-11-25T19:19:16.661203+00:00"
     },
     "AJPW/ajpw": {
@@ -359,17 +373,33 @@
         "https://archive.org/download/ajpw-2008.11.22/AJPW%202008.11.22.mp4"
       ],
       "last_added": "2026-11-25T21:20:02.684612+00:00",
-      "last_scan": "2026-11-25T21:20:02.684661+00:00"
+      "last_scan": "2026-11-25T21:29:08.770699+00:00"
     },
     "NOAH/noah": {
       "archive_cursor": 0,
-      "seen": [],
-      "last_scan": "2026-11-25T21:20:07.044800+00:00"
+      "seen": [
+        "https://archive.org/download/noah-n-1-victory-2026-day-12-04-10-26/NOAH%20N-1%20Victory%202026%20Day%2012%2004-10-26.mp4",
+        "https://archive.org/download/noah-n-1-victory-2026-day-12-27-09-26/NOAH%20N-1%20Victory%202026%20Day%2012%2027-09-26.mp4",
+        "https://archive.org/download/noah-n-1-victory-2026-day-11-26-09-26/NOAH%20N-1%20Victory%202026%20Day%2011%2026-09-26.mp4",
+        "https://archive.org/download/noah-n-1-victory-2026-day-10-25-09-26/NOAH%20N-1%20Victory%202026%20Day%2010%2025-09-26.mp4",
+        "https://archive.org/download/noah-n-1-victory-2026-day-9-23-09-26/NOAH%20N-1%20Victory%202026%20Day%209%2023-09-26.mp4",
+        "https://archive.org/download/noah-n-1-victory-2026-day-8-22-09-26/NOAH%20N-1%20Victory%202026%20Day%208%2022-09-26.mp4"
+      ],
+      "last_scan": "2026-11-25T21:29:14.487271+00:00",
+      "last_added": "2026-11-25T21:29:14.487224+00:00"
     },
     "DragonGate/dg": {
       "archive_cursor": 0,
-      "seen": [],
-      "last_scan": "2026-11-25T21:20:07.868687+00:00"
+      "seen": [
+        "https://archive.org/download/toryumon-2003.01.27/Toryumon%20-%202003.01.27.mp4",
+        "https://archive.org/download/toryumon-2002.12.07-12.26/Toryumon%20-%202002.12.07%2B12.26.mp4",
+        "https://archive.org/download/toryumon.2002.09.08.live/toryumon.2002.09.08.live.mp4",
+        "https://archive.org/download/toryumon-2002.09.08/Toryumon%20-%202002.09.08.mp4",
+        "https://archive.org/download/toryumon-2002.08.11-13/Toryumon%20-%202002.08.11-13.mp4",
+        "https://archive.org/download/toryumon-2002.08.03-11/Toryumon%20-%202002.08.03%2B11.mp4"
+      ],
+      "last_scan": "2026-11-25T21:29:17.960521+00:00",
+      "last_added": "2026-11-25T21:29:17.960479+00:00"
     },
     "Joshi/joshi": {
       "archive_cursor": 0,
@@ -378,7 +408,7 @@
         "https://archive.org/download/colors-x-spark-joshi-puroresu-2024.06.05/COLORS%20X%20SPARK%20Joshi%20Puroresu%20%282024.06.05%29%5B720p30%5D.mp4"
       ],
       "last_added": "2026-11-25T19:19:36.411916+00:00",
-      "last_scan": "2026-11-25T21:20:14.407923+00:00"
+      "last_scan": "2026-11-25T21:29:22.581413+00:00"
     },
     "Puro/puro": {
       "archive_cursor": 0,
@@ -387,22 +417,33 @@
         "https://archive.org/download/toryumon-1997.12.07-1998.12.12-shukan-puroresu-video-special-vol.-32-open-toryumon/Toryumon%20-%201997.12.07-1998.12.12%20-%20Shukan%20Puroresu%20Video%20Special%20Vol.%2032%20Open%21%20Toryumon.mp4"
       ],
       "last_added": "2026-11-25T19:19:39.924034+00:00",
-      "last_scan": "2026-11-25T21:20:17.301835+00:00"
+      "last_scan": "2026-11-25T21:29:23.933536+00:00"
     },
     "NJPW/secondary/NJPWALT/njpwalt": {
-      "archive_cursor": 2,
+      "archive_cursor": 3,
       "seen": [
         "https://www.youtube.com/watch?v=3Tuy-dsmheY",
         "https://www.youtube.com/watch?v=BYh7goWhN7w",
-        "https://archive.org/download/njpw-world-tag-league-2026-day-2-24-11-26/NJPW%20World%20Tag%20League%202026%20Day%202%2024-11-26.mp4"
+        "https://archive.org/download/njpw-world-tag-league-2026-day-2-24-11-26/NJPW%20World%20Tag%20League%202026%20Day%202%2024-11-26.mp4",
+        "https://www.youtube.com/watch?v=v9Co3P1DzBI",
+        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt4.mp4",
+        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt5.mp4"
       ],
-      "last_added": "2026-11-25T19:19:41.189530+00:00",
-      "last_scan": "2026-11-25T21:20:18.217942+00:00"
+      "last_added": "2026-11-25T21:29:24.688593+00:00",
+      "last_scan": "2026-11-25T21:29:24.688674+00:00"
     },
     "DragonGate/secondary/DGalt/dgalt": {
       "archive_cursor": 0,
-      "seen": [],
-      "last_scan": "2026-11-25T21:20:18.486501+00:00"
+      "seen": [
+        "https://archive.org/download/toryumon-2003.01.27/Toryumon%20-%202003.01.27.mp4",
+        "https://archive.org/download/toryumon-2002.12.07-12.26/Toryumon%20-%202002.12.07%2B12.26.mp4",
+        "https://archive.org/download/toryumon.2002.09.08.live/toryumon.2002.09.08.live.mp4",
+        "https://archive.org/download/toryumon-2002.09.08/Toryumon%20-%202002.09.08.mp4",
+        "https://archive.org/download/toryumon-2002.08.11-13/Toryumon%20-%202002.08.11-13.mp4",
+        "https://archive.org/download/toryumon-2002.08.03-11/Toryumon%20-%202002.08.03%2B11.mp4"
+      ],
+      "last_scan": "2026-11-25T21:29:26.298678+00:00",
+      "last_added": "2026-11-25T21:29:26.298636+00:00"
     },
     "Joshi/secondary/joshi2/joshi2": {
       "archive_cursor": 0,
@@ -411,17 +452,25 @@
         "https://archive.org/download/colors-x-spark-joshi-puroresu-2024.06.05/COLORS%20X%20SPARK%20Joshi%20Puroresu%20%282024.06.05%29%5B720p30%5D.mp4"
       ],
       "last_added": "2026-11-25T19:19:45.008338+00:00",
-      "last_scan": "2026-11-25T21:20:21.473563+00:00"
+      "last_scan": "2026-11-25T21:29:28.364951+00:00"
     },
     "Indies/indies": {
       "archive_cursor": 0,
-      "seen": [],
-      "last_scan": "2026-11-25T21:20:25.811730+00:00"
+      "seen": [
+        "https://archive.org/download/2005-11-19-chikara-hors-d-ouerves-dynamite/2005_11_19_CHIKARA_-_Hors_D_Ouerves_Dynamite.mp4",
+        "https://archive.org/download/2005-11-18-chikara-true-stories/2005_11_18_CHIKARA_-_True_Stories.mp4",
+        "https://archive.org/download/2005-11-13-chikara-running-in-the-red/2005_11_13_CHIKARA_-_Running_In_The_Red.mp4",
+        "https://archive.org/download/2005-10-30-chikara-extra-credit/2005_10_30_CHIKARA_-_Extra_Credit.mp4",
+        "https://archive.org/download/2005-10-22-chikara-the-cibernetico-returneth/2005_10_22_CHIKARA_-_The_Cibernetico_Returneth.mp4",
+        "https://archive.org/download/2005-10-21-chikara-little-creatures/2005_10_21_CHIKARA_-_Little_Creatures.mp4"
+      ],
+      "last_scan": "2026-11-25T21:29:37.427519+00:00",
+      "last_added": "2026-11-25T21:29:37.427473+00:00"
     },
     "Shoot/shoot": {
       "archive_cursor": 0,
       "seen": [],
-      "last_scan": "2026-11-25T21:20:35.642457+00:00"
+      "last_scan": "2026-11-25T21:29:41.816725+00:00"
     },
     "Boxing/boxing": {
       "archive_cursor": 0,
@@ -431,15 +480,20 @@
         "https://www.youtube.com/watch?v=YXYXmtccJqE",
         "https://www.youtube.com/watch?v=0xmxTMhbbRk",
         "https://www.youtube.com/watch?v=KyNxxwKXuUA",
-        "https://www.youtube.com/watch?v=G9gYHQQVHo4"
+        "https://www.youtube.com/watch?v=G9gYHQQVHo4",
+        "https://www.youtube.com/watch?v=jAhYYToGh-s",
+        "https://www.youtube.com/watch?v=nUA9sYLE0XQ"
       ],
-      "last_added": "2026-11-25T21:20:40.953275+00:00",
-      "last_scan": "2026-11-25T21:20:40.953319+00:00"
+      "last_added": "2026-11-25T21:29:46.997430+00:00",
+      "last_scan": "2026-11-25T21:29:46.997471+00:00"
     },
     "Rizin/rizin": {
       "archive_cursor": 0,
-      "seen": [],
-      "last_scan": "2026-11-25T21:20:41.681859+00:00"
+      "seen": [
+        "https://archive.org/download/full-fight-vs.-kyoma-akimoto-vs.-kyohei-hagiwara-rizin-landmark-12-2025.11.3/Full%20Fight%20_%20%E7%A7%8B%E5%85%83%E5%BC%B7%E7%9C%9F%20vs.%20%E8%90%A9%E5%8E%9F%E4%BA%AC%E5%B9%B3%20_%20Kyoma%20Akimoto%20vs.%20Kyohei%20Hagiwara%20_%20RIZIN%20LANDMARK%2012%20-2025.11.3.mp4"
+      ],
+      "last_scan": "2026-11-25T21:29:47.753829+00:00",
+      "last_added": "2026-11-25T21:29:47.753783+00:00"
     },
     "Sumo/sumo": {
       "archive_cursor": 0,
@@ -453,10 +507,16 @@
         "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/03%20GRAND%20SUMO%EF%BC%9A%20Day%203%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
         "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/04%20GRAND%20SUMO%EF%BC%9A%20Day%204%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
         "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/05%20GRAND%20SUMO%EF%BC%9A%20Day%205%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
-        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/06%20GRAND%20SUMO%EF%BC%9A%20Day%206%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm"
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/06%20GRAND%20SUMO%EF%BC%9A%20Day%206%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/07%20GRAND%20SUMO%EF%BC%9A%20Day%207%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/08%20GRAND%20SUMO%EF%BC%9A%20Day%208%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/09%20GRAND%20SUMO%EF%BC%9A%20Day%209%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/10%20GRAND%20SUMO%EF%BC%9A%20Day%2010%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/11%20GRAND%20SUMO%EF%BC%9A%20Day%2011%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm",
+        "https://archive.org/download/may-2026-grand-sumo-highlights/May%202026%20Tournament%20GRAND%20SUMO%20Highlights/12%20GRAND%20SUMO%EF%BC%9A%20Day%2012%20of%20the%20May%202026%20Tournament%20-%20GRAND%20SUMO%20Highlights.webm"
       ],
-      "last_added": "2026-11-25T21:20:59.312210+00:00",
-      "last_scan": "2026-11-25T21:20:59.312256+00:00"
+      "last_added": "2026-11-25T21:29:51.092760+00:00",
+      "last_scan": "2026-11-25T21:29:51.092803+00:00"
     },
     "WID/wid": {
       "archive_cursor": 0,
@@ -464,20 +524,28 @@
         "https://www.youtube.com/watch?v=XzA50Fv5JQI",
         "https://www.youtube.com/watch?v=zoAaKI0tG1g",
         "https://www.youtube.com/watch?v=YHTpoEoXy2U",
-        "https://www.youtube.com/watch?v=yP9LRqWLZ0M"
+        "https://www.youtube.com/watch?v=yP9LRqWLZ0M",
+        "https://archive.org/download/njpw-world-tag-league-2026-day-2-24-11-26/NJPW%20World%20Tag%20League%202026%20Day%202%2024-11-26.mp4",
+        "https://archive.org/download/njpw-world-tag-league-2026-day-1-23-11-26/NJPW%20World%20Tag%20League%202026%20Day%201%2023-11-26.mp4",
+        "https://archive.org/download/wwf-survivor-series-1993/WWF%20Survivor%20Series%201993.mp4",
+        "https://archive.org/download/wwf-survivor-series-89-original-broadcast/WWF%20Survivor%20Series%201989%20Countdown%20Show.mp4",
+        "https://archive.org/download/wwf-survivor-series-89-original-broadcast/WWF%20Survivor%20Series%201989%20Original%20Broadcast.mp4",
+        "https://archive.org/download/wwf-survivor-series-1990/WWF%20Survivor%20Series%201990%20Countdown%20Show.mp4",
+        "https://www.youtube.com/watch?v=BxYJfUkwZsI",
+        "https://www.youtube.com/watch?v=uqoLTM34sts"
       ],
-      "last_added": "2026-11-25T21:20:59.554694+00:00",
-      "last_scan": "2026-11-25T21:20:59.554737+00:00"
+      "last_added": "2026-11-25T21:29:53.348824+00:00",
+      "last_scan": "2026-11-25T21:29:53.348899+00:00"
     },
     "WrestleTube/secondary/wrestling2/wrestling2": {
       "archive_cursor": 0,
       "seen": [],
-      "last_scan": "2026-11-25T21:21:04.364333+00:00"
+      "last_scan": "2026-11-25T21:29:55.019103+00:00"
     },
     "WrestleTube/secondary/wrestling3/wrestling3": {
       "archive_cursor": 0,
       "seen": [],
-      "last_scan": "2026-11-25T21:21:04.902427+00:00"
+      "last_scan": "2026-11-25T21:29:55.365193+00:00"
     },
     "WrestleTube/secondary/Wrestling4/wrestling4": {
       "archive_cursor": 0,
@@ -489,7 +557,7 @@
         "https://archive.org/download/classic-wrestling-from-florida-featuring-ric-flair-championship-wrestling-from-florida/Classic%20Wrestling%20From%20Florida%20%28Featuring%20Ric%20Flair%29%20%28Championship%20Wrestling%20From%20Florida%29.mp4"
       ],
       "last_added": "2026-11-25T19:20:36.258361+00:00",
-      "last_scan": "2026-11-25T21:21:07.698438+00:00"
+      "last_scan": "2026-11-25T21:29:56.554163+00:00"
     },
     "WrestleTube/secondary/wrestling5/wrestling5": {
       "archive_cursor": 0,
@@ -497,15 +565,17 @@
         "https://www.youtube.com/watch?v=XzA50Fv5JQI",
         "https://www.youtube.com/watch?v=zoAaKI0tG1g",
         "https://www.youtube.com/watch?v=YHTpoEoXy2U",
-        "https://www.youtube.com/watch?v=yP9LRqWLZ0M"
+        "https://www.youtube.com/watch?v=yP9LRqWLZ0M",
+        "https://www.youtube.com/watch?v=BxYJfUkwZsI",
+        "https://www.youtube.com/watch?v=uqoLTM34sts"
       ],
-      "last_added": "2026-11-25T21:21:08.450432+00:00",
-      "last_scan": "2026-11-25T21:21:08.450478+00:00"
+      "last_added": "2026-11-25T21:29:57.085380+00:00",
+      "last_scan": "2026-11-25T21:29:57.085420+00:00"
     },
     "MTV/mtv": {
       "archive_cursor": 0,
       "seen": [],
-      "last_scan": "2026-11-25T21:21:18.134238+00:00"
+      "last_scan": "2026-11-25T21:30:04.542990+00:00"
     }
   },
   "next_channel": 0

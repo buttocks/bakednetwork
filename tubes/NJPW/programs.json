@@ -553,6 +553,31 @@
           "duration": 1238,
           "source": "Internet Archive",
           "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "FREE MATCH: Yano & Cabana vs Fredericks & Coughlin: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=v9Co3P1DzBI",
+          "youtube_id": "v9Co3P1DzBI",
+          "duration": 788,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "1990.07.05b-NJPW-Masahiro Chono, Kensuke Sasaki VS Brad Rheingans, Pegasus Kid",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.07.05b-NJPW-Masahiro%20Chono%2C%20Kensuke%20Sasaki%20VS%20Brad%20Rheingans%2C%20Pegasus%20Kid.mp4",
+          "duration": 676,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
+        },
+        {
+          "title": "1990.07.05c-NJPW-Keiji Muto VS Owen Hart",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.07.05c-NJPW-Keiji%20Muto%20VS%20Owen%20Hart.mp4",
+          "duration": 881,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
         }
       ]
     },
@@ -1127,6 +1152,23 @@
           "duration": 882,
           "source": "Internet Archive",
           "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "FREE MATCH: Yano & Cabana vs Fredericks & Coughlin: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=v9Co3P1DzBI",
+          "youtube_id": "v9Co3P1DzBI",
+          "duration": 788,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "NJPW World Tag League 2026 Day 2 24-11-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-tag-league-2026-day-2-24-11-26/NJPW%20World%20Tag%20League%202026%20Day%202%2024-11-26.mp4",
+          "duration": 7609,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Tag League 2026 Day 2 24-11-26"
         }
       ]
     }

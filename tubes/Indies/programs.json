@@ -356,6 +356,54 @@
           "duration": 1971,
           "source": "YouTube",
           "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "2005 11 19 CHIKARA - Hors D Ouerves Dynamite",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2005-11-19-chikara-hors-d-ouerves-dynamite/2005_11_19_CHIKARA_-_Hors_D_Ouerves_Dynamite.mp4",
+          "duration": 6067,
+          "source": "Internet Archive",
+          "source_channel": "2005.11.19 CHIKARA Hors D'Ouerves & Dynamite"
+        },
+        {
+          "title": "2005 11 18 CHIKARA - True Stories",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2005-11-18-chikara-true-stories/2005_11_18_CHIKARA_-_True_Stories.mp4",
+          "duration": 8459,
+          "source": "Internet Archive",
+          "source_channel": "2005.11.18 CHIKARA True Stories"
+        },
+        {
+          "title": "2005 11 13 CHIKARA - Running In The Red",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2005-11-13-chikara-running-in-the-red/2005_11_13_CHIKARA_-_Running_In_The_Red.mp4",
+          "duration": 11962,
+          "source": "Internet Archive",
+          "source_channel": "2005.11.13 CHIKARA Running In The Red"
+        },
+        {
+          "title": "2005 10 30 CHIKARA - Extra Credit",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2005-10-30-chikara-extra-credit/2005_10_30_CHIKARA_-_Extra_Credit.mp4",
+          "duration": 6595,
+          "source": "Internet Archive",
+          "source_channel": "2005.10.30 CHIKARA Extra Credit"
+        },
+        {
+          "title": "2005 10 22 CHIKARA - The Cibernetico Returneth",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2005-10-22-chikara-the-cibernetico-returneth/2005_10_22_CHIKARA_-_The_Cibernetico_Returneth.mp4",
+          "duration": 11208,
+          "source": "Internet Archive",
+          "source_channel": "2005.10.22 CHIKARA The Cibernetico Returneth"
+        },
+        {
+          "title": "2005 10 21 CHIKARA - Little Creatures",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2005-10-21-chikara-little-creatures/2005_10_21_CHIKARA_-_Little_Creatures.mp4",
+          "duration": 8584,
+          "source": "Internet Archive",
+          "source_channel": "2005.10.21 CHIKARA Little Creatures"
         }
       ]
     }

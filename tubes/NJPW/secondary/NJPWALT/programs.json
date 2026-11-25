@@ -549,6 +549,31 @@
           "duration": 7609,
           "source": "Internet Archive",
           "source_channel": "NJPW World Tag League 2026 Day 2 24-11-26"
+        },
+        {
+          "title": "FREE MATCH: Yano & Cabana vs Fredericks & Coughlin: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=v9Co3P1DzBI",
+          "youtube_id": "v9Co3P1DzBI",
+          "duration": 788,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt4",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt4.mp4",
+          "duration": 1098,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt5",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt5.mp4",
+          "duration": 650,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
         }
       ]
     }

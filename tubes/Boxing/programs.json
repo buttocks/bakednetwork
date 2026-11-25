@@ -589,6 +589,24 @@
           "duration": 3236,
           "source": "YouTube",
           "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Andy Ruiz v Jarrell \"Big Baby\" Miller | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=jAhYYToGh-s",
+          "youtube_id": "jAhYYToGh-s",
+          "duration": 3445,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Tony Bellew vs Julio Cesar Dos Santos | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=nUA9sYLE0XQ",
+          "youtube_id": "nUA9sYLE0XQ",
+          "duration": 1505,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
         }
       ]
     }

@@ -401,6 +401,24 @@
           "duration": 947,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The Hulkamaniacs vs. The Dungeon of Doom: WarGames Match: WCW Fall Brawl 1995",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=wfWM9cvG1ZE",
+          "youtube_id": "wfWM9cvG1ZE",
+          "duration": 1783,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Hulk Hogan vs Ric Flair | WCW Title Barbed Wire Steel Cage Match: WCW Uncensored 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=tqjCDm-tZos",
+          "youtube_id": "tqjCDm-tZos",
+          "duration": 1302,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

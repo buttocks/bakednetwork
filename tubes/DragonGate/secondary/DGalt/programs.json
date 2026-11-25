@@ -274,6 +274,54 @@
           "duration": 7206,
           "source": "Internet Archive",
           "source_channel": "Toryumon - 1997/12/07-1998/12/12 Shukan Puroresu Video Special Vol. 32 Open! Toryumon VHS"
+        },
+        {
+          "title": "Toryumon - 2003.01.27",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2003.01.27/Toryumon%20-%202003.01.27.mp4",
+          "duration": 7074,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2003/01/27"
+        },
+        {
+          "title": "Toryumon - 2002.12.07+12.26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.12.07-12.26/Toryumon%20-%202002.12.07%2B12.26.mp4",
+          "duration": 6934,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/12/07+12/26"
+        },
+        {
+          "title": "toryumon.2002.09.08.live",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon.2002.09.08.live/toryumon.2002.09.08.live.mp4",
+          "duration": 13483,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/09/08 - Absolutamente (Live broadcast ver.)"
+        },
+        {
+          "title": "Toryumon - 2002.09.08",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.09.08/Toryumon%20-%202002.09.08.mp4",
+          "duration": 13853,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/09/08 - Absolutamente"
+        },
+        {
+          "title": "Toryumon - 2002.08.11-13",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.08.11-13/Toryumon%20-%202002.08.11-13.mp4",
+          "duration": 6775,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/08/11-13"
+        },
+        {
+          "title": "Toryumon - 2002.08.03+11",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.08.03-11/Toryumon%20-%202002.08.03%2B11.mp4",
+          "duration": 4925,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/08/03+11"
         }
       ]
     }

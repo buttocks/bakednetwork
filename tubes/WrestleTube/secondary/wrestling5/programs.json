@@ -605,6 +605,24 @@
           "duration": 947,
           "source": "Internet Archive",
           "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "FULL MATCH: Lex Luger vs. Scott Steiner: WCW Thunder, Nov. 5, 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=BxYJfUkwZsI",
+          "youtube_id": "BxYJfUkwZsI",
+          "duration": 549,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Ric Flair: WCW Nitro, Nov. 6, 1995",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=uqoLTM34sts",
+          "youtube_id": "uqoLTM34sts",
+          "duration": 874,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

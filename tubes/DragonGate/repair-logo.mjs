@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 const OLD='https://upload.wikimedia.org/wikipedia/en/3/3c/Dglogo3.png';
+const PRIMARY='https://upload.wikimedia.org/wikipedia/fr/a/a6/Dragon_Gate_Logo.png';
 const NEW='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@236c682c37d547c6d6d534148b199e1d503bb1f0/tubes/DragonGate/assets/dragon-gate-wordmark.svg';
 export async function repairDragonGate({page,request,initial}){
  if(!['DG','DGalt'].includes(request.channel)||initial.rank<3||!initial.loggedIn||initial.channel!==request.channel)throw Error('Verified Dragon Gate admin required');
@@ -11,24 +12,29 @@ export async function repairDragonGate({page,request,initial}){
  const res=await page.request.get(NEW,{timeout:20000});
  if(!res.ok()||!(await res.text()).includes('DRAGON GATE'))throw Error('Replacement artwork inaccessible');
  await res.dispose();
- const count=before.motd.split(OLD).length-1;
- if(count===0&&before.motd.includes(NEW))return {channel:request.channel,action:request.action,status:'already-repaired'};
- if(count!==1)throw Error('Expected exactly one old logo URL in live MOTD');
- const exists=await page.evaluate(old=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===old),OLD);
- if(!exists)throw Error('Old URL is not an MOTD image');
- const next=before.motd.replace(OLD,NEW);
+ // Check the original image in an actual browser, not only HTTP status.
+ const primaryOK=await page.evaluate(async url=>{
+   const image=new Image();
+   return await new Promise(resolve=>{const timer=setTimeout(()=>resolve(false),12000);image.onload=()=>{clearTimeout(timer);resolve(image.naturalWidth>0)};image.onerror=()=>{clearTimeout(timer);resolve(false)};image.src=url});
+ },PRIMARY);
+ const chosen=primaryOK?PRIMARY:NEW;
+ const prior=[OLD,NEW,PRIMARY].filter(url=>before.motd.includes(url));
+ if(prior.length!==1||before.motd.split(prior[0]).length!==2)throw Error('Expected one known logo URL in MOTD');
+ const exists=await page.evaluate(old=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===old),prior[0]);
+ if(!exists)throw Error('Known logo is not an MOTD image');
+ const next=before.motd.replace(prior[0],chosen);
  async function set(motd){
   await page.evaluate(motd=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Disconnected');window.socket.emit('setMotd',{motd})},motd);
   const until=Date.now()+20000;while(Date.now()<until){if((await capture()).motd===motd)return;await page.waitForTimeout(250);}
   throw Error('MOTD update not confirmed');
  }
  try{
-  await set(next);
-  await page.waitForFunction(url=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===url&&i.complete&&i.naturalWidth>0),NEW,{timeout:20000});
+  if(next!==before.motd)await set(next);
+  await page.waitForFunction(url=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===url&&i.complete&&i.naturalWidth>0),chosen,{timeout:20000});
   const after=await capture();
   if(after.motd!==next||['css','js','externalcss','externaljs'].some(k=>after[k]!==before[k]))throw Error('Unexpected concurrent settings change');
   await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2));await page.screenshot({path:dir+'/preview.png'});
-  console.log('Dragon Gate logo verified '+request.channel);
-  return {channel:request.channel,action:request.action,status:'logo-repaired'};
+  console.log('Dragon Gate logo verified '+request.channel+' source='+(primaryOK?'wikimedia':'github-fallback'));
+  return {channel:request.channel,action:request.action,status:'logo-repaired',source:primaryOK?'wikimedia':'github-fallback'};
  }catch(e){if((await capture()).motd===next)await set(before.motd);throw e;}
 }

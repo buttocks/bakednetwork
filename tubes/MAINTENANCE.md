@@ -61,3 +61,5 @@ NWA-TNA theme deployed successfully 45538283890. Playlist Tools diagnostics 4553
 User requires existing wrestling JS base/modules for new builds and overhauls. Created shared WrestleTube-derived base, parameterized branding and added Playlist Tools to existing sequencer. Original pinned dependencies and module selections retained. NWA-TNA pilot generated from shared source; validation before live rollout.
 
 User preference: YouTube items should start with closed captions off. Shared Baked TV player requests captions off and unloads captions on readiness/API change; YouTube may override via viewer settings or burned-in subtitles. Native Baked.live player is separate.
+
+MTV verified rank 3, 708 entries, backup and skin audit successful, zero legacy references (45540562353). Compact native toolbar Playlist Tools v1.2 passed functional tests (45541210842), including permission hiding and Escape dismissal. Shared wrestling base syntax/consistency passed (45539678689); live initialization not yet verified. User prefers native compact toolbar controls over floating panels.

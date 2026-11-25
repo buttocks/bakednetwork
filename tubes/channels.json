@@ -239,7 +239,9 @@
       "slug": "MTV",
       "directory": "tubes/MTV",
       "stage": "onboarding",
-      "skinReview": "pending"
+      "skinReview": "pending",
+      "adminVerified": true,
+      "backupVerified": true
     }
   ]
 }

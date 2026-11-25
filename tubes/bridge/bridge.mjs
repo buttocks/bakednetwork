@@ -53,7 +53,7 @@ function validate(raw){
     if(raw.channel!=='RetroWrestling'||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid Retro deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
-  if(['deploy_nwatna','install_nwatna_tools','deploy_nwatna_base'].includes(raw.action)){
+  if(['deploy_nwatna','install_nwatna_tools','deploy_nwatna_base','fix_nwatna_queue_blame'].includes(raw.action)){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
@@ -207,6 +207,10 @@ async function run(request){
     if(request.action==='update_retro_js'){
       const {updateRetro}=await import('../RetroWrestling/update-js.mjs');
       return await updateRetro({page,request,initial});
+    }
+    if(request.action==='fix_nwatna_queue_blame'){
+      const {fixQueueBlame}=await import('../NWA-TNA/fix-queue-blame.mjs');
+      return await fixQueueBlame({page,request,initial});
     }
     if(request.action==='deploy_nwatna_base'){
       const {deployBase}=await import('../NWA-TNA/deploy-base.mjs');

@@ -1,0 +1,70 @@
+name: WrestleTube shared filters and macros
+
+on:
+  schedule:
+    - cron: '13 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: baked-live-iframe-bridge
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+      BAKED_BRIDGE_REQUEST: tubes/bridge/scheduled-chat-sync-request.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check explicit enable switch and exact channel scope
+        id: gate
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const cfg=JSON.parse(fs.readFileSync('tubes/shared/wrestling-chat-sync.json','utf8'));
+          const allowed=['wrestling2','wrestling3','Wrestling4','wrestling5'];
+          if(cfg.schema!==1||cfg.master!=='Wrestling'||cfg.mode!=='exact-one-way'||JSON.stringify(cfg.targets)!==JSON.stringify(allowed))throw Error('Unapproved synchronization scope');
+          const enabled=cfg.automaticWrites===true;
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'enabled='+enabled+'\n');
+          if(!enabled){console.log('Automatic chat synchronization disabled');process.exit(0);}
+          const id=process.env.GITHUB_RUN_ID;
+          const requests=[{schema:1,request_id:'scheduled_master_'+id,channel:cfg.master,action:'inventory_chat_sync'},...allowed.map(channel=>({schema:1,request_id:'scheduled_'+id+'_'+channel,channel,action:'sync_wrestletube_chat'}))];
+          fs.writeFileSync(process.env.BAKED_BRIDGE_REQUEST,JSON.stringify(requests,null,2)+'\n');
+          JS
+      - name: Validate reviewed synchronization code
+        if: steps.gate.outputs.enabled == 'true'
+        run: |
+          node --check tubes/bridge/bridge.mjs
+          node --check tubes/bridge/chat-sync-inventory.mjs
+          node --check tubes/bridge/chat-sync-pilot.mjs
+          node tubes/bridge/bridge.mjs --self-test
+          test -n "$BAKED_LIVE_PASSWORD"
+      - name: Install pinned browser
+        if: steps.gate.outputs.enabled == 'true'
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Reconcile four mirrors against fresh master
+        if: steps.gate.outputs.enabled == 'true'
+        run: node tubes/bridge/bridge.mjs
+      - name: Attach synchronization report and backups
+        if: always() && steps.gate.outputs.enabled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrestletube-chat-sync
+          path: |
+            tubes/bridge/result.json
+            tubes/bridge/backup/chat-sync/
+          if-no-files-found: ignore
+          retention-days: 30

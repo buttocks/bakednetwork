@@ -281,7 +281,7 @@
       "directory": "NOAH",
       "key": "noah",
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Pro[ -]+Wrestling[ -]+NOAH)\\b",
+      "archive_title_pattern": "(?i)\\b(?:Pro[ -]+Wrestling[ -]+NOAH|NOAH[ -]+Global[ -]+League|NOAH[ -]+N-1[ -]+Victory|NOAH[ -]+Navigation|NOAH[ -]+Great[ -]+Voyage)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -294,16 +294,16 @@
           "name": "プロレスリング・ノア公式チャンネル"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Pro Wrestling NOAH\")",
-      "archive_search_rows": 30,
-      "archive_candidate_limit": 8,
+      "archive_search": "mediatype:movies AND (title:\"Pro Wrestling NOAH\" OR title:\"NOAH Global League\" OR title:\"NOAH N-1 Victory\" OR title:\"NOAH Navigation\" OR title:\"NOAH Great Voyage\")",
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 10,
       "archive_first": true
     },
     {
       "directory": "DragonGate",
       "key": "dg",
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Dragon[ -]+Gate[ -]+Wrestling|Dragon[ -]+Gate[ -]+Pro[ -]+Wrestling)\\b",
+      "archive_title_pattern": "(?i)\\b(?:Dragon[ -]+Gate[ -]+Wrestling|Dragon[ -]+Gate[ -]+Pro[ -]+Wrestling|Dragon[ -]+Gate[ -]+King[ -]+of[ -]+Gate|Dragon[ -]+Gate[ -]+Kobe[ -]+Pro[ -]+Wrestling|Toryumon)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -316,9 +316,9 @@
           "name": "DRAGONGATE"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\")",
-      "archive_search_rows": 30,
-      "archive_candidate_limit": 8,
+      "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\" OR title:\"Dragon Gate King of Gate\" OR title:\"Dragon Gate Kobe Pro Wrestling\" OR title:\"Toryumon\")",
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 10,
       "archive_first": true
     },
     {
@@ -415,7 +415,7 @@
       "directory": "DragonGate/secondary/DGalt",
       "key": "dgalt",
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Dragon[ -]+Gate[ -]+Wrestling|Dragon[ -]+Gate[ -]+Pro[ -]+Wrestling|Toryumon[ -]+Wrestling)\\b",
+      "archive_title_pattern": "(?i)\\b(?:Dragon[ -]+Gate[ -]+Wrestling|Dragon[ -]+Gate[ -]+Pro[ -]+Wrestling|Dragon[ -]+Gate[ -]+King[ -]+of[ -]+Gate|Toryumon)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -428,9 +428,9 @@
           "name": "DRAGONGATE"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\" OR title:\"Toryumon Wrestling\")",
-      "archive_search_rows": 30,
-      "archive_candidate_limit": 8,
+      "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\" OR title:\"Dragon Gate King of Gate\" OR title:\"Toryumon\")",
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 10,
       "archive_first": true
     },
     {
@@ -463,7 +463,7 @@
       "directory": "Indies",
       "key": "indies",
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Independent[ -]+Wrestling|Ring[ -]+of[ -]+Honor[ -]+Wrestling|CHIKARA[ -]+Wrestling)\\b",
+      "archive_title_pattern": "(?i)\\b(?:Independent[ -]+Wrestling|Ring[ -]+of[ -]+Honor|CHIKARA|Game[ -]+Changer[ -]+Wrestling|Pro[ -]+Wrestling[ -]+Guerrilla|DEFY[ -]+Wrestling|Beyond[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "youtube_search_queries": [
         "full match",
@@ -484,9 +484,9 @@
           "name": "DEFY Wrestling"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Independent Wrestling\" OR title:\"Ring of Honor Wrestling\" OR title:\"CHIKARA Wrestling\")",
-      "archive_search_rows": 30,
-      "archive_candidate_limit": 8,
+      "archive_search": "mediatype:movies AND (title:\"Independent Wrestling\" OR title:\"Ring of Honor\" OR title:\"CHIKARA\" OR title:\"Game Changer Wrestling\" OR title:\"Pro Wrestling Guerrilla\" OR title:\"DEFY Wrestling\" OR title:\"Beyond Wrestling\")",
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 10,
       "archive_first": true
     },
     {
@@ -551,7 +551,7 @@
       "directory": "Rizin",
       "key": "rizin",
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Rizin[ -]+Fighting[ -]+Federation|RIZIN[ -]+FF)\\b",
+      "archive_title_pattern": "(?i)\\b(?:RIZIN[ -]+Fighting[ -]+Federation|RIZIN[ -]+FF|RIZIN[ -]+Landmark|RIZIN[ -]+Trigger|RIZIN[ -]+Grand[ -]+Prix)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|試合映像|フルファイト|無料公開)",
       "youtube_search_queries": [
         "full fight",
@@ -564,9 +564,9 @@
           "name": "RIZIN FIGHTING FEDERATION"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Rizin Fighting Federation\" OR title:\"RIZIN FF\")",
-      "archive_search_rows": 30,
-      "archive_candidate_limit": 8,
+      "archive_search": "mediatype:movies AND (title:\"RIZIN Fighting Federation\" OR title:\"RIZIN FF\" OR title:\"RIZIN Landmark\" OR title:\"RIZIN Trigger\" OR title:\"RIZIN Grand Prix\")",
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 10,
       "archive_first": true
     },
     {
@@ -603,7 +603,7 @@
         "full match"
       ],
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match)\\b",
+      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match|WCW[ -]+Starrcade|WWF[ -]+Survivor[ -]+Series|NJPW[ -]+World[ -]+Tag[ -]+League|AEW[ -]+World[ -]+Championship[ -]+Eliminator[ -]+Tournament)\\b",
       "seed_count": 0,
       "youtube_channels": [
         {
@@ -635,9 +635,9 @@
           "name": "TNA Wrestling"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\")",
-      "archive_search_rows": 30,
-      "archive_candidate_limit": 8,
+      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"WCW Starrcade\" OR title:\"WWF Survivor Series\" OR title:\"NJPW World Tag League\" OR title:\"AEW World Championship Eliminator Tournament\")",
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 10,
       "archive_first": true
     },
     {

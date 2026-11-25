@@ -13,7 +13,7 @@ concurrency:
 jobs:
   playback:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     env:
       BAKED_TEST_FEED: nwa-tna-early
       BAKED_TEST_EMBED: standard
@@ -66,15 +66,25 @@ jobs:
           }
           JS
       - run: npm install --no-save --ignore-scripts playwright@1.56.1
-      - name: Check installed Chrome and media probe tools
+      - name: Install and verify media tools
         run: |
+          set -euo pipefail
           google-chrome --version
-          ffprobe -version | head -n 1
-      - name: Inspect actual video and audio codecs in sampled archive files
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+          command -v ffprobe
+          ffprobe -version > /tmp/ffprobe-version.txt
+          head -n 1 /tmp/ffprobe-version.txt
+      - name: Identify source codecs and verify actual decoded frames
         run: |
           node --input-type=module <<'JS'
           import {spawnSync} from 'node:child_process';
-          const catalog=await (await fetch('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/programs.json?probe='+Date.now())).json();
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const base='https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/';
+          const catalog=await (await fetch(base+'programs.json?probe='+Date.now())).json();
           const archive=catalog.channels['nwa-tna-early'].programs.filter(p=>p.source==='Internet Archive');
           const samples=[archive[0],archive.find(p=>p.title.includes('PPV #27')),archive.find(p=>p.title.includes('PPV #38'))].filter(Boolean);
           for(const p of samples){
@@ -82,24 +92,64 @@ jobs:
             let streams=null;try{streams=JSON.parse(result.stdout)}catch{}
             console.log('STREAM_PROBE '+JSON.stringify({title:p.title,streams,error:result.error?.message||result.stderr?.slice(0,300),exit:result.status}));
           }
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          const results=[];
+          try{
+            for(const p of archive){
+              const page=await browser.newPage();
+              try{
+                await page.goto(base+'feed.html?channel=diagnostic',{waitUntil:'domcontentloaded',timeout:20000});
+                const result=await page.evaluate(async src=>{
+                  const v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';document.body.append(v);
+                  return await new Promise(resolve=>{
+                    let done=false;
+                    const finish=event=>{if(done)return;done=true;clearInterval(poll);clearTimeout(timer);resolve({event,width:v.videoWidth,height:v.videoHeight,time:v.currentTime,error:v.error?.code||null});v.pause();v.removeAttribute('src');v.load();v.remove();};
+                    const poll=setInterval(()=>{if(v.videoWidth>0&&v.videoHeight>0&&v.currentTime>1)finish('video-verified');},250);
+                    const timer=setTimeout(()=>finish('timeout'),15000);
+                    v.addEventListener('error',()=>finish('error'),{once:true});
+                    v.src=src;v.play().catch(()=>{if(v.error)finish('error');});
+                  });
+                },p.url);
+                results.push({title:p.title,url:p.url,...result});
+              }catch(e){results.push({title:p.title,url:p.url,event:'probe-failed',error:e.message});}
+              finally{await page.close();}
+              console.log('VIDEO_PROOF '+JSON.stringify(results.at(-1)));
+            }
+          }finally{await browser.close();}
+          fs.writeFileSync('asylum-source-proof.json',JSON.stringify(results,null,2));
           JS
-      - name: Verify actual published feed in Chrome with retry
+      - name: Verify full published feed and identify failing stage
         run: |
-          for attempt in 1 2 3; do
-            echo "Chrome full-feed verification attempt $attempt"
-            if node tubes/feeds/test-browser.mjs; then
-              cp feed-browser-results.json "asylum-attempt-$attempt.json"
-              exit 0
-            fi
-            if [ -f feed-browser-results.json ]; then cp feed-browser-results.json "asylum-attempt-$attempt.json"; fi
-            sleep 10
-          done
-          exit 1
+          node --input-type=module <<'JS'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          const page=await browser.newPage();
+          const errors=[],diagnostics=[];
+          page.on('pageerror',e=>errors.push(e.message));
+          page.on('console',m=>{if(m.text().includes('[Baked TV]'))diagnostics.push(m.text())});
+          let stage='navigation',ok=false;
+          try{
+            await page.goto('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/feed.html?channel=nwa-tna-early&embed=standard&verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:45000});
+            stage='catalog';await page.waitForFunction(()=>document.querySelector('#program-name')?.textContent!=='Tuning…',{},{timeout:60000});
+            stage='decoded video';await page.waitForFunction(()=>{const v=document.querySelector('video');return document.querySelector('#status')?.hidden&&!v.hidden&&!v.paused&&v.videoWidth>0&&v.videoHeight>0&&v.currentTime>1;},{},{timeout:120000});
+            const first=await page.evaluate(()=>({src:document.querySelector('video').currentSrc,time:document.querySelector('video').currentTime}));
+            await page.waitForFunction(a=>{const v=document.querySelector('video');return v.currentSrc===a.src&&v.currentTime>a.time+1;},first,{timeout:15000});
+            stage='guide';await page.locator('#guide-toggle').click();
+            if(!await page.locator('#guide-list li').count())throw Error('Empty guide');
+            await page.locator('#guide-toggle').click();
+            ok=!errors.length;
+          }catch(e){errors.push(stage+': '+e.message);}
+          const state=await page.evaluate(()=>({title:document.querySelector('#program-name')?.textContent,status:document.querySelector('#status-text')?.textContent,source:document.querySelector('#channel-name')?.textContent,width:document.querySelector('video')?.videoWidth,height:document.querySelector('video')?.videoHeight,time:document.querySelector('video')?.currentTime})).catch(()=>({}));
+          const result={playing:ok,stage,errors,diagnostics,...state};
+          console.log('FULL_FEED_PROOF '+JSON.stringify(result));fs.writeFileSync('feed-browser-results.json',JSON.stringify(result,null,2));
+          await browser.close();if(!ok)process.exitCode=1;
+          JS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: asylum-years-playback-result
           path: |
             feed-browser-results.json
-            asylum-attempt-*.json
+            asylum-source-proof.json
           retention-days: 30

@@ -54,11 +54,11 @@
           "name": "NEW JAPAN PRO-WRESTLING"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|fight|event|show)|free\\s*match|match\\s*free|試合映像|無料試合|無料公開)",
       "seed_count": 8,
       "youtube_search_queries": [
-        "full match",
-        "classic match"
+        "free match",
+        "フルマッチ"
       ]
     },
     {
@@ -80,11 +80,11 @@
           "name": "NEW JAPAN PRO-WRESTLING"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|fight|event|show)|free\\s*match|match\\s*free|試合映像|無料試合|無料公開)",
       "seed_count": 16,
       "youtube_search_queries": [
-        "full match",
-        "full event"
+        "free match",
+        "フルマッチ"
       ]
     },
     {
@@ -95,11 +95,15 @@
       "archive_title_pattern": "(?i)(WCW|World Championship Wrestling|Monday Nitro|WCW Thunder)",
       "youtube_channels": [
         {
-          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
-          "name": "WWE"
+          "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+          "name": "WCW"
+        },
+        {
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
         }
       ],
-      "youtube_title_pattern": "(?i)(?=.*(WCW|World Championship Wrestling|Monday Nitro|WCW Thunder))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show)|classic\\s*match).*(WCW|Nitro|Thunder|Starrcade|Havoc|Bash|Clash|SuperBrawl|Slamboree)|(?=.*(WCW|Nitro|Thunder|Starrcade))(?=.*full\\s*(match|episode|event|show))",
       "seed_count": 0,
       "youtube_search_queries": [
         "WCW full match",
@@ -114,11 +118,15 @@
       "archive_title_pattern": "(?i)(WWF|WWE|WrestleMania|Royal Rumble|SummerSlam)",
       "youtube_channels": [
         {
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
+        },
+        {
           "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
           "name": "WWE"
         }
       ],
-      "youtube_title_pattern": "(?i)(?=.*(WWF|WWE|WrestleMania|Royal Rumble|SummerSlam))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show)|classic\\s*match)",
       "seed_count": 0,
       "youtube_search_queries": [
         "classic full match",
@@ -133,15 +141,19 @@
       "archive_title_pattern": "(?i)(AWA|NWA|World Class Championship Wrestling|Mid-South Wrestling|Smoky Mountain Wrestling)",
       "youtube_channels": [
         {
-          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
-          "name": "WWE"
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
+        },
+        {
+          "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+          "name": "WCW"
         }
       ],
-      "youtube_title_pattern": "(?i)(?=.*(AWA|NWA|World Class Championship Wrestling|Mid-South Wrestling|Smoky Mountain Wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "youtube_title_pattern": "(?i)(?=.*(AWA|NWA|World Class Championship Wrestling|Mid-South Wrestling|Smoky Mountain Wrestling))(?=.*(full\\s*(match|episode|event|show)|classic\\s*match))",
       "seed_count": 0,
       "youtube_search_queries": [
         "NWA full match",
-        "AWA full match"
+        "AWA full show"
       ]
     },
     {
@@ -154,6 +166,10 @@
         {
           "id": "UCFN4JkGP_bVhAdBsoV9xftA",
           "name": "All Elite Wrestling"
+        },
+        {
+          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+          "name": "TNA Wrestling"
         }
       ],
       "youtube_title_pattern": "(?i)(?=.*(AEW|Ring of Honor|TNA|Impact Wrestling|professional wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",

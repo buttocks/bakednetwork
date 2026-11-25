@@ -122,7 +122,7 @@ def youtube_api(entry,defaults,key):
         # Search older uploads by topic, rather than relying on recent uploads.
         # One channel-scoped search costs 100 quota units per configured query.
         for query in entry.get("youtube_search_queries",[])[:2]:
-            results=call("search",{"part":"snippet","channelId":channel,"type":"video","q":query,"maxResults":25,"videoEmbeddable":"true","videoDuration":"medium","order":"relevance"})
+            results=call("search",{"part":"snippet","channelId":channel,"type":"video","q":query,"maxResults":25,"videoEmbeddable":"true","order":"relevance"})
             ids.extend(x.get("id",{}).get("videoId","") for x in results.get("items",[]) if match.search(x.get("snippet",{}).get("title","")))
         ids=list(dict.fromkeys(v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)))[:50]
         print("YouTube title candidates",source["name"],len(ids))

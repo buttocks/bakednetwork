@@ -193,6 +193,28 @@
           "source_channel": "TNA Impact Wrestling 05-11-26"
         }
       ]
+    },
+    "nwa-tna-early": {
+      "name": "BAKED TV · NWA-TNA ASYLUM YEARS (2002–2004)",
+      "programs": [
+        {
+          "title": "Amazing Red and Jerry Lynn vs. Triple X (FULL MATCH) | NWA-TNA PPV #41",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=DOL1Kh5zhXc",
+          "youtube_id": "DOL1Kh5zhXc",
+          "duration": 1080,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "2004.10.16 Chris Sabin vs. Alex Shelley vs. AJ Styles [TNA Xplosion #99]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/chris-sabin-in-2004-nwa-tna/2004.10.16%20Chris%20Sabin%20vs.%20Alex%20Shelley%20vs.%20AJ%20Styles%20%5BTNA%20Xplosion%20%2399%5D.mp4",
+          "duration": 572,
+          "source": "Internet Archive",
+          "source_channel": "The Complete Run #17: Chris Sabin in 2004 NWA-TNA"
+        }
+      ]
     }
   }
 }

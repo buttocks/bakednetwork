@@ -1,18 +1,6 @@
-[
-  {
-    "schema": 1,
-    "request_id": "macro_paced_20261125_Wrestling",
-    "channel": "Wrestling",
-    "action": "clean_dead_emotes",
-    "offset": 0,
-    "limit": 20000
-  },
-  {
-    "schema": 1,
-    "request_id": "macro_paced_20261125_WWF-WWE",
-    "channel": "WWF-WWE",
-    "action": "clean_dead_emotes",
-    "offset": 0,
-    "limit": 20000
-  }
-]
+{
+  "schema": 1,
+  "request_id": "nwatna_queue_blame_20261125",
+  "channel": "NWA-TNA",
+  "action": "fix_nwatna_queue_blame"
+}

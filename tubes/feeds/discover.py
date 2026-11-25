@@ -64,6 +64,7 @@ def archive(entry, defaults, cursor):
                 continue
             title=re.sub(r"\s+"," ",name.rsplit(".",1)[0].replace("_"," ")).strip()
             if len(title)<10 or not titlematch.search(title):continue
+            if re.search(r"\b(?:WWE\s*2K\d*|AEW Fight Forever|gameplay|video game|watchalong|watch along|simulation)\b",title,re.I):continue
             # Mixed Archive items sometimes include unrelated wrestling. A generic
             # "vs" is not sufficient evidence that a match belongs to Lucha Tube.
             if entry["directory"]=="luchatube" and not re.search(
@@ -125,10 +126,12 @@ def youtube_api(entry,defaults,key):
         for query in entry.get("youtube_search_queries",[])[:2]:
             results=call("search",{"part":"snippet","channelId":channel,"type":"video","q":query,"maxResults":25,"videoEmbeddable":"true","order":"relevance"})
             ids.extend(x.get("id",{}).get("videoId","") for x in results.get("items",[]) if match.search(x.get("snippet",{}).get("title","")))
-        ids=list(dict.fromkeys(v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)))[:50]
+        ids=list(dict.fromkeys(v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)))
         print("YouTube title candidates",source["name"],len(ids))
         if not ids:continue
-        videos=call("videos",{"part":"snippet,contentDetails,status","id":",".join(ids)})
+        videos={"items":[]}
+        for offset in range(0,min(len(ids),150),50):
+            videos["items"].extend(call("videos",{"part":"snippet,contentDetails,status","id":",".join(ids[offset:offset+50])}).get("items",[]))
         for v in videos.get("items",[]):
             sn=v.get("snippet",{});status=v.get("status",{});ident=v.get("id","")
             if ident not in ids or sn.get("channelId")!=channel or not match.search(sn.get("title","")) or excluded.search(sn.get("title","")):continue

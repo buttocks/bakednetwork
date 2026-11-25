@@ -37,6 +37,7 @@ jobs:
           set -e
           python -m py_compile tubes/feeds/discover.py
           node --check tubes/feeds/player-core.js
+          node tubes/feeds/test-schedule.mjs
           python tubes/feeds/discover.py
           python - <<'PY'
           import json

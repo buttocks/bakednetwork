@@ -129,8 +129,8 @@
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match)",
       "seed_count": 0,
       "youtube_search_queries": [
-        "classic full match",
-        "full event classic"
+        "WWF full match 1980 1990",
+        "WWF full episode"
       ]
     },
     {

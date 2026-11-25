@@ -74,6 +74,16 @@ function validate(raw){
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
   if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  // ScaryTube is authorized only for its exact public viewer endpoint.
+  if(raw.channel==='ScaryTube'&&raw.action==='add_iframe'){
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.stage==='established'&&c.adminVerified&&c.backupVerified)||
+       raw.src!=='https://pc-mint.tail7c671f.ts.net:10000/'||
+       raw.old_src!==undefined||raw.offset!==undefined||raw.limit!==undefined||
+       typeof raw.title!=='string'||raw.title.trim().length<4||raw.title.length>100||
+       typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))
+      throw Error('Invalid ScaryTube public embed request');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:raw.src};
+  }
   if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(ONBOARDING.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel onboarding is read-only');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
@@ -378,6 +388,7 @@ async function run(request){
     mutationAllowed(initial,request.action);
     const already=exactMatches(initial,request.src);
     if(already.length>1)throw Error('Multiple existing copies of target iframe; refusing duplicate actions');
+    if(request.channel==='ScaryTube'&&already.some(x=>x.temp))throw Error('Existing ScaryTube iframe is temporary; refusing duplicate');
     if(request.action==='add_iframe'&&already.length===1){
       return {request_id:request.request_id,channel:request.channel,action:request.action,status:'already-present',src:request.src};
     }
@@ -389,6 +400,19 @@ async function run(request){
       if(old.uid===initial.playing)throw Error('Old iframe is currently playing; replacement cancelled');
       predecessor=old.index>0?initial.queue[old.index-1].uid:'prepend';
       if(already.length)throw Error('New iframe already exists elsewhere; refusing ambiguous replacement');
+    }
+    if(request.channel==='ScaryTube'){
+      if(!initial.permissions.permanent)throw Error('ScaryTube permanent queue permission missing');
+      const {backupCurrentSkin}=await import('./skin-backup.mjs');
+      await backupCurrentSkin({page,request:{...request,action:'backup_skin'},initial});
+      initial=await snapshot(page);
+      if(!initial.connected||!initial.loggedIn||String(initial.username||'').toLowerCase()!==USERNAME||
+         String(initial.channel||'').toLowerCase()!=='scarytube'||!Number.isFinite(initial.rank)||initial.rank<3||!initial.permissions.permanent)
+        throw Error('ScaryTube authorization changed after backup');
+      mutationAllowed(initial,request.action);
+      const existing=exactMatches(initial,request.src);
+      if(existing.length>1||existing.some(x=>x.temp))throw Error('Ambiguous or temporary ScaryTube entry; refusing duplicate');
+      if(existing.length===1)return {request_id:request.request_id,channel:request.channel,action:request.action,status:'already-present',src:request.src};
     }
     // Queue as permanent media; never advance live playback.
     await page.evaluate(({markup,title})=>{
@@ -437,7 +461,14 @@ function selfTest(){
   const url='https://buttocks.github.io/suplex-baked-player/lucha-slamvision.html';
   assert.equal(validate({schema:1,request_id:'test_add_01',channel:'luchatube',
     action:'add_iframe',title:'Lucha',src:url}).src,url);
+  const scary={schema:1,request_id:'scarytube_public_test',channel:'ScaryTube',action:'add_iframe',title:'ScaryTube — 24/7 Horror Movies',src:'https://pc-mint.tail7c671f.ts.net:10000/'};
+  assert.equal(validate(scary).src,scary.src);
   for(const candidate of [
+    {...scary,src:'https://pc-mint.tail7c671f.ts.net/'},
+    {...scary,src:'https://pc-mint.tail7c671f.ts.net:10000/admin'},
+    {...scary,channel:'RDH'},
+    {...scary,channel:'luchatube'},
+    {...scary,action:'replace_iframe',old_src:url},
     {schema:1,request_id:'test_bad_01',channel:'other',action:'audit'},
     {schema:1,request_id:'test_bad_02',channel:'luchatube',action:'add_iframe',
       title:'Test',src:'https://example.com/attack.html'},

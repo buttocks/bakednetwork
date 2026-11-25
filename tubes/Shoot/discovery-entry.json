@@ -1,21 +1,6 @@
 {
   "directory": "Shoot",
   "key": "shoot",
-  "name": "SHOOT",
-  "sources": [
-    {
-      "handle": "@PANCRASE",
-      "name": "Pancrase"
-    },
-    {
-      "handle": "@GLEAT",
-      "name": "GLEAT"
-    },
-    {
-      "handle": "@RIZIN_FF",
-      "name": "RIZIN"
-    }
-  ],
   "archive_ids": [],
   "archive_search": "mediatype:movies AND (title:\"UWFi\" OR title:\"UWF International\" OR title:\"Fujiwara Gumi\" OR title:\"Battlarts\" OR title:\"Pancrase\" OR title:\"RINGS Fighting Network\")",
   "archive_title_pattern": "(?i)(UWFi|UWF International|Fujiwara Gumi|Battlarts|Pancrase|RINGS|UWF)",
@@ -26,5 +11,18 @@
     "UWF full match"
   ],
   "seed_count": 0,
-  "youtube_channels": []
+  "youtube_channels": [
+    {
+      "id": "UCPiV5XYqFcM-raWBo9VABoQ",
+      "name": "pancrase"
+    },
+    {
+      "id": "UCBWT40Iql3KFxZTRYAMhSqQ",
+      "name": "gleat"
+    },
+    {
+      "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
+      "name": "RIZIN FIGHTING FEDERATION"
+    }
+  ]
 }

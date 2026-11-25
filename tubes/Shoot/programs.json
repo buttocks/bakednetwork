@@ -5,7 +5,160 @@
     "shoot": {
       "name": "BAKED TV · SHOOT",
       "description": "Shoot-style wrestling, submission wrestling and early hybrid MMA",
-      "programs": []
+      "programs": [
+        {
+          "title": "1993-11-8-pancrase-yes-we-are-hybrid-wrestlers-3-ytmp4.savetube.vip",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/1993-9-21-pancrase-yes-we-are-hybrid-wrestlers-1-ytmp-4.savetube.vip/1993-11-8-pancrase-yes-we-are-hybrid-wrestlers-3-ytmp4.savetube.vip.mp4",
+          "duration": 5454,
+          "source": "Internet Archive",
+          "source_channel": "1993 9 21 Pancrase Yes We Are Hybrid Wrestlers 1 Ytmp 4.savetube.vip"
+        },
+        {
+          "title": "1993-9-21-pancrase-yes-we-are-hybrid-wrestlers-1-ytmp4.savetube.vip",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/1993-9-21-pancrase-yes-we-are-hybrid-wrestlers-1-ytmp-4.savetube.vip/1993-9-21-pancrase-yes-we-are-hybrid-wrestlers-1-ytmp4.savetube.vip.mp4",
+          "duration": 4003,
+          "source": "Internet Archive",
+          "source_channel": "1993 9 21 Pancrase Yes We Are Hybrid Wrestlers 1 Ytmp 4.savetube.vip"
+        },
+        {
+          "title": "1997-05-26 Battlarts Get It On Tag 1 & 2 (Samurai! TV)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/1997-05-26-battlarts-get-it-on-tag-1-2-samurai-tv/1997-05-26%20Battlarts%20Get%20It%20On%20Tag%201%20%26%202%20%28Samurai%21%20TV%29.mp4",
+          "duration": 7376,
+          "source": "Internet Archive",
+          "source_channel": "Battlarts 1997-04-13 + 1997-04-15 Get It On Tag 1 & 2"
+        },
+        {
+          "title": "Pancrase Blood.10 - May 04 2026 - Shinigawa Hall, Tokyo",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/pancrase-blood.-10-may-04-2026-shinigawa-hall-tokyo/Pancrase%20Blood.10%20-%20May%2004%202026%20-%20Shinigawa%20Hall%2C%20Tokyo.mp4",
+          "duration": 11609,
+          "source": "Internet Archive",
+          "source_channel": "Pancrase Blood.10 - May 04 2026 - Shinigawa Hall, Tokyo"
+        },
+        {
+          "title": "1999.03.21 Masaaki Mochizuki vs. Minoru Tanaka (JJC F) [BATTLARTS-JWP King And Queens Tournament - Day 2]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/best-of-minoru-tanaka-in-battl-arts/1999.03.21%20Masaaki%20Mochizuki%20vs.%20Minoru%20Tanaka%20%28JJC%20F%29%20%5BBATTLARTS-JWP%20King%20And%20Queens%20Tournament%20-%20Day%202%5D.mp4",
+          "duration": 1103,
+          "source": "Internet Archive",
+          "source_channel": "Best of #5: Minoru Tanaka in BATTLARTS"
+        },
+        {
+          "title": "1. UWF-I vs NJPW ALL OUT CONTEND BATTLE 1 - Oct 11 1995",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/1.-uwf-i-vs-njpw-all-out-contend-battle-1-oct-11-1995/1.%20UWF-I%20vs%20NJPW%20ALL%20OUT%20CONTEND%20BATTLE%201%20-%20Oct%2011%201995.mp4",
+          "duration": 4970,
+          "source": "Internet Archive",
+          "source_channel": "UWFi vs NJPW ALL OUT CONTEND BATTLE 1 & 2 - Oct 11 & 18 1995"
+        },
+        {
+          "title": "2. UWF-I vs NJPW ALL OUT CONTEND BATTLE 2 - Oct 28 1995",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/1.-uwf-i-vs-njpw-all-out-contend-battle-1-oct-11-1995/2.%20UWF-I%20vs%20NJPW%20ALL%20OUT%20CONTEND%20BATTLE%202%20-%20Oct%2028%201995.mp4",
+          "duration": 7019,
+          "source": "Internet Archive",
+          "source_channel": "UWFi vs NJPW ALL OUT CONTEND BATTLE 1 & 2 - Oct 11 & 18 1995"
+        },
+        {
+          "title": "BattlARTS 7.2.2010",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/battl-arts-7.2.2010/BattlARTS%207.2.2010.mp4",
+          "duration": 5120,
+          "source": "Internet Archive",
+          "source_channel": "BattlARTS 7.2.2010"
+        },
+        {
+          "title": "BattlArts - 2001.04.17",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/battl-arts-2001.04.17/BattlArts%20-%202001.04.17.mp4",
+          "duration": 6902,
+          "source": "Internet Archive",
+          "source_channel": "BattlArts - 2001/04/17"
+        },
+        {
+          "title": "Battlarts - 2009.02.15",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/battlarts-2009.02.15/Battlarts%20-%202009.02.15.mp4",
+          "duration": 5872,
+          "source": "Internet Archive",
+          "source_channel": "BattlArts - 2009/02/15"
+        },
+        {
+          "title": "BattlArts-Team DERA - 2008.10.12",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/battl-arts-team-dera-2008.10.12/BattlArts-Team%20DERA%20-%202008.10.12.mp4",
+          "duration": 5222,
+          "source": "Internet Archive",
+          "source_channel": "BattlArts / Team DERA - 2008/10/12 - DNPW Nagoya vs Saitama"
+        },
+        {
+          "title": "Pancrash! Pancrase - 1995",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/pancrash-pancrase-1995/Pancrash%21%20Pancrase%20-%201995.mp4",
+          "duration": 6919,
+          "source": "Internet Archive",
+          "source_channel": "Pancrash! Pancrase - ??/1995"
+        },
+        {
+          "title": "Pancrase 27 Truht 3 (7.04.1996) -186832985 456239799 720p",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/pancrase-27-truht-3-7.04.1996-186832985-456239799-720p/Pancrase%2027_%20Truht%203%20%287.04.1996%29_-186832985_456239799_720p.mp4",
+          "duration": 4092,
+          "source": "Internet Archive",
+          "source_channel": "Pancrase 27 Truht 3 ( 7.04.1996) 186832985 456239799 720p"
+        },
+        {
+          "title": "UWFi - 1992.08.28",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/uwfi-1992.08.28/UWFi%20-%201992.08.28.mp4",
+          "duration": 6950,
+          "source": "Internet Archive",
+          "source_channel": "UWFi - 1992/08/28 - The Root Of Wrestling VHS"
+        },
+        {
+          "title": "Alexander Otsuka vs. Yujiro Yamamoto 21509 BattlArts - Video",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/alexander-otsuka-vs.-mitsuhiro-matsunaga/Alexander%20Otsuka%20vs.%20Yujiro%20Yamamoto%2021509%20BattlArts%20-%20Video.mp4",
+          "duration": 1005,
+          "source": "Internet Archive",
+          "source_channel": "BattlARTS"
+        },
+        {
+          "title": "BattlARTS 6 1 2008",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/alexander-otsuka-vs.-mitsuhiro-matsunaga/BattlARTS%206%201%202008.mp4",
+          "duration": 4759,
+          "source": "Internet Archive",
+          "source_channel": "BattlARTS"
+        },
+        {
+          "title": "Carl Greco vs Super Rider (BattlARTS 4 17 2001)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/alexander-otsuka-vs.-mitsuhiro-matsunaga/Carl%20Greco%20vs%20Super%20Rider%20%28BattlARTS%204%2017%202001%29.mp4",
+          "duration": 569,
+          "source": "Internet Archive",
+          "source_channel": "BattlARTS"
+        },
+        {
+          "title": "Takeshi Ono vs. Ryuji Hijikata (BattlARTS 3 14 2001)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/alexander-otsuka-vs.-mitsuhiro-matsunaga/Takeshi%20Ono%20vs.%20Ryuji%20Hijikata%20%28BattlARTS%203%2014%202001%29.mp4",
+          "duration": 552,
+          "source": "Internet Archive",
+          "source_channel": "BattlARTS"
+        },
+        {
+          "title": "Yuki Ishikawa Ikuto Hidaka vs. Minoru Fujita Minoru Tanaka (BattlARTS 2 12 1999)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/alexander-otsuka-vs.-mitsuhiro-matsunaga/Yuki%20Ishikawa%20Ikuto%20Hidaka%20vs.%20Minoru%20Fujita%20Minoru%20Tanaka%20%28BattlARTS%202%2012%201999%29.mp4",
+          "duration": 433,
+          "source": "Internet Archive",
+          "source_channel": "BattlARTS"
+        }
+      ]
     }
   }
 }

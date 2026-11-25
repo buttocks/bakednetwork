@@ -160,6 +160,26 @@
       "statusKey": "puro",
       "banner": "PURORESU",
       "addOnly": true
+    },
+    {
+      "tube": "boxing",
+      "id": "boxing-baked-tv",
+      "title": "BAKED TV — BOXING",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Boxing/feed.html?channel=boxing&embed=standard",
+      "statusFile": "tubes/Boxing/feed-status.json",
+      "statusKey": "boxing",
+      "banner": "BOXING",
+      "addOnly": true
+    },
+    {
+      "tube": "joshi2",
+      "id": "joshi2-baked-tv",
+      "title": "BAKED TV — JOSHI 2",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Joshi/secondary/joshi2/feed.html?channel=joshi2&embed=standard",
+      "statusFile": "tubes/Joshi2/feed-status.json",
+      "statusKey": "joshi2",
+      "banner": "JOSHI 2",
+      "addOnly": true
     }
   ]
 }

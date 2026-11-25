@@ -17,6 +17,8 @@ jobs:
     env:
       BAKED_TEST_FEED: nwa-tna-early
       BAKED_TEST_EMBED: standard
+      BAKED_TEST_BROWSER: chrome
+      BAKED_TEST_REQUIRE_VIDEO: '1'
     steps:
       - uses: actions/checkout@v4
         with:

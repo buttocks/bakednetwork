@@ -31,10 +31,10 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
-  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
-  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel is read-only until verified');
+  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
-  if(raw.action==='audit_playlist_media'){
+  if(['audit_playlist_media','clean_dead_playlist'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');
     const offset=raw.offset??0,limit=raw.limit??1500;
     if(!Number.isInteger(offset)||offset<0||offset>1400||
@@ -165,7 +165,7 @@ async function run(request){
     const before=initial.queue.map(entry=>({index:entry.index,title:entry.title,src:entry.src,temp:entry.temp}));
     console.log('Authenticated '+USERNAME+' on '+request.channel+
       '; rank='+initial.rank+'; items='+before.length);
-    if(request.action==='audit_playlist_media'){
+    if(['audit_playlist_media','clean_dead_playlist'].includes(request.action)){
       const {auditPlaylistMedia}=await import('./playlist-audit.mjs');
       return await auditPlaylistMedia({page,request,initial});
     }
@@ -340,7 +340,7 @@ else{
     if(Array.isArray(raw)){
       if(!raw.length||raw.length>10)throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
-      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_emotes','audit_playlist_media','plan_legacy_options','migrate_legacy_options','clean_dead_emotes'].includes(r.action)))throw Error('Unsupported batch operation');
+      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes'].includes(r.action)))throw Error('Unsupported batch operation');
       const results=[];
       for(const request of requests){
         try{const result=await run(request);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}

@@ -137,6 +137,49 @@ export async function auditPlaylistMedia({page,request,initial}){
   await fs.copyFile(SNAPSHOT,dir+'/before.json');
   const breakdown={};
   for(const x of suspect){const k=x.type+':'+x.first?.status+'/'+x.second?.status;breakdown[k]=(breakdown[k]||0)+1;}
+  if(request.action==='clean_dead_playlist'){
+    const candidates=suspect.filter(x=>x.type==='fi'&&x.first?.status===404&&x.second?.status===404);
+    const yt=suspect.filter(x=>x.type==='yt');
+    const key=process.env.YOUTUBE_DATA_API_KEY;
+    const youtubeEvidence=[];
+    if(key&&yt.length){
+      for(let i=0;i<yt.length;i+=50){
+        const batch=yt.slice(i,i+50);
+        try{
+          const u=new URL('https://www.googleapis.com/youtube/v3/videos');
+          u.searchParams.set('part','status');u.searchParams.set('id',batch.map(x=>x.id).join(','));u.searchParams.set('key',key);
+          const response=await fetch(u,{signal:AbortSignal.timeout(15000)});
+          if(!response.ok){console.log('YouTube metadata verification HTTP '+response.status);continue;}
+          const data=await response.json();
+          if(!Array.isArray(data.items))continue;
+          for(const x of batch){const v=data.items.find(v=>v.id===x.id);youtubeEvidence.push({uid:x.uid,id:x.id,returned:!!v,status:v?.status||null});}
+        }catch{console.log('YouTube metadata verification unavailable');}
+      }
+    }
+    const dir='tubes/bridge/backup/'+request.channel+'/playlist-cleanup';
+    await fs.mkdir(dir,{recursive:true});
+    await fs.copyFile(SNAPSHOT,dir+'/before.json');
+    const removed=[],skipped=[];
+    if(candidates.length>10)throw Error('Direct-file cleanup exceeds safety cap');
+    for(const x of candidates){
+      if(request.channel!=='Wrestling')continue;
+      const result=await page.evaluate(({uid,id})=>{
+        const entries=[...document.querySelectorAll('#queue .queue_entry')];
+        const el=entries.find(e=>window.jQuery(e).data('uid')===uid);
+        const m=el&&window.jQuery(el).data('media');
+        if(!el||m?.type!=='fi'||m.id!==id||window.PL_CURRENT==null||String(window.PL_CURRENT)===String(uid)||entries.indexOf(el)<60||!window.socket?.connected||window.CLIENT?.rank<3||!window.hasPermission('playlistdelete'))return false;
+        window.socket.emit('delete',uid);return true;
+      },{uid:x.uid,id:x.id});
+      if(!result){skipped.push(x.uid);continue;}
+      await page.waitForFunction(uid=>![...document.querySelectorAll('#queue .queue_entry')].some(e=>window.jQuery(e).data('uid')===uid),x.uid,{timeout:15000});
+      removed.push(x.uid);
+    }
+    const after=await page.evaluate(()=>[...document.querySelectorAll('#queue .queue_entry')].map(e=>({uid:window.jQuery(e).data('uid'),media:window.jQuery(e).data('media')})));
+    await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2)+'\n');
+    await fs.writeFile(dir+'/evidence.json',JSON.stringify({removed,skipped,youtubeEvidence},null,2)+'\n');
+    console.log('Playlist cleanup '+request.channel+' '+JSON.stringify({removed:removed.length,skipped:skipped.length,youtubeChecked:youtubeEvidence.length,youtubeAbsent:youtubeEvidence.filter(x=>!x.returned).length}));
+    return {request_id:request.request_id,channel:request.channel,action:request.action,status:'playlist-cleaned',removed:removed.length,skipped:skipped.length,youtubeChecked:youtubeEvidence.length};
+  }
   console.log('Playlist audit complete: '+JSON.stringify(counts));
   console.log('Playlist candidate breakdown '+request.channel+' '+JSON.stringify(breakdown));
   return {request_id:request.request_id,channel:request.channel,action:request.action,

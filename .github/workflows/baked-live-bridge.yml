@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
+      YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
       BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
       BAKED_BRIDGE_REQUEST: tubes/bridge/request.json
     steps:

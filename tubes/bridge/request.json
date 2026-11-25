@@ -1,25 +1,25 @@
 [
   {
     "schema": 1,
-    "request_id": "playlist_recheck_20261125_luchatube",
-    "channel": "luchatube",
-    "action": "audit_playlist_media",
-    "offset": 0,
-    "limit": 1500
-  },
-  {
-    "schema": 1,
-    "request_id": "playlist_recheck_20261125_Wrestling",
+    "request_id": "playlist_cleanup_20261125_Wrestling",
     "channel": "Wrestling",
-    "action": "audit_playlist_media",
+    "action": "clean_dead_playlist",
     "offset": 0,
     "limit": 1500
   },
   {
     "schema": 1,
-    "request_id": "playlist_recheck_20261125_WID",
+    "request_id": "playlist_cleanup_20261125_luchatube",
+    "channel": "luchatube",
+    "action": "clean_dead_playlist",
+    "offset": 0,
+    "limit": 1500
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_cleanup_20261125_WID",
     "channel": "WID",
-    "action": "audit_playlist_media",
+    "action": "clean_dead_playlist",
     "offset": 0,
     "limit": 1500
   }

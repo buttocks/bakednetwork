@@ -1,0 +1,117 @@
+[
+  {
+    "directory": "AJPW",
+    "key": "ajpw",
+    "name": "AJPW",
+    "sources": [
+      {
+        "handle": "@ajpw_channel",
+        "name": "All Japan Pro Wrestling"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+    "youtube_search_queries": [
+      "full match",
+      "無料試合"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "NOAH",
+    "key": "noah",
+    "name": "NOAH",
+    "sources": [
+      {
+        "handle": "@noah_ghc",
+        "name": "Pro Wrestling NOAH"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+    "youtube_search_queries": [
+      "full match",
+      "無料試合"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "DragonGate",
+    "key": "dg",
+    "name": "DRAGON GATE",
+    "sources": [
+      {
+        "id": "UCekKOhczmszWjqBFLvdFy4A",
+        "name": "DRAGONGATE"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+    "youtube_search_queries": [
+      "full match",
+      "無料試合"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "Joshi",
+    "key": "joshi",
+    "name": "JOSHI",
+    "sources": [
+      {
+        "id": "UCIRohOzkvDyspUb08yG085g",
+        "name": "STARDOM"
+      },
+      {
+        "handle": "@tjpw2013",
+        "name": "Tokyo Joshi Pro Wrestling"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+    "youtube_search_queries": [
+      "full match",
+      "無料試合"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "Puro",
+    "key": "puro",
+    "name": "PURORESU",
+    "sources": [
+      {
+        "handle": "@ajpw_channel",
+        "name": "All Japan Pro Wrestling"
+      },
+      {
+        "handle": "@noah_ghc",
+        "name": "Pro Wrestling NOAH"
+      },
+      {
+        "id": "UCekKOhczmszWjqBFLvdFy4A",
+        "name": "DRAGONGATE"
+      },
+      {
+        "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+        "name": "NJPW"
+      },
+      {
+        "id": "UC6oCIQ4TRcIWgljXqlDFUyA",
+        "name": "DDT"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+    "youtube_search_queries": [
+      "full match",
+      "無料試合"
+    ],
+    "seed_count": 0
+  }
+]

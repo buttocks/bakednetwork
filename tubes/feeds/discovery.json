@@ -13,7 +13,13 @@
     "max_duration_seconds": 28800,
     "rotation": "daily",
     "keep_seed_programs": true,
-    "official_youtube_only": true
+    "official_youtube_only": true,
+    "archive_blocked_ids": [
+      "270419-monday-nitro-hour-1",
+      "270419-monday-nitro-hour-2",
+      "270412-monday-nitro-hour-2"
+    ],
+    "archive_blocked_identifier_pattern": "(?i)^\\d{6}-monday-nitro-hour-\\d+$"
   },
   "channels": [
     {

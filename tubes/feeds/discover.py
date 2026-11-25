@@ -52,8 +52,16 @@ def archive(entry, defaults, cursor):
     found=[]
     for identifier in chosen:
         if time.monotonic()-START>MAX_RUNTIME:break
+        if identifier in defaults.get("archive_blocked_ids",[]) or re.search(defaults.get("archive_blocked_identifier_pattern",r"(?!)"),identifier):
+            print("Archive excluded suspect simulation",identifier)
+            continue
         meta=get_json("https://archive.org/metadata/"+quote(identifier))
         if not isinstance(meta,dict):continue
+        metadata=meta.get("metadata",{})
+        context=" ".join(str(metadata.get(field,"")) for field in ("title","description","subject","collection","creator","uploader"))
+        if re.search(r"\b(?:WWE\s*2K\d*|WWE\s*2K|AEW Fight Forever|gameplay|video[ -]?games?|gaming|fantasy booking|e-fed|efed|Wrestling Empire|Fire Pro Wrestling World|virtual wrestling|simulation|simulated wrestling|watchalong|watch along)\b",context,re.I):
+            print("Archive excluded gaming metadata",identifier)
+            continue
         files=meta.get("files",[])
         if not isinstance(files,list):continue
         for f in files:

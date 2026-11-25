@@ -8,30 +8,6 @@
       "description": "Independent wrestling programming.",
       "programs": [
         {
-          "title": "270419 Monday Nitro Hour 2",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/270419-monday-nitro-hour-2/270419%20Monday%20Nitro%20Hour%202.mp4",
-          "duration": 3500,
-          "source": "Internet Archive",
-          "source_channel": "270419 Monday Nitro Hour 2"
-        },
-        {
-          "title": "270419 Monday Nitro Hour 1",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/270419-monday-nitro-hour-1/270419%20Monday%20Nitro%20Hour%201.mp4",
-          "duration": 2924,
-          "source": "Internet Archive",
-          "source_channel": "270419 Monday Nitro Hour 1"
-        },
-        {
-          "title": "270412 Monday Nitro Hour 2",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/270412-monday-nitro-hour-2/270412%20Monday%20Nitro%20Hour%202.mp4",
-          "duration": 2648,
-          "source": "Internet Archive",
-          "source_channel": "270412 Monday Nitro Hour 2"
-        },
-        {
           "title": "FULL MATCH: Sting vs. Rick Rude | King of Cable Semi Final: Clash of the Champions XXI",
           "episode": "WCW · official full match",
           "url": "https://www.youtube.com/watch?v=WLtvQYVp9R0",

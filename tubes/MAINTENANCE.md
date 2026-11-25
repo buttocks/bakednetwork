@@ -35,3 +35,5 @@ Operator subsequently approved live /Wrestling registration and general multi-pr
 Operator confirmed actual YouTube playback but reported hidden overlay could not be recovered without pausing. Added persistent parent-document Baked TV menu trigger to all feed pages; browser regression test submitted.
 
 YouTube interaction follow-up: dedicated persistent 44px Baked TV toolbar outside the YouTube video rectangle, no extra reveal button in YouTube mode. Archive overlay unchanged. Regression submitted; live user verification pending.
+
+WCW operator identified video-game simulation in Archive item 270419 Monday Nitro Hour 1. Removed that item and two similarly named suspect uploads from independent catalogs; blocked matching identifier family and added Archive metadata gaming checks. Remaining unknown footage is not automatically proven authentic by metadata.

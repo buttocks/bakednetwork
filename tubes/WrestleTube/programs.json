@@ -46,6 +46,51 @@
           "duration": 9976,
           "source": "Internet Archive",
           "source_channel": "TNA Destination X 2026 PPV ( Mp 4 Mania)"
+        },
+        {
+          "title": "FULL MATCH: Kenny Omega vs PAC | AEW Dynamite, 11/27/19",
+          "episode": "All Elite Wrestling · official full match",
+          "url": "https://www.youtube.com/watch?v=Se2xpIRI9uk",
+          "youtube_id": "Se2xpIRI9uk",
+          "duration": 991,
+          "source": "YouTube",
+          "source_channel": "All Elite Wrestling"
+        },
+        {
+          "title": "FULL MATCH: Harley Cameron & Kris Statlander vs Sisters of Sin | AEW All In: London Buy In",
+          "episode": "All Elite Wrestling · official full match",
+          "url": "https://www.youtube.com/watch?v=0xnWssWR5b4",
+          "youtube_id": "0xnWssWR5b4",
+          "duration": 844,
+          "source": "YouTube",
+          "source_channel": "All Elite Wrestling"
+        },
+        {
+          "title": "FULL MATCH: Willow vs Lena Kross - TBS Championship | AEW Revolution 2026 Zero Hour",
+          "episode": "All Elite Wrestling · official full match",
+          "url": "https://www.youtube.com/watch?v=ydvParU0JIc",
+          "youtube_id": "ydvParU0JIc",
+          "duration": 727,
+          "source": "YouTube",
+          "source_channel": "All Elite Wrestling"
+        },
+        {
+          "title": "FULL MATCH: PAC vs Orange Cassidy | AEW Revolution 2020",
+          "episode": "All Elite Wrestling · official full match",
+          "url": "https://www.youtube.com/watch?v=7W63y_mCcg0",
+          "youtube_id": "7W63y_mCcg0",
+          "duration": 758,
+          "source": "YouTube",
+          "source_channel": "All Elite Wrestling"
+        },
+        {
+          "title": "FULL MATCH: Will Ospreay vs. Orange Cassidy – No Commentary | AEW x NJPW Forbidden Door 2022",
+          "episode": "All Elite Wrestling · official full match",
+          "url": "https://www.youtube.com/watch?v=Hz48Ce4QXNc",
+          "youtube_id": "Hz48Ce4QXNc",
+          "duration": 1010,
+          "source": "YouTube",
+          "source_channel": "All Elite Wrestling"
         }
       ]
     }

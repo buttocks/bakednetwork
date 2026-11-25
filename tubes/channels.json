@@ -242,6 +242,14 @@
       "skinReview": "pending",
       "adminVerified": true,
       "backupVerified": true
+    },
+    {
+      "slug": "ddt",
+      "directory": "tubes/DDT",
+      "stage": "onboarding",
+      "skinReview": "pending",
+      "adminVerified": false,
+      "backupVerified": false
     }
   ]
 }

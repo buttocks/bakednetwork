@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "ajpw": {
+      "available": true,
+      "verification": "browser validation run 45683360627 job 139516255715; direct video playback, no JS errors",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

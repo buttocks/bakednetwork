@@ -7,6 +7,9 @@ on:
       - 'tubes/feeds/test-browser.mjs'
       - '.github/workflows/test-feed-browser.yml'
       - 'tubes/NWA-TNA/feed.html'
+      - 'tubes/DDT/feed.html'
+      - 'tubes/DDT/programs.json'
+      - 'tubes/feeds/discovery.json'
 permissions:
   contents: read
 jobs:

@@ -4,7 +4,7 @@ const config=JSON.parse(fs.readFileSync('tubes/feeds/discovery.json'));
 const browser=await chromium.launch({headless:true,args:['--autoplay-policy=no-user-gesture-required']});
 const results=[];
 try {
- for(const e of config.channels){
+ for(const e of config.channels.filter(e=>!process.env.BAKED_TEST_FEED||e.key===process.env.BAKED_TEST_FEED)){
   const page=await browser.newPage();
   const errors=[];page.on('pageerror',err=>errors.push(err.message));
   const url='https://buttocks.github.io/bakednetwork/tubes/'+e.directory+'/feed.html?channel='+e.key;

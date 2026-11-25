@@ -1,4 +1,4 @@
-/* RetroWrestling + WrestleTube v1.3.3
+/* RetroWrestling + WrestleTube v1.3.4
  * Unified external JS, stable playlist tools and classic WrestleTube features.
  * Playlist and arena UI initialize before legacy modules.
  */
@@ -8,7 +8,7 @@ if(!/\/tv\/RetroWrestling\/?$/i.test(location.pathname))return;
 function boot(){
   if(window.RetroWrestlingMergedV13 || !document.body)return;
   window.RetroWrestlingMergedV13=true;
-  document.documentElement.dataset.rwMergedVersion='1.3.3';
+  document.documentElement.dataset.rwMergedVersion='1.3.4';
 
   // The channel might still have the old WrestleTube internal JS enabled.
   // Rewrite only its stale welcome notice, leaving real server status intact.
@@ -24,7 +24,7 @@ function boot(){
 /* Shared Playlist Tools — maintained independently of this skin. */
 (function(){
  const script=document.createElement('script');
- script.src='https://buttocks.github.io/bakednetwork/tubes/shared/modules/PlaylistTools-Standalone.js?v=1.2';
+ script.src='https://buttocks.github.io/bakednetwork/tubes/shared/modules/PlaylistTools-Standalone.js?v=1.2-tools';
  script.onerror=()=>console.error('[RetroWrestling] Playlist Tools failed to load');
  document.head.appendChild(script);
 })();
@@ -50,6 +50,31 @@ function boot(){
   const navbar = document.querySelector('nav.navbar, .navbar');
   if (navbar) navbar.insertAdjacentElement('afterend', header);
   else document.body.insertBefore(header,document.body.firstChild);
+  // Reserve only the space missing beneath a fixed or sticky top navbar.
+  const spacer=document.createElement('div');
+  spacer.id='rw-nav-spacer';
+  spacer.setAttribute('aria-hidden','true');
+  spacer.style.cssText='display:block;height:0;flex:none;pointer-events:none';
+  header.before(spacer);
+  function alignHeader(){
+    if(!navbar||!header.isConnected)return;
+    const n=navbar.getBoundingClientRect(),r=header.getBoundingClientRect();
+    const pos=getComputedStyle(navbar).position;
+    const existing=spacer.getBoundingClientRect().height;
+    const naturalTop=r.top+window.scrollY-existing;
+    const required=(pos==='fixed'||pos==='sticky')&&n.height>0&&n.top<=2
+      ? Math.max(0,Math.ceil(n.bottom+8-naturalTop)) : 0;
+    if(Math.abs(existing-required)>0.5)spacer.style.height=required+'px';
+  }
+  alignHeader();
+  window.addEventListener('resize',alignHeader);
+  if(typeof ResizeObserver==='function'){
+    const navObserver=new ResizeObserver(alignHeader);
+    if(navbar)navObserver.observe(navbar);
+    navObserver.observe(header);
+  }
+  setTimeout(alignHeader,500);
+  setTimeout(alignHeader,2000);
   const button = name => header.querySelector('#rw-'+name);
   button('share').addEventListener('click',async()=>{
     const link=location.origin+location.pathname;
@@ -174,7 +199,7 @@ $('#messagebuffer').on('click', '.username', function(e) {
 });
     }catch(e){console.error('[RetroWrestling] Legacy enhancement error:',e);}
   },200);
-  console.info('[RetroWrestling] v1.3.3 loaded; playlist toolbar and arena initializing.');
+  console.info('[RetroWrestling] v1.3.4 loaded; playlist toolbar and arena initializing.');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
 else boot();

@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "joshi": {
+      "available": true,
+      "verification": "browser validation run 45683360627 job 139516255898; direct video playback, no JS errors",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "schema": 1,
+  "seed": "ddt-20261125",
+  "channels": {
+    "ddt": {
+      "name": "BAKED TV · DDT",
+      "description": "Official DDT Pro-Wrestling matches and events",
+      "programs": [
+        {
+          "title": "マイケル・ジャ●ソンがプロレスに降臨！ムーンウォークしながらDDTを決めるKING OF POPS！スリラーで狼男に変身も…＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=k9wbX8S6vTE",
+          "youtube_id": "k9wbX8S6vTE",
+          "duration": 520,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【初シングル】鈴木みのる vs KONOSUKE TAKESHITA！プロレス王とTHE ALPHAが大阪の地で大激突！！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=C27_Yy65Xbw",
+          "youtube_id": "C27_Yy65Xbw",
+          "duration": 525,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【仙女の怪物】青木真也vs橋本千紘！男と女の性別を超えたライバル対決ふたたび！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=6LrJNrMVo1g",
+          "youtube_id": "6LrJNrMVo1g",
+          "duration": 523,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【狂乱】クリス・ブルックスvsMAO！緊急決定のUNIVERSAL王座戦でやりたい放題の大惨事！そして、まさかの結末が…＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=7uBy06TL77I",
+          "youtube_id": "7uBy06TL77I",
+          "duration": 1327,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【激闘】飯野雄貴 vs 納谷幸男！UNIVERSALのベルトを賭けてDDTのヘビー級レスラー決定戦＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=nBUV0CWbk-8",
+          "youtube_id": "nBUV0CWbk-8",
+          "duration": 1057,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【第五試合まで無料生配信】両国国技館大会に向けてアツさ増す後楽園ホール大会！｜10.18後楽園「WRESTLING HARVEST 2026～秋のプロレス収穫祭～」｜10月18日(日)11時20分〜",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=EJaT16YmmVg",
+          "youtube_id": "EJaT16YmmVg",
+          "duration": 6311,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【狂猿親子】葛西純が息子・陽向と初めての親子タッグ結成！ハッピーボーイと組んで秋山準と対決＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=1CgUebG-fFw",
+          "youtube_id": "1CgUebG-fFw",
+          "duration": 883,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "青木真也が“新日本プロレス”ザック・セイバーJr.対決！日英“グラウンド王”決戦！！団体も競技も超えたタッグマッチが大阪で実現＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=k7l-0aTRosc",
+          "youtube_id": "k7l-0aTRosc",
+          "duration": 1043,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "KONOSUKE TAKESHITA熱望！全日・青柳優馬とシングルマッチ！同世代の前三冠王者と真っ向勝負＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=HrUvDin_9Z0",
+          "youtube_id": "HrUvDin_9Z0",
+          "duration": 540,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "“プロレス王”鈴木みのるが青木真也をボコボコに！？遂に実現した夢のシングルマッチ！互いのプライドを賭けたUNIVERSAL 王座戦！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=kC-TKix1rRU",
+          "youtube_id": "kC-TKix1rRU",
+          "duration": 500,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【事故】強烈な蹴りが腹にクリーンヒット！思わず試合中に嘔吐した“闘う坊主”阿部史典！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=GrO72OhomtQ",
+          "youtube_id": "GrO72OhomtQ",
+          "duration": 502,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "DNA最後の後楽園！メインを任されたのは『勝俣瞬馬vs上野勇希』デビュー9ヶ月の新人レスラーが限界に挑む！！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=ArbLpbsjD60",
+          "youtube_id": "ArbLpbsjD60",
+          "duration": 500,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "青木真也がKO-Dタッグ王座獲得！RIZINの朝倉未来戦にプロレスのチャンピオンとして出場へ！宮脇が悲願のベルト奪取＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=nA3-DY6QpdI",
+          "youtube_id": "nA3-DY6QpdI",
+          "duration": 518,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【IWGP】飯伏&ケニーの“ゴールデン☆ラヴァーズ”初防衛戦！新日本からアポロ55がジュニアタッグ悲願の奪還なるか？プロレス大賞でベストバウトを獲得する前夜＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=Ptr7xGHsJic",
+          "youtube_id": "Ptr7xGHsJic",
+          "duration": 522,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【天山引退】ありがとうテンコジ警察！楽屋泥棒を怒りの制裁！天山広吉の復帰戦を務めたアントーニオ本多がまさかのチン…＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=mAUEHv_EhA0",
+          "youtube_id": "mAUEHv_EhA0",
+          "duration": 529,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【引退】前代未聞のダブル引退…今林GMvs甲田代表の最終決戦！カリスマが3人！？最後の新宿FACEビアガーデンで豪華ユニット&コスチュームシャッフルマッチ＜Highlight of the week＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=5RChD20vRJM",
+          "youtube_id": "5RChD20vRJM",
+          "duration": 973,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【新日激震】これが“ミスターIWGP”永田裕志！？バラモン兄弟と組んだ永田さんがヤバすぎる！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=8V1xhuXc6Wg",
+          "youtube_id": "8V1xhuXc6Wg",
+          "duration": 503,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【両国大会メイン】上野勇希 vs MAO！DDT新時代の黄金カードが実現！サウナカミーナを飛び出し人生を賭けてKO-D無差別級に挑む＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=qsf5Lqzek8Q",
+          "youtube_id": "qsf5Lqzek8Q",
+          "duration": 536,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "“プロレス王”鈴木みのるのDDT制圧を上野勇希が阻止！史上初のKO-D無差別級&ユニバーサル2冠王に！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=Vn3TaZpxMsg",
+          "youtube_id": "Vn3TaZpxMsg",
+          "duration": 2102,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "＜追放＞遠藤哲哉vs佐々木大輔のKO-D無差別級戦！ダムネーションからカリスマを追放して遠藤がDDTの顔へ！コロナ禍のビックマッチ決戦＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=tWtEontFd4s",
+          "youtube_id": "tWtEontFd4s",
+          "duration": 527,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【感動】あの飯伏幸太が再びDDTに帰ってきた！ウェポンランブルでまさかのサプライズ！！髙木三四郎 無期限休養ロードFINAL vs男色ディーノ＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=EHnIc_HsnJc",
+          "youtube_id": "EHnIc_HsnJc",
+          "duration": 1487,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "KONOSUKE TAKESHITA vs 上野勇希！AEWでヒール転向！！咲くやこの花タッグが両国で同級生対決＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=M9kQ4GDF0N0",
+          "youtube_id": "M9kQ4GDF0N0",
+          "duration": 805,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【KONOSUKE TAKESHITA Full Matches】強すぎたっていいじゃない！これが今プロレス界で一番輝いているレスラー250分詰め合わせ ザ・フューチャー 竹下幸之介 THE BEST",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=wQMu5xQU5iw",
+          "youtube_id": "wQMu5xQU5iw",
+          "duration": 15000,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "伝説の黄金カード！飯伏幸太vs男色ディーノ「プロレス、楽しいからです」＜IBUSHI vs DANSYOKU DINO FULL MATCH:DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=TysNDcJJRMc",
+          "youtube_id": "TysNDcJJRMc",
+          "duration": 1714,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "キャンプ場プロレスが破茶滅茶すぎる！ホームレスのテントが燃やされ、誘拐立て篭もり事件まで…＜CAMPSITE PROWRESTLING FULL MATCH:DDT Archives＞【路上プロレス】",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=DW22EPCKL2Q",
+          "youtube_id": "DW22EPCKL2Q",
+          "duration": 5703,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "木板の上で壮絶自爆！！新世代タッグ「しゅんまお」が後楽園全体で暴れまくって出禁レベル＜FULL MATCH＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=tV_n1qHOsvQ",
+          "youtube_id": "tV_n1qHOsvQ",
+          "duration": 1941,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【名勝負】目隠ししたままプロレス！？レフェリーも巻き添い食らいあわや大惨事…ケニー・オメガが目隠し状態でクロイツ・ラス！＜Blindfolded Deathmatch:DDT Archives＞",
+          "episode": "Pro-Wrestling DDT · official programming",
+          "url": "https://www.youtube.com/watch?v=CuvjKe4TARY",
+          "youtube_id": "CuvjKe4TARY",
+          "duration": 499,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT"
+        },
+        {
+          "title": "【Y2J】クリス・ジェリコがDDTに初上陸！KONOSUKE TAKESHITAとアルファ対決！！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=ZDRYmndmSY4",
+          "youtube_id": "ZDRYmndmSY4",
+          "duration": 523,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        },
+        {
+          "title": "【大波乱】ササダンゴの罠で上野勇希がまさかの敗北！！KO-D王者となったら最初の挑戦者に指名を約束も…＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=dqKUgJ9dDFs",
+          "youtube_id": "dqKUgJ9dDFs",
+          "duration": 500,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        },
+        {
+          "title": "【世界レベル】青木真也vs竹下幸之介！DDTの最強王者同士がスペシャルシングルマッチで実現！！＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=74Y16kyrVno",
+          "youtube_id": "74Y16kyrVno",
+          "duration": 499,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        },
+        {
+          "title": "【ド迫力？】プロレスのリングで恐竜とロボが激突！！遂には白使にジョーカーまで？ネタバレ禁止興行が破茶滅茶すぎた…＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=H2SaPIiJU4g",
+          "youtube_id": "H2SaPIiJU4g",
+          "duration": 523,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        },
+        {
+          "title": "ケニー・オメガが凱旋！！5年ぶりに世界の“ベストバウトマシーン”がDDTに帰ってきた！里歩と組んでミックスドマッチ＜DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=Vfbtv9OfQw8",
+          "youtube_id": "Vfbtv9OfQw8",
+          "duration": 509,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        },
+        {
+          "title": "【ガチ過酷】ぐるぐるバットデスマッチ！マッスル坂井の狂気…三半規管が壊れて試合崩壊寸前！！＜DDT EXTREME Title Match：DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=Pdj52FhSiyU",
+          "youtube_id": "Pdj52FhSiyU",
+          "duration": 497,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        },
+        {
+          "title": "【ヤバすぎて禁止級】テキサスマイフレンドトーチャーデスマッチでアントーニオ本多に男色ディーノが挑戦＜ANTONIO HONDA vs DANSHOKU DINO：DDT Archives＞",
+          "episode": "Pro-Wrestling DDT sub-channel · official programming",
+          "url": "https://www.youtube.com/watch?v=k7Elq6IawJ4",
+          "youtube_id": "k7Elq6IawJ4",
+          "duration": 521,
+          "source": "YouTube",
+          "source_channel": "Pro-Wrestling DDT sub-channel"
+        }
+      ]
+    }
+  }
+}

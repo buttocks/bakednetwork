@@ -110,21 +110,39 @@ def youtube_api(entry,defaults,key):
         if not uploads:
             print("YouTube official channel unavailable",source["name"])
             continue
-        page=call("playlistItems",{"part":"snippet,contentDetails","playlistId":uploads,"maxResults":50})
-        ids=[x.get("contentDetails",{}).get("videoId","") for x in page.get("items",[]) if match.search(x.get("snippet",{}).get("title",""))]
-        ids=[v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)][:20]
+        ids=[]
+        token=None
+        for _ in range(4):
+            params={"part":"snippet,contentDetails","playlistId":uploads,"maxResults":50}
+            if token:params["pageToken"]=token
+            page=call("playlistItems",params)
+            ids.extend(x.get("contentDetails",{}).get("videoId","") for x in page.get("items",[]) if match.search(x.get("snippet",{}).get("title","")))
+            token=page.get("nextPageToken")
+            if not token or len(ids)>=20:break
+        # Search older uploads by topic, rather than relying on recent uploads.
+        # One channel-scoped search costs 100 quota units per configured query.
+        for query in entry.get("youtube_search_queries",[])[:2]:
+            results=call("search",{"part":"snippet","channelId":channel,"type":"video","q":query,"maxResults":25,"videoEmbeddable":"true","videoDuration":"medium","order":"relevance"})
+            ids.extend(x.get("id",{}).get("videoId","") for x in results.get("items",[]) if match.search(x.get("snippet",{}).get("title","")))
+        ids=list(dict.fromkeys(v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)))[:50]
         print("YouTube title candidates",source["name"],len(ids))
         if not ids:continue
         videos=call("videos",{"part":"snippet,contentDetails,status","id":",".join(ids)})
         for v in videos.get("items",[]):
             sn=v.get("snippet",{});status=v.get("status",{});ident=v.get("id","")
             if ident not in ids or sn.get("channelId")!=channel or not match.search(sn.get("title","")):continue
-            if status.get("privacyStatus")!="public" or status.get("embeddable") is not True or sn.get("liveBroadcastContent") in ("live","upcoming"):continue
+            if status.get("privacyStatus")!="public" or status.get("embeddable") is not True or sn.get("liveBroadcastContent") in ("live","upcoming"):
+                print("YouTube candidate rejected",ident,"not public/embeddable or live")
+                continue
             duration=re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?",v.get("contentDetails",{}).get("duration",""))
             if not duration:continue
             h,m,s=(int(x or 0) for x in duration.groups());seconds=3600*h+60*m+s
-            if not defaults["min_duration_seconds"]<=seconds<=defaults["max_duration_seconds"]:continue
-            if v.get("contentDetails",{}).get("regionRestriction"):continue
+            if not defaults["min_duration_seconds"]<=seconds<=defaults["max_duration_seconds"]:
+                print("YouTube candidate rejected",ident,"duration",seconds)
+                continue
+            if v.get("contentDetails",{}).get("regionRestriction"):
+                print("YouTube candidate rejected",ident,"region restriction")
+                continue
             found.append({"title":sn["title"][:160],"episode":source["name"]+" · official full match","url":"https://www.youtube.com/watch?v="+ident,"youtube_id":ident,"duration":seconds,"source":"YouTube","source_channel":source["name"]})
     return found
 

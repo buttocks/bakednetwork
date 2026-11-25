@@ -32,7 +32,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|lucha)|lucha\\s*completa|episodio\\s*completo|combate\\s*completo|pelea\\s*completa|luchas\\s*completas)",
-      "seed_count": 7
+      "seed_count": 7,
+      "youtube_search_queries": [
+        "lucha completa",
+        "full match"
+      ]
     },
     {
       "directory": "NJPW",
@@ -51,7 +55,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
-      "seed_count": 8
+      "seed_count": 8,
+      "youtube_search_queries": [
+        "full match",
+        "classic match"
+      ]
     },
     {
       "directory": "NJPW",
@@ -73,7 +81,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
-      "seed_count": 16
+      "seed_count": 16,
+      "youtube_search_queries": [
+        "full match",
+        "full event"
+      ]
     },
     {
       "directory": "WCW",
@@ -88,7 +100,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(?=.*(WCW|World Championship Wrestling|Monday Nitro|WCW Thunder))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
-      "seed_count": 0
+      "seed_count": 0,
+      "youtube_search_queries": [
+        "WCW full match",
+        "WCW Nitro full match"
+      ]
     },
     {
       "directory": "WWE-WWF",
@@ -103,7 +119,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(?=.*(WWF|WWE|WrestleMania|Royal Rumble|SummerSlam))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
-      "seed_count": 0
+      "seed_count": 0,
+      "youtube_search_queries": [
+        "classic full match",
+        "WrestleMania full match"
+      ]
     },
     {
       "directory": "RetroWrestling",
@@ -118,7 +138,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(?=.*(AWA|NWA|World Class Championship Wrestling|Mid-South Wrestling|Smoky Mountain Wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
-      "seed_count": 0
+      "seed_count": 0,
+      "youtube_search_queries": [
+        "NWA full match",
+        "AWA full match"
+      ]
     },
     {
       "directory": "WrestleTube",
@@ -133,7 +157,11 @@
         }
       ],
       "youtube_title_pattern": "(?i)(?=.*(AEW|Ring of Honor|TNA|Impact Wrestling|professional wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
-      "seed_count": 0
+      "seed_count": 0,
+      "youtube_search_queries": [
+        "AEW full match",
+        "ROH full match"
+      ]
     }
   ]
 }

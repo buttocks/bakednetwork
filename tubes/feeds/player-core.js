@@ -181,12 +181,16 @@ async function startYouTube(p,seek,id){
     playbackTimer=setTimeout(()=>{if(activeUrl===id&&!ytPlaying)failCurrent('YouTube startup timed out')},30000);
     yt=new YT.Player('youtube-frame',{
       width:'100%',height:'100%',videoId:p.youtube_id,host:'https://www.youtube-nocookie.com',
-      playerVars:{autoplay:1,controls:0,rel:0,playsinline:1,start:seek,origin:location.origin},
+      playerVars:{autoplay:1,controls:0,rel:0,playsinline:1,cc_load_policy:0,start:seek,origin:location.origin},
       events:{
         onReady:e=>{
           if(activeUrl!==id)return;
           ytReady=true;updateAudio();
+          try{e.target.unloadModule('captions')}catch{}
           try{e.target.seekTo(seek,true);e.target.playVideo()}catch{failCurrent('YouTube playback failed')}
+        },
+        onApiChange:e=>{
+          if(activeUrl===id){try{e.target.unloadModule('captions')}catch{}}
         },
         onStateChange:e=>{
           if(activeUrl!==id)return;

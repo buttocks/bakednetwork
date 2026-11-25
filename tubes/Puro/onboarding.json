@@ -1,0 +1,20 @@
+[
+  {
+    "schema": 1,
+    "request_id": "puro_onboard_backup_skin",
+    "channel": "puro",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "puro_onboard_audit_legacy_paths",
+    "channel": "puro",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "puro_onboard_audit_playlist_media",
+    "channel": "puro",
+    "action": "audit_playlist_media"
+  }
+]

@@ -52,3 +52,7 @@ No live channel configuration was changed by this organization commit.
 
 Original snapshots are archival. Do not interpret a copied backup as current
 live channel settings or deploy it without a fresh private backup.
+
+## Project navigation
+
+Android app documentation and release downloads are in [android/README.md](../android/README.md). Android application created by keatingfish. Tube and Android automation remain separate under `.github/workflows/`.

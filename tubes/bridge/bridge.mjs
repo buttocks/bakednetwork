@@ -33,6 +33,12 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.action==='verify_scarytube_playback'){
+    if(raw.channel!=='ScaryTube'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
+       typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
+       Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid ScaryTube verification request');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
+  }
   if(raw.action==='sync_wrestletube_chat'){
     if(!['wrestling2','wrestling3','Wrestling4','wrestling5'].includes(raw.channel)||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid WrestleTube sync request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
@@ -218,6 +224,47 @@ async function run(request){
     const before=initial.queue.map(entry=>({index:entry.index,title:entry.title,src:entry.src,temp:entry.temp}));
     console.log('Authenticated '+USERNAME+' on '+request.channel+
       '; rank='+initial.rank+'; items='+before.length);
+    if(request.action==='verify_scarytube_playback'){
+      const src='https://pc-mint.tail7c671f.ts.net:10000/';
+      const hits=exactMatches(initial,src);
+      if(hits.length!==1||hits[0].temp)throw Error('Expected exactly one permanent ScaryTube public iframe');
+      const result={request_id:request.request_id,channel:request.channel,action:request.action,items:initial.queue.length,embed_present:true,src};
+      // Observe only. Never queue, jump, unmute, or change shared playback.
+      const deadline=Date.now()+45000;
+      let observed=false,previous=null,last=null;
+      while(Date.now()<deadline){
+        for(const frame of page.frames()){
+          if(frame.url()!==src)continue;
+          observed=true;
+          try{
+            const element=await frame.frameElement();
+            if(!await element.isVisible())continue;
+            const sample=await frame.evaluate(()=>{
+              const v=document.querySelector('video');
+              if(!v)return null;
+              return {time:v.currentTime,paused:v.paused,ready:v.readyState,width:v.videoWidth,height:v.videoHeight,
+                frames:v.getVideoPlaybackQuality?.().totalVideoFrames??null,error:v.error?.code??null};
+            });
+            if(!sample)continue;
+            last=sample;
+            if(previous&&previous.frame===frame&&!sample.paused&&sample.ready>=2&&sample.width>0&&sample.height>0&&
+               sample.time-previous.sample.time>=1&&
+               (sample.frames===null||previous.sample.frames===null||sample.frames>previous.sample.frames)){
+              console.log('ScaryTube embedded playback verified: '+sample.width+'x'+sample.height+'; media advanced '+(sample.time-previous.sample.time).toFixed(2)+'s');
+              return {...result,status:'playback-verified',video:sample};
+            }
+            if(!sample.paused&&sample.ready>=2&&sample.width>0){
+              if(!previous||previous.frame!==frame||sample.time<previous.sample.time)previous={frame,sample};
+            }else previous=null;
+          }catch{previous=null;}
+        }
+        await page.waitForTimeout(1500);
+      }
+      const state=await snapshot(page);
+      const active=String(state.playing)===String(hits[0].uid);
+      console.log('ScaryTube playback not confirmed; iframe observed='+observed+'; active playlist item='+active+'; video='+JSON.stringify(last));
+      return {...result,status:observed?'playback-unverified':active?'iframe-not-loaded':'embed-not-active',active,iframe_observed:observed,video:last};
+    }
     if(['audit_playlist_media','clean_dead_playlist'].includes(request.action)){
       const {auditPlaylistMedia}=await import('./playlist-audit.mjs');
       return await auditPlaylistMedia({page,request,initial});
@@ -463,6 +510,10 @@ function selfTest(){
     action:'add_iframe',title:'Lucha',src:url}).src,url);
   const scary={schema:1,request_id:'scarytube_public_test',channel:'ScaryTube',action:'add_iframe',title:'ScaryTube — 24/7 Horror Movies',src:'https://pc-mint.tail7c671f.ts.net:10000/'};
   assert.equal(validate(scary).src,scary.src);
+  const verifyScary={schema:1,request_id:'scarytube_verify_test',channel:'ScaryTube',action:'verify_scarytube_playback'};
+  assert.equal(validate(verifyScary).action,verifyScary.action);
+  assert.throws(()=>validate({...verifyScary,channel:'RDH'}));
+  assert.throws(()=>validate({...verifyScary,src:scary.src}));
   for(const candidate of [
     {...scary,src:'https://pc-mint.tail7c671f.ts.net/'},
     {...scary,src:'https://pc-mint.tail7c671f.ts.net:10000/admin'},

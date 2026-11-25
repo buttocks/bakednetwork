@@ -1,32 +1,8 @@
-[
-  {
-    "schema": 1,
-    "request_id": "wrestletube_rollout_master_20261125",
-    "channel": "Wrestling",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_rollout_20261125_wrestling2",
-    "channel": "wrestling2",
-    "action": "sync_wrestletube_chat"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_rollout_20261125_wrestling3",
-    "channel": "wrestling3",
-    "action": "sync_wrestletube_chat"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_rollout_20261125_Wrestling4",
-    "channel": "Wrestling4",
-    "action": "sync_wrestletube_chat"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_rollout_20261125_wrestling5",
-    "channel": "wrestling5",
-    "action": "sync_wrestletube_chat"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "scarytube_public_embed_20261125",
+  "channel": "ScaryTube",
+  "action": "add_iframe",
+  "title": "ScaryTube — 24/7 Horror Movies",
+  "src": "https://pc-mint.tail7c671f.ts.net:10000/"
+}

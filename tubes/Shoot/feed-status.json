@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "shoot": {
+      "available": true,
+      "verification": "browser validation run 45676426788 job 139425227960; direct video playback",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

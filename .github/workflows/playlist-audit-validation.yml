@@ -1,0 +1,21 @@
+name: Validate playlist audit code
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/bridge/playlist-audit.mjs'
+      - '.github/workflows/playlist-audit-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/bridge/playlist-audit.mjs
+      - run: node --check tubes/bridge/bridge.mjs
+      - run: node tubes/bridge/bridge.mjs --self-test

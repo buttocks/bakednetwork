@@ -2,7 +2,7 @@
  * Read-only media audit for a Baked.live playlist.
  * Tests archived YouTube/Dailymotion/direct-file media; never tests or deletes
  * custom iframes or live channels as if they were missing recordings.
- * All URLs and playlist data stay in private GitHub Actions artifacts.
+ * Detailed playlist data is retained in GitHub Actions artifacts, not committed to the public repository.
  */
 import fs from 'node:fs/promises';
 
@@ -137,25 +137,37 @@ export async function auditPlaylistMedia({page,request,initial}){
   await fs.copyFile(SNAPSHOT,dir+'/before.json');
   const breakdown={};
   for(const x of suspect){const k=x.type+':'+x.first?.status+'/'+x.second?.status;breakdown[k]=(breakdown[k]||0)+1;}
+  // Collect independent YouTube metadata evidence during read-only audits too.
+  const yt=suspect.filter(x=>x.type==='yt');
+  const key=process.env.YOUTUBE_DATA_API_KEY;
+  const youtubeEvidence=[];
+  if(key&&yt.length){
+    for(let i=0;i<yt.length;i+=50){
+      const batch=yt.slice(i,i+50);
+      try{
+        const u=new URL('https://www.googleapis.com/youtube/v3/videos');
+        u.searchParams.set('part','status');u.searchParams.set('id',batch.map(x=>x.id).join(','));u.searchParams.set('key',key);
+        const response=await fetch(u,{signal:AbortSignal.timeout(15000)});
+        if(!response.ok){console.log('YouTube metadata verification HTTP '+response.status);continue;}
+        const data=await response.json();
+        if(!Array.isArray(data.items))continue;
+        for(const x of batch){const v=data.items.find(v=>v.id===x.id);youtubeEvidence.push({uid:x.uid,id:x.id,returned:!!v,status:v?.status||null});}
+      }catch{console.log('YouTube metadata verification unavailable');}
+    }
+  }
+
+  const absentIds=new Set(youtubeEvidence.filter(x=>!x.returned).map(x=>x.uid));
+  const review={youtubeAbsent:yt.filter(x=>absentIds.has(x.uid)).length,
+    youtubeReturned:youtubeEvidence.filter(x=>x.returned).length,
+    youtubeUnverified:yt.length-youtubeEvidence.length,
+    direct404:suspect.filter(x=>x.type==='fi'&&x.first?.status===404&&x.second?.status===404).length,
+    dailymotionReview:suspect.filter(x=>x.type==='dm').length};
+  report.independentVerification={...review,youtubeEvidence};
+  await fs.writeFile(OUTPUT,JSON.stringify(report,null,2)+'\n');
+  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2)+'\n');
+  console.log('Playlist independent verification '+request.channel+' '+JSON.stringify(review));
   if(request.action==='clean_dead_playlist'){
     const candidates=suspect.filter(x=>x.type==='fi'&&x.first?.status===404&&x.second?.status===404);
-    const yt=suspect.filter(x=>x.type==='yt');
-    const key=process.env.YOUTUBE_DATA_API_KEY;
-    const youtubeEvidence=[];
-    if(key&&yt.length){
-      for(let i=0;i<yt.length;i+=50){
-        const batch=yt.slice(i,i+50);
-        try{
-          const u=new URL('https://www.googleapis.com/youtube/v3/videos');
-          u.searchParams.set('part','status');u.searchParams.set('id',batch.map(x=>x.id).join(','));u.searchParams.set('key',key);
-          const response=await fetch(u,{signal:AbortSignal.timeout(15000)});
-          if(!response.ok){console.log('YouTube metadata verification HTTP '+response.status);continue;}
-          const data=await response.json();
-          if(!Array.isArray(data.items))continue;
-          for(const x of batch){const v=data.items.find(v=>v.id===x.id);youtubeEvidence.push({uid:x.uid,id:x.id,returned:!!v,status:v?.status||null});}
-        }catch{console.log('YouTube metadata verification unavailable');}
-      }
-    }
     const dir='tubes/bridge/backup/'+request.channel+'/playlist-cleanup';
     await fs.mkdir(dir,{recursive:true});
     await fs.copyFile(SNAPSHOT,dir+'/before.json');

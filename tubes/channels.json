@@ -234,6 +234,12 @@
       "skinReview": "pending",
       "adminVerified": true,
       "backupVerified": true
+    },
+    {
+      "slug": "MTV",
+      "directory": "tubes/MTV",
+      "stage": "onboarding",
+      "skinReview": "pending"
     }
   ]
 }

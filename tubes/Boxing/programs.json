@@ -571,6 +571,24 @@
           "duration": 8241,
           "source": "YouTube",
           "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Callum Smith vs Joshua Buatsi | British Classic | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=KyNxxwKXuUA",
+          "youtube_id": "KyNxxwKXuUA",
+          "duration": 3145,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Ryan Garcia vs Rolando Romero | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=G9gYHQQVHo4",
+          "youtube_id": "G9gYHQQVHo4",
+          "duration": 3236,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
         }
       ]
     }

@@ -383,6 +383,24 @@
           "duration": 1194,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Diamond Dallas Page vs. Sting | WCW Title Match: WCW Nitro, April 26, 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=FXa5m8-Kmsg",
+          "youtube_id": "FXa5m8-Kmsg",
+          "duration": 1445,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Road Warriors vs. Sting & Dusty Rhodes | NWA Tag Team Title Match: WCW Starrcade 1988",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=4gEX_vxh7tM",
+          "youtube_id": "4gEX_vxh7tM",
+          "duration": 947,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

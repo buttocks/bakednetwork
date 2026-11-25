@@ -4,17 +4,17 @@
   "tasks": [
     {
       "id": "ddt-nwatna-feeds",
-      "status": "recovery-check-submitted",
+      "status": "installed",
       "workflow": "manage-owned-tube-feeds.yml",
       "mode": "existing scheduled manager",
-      "evidence": "User confirmed both feeds play in real browser. Owner reports Baked.live back online; guarded workflow retriggered."
+      "evidence": "Both feeds manually confirmed playing; managed registration confirmed in run 45682293861. DDT automated playback remains inconclusive."
     },
     {
       "id": "nwatna-base",
-      "status": "recovery-check-submitted",
+      "status": "deployed-runtime-verification-pending",
       "workflow": "nwatna-deploy.yml",
       "mode": "manual dispatch after recovery",
-      "evidence": "Validation 45610953988; deployment deferred 45611245188. Owner reports Baked.live back online; guarded workflow retriggered."
+      "evidence": "Base configuration deployed; automatic module initialization still requires validation."
     },
     {
       "id": "playlist-review",
@@ -32,6 +32,26 @@
       "id": "wrestling-base-rollout",
       "status": "pending-pilot-verification",
       "mode": "verify NWA-TNA runtime before wider rollout"
+    },
+    {
+      "id": "wrestletube-chat-sync",
+      "status": "initial-rollout-complete-schedule-enabled",
+      "workflow": "wrestletube-chat-sync.yml",
+      "mode": "hourly one-way master to four mirrors",
+      "evidence": "All four mirrors exact in run 45701361511; 206 filters, 7973 macro definitions each; first scheduled execution pending verification."
+    },
+    {
+      "id": "queue-attribution",
+      "status": "28-of-29-deployed",
+      "mode": "CSS-only with backup",
+      "evidence": "Wrestling 5 write not acknowledged in run 45691645571; remaining skin repair requires inspection."
+    },
+    {
+      "id": "baked-tv-recovery",
+      "status": "failed-jobs-retry-submitted",
+      "workflow": "test-feed-browser.yml",
+      "mode": "retry failed playback tests only",
+      "evidence": "Run 45683360627 first attempt 14/28 passed; failed jobs resubmitted against hosted players. Do not register unverified feeds."
     }
   ]
 }

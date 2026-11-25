@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 export async function updateRetro({page,request,initial}){
  if(initial.rank<3||!initial.loggedIn||initial.channel!=='RetroWrestling')throw Error('Verified admin required');
- const old='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@a906310b40b9f6a795932f95923c269ff6eb2565/tubes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js';
- const next='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@1758ee910640d91294386a0c00eb359489e31097/tubes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js';
+ const old='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@1758ee910640d91294386a0c00eb359489e31097/tubes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js';
+ const next='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@a6c05d15e1bd0403461d3d91b96294dc4771a7a1/tubes/RetroWrestling/RetroWrestling-WrestleTube-Merged.js';
  const capture=()=>page.evaluate(()=>({externaljs:window.CHANNEL?.opts?.externaljs||'',externalcss:window.CHANNEL?.opts?.externalcss||'',css:window.CHANNEL?.css,js:window.CHANNEL?.js,motd:window.CHANNEL?.motd}));
  const before=await capture();
  const dir='tubes/bridge/backup/RetroWrestling/js-update';
@@ -24,7 +24,7 @@ export async function updateRetro({page,request,initial}){
   const after=await capture();
   if(after.externaljs!==next||['externalcss','css','js','motd'].some(k=>after[k]!==before[k]))throw Error('Unexpected settings change');
   await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2));
-  console.log('RetroWrestling v1.3.4 live external JS URL verified');
+  console.log('RetroWrestling v1.3.5 live external JS URL verified');
   return {channel:request.channel,action:request.action,status:'retro-js-updated'};
  }catch(e){if(before.externaljs!==next&&(await capture()).externaljs===next)await set(before.externaljs);throw e;}
 }

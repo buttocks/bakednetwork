@@ -1,0 +1,20 @@
+[
+  {
+    "schema": 1,
+    "request_id": "joshi_onboard_backup_skin",
+    "channel": "joshi",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "joshi_onboard_audit_legacy_paths",
+    "channel": "joshi",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "joshi_onboard_audit_playlist_media",
+    "channel": "joshi",
+    "action": "audit_playlist_media"
+  }
+]

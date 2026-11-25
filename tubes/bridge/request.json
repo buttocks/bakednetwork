@@ -1,20 +1,6 @@
-[
-  {
-    "schema": 1,
-    "request_id": "queue_attribution_size_repair_20261125_Wrestling4",
-    "channel": "Wrestling4",
-    "action": "fix_queue_attribution"
-  },
-  {
-    "schema": 1,
-    "request_id": "queue_attribution_size_repair_20261125_wrestling5",
-    "channel": "wrestling5",
-    "action": "fix_queue_attribution"
-  },
-  {
-    "schema": 1,
-    "request_id": "queue_attribution_size_repair_20261125_ddt",
-    "channel": "ddt",
-    "action": "fix_queue_attribution"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "queue_attribution_final_size_20261125",
+  "channel": "wrestling5",
+  "action": "fix_queue_attribution"
+}

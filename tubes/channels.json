@@ -199,7 +199,7 @@
       "relationship": "secondary",
       "adminVerified": true,
       "backupVerified": true,
-      "skinReview": "repair-candidate"
+      "skinReview": "main-skin-mirrored"
     },
     {
       "slug": "rizin",
@@ -247,9 +247,9 @@
       "slug": "ddt",
       "directory": "tubes/DDT",
       "stage": "onboarding",
-      "skinReview": "pending",
-      "adminVerified": false,
-      "backupVerified": false
+      "skinReview": "repair-candidate",
+      "adminVerified": true,
+      "backupVerified": true
     }
   ]
 }

@@ -1,0 +1,27 @@
+name: Test Baked TV browser playback
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/feeds/test-browser.mjs'
+      - '.github/workflows/test-feed-browser.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - run: node tubes/feeds/test-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: feed-browser-results
+          path: feed-browser-results.json

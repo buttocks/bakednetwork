@@ -1,0 +1,530 @@
+{
+  "schema": 1,
+  "seed": "njpwalt-20261125",
+  "channels": {
+    "njpwalt": {
+      "name": "BAKED TV · NJPW ALT",
+      "description": "Alternate independently scheduled wrestling programming",
+      "programs": [
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 13",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt13.ia.mp4",
+          "duration": 3110,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 15",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt15.ia.mp4",
+          "duration": 880,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 16",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt16.ia.mp4",
+          "duration": 121,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW Destruction 2012",
+          "episode": "Sep 23, 2012 · Part 17",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt17.ia.mp4",
+          "duration": 1164,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Destruction"
+        },
+        {
+          "title": "NJPW G1 Climax 35",
+          "episode": "Aug 17, 2025",
+          "url": "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.ia.mp4",
+          "duration": 11652,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax"
+        },
+        {
+          "title": "NJPW G1 Climax 36",
+          "episode": "Day 19 · Aug 16, 2026",
+          "url": "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.ia.mp4",
+          "duration": 12945,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 2",
+          "episode": "Apr 1, 2008 · Part 1",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt1.ia.mp4",
+          "duration": 7767,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 2",
+          "episode": "Apr 1, 2008 · Part 2",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt2.ia.mp4",
+          "duration": 8044,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 20",
+          "episode": "Jan 4, 2026",
+          "url": "https://archive.org/download/njpw-wrestle-kingdom-20-in-tokyo-dome-04-01-26/NJPW%20Wrestle%20Kingdom%2020%20In%20Tokyo%20Dome%2004-01-26.ia.mp4",
+          "duration": 19695,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom"
+        },
+        {
+          "title": "NJPW Wrestling Dontaku 2026",
+          "episode": "Apr 20, 2026",
+          "url": "https://archive.org/download/njpw.-road.-to.-wrestling.-dontaku.-2026.04.26.-ja.-720p.-web.h-264-hc_202605/NJPW.Road.To.Wrestling.Dontaku.2026.04.20.EN.720p.WEB.h264-HC.mp4",
+          "duration": 10645,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestling Dontaku"
+        },
+        {
+          "title": "NJPW Wrestling Dontaku 2026",
+          "episode": "Apr 26, 2026",
+          "url": "https://archive.org/download/njpw.-road.-to.-wrestling.-dontaku.-2026.04.26.-ja.-720p.-web.h-264-hc_202605/NJPW.Road.To.Wrestling.Dontaku.2026.04.26.JA.720p.WEB.h264-HC.mp4",
+          "duration": 8870,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestling Dontaku"
+        },
+        {
+          "title": "NJPW Wrestling Dontaku 2026",
+          "episode": "May 3, 2026",
+          "url": "https://archive.org/download/njpw.-road.-to.-wrestling.-dontaku.-2026.04.26.-ja.-720p.-web.h-264-hc_202605/NJPW.Wrestling.Dontaku.2026.05.03.EN.720p.WEB.h264-HC.mp4",
+          "duration": 13221,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestling Dontaku"
+        },
+        {
+          "title": "NJPW Dominion 2021",
+          "episode": "Day 2 · Jun 2, 2021",
+          "url": "https://archive.org/download/njpw-road-to-dominion-day-2-02-06-21/NJPW%20Road%20To%20Dominion%20Day%202%2002-06-21.mp4",
+          "duration": 7479,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW Best Of The Super Junior 33 Day 11",
+          "episode": "Jun 2, 2026",
+          "url": "https://archive.org/download/njpw-best-of-the-super-junior-33-day-11-02-06-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2011%2002-06-26.ia.mp4",
+          "duration": 8596,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW Collision Day 4",
+          "episode": "May 28, 2021",
+          "url": "https://archive.org/download/njpw-collision-2021-day-4-28-05-21/NJPW%20Collision%202021%20Day%204%2028-05-21.mp4",
+          "duration": 4145,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW Best Of The Super Junior 33 Day 10",
+          "episode": "May 30, 2026",
+          "url": "https://archive.org/download/njpw-best-of-the-super-junior-33-day-10-30-05-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2010%2030-05-26.ia.mp4",
+          "duration": 9101,
+          "source": "Internet Archive",
+          "source_channel": "New Japan Pro-Wrestling"
+        },
+        {
+          "title": "NJPW G1 Climax 35 Final 17-08-25",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
+          "duration": 11652,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax 35 Final 17-08-25"
+        },
+        {
+          "title": "NJPW G1 Climax 36 Day 19 16-08-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
+          "duration": 12945,
+          "source": "Internet Archive",
+          "source_channel": "NJPW G1 Climax 36 Day 19 16-08-26"
+        },
+        {
+          "title": "NJPW TANAHASHI JAM 2 by CSテレ朝チャンネル 2026.11.19 [49007292]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-tanahashi-jam-2-by-cs-2026.11.19-49007292/NJPW%20TANAHASHI%20JAM%202%20by%20CS%E3%83%86%E3%83%AC%E6%9C%9D%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%202026.11.19%20%5B49007292%5D.mp4",
+          "duration": 10858,
+          "source": "Internet Archive",
+          "source_channel": "NJPW TANAHASHI JAM 2 2026.11.19"
+        },
+        {
+          "title": "Natsupoi & Shingo Takagi vs Chihiro Hashimoto & Jeff Cobb ~ NJPW (2026.11.20)[1080p30]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/natsupoi-shingo-takagi-vs-chihiro-hashimoto-jeff-cobb-njpw-2026.11.20/Natsupoi%20%26%20Shingo%20Takagi%20vs%20Chihiro%20Hashimoto%20%26%20Jeff%20Cobb%20~%20NJPW%20%282026.11.20%29%5B1080p30%5D.mp4",
+          "duration": 2700,
+          "source": "Internet Archive",
+          "source_channel": "Natsupoi & Shingo Takagi vs Chihiro Hashimoto & Jeff Cobb ~ NJPW ~ 2026.11.20"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt10",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt10.mp4",
+          "duration": 1686,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt12",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt12.mp4",
+          "duration": 1887,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt13",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt13.mp4",
+          "duration": 3110,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt15",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt15.mp4",
+          "duration": 880,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW Best Of The Super Junior 33 Day 11 02-06-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-best-of-the-super-junior-33-day-11-02-06-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2011%2002-06-26.mp4",
+          "duration": 8595,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Best Of The Super Junior 33 Day 11 02-06-26"
+        },
+        {
+          "title": "NJPW 4.1.2008 pt1",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt1.mp4",
+          "duration": 7766,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 4.1.2008 Wrestle Kingdom 2"
+        },
+        {
+          "title": "NJPW 4.1.2008 pt2",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt2.mp4",
+          "duration": 8043,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 4.1.2008 Wrestle Kingdom 2"
+        },
+        {
+          "title": "NJPW Academy Showcase Spring 2026 | FULL EVENT",
+          "episode": "NEW JAPAN PRO-WRESTLING · official full match",
+          "url": "https://www.youtube.com/watch?v=ObiaRPte7V4",
+          "youtube_id": "ObiaRPte7V4",
+          "duration": 6542,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH FinJuice vs GoD The New Beginning in Atlanta 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official full match",
+          "url": "https://www.youtube.com/watch?v=N7PMKvzwIsQ",
+          "youtube_id": "N7PMKvzwIsQ",
+          "duration": 1698,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH! El Desperado vs Jon Moxley No DQ July 30 2022",
+          "episode": "NEW JAPAN PRO-WRESTLING · official full match",
+          "url": "https://www.youtube.com/watch?v=TT8CSWx4n8Q",
+          "youtube_id": "TT8CSWx4n8Q",
+          "duration": 1648,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH: Amazing Red & TJP vs Alex Zayne & Aaron Solow: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official full match",
+          "url": "https://www.youtube.com/watch?v=_fbDJxxw-UM",
+          "youtube_id": "_fbDJxxw-UM",
+          "duration": 927,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH Ricky Morton&Robert Gibson vs Yano Toru&Colt Cabana The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official full match",
+          "url": "https://www.youtube.com/watch?v=QP1bOvlo9oY",
+          "youtube_id": "QP1bOvlo9oY",
+          "duration": 780,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE: Juice Robinson vs Hikuleo Texas Bullrope Match! STRONG Ep63",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=ngRQszGorzs",
+          "youtube_id": "ngRQszGorzs",
+          "duration": 5021,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Kazuchika Okada vs Hiroshi Tanahashi! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=1ty5MxMOXZc",
+          "youtube_id": "1ty5MxMOXZc",
+          "duration": 3316,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Giulia vs Willow Nightingale! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=qC-2SCTRNLU",
+          "youtube_id": "qC-2SCTRNLU",
+          "duration": 3600,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH: Cobb & Taguchi vs. Goto & Romero Lion's Break 2018",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=7ewmsVLwCxA",
+          "youtube_id": "7ewmsVLwCxA",
+          "duration": 1421,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! STRONG Women's 4 Way Match! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=Pxj-HHSMsLI",
+          "youtube_id": "Pxj-HHSMsLI",
+          "duration": 3079,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH Yuji Nagata&TJP vs YOSHI-HASHI&Misterioso The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=m9mTfIuu08Q",
+          "youtube_id": "m9mTfIuu08Q",
+          "duration": 928,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt17",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt17.mp4",
+          "duration": 1164,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt3",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt3.mp4",
+          "duration": 886,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "FREE MATCH  YOSHI-HASHI vs Misterioso  The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=UFuS3Yh4eIk",
+          "youtube_id": "UFuS3Yh4eIk",
+          "duration": 878,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH: LIJ vs BULLET CLUB: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=YSfOYYvjqOY",
+          "youtube_id": "YSfOYYvjqOY",
+          "duration": 1792,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH   6TH MATCH&7TH MATCH   The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=6y5yrBrk0Hw",
+          "youtube_id": "6y5yrBrk0Hw",
+          "duration": 2489,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH R'n'R Express & Alex Zayne vs CHAOS The New Beginning in Raleigh 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=77TAmHKr0u4",
+          "youtube_id": "77TAmHKr0u4",
+          "duration": 1150,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH: Kota Ibushi vs Ren Narita: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=x78v5pS5k9g",
+          "youtube_id": "x78v5pS5k9g",
+          "duration": 836,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Eddie Kingston vs Jay White! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=17rC_6x88v0",
+          "youtube_id": "17rC_6x88v0",
+          "duration": 4383,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Brody King vs Bateman, Jeff Cobb, more! | STRONG ep 32",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=SUiVEcY7R8k",
+          "youtube_id": "SUiVEcY7R8k",
+          "duration": 3018,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EVENT: NJPW Academy Showcase 4",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=yHyjdkuhd1w",
+          "youtube_id": "yHyjdkuhd1w",
+          "duration": 6554,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FULL EVENT: NJPW Academy All-Star Showcase",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=Ks92zXN4pkg",
+          "youtube_id": "Ks92zXN4pkg",
+          "duration": 6976,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EVENT: NJPW Academy Cup 2025",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=3nqPCcTXa3w",
+          "youtube_id": "3nqPCcTXa3w",
+          "duration": 6789,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Yuya Uemura vs Daniel Garcia,  elimination main event! | STRONG ep 83",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=wVFUw0gp7bs",
+          "youtube_id": "wVFUw0gp7bs",
+          "duration": 3604,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EVENT: NJPW Academy Showcase 5",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=QngUioi76_c",
+          "youtube_id": "QngUioi76_c",
+          "duration": 4832,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH  Will Ospreay vs. Amazing Red SUPER J-CUP 2019",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=8yKk4ixzxp0",
+          "youtube_id": "8yKk4ixzxp0",
+          "duration": 1913,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH R'n'R Express & Tanahashi vs Connors, TJP & Alex Zayne The New Beginning Atlanta 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=oX8-uBiKZy8",
+          "youtube_id": "oX8-uBiKZy8",
+          "duration": 1389,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! TMDK, Christopher Daniels, TJP, more! | STRONG ep 81",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=wihAwmt-ciY",
+          "youtube_id": "wihAwmt-ciY",
+          "duration": 3250,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Daniels & Uemura vs Aussie Open! | STRONG Ep102",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=Vk94QVSemn0",
+          "youtube_id": "Vk94QVSemn0",
+          "duration": 3156,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EVENT: NJPW Academy Summer 2023 Showcase",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=Uv9qr0nfcww",
+          "youtube_id": "Uv9qr0nfcww",
+          "duration": 7929,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Jay White vs Swerve Strickland! | STRONG ep 82",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=wewTONK-rgI",
+          "youtube_id": "wewTONK-rgI",
+          "duration": 3473,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "G1 Climax 32 update! Uemura's Upset! BULLET CLUB 8 man free match! | NJPW XTRA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=mnIphmLJaMc",
+          "youtube_id": "mnIphmLJaMc",
+          "duration": 1559,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "NJPW Wrestle Kingdom 20 In Tokyo Dome 04-01-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-wrestle-kingdom-20-in-tokyo-dome-04-01-26/NJPW%20Wrestle%20Kingdom%2020%20In%20Tokyo%20Dome%2004-01-26.mp4",
+          "duration": 19694,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Wrestle Kingdom 20 In Tokyo Dome 04-01-26"
+        },
+        {
+          "title": "NJPW World Tag League 2026 Day 1 23-11-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-tag-league-2026-day-1-23-11-26/NJPW%20World%20Tag%20League%202026%20Day%201%2023-11-26.mp4",
+          "duration": 10000,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Tag League 2026 Day 1 23-11-26"
+        }
+      ]
+    }
+  }
+}

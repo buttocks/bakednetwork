@@ -120,6 +120,36 @@
       "statusKey": "shoot",
       "banner": "SHOOT",
       "addOnly": true
+    },
+    {
+      "tube": "ajpw",
+      "id": "ajpw-baked-tv",
+      "title": "BAKED TV — AJPW",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/AJPW/feed.html?channel=ajpw&embed=standard",
+      "statusFile": "tubes/AJPW/feed-status.json",
+      "statusKey": "ajpw",
+      "banner": "AJPW",
+      "addOnly": true
+    },
+    {
+      "tube": "joshi",
+      "id": "joshi-baked-tv",
+      "title": "BAKED TV — JOSHI",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Joshi/feed.html?channel=joshi&embed=standard",
+      "statusFile": "tubes/Joshi/feed-status.json",
+      "statusKey": "joshi",
+      "banner": "JOSHI",
+      "addOnly": true
+    },
+    {
+      "tube": "Wrestling4",
+      "id": "wrestling4-baked-tv",
+      "title": "BAKED TV — WRESTLING 4",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/Wrestling4/feed.html?channel=wrestling4&embed=standard",
+      "statusFile": "tubes/Wrestling4/feed-status.json",
+      "statusKey": "wrestling4",
+      "banner": "WRESTLING 4",
+      "addOnly": true
     }
   ]
 }

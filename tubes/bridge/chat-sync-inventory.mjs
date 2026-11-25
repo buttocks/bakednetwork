@@ -39,7 +39,16 @@ export async function inventoryChatSync({page,request}){
   const timer=setTimeout(()=>{socket.off?.('chatFilters',done);reject(Error('Filter request timed out'))},15000);
   socket.once('chatFilters',done);socket.emit('requestChatFilters');
  }));
- const current={channel:request.channel,filters,macros,rawEmotes:state.emotes,duplicateStats,at:new Date().toISOString()};
+ // Inspect the site's existing import/export controls without invoking imports.
+ const protocol=await page.evaluate(()=>{
+  const controls=[...document.querySelectorAll('button,input[type=button],a')].filter(e=>/import|export/i.test((e.id||'')+' '+(e.textContent||e.value||''))&&/filter|emote|macro/i.test((e.id||'')+' '+(e.textContent||e.value||'')));
+  const jq=window.jQuery;
+  return controls.map(e=>{
+   const handlers=jq&&typeof jq._data==='function'?(jq._data(e,'events')?.click||[]).map(h=>String(h.handler)):[];
+   return {id:e.id,text:(e.textContent||e.value||'').trim().slice(0,100),handlers,inline:e.getAttribute('onclick')};
+  });
+ });
+ const current={channel:request.channel,filters,macros,rawEmotes:state.emotes,duplicateStats,protocol,at:new Date().toISOString()};
  await fs.mkdir(root,{recursive:true});
  await fs.writeFile(root+'/'+request.channel+'.json',JSON.stringify(current,null,2)+'\n');
  const result={channel:request.channel,status:'inventoried',filters:filters.length,macros:macros.length,filterHash:sha(ordered(filters)),macroHash:sha(sorted(macros)),...duplicateStats};
@@ -51,6 +60,10 @@ export async function inventoryChatSync({page,request}){
   result.macrosDifferent=[...m.keys()].filter(k=>d.has(k)&&sha(sorted(m.get(k)))!==sha(sorted(d.get(k)))).length;
   result.filtersExact=sha(ordered(master.filters))===result.filterHash;
  }
+ result.filterFieldSets=[...new Set(filters.map(f=>Object.keys(f).sort().join(',')))];
+ result.macroFieldSets=[...new Set(state.emotes.map(f=>Object.keys(f).sort().join(',')))];
+ result.importControls=protocol.filter(x=>/import/i.test(x.id+' '+x.text)).map(x=>({id:x.id,events:[...new Set([...x.handlers,x.inline||''].flatMap(h=>Array.from(h.matchAll(/\.emit\s*\(\s*['"]([^'"]+)['"]/g),m=>m[1])))]}));
+ result.exportControls=protocol.filter(x=>/export/i.test(x.id+' '+x.text)).map(x=>x.id);
  console.log('CHAT_SYNC_INVENTORY '+JSON.stringify(result));
  return result;
 }

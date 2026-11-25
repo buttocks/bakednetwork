@@ -33,6 +33,10 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.action==='repair_dg_logo'){
+    if(!['DG','DGalt'].includes(raw.channel)||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid Dragon Gate repair request');
+    return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
+  }
   if(raw.action==='update_retro_js'){
     if(raw.channel!=='RetroWrestling'||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid Retro deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
@@ -246,6 +250,10 @@ async function run(request){
       console.log('Legacy reference breakdown '+request.channel+' '+JSON.stringify(Object.fromEntries(Object.entries(refs.legacy).map(([k,v])=>[k,v.length]))));
       for(const key of ['css','js','options'])for(const url of refs.legacy[key]||[]){try{const u=new URL(url);if(['cdn.jsdelivr.net','raw.githubusercontent.com','buttocks.github.io'].includes(u.hostname)&&!u.username&&!u.password)console.log('Legacy asset '+request.channel+' '+key+' '+u.origin+u.pathname)}catch{}}
       return {request_id:request.request_id,channel:request.channel,action:request.action,status:'audited',rank:initial.rank,admin_verified:Number.isFinite(initial.rank)&&initial.rank>=3,permissions:initial.permissions,items:before.length,...refs};
+    }
+    if(request.action==='repair_dg_logo'){
+      const {repairDragonGate}=await import('../DragonGate/repair-logo.mjs');
+      return await repairDragonGate({page,request,initial});
     }
     if(request.action==='audit_skin'){
       await page.waitForTimeout(1800);

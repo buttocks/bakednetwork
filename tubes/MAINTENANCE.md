@@ -69,3 +69,5 @@ RetroWrestling v1.3.5 deployed; user confirms better layout and captions gone. D
 Skin health scan 45543653807: all 28 completed. Broken visible images: NJPWALT 3, DG/DGalt/joshi/puro 1 each. Prioritize exact image URL review before replacement. Automation failed to detect JS modules even on user-confirmed working RetroWrestling; runtime results not conclusive. NWA-TNA external shared base URL configured, runtime unverified (45543653796).
 
 Priority audit 45544108485 confirmed broken visible assets: NJPWALT Discord/Gyazo/Uproxx; DG and DGalt Wikimedia Dglogo3.png; joshi Discord GIF; puro Discord PNG. Added original text-based Dragon Gate fallback wordmark (not official logo), pending location verification and guarded replacement. No live artwork changed.
+
+Asset-location audit 45544562593: DG/DGalt logo is MOTD artwork; NJPWALT two MOTD images and one chat image; Puro one MOTD image; Joshi chat GIF only. Submitted exact URL-only MOTD repairs for DG/DGalt with backup, rendered image verification and rollback. Joshi chat GIF and NJPWALT chat image are not skin defects.

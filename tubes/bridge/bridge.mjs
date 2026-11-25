@@ -33,6 +33,10 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.action==='inventory_chat_sync'){
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid chat sync inventory request');
+    return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
+  }
   if(raw.action==='fix_queue_attribution'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid queue attribution request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
@@ -211,6 +215,10 @@ async function run(request){
     if(request.action==='update_retro_js'){
       const {updateRetro}=await import('../RetroWrestling/update-js.mjs');
       return await updateRetro({page,request,initial});
+    }
+    if(request.action==='inventory_chat_sync'){
+      const {inventoryChatSync}=await import('./chat-sync-inventory.mjs');
+      return await inventoryChatSync({page,request,initial});
     }
     if(request.action==='fix_queue_attribution'){
       const {fixQueueAttribution}=await import('./queue-attribution.mjs');
@@ -432,9 +440,9 @@ else{
   try{
     const raw=JSON.parse(await fs.readFile(REQUEST_PATH,'utf8'));
     if(Array.isArray(raw)){
-      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution')?30:10))throw Error('Invalid audit batch size');
+      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync')?30:10))throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
-      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution'].includes(r.action)))throw Error('Unsupported batch operation');
+      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution','inventory_chat_sync'].includes(r.action)))throw Error('Unsupported batch operation');
       const results=[];
       for(const request of requests){
         try{const result=await run(request);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}

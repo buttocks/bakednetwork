@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '17 4,16 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/feeds/discovery.json'
+      - 'tubes/feeds/discover.py'
+      - '.github/workflows/update-lucha-catalog.yml'
 
 permissions:
   contents: write

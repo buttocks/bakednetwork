@@ -421,6 +421,275 @@
           "name": "東京女子プロレスofficial - TJPW"
         }
       ]
+    },
+    {
+      "directory": "Indies",
+      "key": "indies",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+      "youtube_search_queries": [
+        "full match",
+        "full event"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UC5bVuZfyM3fwDnQH4nGdcxA",
+          "name": "GC Wrestling"
+        },
+        {
+          "id": "UCy91SdPgEDZnCHHm5ag32yQ",
+          "name": "Beyond Wrestling"
+        },
+        {
+          "id": "UCBZ2Hl4YPU0Dzxuj3a3qSQw",
+          "name": "DEFY Wrestling"
+        }
+      ]
+    },
+    {
+      "directory": "Shoot",
+      "key": "shoot",
+      "archive_ids": [],
+      "archive_search": "mediatype:movies AND (title:\"UWFi\" OR title:\"UWF International\" OR title:\"Fujiwara Gumi\" OR title:\"Battlarts\" OR title:\"Pancrase\" OR title:\"RINGS Fighting Network\")",
+      "archive_title_pattern": "(?i)(UWFi|UWF International|Fujiwara Gumi|Battlarts|Pancrase|RINGS|UWF)",
+      "archive_search_rows": 60,
+      "archive_candidate_limit": 20,
+      "youtube_title_pattern": "(?i)^(?!.*(?:interview|podcast|reaction|highlights|trailer|会見)).*(?:pancrase|パンクラス|UWF|UWFi|LIDET|GLEAT|Battlarts|Fujiwara Gumi|shoot style|shoot wrestling)",
+      "youtube_search_queries": [
+        "UWF full match"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCPiV5XYqFcM-raWBo9VABoQ",
+          "name": "pancrase"
+        },
+        {
+          "id": "UCBWT40Iql3KFxZTRYAMhSqQ",
+          "name": "gleat"
+        },
+        {
+          "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
+          "name": "RIZIN FIGHTING FEDERATION"
+        }
+      ]
+    },
+    {
+      "directory": "Boxing",
+      "key": "boxing",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|classic\\s*fight)",
+      "youtube_search_queries": [
+        "full fight",
+        "classic fight"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCbzRzJNHx7ZLlJML9BjZQVQ",
+          "name": "Top Rank Boxing"
+        },
+        {
+          "id": "UCWXYAGB9SadlL6p5Bb66wWw",
+          "name": "Premier Boxing Champions"
+        },
+        {
+          "id": "UC7LReVje9aPB4B6XAsXX8WQ",
+          "name": "Matchroom Boxing"
+        }
+      ]
+    },
+    {
+      "directory": "Rizin",
+      "key": "rizin",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|試合映像|フルファイト|無料公開)",
+      "youtube_search_queries": [
+        "full fight",
+        "試合映像"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
+          "name": "RIZIN FIGHTING FEDERATION"
+        }
+      ]
+    },
+    {
+      "directory": "Sumo",
+      "key": "sumo",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(sumo|相撲|大相撲|本場所|取組|幕内)",
+      "youtube_search_queries": [
+        "grand sumo highlights",
+        "大相撲"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UC6ZZhovRZpUA4VafgBdECZQ",
+          "name": "日本相撲協会公式チャンネル"
+        },
+        {
+          "id": "UCSPEjw8F2nQDtmUKPFNF7_A",
+          "name": "NHK WORLD-JAPAN"
+        }
+      ]
+    },
+    {
+      "directory": "WID",
+      "key": "wid",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+      "youtube_search_queries": [
+        "full match"
+      ],
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+          "name": "Lucha Libre AAA"
+        },
+        {
+          "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+          "name": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+          "name": "WCW"
+        },
+        {
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
+        },
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        },
+        {
+          "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+          "name": "All Elite Wrestling"
+        },
+        {
+          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+          "name": "TNA Wrestling"
+        }
+      ]
+    },
+    {
+      "directory": "WrestleTube/secondary/wrestling2",
+      "key": "wrestling2",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+      "youtube_search_queries": [
+        "full match",
+        "full event"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+          "name": "All Elite Wrestling"
+        },
+        {
+          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+          "name": "TNA Wrestling"
+        }
+      ]
+    },
+    {
+      "directory": "WrestleTube/secondary/wrestling3",
+      "key": "wrestling3",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+      "youtube_search_queries": [
+        "full match",
+        "full event"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+          "name": "WCW"
+        },
+        {
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
+        },
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        }
+      ]
+    },
+    {
+      "directory": "WrestleTube/secondary/Wrestling4",
+      "key": "wrestling4",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+      "youtube_search_queries": [
+        "full match",
+        "full event"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+          "name": "Lucha Libre AAA"
+        }
+      ]
+    },
+    {
+      "directory": "WrestleTube/secondary/wrestling5",
+      "key": "wrestling5",
+      "archive_ids": [],
+      "archive_title_pattern": "(?!)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+      "youtube_search_queries": [
+        "full match",
+        "full event"
+      ],
+      "seed_count": 0,
+      "youtube_channels": [
+        {
+          "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+          "name": "Lucha Libre AAA"
+        },
+        {
+          "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+          "name": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+          "name": "WCW"
+        },
+        {
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
+        },
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        },
+        {
+          "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+          "name": "All Elite Wrestling"
+        },
+        {
+          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+          "name": "TNA Wrestling"
+        }
+      ]
     }
   ]
 }

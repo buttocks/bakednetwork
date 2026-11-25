@@ -6,7 +6,7 @@ const results=[];
 try {
  for(const e of config.channels.filter(e=>!process.env.BAKED_TEST_FEED||e.key===process.env.BAKED_TEST_FEED)){
   const page=await browser.newPage();
-  const errors=[];page.on('pageerror',err=>errors.push(err.message));
+  const errors=[],diagnostics=[];page.on('pageerror',err=>errors.push(err.message));page.on('console',msg=>{if(msg.text().includes('[Baked TV]'))diagnostics.push(msg.text())});
   const url='https://buttocks.github.io/bakednetwork/tubes/'+e.directory+'/feed.html?channel='+e.key;
   try {
    await page.goto(url,{waitUntil:'domcontentloaded',timeout:30000});
@@ -31,7 +31,7 @@ try {
    const menuRestored=await page.locator('#guide-toggle').isVisible();
    if(!menuRestored)throw Error('Persistent menu failed to restore controls');
    const state=await page.evaluate(()=>({title:document.querySelector('#program-name')?.textContent,status:document.querySelector('#status-text')?.textContent,source:document.querySelector('#channel-name')?.textContent,videoTime:document.querySelector('video')?.currentTime}));
-   results.push({feed:e.key,guide,playing,menuRestored,toolbarSeparated,errors,...state});
+   results.push({feed:e.key,guide,playing,menuRestored,toolbarSeparated,errors,diagnostics,...state});
   }catch(err){results.push({feed:e.key,playing:false,errors:[...errors,err.message]});}
   finally{await page.close();}
  }

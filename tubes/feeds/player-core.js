@@ -14,6 +14,8 @@ let activeProgram=null, nextTrack=null, activeIndex=-1;
 let preferFallbackSource=null;
 let guideOpen=false,hoveringControls=false,keyboardNavigation=false,overlayTimer=null;
 let seekWanted=0,playbackStarted=false,playbackTimer=null;
+let providerBlockedUntil=0,retryTimer=null,attempt=0;
+function retryLater(ms){clearTimeout(retryTimer);retryTimer=setTimeout(()=>{bad.clear();providerBlockedUntil=0;tune(true)},ms)}
 const firstFade=5500,revealFade=3200;
 const isPlaying=()=>mode==='youtube'?ytPlaying:!video.paused&&!video.ended;
 function showStatus(message){statusText.textContent=message;status.hidden=false;reveal()}
@@ -160,7 +162,9 @@ function stopYT(){
     placeholder.id='youtube-frame';shell.replaceChildren(placeholder);
   }else $('youtube-frame').replaceChildren();
 }
-function failCurrent(reason='Source temporarily unavailable'){
+function failCurrent(reason='Source temporarily unavailable',providerFailure=false){
+  console.warn('[Baked TV] playback failure', {channel,source:activeProgram?.source,reason,attempt});
+  if(providerFailure&&activeProgram?.source==='YouTube')providerBlockedUntil=Date.now()+60000;
   const badUrl=activeUrl;if(badUrl)bad.add(badUrl);
   preferFallbackSource=activeProgram?.source==='YouTube'?'Internet Archive':'YouTube';
   stopYT();clearTimeout(playbackTimer);video.pause();
@@ -168,8 +172,9 @@ function failCurrent(reason='Source temporarily unavailable'){
   activeUrl='';
   if(track&&track.programs.every(p=>bad.has(p.url))){
     showStatus('All program sources are temporarily unavailable. Rechecking shortly.');
-    setTimeout(()=>{bad.clear();tune(true)},45000);
-  }else setTimeout(()=>tune(true),900);
+    retryLater(60000);
+  }else if(providerFailure&&!track?.programs.some(p=>p.source!=='YouTube'&&!bad.has(p.url))){showStatus(reason+' — retrying in 60 seconds.');retryLater(60000)}
+  else setTimeout(()=>tune(true),900);
 }
 async function startYouTube(p,seek,id){
   mode='youtube';document.body.classList.add('youtube-mode');video.pause();video.hidden=true;shell.hidden=false;
@@ -178,10 +183,10 @@ async function startYouTube(p,seek,id){
     const YT=await youtubeAPI();
     if(activeUrl!==id)return;
     stopYT();
-    playbackTimer=setTimeout(()=>{if(activeUrl===id&&!ytPlaying)failCurrent('YouTube startup timed out')},30000);
+    playbackTimer=setTimeout(()=>{if(activeUrl===id&&!ytPlaying)failCurrent('YouTube startup timed out',true)},30000);
     yt=new YT.Player('youtube-frame',{
       width:'100%',height:'100%',videoId:p.youtube_id,host:'https://www.youtube-nocookie.com',
-      playerVars:{autoplay:1,controls:0,rel:0,playsinline:1,cc_load_policy:0,start:seek,origin:location.origin},
+      playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,cc_load_policy:0,start:seek,origin:location.origin},
       events:{
         onReady:e=>{
           if(activeUrl!==id)return;
@@ -199,10 +204,11 @@ async function startYouTube(p,seek,id){
           else if(e.data===s.ENDED){activeUrl='';stopYT();tune(true,true)}
           else if(e.data===s.PAUSED){ytPlaying=false;reveal()}
         },
-        onError:()=>{if(activeUrl===id)failCurrent('YouTube cannot embed this match')}
+        onError:e=>{if(activeUrl!==id)return;const code=Number(e.data);const reasons={2:'Invalid video ID',5:'HTML5 playback error',100:'Video unavailable',101:'Embedding disabled',150:'Embedding disabled',153:'Missing embed client identification'};failCurrent('YouTube '+code+': '+(reasons[code]||'Playback error'),[5,153].includes(code))},
+        onAutoplayBlocked:()=>{if(activeUrl===id){console.warn('[Baked TV] autoplay blocked',channel);showStatus('Autoplay blocked. Click Unmute to start playback.')}}
       }
     });
-  }catch{if(activeUrl===id)failCurrent('YouTube unavailable')}
+  }catch(error){if(activeUrl===id)failCurrent(error?.message||'YouTube unavailable',true)}
 }
 function tune(force=false,advance=false){
   if(!track)return;
@@ -218,10 +224,14 @@ function tune(force=false,advance=false){
     const prev=ordered.findIndex(p=>p.url===activeProgram.url);
     for(let i=1;i<=ordered.length;i++){const index=((prev>=0?prev:activeIndex)+i+ordered.length)%ordered.length;const p=ordered[index];if(!bad.has(p.url)){chosen={p,index,seek:0};break;}}
   }
-  if(!chosen){showStatus('No available matches. Retrying automatically.');return}
+  if(providerBlockedUntil>Date.now()&&chosen?.p.source==='YouTube'){
+    const index=ordered.findIndex(p=>p.source!=='YouTube'&&!bad.has(p.url));
+    if(index>=0)chosen={p:ordered[index],index,seek:0};else{showStatus('YouTube temporarily unavailable. Retrying shortly.');retryLater(Math.max(1000,providerBlockedUntil-Date.now()));return;}
+  }
+  if(!chosen){showStatus('No available matches. Retrying automatically.');retryLater(60000);return}
   const {p,seek}=chosen;
   if(!force&&activeUrl===p.url)return;
-  activeUrl=p.url;activeProgram=p;activeIndex=chosen.index;setOverlay(p);
+  attempt++;activeUrl=p.url;activeProgram=p;activeIndex=chosen.index;setOverlay(p);
   clearTimeout(playbackTimer);status.hidden=false;
   if(p.source==='YouTube'){stopYT();startYouTube(p,seek,p.url);return}
   stopYT();mode='archive';document.body.classList.remove('youtube-mode');shell.hidden=true;video.hidden=false;
@@ -245,7 +255,7 @@ $('audio').onclick=()=>{
   if(mode==='youtube'&&ytReady){try{yt.playVideo()}catch{}}
   else if(mode==='archive')video.play().catch(()=>{});
 };
-$('retune').onclick=()=>{bad.clear();activeUrl='';tune(true)};
+$('retune').onclick=()=>{clearTimeout(retryTimer);providerBlockedUntil=0;bad.clear();activeUrl='';tune(true)};
 $('guide-toggle').onclick=()=>{
   guideOpen=!guideOpen;$('guide').hidden=!guideOpen;
   $('guide-toggle').setAttribute('aria-expanded',String(guideOpen));

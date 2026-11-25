@@ -91,3 +91,6 @@ Shared wrestling source loader now continues after failed module fetch, applies 
 Shared loader recovery regression passed run 45610635340. Regenerated NWA-TNA pilot source from tested canonical base; live pin remains unchanged pending service availability and deployment verification.
 
 NWA-TNA source consistency and recovery tests passed 45610953988. Submitted guarded deployment of new immutable pin abcdcf5d41845da4c36df04d857fba6c395dcf8c; accepts only prior known pin, new pin or empty external JS and preserves rollback. Outage preflight skips deployment when site unavailable; manual dispatch needed if skipped.
+
+## Recovery queue
+See `maintenance-queue.json` for pending deployment and repair tasks. NWA-TNA deployment run 45611245188 deferred because login endpoint unavailable; no deployment claimed. Resume with feed integration verification and NWA-TNA pilot runtime verification; playlist review remains read-only pending evidence.

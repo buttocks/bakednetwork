@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "updated": "2026-11-25",
+  "tasks": [
+    {
+      "id": "ddt-nwatna-feeds",
+      "status": "pending-live-verification",
+      "workflow": "manage-owned-tube-feeds.yml",
+      "mode": "existing scheduled manager",
+      "evidence": "User confirmed both feeds play in real browser."
+    },
+    {
+      "id": "nwatna-base",
+      "status": "deferred-outage",
+      "workflow": "nwatna-deploy.yml",
+      "mode": "manual dispatch after recovery",
+      "evidence": "Validation 45610953988; deployment deferred 45611245188."
+    },
+    {
+      "id": "playlist-review",
+      "status": "pending-recheck",
+      "workflow": "network-playlist-review.yml",
+      "mode": "read-only",
+      "evidence": "44 candidates across six channels; independent metadata verification required."
+    },
+    {
+      "id": "puro-artwork",
+      "status": "pending-asset-selection",
+      "mode": "review exact MOTD artwork and choose replacement"
+    },
+    {
+      "id": "wrestling-base-rollout",
+      "status": "pending-pilot-verification",
+      "mode": "verify NWA-TNA runtime before wider rollout"
+    }
+  ]
+}

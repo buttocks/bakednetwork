@@ -1,0 +1,164 @@
+[
+  {
+    "directory": "WrestleTube/secondary/wrestling2",
+    "key": "wrestling2",
+    "name": "WRESTLING 2",
+    "sources": [
+      {
+        "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+        "name": "All Elite Wrestling"
+      },
+      {
+        "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+        "name": "TNA Wrestling"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+    "youtube_search_queries": [
+      "full match",
+      "full event"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "WrestleTube/secondary/wrestling3",
+    "key": "wrestling3",
+    "name": "WRESTLING 3",
+    "sources": [
+      {
+        "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+        "name": "WCW"
+      },
+      {
+        "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+        "name": "WWE Vault"
+      },
+      {
+        "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+        "name": "WWE"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+    "youtube_search_queries": [
+      "full match",
+      "full event"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "WrestleTube/secondary/Wrestling4",
+    "key": "wrestling4",
+    "name": "WRESTLING 4",
+    "sources": [
+      {
+        "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+        "name": "Lucha Libre AAA"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+    "youtube_search_queries": [
+      "full match",
+      "full event"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "WrestleTube/secondary/wrestling5",
+    "key": "wrestling5",
+    "name": "WRESTLING 5",
+    "sources": [
+      {
+        "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+        "name": "Lucha Libre AAA"
+      },
+      {
+        "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+        "name": "NEW JAPAN PRO-WRESTLING"
+      },
+      {
+        "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+        "name": "WCW"
+      },
+      {
+        "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+        "name": "WWE Vault"
+      },
+      {
+        "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+        "name": "WWE"
+      },
+      {
+        "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+        "name": "All Elite Wrestling"
+      },
+      {
+        "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+        "name": "TNA Wrestling"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+    "youtube_search_queries": [
+      "full match",
+      "full event"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "Indies",
+    "key": "indies",
+    "name": "INDIES",
+    "sources": [
+      {
+        "handle": "@GCWrestling",
+        "name": "Game Changer Wrestling"
+      },
+      {
+        "handle": "@BeyondWrestling",
+        "name": "Beyond Wrestling"
+      },
+      {
+        "handle": "@DEFYWrestling",
+        "name": "DEFY Wrestling"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+    "youtube_search_queries": [
+      "full match",
+      "full event"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "Shoot",
+    "key": "shoot",
+    "name": "SHOOT",
+    "sources": [
+      {
+        "handle": "@TitleMatchWrestling",
+        "name": "Title Match Wrestling"
+      },
+      {
+        "handle": "@WrestlingShootInterviews",
+        "name": "Wrestling Shoot Interviews"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(shoot interview|full interview|full shoot|wrestling interview)",
+    "youtube_search_queries": [
+      "shoot interview",
+      "full interview"
+    ],
+    "seed_count": 0
+  }
+]

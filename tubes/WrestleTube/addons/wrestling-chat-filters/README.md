@@ -26,5 +26,5 @@ This is a **filter-only extension** for the existing WrestleTube channel, not a 
 - The six new bracket effects are `[promo]`, `[heel]`, `[face]`, `[gold]`, `[chant]`, `[ringspoiler]`. The last uses CSS to reveal on hover/focus.
 - Existing external CSS URL for rollback:
   `https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@2dabdd69d4ed232daab36b06b2dab0525780f2ad/wrestletube/testing/lean-v1/channel-combined-test.css`
-- Original export is preserved at `wrestletube/backups/2026-11-22/chat-filters.json`.
+- Original export is preserved at `tubes/WrestleTube/backups/2026-11-22/chat-filters.json`.
 - Nothing in this GitHub package modifies the live Baked.live channel; it must be imported manually in the channel admin UI.

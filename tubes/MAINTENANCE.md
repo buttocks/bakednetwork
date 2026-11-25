@@ -41,3 +41,5 @@ WCW operator identified video-game simulation in Archive item 270419 Monday Nitr
 Operator confirmed YouTube playback and usable separate toolbar in live WCW. NJPW mixed-source validation passed run 45529187357. General Wrestling discovery now rotates official sources across promotions; WCW Archive search expanded with gaming exclusions. WCW currently YouTube-only after suspect Archive footage removal; WWF-WWE Archive-only. Restore mixed-source balance with vetted candidates; Archive reuse permissions remain unconfirmed.
 
 Playlist cleanup verified runs 45531347326 and 45531602024: 43 removed (Wrestling 11, luchatube 29, WID 3), three candidates skipped by safety checks. Repeated 404 plus successful YouTube metadata absence required for YouTube removals. Macro recheck uses six workers and two simultaneous checks per host, with cooldown and uncertain-host diagnostics.
+
+Consolidated 19 byte-identical legacy wrestletube/ files into existing canonical tubes/WrestleTube/ copies after dependency scan 45533065560; corrected two documentation references. Historical pinned versions retained. Rollback parent 2e08b75ccdc8f53f5c77450a275af7465af1fa1e.

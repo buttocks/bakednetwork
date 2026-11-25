@@ -45,6 +45,14 @@ body.overlay-idle .overlay-hotspot{pointer-events:auto}
 #menu-reveal{position:absolute;z-index:5;top:8px;left:10px;display:none;opacity:.85;padding:6px 10px;min-height:30px;pointer-events:auto}
 body.overlay-idle #menu-reveal{display:block}
 body.overlay-idle #menu-reveal:hover,body.overlay-idle #menu-reveal:focus-visible{opacity:1}
+/* YouTube owns the video rectangle; Baked TV controls occupy their own strip. */
+body.youtube-mode #youtube-shell{top:44px}
+body.youtube-mode header,body.youtube-mode.overlay-idle header{top:0;left:0;right:0;height:44px;padding:5px 10px;align-items:center;background:#101010;opacity:1;visibility:visible;pointer-events:auto;transition:none}
+body.youtube-mode #menu-reveal,body.youtube-mode.overlay-idle #menu-reveal{display:none}
+body.youtube-mode .overlay-hotspot{display:none}
+body.youtube-mode #now{display:none}
+body.youtube-mode #guide{top:44px}
+@media(max-width:400px){body.youtube-mode header{padding:4px;gap:4px}body.youtube-mode .controls{gap:4px}}
 </style>
 </head>
 <body>
@@ -57,6 +65,6 @@ body.overlay-idle #menu-reveal:hover,body.overlay-idle #menu-reveal:focus-visibl
 <button id="menu-reveal" type="button" aria-label="Show Baked TV controls">☰ Baked TV</button>
 <div class="overlay-hotspot" id="hotspot-top" aria-hidden="true"></div>
 <div class="overlay-hotspot" id="hotspot-bottom" aria-hidden="true"></div>
-<script src="../feeds/player-core.js?v=menu-reveal-20261125"></script>
+<script src="../feeds/player-core.js?v=dedicated-toolbar-20261125"></script>
 </body>
 </html>

@@ -172,7 +172,7 @@ function failCurrent(reason='Source temporarily unavailable'){
   }else setTimeout(()=>tune(true),900);
 }
 async function startYouTube(p,seek,id){
-  mode='youtube';video.pause();video.hidden=true;shell.hidden=false;
+  mode='youtube';document.body.classList.add('youtube-mode');video.pause();video.hidden=true;shell.hidden=false;
   showStatus('Tuning official YouTube match…');
   try{
     const YT=await youtubeAPI();
@@ -220,7 +220,7 @@ function tune(force=false,advance=false){
   activeUrl=p.url;activeProgram=p;activeIndex=chosen.index;setOverlay(p);
   clearTimeout(playbackTimer);status.hidden=false;
   if(p.source==='YouTube'){stopYT();startYouTube(p,seek,p.url);return}
-  stopYT();mode='archive';shell.hidden=true;video.hidden=false;
+  stopYT();mode='archive';document.body.classList.remove('youtube-mode');shell.hidden=true;video.hidden=false;
   video.pause();video.removeAttribute('src');video.load();video.src=p.url;video.load();
   showStatus('Tuning '+p.title+'…');
   playbackTimer=setTimeout(()=>{if(activeUrl===p.url&&!isPlaying())failCurrent('Video source timed out')},20000);

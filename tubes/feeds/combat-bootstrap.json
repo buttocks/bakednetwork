@@ -1,0 +1,71 @@
+[
+  {
+    "directory": "Boxing",
+    "key": "boxing",
+    "name": "BOXING",
+    "sources": [
+      {
+        "handle": "@toprank",
+        "name": "Top Rank Boxing"
+      },
+      {
+        "handle": "@PremierBoxingChampions",
+        "name": "Premier Boxing Champions"
+      },
+      {
+        "handle": "@MatchroomBoxing",
+        "name": "Matchroom Boxing"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|classic\\s*fight)",
+    "youtube_search_queries": [
+      "full fight",
+      "classic fight"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "Rizin",
+    "key": "rizin",
+    "name": "RIZIN",
+    "sources": [
+      {
+        "handle": "@RIZIN_FF",
+        "name": "RIZIN Fighting Federation"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|試合映像|フルファイト|無料公開)",
+    "youtube_search_queries": [
+      "full fight",
+      "試合映像"
+    ],
+    "seed_count": 0
+  },
+  {
+    "directory": "Sumo",
+    "key": "sumo",
+    "name": "SUMO",
+    "sources": [
+      {
+        "handle": "@sumo-video",
+        "name": "Japan Sumo Association"
+      },
+      {
+        "handle": "@NHKWORLDJAPAN",
+        "name": "NHK WORLD-JAPAN"
+      }
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "youtube_title_pattern": "(?i)(sumo|相撲|大相撲|本場所|取組|幕内)",
+    "youtube_search_queries": [
+      "grand sumo highlights",
+      "大相撲"
+    ],
+    "seed_count": 0
+  }
+]

@@ -87,3 +87,5 @@ Read-only playlist audits now obtain independent YouTube metadata evidence for r
 Playlist metadata audit validation passed 45610140976. Expanded recurring playlist batch coverage to all 29 registered channels and added DDT to recurring skin review. Empty playlists are legitimate read-only audit results; cleanup still refuses empty playlists. No live modifications.
 
 Shared wrestling source loader now continues after failed module fetch, applies a 20-second request timeout, and calls completion callbacks only when callable. Added isolated failure-recovery regression test. Existing generated channel builds not regenerated until validation and live rollout approval.
+
+Shared loader recovery regression passed run 45610635340. Regenerated NWA-TNA pilot source from tested canonical base; live pin remains unchanged pending service availability and deployment verification.

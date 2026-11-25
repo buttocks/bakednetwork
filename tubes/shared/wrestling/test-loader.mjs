@@ -10,3 +10,6 @@ assert.ok(requested.some(x=>x.includes('module_audiolib')));
 assert.ok(requested.some(x=>x.includes('PlaylistTools-Standalone')));
 assert.equal(warnings.length,1);
 console.log('PASS: one failed module does not stop the sequence');
+
+assert.equal(fs.readFileSync('tubes/NWA-TNA/channel-internal.js','utf8'),"window.BakedWrestlingBrand = {name:'NWA-TNA'};\n"+src);
+console.log('PASS: generated NWA-TNA pilot matches shared base');

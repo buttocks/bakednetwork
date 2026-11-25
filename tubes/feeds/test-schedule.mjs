@@ -17,8 +17,19 @@ for(const e of config.channels){
  if(p.some(x=>x.source==='YouTube')&&p.some(x=>x.source!=='YouTube')){
   const max=Math.max(...p.map(x=>x.duration));
   const target=e.key==='mtv'?0.2:0.6;
-  assert.ok(Math.abs(yt-target*total)<=max,'airtime imbalance '+e.key);
-  assert.ok(a.every((x,i)=>!i||x.url!==a[i-1].url));
+  const imbalance=Math.abs(yt-target*total);
+  assert.ok(a.every((x,i)=>!i||x.url!==a[i-1].url),'adjacent repeated program '+e.key);
+  if(imbalance>max){
+   // A singleton source cannot occur more than once between other programs.
+   // Accept a shortfall only when that source is underrepresented and its
+   // available non-adjacent slots are already saturated.
+   const y=p.filter(x=>x.source==='YouTube'), ar=p.filter(x=>x.source!=='YouTube');
+   const ny=a.filter(x=>x.source==='YouTube').length, na=a.length-ny;
+   const singletonLimited=(y.length===1&&yt<target*total&&ny>=na-1)||
+     (ar.length===1&&yt>target*total&&na>=ny-1);
+   assert.ok(singletonLimited,'airtime imbalance '+e.key);
+   console.log('Airtime target constrained by single-program source; expand catalog:',e.key);
+  }
  }
  console.log(e.key, p.length+' entries', Math.round(100*yt/total)+'% scheduled YouTube', Math.round(total/3600)+'h cycle');
 }

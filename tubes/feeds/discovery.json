@@ -5,12 +5,12 @@
       "YouTube",
       "Internet Archive"
     ],
-    "max_new_per_channel_per_run": 5,
+    "max_new_per_channel_per_run": 8,
     "max_archive_per_run": 2,
-    "max_youtube_per_run": 5,
+    "max_youtube_per_run": 6,
     "max_catalog_items": 90,
     "min_duration_seconds": 420,
-    "max_duration_seconds": 14400,
+    "max_duration_seconds": 28800,
     "rotation": "daily",
     "keep_seed_programs": true,
     "official_youtube_only": true
@@ -31,11 +31,11 @@
           "name": "Lucha Libre AAA"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*(match|episode|lucha)|lucha\\s*completa|episodio\\s*completo|combate\\s*completo|pelea\\s*completa|luchas\\s*completas)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|lucha|event|show)|lucha\\s*completa|episodio\\s*completo|combate\\s*completo|pelea\\s*completa|luchas\\s*completas)",
       "seed_count": 7,
       "youtube_search_queries": [
         "lucha completa",
-        "full match"
+        "función completa"
       ]
     },
     {
@@ -54,11 +54,11 @@
           "name": "NEW JAPAN PRO-WRESTLING"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*(match|fight|event|show)|free\\s*match|match\\s*free|試合映像|無料試合|無料公開)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|fight|event|show|episode|ppv)|free\\s*match|match\\s*free|試合映像|無料試合|無料公開)",
       "seed_count": 8,
       "youtube_search_queries": [
         "free match",
-        "フルマッチ"
+        "classic full match"
       ]
     },
     {
@@ -80,11 +80,11 @@
           "name": "NEW JAPAN PRO-WRESTLING"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*(match|fight|event|show)|free\\s*match|match\\s*free|試合映像|無料試合|無料公開)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|fight|event|show|episode|ppv)|free\\s*match|match\\s*free|試合映像|無料試合|無料公開)",
       "seed_count": 16,
       "youtube_search_queries": [
         "free match",
-        "フルマッチ"
+        "full event"
       ]
     },
     {
@@ -107,7 +107,7 @@
       "seed_count": 0,
       "youtube_search_queries": [
         "WCW full match",
-        "WCW Nitro full match"
+        "full episode Nitro"
       ]
     },
     {
@@ -126,11 +126,11 @@
           "name": "WWE"
         }
       ],
-      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show)|classic\\s*match)",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match)",
       "seed_count": 0,
       "youtube_search_queries": [
         "classic full match",
-        "WrestleMania full match"
+        "full event classic"
       ]
     },
     {
@@ -153,7 +153,7 @@
       "seed_count": 0,
       "youtube_search_queries": [
         "NWA full match",
-        "AWA full show"
+        "NWA full episode"
       ]
     },
     {
@@ -176,7 +176,7 @@
       "seed_count": 0,
       "youtube_search_queries": [
         "AEW full match",
-        "ROH full match"
+        "full event"
       ]
     }
   ]

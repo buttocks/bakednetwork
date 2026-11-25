@@ -22,3 +22,6 @@ Original backups: runs 45458643814 and 45461441839 (expire 2026-12-24).
 
 ## Verified repository cleanup — 2026-11-24
 Removed 29 SHA-identical legacy duplicates from main for RDH, RetroWrestling, WCW and WWF-WWE. Repository-wide dependency scan (run 45472368331) found only two harmless RDH sibling-loader/diagnostic references; canonical rdh-modern.js remains present. Pre-cleanup rollback commit: 17a73b44949f417bf8172981ffca0e3423170697. WID historical URL and ScaryTube macro dependencies remain retained. Further cleanup requires verification of outstanding dependencies.
+
+## Wrestling catalog update — 2026-11-25 UTC
+YouTube API authenticated for all feeds. Run 45523481228 added 30 official YouTube programs; 115 entries before catalog correction. Full events welcome; discovery duration maximum extended to eight hours, game/simulation entries excluded from official video discovery. Removed 1 game candidate(s) from WWF-WWE catalog. Shared player startup watchdog improved. New feed registration still pending playback and rights verification. The target is 60/40 by airtime, not count.

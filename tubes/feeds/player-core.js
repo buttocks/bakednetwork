@@ -137,6 +137,7 @@ function youtubeAPI(){
     sc.onerror=()=>{if(!settled){settled=true;clearTimeout(timer);reject(Error('YouTube API blocked'))}};
     document.head.appendChild(sc);
   });
+  ytPromise=ytPromise.catch(error=>{ytPromise=null;throw error});
   return ytPromise;
 }
 function stopYT(){
@@ -165,6 +166,7 @@ async function startYouTube(p,seek,id){
     const YT=await youtubeAPI();
     if(activeUrl!==id)return;
     stopYT();
+    playbackTimer=setTimeout(()=>{if(activeUrl===id&&!ytPlaying)failCurrent('YouTube startup timed out')},30000);
     yt=new YT.Player('youtube-frame',{
       width:'100%',height:'100%',videoId:p.youtube_id,host:'https://www.youtube-nocookie.com',
       playerVars:{autoplay:1,controls:0,rel:0,playsinline:1,start:seek,origin:location.origin},
@@ -177,7 +179,7 @@ async function startYouTube(p,seek,id){
         onStateChange:e=>{
           if(activeUrl!==id)return;
           const s=YT.PlayerState;
-          if(e.data===s.PLAYING){ytPlaying=true;status.hidden=true;reveal(firstFade)}
+          if(e.data===s.PLAYING){clearTimeout(playbackTimer);ytPlaying=true;status.hidden=true;reveal(firstFade)}
           else if(e.data===s.ENDED){activeUrl='';stopYT();tune(true,true)}
           else if(e.data===s.PAUSED){ytPlaying=false;reveal()}
         },
@@ -204,17 +206,16 @@ function tune(force=false,advance=false){
   stopYT();mode='archive';shell.hidden=true;video.hidden=false;
   video.pause();video.removeAttribute('src');video.load();video.src=p.url;video.load();
   showStatus('Tuning '+p.title+'…');
-  playbackTimer=setTimeout(()=>{if(activeUrl===p.url&&video.readyState<2)failCurrent('Video source timed out')},20000);
+  playbackTimer=setTimeout(()=>{if(activeUrl===p.url&&!isPlaying())failCurrent('Video source timed out')},20000);
   video.onloadedmetadata=()=>{
     if(activeUrl!==p.url)return;
-    clearTimeout(playbackTimer);
     if(Number.isFinite(video.duration)&&video.duration>1&&seek>0)
       try{video.currentTime=Math.min(seek,video.duration-.8)}catch{}
     video.muted=muted;
     video.play().catch(()=>showStatus('Click Unmute or Retune to start playback.'));
   };
 }
-video.addEventListener('playing',()=>{if(mode!=='archive')return;status.hidden=true;reveal(firstFade)});
+video.addEventListener('playing',()=>{if(mode!=='archive')return;clearTimeout(playbackTimer);status.hidden=true;reveal(firstFade)});
 video.addEventListener('pause',()=>{if(mode==='archive')reveal()});
 video.addEventListener('error',()=>{if(mode==='archive')failCurrent('Video source unavailable')});
 video.addEventListener('ended',()=>{if(mode==='archive'){activeUrl='';tune(true,true)}});

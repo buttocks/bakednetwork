@@ -83,6 +83,7 @@ def youtube_api(entry,defaults,key):
     """Use official YouTube Data API metadata; no cookies or media downloads."""
     match=re.compile(entry["youtube_title_pattern"])
     found=[]
+    excluded=re.compile("(?i)(?:\\bWWE\\s*2K\\d*\\b|\\bAEW Fight Forever\\b|\\bgameplay\\b|\\bvideo game\\b|\\bwatchalong\\b|\\bwatch along\\b|\\breaction\\b|\\bsimulation\\b)")
     def call(resource,params):
         url="https://www.googleapis.com/youtube/v3/"+resource+"?"+urlencode(dict(params,key=key))
         try:
@@ -130,7 +131,7 @@ def youtube_api(entry,defaults,key):
         videos=call("videos",{"part":"snippet,contentDetails,status","id":",".join(ids)})
         for v in videos.get("items",[]):
             sn=v.get("snippet",{});status=v.get("status",{});ident=v.get("id","")
-            if ident not in ids or sn.get("channelId")!=channel or not match.search(sn.get("title","")):continue
+            if ident not in ids or sn.get("channelId")!=channel or not match.search(sn.get("title","")) or excluded.search(sn.get("title","")):continue
             if status.get("privacyStatus")!="public" or status.get("embeddable") is not True or sn.get("liveBroadcastContent") in ("live","upcoming"):
                 print("YouTube candidate rejected",ident,"not public/embeddable or live")
                 continue
@@ -143,7 +144,7 @@ def youtube_api(entry,defaults,key):
             if v.get("contentDetails",{}).get("regionRestriction"):
                 print("YouTube candidate rejected",ident,"region restriction")
                 continue
-            found.append({"title":sn["title"][:160],"episode":source["name"]+" · official full match","url":"https://www.youtube.com/watch?v="+ident,"youtube_id":ident,"duration":seconds,"source":"YouTube","source_channel":source["name"]})
+            found.append({"title":sn["title"][:160],"episode":source["name"]+" · official programming","url":"https://www.youtube.com/watch?v="+ident,"youtube_id":ident,"duration":seconds,"source":"YouTube","source_channel":source["name"]})
     return found
 
 def youtube(entry,defaults):

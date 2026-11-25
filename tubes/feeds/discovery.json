@@ -29,6 +29,34 @@
   },
   "channels": [
     {
+      "directory": "NWA-TNA",
+      "key": "nwa-tna-early",
+      "archive_ids": [
+        "chris-sabin-in-2004-nwa-tna"
+      ],
+      "archive_search": "mediatype:movies AND (title:\"NWA TNA\" OR title:\"TNA Asylum\" OR title:\"TNA Xplosion\" OR title:\"TNA Impact\") AND (title:2002 OR title:2003 OR title:2004 OR title:\"weekly PPV\")",
+      "archive_title_pattern": "(?i)(?:\\b(?:NWA[ ._-]*TNA|TNA[ ._-]*(?:Asylum|Xplosion|Impact)|TNA)\\b.{0,100}\\b200[234]\\b|\\b200[234]\\b.{0,100}\\b(?:NWA[ ._-]*TNA|TNA)\\b|\\bNWA[ ._-]*TNA[ ._-]*(?:weekly[ ._-]*)?PPV\\s*#?\\s*\\d{1,3}\\b)",
+      "youtube_channels": [
+        {
+          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+          "name": "TNA Wrestling"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(?:\\bNWA[ -]*TNA\\s+(?:weekly\\s+)?PPV\\s*#?\\s*\\d{1,3}\\b|(?=.*\\b(?:TNA|Asylum)\\b)(?=.*\\b200[234]\\b)(?=.*(?:full\\s*(?:match|episode|event|show|ppv)|essential\\s*TNA\\s*matches|free\\s*match|pay.per.view)))",
+      "youtube_search_queries": [
+        "NWA TNA PPV"
+      ],
+      "archive_first": true,
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 12,
+      "seed_count": 2,
+      "youtube_candidate_ids": [
+        "NDca-lQjF9g",
+        "ybcJlX4aEa0",
+        "TW4abcuUZTY"
+      ]
+    },
+    {
       "directory": "luchatube",
       "key": "lucha",
       "archive_ids": [
@@ -228,33 +256,6 @@
       "seed_count": 13,
       "youtube_search_queries": [
         "NWA TNA full event"
-      ]
-    },
-    {
-      "directory": "NWA-TNA",
-      "key": "nwa-tna-early",
-      "archive_ids": [
-        "chris-sabin-in-2004-nwa-tna"
-      ],
-      "archive_search": "mediatype:movies AND (title:\"NWA TNA\" OR title:\"TNA Asylum\" OR title:\"TNA Xplosion\" OR title:\"TNA Impact\") AND (title:2002 OR title:2003 OR title:2004 OR title:\"weekly PPV\")",
-      "archive_title_pattern": "(?i)(?:\\b(?:NWA[ ._-]*TNA|TNA[ ._-]*(?:Asylum|Xplosion|Impact)|TNA)\\b.{0,100}\\b200[234]\\b|\\b200[234]\\b.{0,100}\\b(?:NWA[ ._-]*TNA|TNA)\\b|\\bNWA[ ._-]*TNA[ ._-]*(?:weekly[ ._-]*)?PPV\\s*#?\\s*\\d{1,3}\\b)",
-      "youtube_channels": [
-        {
-          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
-          "name": "TNA Wrestling"
-        }
-      ],
-      "youtube_title_pattern": "(?i)(?:\\bNWA[ -]*TNA\\s+(?:weekly\\s+)?PPV\\s*#?\\s*\\d{1,3}\\b|(?=.*\\b(?:TNA|Asylum)\\b)(?=.*\\b200[234]\\b)(?=.*(?:full\\s*(?:match|episode|event|show|ppv)|essential\\s*TNA\\s*matches|free\\s*match|pay.per.view)))",
-      "youtube_search_queries": [
-        "NWA TNA PPV"
-      ],
-      "archive_first": true,
-      "archive_search_rows": 40,
-      "archive_candidate_limit": 12,
-      "seed_count": 2,
-      "youtube_candidate_ids": [
-        "NDca-lQjF9g",
-        "ybcJlX4aEa0"
       ]
     },
     {

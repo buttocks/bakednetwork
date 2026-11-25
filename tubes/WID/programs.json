@@ -647,6 +647,40 @@
           "duration": 874,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "WWF Survivor Series 1990",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/wwf-survivor-series-1990/WWF%20Survivor%20Series%201990.mp4",
+          "duration": 8375,
+          "source": "Internet Archive",
+          "source_channel": "WWF Survivor Series 1990"
+        },
+        {
+          "title": "WCW - FULL EVENT WCW Starrcade 1984 Flair vs. Rhodes; Steamboat vs. Blanchard",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/wcw-full-event-wcw-starrcade-1984-flair-vs.-rhodes-steamboat-vs.-blanchard/WCW_-_FULL%20EVENT%20WCW%20Starrcade%201984%20Flair%20vs.%20Rhodes%3B%20Steamboat%20vs.%20Blanchard.mp4",
+          "duration": 10734,
+          "source": "Internet Archive",
+          "source_channel": "WCW FULL EVENT WCW Starrcade 1984 Flair Vs. Rhodes; Steamboat Vs. Blanchard"
+        },
+        {
+          "title": "FULL MATCH: The Public Enemy vs. The Steiner Brothers | WCW Tag Team Title Philadelphia Street Fight",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=7Bm4vhcWZh0",
+          "youtube_id": "7Bm4vhcWZh0",
+          "duration": 482,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting & Mike Awesome vs. Jeff Jarrett & Vampiro: WCW Thunder, Nov. 1, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=UVCwSpvdGQM",
+          "youtube_id": "UVCwSpvdGQM",
+          "duration": 569,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

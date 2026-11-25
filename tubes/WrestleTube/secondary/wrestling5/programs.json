@@ -623,6 +623,24 @@
           "duration": 874,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The Public Enemy vs. The Steiner Brothers | WCW Tag Team Title Philadelphia Street Fight",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=7Bm4vhcWZh0",
+          "youtube_id": "7Bm4vhcWZh0",
+          "duration": 482,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting & Mike Awesome vs. Jeff Jarrett & Vampiro: WCW Thunder, Nov. 1, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=UVCwSpvdGQM",
+          "youtube_id": "UVCwSpvdGQM",
+          "duration": 569,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

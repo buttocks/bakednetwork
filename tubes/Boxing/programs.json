@@ -607,6 +607,24 @@
           "duration": 1505,
           "source": "YouTube",
           "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Ryan Garcia vs Devin Haney | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=bbqI7fRLlZs",
+          "youtube_id": "bbqI7fRLlZs",
+          "duration": 2297,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "George Liddard vs Kieron Conway | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=SeNj3aN_lOw",
+          "youtube_id": "SeNj3aN_lOw",
+          "duration": 3438,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
         }
       ]
     }

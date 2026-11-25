@@ -314,6 +314,38 @@
           "duration": 4925,
           "source": "Internet Archive",
           "source_channel": "Toryumon - 2002/08/03+11"
+        },
+        {
+          "title": "Toryumon - 2002.07.07 (TV Airing)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.07.07-tv-airing/Toryumon%20-%202002.07.07%20%28TV%20Airing%29.mp4",
+          "duration": 10599,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/07/07 - IIIer Aniversario (TV Airing)"
+        },
+        {
+          "title": "Toryumon - 2002.07.07 (DVD Ver.)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.07.07-dvd-ver./Toryumon%20-%202002.07.07%20%28DVD%20Ver.%29.mp4",
+          "duration": 5573,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/07/07 - IIIer Aniversario (DVD Ver.)"
+        },
+        {
+          "title": "Toryumon - 2002.06.07",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.06.07/Toryumon%20-%202002.06.07.mp4",
+          "duration": 6959,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/06/07"
+        },
+        {
+          "title": "Toryumon - 2002.05.11+06.06",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-2002.05.11-06.06/Toryumon%20-%202002.05.11%2B06.06.mp4",
+          "duration": 6182,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 2002/05/11+06/06"
         }
       ]
     }

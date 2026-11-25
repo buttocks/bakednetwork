@@ -574,6 +574,22 @@
           "duration": 650,
           "source": "Internet Archive",
           "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt6",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt6.mp4",
+          "duration": 1213,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW 23.9.2012 pt7",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt7.mp4",
+          "duration": 882,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 23.9.2012 Destruction 2012"
         }
       ]
     }

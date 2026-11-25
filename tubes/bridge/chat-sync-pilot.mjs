@@ -18,7 +18,7 @@ function validateSnapshot(s,channel){
  }
 }
 export async function pilotChatSync({page,request,initial}){
- if(request.channel!=='wrestling2'||!config.targets.includes(request.channel)||config.master!=='Wrestling'||config.mode!=='exact-one-way')throw Error('Outside approved pilot scope');
+ if(!['wrestling2','wrestling3','Wrestling4','wrestling5'].includes(request.channel)||!config.targets.includes(request.channel)||config.master!=='Wrestling'||config.mode!=='exact-one-way')throw Error('Outside approved WrestleTube scope');
  const master=JSON.parse(await fs.readFile(root+'/'+config.master+'.json','utf8'));
  validateSnapshot(master,config.master);
  if(Date.now()-Date.parse(master.at)>10*60*1000)throw Error('Master snapshot expired');
@@ -75,7 +75,7 @@ export async function pilotChatSync({page,request,initial}){
   }
   if(!equal(await state(),unchanged))throw Error('Unrelated channel configuration changed');
   if(!equal(await read('macros'),macroView(master.macros))||!equal(await read('filters'),master.filters))throw Error('Final comparison failed');
-  report.status='pilot-synced';
+  report.status=request.action==='pilot_chat_sync'?'pilot-synced':'chat-synced';
   await save();
   console.log('CHAT_SYNC_PILOT '+JSON.stringify(report));
   return {channel:request.channel,status:report.status,steps:report.steps};

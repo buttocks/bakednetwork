@@ -11,6 +11,7 @@ const url=new URL('./programs.json',location.href);
 let track=null, yt=null,ytPromise=null,ytReady=false,ytPlaying=false,mode='archive';
 let muted=true, activeUrl='', activeDay='', bad=new Set(), day='', ordered=[];
 let activeProgram=null, nextTrack=null, activeIndex=-1;
+let preferFallbackSource=null;
 let guideOpen=false,hoveringControls=false,keyboardNavigation=false,overlayTimer=null;
 let seekWanted=0,playbackStarted=false,playbackTimer=null;
 const firstFade=5500,revealFade=3200;
@@ -98,7 +99,11 @@ function select(date=new Date()){
 }
 function guide(date=new Date()){
   if(!track)return;
-  const item=select(date);if(!item)return;
+  let item=select(date);if(!item)return;
+  if(activeUrl&&activeProgram&&ordered[activeIndex]?.url===activeUrl){
+    let seek=0;try{seek=mode==='youtube'?(ytReady?yt.getCurrentTime():0):video.currentTime}catch{}
+    item={p:activeProgram,index:activeIndex,seek:Number.isFinite(seek)?seek:0};
+  }
   $('guide-title').textContent=track.name+' · TV Guide';
   const list=$('guide-list');list.replaceChildren();
   let when=date.getTime()-item.seek*1000;
@@ -151,7 +156,8 @@ function stopYT(){
 }
 function failCurrent(reason='Source temporarily unavailable'){
   const badUrl=activeUrl;if(badUrl)bad.add(badUrl);
-  stopYT();clearTimeout(playbackTimer);
+  preferFallbackSource=activeProgram?.source==='YouTube'?'Internet Archive':'YouTube';
+  stopYT();clearTimeout(playbackTimer);video.pause();
   showStatus(reason+' — tuning another match…');
   activeUrl='';
   if(track&&track.programs.every(p=>bad.has(p.url))){
@@ -193,6 +199,11 @@ function tune(force=false,advance=false){
   if(!force&&activeUrl)return; // Do not interrupt active programming on catalog refresh or UTC rollover.
   if(nextTrack){track=nextTrack;nextTrack=null;day='';}
   let chosen=select();
+  if(preferFallbackSource&&ordered.length){
+    const start=chosen?.index??0;
+    for(let i=0;i<ordered.length;i++){const index=(start+i)%ordered.length;const p=ordered[index];if(p.source===preferFallbackSource&&!bad.has(p.url)){chosen={p,index,seek:0};break;}}
+    preferFallbackSource=null;
+  }
   if(advance&&activeProgram&&ordered.length){
     const prev=ordered.findIndex(p=>p.url===activeProgram.url);
     for(let i=1;i<=ordered.length;i++){const index=((prev>=0?prev:activeIndex)+i+ordered.length)%ordered.length;const p=ordered[index];if(!bad.has(p.url)){chosen={p,index,seek:0};break;}}

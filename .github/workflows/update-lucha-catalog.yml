@@ -9,8 +9,6 @@ on:
     paths:
       - 'tubes/feeds/discovery.json'
       - 'tubes/feeds/discover.py'
-      - 'tubes/feeds/player-core.js'
-      - '.github/workflows/update-lucha-catalog.yml'
 
 permissions:
   contents: write

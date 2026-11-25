@@ -30,6 +30,7 @@ jobs:
         feed: ${{ fromJSON(needs.discover.outputs.feeds) }}
     env:
       BAKED_TEST_FEED: ${{ matrix.feed }}
+      BAKED_TEST_EMBED: standard
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:

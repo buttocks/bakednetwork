@@ -31,6 +31,8 @@ jobs:
       - name: Install YouTube metadata discovery
         run: python -m pip install --disable-pip-version-check 'yt-dlp>=2026.9.1'
       - name: Validate and discover a few programs per feed
+        env:
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
         run: |
           set -e
           python -m py_compile tubes/feeds/discover.py

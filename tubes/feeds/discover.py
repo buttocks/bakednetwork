@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urlencode, quote
 from urllib.request import Request, urlopen
 from concurrent.futures import ThreadPoolExecutor
-import json, re, time
+import json, re, time, os
 
 ROOT=Path(__file__).resolve().parent
 CHANNELS=ROOT.parent
@@ -78,7 +78,39 @@ def archive(entry, defaults, cursor):
             if len(found)>=60:break
         if len(found)>=60:break
     return found
+def youtube_api(entry,defaults,key):
+    """Use official YouTube Data API metadata; no cookies or media downloads."""
+    match=re.compile(entry["youtube_title_pattern"])
+    found=[]
+    def call(resource,params):
+        return get_json("https://www.googleapis.com/youtube/v3/"+resource+"?"+urlencode(dict(params,key=key))) or {}
+    for source in entry["youtube_channels"][:3]:
+        if time.monotonic()-START>MAX_RUNTIME-30:break
+        channel=source["id"]
+        if not re.fullmatch(r"UC[A-Za-z0-9_-]{22}",channel):continue
+        listing=call("channels",{"part":"contentDetails","id":channel})
+        uploads=next((c.get("contentDetails",{}).get("relatedPlaylists",{}).get("uploads") for c in listing.get("items",[]) if c.get("id")==channel),None)
+        if not uploads:continue
+        page=call("playlistItems",{"part":"snippet,contentDetails","playlistId":uploads,"maxResults":50})
+        ids=[x.get("contentDetails",{}).get("videoId","") for x in page.get("items",[]) if match.search(x.get("snippet",{}).get("title",""))]
+        ids=[v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)][:20]
+        if not ids:continue
+        videos=call("videos",{"part":"snippet,contentDetails,status","id":",".join(ids)})
+        for v in videos.get("items",[]):
+            sn=v.get("snippet",{});status=v.get("status",{});ident=v.get("id","")
+            if ident not in ids or sn.get("channelId")!=channel or not match.search(sn.get("title","")):continue
+            if status.get("privacyStatus")!="public" or status.get("embeddable") is not True or sn.get("liveBroadcastContent") in ("live","upcoming"):continue
+            duration=re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?",v.get("contentDetails",{}).get("duration",""))
+            if not duration:continue
+            h,m,s=(int(x or 0) for x in duration.groups());seconds=3600*h+60*m+s
+            if not defaults["min_duration_seconds"]<=seconds<=defaults["max_duration_seconds"]:continue
+            if v.get("contentDetails",{}).get("regionRestriction"):continue
+            found.append({"title":sn["title"][:160],"episode":source["name"]+" · official full match","url":"https://www.youtube.com/watch?v="+ident,"youtube_id":ident,"duration":seconds,"source":"YouTube","source_channel":source["name"]})
+    return found
+
 def youtube(entry,defaults):
+    api_key=os.environ.get('YOUTUBE_DATA_API_KEY','').strip()
+    if api_key:return youtube_api(entry,defaults,api_key)
     try:from yt_dlp import YoutubeDL
     except ImportError:return []
     match=re.compile(entry["youtube_title_pattern"])

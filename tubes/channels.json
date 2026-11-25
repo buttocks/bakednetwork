@@ -231,7 +231,9 @@
       "stage": "onboarding",
       "family": "joshi",
       "relationship": "secondary",
-      "skinReview": "pending"
+      "skinReview": "pending",
+      "adminVerified": true,
+      "backupVerified": true
     }
   ]
 }

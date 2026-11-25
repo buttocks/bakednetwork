@@ -53,3 +53,5 @@ Added 14 user-specified channels and central registry (25 total). New channels r
 Paced macro run 45532049589 succeeded: Wrestling and WWF-WWE each removed 210, each one unknown URL remaining; cumulative confirmed macro removals 633. Joshi and Puro verified rank 3 and backed up (45534795166,45534922142); playlist sizes 455 and 81, unavailable candidates 1 and 4 respectively. Keep read-only onboarding until next reviewed changes. Shared Playlist Tools browser test failed because ubuntu-latest resolved to unsupported 26.04; pin runner to 24.04.
 
 All 14 family onboarding channels verified admin rank 3 and successful backups in run 45536265998. Shared playlist tools functional test passed 45536387897. User reports broken skins and requested NWA-TNA channel; registered and submitted batched skin reviews. NWA-TNA slug pending live confirmation. No automatic skin replacement.
+
+Joshi2 verified rank 3, backed up, 10 protected playlist entries, zero legacy references in run 45538021819. NWA-TNA skin-only retry 45538283890 status completed / success.

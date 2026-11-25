@@ -33,6 +33,10 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.action==='mirror_njpw_skin'){
+    if(raw.channel!=='NJPWALT'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NJPW skin mirror request');
+    return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
+  }
   if(raw.action==='repair_njpwalt_logo'){
     if(raw.channel!=='NJPWALT'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NJPWALT logo request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
@@ -254,6 +258,15 @@ async function run(request){
       console.log('Legacy reference breakdown '+request.channel+' '+JSON.stringify(Object.fromEntries(Object.entries(refs.legacy).map(([k,v])=>[k,v.length]))));
       for(const key of ['css','js','options'])for(const url of refs.legacy[key]||[]){try{const u=new URL(url);if(['cdn.jsdelivr.net','raw.githubusercontent.com','buttocks.github.io'].includes(u.hostname)&&!u.username&&!u.password)console.log('Legacy asset '+request.channel+' '+key+' '+u.origin+u.pathname)}catch{}}
       return {request_id:request.request_id,channel:request.channel,action:request.action,status:'audited',rank:initial.rank,admin_verified:Number.isFinite(initial.rank)&&initial.rank>=3,permissions:initial.permissions,items:before.length,...refs};
+    }
+    if(request.action==='mirror_njpw_skin'){
+      const source=await context.newPage();
+      try{
+        await source.goto(SITE+'/tv/NJPW',{waitUntil:'domcontentloaded',timeout:45000});
+        await source.waitForFunction(()=>window.CHANNEL?.name==='NJPW'&&document.querySelector('#motdwrap #header img'),{},{timeout:30000});
+        const {mirrorSkin}=await import('../NJPW/secondary/NJPWALT/mirror-skin.mjs');
+        return await mirrorSkin({page,source,request,initial});
+      }finally{await source.close()}
     }
     if(request.action==='repair_njpwalt_logo'){
       const source=await context.newPage();

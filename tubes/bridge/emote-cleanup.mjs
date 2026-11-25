@@ -5,7 +5,8 @@
  */
 import fs from 'node:fs/promises';
 const FILE='tubes/bridge/emote-url-audit.json';
-const CONCURRENCY=14;
+const CONCURRENCY=6;
+const HOST_CONCURRENCY=2;
 const TIMEOUT=7500;
 
 function normalize(raw){
@@ -112,12 +113,23 @@ export async function auditEmoteUrls({page,request,initial}){
   const tasks=urls.slice(start,end);
   const tested=new Array(tasks.length);
   let next=0,done=0;
+  const activeHosts=new Map();
+  const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  async function pacedProbe(url){
+    const host=new URL(url).hostname.toLowerCase();
+    while((activeHosts.get(host)||0)>=HOST_CONCURRENCY)await sleep(100);
+    activeHosts.set(host,(activeHosts.get(host)||0)+1);
+    try{return await probe(req,url,request.channel);}finally{
+      await sleep(150);
+      activeHosts.set(host,activeHosts.get(host)-1);
+    }
+  }
   const req=page.context().request;
   async function worker(){
     for(;;){
       const i=next++;if(i>=tasks.length)return;
       const item=tasks[i];
-      tested[i]=item.url?await probe(req,item.url,request.channel):
+      tested[i]=item.url?await pacedProbe(item.url):
         {url:item.raw,status:'dead',reason:'invalid-image-url'};
       tested[i].names=item.names;
       tested[i].original=item.raw;
@@ -141,6 +153,9 @@ export async function auditEmoteUrls({page,request,initial}){
   await fs.writeFile(dir+'/audit.json',JSON.stringify(report,null,2)+'\n');
   const original=await page.evaluate(()=>window.CHANNEL.emotes.map(e=>({name:e.name,image:e.image,source:e.source})));
   await fs.writeFile(dir+'/macros-original.json',JSON.stringify(original,null,2)+'\n');
+  const unknownHosts={};
+  for(const hit of tested.filter(x=>x.status==='unknown')){try{const host=new URL(hit.url).hostname;const k=host+' '+(hit.verify?.status??hit.first?.status??hit.reason);unknownHosts[k]=(unknownHosts[k]||0)+1;}catch{}}
+  console.log('Macro uncertain hosts '+request.channel+' '+JSON.stringify(Object.entries(unknownHosts).sort((a,b)=>b[1]-a[1]).slice(0,20)));
   console.log('Macro audit summary '+request.channel+' '+JSON.stringify({totalEmotes:report.totalEmotes,unique:report.totalUniqueUrls,checked:report.limit,offset:report.offset,counts:report.statusCounts}));
   return {request_id:request.request_id,channel:request.channel,action:request.action,
     status:'emotes-audited',checked:report.limit,totalEmotes:emotes.length,

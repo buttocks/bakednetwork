@@ -1,26 +1,18 @@
 [
   {
     "schema": 1,
-    "request_id": "playlist_unavailable_youtube_20261125_Wrestling",
+    "request_id": "macro_paced_20261125_Wrestling",
     "channel": "Wrestling",
-    "action": "clean_dead_playlist",
+    "action": "clean_dead_emotes",
     "offset": 0,
-    "limit": 1500
+    "limit": 20000
   },
   {
     "schema": 1,
-    "request_id": "playlist_unavailable_youtube_20261125_luchatube",
-    "channel": "luchatube",
-    "action": "clean_dead_playlist",
+    "request_id": "macro_paced_20261125_WWF-WWE",
+    "channel": "WWF-WWE",
+    "action": "clean_dead_emotes",
     "offset": 0,
-    "limit": 1500
-  },
-  {
-    "schema": 1,
-    "request_id": "playlist_unavailable_youtube_20261125_WID",
-    "channel": "WID",
-    "action": "clean_dead_playlist",
-    "offset": 0,
-    "limit": 1500
+    "limit": 20000
   }
 ]

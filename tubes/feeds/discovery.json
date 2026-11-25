@@ -246,12 +246,16 @@
       ],
       "youtube_title_pattern": "(?i)(?:\\bNWA[ -]*TNA\\s+(?:weekly\\s+)?PPV\\s*#?\\s*\\d{1,3}\\b|(?=.*\\b(?:TNA|Asylum)\\b)(?=.*\\b200[234]\\b)(?=.*(?:full\\s*(?:match|episode|event|show|ppv)|essential\\s*TNA\\s*matches|free\\s*match|pay.per.view)))",
       "youtube_search_queries": [
-        "NWA TNA weekly PPV 2002 2003 2004 full event"
+        "NWA TNA PPV"
       ],
       "archive_first": true,
       "archive_search_rows": 40,
       "archive_candidate_limit": 12,
-      "seed_count": 2
+      "seed_count": 2,
+      "youtube_candidate_ids": [
+        "NDca-lQjF9g",
+        "ybcJlX4aEa0"
+      ]
     },
     {
       "directory": "DDT",

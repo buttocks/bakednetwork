@@ -144,7 +144,8 @@ def youtube_api(entry,defaults,key):
         if not uploads:
             print("YouTube official channel unavailable",source["name"])
             continue
-        ids=[]
+        # Reviewed candidate IDs still require official-channel, duration and embed checks below.
+        ids=[v for v in entry.get("youtube_candidate_ids",[]) if isinstance(v,str) and re.fullmatch(r"[A-Za-z0-9_-]{11}",v)]
         token=None
         for _ in range(4):
             params={"part":"snippet,contentDetails","playlistId":uploads,"maxResults":50}

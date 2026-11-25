@@ -229,7 +229,7 @@
       "directory": "DDT",
       "key": "ddt",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:DDT[ -]+Pro[ -]+Wrestling|DDT[ -]+Pro-Wrestling|Dramatic[ -]+Dream[ -]+Team)\\b",
       "youtube_channels": [
         {
           "id": "UC6oCIQ4TRcIWgljXqlDFUyA",
@@ -244,13 +244,17 @@
       "seed_count": 0,
       "youtube_search_queries": [
         "DDT full match"
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"DDT Pro Wrestling\" OR title:\"DDT Pro-Wrestling\" OR title:\"Dramatic Dream Team\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "AJPW",
       "key": "ajpw",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:All[ -]+Japan[ -]+Pro[ -]+Wrestling|AJPW)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -262,13 +266,17 @@
           "id": "UCXcE5gdlJ5sOG8eYrI3oenQ",
           "name": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"All Japan Pro Wrestling\" OR title:\"AJPW\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "NOAH",
       "key": "noah",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Pro[ -]+Wrestling[ -]+NOAH)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -280,13 +288,17 @@
           "id": "UC4T0v46s8yxJuTOW1_mD1xA",
           "name": "プロレスリング・ノア公式チャンネル"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Pro Wrestling NOAH\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "DragonGate",
       "key": "dg",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Dragon[ -]+Gate[ -]+Wrestling|Dragon[ -]+Gate[ -]+Pro[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -298,13 +310,17 @@
           "id": "UCekKOhczmszWjqBFLvdFy4A",
           "name": "DRAGONGATE"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Joshi",
       "key": "joshi",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:All[ -]+Japan[ -]+Women's[ -]+Pro[ -]+Wrestling|AJW[ -]+Wrestling|JWP[ -]+Wrestling|Joshi[ -]+Puroresu)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -320,13 +336,17 @@
           "id": "UCQPAIKyGyLCBnbvdwG0j6BQ",
           "name": "東京女子プロレスofficial - TJPW"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"All Japan Women's Pro Wrestling\" OR title:\"AJW Wrestling\" OR title:\"JWP Wrestling\" OR title:\"Joshi Puroresu\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Puro",
       "key": "puro",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Puroresu|Japanese[ -]+Pro[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -354,7 +374,11 @@
           "id": "UC6oCIQ4TRcIWgljXqlDFUyA",
           "name": "DDT"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Puroresu\" OR title:\"Japanese Pro Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "NJPW/secondary/NJPWALT",
@@ -386,7 +410,7 @@
       "directory": "DragonGate/secondary/DGalt",
       "key": "dgalt",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Dragon[ -]+Gate[ -]+Wrestling|Dragon[ -]+Gate[ -]+Pro[ -]+Wrestling|Toryumon[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -398,13 +422,17 @@
           "id": "UCekKOhczmszWjqBFLvdFy4A",
           "name": "DRAGONGATE"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\" OR title:\"Toryumon Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Joshi/secondary/joshi2",
       "key": "joshi2",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:GAEA[ -]+Japan|JWP[ -]+Wrestling|Ladies[ -]+Legend[ -]+Pro[ -]+Wrestling|Joshi[ -]+Puroresu)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
       "youtube_search_queries": [
         "full match",
@@ -420,13 +448,17 @@
           "id": "UCQPAIKyGyLCBnbvdwG0j6BQ",
           "name": "東京女子プロレスofficial - TJPW"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"GAEA Japan\" OR title:\"JWP Wrestling\" OR title:\"Ladies Legend Pro Wrestling\" OR title:\"Joshi Puroresu\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Indies",
       "key": "indies",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Independent[ -]+Wrestling|Ring[ -]+of[ -]+Honor[ -]+Wrestling|CHIKARA[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "youtube_search_queries": [
         "full match",
@@ -446,7 +478,11 @@
           "id": "UCBZ2Hl4YPU0Dzxuj3a3qSQw",
           "name": "DEFY Wrestling"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Independent Wrestling\" OR title:\"Ring of Honor Wrestling\" OR title:\"CHIKARA Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Shoot",
@@ -480,7 +516,7 @@
       "directory": "Boxing",
       "key": "boxing",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Boxing[ -]+Match|Boxing[ -]+Championship)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|classic\\s*fight)",
       "youtube_search_queries": [
         "full fight",
@@ -500,13 +536,17 @@
           "id": "UC7LReVje9aPB4B6XAsXX8WQ",
           "name": "Matchroom Boxing"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Boxing Match\" OR title:\"Boxing Championship\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Rizin",
       "key": "rizin",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Rizin[ -]+Fighting[ -]+Federation|RIZIN[ -]+FF)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|試合映像|フルファイト|無料公開)",
       "youtube_search_queries": [
         "full fight",
@@ -518,13 +558,17 @@
           "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
           "name": "RIZIN FIGHTING FEDERATION"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Rizin Fighting Federation\" OR title:\"RIZIN FF\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "Sumo",
       "key": "sumo",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Grand[ -]+Sumo[ -]+Tournament|Sumo[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(sumo|相撲|大相撲|本場所|取組|幕内)",
       "youtube_search_queries": [
         "grand sumo highlights",
@@ -540,7 +584,11 @@
           "id": "UCSPEjw8F2nQDtmUKPFNF7_A",
           "name": "NHK WORLD-JAPAN"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Grand Sumo Tournament\" OR title:\"Sumo Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "WID",
@@ -550,7 +598,7 @@
         "full match"
       ],
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match)\\b",
       "seed_count": 0,
       "youtube_channels": [
         {
@@ -581,13 +629,17 @@
           "id": "UCOp8wkVqdrWbFYHjDv946QQ",
           "name": "TNA Wrestling"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "WrestleTube/secondary/wrestling2",
       "key": "wrestling2",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match|Ring[ -]+of[ -]+Honor[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "youtube_search_queries": [
         "full match",
@@ -603,13 +655,17 @@
           "id": "UCOp8wkVqdrWbFYHjDv946QQ",
           "name": "TNA Wrestling"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Ring of Honor Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "WrestleTube/secondary/wrestling3",
       "key": "wrestling3",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match|Territory[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "youtube_search_queries": [
         "full match",
@@ -629,13 +685,17 @@
           "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
           "name": "WWE"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Territory Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "WrestleTube/secondary/Wrestling4",
       "key": "wrestling4",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match|Classic[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "youtube_search_queries": [
         "full match",
@@ -647,13 +707,17 @@
           "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
           "name": "Lucha Libre AAA"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Classic Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "WrestleTube/secondary/wrestling5",
       "key": "wrestling5",
       "archive_ids": [],
-      "archive_title_pattern": "(?!)",
+      "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match|Independent[ -]+Wrestling)\\b",
       "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "youtube_search_queries": [
         "full match",
@@ -689,7 +753,11 @@
           "id": "UCOp8wkVqdrWbFYHjDv946QQ",
           "name": "TNA Wrestling"
         }
-      ]
+      ],
+      "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Independent Wrestling\")",
+      "archive_search_rows": 30,
+      "archive_candidate_limit": 8,
+      "archive_first": true
     },
     {
       "directory": "MTV",

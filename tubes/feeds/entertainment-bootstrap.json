@@ -1,0 +1,108 @@
+[
+  {
+    "directory": "MTV",
+    "key": "mtv",
+    "name": "MTV",
+    "sources": [
+      {
+        "handle": "@MTV",
+        "name": "MTV"
+      },
+      {
+        "handle": "@MTVVault",
+        "name": "MTV Vault"
+      }
+    ],
+    "youtube_title_pattern": "(?i)(music video|official video|live performance|unplugged|music awards|music television)",
+    "youtube_search_queries": [
+      "music video"
+    ],
+    "min_duration_seconds": 90,
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "seed_count": 0
+  },
+  {
+    "directory": "RDH",
+    "key": "rdh",
+    "name": "REAL DAD'S HIDEOUT",
+    "sources": [
+      {
+        "handle": "@TheEdSullivanShow",
+        "name": "The Ed Sullivan Show"
+      },
+      {
+        "handle": "@SaturdayNightLive",
+        "name": "Saturday Night Live"
+      }
+    ],
+    "youtube_title_pattern": "(?i)(performance|live|sketch|official clip)",
+    "youtube_search_queries": [
+      "classic performance"
+    ],
+    "min_duration_seconds": 90,
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "seed_count": 0
+  },
+  {
+    "directory": "WID",
+    "key": "wid",
+    "name": "WID SPORTS",
+    "sources": [
+      {
+        "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+        "name": "Lucha Libre AAA"
+      },
+      {
+        "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+        "name": "NEW JAPAN PRO-WRESTLING"
+      },
+      {
+        "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+        "name": "WCW"
+      },
+      {
+        "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+        "name": "WWE Vault"
+      },
+      {
+        "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+        "name": "WWE"
+      },
+      {
+        "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+        "name": "All Elite Wrestling"
+      },
+      {
+        "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+        "name": "TNA Wrestling"
+      }
+    ],
+    "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+    "youtube_search_queries": [
+      "full match"
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "seed_count": 0
+  },
+  {
+    "directory": "ScaryTube",
+    "key": "scarytube",
+    "name": "SCARYTUBE",
+    "sources": [
+      {
+        "handle": "@ALTER",
+        "name": "ALTER"
+      }
+    ],
+    "youtube_title_pattern": "(?i)(horror|scary|short film)",
+    "youtube_search_queries": [
+      "horror short film"
+    ],
+    "archive_ids": [],
+    "archive_title_pattern": "(?!)",
+    "seed_count": 0
+  }
+]

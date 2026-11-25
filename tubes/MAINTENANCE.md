@@ -100,3 +100,5 @@ Started independent AJPW, NOAH, Dragon Gate, Joshi and Puro feeds in parallel wi
 Japanese bootstrap passed 45644967774: AJPW 6, NOAH 6, DG 29, Joshi 30, Puro 40. Added all five to recurring discovery. Created alternate schedules NJPWALT, DGalt and Joshi2 from validated parent catalogs, using separate channel keys and independent daily shuffles; catalogs initially overlap by design. Playback and live registration pending.
 
 Shoot channel scope corrected per owner: shoot-style wrestling and early hybrid MMA, not shoot interviews. Removed eight incorrectly categorized feed entries (history retained), excluded Shoot from general bootstrap, submitted dedicated source discovery. Do not register empty catalog; add to recurring discovery only after appropriate programming is validated.
+
+Final four feed pages created: MTV music, RDH provisional variety, WID wrestling/sports, ScaryTube horror shorts. RDH and MTV programming scope requires owner confirmation; no changes to live playlists. Entertainment catalog bootstrap submitted.

@@ -13,7 +13,23 @@ on:
 permissions:
   contents: read
 jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    outputs:
+      feeds: ${{ steps.matrix.outputs.feeds }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        run: node -e 'const c=require("./tubes/feeds/discovery.json"); console.log("feeds="+JSON.stringify(c.channels.map(e=>e.key)))' >> "$GITHUB_OUTPUT"
   browser:
+    needs: discover
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        feed: ${{ fromJSON(needs.discover.outputs.feeds) }}
+    env:
+      BAKED_TEST_FEED: ${{ matrix.feed }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -27,5 +43,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: feed-browser-results
+          name: feed-browser-results-${{ matrix.feed }}
           path: feed-browser-results.json

@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "njpwalt": {
+      "available": true,
+      "verification": "browser validation run 45666059387 job 139388447227; direct video playback",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

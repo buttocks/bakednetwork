@@ -63,6 +63,7 @@ function shuffle(list,key){
   return a;
 }
 function weightedLineup(programs,key){
+  const youtubeTarget=key.startsWith('mtv|')?.2:.6;
   const unique=[...new Map(programs.map(p=>[p.url,p])).values()];
   const yt=shuffle(unique.filter(p=>p.source==='YouTube'),key+'|youtube');
   const archive=shuffle(unique.filter(p=>p.source!=='YouTube'),key+'|archive');
@@ -76,9 +77,9 @@ function weightedLineup(programs,key){
     const total=seconds[0]+seconds[1];
     const a=queues[0][used[0]%queues[0].length];
     const b=queues[1][used[1]%queues[1].length];
-    // Choose the next complete program closest to the 60% YouTube time target.
-    const errorY=Math.abs(seconds[0]+a.duration-.6*(total+a.duration));
-    const errorA=Math.abs(seconds[0]-.6*(total+b.duration));
+    // Choose the next complete program closest to the channel's YouTube airtime target.
+    const errorY=Math.abs(seconds[0]+a.duration-youtubeTarget*(total+a.duration));
+    const errorA=Math.abs(seconds[0]-youtubeTarget*(total+b.duration));
     let i=errorY<=errorA?0:1;
     // Avoid adjacent identical programs when another source is available.
     if(result.at(-1)?.url===queues[i][used[i]%queues[i].length].url)i=1-i;

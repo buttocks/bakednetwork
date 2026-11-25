@@ -90,6 +90,16 @@
       "statusKey": "nwa-tna",
       "banner": "NWA-TNA",
       "addOnly": true
+    },
+    {
+      "tube": "NJPWALT",
+      "id": "njpwalt-baked-tv",
+      "title": "BAKED TV — NJPW ALT",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NJPW/secondary/NJPWALT/feed.html?channel=njpwalt",
+      "statusFile": "tubes/NJPWALT/feed-status.json",
+      "statusKey": "njpwalt",
+      "banner": "NJPW ALT",
+      "addOnly": true
     }
   ]
 }

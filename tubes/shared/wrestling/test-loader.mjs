@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+const src=fs.readFileSync('tubes/shared/wrestling/channel-base.js','utf8');
+const start=src.indexOf('({options:');const end=src.indexOf('.initialize();',start);assert.ok(start>=0&&end>start);
+const requested=[],warnings=[];
+const sandbox={CLIENT:{rank:3},CHANNEL:{name:'test'},window:{test:{}},console:{info(){},warn(...v){warnings.push(v)}},setTimeout(fn){fn()},jQuery:{ajax(opts){requested.push(opts.url);const failed=opts.url.includes('module_audiolib');if(!failed)opts.success();return {fail(fn){if(failed)fn({},'timeout');return this}}}}};
+vm.runInNewContext(src.slice(start,end+14),sandbox);
+assert.ok(requested.some(x=>x.includes('module_audiolib')));
+assert.ok(requested.some(x=>x.includes('PlaylistTools-Standalone')));
+assert.equal(warnings.length,1);
+console.log('PASS: one failed module does not stop the sequence');

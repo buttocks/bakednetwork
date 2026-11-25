@@ -1,0 +1,20 @@
+name: Test shared wrestling module recovery
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tubes/shared/wrestling/**'
+      - '.github/workflows/shared-wrestling-loader-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/shared/wrestling/channel-base.js
+      - run: node tubes/shared/wrestling/test-loader.mjs

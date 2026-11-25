@@ -29,3 +29,5 @@ YouTube API authenticated for all feeds. Run 45523481228 added 30 official YouTu
 Browser run 45526159422: all seven deployed feeds started Archive playback with zero JS errors. YouTube playback unverified. Operator chose optional standalone WrestleTube, no live /wrestling registration. WCW, WWF-WWE and RetroWrestling enrolled for add-only live registration based on browser startup evidence. Archive reuse permissions remain unconfirmed.
 
 Live registration run 45526833113 succeeded: WCW, WWF-WWE and RetroWrestling added as permanent managed feeds. NJPW classics/events and Lucha already present. WrestleTube remains standalone by operator choice. Next: catalog quality, YouTube playback verification, and outstanding repository cleanup.
+
+Operator subsequently approved live /Wrestling registration and general multi-promotion programming. Registration submitted; broadening catalog remains a separate next step.

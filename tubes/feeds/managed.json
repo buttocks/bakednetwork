@@ -60,6 +60,16 @@
       "statusKey": "retro",
       "banner": "RETRO WRESTLING",
       "addOnly": true
+    },
+    {
+      "tube": "Wrestling",
+      "id": "wrestling-baked-tv",
+      "title": "BAKED TV — WRESTLING",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WrestleTube/feed.html?channel=wrestling&v=fallback-20261125",
+      "statusFile": "tubes/WrestleTube/feed-status.json",
+      "statusKey": "wrestling",
+      "banner": "WRESTLING",
+      "addOnly": true
     }
   ]
 }

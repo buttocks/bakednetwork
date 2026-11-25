@@ -204,6 +204,26 @@ async function run(request){
   try{
     const context=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
     page=await context.newPage();
+    const scaryNet={embedded:{},direct:{}};
+    function observeScaryNetwork(target,bucket){
+      const classify=raw=>{
+        try{
+          const u=new URL(raw);
+          if(u.origin==='https://pc-mint.tail7c671f.ts.net:10000'){
+            if(u.pathname==='/')return 'page';
+            if(u.pathname==='/live.m3u8')return 'manifest';
+            if(u.pathname==='/status.json')return 'status';
+            if(/^\/segment_[0-9]{1,20}\.ts$/.test(u.pathname))return 'segment';
+          }
+          if(u.origin==='https://cdn.jsdelivr.net'&&u.pathname.startsWith('/npm/hls.js@'))return 'hls-script';
+        }catch{}
+        return null;
+      };
+      const record=(raw,key)=>{const kind=classify(raw);if(kind){const b=bucket[kind]??={};b[key]=(b[key]??0)+1;}};
+      target.on('response',r=>record(r.url(),String(r.status())));
+      target.on('requestfailed',r=>record(r.url(),String(r.failure()?.errorText||'failed').match(/^net::ERR_[A-Z0-9_]+$/)?.[0]||'failed'));
+    }
+    if(request.action==='verify_scarytube_playback')observeScaryNetwork(page,scaryNet.embedded);
     page.setDefaultTimeout(20000);
     await login(page,password);
     await page.goto(SITE+'/tv/'+request.channel,{waitUntil:'domcontentloaded',timeout:45000});
@@ -230,8 +250,19 @@ async function run(request){
       if(hits.length!==1||hits[0].temp)throw Error('Expected exactly one permanent ScaryTube public iframe');
       const result={request_id:request.request_id,channel:request.channel,action:request.action,items:initial.queue.length,embed_present:true,src};
       // Observe only. Never queue, jump, unmute, or change shared playback.
-      const deadline=Date.now()+45000;
+      const deadline=Date.now()+30000;
       let observed=false,previous=null,last=null;
+      const sampleVideo=()=>{
+        const v=document.querySelector('video');
+        if(!v)return null;
+        return {time:v.currentTime,paused:v.paused,ready:v.readyState,width:v.videoWidth,height:v.videoHeight,
+          frames:v.getVideoPlaybackQuality?.().totalVideoFrames??null,error:v.error?.code??null,
+          hlsLoaded:typeof window.Hls==='function',hlsSupported:window.Hls?.isSupported?.()??false,
+          nativeHls:v.canPlayType('application/vnd.apple.mpegurl'),
+          avc:window.MediaSource?.isTypeSupported('video/mp4; codecs="avc1.640028"')??false,
+          aac:window.MediaSource?.isTypeSupported('audio/mp4; codecs="mp4a.40.2"')??false,
+          center:document.getElementById('center')?.textContent?.slice(0,120)??null};
+      };
       while(Date.now()<deadline){
         for(const frame of page.frames()){
           if(frame.url()!==src)continue;
@@ -239,12 +270,7 @@ async function run(request){
           try{
             const element=await frame.frameElement();
             if(!await element.isVisible())continue;
-            const sample=await frame.evaluate(()=>{
-              const v=document.querySelector('video');
-              if(!v)return null;
-              return {time:v.currentTime,paused:v.paused,ready:v.readyState,width:v.videoWidth,height:v.videoHeight,
-                frames:v.getVideoPlaybackQuality?.().totalVideoFrames??null,error:v.error?.code??null};
-            });
+            const sample=await frame.evaluate(sampleVideo);
             if(!sample)continue;
             last=sample;
             if(previous&&previous.frame===frame&&!sample.paused&&sample.ready>=2&&sample.width>0&&sample.height>0&&
@@ -263,7 +289,24 @@ async function run(request){
       const state=await snapshot(page);
       const active=String(state.playing)===String(hits[0].uid);
       console.log('ScaryTube playback not confirmed; iframe observed='+observed+'; active playlist item='+active+'; video='+JSON.stringify(last));
-      return {...result,status:observed?'playback-unverified':active?'iframe-not-loaded':'embed-not-active',active,iframe_observed:observed,video:last};
+      const direct=await context.newPage();
+      observeScaryNetwork(direct,scaryNet.direct);
+      let directVideo=null,directFirst=null,directPlaying=false,directError=null;
+      try{
+        await direct.goto(src,{waitUntil:'domcontentloaded',timeout:20000});
+        const until=Date.now()+20000;
+        while(Date.now()<until){
+          directVideo=await direct.evaluate(sampleVideo);
+          if(directVideo&&!directVideo.paused&&directVideo.ready>=2&&directVideo.width>0){
+            if(directFirst===null||directVideo.time<directFirst)directFirst=directVideo.time;
+            if(directVideo.time-directFirst>=1){directPlaying=true;break;}
+          }
+          await direct.waitForTimeout(1500);
+        }
+      }catch{directError='direct navigation or evaluation failed';}
+      finally{await direct.close();}
+      console.log('ScaryTube comparison: '+JSON.stringify({network:scaryNet,directPlaying,directVideo,directError}));
+      return {...result,status:observed?'playback-unverified':active?'iframe-not-loaded':'embed-not-active',active,iframe_observed:observed,video:last,network:scaryNet,direct_playing:directPlaying,direct_video:directVideo,direct_error:directError};
     }
     if(['audit_playlist_media','clean_dead_playlist'].includes(request.action)){
       const {auditPlaylistMedia}=await import('./playlist-audit.mjs');

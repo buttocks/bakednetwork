@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "seed": "nwa-tna-20261125",
+  "source_note": "Seeded from previously API-validated official TNA candidates; live playback verification pending.",
+  "channels": {
+    "nwa-tna": {
+      "name": "BAKED TV · NWA-TNA",
+      "description": "NWA classics, TNA and Impact Wrestling full matches and events.",
+      "programs": [
+        {
+          "title": "TNA Genesis 2005 (FULL EVENT) | Christian Cage Debut, Elimination X, Abyss vs. Sabu",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=M-g8osUYjAw",
+          "youtube_id": "M-g8osUYjAw",
+          "duration": 10511,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Moose's Family UNITES and STANDS UP to The System (FULL MATCH) | TNA Slammiversary 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=vVvNkMNtaPw",
+          "youtube_id": "vVvNkMNtaPw",
+          "duration": 1087,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "The Rising vs. The Beat Down Clan: LOSING GROUP DISBANDS! (FULL MATCH) | TNA iMPACT! July 1, 2016",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=6IAQDUDcxuI",
+          "youtube_id": "6IAQDUDcxuI",
+          "duration": 889,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Triple Threat Revolver: Yim, Taurus, Uemura and MORE! (FULL MATCH) | TNA Victory Road 2022",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=G5KMcT-pj_M",
+          "youtube_id": "G5KMcT-pj_M",
+          "duration": 1637,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Sting vs. Kurt Angle vs. Christian Cage: TNA World Title (FULL MATCH) | TNA Sacrifice 2007",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=PgxFvHrIKJg",
+          "youtube_id": "PgxFvHrIKJg",
+          "duration": 955,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "JDC's FINAL Match vs. Eddie Edwards (FULL MATCH) | TNA Genesis 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=61QbqqSuJTU",
+          "youtube_id": "61QbqqSuJTU",
+          "duration": 1446,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Genesis 2007 (FULL EVENT) | Booker T and Sting vs. Nash and Angle, Christian vs. Kaz",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=-IBmbFHdqws",
+          "youtube_id": "-IBmbFHdqws",
+          "duration": 10600,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "World Title Shot ON THE LINE: Nic Nemeth vs. Elijah (FULL MATCH) | TNA iMPACT! November 12, 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=SEBZ3huqYFQ",
+          "youtube_id": "SEBZ3huqYFQ",
+          "duration": 1028,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Destination X 2006 (FULL EVENT) | Christian vs. Monty, Styles vs. Daniels vs. Joe",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=LLTPtN21tBU",
+          "youtube_id": "LLTPtN21tBU",
+          "duration": 10222,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Trey Miguel vs. Steve Maclin: X-Division Title! (FULL MATCH) | TNA Hard To Kill 2022",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=hGwgtROaWdc",
+          "youtube_id": "hGwgtROaWdc",
+          "duration": 1007,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Destination X 2011 (FULL EVENT) | Styles vs. Daniels, Kaz vs. Joe, RVD vs. Lynn",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=xFUVGg-wiTY",
+          "youtube_id": "xFUVGg-wiTY",
+          "duration": 10221,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Moose vs. Special Agent 0 (FULL MATCH) | TNA Rebellion 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=9UrLVrzhy4g",
+          "youtube_id": "9UrLVrzhy4g",
+          "duration": 875,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Kurt Angle vs. Sting: TNA World Title! (FULL MATCH) | TNA Destination X 2009",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=h36Ut7bIJCI",
+          "youtube_id": "h36Ut7bIJCI",
+          "duration": 1437,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        }
+      ]
+    }
+  }
+}

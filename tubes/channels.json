@@ -221,7 +221,9 @@
       "slug": "NWA-TNA",
       "directory": "tubes/NWA-TNA",
       "stage": "onboarding",
-      "skinReview": "new-build"
+      "skinReview": "new-build",
+      "adminVerified": true,
+      "backupVerified": true
     }
   ]
 }

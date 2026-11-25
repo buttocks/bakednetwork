@@ -206,6 +206,24 @@
         "full match",
         "full event"
       ]
+    },
+    {
+      "directory": "NWA-TNA",
+      "key": "nwa-tna",
+      "archive_ids": [],
+      "archive_search": "mediatype:movies AND (title:\"NWA TNA\" OR title:\"TNA Wrestling\" OR title:\"Impact Wrestling\" OR title:\"National Wrestling Alliance\")",
+      "archive_title_pattern": "(?i)\\b(NWA|TNA|Impact Wrestling|National Wrestling Alliance)\\b",
+      "youtube_channels": [
+        {
+          "id": "UCOp8wkVqdrWbFYHjDv946QQ",
+          "name": "TNA Wrestling"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match)",
+      "seed_count": 13,
+      "youtube_search_queries": [
+        "NWA TNA full event"
+      ]
     }
   ]
 }

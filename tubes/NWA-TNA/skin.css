@@ -1,0 +1,22 @@
+/* NWA-TNA channel skin v1.0 — original, no external image dependencies. */
+:root{--nwatna-bg:#111114;--nwatna-panel:#1c1b20;--nwatna-red:#972632;--nwatna-gold:#d9b36c;--nwatna-text:#eee8dc}
+body{background:radial-gradient(ellipse at top,#39171e 0%,#141217 48%,#09090b 100%) fixed;color:var(--nwatna-text)}
+.navbar,.navbar-inverse{background:#131216;border-color:#4d292b}
+.navbar a,.navbar-inverse .navbar-nav>li>a{color:#e7d3ad}
+#motdwrap{background:linear-gradient(105deg,#141316,#43151b 60%,#181519);border:1px solid #74523a;border-radius:8px;margin-bottom:12px;padding:12px}
+#motd{color:var(--nwatna-text)}
+#motd .nwatna-banner{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center;padding:12px}
+.nwatna-brand{font:900 clamp(30px,5vw,60px)/1 Impact,'Arial Black',sans-serif;letter-spacing:.07em;color:#f3d58d;text-shadow:0 3px 0 #72222c}
+.nwatna-tagline{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#f0d3aa;margin-top:8px}
+#chatwrap,#videowrap,#queue,#userlist,#messagebuffer{border-color:#614333}
+#messagebuffer,#userlist,#queue{background:#151419;color:var(--nwatna-text)}
+#chatheader,#videowrap-header,#plmeta,.panel-heading{background:#2c1d22;color:#f0d3aa;border-color:#614333}
+#queue .queue_entry{background:#1d1b20;color:var(--nwatna-text);border-color:#342b30}
+#queue .queue_active{background:#56232d!important;border-color:#d9b36c!important}
+#queue .qe_title{color:inherit}
+.btn-default{background:#29252b;color:#eee3ce;border-color:#76563e}
+.btn-default:hover,.btn-default:focus{background:#4f2830;color:#fff}
+.form-control{background:#201e23;color:#f3eadb;border-color:#76563e}
+a{color:#e6bf78}a:hover,a:focus{color:#ffe0a4}
+#videowrap iframe{max-width:100%}
+@media(max-width:700px){#motdwrap{padding:6px}.nwatna-tagline{letter-spacing:.08em}}

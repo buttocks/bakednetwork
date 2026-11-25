@@ -2,4 +2,4 @@
 
 Live channel: https://baked.live/tv/NWA-TNA
 
-New channel build: NWA classics, NWA-TNA and Impact/TNA wrestling. Initial read-only backup before theme design and independent feed deployment. Proposed black, red and gold aesthetic; final design not yet deployed.
+Admin rank 3 and initial backup verified in run 45536762880. Original black/red/gold CSS and MOTD, shared Baked TV player, official TNA seed catalog. Live skin deployment, shared tools integration and feed registration pending validation. Archive reuse permissions not established.

@@ -23,7 +23,11 @@ export async function repairDragonGate({page,request,initial}){
  if(prior.length!==1||before.motd.split(prior[0]).length!==2)throw Error('Expected one known logo URL in MOTD');
  const exists=await page.evaluate(old=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===old),prior[0]);
  if(!exists)throw Error('Known logo is not an MOTD image');
- const next=before.motd.replace(prior[0],chosen);
+ const next=before.motd.replace(/<img\b[^>]*>/gi,tag=>{
+   if(!tag.includes(prior[0]))return tag;
+   const updated=tag.replace(prior[0],chosen).replace(/\s(?:width|height|style)\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,'');
+   return updated.replace(/\s*\/?>$/, ' style="display:block;margin:0 auto;width:380px;max-width:100%;height:auto;max-height:180px;object-fit:contain;">');
+ });
  async function set(motd){
   await page.evaluate(motd=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Disconnected');window.socket.emit('setMotd',{motd})},motd);
   const until=Date.now()+20000;while(Date.now()<until){if((await capture()).motd===motd)return;await page.waitForTimeout(250);}
@@ -32,6 +36,8 @@ export async function repairDragonGate({page,request,initial}){
  try{
   if(next!==before.motd)await set(next);
   await page.waitForFunction(url=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===url&&i.complete&&i.naturalWidth>0),chosen,{timeout:20000});
+  const size=await page.evaluate(url=>{const i=[...document.querySelectorAll('#motdwrap img')].find(i=>i.src===url);const r=i?.getBoundingClientRect();return r?{width:r.width,height:r.height}:null},chosen);
+  if(!size||size.width>382||size.height>182||size.width<1)throw Error('Logo size verification failed '+JSON.stringify(size));
   const after=await capture();
   if(after.motd!==next||['css','js','externalcss','externaljs'].some(k=>after[k]!==before[k]))throw Error('Unexpected concurrent settings change');
   await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2));await page.screenshot({path:dir+'/preview.png'});

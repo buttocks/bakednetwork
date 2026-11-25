@@ -1,13 +1,13 @@
 [
   {
     "schema": 1,
-    "request_id": "dg_imgur_transparent_DG",
+    "request_id": "dg_compact_logo_DG",
     "channel": "DG",
     "action": "repair_dg_logo"
   },
   {
     "schema": 1,
-    "request_id": "dg_imgur_transparent_DGalt",
+    "request_id": "dg_compact_logo_DGalt",
     "channel": "DGalt",
     "action": "repair_dg_logo"
   }

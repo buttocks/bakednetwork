@@ -27,11 +27,17 @@ function scheduleFade(delay=revealFade){
   },delay);
 }
 function reveal(delay=revealFade){document.body.classList.remove('overlay-idle');scheduleFade(delay)}
-document.addEventListener('pointermove',()=>{keyboardNavigation=false;reveal()},{passive:true});
-document.addEventListener('pointerdown',()=>{keyboardNavigation=false;reveal()},{passive:true});
-document.addEventListener('touchstart',()=>{keyboardNavigation=false;reveal()},{passive:true});
+const menuReveal=$('menu-reveal');
+if(menuReveal){
+  // The iframe owns its internal pointer events. The persistent parent button
+  // must remain clickable even when the rest of the overlay is hidden.
+  menuReveal.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();reveal(10000);$('guide-toggle').focus({preventScroll:true});});
+}
+document.addEventListener('pointermove',e=>{if(e.target===menuReveal)return;keyboardNavigation=false;reveal()},{passive:true});
+document.addEventListener('pointerdown',e=>{if(e.target===menuReveal)return;keyboardNavigation=false;reveal()},{passive:true});
+document.addEventListener('touchstart',e=>{if(e.target===menuReveal)return;keyboardNavigation=false;reveal()},{passive:true});
 document.addEventListener('keydown',()=>{keyboardNavigation=true;reveal()});
-document.addEventListener('focusin',()=>reveal());
+document.addEventListener('focusin',e=>{if(e.target!==menuReveal)reveal()});
 for(const selector of ['header','#hotspot-top','#hotspot-bottom']){
   const e=document.querySelector(selector);if(!e)continue;
   e.addEventListener('pointerenter',()=>{hoveringControls=selector==='header';keyboardNavigation=false;reveal()});

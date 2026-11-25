@@ -42,6 +42,10 @@ body.overlay-idle .overlay-hotspot{pointer-events:auto}
 #guide footer{font-size:11px;padding:11px;color:#c0a68a}
 @media(max-width:550px){button{padding:7px 8px;font-size:11px}#now{padding:12px}#now h1{font-size:16px}}
 @media(prefers-reduced-motion:reduce){#now,header{transition:none !important}}
+/* Persistent edge control stays in the parent document, outside YouTube's iframe. */
+#menu-reveal{position:absolute;z-index:5;top:8px;left:10px;display:none;opacity:.85;padding:6px 10px;min-height:30px;pointer-events:auto}
+body.overlay-idle #menu-reveal{display:block}
+body.overlay-idle #menu-reveal:hover,body.overlay-idle #menu-reveal:focus-visible{opacity:1}
 </style>
 </head>
 <body>
@@ -51,8 +55,9 @@ body.overlay-idle .overlay-hotspot{pointer-events:auto}
 <header><div class="controls"><button id="guide-toggle" type="button" aria-expanded="false">☰ TV Guide</button></div><div class="controls"><button id="audio" type="button">🔇 Unmute</button><button id="retune" type="button">↻ Retune</button></div></header>
 <aside id="guide" hidden aria-label="Channel program guide"><h2 id="guide-title">LUCHA LIBRE TV Guide</h2><ol id="guide-list"></ol><footer>Internet Archive and official YouTube full matches. Times shown locally. YouTube ads or embedding restrictions may apply.</footer></aside>
 <section id="now" aria-live="polite"><small id="channel-name">LUCHA LIBRE · DIRECT VIDEO</small><h1 id="program-name">Tuning…</h1><p id="program-details">Independent Baked TV feed</p></section>
+<button id="menu-reveal" type="button" aria-label="Show Baked TV controls">☰ Baked TV</button>
 <div class="overlay-hotspot" id="hotspot-top" aria-hidden="true"></div>
 <div class="overlay-hotspot" id="hotspot-bottom" aria-hidden="true"></div>
-<script src="../feeds/player-core.js?v=fallback-20261125"></script>
+<script src="../feeds/player-core.js?v=menu-reveal-20261125"></script>
 </body>
 </html>

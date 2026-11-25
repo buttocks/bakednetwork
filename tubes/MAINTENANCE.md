@@ -31,3 +31,5 @@ Browser run 45526159422: all seven deployed feeds started Archive playback with 
 Live registration run 45526833113 succeeded: WCW, WWF-WWE and RetroWrestling added as permanent managed feeds. NJPW classics/events and Lucha already present. WrestleTube remains standalone by operator choice. Next: catalog quality, YouTube playback verification, and outstanding repository cleanup.
 
 Operator subsequently approved live /Wrestling registration and general multi-promotion programming. Registration submitted; broadening catalog remains a separate next step.
+
+Operator confirmed actual YouTube playback but reported hidden overlay could not be recovered without pausing. Added persistent parent-document Baked TV menu trigger to all feed pages; browser regression test submitted.

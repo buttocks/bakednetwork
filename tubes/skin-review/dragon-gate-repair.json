@@ -1,13 +1,13 @@
 [
   {
     "schema": 1,
-    "request_id": "dg_logo_repair_DG",
+    "request_id": "dg_logo_repair_v2_DG",
     "channel": "DG",
     "action": "repair_dg_logo"
   },
   {
     "schema": 1,
-    "request_id": "dg_logo_repair_DGalt",
+    "request_id": "dg_logo_repair_v2_DGalt",
     "channel": "DGalt",
     "action": "repair_dg_logo"
   }

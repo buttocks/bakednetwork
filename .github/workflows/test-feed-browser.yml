@@ -6,6 +6,7 @@ on:
     paths:
       - 'tubes/feeds/test-browser.mjs'
       - '.github/workflows/test-feed-browser.yml'
+      - 'tubes/NWA-TNA/feed.html'
 permissions:
   contents: read
 jobs:

@@ -224,6 +224,14 @@
       "skinReview": "new-build",
       "adminVerified": true,
       "backupVerified": true
+    },
+    {
+      "slug": "joshi2",
+      "directory": "tubes/Joshi/secondary/joshi2",
+      "stage": "onboarding",
+      "family": "joshi",
+      "relationship": "secondary",
+      "skinReview": "pending"
     }
   ]
 }

@@ -10,5 +10,5 @@
   "mode": "exact-one-way",
   "filterOrder": "preserve-master",
   "macroConflict": "master-wins",
-  "automaticWrites": false
+  "automaticWrites": true
 }

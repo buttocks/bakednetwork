@@ -2,7 +2,7 @@
   "schema": 1,
   "channels": {
     "luchatube/lucha": {
-      "archive_cursor": 1,
+      "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.ia.mp4",
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4",
@@ -16,13 +16,19 @@
         "https://www.youtube.com/watch?v=2rpvz3kR-5M",
         "https://www.youtube.com/watch?v=oArdnFvh8Q0",
         "https://www.youtube.com/watch?v=qvGqqPubAtY",
-        "https://www.youtube.com/watch?v=su0_c4V2Ino"
+        "https://www.youtube.com/watch?v=su0_c4V2Ino",
+        "https://www.youtube.com/watch?v=-JzVDK9PpbA",
+        "https://www.youtube.com/watch?v=es23DcWARIM",
+        "https://www.youtube.com/watch?v=_-DO5C01v98",
+        "https://www.youtube.com/watch?v=V68StZT8kqY",
+        "https://www.youtube.com/watch?v=Ve8tgm-d0Fc",
+        "https://www.youtube.com/watch?v=KZH-uZtvoA0"
       ],
-      "last_scan": "2026-11-25T01:08:36.495307+00:00",
-      "last_added": "2026-11-25T01:08:36.495250+00:00"
+      "last_scan": "2026-11-25T01:14:21.139404+00:00",
+      "last_added": "2026-11-25T01:14:21.139348+00:00"
     },
     "NJPW/classics": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
@@ -44,13 +50,21 @@
         "https://www.youtube.com/watch?v=TT8CSWx4n8Q",
         "https://www.youtube.com/watch?v=N7PMKvzwIsQ",
         "https://www.youtube.com/watch?v=_fbDJxxw-UM",
-        "https://www.youtube.com/watch?v=QP1bOvlo9oY"
+        "https://www.youtube.com/watch?v=QP1bOvlo9oY",
+        "https://www.youtube.com/watch?v=ngRQszGorzs",
+        "https://www.youtube.com/watch?v=1ty5MxMOXZc",
+        "https://www.youtube.com/watch?v=qC-2SCTRNLU",
+        "https://www.youtube.com/watch?v=7ewmsVLwCxA",
+        "https://www.youtube.com/watch?v=Pxj-HHSMsLI",
+        "https://www.youtube.com/watch?v=m9mTfIuu08Q",
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.15b-NJPW-Seiji%20Sakaguchi%20%26%20Tiger%20Toguchi%20VS%20Wahoo%20McDaniel%20%26%20Superstar%20Billy%20Graham.mp4",
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.15c-NJPW-Tiger%20Mask%20VS%20El%20Falcon%20%28Halcon%2078%29.mp4"
       ],
-      "last_scan": "2026-11-25T01:08:41.471442+00:00",
-      "last_added": "2026-11-25T01:08:41.471413+00:00"
+      "last_scan": "2026-11-25T01:14:23.686617+00:00",
+      "last_added": "2026-11-25T01:14:23.686522+00:00"
     },
     "NJPW/events": {
-      "archive_cursor": 3,
+      "archive_cursor": 4,
       "seen": [
         "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
         "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
@@ -67,10 +81,18 @@
         "https://www.youtube.com/watch?v=N7PMKvzwIsQ",
         "https://www.youtube.com/watch?v=TT8CSWx4n8Q",
         "https://www.youtube.com/watch?v=_fbDJxxw-UM",
-        "https://www.youtube.com/watch?v=QP1bOvlo9oY"
+        "https://www.youtube.com/watch?v=QP1bOvlo9oY",
+        "https://www.youtube.com/watch?v=ngRQszGorzs",
+        "https://www.youtube.com/watch?v=1ty5MxMOXZc",
+        "https://www.youtube.com/watch?v=qC-2SCTRNLU",
+        "https://www.youtube.com/watch?v=7ewmsVLwCxA",
+        "https://www.youtube.com/watch?v=Pxj-HHSMsLI",
+        "https://www.youtube.com/watch?v=m9mTfIuu08Q",
+        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt17.mp4",
+        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt3.mp4"
       ],
-      "last_scan": "2026-11-25T01:08:45.846999+00:00",
-      "last_added": "2026-11-25T01:08:45.846969+00:00"
+      "last_scan": "2026-11-25T01:14:26.965202+00:00",
+      "last_added": "2026-11-25T01:14:26.965119+00:00"
     },
     "WCW/wcw": {
       "archive_cursor": 0,
@@ -82,10 +104,16 @@
         "https://www.youtube.com/watch?v=PORGX9kq_yM",
         "https://www.youtube.com/watch?v=6-KS23WCszw",
         "https://www.youtube.com/watch?v=h85Ugd13DrI",
-        "https://www.youtube.com/watch?v=FkbX6w0fFF0"
+        "https://www.youtube.com/watch?v=FkbX6w0fFF0",
+        "https://www.youtube.com/watch?v=YqSXEr5jCps",
+        "https://www.youtube.com/watch?v=saChePUQ-Ls",
+        "https://www.youtube.com/watch?v=Q2Cb6Erdpf4",
+        "https://www.youtube.com/watch?v=xWYUu-Ptt6E",
+        "https://www.youtube.com/watch?v=uo3Sd_1LQ78",
+        "https://www.youtube.com/watch?v=Ul7HB1dLy_M"
       ],
-      "last_added": "2026-11-25T01:08:51.043016+00:00",
-      "last_scan": "2026-11-25T01:08:51.043043+00:00"
+      "last_added": "2026-11-25T01:14:31.651648+00:00",
+      "last_scan": "2026-11-25T01:14:31.651721+00:00"
     },
     "WWE-WWF/wwf-wwe": {
       "archive_cursor": 0,
@@ -97,7 +125,7 @@
         "https://archive.org/download/wwe-2-k-25-toy-chica-vs-toriel-2-out-of-3-falls-match-stinkface/WWE%202K25%20Toy%20Chica%20vs%20Toriel%20%282%20out%20of%203%20falls%20match%29%20STINKFACE.mp4"
       ],
       "last_added": "2026-11-25T00:54:46.726610+00:00",
-      "last_scan": "2026-11-25T01:08:56.807771+00:00"
+      "last_scan": "2026-11-25T01:14:35.689973+00:00"
     },
     "RetroWrestling/retro": {
       "archive_cursor": 0,
@@ -109,10 +137,16 @@
         "https://www.youtube.com/watch?v=9STbcwkLO9A",
         "https://www.youtube.com/watch?v=Px9WIvLiPzQ",
         "https://www.youtube.com/watch?v=Mb4WKxiiWwY",
-        "https://www.youtube.com/watch?v=n_-v7l7S4uU"
+        "https://www.youtube.com/watch?v=n_-v7l7S4uU",
+        "https://www.youtube.com/watch?v=4gEX_vxh7tM",
+        "https://www.youtube.com/watch?v=oXWdgG79r3A",
+        "https://www.youtube.com/watch?v=8SzDkgyJhnQ",
+        "https://www.youtube.com/watch?v=4YzSBMM7hsI",
+        "https://www.youtube.com/watch?v=cyLQfyb6JmM",
+        "https://www.youtube.com/watch?v=SB5vMDZSIIU"
       ],
-      "last_added": "2026-11-25T01:09:02.211415+00:00",
-      "last_scan": "2026-11-25T01:09:02.211445+00:00"
+      "last_added": "2026-11-25T01:14:40.440344+00:00",
+      "last_scan": "2026-11-25T01:14:40.440393+00:00"
     },
     "WrestleTube/wrestling": {
       "archive_cursor": 0,
@@ -131,10 +165,16 @@
         "https://www.youtube.com/watch?v=ooYS5qHmZSA",
         "https://www.youtube.com/watch?v=iQpZv6H_CEc",
         "https://www.youtube.com/watch?v=uOcQrGygjcA",
-        "https://www.youtube.com/watch?v=kmmLTxHGff4"
+        "https://www.youtube.com/watch?v=kmmLTxHGff4",
+        "https://www.youtube.com/watch?v=4iX3moHgUWM",
+        "https://www.youtube.com/watch?v=I4ap3_fAo50",
+        "https://www.youtube.com/watch?v=pZJCpVjH2aQ",
+        "https://www.youtube.com/watch?v=L0yeO0ZhfFo",
+        "https://www.youtube.com/watch?v=gWcmv58_8rc",
+        "https://www.youtube.com/watch?v=NzhL49ODNZM"
       ],
-      "last_added": "2026-11-25T01:09:12.119469+00:00",
-      "last_scan": "2026-11-25T01:09:12.119499+00:00"
+      "last_added": "2026-11-25T01:14:44.975977+00:00",
+      "last_scan": "2026-11-25T01:14:44.976026+00:00"
     }
   },
   "next_channel": 0

@@ -1,44 +1,26 @@
 [
   {
     "schema": 1,
-    "request_id": "skin_review_DG",
-    "channel": "DG",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_wrestling5",
-    "channel": "wrestling5",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_NJPWALT",
-    "channel": "NJPWALT",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_rizin",
-    "channel": "rizin",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_sumo",
+    "request_id": "skin_health_v2_sumo",
     "channel": "sumo",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "nwatna_backup",
+    "request_id": "skin_health_v2_NWA-TNA",
     "channel": "NWA-TNA",
-    "action": "backup_skin"
+    "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "nwatna_skin",
-    "channel": "NWA-TNA",
+    "request_id": "skin_health_v2_joshi2",
+    "channel": "joshi2",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_MTV",
+    "channel": "MTV",
     "action": "audit_skin"
   }
 ]

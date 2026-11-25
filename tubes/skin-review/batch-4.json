@@ -1,32 +1,38 @@
 [
   {
     "schema": 1,
-    "request_id": "skin_review_shoot",
-    "channel": "shoot",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_wrestling3",
-    "channel": "wrestling3",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_Wrestling4",
-    "channel": "Wrestling4",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_boxing",
+    "request_id": "skin_health_v2_boxing",
     "channel": "boxing",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_DGalt",
+    "request_id": "skin_health_v2_DGalt",
     "channel": "DGalt",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_DG",
+    "channel": "DG",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_wrestling5",
+    "channel": "wrestling5",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_NJPWALT",
+    "channel": "NJPWALT",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_rizin",
+    "channel": "rizin",
     "action": "audit_skin"
   }
 ]

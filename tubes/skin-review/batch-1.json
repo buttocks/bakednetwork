@@ -1,32 +1,38 @@
 [
   {
     "schema": 1,
-    "request_id": "skin_review_luchatube",
+    "request_id": "skin_health_v2_luchatube",
     "channel": "luchatube",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_NJPW",
+    "request_id": "skin_health_v2_NJPW",
     "channel": "NJPW",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_Wrestling",
+    "request_id": "skin_health_v2_Wrestling",
     "channel": "Wrestling",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_RetroWrestling",
+    "request_id": "skin_health_v2_RetroWrestling",
     "channel": "RetroWrestling",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_WWF-WWE",
+    "request_id": "skin_health_v2_WWF-WWE",
     "channel": "WWF-WWE",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_RDH",
+    "channel": "RDH",
     "action": "audit_skin"
   }
 ]

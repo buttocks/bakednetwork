@@ -37,7 +37,7 @@ function validate(raw){
     if(raw.channel!=='RetroWrestling'||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid Retro deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
-  if(['deploy_nwatna','install_nwatna_tools'].includes(raw.action)){
+  if(['deploy_nwatna','install_nwatna_tools','deploy_nwatna_base'].includes(raw.action)){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
@@ -192,6 +192,10 @@ async function run(request){
       const {updateRetro}=await import('../RetroWrestling/update-js.mjs');
       return await updateRetro({page,request,initial});
     }
+    if(request.action==='deploy_nwatna_base'){
+      const {deployBase}=await import('../NWA-TNA/deploy-base.mjs');
+      return await deployBase({page,request,initial});
+    }
     if(request.action==='install_nwatna_tools'){
       const {installTools}=await import('../NWA-TNA/install-tools.mjs');
       return await installTools({page,request,initial});
@@ -260,8 +264,11 @@ async function run(request){
         const references=[...css.matchAll(/url\(\s*(['"]?)(.*?)\1\s*\)/g)]
           .map(match=>match[2].trim()).filter(Boolean);
         const images=[...document.querySelectorAll('img')].slice(0,30)
-          .map(img=>({src:img.currentSrc||img.src,alt:img.alt||''}));
-        return {css,cssLength:css.length,jsLength:js.length,
+          .map(img=>({src:img.currentSrc||img.src,alt:img.alt||'',broken:img.complete&&!img.naturalWidth,visible:!!img.getClientRects().length}));
+        const rect=s=>{const e=document.querySelector(s);if(!e||!e.getClientRects().length)return null;const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,height:r.height,width:r.width}};
+        const nav=rect('nav.navbar,.navbar'),header=rect('#rw-header'),users=rect('#userlist'),messages=rect('#messagebuffer');
+        const health={brokenVisibleImages:images.filter(i=>i.broken&&i.visible).length,headerOverlap:!!(nav&&header&&nav.bottom>header.top&&nav.top<header.bottom),chatBottomGap:users&&messages?Math.round(messages.bottom-users.bottom):null,customScriptsIgnored:!!window.USEROPTS?.ignore_channeljs,baseInitialized:!!window.CLIENT?.modules,toolsMounted:!!document.querySelector('#bpt-toolbar')};
+        return {health,css,cssLength:css.length,jsLength:js.length,
           externalCss:channel.opts?.externalcss||'',
           externalJs:channel.opts?.externaljs||'',
           pageTitle:channel.opts?.pagetitle||document.title,
@@ -275,6 +282,7 @@ async function run(request){
       await fs.writeFile(reviewDir+'/review.json',JSON.stringify(skin,null,2)+'\n');
       await page.screenshot({path:reviewDir+'/preview.png',fullPage:false,
         animations:'disabled',timeout:20000});
+      console.log('Skin health '+request.channel+' '+JSON.stringify({cssLength:skin.cssLength,jsLength:skin.jsLength,hasExternalCSS:!!skin.externalCss,hasExternalJS:!!skin.externalJs,...skin.health}));
       delete skin.css;
       return {request_id:request.request_id,channel:request.channel,action:request.action,
         status:'skin-audited',rank:initial.rank,skin};

@@ -63,3 +63,5 @@ User requires existing wrestling JS base/modules for new builds and overhauls. C
 User preference: YouTube items should start with closed captions off. Shared Baked TV player requests captions off and unloads captions on readiness/API change; YouTube may override via viewer settings or burned-in subtitles. Native Baked.live player is separate.
 
 MTV verified rank 3, 708 entries, backup and skin audit successful, zero legacy references (45540562353). Compact native toolbar Playlist Tools v1.2 passed functional tests (45541210842), including permission hiding and Escape dismissal. Shared wrestling base syntax/consistency passed (45539678689); live initialization not yet verified. User prefers native compact toolbar controls over floating panels.
+
+RetroWrestling v1.3.5 deployed; user confirms better layout and captions gone. Design standards: full-size fading overlays, native Tools dropdown, no redundant header controls. Latest browser test 45542978471 seven established feeds passed, NWA-TNA playback still failed. Submitted shared wrestling base deployment and structured read-only skin health scan across registry.

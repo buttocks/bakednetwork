@@ -1,32 +1,38 @@
 [
   {
     "schema": 1,
-    "request_id": "skin_review_RDH",
-    "channel": "RDH",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_ScaryTube",
+    "request_id": "skin_health_v2_ScaryTube",
     "channel": "ScaryTube",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_WID",
+    "request_id": "skin_health_v2_WID",
     "channel": "WID",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_WCW",
+    "request_id": "skin_health_v2_WCW",
     "channel": "WCW",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_joshi",
+    "request_id": "skin_health_v2_joshi",
     "channel": "joshi",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_puro",
+    "channel": "puro",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_ajpw",
+    "channel": "ajpw",
     "action": "audit_skin"
   }
 ]

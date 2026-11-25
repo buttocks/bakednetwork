@@ -1,32 +1,38 @@
 [
   {
     "schema": 1,
-    "request_id": "skin_review_puro",
-    "channel": "puro",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_ajpw",
-    "channel": "ajpw",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "skin_review_Noah",
+    "request_id": "skin_health_v2_Noah",
     "channel": "Noah",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_wrestling2",
+    "request_id": "skin_health_v2_wrestling2",
     "channel": "wrestling2",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "skin_review_indies",
+    "request_id": "skin_health_v2_indies",
     "channel": "indies",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_shoot",
+    "channel": "shoot",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_wrestling3",
+    "channel": "wrestling3",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_Wrestling4",
+    "channel": "Wrestling4",
     "action": "audit_skin"
   }
 ]

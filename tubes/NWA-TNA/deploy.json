@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "nwatna_tools_consent_v3",
+  "request_id": "nwatna_shared_base_v1",
   "channel": "NWA-TNA",
-  "action": "install_nwatna_tools"
+  "action": "deploy_nwatna_base"
 }

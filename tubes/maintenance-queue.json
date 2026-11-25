@@ -4,17 +4,17 @@
   "tasks": [
     {
       "id": "ddt-nwatna-feeds",
-      "status": "pending-live-verification",
+      "status": "recovery-check-submitted",
       "workflow": "manage-owned-tube-feeds.yml",
       "mode": "existing scheduled manager",
-      "evidence": "User confirmed both feeds play in real browser."
+      "evidence": "User confirmed both feeds play in real browser. Owner reports Baked.live back online; guarded workflow retriggered."
     },
     {
       "id": "nwatna-base",
-      "status": "deferred-outage",
+      "status": "recovery-check-submitted",
       "workflow": "nwatna-deploy.yml",
       "mode": "manual dispatch after recovery",
-      "evidence": "Validation 45610953988; deployment deferred 45611245188."
+      "evidence": "Validation 45610953988; deployment deferred 45611245188. Owner reports Baked.live back online; guarded workflow retriggered."
     },
     {
       "id": "playlist-review",

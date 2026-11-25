@@ -72,3 +72,5 @@ jobs:
           path: tubes/feeds/last-reconcile.json
           if-no-files-found: ignore
           retention-days: 7
+
+# Recovery reconciliation requested after owner reported service restored on 2026-11-25.

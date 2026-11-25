@@ -47,3 +47,5 @@ Consolidated 19 byte-identical legacy wrestletube/ files into existing canonical
 PlaylistTools-Standalone.js canonical implementation is tubes/shared/modules/PlaylistTools-Standalone.js. Legacy modules/ entry is a compatibility loader, not a second implementation. Android APK dependency not inspected; preserve old entry point. User approved canonical location.
 
 Removed seven root duplicate WID and WrestleTube assets after dependency scan 45533707469 found no unpinned references to these paths. WID live CSS/JS URLs are commit-pinned, so historical files remain available independently of main; prior CSS checksum mismatch remains unresolved and no live WID settings were changed. Rollback parent db6a0449dfb56db4f51223131142a555fc4e94be.
+
+Added 14 user-specified channels and central registry (25 total). New channels read-only until verified; family relationships provisional except explicitly identified Dragon Gate secondary. Sumo URL normalized to /tv/sumo. Four parallel backup/dependency batches; playlist audits follow after backup confirmation.

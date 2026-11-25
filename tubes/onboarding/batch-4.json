@@ -1,0 +1,26 @@
+[
+  {
+    "schema": 1,
+    "request_id": "onboard_rizin_backup_skin",
+    "channel": "rizin",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_rizin_audit_legacy_paths",
+    "channel": "rizin",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_sumo_backup_skin",
+    "channel": "sumo",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_sumo_audit_legacy_paths",
+    "channel": "sumo",
+    "action": "audit_legacy_paths"
+  }
+]

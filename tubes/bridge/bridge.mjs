@@ -10,7 +10,9 @@ import assert from 'node:assert/strict';
 
 const SITE='https://baked.live';
 const USERNAME='buttman-gpt';
-const CHANNELS=new Set(["luchatube","NJPW","Wrestling","RetroWrestling","WWF-WWE","RDH","ScaryTube","WID","WCW","joshi","puro"]);
+const REGISTRY=JSON.parse(await fs.readFile(new URL('../channels.json',import.meta.url),'utf8')).channels;
+const CHANNELS=new Set(REGISTRY.map(c=>c.slug));
+const ONBOARDING=new Set(REGISTRY.filter(c=>c.stage==='onboarding').map(c=>c.slug));
 const ORIGINAL_CHANNELS=new Set(['luchatube','NJPW']);
 const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
@@ -33,7 +35,7 @@ function validate(raw){
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
   if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
   if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist'].includes(raw.action))throw Error('New channel is read-only until verified');
-  if(['joshi','puro'].includes(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel onboarding is read-only');
+  if(ONBOARDING.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel onboarding is read-only');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
   if(['audit_playlist_media','clean_dead_playlist'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');

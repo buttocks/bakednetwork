@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "channels": [
+    {
+      "slug": "luchatube",
+      "directory": "tubes/luchatube",
+      "stage": "established"
+    },
+    {
+      "slug": "NJPW",
+      "directory": "tubes/NJPW",
+      "stage": "established"
+    },
+    {
+      "slug": "Wrestling",
+      "directory": "tubes/WrestleTube",
+      "stage": "established"
+    },
+    {
+      "slug": "RetroWrestling",
+      "directory": "tubes/RetroWrestling",
+      "stage": "established"
+    },
+    {
+      "slug": "WWF-WWE",
+      "directory": "tubes/WWE-WWF",
+      "stage": "established"
+    },
+    {
+      "slug": "RDH",
+      "directory": "tubes/RDH",
+      "stage": "established"
+    },
+    {
+      "slug": "ScaryTube",
+      "directory": "tubes/ScaryTube",
+      "stage": "established"
+    },
+    {
+      "slug": "WID",
+      "directory": "tubes/WID",
+      "stage": "established"
+    },
+    {
+      "slug": "WCW",
+      "directory": "tubes/WCW",
+      "stage": "established"
+    },
+    {
+      "slug": "joshi",
+      "directory": "tubes/Joshi",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "puro",
+      "directory": "tubes/Puro",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "ajpw",
+      "directory": "tubes/AJPW",
+      "stage": "onboarding",
+      "family": "puro",
+      "relationship": "specialist"
+    },
+    {
+      "slug": "Noah",
+      "directory": "tubes/NOAH",
+      "stage": "onboarding",
+      "family": "puro",
+      "relationship": "specialist"
+    },
+    {
+      "slug": "wrestling2",
+      "directory": "tubes/WrestleTube/secondary/wrestling2",
+      "stage": "onboarding",
+      "family": "Wrestling",
+      "relationship": "secondary"
+    },
+    {
+      "slug": "indies",
+      "directory": "tubes/Indies",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "shoot",
+      "directory": "tubes/Shoot",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "wrestling3",
+      "directory": "tubes/WrestleTube/secondary/wrestling3",
+      "stage": "onboarding",
+      "family": "Wrestling",
+      "relationship": "secondary"
+    },
+    {
+      "slug": "Wrestling4",
+      "directory": "tubes/WrestleTube/secondary/Wrestling4",
+      "stage": "onboarding",
+      "family": "Wrestling",
+      "relationship": "secondary"
+    },
+    {
+      "slug": "boxing",
+      "directory": "tubes/Boxing",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "DGalt",
+      "directory": "tubes/DragonGate/secondary/DGalt",
+      "stage": "onboarding",
+      "family": "DG",
+      "relationship": "secondary"
+    },
+    {
+      "slug": "DG",
+      "directory": "tubes/DragonGate",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "wrestling5",
+      "directory": "tubes/WrestleTube/secondary/wrestling5",
+      "stage": "onboarding",
+      "family": "Wrestling",
+      "relationship": "secondary"
+    },
+    {
+      "slug": "NJPWALT",
+      "directory": "tubes/NJPW/secondary/NJPWALT",
+      "stage": "onboarding",
+      "family": "NJPW",
+      "relationship": "secondary"
+    },
+    {
+      "slug": "rizin",
+      "directory": "tubes/Rizin",
+      "stage": "onboarding"
+    },
+    {
+      "slug": "sumo",
+      "directory": "tubes/Sumo",
+      "stage": "onboarding"
+    }
+  ]
+}

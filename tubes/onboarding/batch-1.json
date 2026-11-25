@@ -1,0 +1,50 @@
+[
+  {
+    "schema": 1,
+    "request_id": "onboard_ajpw_backup_skin",
+    "channel": "ajpw",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_ajpw_audit_legacy_paths",
+    "channel": "ajpw",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_Noah_backup_skin",
+    "channel": "Noah",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_Noah_audit_legacy_paths",
+    "channel": "Noah",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_wrestling2_backup_skin",
+    "channel": "wrestling2",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_wrestling2_audit_legacy_paths",
+    "channel": "wrestling2",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_indies_backup_skin",
+    "channel": "indies",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_indies_audit_legacy_paths",
+    "channel": "indies",
+    "action": "audit_legacy_paths"
+  }
+]

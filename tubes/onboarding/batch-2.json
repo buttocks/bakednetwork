@@ -1,0 +1,50 @@
+[
+  {
+    "schema": 1,
+    "request_id": "onboard_shoot_backup_skin",
+    "channel": "shoot",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_shoot_audit_legacy_paths",
+    "channel": "shoot",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_wrestling3_backup_skin",
+    "channel": "wrestling3",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_wrestling3_audit_legacy_paths",
+    "channel": "wrestling3",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_Wrestling4_backup_skin",
+    "channel": "Wrestling4",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_Wrestling4_audit_legacy_paths",
+    "channel": "Wrestling4",
+    "action": "audit_legacy_paths"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_boxing_backup_skin",
+    "channel": "boxing",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "onboard_boxing_audit_legacy_paths",
+    "channel": "boxing",
+    "action": "audit_legacy_paths"
+  }
+]

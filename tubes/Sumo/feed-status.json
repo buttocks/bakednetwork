@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "sumo": {
+      "available": true,
+      "verification": "Browser validation run 45703040200 job 139517864292; May 2026 Grand Sumo tournament highlights direct video startup, no JS errors",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

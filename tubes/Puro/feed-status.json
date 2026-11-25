@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "puro": {
+      "available": true,
+      "verification": "Browser playback run 45683360627, job 139516255705; direct archival playback, no JavaScript errors",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

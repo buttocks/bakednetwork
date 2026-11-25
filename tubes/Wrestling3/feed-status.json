@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "wrestling3": {
+      "available": true,
+      "verification": "browser validation run 45703040200 job 139517863872; direct video startup, no JS errors",
+      "verifiedDate": "2026-11-25"
+    }
+  }
+}

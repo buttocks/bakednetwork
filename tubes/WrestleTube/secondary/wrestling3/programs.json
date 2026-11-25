@@ -1,0 +1,435 @@
+{
+  "schema": 1,
+  "seed": "wrestling3-20261125",
+  "channels": {
+    "wrestling3": {
+      "name": "BAKED TV · WRESTLING 3",
+      "description": "Official wrestling programming and interviews",
+      "programs": [
+        {
+          "title": "FULL MATCH: WCW Championship Triple Cage WarGames Match: WCW Nitro, Sept. 4, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=2LOjy17-P38",
+          "youtube_id": "2LOjy17-P38",
+          "duration": 1259,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Rick Rude | King of Cable Semi Final: Clash of the Champions XXI",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=WLtvQYVp9R0",
+          "youtube_id": "WLtvQYVp9R0",
+          "duration": 1549,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Nitro’s best singles matches of 2000 | WCW Monday Nitro, Jan. 1, 2001",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=PORGX9kq_yM",
+          "youtube_id": "PORGX9kq_yM",
+          "duration": 5250,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Luger is ready for Rhodes at Starrcade | WCW, Oct. 24, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=6-KS23WCszw",
+          "youtube_id": "6-KS23WCszw",
+          "duration": 4943,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Booker T vs. Scott Steiner | WCW Title Straight Jacket Cage Match: WCW Mayhem 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=h85Ugd13DrI",
+          "youtube_id": "h85Ugd13DrI",
+          "duration": 1042,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Scott Hall vs. Booker T | WCW U.S. Title Match: WCW Mayhem 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=FkbX6w0fFF0",
+          "youtube_id": "FkbX6w0fFF0",
+          "duration": 693,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The Road Warriors vs. The Fabulous Freebirds: Clash of the Champions IX, Nov. 15, 1989",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=YqSXEr5jCps",
+          "youtube_id": "YqSXEr5jCps",
+          "duration": 533,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting & Scott Steiner vs. Bam Bam Bigelow & Mike Awesome: WCW Nitro, Nov. 13, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=saChePUQ-Ls",
+          "youtube_id": "saChePUQ-Ls",
+          "duration": 421,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Nitro’s best tag team matches of 2000 | WCW Monday Nitro, Dec. 25, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Q2Cb6Erdpf4",
+          "youtube_id": "Q2Cb6Erdpf4",
+          "duration": 4904,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Starrcade 1985 | Flair vs. Rhodes; Magnum T.A. vs. Blanchard",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=xWYUu-Ptt6E",
+          "youtube_id": "xWYUu-Ptt6E",
+          "duration": 10373,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Sting’s WCW debut; JJ Dillon introduces Shogun | WCW, Oct. 17, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=uo3Sd_1LQ78",
+          "youtube_id": "uo3Sd_1LQ78",
+          "duration": 4849,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Goldberg vs. Bam Bam Bigelow vs. Lex Luger: WCW Thunder Nov. 8, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Ul7HB1dLy_M",
+          "youtube_id": "Ul7HB1dLy_M",
+          "duration": 593,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Ric Flair & Arn Anderson vs. Steve Austin & Vader: WCW Saturday Night, Nov. 13, 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=fWWa7rSlR2A",
+          "youtube_id": "fWWa7rSlR2A",
+          "duration": 2028,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Nasty Boys vs. Sting & British Bulldog | WCW Tag Title Match: Clash of the Champions XXV",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=XzA50Fv5JQI",
+          "youtube_id": "XzA50Fv5JQI",
+          "duration": 767,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Steiner’s next challenger determined; Funk vs. Meng | WCW Monday Nitro, Dec. 18, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=zoAaKI0tG1g",
+          "youtube_id": "zoAaKI0tG1g",
+          "duration": 5186,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Starrcade 1984 | Flair vs. Rhodes; Steamboat vs. Blanchard",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=YHTpoEoXy2U",
+          "youtube_id": "YHTpoEoXy2U",
+          "duration": 10735,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Anderson & Blanchard define overcoming adversity | WCW, Oct. 10, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=yP9LRqWLZ0M",
+          "youtube_id": "yP9LRqWLZ0M",
+          "duration": 4981,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Lex Luger vs. Scott Steiner: WCW Thunder, Nov. 5, 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=BxYJfUkwZsI",
+          "youtube_id": "BxYJfUkwZsI",
+          "duration": 549,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Ric Flair: WCW Nitro, Nov. 6, 1995",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=uqoLTM34sts",
+          "youtube_id": "uqoLTM34sts",
+          "duration": 874,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The Public Enemy vs. The Steiner Brothers | WCW Tag Team Title Philadelphia Street Fight",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=7Bm4vhcWZh0",
+          "youtube_id": "7Bm4vhcWZh0",
+          "duration": 482,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting & Mike Awesome vs. Jeff Jarrett & Vampiro: WCW Thunder, Nov. 1, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=UVCwSpvdGQM",
+          "youtube_id": "UVCwSpvdGQM",
+          "duration": 569,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Goldberg faces his trainer; Steiner vs. A-Wall | WCW Monday Nitro, Dec. 12, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=K9PBibXqcTo",
+          "youtube_id": "K9PBibXqcTo",
+          "duration": 5294,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW BattleBowl 1993 | Sting, Flair, Vader and more enter The Lethal Lottery",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=cAFE_tpdzJo",
+          "youtube_id": "cAFE_tpdzJo",
+          "duration": 9909,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Ron Garvin celebrates World Title win; Taylor steals Koloff’s title | WCW, Oct 3, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=qyRQF_3QdUs",
+          "youtube_id": "qyRQF_3QdUs",
+          "duration": 2890,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Hulk Hogan vs. Ric Flair | WCW World Title Steel Cage Match: WCW Halloween Havoc 1994",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=jnm8_7cHyIU",
+          "youtube_id": "jnm8_7cHyIU",
+          "duration": 2010,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Sid Vicious: WCW Halloween Havoc 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=qri_u0yhkoU",
+          "youtube_id": "qri_u0yhkoU",
+          "duration": 802,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Vader vs. Cactus Jack | Texas Death Match: Halloween Havoc 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Wb9tHuTvnoU",
+          "youtube_id": "Wb9tHuTvnoU",
+          "duration": 1116,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Sid gets arrested; Page & Nash vs. 3-Count | WCW Monday Nitro, Dec. 4, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Lktrv3RnnsY",
+          "youtube_id": "Lktrv3RnnsY",
+          "duration": 5270,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Halloween Havoc 2000 | Booker T vs. Steiner; Goldberg vs. KroniK |",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=-vWCmMTAszk",
+          "youtube_id": "-vWCmMTAszk",
+          "duration": 10107,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Flair vs. Garvin for NWA World Title in a Cage | WCW, Sept. 26, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=mqw-fgtJ7Bc",
+          "youtube_id": "mqw-fgtJ7Bc",
+          "duration": 3287,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Bret Hart vs. Ric Flair: WCW Souled Out 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=rfHTF8EYmHU",
+          "youtube_id": "rfHTF8EYmHU",
+          "duration": 1301,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: BattleBowl Battle Royal: WCW BattleBowl 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=tHjzKKXhXOI",
+          "youtube_id": "tHjzKKXhXOI",
+          "duration": 1710,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting’s Squadron vs. Dangerous Alliance – WarGames Match: WrestleWar 1992",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=OUBpRjHZ7ew",
+          "youtube_id": "OUBpRjHZ7ew",
+          "duration": 1677,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The first-ever WarGames Match: Great American Bash 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=SMi1dm9SiNY",
+          "youtube_id": "SMi1dm9SiNY",
+          "duration": 1009,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Scott Steiner vs. Kevin Nash | WCW Title Falls Count Anywhere: WCW SuperBrawl Revenge",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=AWoP9KLzNcw",
+          "youtube_id": "AWoP9KLzNcw",
+          "duration": 1194,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Mega Powers vs. Alliance to end Hulkamania | Doomsday Cage Match: WCW Uncensored 1996",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=_-IitWiHLzU",
+          "youtube_id": "_-IitWiHLzU",
+          "duration": 1851,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Scott Steiner vs. Booker T | WCW TV Title: WCW Uncensored 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=F1dyWJfoFtE",
+          "youtube_id": "F1dyWJfoFtE",
+          "duration": 1129,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Booker T vs. Eddie Guerrero – WCW TV Title: WCW Uncensored 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=vXJPGCOHIY8",
+          "youtube_id": "vXJPGCOHIY8",
+          "duration": 992,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Goldberg vs. Scott Steiner | No Disqualification Match: Fall Brawl 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=e39RgToZ0uQ",
+          "youtube_id": "e39RgToZ0uQ",
+          "duration": 1073,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Goldberg, Hogan & Sting vs. Nash, Steiner & Vicious: WCW Nitro, Aug. 9, 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=JdAZw18vOxE",
+          "youtube_id": "JdAZw18vOxE",
+          "duration": 938,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Randy Savage – No Disqualification WCW Title Match: WCW Spring Stampede 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=H3Q4jp_aYdE",
+          "youtube_id": "H3Q4jp_aYdE",
+          "duration": 900,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Ric Flair vs. Hollywood Hogan vs. Diamond Dallas Page vs. Goldberg | WCW Title Match",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=FsionCQHTUE",
+          "youtube_id": "FsionCQHTUE",
+          "duration": 997,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Meng | WCW United States Championship Match: WCW Great American Bash 1995",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Mf1ueBrkU1Y",
+          "youtube_id": "Mf1ueBrkU1Y",
+          "duration": 985,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Ric Flair vs. Hulk Hogan | WCW Title Match: WCW Bash at the Beach 1994",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=u2AO7j7-9Vw",
+          "youtube_id": "u2AO7j7-9Vw",
+          "duration": 1772,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The Hulkamaniacs vs. The Dungeon of Doom: WarGames Match: WCW Fall Brawl 1995",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=wfWM9cvG1ZE",
+          "youtube_id": "wfWM9cvG1ZE",
+          "duration": 1783,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: nWo vs. Randy Savage, Sting & The Giant: WCW Nitro, Mar. 9, 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=2XHrTYPLWag",
+          "youtube_id": "2XHrTYPLWag",
+          "duration": 745,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Raven vs. Goldberg | WCW U.S. Title Match: WCW Nitro, April 20, 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=ONc-lSVMJyY",
+          "youtube_id": "ONc-lSVMJyY",
+          "duration": 507,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        }
+      ]
+    }
+  }
+}

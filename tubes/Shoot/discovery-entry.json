@@ -1,0 +1,18 @@
+{
+  "directory": "Shoot",
+  "key": "shoot",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(shoot interview|full interview|full shoot|wrestling interview)",
+  "youtube_search_queries": [
+    "shoot interview",
+    "full interview"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UCL-SpA6XXf282YMAelest8w",
+      "name": "Title Match Wrestling"
+    }
+  ]
+}

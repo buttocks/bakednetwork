@@ -1,0 +1,26 @@
+{
+  "directory": "WrestleTube/secondary/wrestling3",
+  "key": "wrestling3",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+  "youtube_search_queries": [
+    "full match",
+    "full event"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+      "name": "WCW"
+    },
+    {
+      "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+      "name": "WWE Vault"
+    },
+    {
+      "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+      "name": "WWE"
+    }
+  ]
+}

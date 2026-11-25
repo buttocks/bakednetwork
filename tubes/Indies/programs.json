@@ -1,0 +1,363 @@
+{
+  "schema": 1,
+  "seed": "indies-20261125",
+  "channels": {
+    "indies": {
+      "name": "BAKED TV · INDIES",
+      "description": "Official wrestling programming and interviews",
+      "programs": [
+        {
+          "title": "[Free Match] Miracle Generation vs. Ichiban & Brando Lee | Wrestling Open 5/7/26 (Tag Team, Beyond)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=pIRDJiLolwQ",
+          "youtube_id": "pIRDJiLolwQ",
+          "duration": 1008,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Gabby Forza/Bear Bronson v Brooke Havok/Anthony Greene | Intergender Mixed Tag (Beyond)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=rbINaZ-NuB8",
+          "youtube_id": "rbINaZ-NuB8",
+          "duration": 1259,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Tyree Taylor vs. Dustin Waller | Wrestling Open #1 Contender Tournament (2/19/26)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=HaIxJ-Wdy44",
+          "youtube_id": "HaIxJ-Wdy44",
+          "duration": 1097,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Fancy Ryan Clancy vs. Brando Lee | Wrestling Open #1 Contender Tournament (2/12/26)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=VdaRKzfJx5g",
+          "youtube_id": "VdaRKzfJx5g",
+          "duration": 1236,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Oxx Adams with BRG vs. Tyree Taylor | Wrestling Open #1 Contender Tournament (2/12/26)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=nKCmIwFy3Pc",
+          "youtube_id": "nKCmIwFy3Pc",
+          "duration": 826,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Max Caster vs. Bear Bronson | Wrestling Open RI (Beyond, AEW, TNA, System, Acclaimed)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=nKAfYQQHupw",
+          "youtube_id": "nKAfYQQHupw",
+          "duration": 1345,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Corinne Joy & Gabby Forza v Kylie Alexa & Amity Lavey | Women's Wrestling Open (Beyond)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=1fQ73uw9was",
+          "youtube_id": "1fQ73uw9was",
+          "duration": 589,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Kylie Alexa v. Aaron Rourke | Beyond Wrestling (Intergender, Mixed, WWE ID, NWA, Paige)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=WsApTy0A9FU",
+          "youtube_id": "WsApTy0A9FU",
+          "duration": 940,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Fancy Ryan Clancy vs. Sammy Diaz | Wrestling Open #1 Contender Tournament (2/5/26)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=FBoo9p8oJBw",
+          "youtube_id": "FBoo9p8oJBw",
+          "duration": 1295,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Brando Lee vs. Steven Stetson | Wrestling Open #1 Contender Tournament (2/5/26)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=mvjrgH1lj28",
+          "youtube_id": "mvjrgH1lj28",
+          "duration": 889,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Dustin Waller vs. Eye Black Jack | Wrestling Open #1 Contender Tournament (2/5/26)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=rsr9cxc6FRY",
+          "youtube_id": "rsr9cxc6FRY",
+          "duration": 681,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Nixi XS vs. Shannon LeVangie | Women's Wrestling (Beyond, Open, WWE ID, NXT, AEW, ROH)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=WsfshVkSJgg",
+          "youtube_id": "WsfshVkSJgg",
+          "duration": 478,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Lady Leigh vs. Allie Katch | Women's Wrestling (Beyond, Open, LFG, WWE, NXT, Jin Tala)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=2v98_gBkCsQ",
+          "youtube_id": "2v98_gBkCsQ",
+          "duration": 420,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Bear Bronson & Fancy Ryan Clancy vs. All The Attention (Nick Battee & Jose Zamora)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=Lweaayc11V8",
+          "youtube_id": "Lweaayc11V8",
+          "duration": 1000,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Dani Luna vs. Jody Threat vs. Gabby Forza vs. Liviyah | Women's Wrestling Open RI (TNA)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=wC2n-Ea16EA",
+          "youtube_id": "wC2n-Ea16EA",
+          "duration": 607,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Sinner And Saint (Travis Williams/Judas Icarus) vs. The Vibe (Sammy Diaz/Mani Ariez)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=VZedEPslRkI",
+          "youtube_id": "VZedEPslRkI",
+          "duration": 686,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] TJ Crawford & Eye Black Jack vs. Stetson Ranch | Wrestling Open 10/9/25 (WWE NXT AEW)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=Gep0W-aytjg",
+          "youtube_id": "Gep0W-aytjg",
+          "duration": 897,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] \"Big Boofa\" Dezmond Cole vs. DJ Powers | Wrestling Open 10/9/25 (WWE ID, NXT, AEW, ROH)",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=uP_S5F8vAkE",
+          "youtube_id": "uP_S5F8vAkE",
+          "duration": 732,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[Free Match] Bear Bronson/Ryan Clancy/Ichiban/Brando Lee vs. Miracle Generation & Simply The Best",
+          "episode": "Beyond Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=PYbo9HJNe08",
+          "youtube_id": "PYbo9HJNe08",
+          "duration": 1394,
+          "source": "YouTube",
+          "source_channel": "Beyond Wrestling"
+        },
+        {
+          "title": "[ FULL SHOW ] DEFY: ALL HEART | LIVE from Detroit!",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=bnUlklrEKgI",
+          "youtube_id": "bnUlklrEKgI",
+          "duration": 8552,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Shane 'Swerve' Strickland vs Brody King | DEFY Wrestling - Yo! DEFY Graps (11/10/17)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=z_-7NuyTbYo",
+          "youtube_id": "z_-7NuyTbYo",
+          "duration": 1730,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Artemis Spencer, Speedball Bailey & Nick Gage vs Sovereign | DEFY Pantheon (11/18/23)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=dIH9i0x9Yzc",
+          "youtube_id": "dIH9i0x9Yzc",
+          "duration": 1338,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Timothy Thatcher vs Zack Sabre Jr. | DEFY Wrestling - Streets of Rage (04/13/25)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=he9MOJ00CbQ",
+          "youtube_id": "he9MOJ00CbQ",
+          "duration": 834,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Women's 5-Way Match with Megan Bayne | DEFY Wrestling - Blueprint (12/29/24)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=EIEuq2WkfgE",
+          "youtube_id": "EIEuq2WkfgE",
+          "duration": 857,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Gabe Kidd vs Calvin Tankman | DEFY Wrestling - Streets of Rage (04/13/25)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=vZeqWvkRYqA",
+          "youtube_id": "vZeqWvkRYqA",
+          "duration": 944,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Jacob Fatu vs Amazing Red | DEFY Wrestling - Fight For This (10/19/19)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=rrlYM8eIRGs",
+          "youtube_id": "rrlYM8eIRGs",
+          "duration": 712,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Marina Shafir vs Shoko Nakajima | DEFY Wrestling - Triangler DTD (11/10/24)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=woyyunjI3Jg",
+          "youtube_id": "woyyunjI3Jg",
+          "duration": 982,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Jeff Cobb vs Jacob Fatu | DEFY Wrestling - Marauders (10/29/21)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=ZcXosUhtQh0",
+          "youtube_id": "ZcXosUhtQh0",
+          "duration": 982,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Kevin \"Jet\" Knight vs Cody Chhun | DEFY Wrestling - New Wave (12/30/23)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=XEtQNsK3ijs",
+          "youtube_id": "XEtQNsK3ijs",
+          "duration": 1501,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Bollywood Boyz vs Mance Warner & Matthew Justice | DEFY Heathens (06/24/23)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=IIawQOpec-g",
+          "youtube_id": "IIawQOpec-g",
+          "duration": 1065,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Vikingo vs Nick Wayne | DEFY Wrestling - Air Raid (12/17/22)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=97uhgTW477A",
+          "youtube_id": "97uhgTW477A",
+          "duration": 1071,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] SCU vs Myers, Schaff, Swerve | DEFY Wrestling - Never Dies (01/19/19)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=KhqExFC9wgA",
+          "youtube_id": "KhqExFC9wgA",
+          "duration": 1340,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ 5 Free Matches ] DEFY Holiday Special | DEFY Wrestling (12/15/24)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=NWzl7ikwu_4",
+          "youtube_id": "NWzl7ikwu_4",
+          "duration": 6174,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Shelton Benjamin vs Kevin \"Jet\" Knight | DEFY Wrestling - By Design (09/20/24)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=Brx1sSdfwy4",
+          "youtube_id": "Brx1sSdfwy4",
+          "duration": 1274,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Mustafa Ali vs Judas Icarus | DEFY Wrestling - Seven (02/09/24)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=kzEIHgR7MNQ",
+          "youtube_id": "kzEIHgR7MNQ",
+          "duration": 1145,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] \"Speedball\" Mike Bailey vs Judas Icarus | DEFY Wrestling - Genesis (10/27/23)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=XxvIYlc1bYY",
+          "youtube_id": "XxvIYlc1bYY",
+          "duration": 1506,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Swerve Strickland vs MVP | DEFY Wrestling - Requiem (06/09/18)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=uxOCR9EyqEY",
+          "youtube_id": "uxOCR9EyqEY",
+          "duration": 1376,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] Artemis Spencer vs Mark Haskins | DEFY Wrestling - For the Glory (07/19/23)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=JKUn0e2oU6A",
+          "youtube_id": "JKUn0e2oU6A",
+          "duration": 1271,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        },
+        {
+          "title": "[ Full Match ] KENTA vs Mark Haskins | DEFY Wrestling - The Splendid & The Vile (08/26/23)",
+          "episode": "DEFY Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=4o4NT4ZYgqw",
+          "youtube_id": "4o4NT4ZYgqw",
+          "duration": 1971,
+          "source": "YouTube",
+          "source_channel": "DEFY Wrestling"
+        }
+      ]
+    }
+  }
+}

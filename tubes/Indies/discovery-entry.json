@@ -1,0 +1,26 @@
+{
+  "directory": "Indies",
+  "key": "indies",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
+  "youtube_search_queries": [
+    "full match",
+    "full event"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UC5bVuZfyM3fwDnQH4nGdcxA",
+      "name": "GC Wrestling"
+    },
+    {
+      "id": "UCy91SdPgEDZnCHHm5ag32yQ",
+      "name": "Beyond Wrestling"
+    },
+    {
+      "id": "UCBZ2Hl4YPU0Dzxuj3a3qSQw",
+      "name": "DEFY Wrestling"
+    }
+  ]
+}

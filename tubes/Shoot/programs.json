@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "seed": "shoot-20261125",
+  "channels": {
+    "shoot": {
+      "name": "BAKED TV · SHOOT",
+      "description": "Official wrestling programming and interviews",
+      "programs": [
+        {
+          "title": "LANCE RUSSELL (2005) FULL INTERVIEW I Memphis, Jerry Lawler, Andy Kauffman, Bill Dundee, & more!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=zIrdNy5cprc",
+          "youtube_id": "zIrdNy5cprc",
+          "duration": 4670,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Demolition FULL INTERVIEW on Vince McMahon, WWE, Road Warriors, WCW, Territories, & More!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=lg6cHvH7dfY",
+          "youtube_id": "lg6cHvH7dfY",
+          "duration": 6006,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Jimmy Hart (2003) FULL INTERVIEW I WWE, WCW, Hulk Hogan, Jerry Lawler, Legends, & more!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=LyDkw66RrSc",
+          "youtube_id": "LyDkw66RrSc",
+          "duration": 8903,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Larry Sharpe FULL INTERVIEW I Vince McMahon, WWE, Bam Bam Bigelow, Ric Flair, & much much more!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=V5_gCAyW-wY",
+          "youtube_id": "V5_gCAyW-wY",
+          "duration": 7889,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Kevin Von Erich FULL Interview | Von Erichs, World Class, Ric Flair, Bruiser Brody, & MORE!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=F2fEH2zbi8E",
+          "youtube_id": "F2fEH2zbi8E",
+          "duration": 8737,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Tony Garea FULL INTERVIEW on Vince Mcmahon, WWE, Pat Patterson, Hulk Hogan, Ultimate Warrior, & More",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=vuk4Hd4p4aI",
+          "youtube_id": "vuk4Hd4p4aI",
+          "duration": 8564,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Norman Smiley I FULL INTERVIEW WCW, WWE, Vince Mcmahon, Eric Bischoff, Hulk Hogan, & more!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=UwC_H8Lre20",
+          "youtube_id": "UwC_H8Lre20",
+          "duration": 7177,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        },
+        {
+          "title": "Brickhouse Brown FULL INTERVIEW I Hulk Hogan, Bill Watts, Von Erich's, & much more!",
+          "episode": "Title Match Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=aKEuyo7FWKg",
+          "youtube_id": "aKEuyo7FWKg",
+          "duration": 10375,
+          "source": "YouTube",
+          "source_channel": "Title Match Wrestling"
+        }
+      ]
+    }
+  }
+}

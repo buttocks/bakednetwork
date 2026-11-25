@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "seed": "wrestling4-20261125",
+  "channels": {
+    "wrestling4": {
+      "name": "BAKED TV · WRESTLING 4",
+      "description": "Official wrestling programming and interviews",
+      "programs": [
+        {
+          "title": "LUCHA COMPLETA: El Fiscal vs. Galeno: AAA Héroes Inmortales 2025",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=WDNavWrTyp8",
+          "youtube_id": "WDNavWrTyp8",
+          "duration": 464,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Mascarita Sagrada vs. Mini Abismo Negro: AAA Héroes Inmortales 2025",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=w7uz1SB9AAw",
+          "youtube_id": "w7uz1SB9AAw",
+          "duration": 530,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Catalina vs. Jessy Jackson: AAA en FOX EP. 17",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=UH3sNh42pX4",
+          "youtube_id": "UH3sNh42pX4",
+          "duration": 891,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Daga, Campeón Latinoamericano AAA | AAA Héroes Inmortales VI",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=jnFIWYWlpDc",
+          "youtube_id": "jnFIWYWlpDc",
+          "duration": 934,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: El Grande Americano y Texano Jr. vs. El Mesías y Mecha Wolf: AAA en FOX EP. 15",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=EeSsrNE9ngU",
+          "youtube_id": "EeSsrNE9ngU",
+          "duration": 911,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Perros del Mal vs. Cibernético y La Secta en Domo | AAA Héroes Inmortales VI",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=3C5cj0XdIHc",
+          "youtube_id": "3C5cj0XdIHc",
+          "duration": 607,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Abyss y Chessman vs. Jack Evans y Xtreme Tiger | AAA Héroes Inmortales V",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=2rpvz3kR-5M",
+          "youtube_id": "2rpvz3kR-5M",
+          "duration": 838,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Hijo del Perro Aguayo vs. Dr. Wagner Jr. | AAA Héroes Inmortales V",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=oArdnFvh8Q0",
+          "youtube_id": "oArdnFvh8Q0",
+          "duration": 821,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Perros del Mal vs. Psycho Circus | AAA Héroes Inmortales V",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=qvGqqPubAtY",
+          "youtube_id": "qvGqqPubAtY",
+          "duration": 1067,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: TEAM LA PARKA vs. PSYCHO CIRCUS | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=su0_c4V2Ino",
+          "youtube_id": "su0_c4V2Ino",
+          "duration": 711,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Penta vs. Hijo del Vikingo: AAAenFOX Ep. 13",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=-JzVDK9PpbA",
+          "youtube_id": "-JzVDK9PpbA",
+          "duration": 1170,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Faby Apache, Lola Vice y Natalya vs. Flammer, Hiedra y Maravilla | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=es23DcWARIM",
+          "youtube_id": "es23DcWARIM",
+          "duration": 801,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Latin Lover, Gronda y Héctor Garza vs. Abyss, Chessman y Abismo | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=81DLbqmf02w",
+          "youtube_id": "81DLbqmf02w",
+          "duration": 700,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Parka vs. Lince Dorado | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=HmEauIatAYQ",
+          "youtube_id": "HmEauIatAYQ",
+          "duration": 438,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Axiom vs. Je'Von Evans vs. Octagón Jr. | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=ft02Z5d2nCc",
+          "youtube_id": "ft02Z5d2nCc",
+          "duration": 1118,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Carnival of Carnage: The Wyatt Sicks vs. Psycho Circus | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=jaHIEvFusKI",
+          "youtube_id": "jaHIEvFusKI",
+          "duration": 921,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Octagón & El Hijo del Santo vs. Art Barr & Eddie Guerrero | Worlds Collide 1994",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=Nkxu3TH6rB0",
+          "youtube_id": "Nkxu3TH6rB0",
+          "duration": 1424,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Penta y Fénix vs. Hijo del Vikingo y Laredo Kid | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=S1EPVYogT44",
+          "youtube_id": "S1EPVYogT44",
+          "duration": 989,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Roxanne Perez vs. La Hiedra vs. Faby Apache vs. Nattie | Triplemanía 34",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=5osfZbQkf2U",
+          "youtube_id": "5osfZbQkf2U",
+          "duration": 1032,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "DR WAGNER Jr Vs BLUE DEMON Jr  en NUEVA YORK | LUCHA COMPLETA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=0K-zuOslsRg",
+          "youtube_id": "0K-zuOslsRg",
+          "duration": 588,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Parka vs. Mecha Wolf | Alianzas Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=RQZbXMWSAz8",
+          "youtube_id": "RQZbXMWSAz8",
+          "duration": 554,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: El Hijo del Dr. Wagner Jr. vs. El Hijo del Vikingo | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=83kW3sDd2m8",
+          "youtube_id": "83kW3sDd2m8",
+          "duration": 1153,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: L.A. Park vs. Psycho Clown vs. Penta vs. Fantasma | Máscara vs. Máscara, Triplemanía",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=RmMf3KPfdl8",
+          "youtube_id": "RmMf3KPfdl8",
+          "duration": 1134,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Dominik Mysterio vs. El Grande Americano, Megacampeonato | AAA Triplemania 2026",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=KZH-uZtvoA0",
+          "youtube_id": "KZH-uZtvoA0",
+          "duration": 1675,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: WAGNER vs. MESÍAS en TRIPLEMANIA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=7U3Ghv_ZegE",
+          "youtube_id": "7U3Ghv_ZegE",
+          "duration": 980,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Catalina vs. Flammer | AAA Triplemanía 34",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=uD91v4vkLNY",
+          "youtube_id": "uD91v4vkLNY",
+          "duration": 783,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Copa Bardahl | AAA Triplemania 2025",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=EiLODn-8bgA",
+          "youtube_id": "EiLODn-8bgA",
+          "duration": 1945,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Lince Dorado vs. Apollo Crews | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=xQsBICAvUqM",
+          "youtube_id": "xQsBICAvUqM",
+          "duration": 934,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        }
+      ]
+    }
+  }
+}

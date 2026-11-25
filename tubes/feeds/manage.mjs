@@ -46,10 +46,12 @@ async function wait(page,predicate,msg,ms=20000){
 async function login(page,password){
   await page.goto(SITE+'/login',{waitUntil:'domcontentloaded',timeout:45000});
   const form=page.locator('form[action="/login"]').last();
+  await form.locator('input[name="name"]').waitFor({state:'visible',timeout:20000});
   await form.locator('input[name="name"]').fill(USER);
   await form.locator('input[name="password"]').fill(password);
   await form.locator('button[type="submit"]').click();
   await page.waitForLoadState('domcontentloaded');
+  if(/Login Failed|Invalid username\/password/i.test(await page.locator('body').innerText()))throw Error('Baked.live login failed');
 }
 async function main(){
   const cfg=JSON.parse(await fs.readFile(CONFIG,'utf8'));
@@ -84,8 +86,8 @@ async function main(){
   const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
   const report={at:new Date().toISOString(),actions:[],channels:{}};
   try{
-    const context=await browser.newContext({viewport:{width:1300,height:830}});
-    const page=await context.newPage();
+    const probeContext=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
+    const page=await probeContext.newPage();
     // A service outage must not be interpreted as a feed failure.
     let reachable=false;
     try{
@@ -94,15 +96,30 @@ async function main(){
       await probe.dispose();
     }catch{}
     if(!reachable){report.actions.push({result:'site-unavailable-no-changes'});console.log('Baked.live unavailable; reconciliation skipped');return;}
-    await login(page,password);
+    await probeContext.close();
     for(const tube of [...new Set(cfg.managed.map(x=>x.tube))]){
-      await page.goto(SITE+'/tv/'+tube,{waitUntil:'domcontentloaded',timeout:45000});
-      let initial=await wait(page,s=>s.connected&&s.loggedIn&&
-        s.username?.toLowerCase()===USER&&String(s.channel||'').toLowerCase()===tube.toLowerCase(),
-        'Cannot verify connected bot identity on '+tube,30000);
-      await page.waitForTimeout(1800);
-      initial=await state(page);
-      if(initial.rank<3)initial=await wait(page,s=>s.rank>=3,'No admin rank on '+tube,8000);
+      // Match the successful bridge: isolate login and socket state per channel.
+      const context=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
+      const page=await context.newPage();
+      page.setDefaultTimeout(20000);
+      try {
+      let initial;
+      const authenticated=s=>s.connected&&s.loggedIn&&String(s.username||'').toLowerCase()===USER&&String(s.channel||'').toLowerCase()===tube.toLowerCase();
+      try{
+        await login(page,password);
+        await page.goto(SITE+'/tv/'+tube,{waitUntil:'domcontentloaded',timeout:45000});
+        initial=await wait(page,authenticated,'Cannot verify connected bot identity on '+tube,30000);
+        await page.waitForTimeout(2200);
+        initial=await wait(page,s=>authenticated(s)&&Number.isFinite(s.rank)&&s.rank>=3,'Cannot verify admin identity on '+tube,8000);
+      }catch(e){
+        const snapshot=await state(page).catch(()=>({}));
+        const diagnostic={connected:!!snapshot.connected,loggedIn:!!snapshot.loggedIn,expectedUsername:String(snapshot.username||'').toLowerCase()===USER,expectedChannel:String(snapshot.channel||'').toLowerCase()===tube.toLowerCase(),rank:Number.isFinite(snapshot.rank)?snapshot.rank:null};
+        report.channels[tube]={status:'authentication-unverified',diagnostic};
+        report.actions.push({tube,result:'authentication-unverified-no-changes'});
+        console.log('CHANNEL_AUTH '+tube+' '+JSON.stringify(diagnostic));
+        continue;
+      }
+      console.log('CHANNEL_AUTH '+tube+' verified rank='+initial.rank);
       report.channels[tube]={before:initial.queue.map(e=>({uid:e.uid,title:e.title,src:e.src})),
         playing:initial.playing,rank:initial.rank};
       for(const feed of cfg.managed.filter(x=>x.tube===tube)){
@@ -185,8 +202,10 @@ async function main(){
         .every(x=>report.channels[tube].after.some(y=>y.uid===x.uid));
       if(!report.channels[tube].unchangedNonManaged)
         throw Error('An unmanaged playlist entry disappeared during reconciliation');
+      } finally { await context.close(); }
     }
   }finally{await browser.close();await fs.writeFile(REPORT,JSON.stringify(report,null,2)+'\n');}
   console.log('RECONCILE_RESULTS '+JSON.stringify(report.actions));
+  if(report.actions.some(x=>x.result==='authentication-unverified-no-changes'))process.exitCode=1;
 }
 main().catch(e=>{console.error('Managed feed reconciliation failed: '+String(e.message||e).slice(0,300));process.exitCode=1});

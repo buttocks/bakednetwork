@@ -62,6 +62,9 @@ def archive(entry, defaults, cursor):
         if not isinstance(meta,dict):continue
         metadata=meta.get("metadata",{})
         context=" ".join(str(metadata.get(field,"")) for field in ("title","description","subject","collection","creator","uploader"))
+        if entry["key"]=="mtv" and re.search(r"\b(?:Halloween Justice|Halloween Havoc|DisMissed)\b",str(metadata.get("title","")),re.I):
+            print("Archive excluded unrelated MTV programming",identifier)
+            continue
         if entry.get("archive_require_open_license"):
             license_url=str(metadata.get("licenseurl","")).strip()
             if not re.fullmatch(r"https?://creativecommons\.org/(?:publicdomain/(?:zero|mark)/1\.0|licenses/(?:by|by-sa)/(?:1\.0|2\.0|2\.5|3\.0|4\.0))/?",license_url,re.I):
@@ -236,6 +239,7 @@ def youtube(entry,defaults):
     with ThreadPoolExecutor(max_workers=3) as pool:
         return [r for r in pool.map(detail,candidates[:9]) if r]
 def refresh_one(entry,defaults,record):
+    defaults={**defaults,**{k:entry[k] for k in ("min_duration_seconds","max_duration_seconds") if k in entry}}
     target=CHANNELS/entry["directory"]/"programs.json"
     j=load(target)
     key=entry["key"]

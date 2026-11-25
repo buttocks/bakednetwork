@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "seed": "rdh-20261125",
+  "channels": {
+    "rdh": {
+      "name": "BAKED TV · REAL DAD'S HIDEOUT",
+      "description": "Official entertainment programming",
+      "programs": [
+        {
+          "title": "Saturday Night Live Monologue Live Stream",
+          "episode": "Saturday Night Live · official programming",
+          "url": "https://www.youtube.com/watch?v=ZrSdSAme9uw",
+          "youtube_id": "ZrSdSAme9uw",
+          "duration": 1185,
+          "source": "YouTube",
+          "source_channel": "Saturday Night Live"
+        },
+        {
+          "title": "Saturday Night Live Monologue Live Stream",
+          "episode": "Saturday Night Live · official programming",
+          "url": "https://www.youtube.com/watch?v=c7M4svsNDT4",
+          "youtube_id": "c7M4svsNDT4",
+          "duration": 916,
+          "source": "YouTube",
+          "source_channel": "Saturday Night Live"
+        },
+        {
+          "title": "Saturday Night Live Monologue Live Stream",
+          "episode": "Saturday Night Live · official programming",
+          "url": "https://www.youtube.com/watch?v=KN8J8FTrl88",
+          "youtube_id": "KN8J8FTrl88",
+          "duration": 898,
+          "source": "YouTube",
+          "source_channel": "Saturday Night Live"
+        },
+        {
+          "title": "ESPN Classic: Ladies' Darts - Saturday Night Live",
+          "episode": "Saturday Night Live · official programming",
+          "url": "https://www.youtube.com/watch?v=M_YO4lsGyW4",
+          "youtube_id": "M_YO4lsGyW4",
+          "duration": 311,
+          "source": "YouTube",
+          "source_channel": "Saturday Night Live"
+        },
+        {
+          "title": "Pumping up With Hans and Franz: Arnold Schwarzenegger - Saturday Night Live",
+          "episode": "Saturday Night Live · official programming",
+          "url": "https://www.youtube.com/watch?v=GAalP0jeqV4",
+          "youtube_id": "GAalP0jeqV4",
+          "duration": 339,
+          "source": "YouTube",
+          "source_channel": "Saturday Night Live"
+        }
+      ]
+    }
+  }
+}

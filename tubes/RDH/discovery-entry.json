@@ -1,0 +1,22 @@
+{
+  "directory": "RDH",
+  "key": "rdh",
+  "youtube_title_pattern": "(?i)(performance|live|sketch|official clip)",
+  "youtube_search_queries": [
+    "classic performance"
+  ],
+  "min_duration_seconds": 90,
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UCDUNe-NZaknJOGyulc4Ohvg",
+      "name": "The Ed Sullivan Show"
+    },
+    {
+      "id": "UCqFzWxSCi39LnW1JKFR3efg",
+      "name": "Saturday Night Live"
+    }
+  ]
+}

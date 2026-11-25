@@ -1,0 +1,552 @@
+{
+  "schema": 1,
+  "seed": "wid-20261125",
+  "channels": {
+    "wid": {
+      "name": "BAKED TV · WID SPORTS",
+      "description": "Official entertainment programming",
+      "programs": [
+        {
+          "title": "LUCHA COMPLETA: El Fiscal vs. Galeno: AAA Héroes Inmortales 2025",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=WDNavWrTyp8",
+          "youtube_id": "WDNavWrTyp8",
+          "duration": 464,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Mascarita Sagrada vs. Mini Abismo Negro: AAA Héroes Inmortales 2025",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=w7uz1SB9AAw",
+          "youtube_id": "w7uz1SB9AAw",
+          "duration": 530,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Catalina vs. Jessy Jackson: AAA en FOX EP. 17",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=UH3sNh42pX4",
+          "youtube_id": "UH3sNh42pX4",
+          "duration": 891,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Daga, Campeón Latinoamericano AAA | AAA Héroes Inmortales VI",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=jnFIWYWlpDc",
+          "youtube_id": "jnFIWYWlpDc",
+          "duration": 934,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: El Grande Americano y Texano Jr. vs. El Mesías y Mecha Wolf: AAA en FOX EP. 15",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=EeSsrNE9ngU",
+          "youtube_id": "EeSsrNE9ngU",
+          "duration": 911,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Perros del Mal vs. Cibernético y La Secta en Domo | AAA Héroes Inmortales VI",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=3C5cj0XdIHc",
+          "youtube_id": "3C5cj0XdIHc",
+          "duration": 607,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Abyss y Chessman vs. Jack Evans y Xtreme Tiger | AAA Héroes Inmortales V",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=2rpvz3kR-5M",
+          "youtube_id": "2rpvz3kR-5M",
+          "duration": 838,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Hijo del Perro Aguayo vs. Dr. Wagner Jr. | AAA Héroes Inmortales V",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=oArdnFvh8Q0",
+          "youtube_id": "oArdnFvh8Q0",
+          "duration": 821,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Perros del Mal vs. Psycho Circus | AAA Héroes Inmortales V",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=qvGqqPubAtY",
+          "youtube_id": "qvGqqPubAtY",
+          "duration": 1067,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: TEAM LA PARKA vs. PSYCHO CIRCUS | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=su0_c4V2Ino",
+          "youtube_id": "su0_c4V2Ino",
+          "duration": 711,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Faby Apache, Lola Vice y Natalya vs. Flammer, Hiedra y Maravilla | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=es23DcWARIM",
+          "youtube_id": "es23DcWARIM",
+          "duration": 801,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Penta vs. Hijo del Vikingo: AAAenFOX Ep. 13",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=-JzVDK9PpbA",
+          "youtube_id": "-JzVDK9PpbA",
+          "duration": 1170,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Axiom vs. Je'Von Evans vs. Octagón Jr. | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=ft02Z5d2nCc",
+          "youtube_id": "ft02Z5d2nCc",
+          "duration": 1118,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Latin Lover, Gronda y Héctor Garza vs. Abyss, Chessman y Abismo | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=81DLbqmf02w",
+          "youtube_id": "81DLbqmf02w",
+          "duration": 700,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "DR WAGNER Jr Vs BLUE DEMON Jr  en NUEVA YORK | LUCHA COMPLETA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=0K-zuOslsRg",
+          "youtube_id": "0K-zuOslsRg",
+          "duration": 588,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Parka vs. Lince Dorado | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=HmEauIatAYQ",
+          "youtube_id": "HmEauIatAYQ",
+          "duration": 438,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Carnival of Carnage: The Wyatt Sicks vs. Psycho Circus | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=jaHIEvFusKI",
+          "youtube_id": "jaHIEvFusKI",
+          "duration": 921,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Octagón & El Hijo del Santo vs. Art Barr & Eddie Guerrero | Worlds Collide 1994",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=Nkxu3TH6rB0",
+          "youtube_id": "Nkxu3TH6rB0",
+          "duration": 1424,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: L.A. Park vs. Psycho Clown vs. Penta vs. Fantasma | Máscara vs. Máscara, Triplemanía",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=RmMf3KPfdl8",
+          "youtube_id": "RmMf3KPfdl8",
+          "duration": 1134,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Parka vs. Mecha Wolf | Alianzas Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=RQZbXMWSAz8",
+          "youtube_id": "RQZbXMWSAz8",
+          "duration": 554,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Dominik Mysterio vs. El Grande Americano, Megacampeonato | AAA Triplemania 2026",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=KZH-uZtvoA0",
+          "youtube_id": "KZH-uZtvoA0",
+          "duration": 1675,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: El Hijo del Dr. Wagner Jr. vs. El Hijo del Vikingo | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=83kW3sDd2m8",
+          "youtube_id": "83kW3sDd2m8",
+          "duration": 1153,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Penta y Fénix vs. Hijo del Vikingo y Laredo Kid | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=S1EPVYogT44",
+          "youtube_id": "S1EPVYogT44",
+          "duration": 989,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Parka vs. Galeno del Mal | Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=JDpPHzCJDnE",
+          "youtube_id": "JDpPHzCJDnE",
+          "duration": 672,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Dominik Mysterio vs. Dragon Lee | Héroes Inmortales de Lucha Libre AAA",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=ZKzpk754bjQ",
+          "youtube_id": "ZKzpk754bjQ",
+          "duration": 1675,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: Roxanne Perez vs. La Hiedra vs. Faby Apache vs. Nattie | Triplemanía 34",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=5osfZbQkf2U",
+          "youtube_id": "5osfZbQkf2U",
+          "duration": 1032,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "LUCHA COMPLETA: La Catalina vs. Flammer | AAA Triplemanía 34",
+          "episode": "Lucha Libre AAA · official programming",
+          "url": "https://www.youtube.com/watch?v=uD91v4vkLNY",
+          "youtube_id": "uD91v4vkLNY",
+          "duration": 783,
+          "source": "YouTube",
+          "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "NJPW Academy Showcase Spring 2026 | FULL EVENT",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=ObiaRPte7V4",
+          "youtube_id": "ObiaRPte7V4",
+          "duration": 6542,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Kazuchika Okada vs Hiroshi Tanahashi! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=1ty5MxMOXZc",
+          "youtube_id": "1ty5MxMOXZc",
+          "duration": 3316,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Eddie Kingston vs Jay White! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=17rC_6x88v0",
+          "youtube_id": "17rC_6x88v0",
+          "duration": 4383,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Giulia vs Willow Nightingale! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=qC-2SCTRNLU",
+          "youtube_id": "qC-2SCTRNLU",
+          "duration": 3600,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Jay White vs Swerve Strickland! | STRONG ep 82",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=wewTONK-rgI",
+          "youtube_id": "wewTONK-rgI",
+          "duration": 3473,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Mercedes Moné vs Willow Nightingale! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=RQaF8SnPrbI",
+          "youtube_id": "RQaF8SnPrbI",
+          "duration": 3885,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH! El Desperado vs Jon Moxley No DQ July 30 2022",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=TT8CSWx4n8Q",
+          "youtube_id": "TT8CSWx4n8Q",
+          "duration": 1648,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH  Will Ospreay vs. Amazing Red SUPER J-CUP 2019",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=8yKk4ixzxp0",
+          "youtube_id": "8yKk4ixzxp0",
+          "duration": 1913,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! KAIRI vs Mercedes Moné! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=BYh7goWhN7w",
+          "youtube_id": "BYh7goWhN7w",
+          "duration": 3751,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Brody King vs Bateman, Jeff Cobb, more! | STRONG ep 32",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=SUiVEcY7R8k",
+          "youtube_id": "SUiVEcY7R8k",
+          "duration": 3018,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH FinJuice vs GoD The New Beginning in Atlanta 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=N7PMKvzwIsQ",
+          "youtube_id": "N7PMKvzwIsQ",
+          "duration": 1698,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Jun Kasai & El Desperado vs Jon Moxley & Homicide! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=aiICls1g1To",
+          "youtube_id": "aiICls1g1To",
+          "duration": 3301,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE: Juice Robinson vs Hikuleo Texas Bullrope Match! STRONG Ep63",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=ngRQszGorzs",
+          "youtube_id": "ngRQszGorzs",
+          "duration": 5021,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH: LIJ vs BULLET CLUB: Showdown in LA",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=YSfOYYvjqOY",
+          "youtube_id": "YSfOYYvjqOY",
+          "duration": 1792,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Lio Rush vs Taiji Ishimori! Suzuki-Gun vs Team Filthy! | STRONG #64",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=aiAL4j9_sAw",
+          "youtube_id": "aiAL4j9_sAw",
+          "duration": 4220,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Hiroshi Tanahashi vs Alex Shelley! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=FxwHIXOW5dQ",
+          "youtube_id": "FxwHIXOW5dQ",
+          "duration": 3088,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! CHAOS, Mascara Dorada, Ren Narita vs BULLET CLUB! | STRONG Ep94",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=1s51jB5XUBQ",
+          "youtube_id": "1s51jB5XUBQ",
+          "duration": 3473,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Jay White vs Robbie Eagles, Minoru Suzuki, more! | STRONG ep 61",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=t5gasAZ2xuo",
+          "youtube_id": "t5gasAZ2xuo",
+          "duration": 4869,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Hiroshi Tanahashi vs Will Ospreay! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=FS1aqIEdRYM",
+          "youtube_id": "FS1aqIEdRYM",
+          "duration": 3570,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! Moxley vs KENTA, more! | STRONG Ep 29",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=4pBGFWiPfe4",
+          "youtube_id": "4pBGFWiPfe4",
+          "duration": 3018,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FULL MATCH: WCW Championship Triple Cage WarGames Match: WCW Nitro, Sept. 4, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=2LOjy17-P38",
+          "youtube_id": "2LOjy17-P38",
+          "duration": 1259,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Rick Rude | King of Cable Semi Final: Clash of the Champions XXI",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=WLtvQYVp9R0",
+          "youtube_id": "WLtvQYVp9R0",
+          "duration": 1549,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Nitro’s best singles matches of 2000 | WCW Monday Nitro, Jan. 1, 2001",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=PORGX9kq_yM",
+          "youtube_id": "PORGX9kq_yM",
+          "duration": 5250,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Luger is ready for Rhodes at Starrcade | WCW, Oct. 24, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=6-KS23WCszw",
+          "youtube_id": "6-KS23WCszw",
+          "duration": 4943,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Booker T vs. Scott Steiner | WCW Title Straight Jacket Cage Match: WCW Mayhem 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=h85Ugd13DrI",
+          "youtube_id": "h85Ugd13DrI",
+          "duration": 1042,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Scott Hall vs. Booker T | WCW U.S. Title Match: WCW Mayhem 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=FkbX6w0fFF0",
+          "youtube_id": "FkbX6w0fFF0",
+          "duration": 693,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: The Road Warriors vs. The Fabulous Freebirds: Clash of the Champions IX, Nov. 15, 1989",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=YqSXEr5jCps",
+          "youtube_id": "YqSXEr5jCps",
+          "duration": 533,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting & Scott Steiner vs. Bam Bam Bigelow & Mike Awesome: WCW Nitro, Nov. 13, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=saChePUQ-Ls",
+          "youtube_id": "saChePUQ-Ls",
+          "duration": 421,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Nitro’s best tag team matches of 2000 | WCW Monday Nitro, Dec. 25, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Q2Cb6Erdpf4",
+          "youtube_id": "Q2Cb6Erdpf4",
+          "duration": 4904,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Starrcade 1985 | Flair vs. Rhodes; Magnum T.A. vs. Blanchard",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=xWYUu-Ptt6E",
+          "youtube_id": "xWYUu-Ptt6E",
+          "duration": 10373,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Sting’s WCW debut; JJ Dillon introduces Shogun | WCW, Oct. 17, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=uo3Sd_1LQ78",
+          "youtube_id": "uo3Sd_1LQ78",
+          "duration": 4849,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Goldberg vs. Bam Bam Bigelow vs. Lex Luger: WCW Thunder Nov. 8, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Ul7HB1dLy_M",
+          "youtube_id": "Ul7HB1dLy_M",
+          "duration": 593,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Ric Flair & Arn Anderson vs. Steve Austin & Vader: WCW Saturday Night, Nov. 13, 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=fWWa7rSlR2A",
+          "youtube_id": "fWWa7rSlR2A",
+          "duration": 2028,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+name: Validate shared playlist tools
+on:
+  push:
+    branches: [main]
+    paths: ['tubes/shared/modules/PlaylistTools-Standalone.js','modules/PlaylistTools-Standalone.js','.github/workflows/check-playlist-tools.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          node --check tubes/shared/modules/PlaylistTools-Standalone.js
+          node --check modules/PlaylistTools-Standalone.js

@@ -1,4 +1,4 @@
-/* Baked.live / CyTube Playlist Tools v1.0 — reusable, no external dependencies. */
+/* Baked.live / CyTube Playlist Tools v1.1 — reusable, no external dependencies. */
 (function () {
   'use strict';
   if (!/\/(tv|r)\//i.test(location.pathname)) return;
@@ -13,7 +13,7 @@
   const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
   const isPermitted = () => typeof window.hasPermission === 'function' &&
     !!window.hasPermission('playlistdelete') && !!window.hasPermission('seeplaylist');
-  const sock = () => window.socket && typeof window.socket.emit === 'function' ? window.socket : null;
+  const sock = () => window.socket && window.socket.connected && typeof window.socket.emit === 'function' ? window.socket : null;
   const jq = () => window.jQuery || window.$;
 
   const style = document.createElement('style');
@@ -99,7 +99,7 @@
     if (mode === 'selected') return eligible.filter(e => S.selected.has(String(e.uid)));
     if (mode === 'last') {
       const n = Math.max(0, Math.min(entries.length, +id('n').value || 0));
-      return entries.slice(-n).filter(e => !protectedEntry(e));
+      return (n ? entries.slice(-n) : []).filter(e => !protectedEntry(e));
     }
     if (mode === 'title') {
       const term = id('title').value.toLowerCase().trim();
@@ -204,23 +204,33 @@
     id('cancel').hidden = false; id('delete').disabled = true;
     status('Starting removal requests…');
     const uids = [...new Set(selected.map(e => String(e.uid)))];
-    let sent=0, skipped=0;
+    let sent=0, confirmed=0, skipped=0;
     try {
       for (const uid of uids) {
         if (S.cancel || location.pathname !== originalChannel || !isPermitted() || !sock()) break;
         const latest = getEntries().find(e => String(e.uid) === uid);
         // Re-evaluate position and current video immediately before each removal.
         if (!latest || protectedEntry(latest)) { skipped++; continue; }
+        const media=selected.find(e=>String(e.uid)===uid)?.media;
+        if(!media || latest.media.id!==media.id || latest.media.type!==media.type){skipped++;continue;}
         sock().emit('delete', latest.uid);
         sent++;
-        status('Sent ' + sent + ' / ' + uids.length + ' removal requests' + (skipped ? ' (' + skipped + ' skipped)' : '') + '.');
+        const deadline=Date.now()+10000;
+        while(Date.now()<deadline){
+          if(!sock() || location.pathname!==originalChannel || !isPermitted() || !$('#queue'))throw Error('Connection or permission lost before confirmation');
+          if(!getEntries().some(e=>String(e.uid)===uid))break;
+          await pause(150);
+        }
+        if(getEntries().some(e=>String(e.uid)===uid))throw Error('Removal not confirmed; stopped to avoid further changes');
+        confirmed++;
+        status('Confirmed '+confirmed+' / '+uids.length+' removals ('+skipped+' skipped).');
         await pause(250);
       }
       await pause(700);
       const remains = uids.filter(uid => getEntries().some(e => String(e.uid) === uid)).length;
-      status((S.cancel ? 'Stopped. ' : '') + sent + ' request(s) sent. ' + remains + ' targeted entries still visible; server permissions and queue updates determine actual removals.');
+      status((S.cancel ? 'Stopped. ' : '') + confirmed + ' removals confirmed. ' + skipped + ' skipped; ' + remains + ' targeted entries still visible.');
       S.selected.clear();
-    } catch (error) { status('Stopped after ' + sent + ' requests: ' + String(error.message || error)); }
+    } catch (error) { status('Stopped: ' + confirmed + ' confirmed, ' + skipped + ' skipped, ' + (sent-confirmed) + ' unconfirmed. ' + String(error.message || error)); }
     finally { S.busy=false; id('cancel').hidden=true; update(); }
   }
 

@@ -6,7 +6,24 @@
     "retro": {
       "name": "BAKED TV · RETRO WRESTLING",
       "description": "Independent wrestling programming.",
-      "programs": []
+      "programs": [
+        {
+          "title": "Gene LeBell's NWA Hollywood Wrestling vol 1",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-1/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%201.mp4",
+          "duration": 8108,
+          "source": "Internet Archive",
+          "source_channel": "Gene Le Bell's NWA Hollywood Wrestling Vol 1"
+        },
+        {
+          "title": "Gene LeBell's NWA Hollywood Wrestling vol 2",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-2/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%202.mp4",
+          "duration": 12924,
+          "source": "Internet Archive",
+          "source_channel": "Gene Le Bell's NWA Hollywood Wrestling Vol 2"
+        }
+      ]
     }
   }
 }

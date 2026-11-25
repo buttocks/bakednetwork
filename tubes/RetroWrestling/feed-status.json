@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "channels": {
+    "retro": {
+      "available": true,
+      "evidence": "Browser smoke test 45526159422, Archive playback startup",
+      "verifiedAt": "2026-11-25T01:31:14Z"
+    }
+  }
+}

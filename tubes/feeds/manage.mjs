@@ -64,7 +64,7 @@ async function main(){
       if(urls.has(legacy))throw Error('Duplicate feed URL or alias');
       urls.add(legacy);
     }
-    if(typeof e.tube!=='string'||!/^[A-Za-z0-9]{2,35}$/.test(e.tube)||
+    if(typeof e.tube!=='string'||!/^[A-Za-z0-9-]{2,35}$/.test(e.tube)||
        typeof e.title!=='string'||e.title.length<8||e.title.length>95||
        typeof e.statusFile!=='string'||!/^tubes\/[A-Za-z0-9-]+\/feed-status\.json$/.test(e.statusFile)||
        typeof e.statusKey!=='string'||!/^[a-z0-9-]+$/.test(e.statusKey))
@@ -116,7 +116,7 @@ async function main(){
           }
           const response=await page.request.get(currentUrl,{timeout:20000,failOnStatusCode:false});
           const body=await response.text();
-          const banner=feed.tube==='luchatube'?'LUCHA LIBRE':'NJPW';
+          const banner=feed.banner||(feed.tube==='luchatube'?'LUCHA LIBRE':'NJPW');
           const ok=response.status()===200&&body.includes(banner)&&
             body.includes('id="video"')&&body.includes('player-core.js');
           await response.dispose();
@@ -129,6 +129,7 @@ async function main(){
             'Failed to verify owned iframe insertion for '+feed.id);
           report.actions.push({feed:feed.id,result:'added'});
         }
+        if(feed.addOnly){if(existing.length===1)report.actions.push({feed:feed.id,result:'already-present'});continue;}
         // If a versioned iframe replaces an older URL, remove only the exact
         // registered old URL once the new iframe has been confirmed present.
         // This is also safe if both versions were queued before the migration.

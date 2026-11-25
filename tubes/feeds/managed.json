@@ -30,6 +30,36 @@
       "url": "https://buttocks.github.io/bakednetwork/tubes/luchatube/feed.html?channel=lucha&v=lucha1-20261124",
       "statusFile": "tubes/luchatube/feed-status.json",
       "statusKey": "lucha"
+    },
+    {
+      "tube": "WCW",
+      "id": "wcw-baked-tv",
+      "title": "BAKED TV — WCW CLASSICS",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WCW/feed.html?channel=wcw&v=fallback-20261125",
+      "statusFile": "tubes/WCW/feed-status.json",
+      "statusKey": "wcw",
+      "banner": "WCW CLASSICS",
+      "addOnly": true
+    },
+    {
+      "tube": "WWF-WWE",
+      "id": "wwf-wwe-baked-tv",
+      "title": "BAKED TV — WWF / WWE CLASSICS",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WWE-WWF/feed.html?channel=wwf-wwe&v=fallback-20261125",
+      "statusFile": "tubes/WWE-WWF/feed-status.json",
+      "statusKey": "wwf-wwe",
+      "banner": "WWF / WWE CLASSICS",
+      "addOnly": true
+    },
+    {
+      "tube": "RetroWrestling",
+      "id": "retro-baked-tv",
+      "title": "BAKED TV — RETRO WRESTLING",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/RetroWrestling/feed.html?channel=retro&v=fallback-20261125",
+      "statusFile": "tubes/RetroWrestling/feed-status.json",
+      "statusKey": "retro",
+      "banner": "RETRO WRESTLING",
+      "addOnly": true
     }
   ]
 }

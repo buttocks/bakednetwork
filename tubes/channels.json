@@ -49,12 +49,16 @@
     {
       "slug": "joshi",
       "directory": "tubes/Joshi",
-      "stage": "onboarding"
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true
     },
     {
       "slug": "puro",
       "directory": "tubes/Puro",
-      "stage": "onboarding"
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true
     },
     {
       "slug": "ajpw",

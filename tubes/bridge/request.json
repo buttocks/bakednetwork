@@ -1,32 +1,14 @@
 [
   {
     "schema": 1,
-    "request_id": "wrestletube_native_import_preflight_Wrestling",
+    "request_id": "wrestletube_pilot_master_20261125",
     "channel": "Wrestling",
     "action": "inventory_chat_sync"
   },
   {
     "schema": 1,
-    "request_id": "wrestletube_native_import_preflight_wrestling2",
+    "request_id": "wrestletube_pilot_wrestling2_20261125",
     "channel": "wrestling2",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_native_import_preflight_wrestling3",
-    "channel": "wrestling3",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_native_import_preflight_Wrestling4",
-    "channel": "Wrestling4",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "wrestletube_native_import_preflight_wrestling5",
-    "channel": "wrestling5",
-    "action": "inventory_chat_sync"
+    "action": "pilot_chat_sync"
   }
 ]

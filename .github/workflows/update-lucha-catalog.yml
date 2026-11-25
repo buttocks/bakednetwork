@@ -9,6 +9,7 @@ on:
     paths:
       - 'tubes/feeds/discovery.json'
       - 'tubes/feeds/discover.py'
+      - 'tubes/feeds/test-schedule.mjs'
       - '.github/workflows/update-lucha-catalog.yml'
 
 permissions:

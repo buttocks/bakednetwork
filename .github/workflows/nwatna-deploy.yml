@@ -54,12 +54,24 @@ jobs:
             exit 1
           fi
 
+      - name: Check service availability
+        id: availability
+        run: |
+          if curl -fsSL --max-time 20 https://baked.live/login | grep -Fq 'name="password"'; then
+            echo "reachable=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "reachable=false" >> "$GITHUB_OUTPUT"
+            echo "Baked.live unavailable; deployment deferred."
+          fi
+
       - name: Install pinned browser automation
+        if: steps.availability.outputs.reachable == 'true'
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.1
           npx playwright install --with-deps chromium
 
       - name: Audit or update authorized channel iframe
+        if: steps.availability.outputs.reachable == 'true'
         run: node tubes/bridge/bridge.mjs
 
       - name: Attach action result (without credentials)

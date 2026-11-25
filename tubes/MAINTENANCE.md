@@ -89,3 +89,5 @@ Playlist metadata audit validation passed 45610140976. Expanded recurring playli
 Shared wrestling source loader now continues after failed module fetch, applies a 20-second request timeout, and calls completion callbacks only when callable. Added isolated failure-recovery regression test. Existing generated channel builds not regenerated until validation and live rollout approval.
 
 Shared loader recovery regression passed run 45610635340. Regenerated NWA-TNA pilot source from tested canonical base; live pin remains unchanged pending service availability and deployment verification.
+
+NWA-TNA source consistency and recovery tests passed 45610953988. Submitted guarded deployment of new immutable pin abcdcf5d41845da4c36df04d857fba6c395dcf8c; accepts only prior known pin, new pin or empty external JS and preserves rollback. Outage preflight skips deployment when site unavailable; manual dispatch needed if skipped.

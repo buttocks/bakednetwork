@@ -1,13 +1,14 @@
 import fs from 'node:fs/promises';
 export async function deployBase({page,request,initial}){
  if(initial.rank<3||!initial.loggedIn||initial.channel!=='NWA-TNA')throw Error('Verified admin required');
- const url='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9e3a1244518097e8f0ca9bb41ee2970ccbce2989/tubes/NWA-TNA/channel-internal.js';
+ const previousUrl='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@9e3a1244518097e8f0ca9bb41ee2970ccbce2989/tubes/NWA-TNA/channel-internal.js';
+ const url='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@abcdcf5d41845da4c36df04d857fba6c395dcf8c/tubes/NWA-TNA/channel-internal.js';
  const capture=()=>page.evaluate(()=>({externaljs:window.CHANNEL?.opts?.externaljs||'',js:window.CHANNEL?.js||'',css:window.CHANNEL?.css||'',motd:window.CHANNEL?.motd||'',externalcss:window.CHANNEL?.opts?.externalcss||''}));
  const before=await capture();
  const dir='tubes/bridge/backup/NWA-TNA/base-deployment';
  await fs.mkdir(dir,{recursive:true});
  await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));
- if(before.js.trim()||before.externaljs&&before.externaljs!==url)throw Error('Unexpected existing JS; review required');
+ if(before.js.trim()||before.externaljs&&![url,previousUrl].includes(before.externaljs))throw Error('Unexpected existing JS; review required');
  const res=await page.request.get(url,{timeout:20000});
  if(!res.ok()||!(await res.text()).includes('BakedWrestlingBrand'))throw Error('Shared base build not accessible');
  await res.dispose();

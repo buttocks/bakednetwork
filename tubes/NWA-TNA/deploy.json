@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "nwatna_shared_base_v1",
+  "request_id": "nwatna_shared_base_recovery_v2",
   "channel": "NWA-TNA",
   "action": "deploy_nwatna_base"
 }

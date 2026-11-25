@@ -123,6 +123,58 @@
           "duration": 1437,
           "source": "YouTube",
           "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Destination X 2010 (FULL EVENT) | Angle vs. Anderson, Styles vs. Abyss, Ultimate X",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=vU-N9w8vScA",
+          "youtube_id": "vU-N9w8vScA",
+          "duration": 10148,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Joe Hendry vs. Cedric Alexander vs. Moose (FULL MATCH) | TNA Genesis 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=8Uz7wsBW9hE",
+          "youtube_id": "8Uz7wsBW9hE",
+          "duration": 1313,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Amazing Red and Jerry Lynn vs. Triple X (FULL MATCH) | NWA-TNA PPV #41",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=DOL1Kh5zhXc",
+          "youtube_id": "DOL1Kh5zhXc",
+          "duration": 1080,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Abyss vs. AJ Styles: TNA World Title (FULL MATCH) | TNA Destination X 2010",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=cEs1wP_Bkuw",
+          "youtube_id": "cEs1wP_Bkuw",
+          "duration": 1360,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Impact Wrestling 19-11-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/tna-impact-wrestling-19-11-26/TNA%20Impact%20Wrestling%2019-11-26.mp4",
+          "duration": 5642,
+          "source": "Internet Archive",
+          "source_channel": "TNA Impact Wrestling 19-11-26"
+        },
+        {
+          "title": "2004.10.16 Chris Sabin vs. Alex Shelley vs. AJ Styles [TNA Xplosion #99]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/chris-sabin-in-2004-nwa-tna/2004.10.16%20Chris%20Sabin%20vs.%20Alex%20Shelley%20vs.%20AJ%20Styles%20%5BTNA%20Xplosion%20%2399%5D.mp4",
+          "duration": 572,
+          "source": "Internet Archive",
+          "source_channel": "The Complete Run #17: Chris Sabin in 2004 NWA-TNA"
         }
       ]
     }

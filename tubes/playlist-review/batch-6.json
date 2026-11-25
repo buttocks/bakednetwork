@@ -1,0 +1,20 @@
+[
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_NWA-TNA",
+    "channel": "NWA-TNA",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_joshi2",
+    "channel": "joshi2",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_MTV",
+    "channel": "MTV",
+    "action": "audit_playlist_media"
+  }
+]

@@ -99,7 +99,7 @@ export async function auditPlaylistMedia({page,request,initial}){
       })
     };
   });
-  if(state.entries.length<1||state.entries.length>1500)
+  if(state.entries.length>1500||(state.entries.length===0&&request.action==='clean_dead_playlist'))
     throw Error('Unexpected playlist length; refusing incomplete audit');
   const uniqueUids=new Set(state.entries.map(e=>e.uid));
   if(uniqueUids.size!==state.entries.length)throw Error('Incomplete playlist: duplicate UIDs');

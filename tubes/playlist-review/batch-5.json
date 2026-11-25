@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_joshi",
+    "channel": "joshi",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_puro",
+    "channel": "puro",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_boxing",
+    "channel": "boxing",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_rizin",
+    "channel": "rizin",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_sumo",
+    "channel": "sumo",
+    "action": "audit_playlist_media"
+  }
+]

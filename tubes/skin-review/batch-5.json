@@ -22,5 +22,11 @@
     "request_id": "skin_health_v2_MTV",
     "channel": "MTV",
     "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_health_v2_ddt",
+    "channel": "ddt",
+    "action": "audit_skin"
   }
 ]

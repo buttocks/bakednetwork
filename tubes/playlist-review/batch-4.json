@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_luchatube",
+    "channel": "luchatube",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_Wrestling",
+    "channel": "Wrestling",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_RDH",
+    "channel": "RDH",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_ScaryTube",
+    "channel": "ScaryTube",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "weekly_playlist_WID",
+    "channel": "WID",
+    "action": "audit_playlist_media"
+  }
+]

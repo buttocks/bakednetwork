@@ -83,3 +83,5 @@ DDT playback diagnostic run 45552262195: 34 error-150 embed failures; full run 4
 Outage handling confirmed in manager run 45606979938 (success, skipped). Set existing read-only skin review monthly and playlist review weekly; narrowed push triggers to batch requests and added availability checks before browser setup. Playlist audit run 45548980305: 44 unavailable candidates (NJPWALT 13, Noah 3, indies 2, shoot 14, wrestling2 9, wrestling3 3), mixed providers; further validation required before deletion. No cleanup performed.
 
 Read-only playlist audits now obtain independent YouTube metadata evidence for repeated 404/410 candidates, distinguish returned/absent/unverified IDs, and separately count direct 404 and Dailymotion review candidates. Existing deletion authorization and safety caps unchanged. Syntax validation submitted; live verification deferred during outage.
+
+Playlist metadata audit validation passed 45610140976. Expanded recurring playlist batch coverage to all 29 registered channels and added DDT to recurring skin review. Empty playlists are legitimate read-only audit results; cleanup still refuses empty playlists. No live modifications.

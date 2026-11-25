@@ -9,7 +9,7 @@ import fs from 'node:fs/promises';
 const OUTPUT='tubes/bridge/playlist-media-audit.json';
 const SNAPSHOT='tubes/bridge/playlist-before-cleanup.json';
 const TIMEOUT=12000;
-const CONCURRENCY=9;
+const CONCURRENCY=4;
 const TWO_DIGITS=2;
 function lower(value){return String(value||'').toLowerCase();}
 function classify(item) {
@@ -31,7 +31,7 @@ function endpoint(item){
 }
 async function fetchStatus(context,url,method='GET'){
   const options={timeout:TIMEOUT,maxRedirects:4,failOnStatusCode:false};
-  if(method==='GET'&&url.includes('cdn.lbryplayer'))options.headers={Range:'bytes=0-0'};
+  if(method==='GET'&&!url.includes('youtube.com/oembed')&&!url.includes('api.dailymotion.com'))options.headers={Range:'bytes=0-0'};
   const response=method==='HEAD'?await context.head(url,options):await context.get(url,options);
   const s=response.status(),kind=String(response.headers()['content-type']||'');
   let data=null;
@@ -135,7 +135,10 @@ export async function auditPlaylistMedia({page,request,initial}){
   await fs.mkdir(dir,{recursive:true});
   await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2)+'\n');
   await fs.copyFile(SNAPSHOT,dir+'/before.json');
+  const breakdown={};
+  for(const x of suspect){const k=x.type+':'+x.first?.status+'/'+x.second?.status;breakdown[k]=(breakdown[k]||0)+1;}
   console.log('Playlist audit complete: '+JSON.stringify(counts));
+  console.log('Playlist candidate breakdown '+request.channel+' '+JSON.stringify(breakdown));
   return {request_id:request.request_id,channel:request.channel,action:request.action,
     status:'playlist-audited',playlistItems:report.playlistItems,
     statusCounts:counts,suspects:suspect.length,

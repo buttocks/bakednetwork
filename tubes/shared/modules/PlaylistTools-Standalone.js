@@ -236,7 +236,7 @@
     button.id = 'bpt-toolbar';
     button.type = 'button';
     button.className = 'btn btn-sm btn-default';
-    button.textContent = 'Playlist Tools ▾';
+    button.textContent = 'Tools ▾';
     button.setAttribute('aria-expanded','false');
     button.title = 'Batch delete, remove duplicates, manage playlist';
     button.addEventListener('click', () => S.open?closeMenu():openMenu());

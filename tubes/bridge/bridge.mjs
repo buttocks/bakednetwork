@@ -41,6 +41,10 @@ function validate(raw){
     if(raw.channel!=='NJPWALT'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NJPWALT logo request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
+  if(raw.action==='repair_ddt_logo'){
+    if(raw.channel!=='ddt'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid DDT repair request');
+    return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
+  }
   if(raw.action==='repair_dg_logo'){
     if(!['DG','DGalt'].includes(raw.channel)||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid Dragon Gate repair request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
@@ -278,6 +282,10 @@ async function run(request){
         const {repairLogo}=await import('../NJPW/secondary/NJPWALT/repair-logo.mjs');
         return await repairLogo({page,request,initial,logo:logo[0]});
       }finally{await source.close()}
+    }
+    if(request.action==='repair_ddt_logo'){
+      const {repairDDT}=await import('../DDT/repair-logo.mjs');
+      return await repairDDT({page,request,initial});
     }
     if(request.action==='repair_dg_logo'){
       const {repairDragonGate}=await import('../DragonGate/repair-logo.mjs');

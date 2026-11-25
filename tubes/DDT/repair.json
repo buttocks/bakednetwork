@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "request_id": "ddt_compact_logo_v1",
+  "channel": "ddt",
+  "action": "repair_ddt_logo"
+}

@@ -62,6 +62,11 @@ def archive(entry, defaults, cursor):
         if not isinstance(meta,dict):continue
         metadata=meta.get("metadata",{})
         context=" ".join(str(metadata.get(field,"")) for field in ("title","description","subject","collection","creator","uploader"))
+        if entry.get("archive_require_open_license"):
+            license_url=str(metadata.get("licenseurl","")).strip()
+            if not re.fullmatch(r"https?://creativecommons\.org/(?:publicdomain/(?:zero|mark)/1\.0|licenses/(?:by|by-sa)/(?:1\.0|2\.0|2\.5|3\.0|4\.0))/?",license_url,re.I):
+                continue
+            if not titlematch.search(str(metadata.get("title",""))):continue
         if re.search(r"\b(?:WWE\s*2K\d*|WWE\s*2K|AEW Fight Forever|gameplay|video[ -]?games?|gaming|fantasy booking|e-fed|efed|Wrestling Empire|Fire Pro Wrestling World|virtual wrestling|simulation|simulated wrestling|watchalong|watch along)\b",context,re.I):
             print("Archive excluded gaming metadata",identifier)
             continue
@@ -74,7 +79,7 @@ def archive(entry, defaults, cursor):
             if name.lower().endswith(".ia.mp4") or f.get("source") in ("derivative","metadata"):
                 continue
             title=re.sub(r"\s+"," ",name.rsplit(".",1)[0].replace("_"," ")).strip()
-            if len(title)<10 or not titlematch.search(title):continue
+            if len(title)<10 or not (titlematch.search(title) or (entry.get("archive_require_open_license") and titlematch.search(str(metadata.get("title",""))))):continue
             if re.search(r"\b(?:WWE\s*2K\d*|AEW Fight Forever|gameplay|video game|watchalong|watch along|simulation)\b",title,re.I):continue
             # Mixed Archive items sometimes include unrelated wrestling. A generic
             # "vs" is not sufficient evidence that a match belongs to Lucha Tube.
@@ -85,7 +90,7 @@ def archive(entry, defaults, cursor):
             except (ValueError,TypeError):continue
             if not defaults["min_duration_seconds"]<=seconds<=defaults["max_duration_seconds"]:continue
             url="https://archive.org/download/"+quote(identifier,safe="")+"/"+quote(name,safe="/")
-            found.append({"title":title[:150],"episode":"Archived match",
+            found.append({"title":title[:150],"episode":entry.get("archive_episode_label","Archived match"),
                 "url":url,"duration":seconds,"source":"Internet Archive",
                 "source_channel":str(meta.get("metadata",{}).get("title") or identifier)[:90]})
             if len(found)>=60:break
@@ -241,7 +246,10 @@ def refresh_one(entry,defaults,record):
     seen=record.setdefault("seen",[])
     if not isinstance(seen,list):seen=[]
     skip=set(seen)
-    sources=[("YouTube",youtube(entry,defaults),defaults["max_youtube_per_run"]),
+    if entry.get("archive_first"):
+        sources=[("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),6),("YouTube",youtube(entry,defaults),2)]
+    else:
+        sources=[("YouTube",youtube(entry,defaults),defaults["max_youtube_per_run"]),
              ("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),
               defaults["max_archive_per_run"])]
     additions=[]

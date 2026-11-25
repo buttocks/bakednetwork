@@ -19,9 +19,14 @@ export async function installTools({page,request,initial}){
   if(before.js!==js)await set(js);
   await page.reload({waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.rank>=3,{},{timeout:20000});
+  // Allow the channel's asynchronous custom-script consent/initialization flow.
+  await page.waitForTimeout(2500);
+  const consent=await page.evaluate(()=>[...document.querySelectorAll('button,a,input[type=button]')].filter(e=>e.getClientRects().length).map(e=>({text:(e.innerText||e.value||'').trim(),id:e.id})).filter(e=>/javascript|channel script|custom script|allow js|enable js/i.test(e.text+' '+e.id)));
+  console.log('Custom script controls '+JSON.stringify(consent));
   const diagnostics=await page.evaluate(()=>({path:location.pathname,scriptPersisted:typeof window.CHANNEL?.js==='string'&&window.CHANNEL.js.includes('BakedPlaylistToolsV1'),flag:!!window.BakedPlaylistToolsV1,root:!!document.getElementById('bpt-root'),style:!!document.getElementById('bpt-styles'),customScriptOptions:Object.fromEntries(Object.entries(window.USEROPTS||{}).filter(([k])=>/js|script|custom/i.test(k)).filter(([k,v])=>typeof v==='boolean'||typeof v==='number')),scripts:[...document.scripts].map(s=>({inline:!s.src,hasModule:!s.src&&s.textContent.includes('BakedPlaylistToolsV1')}))}));
   console.log('Playlist Tools diagnostics '+JSON.stringify(diagnostics));
   if(!diagnostics.root){
+   await page.screenshot({path:dir+'/initialization-failure.png'});
    await page.addScriptTag({content:js});
    console.log('Direct injection diagnostic '+JSON.stringify(await page.evaluate(()=>({root:!!document.getElementById('bpt-root'),flag:!!window.BakedPlaylistToolsV1}))));
    throw Error('Automatic channel script initialization failed; diagnostic injection is not deployment');

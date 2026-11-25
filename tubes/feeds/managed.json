@@ -190,6 +190,36 @@
       "statusKey": "sumo",
       "banner": "SUMO",
       "addOnly": true
+    },
+    {
+      "tube": "wrestling2",
+      "id": "wrestling2-baked-tv",
+      "title": "BAKED TV — WRESTLING 2",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/wrestling2/feed.html?channel=wrestling2&embed=standard",
+      "statusFile": "tubes/Wrestling2/feed-status.json",
+      "statusKey": "wrestling2",
+      "banner": "WRESTLING 2",
+      "addOnly": true
+    },
+    {
+      "tube": "wrestling3",
+      "id": "wrestling3-baked-tv",
+      "title": "BAKED TV — WRESTLING 3",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/wrestling3/feed.html?channel=wrestling3&embed=standard",
+      "statusFile": "tubes/Wrestling3/feed-status.json",
+      "statusKey": "wrestling3",
+      "banner": "WRESTLING 3",
+      "addOnly": true
+    },
+    {
+      "tube": "wrestling5",
+      "id": "wrestling5-baked-tv",
+      "title": "BAKED TV — WRESTLING 5",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/wrestling5/feed.html?channel=wrestling5&embed=standard",
+      "statusFile": "tubes/Wrestling5/feed-status.json",
+      "statusKey": "wrestling5",
+      "banner": "WRESTLING 5",
+      "addOnly": true
     }
   ]
 }

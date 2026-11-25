@@ -298,6 +298,76 @@
           "duration": 10600,
           "source": "YouTube",
           "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "World Title Shot ON THE LINE: Nic Nemeth vs. Elijah (FULL MATCH) | TNA iMPACT! November 12, 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=SEBZ3huqYFQ",
+          "youtube_id": "SEBZ3huqYFQ",
+          "duration": 1028,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Destination X 2006 (FULL EVENT) | Christian vs. Monty, Styles vs. Daniels vs. Joe",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=LLTPtN21tBU",
+          "youtube_id": "LLTPtN21tBU",
+          "duration": 10222,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Trey Miguel vs. Steve Maclin: X-Division Title! (FULL MATCH) | TNA Hard To Kill 2022",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=hGwgtROaWdc",
+          "youtube_id": "hGwgtROaWdc",
+          "duration": 1007,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Destination X 2011 (FULL EVENT) | Styles vs. Daniels, Kaz vs. Joe, RVD vs. Lynn",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=xFUVGg-wiTY",
+          "youtube_id": "xFUVGg-wiTY",
+          "duration": 10221,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Moose vs. Special Agent 0 (FULL MATCH) | TNA Rebellion 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=9UrLVrzhy4g",
+          "youtube_id": "9UrLVrzhy4g",
+          "duration": 875,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Kurt Angle vs. Sting: TNA World Title! (FULL MATCH) | TNA Destination X 2009",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=h36Ut7bIJCI",
+          "youtube_id": "h36Ut7bIJCI",
+          "duration": 1437,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "WWF Survivor Series 1993",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/wwf-survivor-series-1993/WWF%20Survivor%20Series%201993.mp4",
+          "duration": 10040,
+          "source": "Internet Archive",
+          "source_channel": "WWF Survivor Series 1993"
+        },
+        {
+          "title": "2008-01-11-wwe-friday-night-smackdown-33.mp4-vkvideodownload",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/2008-01-11-wwe-friday-night-smackdown-33.mp-4-vkvideodownload/2008-01-11-wwe-friday-night-smackdown-33.mp4-vkvideodownload.mp4",
+          "duration": 5379,
+          "source": "Internet Archive",
+          "source_channel": "2008 01 11 Wwe Friday Night Smackdown 33.mp 4 Vkvideodownload"
         }
       ]
     }

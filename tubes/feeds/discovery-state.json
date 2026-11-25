@@ -2,7 +2,7 @@
   "schema": 1,
   "channels": {
     "luchatube/lucha": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.ia.mp4",
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4",
@@ -36,11 +36,11 @@
         "https://www.youtube.com/watch?v=82JeWxHpLQ4",
         "https://www.youtube.com/watch?v=AjIgQ_doK58"
       ],
-      "last_scan": "2026-11-25T01:56:10.717420+00:00",
+      "last_scan": "2026-11-25T01:59:10.318639+00:00",
       "last_added": "2026-11-25T01:56:10.717384+00:00"
     },
     "NJPW/classics": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
@@ -80,13 +80,21 @@
         "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.26b-NJPW-Riki%20Choshu%2C%20Kantaro%20Hoshino%2C%20Shiro%20Koshinaka%2C%20Kuniaki%20Kobayashi%2C%20Kensuke%20Sasaki%20VS%20Animal%20Hamaguchi%2C%20Super%20Strong%20Machine%2C%20Tatsutoshi%20Goto%2C%20Hiro%20Saito%2C%20Masanobu%20Kurisu.mp4",
         "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.30a-NJPW-Steve%20Williams%2C%20Pegasus%20Kid%20VS%20Crusher%20Bam%20Bam%20Bigelow%2C%20Owen%20Hart-WPW-Burning%20Wave%20Series-Opening%20Game-7.7OA-OP.mp4",
         "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.04e-NJPW-Kensuke%20Sasaki%2C%20Shinya%20Hashimoto%2C%20Junji%20Hirata%20VS%20Scott%20Norton%2C%20Masahiro%20Chono%2C%20Big%20Titan.mp4",
-        "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.07a-NJPW-IWGP%20Jr.%20Heavyweight%20Championship-Shinjiro%20Otani%20%28C-V6%29%20VS%20Jyushin%20Thunder%20Liger-WPW%202.22OA-OP.mp4"
+        "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.07a-NJPW-IWGP%20Jr.%20Heavyweight%20Championship-Shinjiro%20Otani%20%28C-V6%29%20VS%20Jyushin%20Thunder%20Liger-WPW%202.22OA-OP.mp4",
+        "https://www.youtube.com/watch?v=8yKk4ixzxp0",
+        "https://www.youtube.com/watch?v=BYh7goWhN7w",
+        "https://www.youtube.com/watch?v=17rC_6x88v0",
+        "https://www.youtube.com/watch?v=wewTONK-rgI",
+        "https://www.youtube.com/watch?v=x78v5pS5k9g",
+        "https://www.youtube.com/watch?v=TlyW7EcfcJw",
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.15d-NJPW-Antonio%20Inoki%2C%20Tatsumi%20Fujinami%2C%20Riki%20Choshu%20VS%20Abdullah%20the%20Butcher%2C%20Bad%20News%20Allen%2C%20S.D%20Jones.mp4",
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.22a-NJPW-World%20Pro-Wrestling-OP-Tiger%20Mask%20%26%20Kantaro%20Hoshino%20VS%20Dynamite%20Kid%20%26%20Bret%20Hart.mp4"
       ],
-      "last_scan": "2026-11-25T01:56:14.050341+00:00",
-      "last_added": "2026-11-25T01:56:14.050303+00:00"
+      "last_scan": "2026-11-25T01:59:12.298407+00:00",
+      "last_added": "2026-11-25T01:59:12.298372+00:00"
     },
     "NJPW/events": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
         "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
@@ -123,10 +131,16 @@
         "https://www.youtube.com/watch?v=Ks92zXN4pkg",
         "https://www.youtube.com/watch?v=3nqPCcTXa3w",
         "https://www.youtube.com/watch?v=wVFUw0gp7bs",
-        "https://www.youtube.com/watch?v=QngUioi76_c"
+        "https://www.youtube.com/watch?v=QngUioi76_c",
+        "https://www.youtube.com/watch?v=8yKk4ixzxp0",
+        "https://www.youtube.com/watch?v=oX8-uBiKZy8",
+        "https://www.youtube.com/watch?v=wihAwmt-ciY",
+        "https://www.youtube.com/watch?v=Vk94QVSemn0",
+        "https://www.youtube.com/watch?v=Uv9qr0nfcww",
+        "https://www.youtube.com/watch?v=wewTONK-rgI"
       ],
-      "last_scan": "2026-11-25T01:56:18.834390+00:00",
-      "last_added": "2026-11-25T01:56:18.834360+00:00"
+      "last_scan": "2026-11-25T01:59:16.002720+00:00",
+      "last_added": "2026-11-25T01:59:16.002687+00:00"
     },
     "WCW/wcw": {
       "archive_cursor": 0,
@@ -156,10 +170,17 @@
         "https://www.youtube.com/watch?v=UVCwSpvdGQM",
         "https://www.youtube.com/watch?v=K9PBibXqcTo",
         "https://www.youtube.com/watch?v=cAFE_tpdzJo",
-        "https://www.youtube.com/watch?v=qyRQF_3QdUs"
+        "https://www.youtube.com/watch?v=qyRQF_3QdUs",
+        "https://www.youtube.com/watch?v=jnm8_7cHyIU",
+        "https://www.youtube.com/watch?v=qri_u0yhkoU",
+        "https://www.youtube.com/watch?v=Wb9tHuTvnoU",
+        "https://www.youtube.com/watch?v=Lktrv3RnnsY",
+        "https://www.youtube.com/watch?v=-vWCmMTAszk",
+        "https://www.youtube.com/watch?v=mqw-fgtJ7Bc",
+        "https://archive.org/download/wcw-full-event-wcw-starrcade-1984-flair-vs.-rhodes-steamboat-vs.-blanchard/WCW_-_FULL%20EVENT%20WCW%20Starrcade%201984%20Flair%20vs.%20Rhodes%3B%20Steamboat%20vs.%20Blanchard.mp4"
       ],
-      "last_added": "2026-11-25T01:56:25.021507+00:00",
-      "last_scan": "2026-11-25T01:56:25.021537+00:00"
+      "last_added": "2026-11-25T01:59:20.639225+00:00",
+      "last_scan": "2026-11-25T01:59:20.639251+00:00"
     },
     "WWE-WWF/wwf-wwe": {
       "archive_cursor": 0,
@@ -171,7 +192,7 @@
         "https://archive.org/download/wwe-2-k-25-toy-chica-vs-toriel-2-out-of-3-falls-match-stinkface/WWE%202K25%20Toy%20Chica%20vs%20Toriel%20%282%20out%20of%203%20falls%20match%29%20STINKFACE.mp4"
       ],
       "last_added": "2026-11-25T00:54:46.726610+00:00",
-      "last_scan": "2026-11-25T01:56:29.572803+00:00"
+      "last_scan": "2026-11-25T01:59:24.955413+00:00"
     },
     "RetroWrestling/retro": {
       "archive_cursor": 0,
@@ -191,10 +212,11 @@
         "https://www.youtube.com/watch?v=cyLQfyb6JmM",
         "https://www.youtube.com/watch?v=SB5vMDZSIIU",
         "https://www.youtube.com/watch?v=emN-E7zYB8Q",
-        "https://www.youtube.com/watch?v=PcPbApTmAOs"
+        "https://www.youtube.com/watch?v=PcPbApTmAOs",
+        "https://www.youtube.com/watch?v=aINnXZ85lTE"
       ],
-      "last_added": "2026-11-25T01:17:05.038593+00:00",
-      "last_scan": "2026-11-25T01:56:35.550859+00:00"
+      "last_added": "2026-11-25T01:59:30.060167+00:00",
+      "last_scan": "2026-11-25T01:59:30.060197+00:00"
     },
     "WrestleTube/wrestling": {
       "archive_cursor": 0,
@@ -231,10 +253,18 @@
         "https://www.youtube.com/watch?v=G5KMcT-pj_M",
         "https://www.youtube.com/watch?v=PgxFvHrIKJg",
         "https://www.youtube.com/watch?v=61QbqqSuJTU",
-        "https://www.youtube.com/watch?v=-IBmbFHdqws"
+        "https://www.youtube.com/watch?v=-IBmbFHdqws",
+        "https://www.youtube.com/watch?v=SEBZ3huqYFQ",
+        "https://www.youtube.com/watch?v=LLTPtN21tBU",
+        "https://www.youtube.com/watch?v=hGwgtROaWdc",
+        "https://www.youtube.com/watch?v=xFUVGg-wiTY",
+        "https://www.youtube.com/watch?v=9UrLVrzhy4g",
+        "https://www.youtube.com/watch?v=h36Ut7bIJCI",
+        "https://archive.org/download/wwf-survivor-series-1993/WWF%20Survivor%20Series%201993.mp4",
+        "https://archive.org/download/2008-01-11-wwe-friday-night-smackdown-33.mp-4-vkvideodownload/2008-01-11-wwe-friday-night-smackdown-33.mp4-vkvideodownload.mp4"
       ],
-      "last_added": "2026-11-25T01:56:40.729352+00:00",
-      "last_scan": "2026-11-25T01:56:40.729380+00:00"
+      "last_added": "2026-11-25T01:59:34.829117+00:00",
+      "last_scan": "2026-11-25T01:59:34.829150+00:00"
     }
   },
   "next_channel": 0

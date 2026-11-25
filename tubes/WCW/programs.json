@@ -213,6 +213,68 @@
           "duration": 2890,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Hulk Hogan vs. Ric Flair | WCW World Title Steel Cage Match: WCW Halloween Havoc 1994",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=jnm8_7cHyIU",
+          "youtube_id": "jnm8_7cHyIU",
+          "duration": 2010,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Sid Vicious: WCW Halloween Havoc 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=qri_u0yhkoU",
+          "youtube_id": "qri_u0yhkoU",
+          "duration": 802,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Vader vs. Cactus Jack | Texas Death Match: Halloween Havoc 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Wb9tHuTvnoU",
+          "youtube_id": "Wb9tHuTvnoU",
+          "duration": 1116,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Sid gets arrested; Page & Nash vs. 3-Count | WCW Monday Nitro, Dec. 4, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Lktrv3RnnsY",
+          "youtube_id": "Lktrv3RnnsY",
+          "duration": 5270,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Halloween Havoc 2000 | Booker T vs. Steiner; Goldberg vs. KroniK |",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=-vWCmMTAszk",
+          "youtube_id": "-vWCmMTAszk",
+          "duration": 10107,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Flair vs. Garvin for NWA World Title in a Cage | WCW, Sept. 26, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=mqw-fgtJ7Bc",
+          "youtube_id": "mqw-fgtJ7Bc",
+          "duration": 3287,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "WCW - FULL EVENT WCW Starrcade 1984 Flair vs. Rhodes; Steamboat vs. Blanchard",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/wcw-full-event-wcw-starrcade-1984-flair-vs.-rhodes-steamboat-vs.-blanchard/WCW_-_FULL%20EVENT%20WCW%20Starrcade%201984%20Flair%20vs.%20Rhodes%3B%20Steamboat%20vs.%20Blanchard.mp4",
+          "duration": 10734,
+          "source": "Internet Archive",
+          "source_channel": "WCW FULL EVENT WCW Starrcade 1984 Flair Vs. Rhodes; Steamboat Vs. Blanchard"
         }
       ]
     }

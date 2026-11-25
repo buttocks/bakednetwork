@@ -86,6 +86,14 @@ async function main(){
   try{
     const context=await browser.newContext({viewport:{width:1300,height:830}});
     const page=await context.newPage();
+    // A service outage must not be interpreted as a feed failure.
+    let reachable=false;
+    try{
+      const probe=await page.request.get(SITE+'/login',{timeout:15000,failOnStatusCode:false});
+      reachable=probe.ok()&&(await probe.text()).includes('name="password"');
+      await probe.dispose();
+    }catch{}
+    if(!reachable){report.actions.push({result:'site-unavailable-no-changes'});console.log('Baked.live unavailable; reconciliation skipped');return;}
     await login(page,password);
     for(const tube of [...new Set(cfg.managed.map(x=>x.tube))]){
       await page.goto(SITE+'/tv/'+tube,{waitUntil:'domcontentloaded',timeout:45000});

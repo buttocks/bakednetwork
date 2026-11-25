@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "channels": {
+    "nwa-tna": {
+      "available": true,
+      "verification": "user-confirmed real browser playback",
+      "verifiedDate": "2026-11-25",
+      "automatedPlayback": "inconclusive",
+      "goodStreak": 0,
+      "badStreak": 0,
+      "pageBadStreak": 0
+    }
+  }
+}

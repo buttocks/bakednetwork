@@ -77,3 +77,5 @@ DDT onboarded successfully (45546112283), rank 3, four items, no legacy paths, b
 User visually verified compact transparent Dragon Gate logo and DDT logo. DDT old schedules unreachable; migrate via separate new feed with validated source catalog. Submitted read-only playlist review for 16 channels in three batches. No live changes in this batch.
 
 DDT playback diagnostic run 45552262195: 34 error-150 embed failures; full run 45552262184: seven established feeds playing, DDT and NWA-TNA timed out. Added diagnostic comparison of documented standard and privacy-enhanced embed hosts, including Lucha as comparison. Neither new feed installed live.
+
+2026-11-25: User confirmed DDT and NWA-TNA standard embed feeds play in real browser; Baked.live reported down. Recorded manual playback verification separately from inconclusive CI playback. Registered both as add-only owned feeds for existing scheduled reconciliation, using user-tested standard embed URL. Live installation remains unverified until service recovers.

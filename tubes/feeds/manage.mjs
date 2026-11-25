@@ -108,7 +108,16 @@ async function main(){
       try{
         await login(page,password);
         await page.goto(SITE+'/tv/'+tube,{waitUntil:'domcontentloaded',timeout:45000});
-        initial=await wait(page,authenticated,'Cannot verify connected bot identity on '+tube,30000);
+        // Retry a disconnected socket once; never relax identity or rank checks.
+        try{
+          initial=await wait(page,authenticated,'Cannot verify connected bot identity on '+tube,30000);
+        }catch(e){
+          const snapshot=await state(page).catch(()=>({}));
+          if(snapshot.connected||snapshot.loggedIn)throw e;
+          console.log('CHANNEL_AUTH '+tube+' disconnected; retrying channel navigation once');
+          await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+          initial=await wait(page,authenticated,'Cannot verify connected bot identity on retry for '+tube,30000);
+        }
         await page.waitForTimeout(2200);
         initial=await wait(page,s=>authenticated(s)&&Number.isFinite(s.rank)&&s.rank>=3,'Cannot verify admin identity on '+tube,8000);
       }catch(e){

@@ -251,7 +251,7 @@ def main():
     assert config["schema"]==1 and state["schema"]==1
     assert defaults["source_priority"]==["YouTube","Internet Archive"]
     assert 20<=defaults["max_catalog_items"]<=200
-    assert 1<=defaults["max_new_per_channel_per_run"]<=5
+    assert 1<=defaults["max_new_per_channel_per_run"]<=8
     added=0
     entries=config["channels"]
     # Rotate discovery order so additional feeds are not starved by the budget.

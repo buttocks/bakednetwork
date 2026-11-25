@@ -98,7 +98,7 @@ async function main(){
     for(const tube of [...new Set(cfg.managed.map(x=>x.tube))]){
       await page.goto(SITE+'/tv/'+tube,{waitUntil:'domcontentloaded',timeout:45000});
       let initial=await wait(page,s=>s.connected&&s.loggedIn&&
-        s.username?.toLowerCase()===USER&&s.channel===tube,
+        s.username?.toLowerCase()===USER&&String(s.channel||'').toLowerCase()===tube.toLowerCase(),
         'Cannot verify connected bot identity on '+tube,30000);
       await page.waitForTimeout(1800);
       initial=await state(page);

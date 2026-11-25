@@ -1,8 +1,6 @@
 {
   "schema": 1,
-  "request_id": "scarytube_public_embed_20261125",
+  "request_id": "scarytube_verify_playback_20261125",
   "channel": "ScaryTube",
-  "action": "add_iframe",
-  "title": "ScaryTube — 24/7 Horror Movies",
-  "src": "https://pc-mint.tail7c671f.ts.net:10000/"
+  "action": "verify_scarytube_playback"
 }

@@ -20,7 +20,7 @@ https://github.com/buttocks/bakednetwork/settings/secrets/actions
 
 The secret from the previous `suplex-baked-player` repository cannot be copied by the GitHub content API. Do not put passwords in commits, workflow logs or chat messages.
 
-The bot uses the existing account `buttman-gpt`. The first audit should confirm NJPW and Lucha Tube permissions. The run attaches its results privately for seven days.
+The bot uses the existing account `buttman-gpt`. The account has verified global administrator rank 10. The registered scope is defined in `../channels.json`; global permissions do not authorize arbitrary channel changes. Bridge artifacts have a 30-day retention setting. Treat configuration backups as sensitive, and review artifact access before sharing them.
 
 ## Example read-only request
 
@@ -40,3 +40,29 @@ The deployment workflow has no write-token privilege for the repository; the use
 All new tube-management code, css/JS and administrative configuration belongs to `tubes/`. Existing SlamVision video **player URLs** remain separate until an explicitly tested player migration.
 
 For JavaScript, use WrestleTube as reference baseline **without overwriting** tube-specific features.
+
+## WrestleTube chat configuration synchronization
+
+Master: `/Wrestling`. Mirrors: `/wrestling2`, `/wrestling3`, `/Wrestling4`, `/wrestling5`. No other tube participates.
+
+- Configuration: `../shared/wrestling-chat-sync.json`.
+- Read-only inventory: `chat-sync-inventory.mjs`.
+- Guarded native import pilot: `chat-sync-pilot.mjs`.
+- The master is read-only; destination lists are backed up before import.
+- Preserve ordered filters and all macro definitions, including duplicate names.
+- Verify exact returned lists after import; attempt rollback only when the observed live state can safely be attributed to the import.
+- Do not change skins, playlists, or permissions.
+- Automatic writes remain disabled until the pilot is verified and an explicit rollout is implemented.
+
+### Verified baseline — 2026-11-25
+
+| Channel | Filters | Macro definitions |
+| --- | ---: | ---: |
+| Wrestling | 206 | 7973 |
+| wrestling2 | 148 | 8990 |
+| wrestling3 | 121 | 9180 |
+| Wrestling4 | 121 | 9151 |
+| wrestling5 | 121 | 7158 |
+
+Each list contains one conflicting duplicate macro name. Inventory preserves those entries rather than choosing a winner. Native import controls were verified in [run 45700407481](https://github.com/buttocks/bakednetwork/actions/runs/45700407481). Wrestling 2 pilot was submitted in [run 45700731231](https://github.com/buttocks/bakednetwork/actions/runs/45700731231); check its actual result before claiming synchronization or proceeding with other mirrors.
+

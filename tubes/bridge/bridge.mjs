@@ -248,6 +248,7 @@ async function run(request){
       return {request_id:request.request_id,channel:request.channel,action:request.action,status:'audited',rank:initial.rank,admin_verified:Number.isFinite(initial.rank)&&initial.rank>=3,permissions:initial.permissions,items:before.length,...refs};
     }
     if(request.action==='audit_skin'){
+      await page.waitForTimeout(1800);
       const skin=await page.evaluate(()=>{
         const channel=window.CHANNEL||{};
         const css=typeof channel.css==='string'?channel.css:'';
@@ -282,6 +283,8 @@ async function run(request){
       await fs.writeFile(reviewDir+'/review.json',JSON.stringify(skin,null,2)+'\n');
       await page.screenshot({path:reviewDir+'/preview.png',fullPage:false,
         animations:'disabled',timeout:20000});
+      const broken=skin.images.filter(i=>i.broken&&i.visible).map(i=>({src:i.src,alt:i.alt}));
+      console.log('Broken image review '+request.channel+' '+JSON.stringify(broken));
       console.log('Skin health '+request.channel+' '+JSON.stringify({cssLength:skin.cssLength,jsLength:skin.jsLength,hasExternalCSS:!!skin.externalCss,hasExternalJS:!!skin.externalJs,...skin.health}));
       delete skin.css;
       return {request_id:request.request_id,channel:request.channel,action:request.action,

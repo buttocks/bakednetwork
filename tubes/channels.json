@@ -79,7 +79,7 @@
       "stage": "onboarding",
       "adminVerified": true,
       "backupVerified": true,
-      "skinReview": "pending"
+      "skinReview": "repair-candidate"
     },
     {
       "slug": "puro",
@@ -87,7 +87,7 @@
       "stage": "onboarding",
       "adminVerified": true,
       "backupVerified": true,
-      "skinReview": "pending"
+      "skinReview": "repair-candidate"
     },
     {
       "slug": "ajpw",
@@ -171,7 +171,7 @@
       "relationship": "secondary",
       "adminVerified": true,
       "backupVerified": true,
-      "skinReview": "pending"
+      "skinReview": "repair-candidate"
     },
     {
       "slug": "DG",
@@ -179,7 +179,7 @@
       "stage": "onboarding",
       "adminVerified": true,
       "backupVerified": true,
-      "skinReview": "pending"
+      "skinReview": "repair-candidate"
     },
     {
       "slug": "wrestling5",
@@ -199,7 +199,7 @@
       "relationship": "secondary",
       "adminVerified": true,
       "backupVerified": true,
-      "skinReview": "pending"
+      "skinReview": "repair-candidate"
     },
     {
       "slug": "rizin",
@@ -221,7 +221,7 @@
       "slug": "NWA-TNA",
       "directory": "tubes/NWA-TNA",
       "stage": "onboarding",
-      "skinReview": "new-build",
+      "skinReview": "base-configured-runtime-unverified",
       "adminVerified": true,
       "backupVerified": true
     },

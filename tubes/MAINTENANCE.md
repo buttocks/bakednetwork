@@ -37,3 +37,5 @@ Operator confirmed actual YouTube playback but reported hidden overlay could not
 YouTube interaction follow-up: dedicated persistent 44px Baked TV toolbar outside the YouTube video rectangle, no extra reveal button in YouTube mode. Archive overlay unchanged. Regression submitted; live user verification pending.
 
 WCW operator identified video-game simulation in Archive item 270419 Monday Nitro Hour 1. Removed that item and two similarly named suspect uploads from independent catalogs; blocked matching identifier family and added Archive metadata gaming checks. Remaining unknown footage is not automatically proven authentic by metadata.
+
+Operator confirmed YouTube playback and usable separate toolbar in live WCW. NJPW mixed-source validation passed run 45529187357. General Wrestling discovery now rotates official sources across promotions; WCW Archive search expanded with gaming exclusions. WCW currently YouTube-only after suspect Archive footage removal; WWF-WWE Archive-only. Restore mixed-source balance with vetted candidates; Archive reuse permissions remain unconfirmed.

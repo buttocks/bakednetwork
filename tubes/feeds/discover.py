@@ -41,13 +41,13 @@ def archive(entry, defaults, cursor):
     chosen=[names[(cursor+i)%len(names)] for i in range(min(2,len(names)))] if names else []
     if entry.get("archive_search") and time.monotonic()-START<MAX_RUNTIME-100:
         params=urlencode({"q":entry["archive_search"],"fl[]":"identifier",
-                          "rows":10,"sort[]":"publicdate desc","output":"json"})
+                          "rows":entry.get("archive_search_rows",10),"sort[]":"publicdate desc","output":"json"})
         result=get_json("https://archive.org/advancedsearch.php?"+params)
         for resultitem in (result or {}).get("response",{}).get("docs",[]):
             name=resultitem.get("identifier","")
             if isinstance(name,str) and re.fullmatch(r"[-a-zA-Z0-9._]{4,160}",name) and name not in chosen:
                 chosen.append(name)
-            if len(chosen)>=5:break
+            if len(chosen)>=entry.get("archive_candidate_limit",5):break
     titlematch=re.compile(entry["archive_title_pattern"])
     found=[]
     for identifier in chosen:
@@ -111,7 +111,11 @@ def youtube_api(entry,defaults,key):
         except Exception as exc:
             print("YouTube API",resource,"request failed",type(exc).__name__)
         return {}
-    for source in entry["youtube_channels"][:3]:
+    sources=entry["youtube_channels"]
+    if len(sources)>3:
+        offset=(datetime.now(timezone.utc).toordinal()*2+datetime.now(timezone.utc).hour//12)%len(sources)
+        sources=(sources[offset:]+sources[:offset])[:3]
+    for source in sources:
         if time.monotonic()-START>MAX_RUNTIME-30:break
         channel=source["id"]
         if not re.fullmatch(r"UC[A-Za-z0-9_-]{22}",channel):continue

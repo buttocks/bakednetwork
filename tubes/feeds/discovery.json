@@ -97,7 +97,7 @@
       "directory": "WCW",
       "key": "wcw",
       "archive_ids": [],
-      "archive_search": "mediatype:movies AND (title:\"WCW\" OR title:\"World Championship Wrestling\" OR title:\"Monday Nitro\" OR title:\"WCW Thunder\")",
+      "archive_search": "mediatype:movies AND (title:\"WCW\" OR title:\"World Championship Wrestling\" OR title:\"Monday Nitro\" OR title:\"WCW Thunder\") AND NOT (subject:gaming OR subject:\"video games\" OR title:simulation)",
       "archive_title_pattern": "(?i)(WCW|World Championship Wrestling|Monday Nitro|WCW Thunder)",
       "youtube_channels": [
         {
@@ -114,7 +114,9 @@
       "youtube_search_queries": [
         "WCW full match",
         "full episode Nitro"
-      ]
+      ],
+      "archive_search_rows": 40,
+      "archive_candidate_limit": 12
     },
     {
       "directory": "WWE-WWF",
@@ -166,9 +168,29 @@
       "directory": "WrestleTube",
       "key": "wrestling",
       "archive_ids": [],
-      "archive_search": "mediatype:movies AND (title:\"AEW\" OR title:\"Ring of Honor\" OR title:\"TNA\" OR title:\"Impact Wrestling\" OR title:\"professional wrestling\")",
-      "archive_title_pattern": "(?i)(AEW|Ring of Honor|TNA|Impact Wrestling|professional wrestling)",
+      "archive_search": "mediatype:movies AND (title:\"AEW\" OR title:\"Ring of Honor\" OR title:\"TNA\" OR title:\"Impact Wrestling\" OR title:\"NJPW\" OR title:\"WCW\" OR title:\"WWF\" OR title:\"WWE\" OR title:\"ECW\" OR title:\"NWA\" OR title:\"CMLL\" OR title:\"Lucha Libre\" OR title:\"professional wrestling\")",
+      "archive_title_pattern": "(?i)\\b(AEW|ROH|Ring of Honor|TNA|Impact Wrestling|NJPW|WCW|WWF|WWE|ECW|NWA|CMLL|Lucha Libre|professional wrestling)\\b",
       "youtube_channels": [
+        {
+          "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",
+          "name": "Lucha Libre AAA"
+        },
+        {
+          "id": "UC1lgJkpCx_0SMzsvrTCdxPw",
+          "name": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "id": "UCbGG2hv4cWmIrBAIhGiCdSg",
+          "name": "WCW"
+        },
+        {
+          "id": "UCNSnSemXKDc9UEZ7m31wY9Q",
+          "name": "WWE Vault"
+        },
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        },
         {
           "id": "UCFN4JkGP_bVhAdBsoV9xftA",
           "name": "All Elite Wrestling"
@@ -178,10 +200,10 @@
           "name": "TNA Wrestling"
         }
       ],
-      "youtube_title_pattern": "(?i)(?=.*(AEW|Ring of Honor|TNA|Impact Wrestling|professional wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "youtube_title_pattern": "(?i)(full\\s*(match|episode|event|show|ppv)|classic\\s*match|free\\s*match|lucha\\s*completa|funci[oó]n\\s*completa|episodio\\s*completo|無料試合)",
       "seed_count": 0,
       "youtube_search_queries": [
-        "AEW full match",
+        "full match",
         "full event"
       ]
     }

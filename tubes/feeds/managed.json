@@ -180,6 +180,16 @@
       "statusKey": "joshi2",
       "banner": "JOSHI 2",
       "addOnly": true
+    },
+    {
+      "tube": "sumo",
+      "id": "sumo-baked-tv",
+      "title": "BAKED TV — SUMO",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Sumo/feed.html?channel=sumo&embed=standard",
+      "statusFile": "tubes/Sumo/feed-status.json",
+      "statusKey": "sumo",
+      "banner": "SUMO",
+      "addOnly": true
     }
   ]
 }

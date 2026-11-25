@@ -1,5 +1,5 @@
 # Dragon Gate artwork
 
-Primary: https://upload.wikimedia.org/wikipedia/fr/a/a6/Dragon_Gate_Logo.png
+Primary: https://i.imgur.com/dftYpyZ.png (user-supplied transparent logo).
 
-Fallback: repository-hosted `assets/dragon-gate-wordmark.svg`. Repair deployment verifies primary image rendering and uses the fallback if unavailable. This is deployment-time fallback, not client-side automatic failover.
+Fallback: repository-hosted `assets/dragon-gate-wordmark.svg`. Repair deployment verifies primary image rendering and uses fallback if unavailable. This is deployment-time fallback, not client-side automatic failover.

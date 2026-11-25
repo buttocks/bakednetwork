@@ -1,13 +1,13 @@
 [
   {
     "schema": 1,
-    "request_id": "dg_wikimedia_primary_DG",
+    "request_id": "dg_imgur_transparent_DG",
     "channel": "DG",
     "action": "repair_dg_logo"
   },
   {
     "schema": 1,
-    "request_id": "dg_wikimedia_primary_DGalt",
+    "request_id": "dg_imgur_transparent_DGalt",
     "channel": "DGalt",
     "action": "repair_dg_logo"
   }

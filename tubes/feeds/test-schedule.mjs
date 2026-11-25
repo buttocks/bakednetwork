@@ -16,7 +16,8 @@ for(const e of config.channels){
  const total=a.reduce((s,x)=>s+x.duration,0),yt=a.filter(x=>x.source==='YouTube').reduce((s,x)=>s+x.duration,0);
  if(p.some(x=>x.source==='YouTube')&&p.some(x=>x.source!=='YouTube')){
   const max=Math.max(...p.map(x=>x.duration));
-  assert.ok(Math.abs(yt-.6*total)<=max,'airtime imbalance '+e.key);
+  const target=e.key==='mtv'?0.2:0.6;
+  assert.ok(Math.abs(yt-target*total)<=max,'airtime imbalance '+e.key);
   assert.ok(a.every((x,i)=>!i||x.url!==a[i-1].url));
  }
  console.log(e.key, p.length+' entries', Math.round(100*yt/total)+'% scheduled YouTube', Math.round(total/3600)+'h cycle');

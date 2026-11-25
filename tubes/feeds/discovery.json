@@ -17,7 +17,12 @@
     "archive_blocked_ids": [
       "270419-monday-nitro-hour-1",
       "270419-monday-nitro-hour-2",
-      "270412-monday-nitro-hour-2"
+      "270412-monday-nitro-hour-2",
+      "minecraft-sumo-wrestling-knock-the-other-team-off-and-kill-them-mini-game",
+      "USSumoWrestlingSyrianWarReturneesVICENewsTonightFullEpisodeHBO",
+      "TheDarkSideofSumoWrestling",
+      "TheViolentWorldofSumoWrestling",
+      "yusuf-x-poudi-today-reffing-my-first-boxing-match-sticking-to-the-kode-yusuf-"
     ],
     "archive_blocked_identifier_pattern": "(?i)^\\d{6}-monday-nitro-hour-\\d+$",
     "max_search_calls_per_run": 8
@@ -537,7 +542,7 @@
           "name": "Matchroom Boxing"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Boxing Match\" OR title:\"Boxing Championship\")",
+      "archive_search": "mediatype:movies AND (title:\"Boxing Championship\" OR title:\"Boxing Full Fight\" OR title:\"Boxing Match\") AND NOT (title:\"reffing\" OR title:\"streamer\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
       "archive_first": true
@@ -568,7 +573,7 @@
       "directory": "Sumo",
       "key": "sumo",
       "archive_ids": [],
-      "archive_title_pattern": "(?i)\\b(?:Grand[ -]+Sumo[ -]+Tournament|Sumo[ -]+Wrestling)\\b",
+      "archive_title_pattern": "(?i)\\b(?:Grand[ -]+Sumo[ -]+Tournament|Sumo[ -]+(?:Basho|Tournament|Highlights|Day[ -]+\\d+)|(?:Hatsu|Haru|Natsu|Nagoya|Aki|Kyushu)[ -]+Basho)\\b",
       "youtube_title_pattern": "(?i)(sumo|相撲|大相撲|本場所|取組|幕内)",
       "youtube_search_queries": [
         "grand sumo highlights",
@@ -585,7 +590,7 @@
           "name": "NHK WORLD-JAPAN"
         }
       ],
-      "archive_search": "mediatype:movies AND (title:\"Grand Sumo Tournament\" OR title:\"Sumo Wrestling\")",
+      "archive_search": "mediatype:movies AND (title:\"Grand Sumo Tournament\" OR title:\"Sumo Basho\" OR title:\"Sumo Tournament\" OR title:\"Sumo Highlights\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
       "archive_first": true

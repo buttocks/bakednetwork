@@ -20,15 +20,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify source and channel catalogs
         run: |
-          node --check tubes/NJPW/feed-player.js
+          node --check tubes/feeds/player-core.js
           python3 - <<'PY'
-          import json
+          import json, re
           j=json.load(open('tubes/NJPW/programs.json'))
           for ident, c in j['channels'].items():
               assert ident in ('classics','events')
               assert len(c['programs']) >= 6
               assert len({x['url'] for x in c['programs']})==len(c['programs'])
-              assert all(x['url'].startswith('https://archive.org/download/') for x in c['programs'])
+              assert all((x['source']=='Internet Archive' and x['url'].startswith('https://archive.org/download/')) or (x['source']=='YouTube' and re.fullmatch(r'[A-Za-z0-9_-]{11}',x.get('youtube_id','')) and x['url']=='https://www.youtube.com/watch?v='+x['youtube_id']) for x in c['programs'])
           print('Verified independent channels and source allowlist')
           PY
       - name: Check published GitHub Pages assets after deployment
@@ -37,10 +37,9 @@ jobs:
           base='https://buttocks.github.io/bakednetwork/tubes/NJPW'
           for attempt in $(seq 1 18); do
             if curl -fsSL --max-time 20 "${base}/feed.html?channel=classics" -o /tmp/njpw-feed.html && \
-               curl -fsSL --max-time 20 "${base}/feed-player.js" -o /tmp/njpw-player.js && \
+               curl -fsSL --max-time 20 "${base}/../feeds/player-core.js" -o /tmp/njpw-player.js && \
                curl -fsSL --max-time 20 "${base}/programs.json" -o /tmp/njpw-programs.json; then
-              if grep -q 'NJPW TV' /tmp/njpw-feed.html && grep -q 'Continuous' /tmp/njpw-feed.html /tmp/njpw-player.js 2>/dev/null || \
-                 grep -q 'CONTINUOUS PROGRAMMING' /tmp/njpw-player.js; then
+              if grep -q 'player-core.js' /tmp/njpw-feed.html && grep -q 'weightedLineup' /tmp/njpw-player.js; then
                 python3 -m json.tool /tmp/njpw-programs.json >/dev/null
                 echo 'LIVE_GITHUB_PAGES_VERIFIED'
                 exit 0

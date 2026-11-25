@@ -1,4 +1,4 @@
-/* RetroWrestling + WrestleTube v1.3.2
+/* RetroWrestling + WrestleTube v1.3.3
  * Unified external JS, stable playlist tools and classic WrestleTube features.
  * Playlist and arena UI initialize before legacy modules.
  */
@@ -8,7 +8,7 @@ if(!/\/tv\/RetroWrestling\/?$/i.test(location.pathname))return;
 function boot(){
   if(window.RetroWrestlingMergedV13 || !document.body)return;
   window.RetroWrestlingMergedV13=true;
-  document.documentElement.dataset.rwMergedVersion='1.3.2';
+  document.documentElement.dataset.rwMergedVersion='1.3.3';
 
   // The channel might still have the old WrestleTube internal JS enabled.
   // Rewrite only its stale welcome notice, leaving real server status intact.
@@ -44,23 +44,13 @@ function boot(){
   <div class="rw-now"><strong>NOW SHOWING</strong><span id="rw-song">Waiting for the next match card…</span></div>
   <div class="rw-controls"><a href="#videowrap" id="rw-watch">▣ Watch</a><a href="#chatwrap" id="rw-chat">✉ Chat</a>
   <a href="#queue" id="rw-queue">☷ Playlist</a><button id="rw-share" type="button">↗ Copy Channel Link</button>
-  <button id="rw-bell" type="button">◉ Ring Bell</button><button id="rw-focus" type="button">◧ Focus</button>
-  <button id="rw-lights" type="button">✦ Effects</button></div>
+  <button id="rw-bell" type="button">◉ Ring Bell</button>
+  </div>
   <div id="rw-ticker">WELCOME TO THE ARENA · CLASSIC WRESTLING · THE MAIN EVENT STARTS HERE</div>`;
   const navbar = document.querySelector('nav.navbar, .navbar');
   if (navbar) navbar.insertAdjacentElement('afterend', header);
   else document.body.insertBefore(header,document.body.firstChild);
   const button = name => header.querySelector('#rw-'+name);
-  let muted=false,focus=false;
-  try {muted=localStorage.getItem('rw-effects-disabled')==='yes';}catch(_e){}
-  document.body.classList.toggle('rw-lights-off',muted);
-  button('lights').textContent=muted?'✦ Effects Off':'✦ Effects On';
-  button('lights').addEventListener('click',()=>{
-    muted=!muted; document.body.classList.toggle('rw-lights-off',muted);
-    button('lights').textContent=muted?'✦ Effects Off':'✦ Effects On';
-    try{localStorage.setItem('rw-effects-disabled',muted?'yes':'no');}catch(_e){}
-  });
-  button('focus').addEventListener('click',()=>{focus=!focus;document.body.classList.toggle('rw-focus',focus);button('focus').textContent=focus?'◧ Exit Focus':'◧ Focus';});
   button('share').addEventListener('click',async()=>{
     const link=location.origin+location.pathname;
     try{await navigator.clipboard.writeText(link);button('share').textContent='✓ Link Copied';}
@@ -184,7 +174,7 @@ $('#messagebuffer').on('click', '.username', function(e) {
 });
     }catch(e){console.error('[RetroWrestling] Legacy enhancement error:',e);}
   },200);
-  console.info('[RetroWrestling] v1.3.2 loaded; playlist toolbar and arena initializing.');
+  console.info('[RetroWrestling] v1.3.3 loaded; playlist toolbar and arena initializing.');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
 else boot();

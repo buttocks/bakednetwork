@@ -19,7 +19,7 @@ Save both fields (changes automatically saved), then hard-refresh the channel wi
 
 ## Features
 
-- Red-and-gold RetroWrestling skin, compact arena header, ticker, watch/chat/playlist shortcuts, focus and effects toggles, bell, copy-link.
+- Red-and-gold RetroWrestling skin, compact arena header, ticker, watch/chat/playlist shortcuts, bell, copy-link.
 - New **✂ Playlist Tools** button located directly in the native playlist toolbar, using the shared v1.2 dropdown. No floating or header shortcut.
 - Delete selected rows, last N entries, duplicate videos, title matches, position ranges, or all except currently playing.
 - Protect first N entries and the currently playing item. Preview, manual confirmation, typed confirmation for batches of 20+, stop sending pending requests, JSON metadata export.
@@ -49,3 +49,6 @@ For rollback, replace the two URLs with the previous channel settings backups; r
 
 ## v1.3.2
 Legacy embedded Playlist Tools removed; loads shared module. Live external JS URL migration pending.
+
+## v1.3.3
+Removed Focus and Effects from the arena header. Playlist Tools remains in the native playlist toolbar only.

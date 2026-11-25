@@ -1,0 +1,17 @@
+name: Validate shared wrestling base
+on:
+  push:
+    paths:
+      - 'tubes/shared/wrestling/**'
+      - 'tubes/NWA-TNA/channel-internal.js'
+      - '.github/workflows/check-wrestling-base.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: node --check tubes/shared/wrestling/channel-base.js && node --check tubes/NWA-TNA/channel-internal.js
+      - run: tail -n +2 tubes/NWA-TNA/channel-internal.js | cmp - tubes/shared/wrestling/channel-base.js

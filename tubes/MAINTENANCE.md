@@ -57,3 +57,5 @@ All 14 family onboarding channels verified admin rank 3 and successful backups i
 Joshi2 verified rank 3, backed up, 10 protected playlist entries, zero legacy references in run 45538021819. NWA-TNA skin-only retry 45538283890 status completed / success.
 
 NWA-TNA theme deployed successfully 45538283890. Playlist Tools diagnostics 45539268505: JS persisted, ignore_channeljs false, module not executed automatically, direct injection mounts successfully. Investigate custom script consent/initialization; do not consider direct injection a live install. NWA-TNA feed browser test 45537614521 guide and toolbar pass, YouTube playback failed in runner.
+
+User requires existing wrestling JS base/modules for new builds and overhauls. Created shared WrestleTube-derived base, parameterized branding and added Playlist Tools to existing sequencer. Original pinned dependencies and module selections retained. NWA-TNA pilot generated from shared source; validation before live rollout.

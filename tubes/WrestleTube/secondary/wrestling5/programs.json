@@ -641,6 +641,24 @@
           "duration": 569,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Goldberg faces his trainer; Steiner vs. A-Wall | WCW Monday Nitro, Dec. 12, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=K9PBibXqcTo",
+          "youtube_id": "K9PBibXqcTo",
+          "duration": 5294,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW BattleBowl 1993 | Sting, Flair, Vader and more enter The Lethal Lottery",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=cAFE_tpdzJo",
+          "youtube_id": "cAFE_tpdzJo",
+          "duration": 9909,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

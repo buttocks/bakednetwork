@@ -625,6 +625,24 @@
           "duration": 3438,
           "source": "YouTube",
           "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Teofimo Lopez vs George Kambosos Jr | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=BQn5yqk4BZU",
+          "youtube_id": "BQn5yqk4BZU",
+          "duration": 3469,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
+        },
+        {
+          "title": "Richardson Hitchins vs George Kambosos Jr | Full Fight | Matchroom Boxing",
+          "episode": "Matchroom Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=pP3VxfA7-Hc",
+          "youtube_id": "pP3VxfA7-Hc",
+          "duration": 2519,
+          "source": "YouTube",
+          "source_channel": "Matchroom Boxing"
         }
       ]
     }

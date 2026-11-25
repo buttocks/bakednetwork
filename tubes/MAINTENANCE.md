@@ -45,3 +45,5 @@ Playlist cleanup verified runs 45531347326 and 45531602024: 43 removed (Wrestlin
 Consolidated 19 byte-identical legacy wrestletube/ files into existing canonical tubes/WrestleTube/ copies after dependency scan 45533065560; corrected two documentation references. Historical pinned versions retained. Rollback parent 2e08b75ccdc8f53f5c77450a275af7465af1fa1e.
 
 PlaylistTools-Standalone.js canonical implementation is tubes/shared/modules/PlaylistTools-Standalone.js. Legacy modules/ entry is a compatibility loader, not a second implementation. Android APK dependency not inspected; preserve old entry point. User approved canonical location.
+
+Removed seven root duplicate WID and WrestleTube assets after dependency scan 45533707469 found no unpinned references to these paths. WID live CSS/JS URLs are commit-pinned, so historical files remain available independently of main; prior CSS checksum mismatch remains unresolved and no live WID settings were changed. Rollback parent db6a0449dfb56db4f51223131142a555fc4e94be.

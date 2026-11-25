@@ -17,19 +17,23 @@ def resolve(source):
         resolved[handle]={'id':items[0]['id'],'name':items[0]['snippet']['title']}
     return resolved[handle]
 for raw in entries:
+    if raw['key'] != 'mtv': continue  # This revision targets MTV only; preserve other catalogs.
     entry={k:v for k,v in raw.items() if k not in ('sources','name')}
     try:
         entry['youtube_channels']=[]
         for s in raw['sources']:
             try: entry['youtube_channels'].append(resolve(s))
             except Exception as exc: print('Source unavailable:',s.get('handle'),type(exc).__name__)
-        if not entry['youtube_channels']: raise ValueError('No resolved sources')
-        items=discover.youtube(entry,{**defaults,'min_duration_seconds':entry.get('min_duration_seconds',defaults['min_duration_seconds'])})
-        programs=list({p['url']:p for p in items}.values())[:60]
+        limits={**defaults,'min_duration_seconds':entry.get('min_duration_seconds',defaults['min_duration_seconds'])}
+        archives=discover.archive(entry,limits,0)
+        items=discover.youtube(entry,limits) if entry['youtube_channels'] else []
+        if not archives:
+            print('No qualifying archival programs; MTV remains unpublished');continue
+        programs=list({p['url']:p for p in archives[:48]+items[:12]}.values())[:60]
         if len(programs)<3:
             print('Insufficient catalog:',entry['key'],len(programs));continue
         folder=root.parent/entry['directory']
-        discover.write(folder/'programs.json',{'schema':1,'seed':entry['key']+'-20261125','channels':{entry['key']:{'name':'BAKED TV · '+raw['name'],'description':'Official entertainment programming','programs':programs}}})
+        discover.write(folder/'programs.json',{'schema':1,'seed':entry['key']+'-20261125','channels':{entry['key']:{'name':'BAKED TV · '+raw['name'],'description':'Classic MTV archival programming with official YouTube supplements','programs':programs}}})
         discover.write(folder/'discovery-entry.json',entry)
         print('Validated',entry['key'],len(programs))
     except Exception as exc:

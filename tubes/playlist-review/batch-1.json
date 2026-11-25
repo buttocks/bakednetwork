@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_NJPW",
+    "channel": "NJPW",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_RetroWrestling",
+    "channel": "RetroWrestling",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_WWF-WWE",
+    "channel": "WWF-WWE",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_WCW",
+    "channel": "WCW",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_NJPWALT",
+    "channel": "NJPWALT",
+    "action": "audit_playlist_media"
+  }
+]

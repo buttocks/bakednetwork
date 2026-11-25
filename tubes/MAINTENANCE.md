@@ -73,3 +73,5 @@ Priority audit 45544108485 confirmed broken visible assets: NJPWALT Discord/Gyaz
 Asset-location audit 45544562593: DG/DGalt logo is MOTD artwork; NJPWALT two MOTD images and one chat image; Puro one MOTD image; Joshi chat GIF only. Submitted exact URL-only MOTD repairs for DG/DGalt with backup, rendered image verification and rollback. Joshi chat GIF and NJPWALT chat image are not skin defects.
 
 DDT onboarded successfully (45546112283), rank 3, four items, no legacy paths, broken MOTD logo. Network total 29 verified/backed up. NJPWALT main NJPW CSS/MOTD mirror verified (45546755182). DG/DGalt user-supplied Imgur transparent artwork in use; compact size deployment pending (45547887791).
+
+User visually verified compact transparent Dragon Gate logo and DDT logo. DDT old schedules unreachable; migrate via separate new feed with validated source catalog. Submitted read-only playlist review for 16 channels in three batches. No live changes in this batch.

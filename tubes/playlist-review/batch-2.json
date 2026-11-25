@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_DG",
+    "channel": "DG",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_DGalt",
+    "channel": "DGalt",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_ddt",
+    "channel": "ddt",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_ajpw",
+    "channel": "ajpw",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_Noah",
+    "channel": "Noah",
+    "action": "audit_playlist_media"
+  }
+]

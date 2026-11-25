@@ -1,0 +1,38 @@
+[
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_indies",
+    "channel": "indies",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_shoot",
+    "channel": "shoot",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_wrestling2",
+    "channel": "wrestling2",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_wrestling3",
+    "channel": "wrestling3",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_Wrestling4",
+    "channel": "Wrestling4",
+    "action": "audit_playlist_media"
+  },
+  {
+    "schema": 1,
+    "request_id": "playlist_review_nov25_wrestling5",
+    "channel": "wrestling5",
+    "action": "audit_playlist_media"
+  }
+]

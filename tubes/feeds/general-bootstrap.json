@@ -137,28 +137,5 @@
       "full event"
     ],
     "seed_count": 0
-  },
-  {
-    "directory": "Shoot",
-    "key": "shoot",
-    "name": "SHOOT",
-    "sources": [
-      {
-        "handle": "@TitleMatchWrestling",
-        "name": "Title Match Wrestling"
-      },
-      {
-        "handle": "@WrestlingShootInterviews",
-        "name": "Wrestling Shoot Interviews"
-      }
-    ],
-    "archive_ids": [],
-    "archive_title_pattern": "(?!)",
-    "youtube_title_pattern": "(?i)(shoot interview|full interview|full shoot|wrestling interview)",
-    "youtube_search_queries": [
-      "shoot interview",
-      "full interview"
-    ],
-    "seed_count": 0
   }
 ]

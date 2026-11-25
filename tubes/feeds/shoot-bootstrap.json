@@ -1,0 +1,31 @@
+[
+  {
+    "directory": "Shoot",
+    "key": "shoot",
+    "name": "SHOOT",
+    "sources": [
+      {
+        "handle": "@PANCRASE",
+        "name": "Pancrase"
+      },
+      {
+        "handle": "@GLEAT",
+        "name": "GLEAT"
+      },
+      {
+        "handle": "@RIZIN_FF",
+        "name": "RIZIN"
+      }
+    ],
+    "archive_ids": [],
+    "archive_search": "mediatype:movies AND (title:\"UWFi\" OR title:\"UWF International\" OR title:\"Fujiwara Gumi\" OR title:\"Battlarts\" OR title:\"Pancrase\" OR title:\"RINGS Fighting Network\")",
+    "archive_title_pattern": "(?i)(UWFi|UWF International|Fujiwara Gumi|Battlarts|Pancrase|RINGS|UWF)",
+    "archive_search_rows": 60,
+    "archive_candidate_limit": 20,
+    "youtube_title_pattern": "(?i)^(?!.*(?:interview|podcast|reaction|highlights|trailer|会見)).*(?:pancrase|パンクラス|UWF|UWFi|LIDET|GLEAT|Battlarts|Fujiwara Gumi|shoot style|shoot wrestling)",
+    "youtube_search_queries": [
+      "UWF full match"
+    ],
+    "seed_count": 0
+  }
+]

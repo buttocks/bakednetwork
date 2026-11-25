@@ -54,15 +54,20 @@ export async function fixQueueAttribution({page,request,initial}){
  const base=start<0?before.css:before.css.slice(0,start)+before.css.slice(end+END.length);
  let target=start<0?before.css+'\n'+layer+'\n':before.css.slice(0,start)+layer+before.css.slice(end+END.length);
  if(target===before.css)return {channel:request.channel,status:'already-deployed'};
+ // Wrestling 5 has a verified existing oversized stylesheet. Permit a
+ // non-growing repair only, without relaxing the normal network limit.
+ const originalBytes=Buffer.byteLength(before.css,'utf8');
+ const limit=request.channel.toLowerCase()==='wrestling5'&&before.rank>=10
+   ?Math.max(20000,originalBytes):20000;
  let compacted=false;
- if(Buffer.byteLength(target,'utf8')>20000){
+ if(Buffer.byteLength(target,'utf8')>limit){
   const compact=compactWhitespace(base);
   if(!(await equivalentCSS(page,base,compact)))throw Error('CSS compaction equivalence unverified; existing skin preserved');
   target=compact+'\n'+layer+'\n';
   // If whitespace compaction is insufficient, try the browser's canonical
   // rule serialization. Reject imports and custom property declarations
   // because their original tokens can matter outside the CSSOM comparison.
-  if(Buffer.byteLength(target,'utf8')>20000&&!/@import\b|--[\w-]+\s*:|\/\*!|@license|@preserve|copyright/i.test(base)){
+  if(Buffer.byteLength(target,'utf8')>limit&&!/@import\b|--[\w-]+\s*:|\/\*!|@license|@preserve|copyright/i.test(base)){
    const canonical=await page.evaluate(css=>{
     try{const sheet=new CSSStyleSheet();sheet.replaceSync(css);return Array.from(sheet.cssRules,r=>r.cssText).join('\n')}catch{return ''}
    },base);
@@ -70,9 +75,9 @@ export async function fixQueueAttribution({page,request,initial}){
   }
   compacted=true;
  }
- const sizes={before:Buffer.byteLength(before.css,'utf8'),after:Buffer.byteLength(target,'utf8'),compacted};
+ const sizes={before:originalBytes,after:Buffer.byteLength(target,'utf8'),limit,compacted};
  await fs.writeFile(dir+'/size-report.json',JSON.stringify(sizes,null,2));
- if(sizes.after>20000)throw Error('CSS still exceeds limit after safe compaction; existing skin preserved');
+ if(sizes.after>limit)throw Error('CSS still exceeds limit after safe compaction; existing skin preserved');
  async function change(expected,css){
   await page.evaluate(({expected,css,channel})=>{if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.rank<3||String(window.CLIENT?.name||'').toLowerCase()!=='buttman-gpt'||String(window.CHANNEL?.name||'').toLowerCase()!==channel.toLowerCase()||window.CHANNEL.css!==expected)throw Error('Live state changed');window.socket.emit('setChannelCSS',{css})},{expected,css,channel:request.channel});
   for(let i=0;i<60;i++){if((await capture()).css===css)return;await page.waitForTimeout(250)}

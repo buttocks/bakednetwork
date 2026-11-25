@@ -20,7 +20,7 @@ Save both fields (changes automatically saved), then hard-refresh the channel wi
 ## Features
 
 - Red-and-gold RetroWrestling skin, compact arena header, ticker, watch/chat/playlist shortcuts, focus and effects toggles, bell, copy-link.
-- New **✂ Playlist Tools** button located directly in the native playlist toolbar, plus a floating fallback button. The arena header has an additional Playlist Tools shortcut.
+- New **✂ Playlist Tools** button located directly in the native playlist toolbar, using the shared v1.2 dropdown. No floating or header shortcut.
 - Delete selected rows, last N entries, duplicate videos, title matches, position ranges, or all except currently playing.
 - Protect first N entries and the currently playing item. Preview, manual confirmation, typed confirmation for batches of 20+, stop sending pending requests, JSON metadata export.
 - Original WrestleTube Xaekai modules, playlist scroll, chat name and emote shortcuts, and navbar enhancements preserved. The old forced per-second fluid layout override was removed to avoid spacing shifts.
@@ -46,3 +46,6 @@ Do **not** include the standalone module again alongside the merged RetroWrestli
 The linked legacy 2022 script referenced a separate Dropbox `Playlistbatchdelete.js` that could not be independently inspected. The batch-delete manager here is independently implemented and has not been tested against a live moderator session.
 
 For rollback, replace the two URLs with the previous channel settings backups; restoring JavaScript does not restore deleted playlist entries.
+
+## v1.3.2
+Legacy embedded Playlist Tools removed; loads shared module. Live external JS URL migration pending.

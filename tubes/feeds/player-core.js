@@ -186,7 +186,7 @@ async function startYouTube(p,seek,id){
         onReady:e=>{
           if(activeUrl!==id)return;
           ytReady=true;updateAudio();
-          try{e.target.unloadModule('captions')}catch{}
+          try{e.target.unloadModule('captions');e.target.unloadModule('cc')}catch{}
           try{e.target.seekTo(seek,true);e.target.playVideo()}catch{failCurrent('YouTube playback failed')}
         },
         onApiChange:e=>{
@@ -195,7 +195,7 @@ async function startYouTube(p,seek,id){
         onStateChange:e=>{
           if(activeUrl!==id)return;
           const s=YT.PlayerState;
-          if(e.data===s.PLAYING){clearTimeout(playbackTimer);ytPlaying=true;status.hidden=true;reveal(firstFade)}
+          if(e.data===s.PLAYING){try{e.target.unloadModule('captions');e.target.unloadModule('cc')}catch{}clearTimeout(playbackTimer);ytPlaying=true;status.hidden=true;reveal(firstFade)}
           else if(e.data===s.ENDED){activeUrl='';stopYT();tune(true,true)}
           else if(e.data===s.PAUSED){ytPlaying=false;reveal()}
         },

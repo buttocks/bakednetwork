@@ -52,7 +52,7 @@ Master: `/Wrestling`. Mirrors: `/wrestling2`, `/wrestling3`, `/Wrestling4`, `/wr
 - Preserve ordered filters and all macro definitions, including duplicate names.
 - Verify exact returned lists after import; attempt rollback only when the observed live state can safely be attributed to the import.
 - Do not change skins, playlists, or permissions.
-- Automatic writes remain disabled until the pilot is verified and an explicit rollout is implemented.
+- Automatic writes are enabled for the four mirrors only. The scheduled workflow runs hourly at minute 13 (UTC), subject to GitHub Actions scheduling delays. It skips exact matches and stops on the first failed destination. Set `automaticWrites` to `false` in the shared configuration to disable scheduled writes.
 
 ### Verified baseline — 2026-11-25
 
@@ -64,5 +64,5 @@ Master: `/Wrestling`. Mirrors: `/wrestling2`, `/wrestling3`, `/Wrestling4`, `/wr
 | Wrestling4 | 121 | 9151 |
 | wrestling5 | 121 | 7158 |
 
-Each list contains one conflicting duplicate macro name. Inventory preserves those entries rather than choosing a winner. Native import controls were verified in [run 45700407481](https://github.com/buttocks/bakednetwork/actions/runs/45700407481). Wrestling 2 pilot was submitted in [run 45700731231](https://github.com/buttocks/bakednetwork/actions/runs/45700731231); check its actual result before claiming synchronization or proceeding with other mirrors.
+Each list contains one conflicting duplicate macro name. Inventory preserves those entries rather than choosing a winner. Native import controls were verified in [run 45700407481](https://github.com/buttocks/bakednetwork/actions/runs/45700407481). Wrestling 2 pilot passed in [run 45700731231](https://github.com/buttocks/bakednetwork/actions/runs/45700731231). All four mirrors were verified exact in [run 45701361511](https://github.com/buttocks/bakednetwork/actions/runs/45701361511), with 206 filters and 7973 macro definitions per channel. Hourly synchronization has been enabled; the first scheduled execution remains unverified.
 

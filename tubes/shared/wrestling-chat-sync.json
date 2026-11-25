@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "master": "Wrestling",
+  "targets": [
+    "luchatube",
+    "NJPW",
+    "RetroWrestling",
+    "WWF-WWE",
+    "WCW",
+    "joshi",
+    "puro",
+    "ajpw",
+    "Noah",
+    "wrestling2",
+    "indies",
+    "shoot",
+    "wrestling3",
+    "Wrestling4",
+    "DGalt",
+    "DG",
+    "wrestling5",
+    "NJPWALT",
+    "NWA-TNA",
+    "joshi2",
+    "ddt"
+  ],
+  "mode": "exact-one-way",
+  "filterOrder": "preserve-master",
+  "macroConflict": "master-wins",
+  "automaticWrites": false
+}

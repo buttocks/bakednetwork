@@ -1,0 +1,28 @@
+{
+  "directory": "MTV",
+  "key": "mtv",
+  "youtube_title_pattern": "(?i)(classic|archive|throwback|unplugged|headbangers ball|120 minutes|music video|VJ|music awards)",
+  "youtube_search_queries": [
+    "classic MTV archive"
+  ],
+  "min_duration_seconds": 90,
+  "archive_ids": [],
+  "archive_title_pattern": "(?i)\\b(MTV|Headbangers Ball|120 Minutes|Yo[! ]+MTV Raps)\\b",
+  "seed_count": 0,
+  "archive_first": true,
+  "archive_require_open_license": true,
+  "archive_episode_label": "Classic television archive",
+  "archive_search": "mediatype:movies AND (title:\"MTV\" OR title:\"Headbangers Ball\" OR title:\"120 Minutes\" OR title:\"Yo MTV Raps\") AND (licenseurl:*creativecommons.org*)",
+  "archive_search_rows": 80,
+  "archive_candidate_limit": 30,
+  "youtube_channels": [
+    {
+      "id": "UCxAICW_LdkfFYwTqTHHE0vg",
+      "name": "MTV"
+    },
+    {
+      "id": "UCRLbrE3FKPGDZNLtCVNLnQg",
+      "name": "MTV Vault"
+    }
+  ]
+}

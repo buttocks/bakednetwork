@@ -43,3 +43,5 @@ Operator confirmed YouTube playback and usable separate toolbar in live WCW. NJP
 Playlist cleanup verified runs 45531347326 and 45531602024: 43 removed (Wrestling 11, luchatube 29, WID 3), three candidates skipped by safety checks. Repeated 404 plus successful YouTube metadata absence required for YouTube removals. Macro recheck uses six workers and two simultaneous checks per host, with cooldown and uncertain-host diagnostics.
 
 Consolidated 19 byte-identical legacy wrestletube/ files into existing canonical tubes/WrestleTube/ copies after dependency scan 45533065560; corrected two documentation references. Historical pinned versions retained. Rollback parent 2e08b75ccdc8f53f5c77450a275af7465af1fa1e.
+
+PlaylistTools-Standalone.js canonical implementation is tubes/shared/modules/PlaylistTools-Standalone.js. Legacy modules/ entry is a compatibility loader, not a second implementation. Android APK dependency not inspected; preserve old entry point. User approved canonical location.

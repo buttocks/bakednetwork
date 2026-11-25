@@ -33,7 +33,7 @@ Save both fields (changes automatically saved), then hard-refresh the channel wi
 - `RetroWrestling.css` — skin and v1.3 spacing refinements.
 - `RetroWrestling.js` — earlier alternate combined script (not the recommended version).
 - `RetroWrestling-Theme.js` — earlier standalone arena UI.
-- `../../modules/PlaylistTools-Standalone.js` — reusable module for other channels, separate from any theme.
+- `../../tubes/shared/modules/PlaylistTools-Standalone.js` — reusable module for other channels, separate from any theme.
 
 Reusable Playlist Tools module (other tubes only):
 

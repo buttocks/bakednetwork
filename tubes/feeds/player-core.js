@@ -8,6 +8,8 @@ const video=$('video'), shell=$('youtube-shell'), status=$('status'), statusText
 const page=new URL(location.href), channel=page.searchParams.get('channel')||page.searchParams.get('feed')||'lucha';
 if(!/^[a-z0-9-]{2,32}$/.test(channel)||!video||!shell||!status)return;
 const url=new URL('./programs.json',location.href);
+// Public diagnostic mode: compare the documented standard and privacy-enhanced embeds.
+const embedHost=page.searchParams.get('embed')==='standard'?'https://www.youtube.com':'https://www.youtube-nocookie.com';
 let track=null, yt=null,ytPromise=null,ytReady=false,ytPlaying=false,mode='archive';
 let muted=true, activeUrl='', activeDay='', bad=new Set(), day='', ordered=[];
 let activeProgram=null, nextTrack=null, activeIndex=-1;
@@ -163,7 +165,7 @@ function stopYT(){
   }else $('youtube-frame').replaceChildren();
 }
 function failCurrent(reason='Source temporarily unavailable',providerFailure=false){
-  console.warn('[Baked TV] playback failure', {channel,source:activeProgram?.source,reason,attempt});
+  console.warn('[Baked TV] playback failure', {channel,source:activeProgram?.source,reason,attempt,videoId:activeProgram?.youtube_id,host:embedHost});
   if(providerFailure&&activeProgram?.source==='YouTube')providerBlockedUntil=Date.now()+60000;
   const badUrl=activeUrl;if(badUrl)bad.add(badUrl);
   preferFallbackSource=activeProgram?.source==='YouTube'?'Internet Archive':'YouTube';
@@ -185,7 +187,7 @@ async function startYouTube(p,seek,id){
     stopYT();
     playbackTimer=setTimeout(()=>{if(activeUrl===id&&!ytPlaying)failCurrent('YouTube startup timed out',true)},30000);
     yt=new YT.Player('youtube-frame',{
-      width:'100%',height:'100%',videoId:p.youtube_id,host:'https://www.youtube-nocookie.com',
+      width:'100%',height:'100%',videoId:p.youtube_id,host:embedHost,
       playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,cc_load_policy:0,start:seek,origin:location.origin},
       events:{
         onReady:e=>{

@@ -1,0 +1,4 @@
+{
+  "request": "compare-standard-and-privacy-embed-hosts",
+  "purpose": "diagnose provider errors; respect embedding restrictions"
+}

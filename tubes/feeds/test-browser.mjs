@@ -7,7 +7,7 @@ try {
  for(const e of config.channels.filter(e=>!process.env.BAKED_TEST_FEED||e.key===process.env.BAKED_TEST_FEED)){
   const page=await browser.newPage();
   const errors=[],diagnostics=[];page.on('pageerror',err=>errors.push(err.message));page.on('console',msg=>{if(msg.text().includes('[Baked TV]'))diagnostics.push(msg.text())});
-  const url='https://buttocks.github.io/bakednetwork/tubes/'+e.directory+'/feed.html?channel='+e.key;
+  const url='https://buttocks.github.io/bakednetwork/tubes/'+e.directory+'/feed.html?channel='+e.key+(process.env.BAKED_TEST_EMBED==='standard'?'&embed=standard':'');
   try {
    await page.goto(url,{waitUntil:'domcontentloaded',timeout:30000});
    await page.waitForFunction(()=>document.querySelector('#program-name')?.textContent!=='Tuning…',{},{timeout:20000});

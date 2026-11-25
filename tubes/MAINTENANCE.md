@@ -75,3 +75,5 @@ Asset-location audit 45544562593: DG/DGalt logo is MOTD artwork; NJPWALT two MOT
 DDT onboarded successfully (45546112283), rank 3, four items, no legacy paths, broken MOTD logo. Network total 29 verified/backed up. NJPWALT main NJPW CSS/MOTD mirror verified (45546755182). DG/DGalt user-supplied Imgur transparent artwork in use; compact size deployment pending (45547887791).
 
 User visually verified compact transparent Dragon Gate logo and DDT logo. DDT old schedules unreachable; migrate via separate new feed with validated source catalog. Submitted read-only playlist review for 16 channels in three batches. No live changes in this batch.
+
+DDT playback diagnostic run 45552262195: 34 error-150 embed failures; full run 45552262184: seven established feeds playing, DDT and NWA-TNA timed out. Added diagnostic comparison of documented standard and privacy-enhanced embed hosts, including Lucha as comparison. Neither new feed installed live.

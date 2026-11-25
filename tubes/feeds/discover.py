@@ -18,6 +18,9 @@ CONFIG=ROOT/"discovery.json"
 STATE=ROOT/"discovery-state.json"
 START=time.monotonic()
 MAX_RUNTIME=420
+SEARCH_BLOCKED=False
+SEARCH_USED=0
+API_CACHE={}
 
 def load(p): return json.loads(p.read_text(encoding="utf8"))
 def write(p, obj):
@@ -94,12 +97,19 @@ def youtube_api(entry,defaults,key):
     found=[]
     excluded=re.compile("(?i)(?:\\bWWE\\s*2K\\d*\\b|\\bAEW Fight Forever\\b|\\bgameplay\\b|\\bvideo game\\b|\\bwatchalong\\b|\\bwatch along\\b|\\breaction\\b|\\bsimulation\\b)")
     def call(resource,params):
+        global SEARCH_BLOCKED, SEARCH_USED
+        cache_key=(resource,json.dumps(params,sort_keys=True))
+        if cache_key in API_CACHE:return API_CACHE[cache_key]
+        if resource=="search":
+            if SEARCH_BLOCKED or SEARCH_USED>=defaults.get("max_search_calls_per_run",8):return {}
+            SEARCH_USED+=1
         url="https://www.googleapis.com/youtube/v3/"+resource+"?"+urlencode(dict(params,key=key))
         try:
             req=Request(url,headers={"Accept":"application/json","User-Agent":"BakedTVCatalog/1.0"})
             with urlopen(req,timeout=15) as response:
                 data=json.loads(response.read(5_000_000))
             print("YouTube API",resource,"HTTP 200 items",len(data.get("items",[])))
+            API_CACHE[cache_key]=data
             return data
         except HTTPError as exc:
             reason="unknown"
@@ -108,6 +118,8 @@ def youtube_api(entry,defaults,key):
                 reason=str(obj.get("error",{}).get("errors",[{}])[0].get("reason","unknown"))
             except Exception:pass
             print("YouTube API",resource,"HTTP",exc.code,"reason",re.sub(r"[^A-Za-z0-9_-]","",reason)[:80])
+            if exc.code==429 or reason in ("quotaExceeded","dailyLimitExceeded","rateLimitExceeded","userRateLimitExceeded"):
+                SEARCH_BLOCKED=True
         except Exception as exc:
             print("YouTube API",resource,"request failed",type(exc).__name__)
         return {}
@@ -135,7 +147,7 @@ def youtube_api(entry,defaults,key):
             if not token or len(ids)>=20:break
         # Search older uploads by topic, rather than relying on recent uploads.
         # One channel-scoped search costs 100 quota units per configured query.
-        for query in entry.get("youtube_search_queries",[])[:2]:
+        for query in entry.get("youtube_search_queries",[])[:1]:
             results=call("search",{"part":"snippet","channelId":channel,"type":"video","q":query,"maxResults":25,"videoEmbeddable":"true","order":"relevance"})
             ids.extend(x.get("id",{}).get("videoId","") for x in results.get("items",[]) if match.search(x.get("snippet",{}).get("title","")))
         ids=list(dict.fromkeys(v for v in ids if re.fullmatch(r"[A-Za-z0-9_-]{11}",v)))
@@ -271,7 +283,10 @@ def main():
     entries=config["channels"]
     # Rotate discovery order so additional feeds are not starved by the budget.
     start=int(state.get('next_channel',0))%len(entries)
-    for i,entry in enumerate(entries[start:]+entries[:start]):
+    ordered=entries[start:]+entries[:start]
+    # Give the sole Archive-only feed first access to the limited search budget.
+    ordered.sort(key=lambda e: e['key']!='wwf-wwe')
+    for i,entry in enumerate(ordered):
         if time.monotonic()-START>MAX_RUNTIME:break
         state['next_channel']=(start+i+1)%len(entries)
         name=entry["directory"]+"/"+entry["key"]

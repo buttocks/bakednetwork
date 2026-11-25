@@ -15,7 +15,12 @@ try {
   for(let i=1;i<=5;i++){const e=document.createElement('div');e.className='queue_entry';e.dataset.uid=i;e.dataset.media='video'+i;e.textContent='Video '+i;document.querySelector('#queue').appendChild(e);}
  });
  await page.addScriptTag({path:'tubes/shared/modules/PlaylistTools-Standalone.js'});
- await page.locator('#bpt-open').click();
+ assert.equal(await page.locator('#bpt-open').count(),0);
+ await page.locator('#bpt-toolbar').click();
+ assert.equal(await page.locator('#bpt-panel').isVisible(),true);
+ await page.keyboard.press('Escape');
+ assert.equal(await page.locator('#bpt-panel').isVisible(),false);
+ await page.locator('#bpt-toolbar').click();
  await page.locator('#bpt-mode').selectOption('last');
  await page.locator('#bpt-n').fill('0');
  assert.equal(await page.locator('#bpt-delete').isDisabled(),true);
@@ -31,5 +36,8 @@ try {
  assert.deepEqual(await page.evaluate(()=>window.sent),[4,5,2]);
  assert.equal(await page.locator('[data-uid="1"]').count(),1);
  assert.equal(await page.locator('[data-uid="3"]').count(),1);
+ await page.evaluate(()=>{window.hasPermission=()=>false});
+ await page.waitForFunction(()=>document.querySelector('#bpt-toolbar').hidden);
+ assert.equal(await page.locator('#bpt-panel').isVisible(),false);
  console.log('PASS: zero count, confirmed removal, current playback protection, stop on failed removal');
 } finally {await browser.close();}

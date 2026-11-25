@@ -1,4 +1,4 @@
-/* Baked.live / CyTube Playlist Tools v1.1 — reusable, no external dependencies. */
+/* Baked.live / CyTube Playlist Tools v1.2 — reusable, no external dependencies. */
 (function () {
   'use strict';
   if (!/\/(tv|r)\//i.test(location.pathname)) return;
@@ -19,44 +19,32 @@
   const style = document.createElement('style');
   style.id = 'bpt-styles';
   style.textContent = `
-#bpt-root {position:fixed;z-index:2147481000;right:17px;bottom:18px;font:13px/1.4 system-ui,Segoe UI,sans-serif;color:#f1f2f7}
+#bpt-root{position:absolute;z-index:1050;width:min(310px,calc(100vw - 16px));display:none;font:inherit}
+#bpt-root.bpt-visible{display:block}
 #bpt-root *{box-sizing:border-box}
-#bpt-open{background:#242632;border:1px solid #cbb46b;color:#f7de89;border-radius:24px;padding:10px 15px;box-shadow:0 6px 24px #0008;font-weight:800;cursor:pointer}
-#bpt-panel{width:min(390px,calc(100vw - 24px));max-height:min(690px,calc(100vh - 75px));overflow:auto;padding:16px;background:#171923;border:1px solid #cbb46b;border-radius:14px;box-shadow:0 14px 50px #000c;display:none}
-#bpt-root.bpt-visible #bpt-panel{display:block} #bpt-root.bpt-visible #bpt-open{display:none}
-#bpt-panel h3{font-size:16px;margin:0;color:#f6dc8b;letter-spacing:.03em}
-#bpt-panel .bpt-sub{font-size:11px;color:#b9c0ce;margin:4px 0 12px}
-#bpt-panel .bpt-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-#bpt-panel label{display:block;color:#d5d8e3;font-weight:600;margin:9px 0 4px}
-#bpt-panel select,#bpt-panel input{width:100%;min-height:32px;border:1px solid #596071;border-radius:6px;background:#242736;color:#fff;padding:6px 8px}
-#bpt-panel select:focus,#bpt-panel input:focus{outline:2px solid #cfb46b;outline-offset:1px}
-#bpt-panel button{cursor:pointer;border:1px solid #666e80;border-radius:7px;background:#30384a;color:#fff;padding:7px 10px}
-#bpt-panel button:hover:not(:disabled){background:#46536b} #bpt-panel button:disabled{opacity:.45;cursor:not-allowed}
-#bpt-panel .bpt-buttons{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-#bpt-panel .bpt-danger{background:#8d3036;border-color:#d76c69;font-weight:800}
-#bpt-panel .bpt-danger:hover:not(:disabled){background:#ac4548}
-#bpt-panel .bpt-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-#bpt-preview{font-size:12px;white-space:pre-wrap;margin:12px 0 0;padding:10px;background:#252837;border-radius:8px;color:#e4e6ec;max-height:130px;overflow:auto}
-#bpt-status{font-size:12px;color:#ffe29a;min-height:17px;margin-top:9px}
-#bpt-panel .bpt-small{font-size:11px;color:#9fa6b5;margin-top:8px}
-#bpt-panel .bpt-x{background:transparent;border:0;font-size:19px;padding:0 5px;line-height:1}
+#bpt-panel{display:block;position:static;float:none;width:100%;min-width:0;margin:0;padding:10px;max-height:min(480px,70vh);overflow:auto}
+#bpt-panel [hidden]{display:none!important}
+#bpt-panel label{display:block;margin:5px 0 3px;font-size:12px}
+#bpt-panel select,#bpt-panel input{width:100%;height:28px;padding:3px 6px;font-size:12px}
+#bpt-panel .bpt-buttons{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+#bpt-panel .bpt-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#bpt-preview{font:inherit;font-size:11px;white-space:pre-wrap;margin:7px 0 0;padding:5px;max-height:90px;overflow:auto}
+#bpt-status{font-size:11px;margin-top:5px}
+#bpt-status:empty{display:none}
 #queue .bpt-check{display:inline-flex!important;align-items:center;vertical-align:middle;margin:0 6px 0 5px;cursor:pointer}
 #queue .bpt-check input{appearance:auto!important;width:15px!important;height:15px!important;opacity:1!important;position:static!important;margin:0!important}
 #queue .bpt-check input:disabled{cursor:not-allowed}
-@media (max-width:540px){#bpt-root{right:8px;bottom:8px}}
+
 `;
   (document.head || document.documentElement).appendChild(style);
 
   const root = document.createElement('div');
   root.id = 'bpt-root';
   root.innerHTML = `
-    <button type="button" id="bpt-open" title="Playlist maintenance tools">☷ Playlist Tools</button>
-    <section id="bpt-panel" role="dialog" aria-label="Playlist management tools">
-      <div class="bpt-head"><h3>Playlist Tools</h3><button type="button" id="bpt-close" class="bpt-x" title="Close">×</button></div>
-      <p class="bpt-sub">Reusable across Baked.live / CyTube channels · permission-aware</p>
-      <label for="bpt-protect">Protect first N positions</label>
+    <section id="bpt-panel" class="dropdown-menu" role="dialog" aria-label="Playlist management tools">
+      <label for="bpt-protect">Protect first N</label>
       <input id="bpt-protect" type="number" min="0" max="9999" value="0" />
-      <label for="bpt-mode">Deletion method</label>
+      <label for="bpt-mode">Remove by</label>
       <select id="bpt-mode">
         <option value="selected">Manually selected rows</option>
         <option value="last">Last N playlist entries</option>
@@ -68,14 +56,15 @@
       <div id="bpt-n-wrap" hidden><label for="bpt-n">How many from the end?</label><input id="bpt-n" type="number" min="1" value="10" /></div>
       <div id="bpt-title-wrap" hidden><label for="bpt-title">Title search</label><input id="bpt-title" placeholder="Text in video title" /></div>
       <div id="bpt-range-wrap" hidden><div class="bpt-row"><div><label for="bpt-from">From position</label><input id="bpt-from" type="number" min="1" value="1" /></div><div><label for="bpt-to">To position</label><input id="bpt-to" type="number" min="1" value="20" /></div></div></div>
-      <div class="bpt-buttons"><button type="button" id="bpt-select">Show row checkboxes</button><button type="button" id="bpt-all">Select eligible</button><button type="button" id="bpt-none">Clear selection</button></div>
+      <div class="bpt-buttons"><button type="button" id="bpt-select">Select rows</button><button type="button" id="bpt-all">Select eligible</button><button type="button" id="bpt-none">Clear selection</button></div>
       <pre id="bpt-preview" aria-live="polite"></pre>
-      <div class="bpt-buttons"><button type="button" id="bpt-backup">Export playlist JSON</button><button type="button" id="bpt-delete" class="bpt-danger">Review & Delete</button><button type="button" id="bpt-cancel" hidden>Stop</button></div>
+      <div class="bpt-buttons"><button type="button" id="bpt-backup">Export JSON</button><button type="button" id="bpt-delete" class="bpt-danger">Delete…</button><button type="button" id="bpt-cancel" hidden>Stop</button></div>
       <div id="bpt-status" aria-live="polite"></div>
-      <p class="bpt-small">Currently playing and protected top entries are never deleted. Bulk deletes require confirmation; removal cannot be undone by this tool. Only use on channels you moderate.</p>
     </section>`;
   (document.body || document.documentElement).appendChild(root);
   const id = name => root.querySelector('#bpt-' + name);
+  root.querySelectorAll('button').forEach(b=>b.classList.add('btn','btn-xs',b.id==='bpt-delete'?'btn-danger':'btn-default'));
+  root.querySelectorAll('input,select').forEach(e=>e.classList.add('form-control','input-sm'));
 
   function getEntries() {
     const J = jq();
@@ -137,7 +126,7 @@
     id('preview').textContent = message.join('\n');
     id('delete').disabled = S.busy || !isPermitted() || !sock() || !candidates.length;
     id('delete').title = !isPermitted() ? 'Requires playlist-delete permission in this channel' : '';
-    id('select').textContent = S.selecting ? 'Hide row checkboxes' : 'Show row checkboxes';
+    id('select').textContent = S.selecting ? 'Hide selection' : 'Show row checkboxes';
   }
   function setupChecks() {
     getEntries().forEach(entry => {
@@ -145,7 +134,7 @@
       const J = jq(); let uid = el.getAttribute('data-uid') || el.dataset.uid;
       try { if (typeof J === 'function') uid = J(el).data('uid') ?? uid; } catch (_e) {}
       let tag = el.querySelector('.bpt-check');
-      if (!S.selecting) { if (tag) tag.remove(); return; }
+      if (!S.selecting || !isPermitted()) { if (tag) tag.remove(); return; }
       if (!tag) {
         tag = document.createElement('label');
         tag.className = 'bpt-check'; tag.title = 'Select playlist row for removal';
@@ -235,7 +224,9 @@
   }
 
   function mountPlaylistToolbarButton() {
-    if (document.getElementById('bpt-toolbar')) return;
+    const existing=document.getElementById('bpt-toolbar');
+    if(existing){existing.hidden=!isPermitted();existing.style.display=isPermitted()?'':'none';if(!isPermitted()){if(S.open)closeMenu();if(S.selecting){S.selecting=false;setupChecks();}}return;}
+    if(!isPermitted())return;
     const nativeClear = document.querySelector('#clearplaylist');
     const toolbar = nativeClear?.parentElement ||
       document.querySelector('#playlistcontrols') ||
@@ -245,15 +236,25 @@
     button.id = 'bpt-toolbar';
     button.type = 'button';
     button.className = 'btn btn-sm btn-default';
-    button.textContent = '✂ Playlist Tools';
+    button.textContent = 'Playlist Tools ▾';
+    button.setAttribute('aria-expanded','false');
     button.title = 'Batch delete, remove duplicates, manage playlist';
-    button.addEventListener('click', () => id('open').click());
+    button.addEventListener('click', () => S.open?closeMenu():openMenu());
     if (nativeClear && nativeClear.parentElement === toolbar)
       nativeClear.insertAdjacentElement('afterend', button);
     else toolbar.appendChild(button);
   }
-  id('open').addEventListener('click', () => {root.classList.add('bpt-visible'); S.open=true; update();});
-  id('close').addEventListener('click', () => {root.classList.remove('bpt-visible'); S.open=false;});
+  function placeMenu(){
+    const button=document.getElementById('bpt-toolbar');if(!button||!S.open)return;
+    const r=button.getBoundingClientRect(),w=root.offsetWidth,h=root.offsetHeight;
+    root.style.left=(window.scrollX+Math.max(8,Math.min(r.left,innerWidth-w-8)))+'px';
+    root.style.top=(window.scrollY+(innerHeight-r.bottom>=h+4||r.top<h+4?r.bottom+3:r.top-h-3))+'px';
+  }
+  function openMenu(){if(!isPermitted())return;S.open=true;root.classList.add('bpt-visible');document.getElementById('bpt-toolbar')?.setAttribute('aria-expanded','true');update();placeMenu();}
+  function closeMenu(){S.open=false;root.classList.remove('bpt-visible');document.getElementById('bpt-toolbar')?.setAttribute('aria-expanded','false');}
+  document.addEventListener('click',e=>{if(S.open&&!root.contains(e.target)&&!e.target.closest('#bpt-toolbar'))closeMenu();});
+  window.addEventListener('resize',placeMenu);
+  if(typeof ResizeObserver==='function')new ResizeObserver(placeMenu).observe(root);
   id('mode').addEventListener('change', setMode);
   for (const field of ['n','title','from','to']) id(field).addEventListener('input', preview);
   id('protect').value = String(S.count);
@@ -269,7 +270,7 @@
   id('backup').addEventListener('click', exportBackup);
   id('delete').addEventListener('click', deleteTargets);
   id('cancel').addEventListener('click', () => {S.cancel=true; status('Stop requested — any already-sent deletes cannot be reversed.');});
-  document.addEventListener('keydown', e => {if (e.key === 'Escape' && S.open) id('close').click();});
+  document.addEventListener('keydown', e => {if (e.key === 'Escape' && S.open) closeMenu();});
   function attachQueue() {
     const queue = $('#queue');
     if (!queue || queue === S.seenQueue) return;
@@ -282,7 +283,7 @@
   }
   attachQueue();
   mountPlaylistToolbarButton();
-  setInterval(() => {attachQueue();mountPlaylistToolbarButton();if (S.open && !S.busy) preview();}, 2500);
+  setInterval(() => {attachQueue();mountPlaylistToolbarButton();if (S.open && !S.busy) {preview();placeMenu();}}, 2500);
   setMode();
 })();
 /* Playlist tools toolbar addition v1.3.0; independent of channel skin. */

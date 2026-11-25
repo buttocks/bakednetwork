@@ -19,7 +19,13 @@ export async function installTools({page,request,initial}){
   if(before.js!==js)await set(js);
   await page.reload({waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.rank>=3,{},{timeout:20000});
-  await page.waitForSelector('#bpt-root',{state:'attached',timeout:20000});
+  const diagnostics=await page.evaluate(()=>({path:location.pathname,scriptPersisted:typeof window.CHANNEL?.js==='string'&&window.CHANNEL.js.includes('BakedPlaylistToolsV1'),flag:!!window.BakedPlaylistToolsV1,root:!!document.getElementById('bpt-root'),style:!!document.getElementById('bpt-styles'),customScriptOptions:Object.fromEntries(Object.entries(window.USEROPTS||{}).filter(([k])=>/js|script|custom/i.test(k)).filter(([k,v])=>typeof v==='boolean'||typeof v==='number')),scripts:[...document.scripts].map(s=>({inline:!s.src,hasModule:!s.src&&s.textContent.includes('BakedPlaylistToolsV1')}))}));
+  console.log('Playlist Tools diagnostics '+JSON.stringify(diagnostics));
+  if(!diagnostics.root){
+   await page.addScriptTag({content:js});
+   console.log('Direct injection diagnostic '+JSON.stringify(await page.evaluate(()=>({root:!!document.getElementById('bpt-root'),flag:!!window.BakedPlaylistToolsV1}))));
+   throw Error('Automatic channel script initialization failed; diagnostic injection is not deployment');
+  }
   const after=await capture();
   if(after.js!==js||after.css!==before.css||after.motd!==before.motd)throw Error('Settings mismatch');
   await page.screenshot({path:dir+'/preview.png'});

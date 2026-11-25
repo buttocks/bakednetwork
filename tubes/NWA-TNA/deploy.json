@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "nwatna_tools_direct_v1",
+  "request_id": "nwatna_tools_diagnostic_v2",
   "channel": "NWA-TNA",
   "action": "install_nwatna_tools"
 }

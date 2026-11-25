@@ -59,6 +59,15 @@ export async function fixQueueAttribution({page,request,initial}){
   const compact=compactWhitespace(base);
   if(!(await equivalentCSS(page,base,compact)))throw Error('CSS compaction equivalence unverified; existing skin preserved');
   target=compact+'\n'+layer+'\n';
+  // If whitespace compaction is insufficient, try the browser's canonical
+  // rule serialization. Reject imports and custom property declarations
+  // because their original tokens can matter outside the CSSOM comparison.
+  if(Buffer.byteLength(target,'utf8')>20000&&!/@import\b|--[\w-]+\s*:|\/\*!|@license|@preserve|copyright/i.test(base)){
+   const canonical=await page.evaluate(css=>{
+    try{const sheet=new CSSStyleSheet();sheet.replaceSync(css);return Array.from(sheet.cssRules,r=>r.cssText).join('\n')}catch{return ''}
+   },base);
+   if(canonical&&Buffer.byteLength(canonical,'utf8')<Buffer.byteLength(compact,'utf8')&&await equivalentCSS(page,base,canonical))target=canonical+'\n'+layer+'\n';
+  }
   compacted=true;
  }
  const sizes={before:Buffer.byteLength(before.css,'utf8'),after:Buffer.byteLength(target,'utf8'),compacted};

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "queue_attribution_final_size_20261125",
+  "request_id": "wrestling5_exact_skin_backup_20261125",
   "channel": "wrestling5",
-  "action": "fix_queue_attribution"
+  "action": "backup_skin"
 }

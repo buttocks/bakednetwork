@@ -134,6 +134,22 @@
           "duration": 555,
           "source": "Internet Archive",
           "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "1990.06.18a-NJPW-WPW-OP-6.23OA-Kantaro Hoshino, Shiro Koshinaka, Kuniaki Kobayashi, Takayuki Iizuka VS BLOND OUTLAWS",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.18a-NJPW-WPW-OP-6.23OA-Kantaro%20Hoshino%2C%20Shiro%20Koshinaka%2C%20Kuniaki%20Kobayashi%2C%20Takayuki%20Iizuka%20VS%20BLOND%20OUTLAWS.mp4",
+          "duration": 465,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
+        },
+        {
+          "title": "1990.06.18b-NJPW-Keiji Muto, Masahiro Chono VS Shinya Hashimoto, Kensuke Sasaki",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.18b-NJPW-Keiji%20Muto%2C%20Masahiro%20Chono%20VS%20Shinya%20Hashimoto%2C%20Kensuke%20Sasaki.mp4",
+          "duration": 975,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
         }
       ]
     },
@@ -332,6 +348,22 @@
           "duration": 880,
           "source": "Internet Archive",
           "source_channel": "NJPW 23.9.2012 Destruction 2012"
+        },
+        {
+          "title": "NJPW Best Of The Super Junior 33 Day 11 02-06-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-best-of-the-super-junior-33-day-11-02-06-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2011%2002-06-26.mp4",
+          "duration": 8595,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Best Of The Super Junior 33 Day 11 02-06-26"
+        },
+        {
+          "title": "NJPW 4.1.2008 pt1",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt1.mp4",
+          "duration": 7766,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 4.1.2008 Wrestle Kingdom 2"
         }
       ]
     }

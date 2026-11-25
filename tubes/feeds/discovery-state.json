@@ -2,17 +2,17 @@
   "schema": 1,
   "channels": {
     "luchatube/lucha": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.ia.mp4",
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4",
         "https://archive.org/download/syuri-c-vs-kira-iwgp-title-cmll-njpw-lucha-kingdom-2026.11.16/Syuri%20%28c%29%20vs%20Kira%20~%20IWGP%20Title%20~%20CMLL-NJPW%20Lucha%20Kingdom%20%282026.11.16%29%5B1080p30%5D.mp4"
       ],
-      "last_scan": "2026-11-25T00:41:39.539779+00:00",
+      "last_scan": "2026-11-25T00:46:28.271424+00:00",
       "last_added": "2026-11-24T17:51:42.905518+00:00"
     },
     "NJPW/classics": {
-      "archive_cursor": 1,
+      "archive_cursor": 2,
       "seen": [
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
@@ -21,13 +21,15 @@
         "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.01.26b-NJPW-Jyushin%20Thunder%20Liger%20%26%20Hayato%20Nanjo%20VS%20Shinjiro%20Otani%20%26%20Tatsuhito%20Takaiwa.mp4",
         "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.01.26c-NJPW-Kensuke%20Sasaki%2C%20Kazuo%20Yamazaki%2C%20Junji%20Hirata%20VS%20Manabu%20Nakanishi%2C%20Satoshi%20Kojima%2C%20Osamu%20Nishimura.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01e-NJPW-Tatsumi%20Fujinami%27s%20Heavyweight%20Trials%20of%20Ten%20Games~Starting%20Bullet-WWF%20Heavyweight%20Championship-Bob%20Backlund%20%28C%29%20VS%20Tatsumi%20Fujinami.mp4",
-        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01f-NJPW-European%20Rules-Antonio%20Inoki%20VS%20Roland%20Bock.mp4"
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01f-NJPW-European%20Rules-Antonio%20Inoki%20VS%20Roland%20Bock.mp4",
+        "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.18a-NJPW-WPW-OP-6.23OA-Kantaro%20Hoshino%2C%20Shiro%20Koshinaka%2C%20Kuniaki%20Kobayashi%2C%20Takayuki%20Iizuka%20VS%20BLOND%20OUTLAWS.mp4",
+        "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.18b-NJPW-Keiji%20Muto%2C%20Masahiro%20Chono%20VS%20Shinya%20Hashimoto%2C%20Kensuke%20Sasaki.mp4"
       ],
-      "last_scan": "2026-11-25T00:41:42.023835+00:00",
-      "last_added": "2026-11-25T00:41:42.023803+00:00"
+      "last_scan": "2026-11-25T00:46:31.699395+00:00",
+      "last_added": "2026-11-25T00:46:31.699343+00:00"
     },
     "NJPW/events": {
-      "archive_cursor": 4,
+      "archive_cursor": 5,
       "seen": [
         "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
         "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
@@ -36,46 +38,54 @@
         "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt10.mp4",
         "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt12.mp4",
         "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt13.mp4",
-        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt15.mp4"
+        "https://archive.org/download/njpw-23.9.2012-pt-13/NJPW%2023.9.2012%20pt15.mp4",
+        "https://archive.org/download/njpw-best-of-the-super-junior-33-day-11-02-06-26/NJPW%20Best%20Of%20The%20Super%20Junior%2033%20Day%2011%2002-06-26.mp4",
+        "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt1.mp4"
       ],
-      "last_scan": "2026-11-25T00:41:45.357680+00:00",
-      "last_added": "2026-11-25T00:41:45.357649+00:00"
+      "last_scan": "2026-11-25T00:46:34.503579+00:00",
+      "last_added": "2026-11-25T00:46:34.503533+00:00"
     },
     "WCW/wcw": {
       "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/270419-monday-nitro-hour-2/270419%20Monday%20Nitro%20Hour%202.mp4",
-        "https://archive.org/download/270419-monday-nitro-hour-1/270419%20Monday%20Nitro%20Hour%201.mp4"
+        "https://archive.org/download/270419-monday-nitro-hour-1/270419%20Monday%20Nitro%20Hour%201.mp4",
+        "https://archive.org/download/270412-monday-nitro-hour-2/270412%20Monday%20Nitro%20Hour%202.mp4"
       ],
-      "last_added": "2026-11-25T00:41:49.151968+00:00",
-      "last_scan": "2026-11-25T00:41:49.151998+00:00"
+      "last_added": "2026-11-25T00:46:37.473694+00:00",
+      "last_scan": "2026-11-25T00:46:37.473741+00:00"
     },
     "WWE-WWF/wwf-wwe": {
       "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/wwf-survivor-series-1993/WWF%20Survivor%20Series%201993.mp4",
-        "https://archive.org/download/2008-01-11-wwe-friday-night-smackdown-33.mp-4-vkvideodownload/2008-01-11-wwe-friday-night-smackdown-33.mp4-vkvideodownload.mp4"
+        "https://archive.org/download/2008-01-11-wwe-friday-night-smackdown-33.mp-4-vkvideodownload/2008-01-11-wwe-friday-night-smackdown-33.mp4-vkvideodownload.mp4",
+        "https://archive.org/download/wwf-survivor-series-89-original-broadcast/WWF%20Survivor%20Series%2089%20Countdown%20Show.mp4",
+        "https://archive.org/download/wwf-survivor-series-89-original-broadcast/WWF%20Survivor%20Series%2089%20Original%20Broadcast.mp4"
       ],
-      "last_added": "2026-11-25T00:41:52.187732+00:00",
-      "last_scan": "2026-11-25T00:41:52.187763+00:00"
+      "last_added": "2026-11-25T00:46:40.588630+00:00",
+      "last_scan": "2026-11-25T00:46:40.588676+00:00"
     },
     "RetroWrestling/retro": {
       "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-1/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%201.mp4",
-        "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-2/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%202.mp4"
+        "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-2/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%202.mp4",
+        "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-4/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%204.mp4"
       ],
-      "last_added": "2026-11-25T00:41:56.787339+00:00",
-      "last_scan": "2026-11-25T00:41:56.787368+00:00"
+      "last_added": "2026-11-25T00:46:43.719298+00:00",
+      "last_scan": "2026-11-25T00:46:43.719349+00:00"
     },
     "WrestleTube/wrestling": {
       "archive_cursor": 0,
       "seen": [
         "https://archive.org/download/aew-womens-world-championship-eliminator-tournament-day-3-2021.2.28/AEW%20Women%27s%20World%20Championship%20Eliminator%20Tournament%20-%20Day%203%20%282021.2.28%29%5B720p30%5D.mp4",
-        "https://archive.org/download/aew-womens-world-championship-eliminator-tournament-day-2-2021.2.22/AEW%20Women%27s%20World%20Championship%20Eliminator%20Tournament%20-%20Day%202%20%282021.2.22%29%5B1080p30%5D.mp4"
+        "https://archive.org/download/aew-womens-world-championship-eliminator-tournament-day-2-2021.2.22/AEW%20Women%27s%20World%20Championship%20Eliminator%20Tournament%20-%20Day%202%20%282021.2.22%29%5B1080p30%5D.mp4",
+        "https://archive.org/download/aew-womens-world-championship-eliminator-tournament-day-1-2021.2.15/AEW%20Women%27s%20World%20Championship%20Eliminator%20Tournament%20-%20Day%201%20%282021.2.15%29%5B1080p30%5D.mp4",
+        "https://archive.org/download/tna-impact-wrestling-19-11-26/TNA%20Impact%20Wrestling%2019-11-26.mp4"
       ],
-      "last_added": "2026-11-25T00:41:59.964596+00:00",
-      "last_scan": "2026-11-25T00:41:59.964622+00:00"
+      "last_added": "2026-11-25T00:46:46.426471+00:00",
+      "last_scan": "2026-11-25T00:46:46.426505+00:00"
     }
   },
   "next_channel": 0

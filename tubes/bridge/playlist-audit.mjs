@@ -160,16 +160,18 @@ export async function auditPlaylistMedia({page,request,initial}){
     await fs.mkdir(dir,{recursive:true});
     await fs.copyFile(SNAPSHOT,dir+'/before.json');
     const removed=[],skipped=[];
-    if(candidates.length>10)throw Error('Direct-file cleanup exceeds safety cap');
+    const absent=new Set(youtubeEvidence.filter(x=>!x.returned).map(x=>x.uid));
+    candidates.push(...yt.filter(x=>absent.has(x.uid)&&x.first?.status===404&&x.second?.status===404));
+    if(candidates.length>50||candidates.length>Math.ceil(state.entries.length*0.1))throw Error('Playlist cleanup exceeds safety cap');
     for(const x of candidates){
-      if(request.channel!=='Wrestling')continue;
-      const result=await page.evaluate(({uid,id})=>{
+      if(!['Wrestling','luchatube','WID'].includes(request.channel))continue;
+      const result=await page.evaluate(({uid,id,type})=>{
         const entries=[...document.querySelectorAll('#queue .queue_entry')];
         const el=entries.find(e=>window.jQuery(e).data('uid')===uid);
         const m=el&&window.jQuery(el).data('media');
-        if(!el||m?.type!=='fi'||m.id!==id||window.PL_CURRENT==null||String(window.PL_CURRENT)===String(uid)||entries.indexOf(el)<60||!window.socket?.connected||window.CLIENT?.rank<3||!window.hasPermission('playlistdelete'))return false;
+        if(!el||m?.type!==type||!['fi','yt'].includes(type)||m.id!==id||window.PL_CURRENT==null||String(window.PL_CURRENT)===String(uid)||entries.indexOf(el)<60||!window.socket?.connected||window.CLIENT?.rank<3||!window.hasPermission('playlistdelete'))return false;
         window.socket.emit('delete',uid);return true;
-      },{uid:x.uid,id:x.id});
+      },{uid:x.uid,id:x.id,type:x.type});
       if(!result){skipped.push(x.uid);continue;}
       await page.waitForFunction(uid=>![...document.querySelectorAll('#queue .queue_entry')].some(e=>window.jQuery(e).data('uid')===uid),x.uid,{timeout:15000});
       removed.push(x.uid);

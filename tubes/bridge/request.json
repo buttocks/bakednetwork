@@ -1,7 +1,7 @@
 [
   {
     "schema": 1,
-    "request_id": "playlist_cleanup_20261125_Wrestling",
+    "request_id": "playlist_unavailable_youtube_20261125_Wrestling",
     "channel": "Wrestling",
     "action": "clean_dead_playlist",
     "offset": 0,
@@ -9,7 +9,7 @@
   },
   {
     "schema": 1,
-    "request_id": "playlist_cleanup_20261125_luchatube",
+    "request_id": "playlist_unavailable_youtube_20261125_luchatube",
     "channel": "luchatube",
     "action": "clean_dead_playlist",
     "offset": 0,
@@ -17,7 +17,7 @@
   },
   {
     "schema": 1,
-    "request_id": "playlist_cleanup_20261125_WID",
+    "request_id": "playlist_unavailable_youtube_20261125_WID",
     "channel": "WID",
     "action": "clean_dead_playlist",
     "offset": 0,

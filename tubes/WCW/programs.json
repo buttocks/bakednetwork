@@ -329,6 +329,60 @@
           "duration": 10299,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: BattleBowl Battle Royal: WCW BattleBowl 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=tHjzKKXhXOI",
+          "youtube_id": "tHjzKKXhXOI",
+          "duration": 1710,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Goldberg, Hogan & Sting vs. Nash, Steiner & Vicious: WCW Nitro, Aug. 9, 1999",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=JdAZw18vOxE",
+          "youtube_id": "JdAZw18vOxE",
+          "duration": 938,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Hulk Hogan & Goldberg vs. Sid Vicious, DDP & Rick Steiner | Steel Cage Match: WCW Nitro",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=oDPsQ7gVglg",
+          "youtube_id": "oDPsQ7gVglg",
+          "duration": 660,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Road Warriors vs. Steiner Brothers: WCW Nitro, March 11, 1996",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=naAXO9Xd_no",
+          "youtube_id": "naAXO9Xd_no",
+          "duration": 769,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Goldberg vs. Diamond Dallas Page | WCW Title Match: WCW Halloween Havoc 1998",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=hquZnWBP4y8",
+          "youtube_id": "hquZnWBP4y8",
+          "duration": 1034,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting & British Bulldog vs. Vader & Sid Vicious: WCW Beach Blast 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=k4UGdO-6BZ8",
+          "youtube_id": "k4UGdO-6BZ8",
+          "duration": 1194,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

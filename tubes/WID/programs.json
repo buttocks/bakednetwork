@@ -545,6 +545,24 @@
           "duration": 2028,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Nasty Boys vs. Sting & British Bulldog | WCW Tag Title Match: Clash of the Champions XXV",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=XzA50Fv5JQI",
+          "youtube_id": "XzA50Fv5JQI",
+          "duration": 767,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Steiner’s next challenger determined; Funk vs. Meng | WCW Monday Nitro, Dec. 18, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=zoAaKI0tG1g",
+          "youtube_id": "zoAaKI0tG1g",
+          "duration": 5186,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

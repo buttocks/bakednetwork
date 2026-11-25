@@ -275,6 +275,22 @@
           "duration": 656,
           "source": "YouTube",
           "source_channel": "東京女子プロレスofficial - TJPW"
+        },
+        {
+          "title": "SPARK Joshi Puroresu of America ~ Lady Luck II (2026.04.19)[1080p30]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/spark-joshi-puroresu-of-america-lady-luck-ii-2026.04.19/SPARK%20Joshi%20Puroresu%20of%20America%20~%20Lady%20Luck%20II%20%282026.04.19%29%5B1080p30%5D.mp4",
+          "duration": 6918,
+          "source": "Internet Archive",
+          "source_channel": "SPARK Joshi Puroresu of America ~ Lady Luck II ~ 2026.04.19"
+        },
+        {
+          "title": "COLORS X SPARK Joshi Puroresu (2024.06.05)[720p30]",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/colors-x-spark-joshi-puroresu-2024.06.05/COLORS%20X%20SPARK%20Joshi%20Puroresu%20%282024.06.05%29%5B720p30%5D.mp4",
+          "duration": 6911,
+          "source": "Internet Archive",
+          "source_channel": "COLORS X SPARK Joshi Puroresu ~ 2024.06.05"
         }
       ]
     }

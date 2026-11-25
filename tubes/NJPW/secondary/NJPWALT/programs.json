@@ -523,6 +523,32 @@
           "duration": 10000,
           "source": "Internet Archive",
           "source_channel": "NJPW World Tag League 2026 Day 1 23-11-26"
+        },
+        {
+          "title": "FREE MATCH  Toru Yano&Colt Cabana vs Yujiro Takahashi&Jado  The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=3Tuy-dsmheY",
+          "youtube_id": "3Tuy-dsmheY",
+          "duration": 947,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE FULL EPISODE! KAIRI vs Mercedes Moné! | STRONG on Demand",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=BYh7goWhN7w",
+          "youtube_id": "BYh7goWhN7w",
+          "duration": 3751,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "NJPW World Tag League 2026 Day 2 24-11-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-tag-league-2026-day-2-24-11-26/NJPW%20World%20Tag%20League%202026%20Day%202%2024-11-26.mp4",
+          "duration": 7609,
+          "source": "Internet Archive",
+          "source_channel": "NJPW World Tag League 2026 Day 2 24-11-26"
         }
       ]
     }

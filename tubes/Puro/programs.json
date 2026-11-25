@@ -365,6 +365,22 @@
           "duration": 1792,
           "source": "YouTube",
           "source_channel": "NJPW"
+        },
+        {
+          "title": "Puroresu Classic #27： Resurgent Inter Championship Special",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/puroresu-classic-27-resurgent-inter-championship-special/Puroresu%20Classic%20%2327%EF%BC%9A%20Resurgent%20Inter%20Championship%20Special.mp4",
+          "duration": 7199,
+          "source": "Internet Archive",
+          "source_channel": "Puroresu Classic #27: Dory Funk Jr. Championship Special"
+        },
+        {
+          "title": "Toryumon - 1997.12.07-1998.12.12 - Shukan Puroresu Video Special Vol. 32 Open! Toryumon",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/toryumon-1997.12.07-1998.12.12-shukan-puroresu-video-special-vol.-32-open-toryumon/Toryumon%20-%201997.12.07-1998.12.12%20-%20Shukan%20Puroresu%20Video%20Special%20Vol.%2032%20Open%21%20Toryumon.mp4",
+          "duration": 7206,
+          "source": "Internet Archive",
+          "source_channel": "Toryumon - 1997/12/07-1998/12/12 Shukan Puroresu Video Special Vol. 32 Open! Toryumon VHS"
         }
       ]
     }

@@ -248,6 +248,46 @@
           "duration": 783,
           "source": "YouTube",
           "source_channel": "Lucha Libre AAA"
+        },
+        {
+          "title": "Classic wrestling matches vol 1",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/classic-wrestling-matches-vol-1_202611/Classic%20wrestling%20matches%20vol%201.mp4",
+          "duration": 2450,
+          "source": "Internet Archive",
+          "source_channel": "Classic Wrestling Matches Vol 1"
+        },
+        {
+          "title": "Classic wrestling matches vol 1",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/classic-wrestling-matches-vol-1/Classic%20wrestling%20matches%20vol%201.mp4",
+          "duration": 2450,
+          "source": "Internet Archive",
+          "source_channel": "Classic Wrestling Matches Vol 1"
+        },
+        {
+          "title": "Classic Wrestling From Florida (Featuring Dusty Rhodes) (Championship Wrestling From Florida)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/classic-wrestling-from-florida-featuring-dusty-rhodes-championship-wrestling-from-florida/Classic%20Wrestling%20From%20Florida%20%28Featuring%20Dusty%20Rhodes%29%20%28Championship%20Wrestling%20From%20Florida%29.mp4",
+          "duration": 9330,
+          "source": "Internet Archive",
+          "source_channel": "Classic Wrestling From Florida ( Featuring Dusty Rhodes) ( Championship Wrestling From Flo"
+        },
+        {
+          "title": "Classic Wrestling From Florida (Featuring Dusty Rhodes) (Championship Wrestling From Florida) (CWF)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/classic-wrestling-from-florida-featuring-dusty-rhodes-championship-wrestling-from-florida-cwf/Classic%20Wrestling%20From%20Florida%20%28Featuring%20Dusty%20Rhodes%29%20%28Championship%20Wrestling%20From%20Florida%29%20%28CWF%29.mp4",
+          "duration": 1349,
+          "source": "Internet Archive",
+          "source_channel": "Classic Wrestling From Florida ( Featuring Dusty Rhodes) ( Championship Wrestling From Flo"
+        },
+        {
+          "title": "Classic Wrestling From Florida (Featuring Ric Flair) (Championship Wrestling From Florida)",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/classic-wrestling-from-florida-featuring-ric-flair-championship-wrestling-from-florida/Classic%20Wrestling%20From%20Florida%20%28Featuring%20Ric%20Flair%29%20%28Championship%20Wrestling%20From%20Florida%29.mp4",
+          "duration": 1349,
+          "source": "Internet Archive",
+          "source_channel": "Classic Wrestling From Florida ( Featuring Ric Flair) ( Championship Wrestling From Florid"
         }
       ]
     }

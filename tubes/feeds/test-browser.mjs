@@ -21,13 +21,13 @@ try {
    if(await page.locator('body.youtube-mode').count()===0)await page.locator('#menu-reveal').click();
    const toolbarSeparated=await page.evaluate(()=>{
      const body=document.body, was=body.classList.contains('youtube-mode');
-     body.classList.add('youtube-mode','overlay-idle');
+     body.classList.add('youtube-mode');body.classList.remove('overlay-idle');
      const header=document.querySelector('header'), shell=document.querySelector('#youtube-shell');
      const hidden=shell.hidden;shell.hidden=false;
-     const ok=getComputedStyle(header).visibility==='visible'&&header.getBoundingClientRect().bottom<=shell.getBoundingClientRect().top;
+     const ok=getComputedStyle(header).visibility==='visible'&&Math.abs(shell.getBoundingClientRect().top)<2&&shell.getBoundingClientRect().height>=innerHeight-2;
      shell.hidden=hidden;if(!was)body.classList.remove('youtube-mode');body.classList.remove('overlay-idle');return ok;
    });
-   if(!toolbarSeparated)throw Error('YouTube toolbar overlaps video or is hidden');
+   if(!toolbarSeparated)throw Error('YouTube full-size overlay layout failed');
    const menuRestored=await page.locator('#guide-toggle').isVisible();
    if(!menuRestored)throw Error('Persistent menu failed to restore controls');
    const state=await page.evaluate(()=>({title:document.querySelector('#program-name')?.textContent,status:document.querySelector('#status-text')?.textContent,source:document.querySelector('#channel-name')?.textContent,videoTime:document.querySelector('video')?.currentTime}));

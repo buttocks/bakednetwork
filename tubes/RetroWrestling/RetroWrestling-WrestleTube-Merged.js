@@ -1,4 +1,4 @@
-/* RetroWrestling + WrestleTube v1.3.4
+/* RetroWrestling + WrestleTube v1.3.5
  * Unified external JS, stable playlist tools and classic WrestleTube features.
  * Playlist and arena UI initialize before legacy modules.
  */
@@ -8,7 +8,7 @@ if(!/\/tv\/RetroWrestling\/?$/i.test(location.pathname))return;
 function boot(){
   if(window.RetroWrestlingMergedV13 || !document.body)return;
   window.RetroWrestlingMergedV13=true;
-  document.documentElement.dataset.rwMergedVersion='1.3.4';
+  document.documentElement.dataset.rwMergedVersion='1.3.5';
 
   // The channel might still have the old WrestleTube internal JS enabled.
   // Rewrite only its stale welcome notice, leaving real server status intact.
@@ -18,6 +18,25 @@ function boot(){
       if (/welcome to wrestletube/i.test(node.textContent || '')) node.textContent = rwWelcome;
     });
   }
+  function alignChat(){
+    const users=document.querySelector('#userlist'),messages=document.querySelector('#messagebuffer');
+    if(!users||!messages||!users.getClientRects().length||!messages.getClientRects().length)return;
+    const u=users.getBoundingClientRect(),m=messages.getBoundingClientRect();
+    if(u.width<1||m.height<1)return;
+    const height=Math.round(m.bottom-u.top);
+    if(height>40&&Math.abs(u.height-height)>1){
+      users.style.setProperty('box-sizing','border-box','important');
+      users.style.setProperty('height',height+'px','important');
+    }
+  }
+  alignChat();
+  window.addEventListener('resize',alignChat);
+  if(typeof ResizeObserver==='function'){
+    const observer=new ResizeObserver(alignChat);
+    const messages=document.querySelector('#messagebuffer');
+    if(messages)observer.observe(messages);
+  }
+  setInterval(alignChat,1500);
   correctOldWelcome();
   setInterval(correctOldWelcome, 3000);
   try{
@@ -199,7 +218,7 @@ $('#messagebuffer').on('click', '.username', function(e) {
 });
     }catch(e){console.error('[RetroWrestling] Legacy enhancement error:',e);}
   },200);
-  console.info('[RetroWrestling] v1.3.4 loaded; playlist toolbar and arena initializing.');
+  console.info('[RetroWrestling] v1.3.5 loaded; playlist toolbar and arena initializing.');
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
 else boot();

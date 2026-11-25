@@ -150,6 +150,16 @@
       "statusKey": "wrestling4",
       "banner": "WRESTLING 4",
       "addOnly": true
+    },
+    {
+      "tube": "puro",
+      "id": "puro-baked-tv",
+      "title": "BAKED TV — PURORESU",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Puro/feed.html?channel=puro&embed=standard",
+      "statusFile": "tubes/Puro/feed-status.json",
+      "statusKey": "puro",
+      "banner": "PURORESU",
+      "addOnly": true
     }
   ]
 }

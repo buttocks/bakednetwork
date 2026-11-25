@@ -41,6 +41,28 @@ jobs:
           }
           if(!ready)throw Error('Published catalog not ready; no playback claim');
           JS
+      - name: Diagnose public archive source availability
+        run: |
+          node --input-type=module <<'JS'
+          const res=await fetch('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/programs.json',{cache:'no-store'});
+          const data=await res.json();
+          const items=data.channels['nwa-tna-early'].programs.filter(p=>p.source==='Internet Archive');
+          const groups=new Map();
+          for(const p of items){
+            const id=new URL(p.url).pathname.split('/')[2];
+            if(!groups.has(id))groups.set(id,[]);
+            groups.get(id).push(p);
+          }
+          for(const [id,programs] of groups){
+            for(const p of [programs[0],programs.at(-1)].filter((v,i,a)=>a.indexOf(v)===i)){
+              try{
+                const response=await fetch(p.url,{headers:{Range:'bytes=0-1023'},redirect:'follow',signal:AbortSignal.timeout(15000)});
+                console.log(JSON.stringify({archive:id,title:p.title,status:response.status,type:response.headers.get('content-type'),range:response.headers.get('content-range')}));
+                await response.body?.cancel();
+              }catch(e){console.log(JSON.stringify({archive:id,title:p.title,error:e.message}));}
+            }
+          }
+          JS
       - run: npm install --no-save --ignore-scripts playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - run: node tubes/feeds/test-browser.mjs

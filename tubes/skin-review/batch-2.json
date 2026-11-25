@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "skin_review_RDH",
+    "channel": "RDH",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_ScaryTube",
+    "channel": "ScaryTube",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_WID",
+    "channel": "WID",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_WCW",
+    "channel": "WCW",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_joshi",
+    "channel": "joshi",
+    "action": "audit_skin"
+  }
+]

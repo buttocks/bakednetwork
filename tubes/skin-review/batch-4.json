@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "skin_review_shoot",
+    "channel": "shoot",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_wrestling3",
+    "channel": "wrestling3",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_Wrestling4",
+    "channel": "Wrestling4",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_boxing",
+    "channel": "boxing",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_DGalt",
+    "channel": "DGalt",
+    "action": "audit_skin"
+  }
+]

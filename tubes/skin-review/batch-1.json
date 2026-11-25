@@ -1,0 +1,32 @@
+[
+  {
+    "schema": 1,
+    "request_id": "skin_review_luchatube",
+    "channel": "luchatube",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_NJPW",
+    "channel": "NJPW",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_Wrestling",
+    "channel": "Wrestling",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_RetroWrestling",
+    "channel": "RetroWrestling",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_WWF-WWE",
+    "channel": "WWF-WWE",
+    "action": "audit_skin"
+  }
+]

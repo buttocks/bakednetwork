@@ -1,0 +1,44 @@
+[
+  {
+    "schema": 1,
+    "request_id": "skin_review_DG",
+    "channel": "DG",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_wrestling5",
+    "channel": "wrestling5",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_NJPWALT",
+    "channel": "NJPWALT",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_rizin",
+    "channel": "rizin",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "skin_review_sumo",
+    "channel": "sumo",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "nwatna_backup",
+    "channel": "NWA-TNA",
+    "action": "backup_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "nwatna_skin",
+    "channel": "NWA-TNA",
+    "action": "audit_skin"
+  }
+]

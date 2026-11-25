@@ -1,0 +1,98 @@
+name: Network skin health review
+
+on:
+  push:
+    branches: [main]
+    paths: ['tubes/skin-review/*.json']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+
+jobs:
+  update-iframe:
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        batch: [batch-1, batch-2, batch-3, batch-4, batch-5]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+      BAKED_BRIDGE_REQUEST: tubes/skin-review/${{ matrix.batch }}.json
+    steps:
+      - name: Check out reviewed commands
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate bridge code and command
+        run: |
+          node --check tubes/bridge/bridge.mjs
+          node --check tubes/bridge/skin-backup.mjs
+          node --check tubes/bridge/skin-apply.mjs
+          node --check tubes/NJPW/refresh.mjs
+          node --check tubes/bridge/motd-cleanup.mjs
+          node --check tubes/bridge/emote-cleanup.mjs
+          node --check tubes/bridge/playlist-audit.mjs
+          node --check tubes/bridge/legacy-options.mjs
+          node --input-type=module -e "import {isImgurRemovedPlaceholder as f} from './tubes/bridge/emote-cleanup.mjs'; if (!f('https://i.imgur.com/removed.png') || !f('https://i.imgur.com/removed.png?token=1') || f('https://i.imgur.com/valid.png') || f('https://other.example/removed.png')) process.exit(1);"
+          node tubes/bridge/bridge.mjs --self-test
+          test -f tubes/skin-review/${{ matrix.batch }}.json || { echo 'No bridge request: contact maintainer to create it.'; exit 1; }
+
+      - name: Check Baked.live account secret
+        run: |
+          if [ -z "$BAKED_LIVE_PASSWORD" ]; then
+            echo 'Configure repository secret BAKED_LIVE_PASSWORD first. See tubes/bridge/README.md.'
+            exit 1
+          fi
+
+      - name: Install pinned browser automation
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+
+      - name: Back up and audit authorized channels
+        run: node tubes/bridge/bridge.mjs
+
+      - name: Attach action result (without credentials)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skin-review-${{ matrix.batch }}
+          path: |
+            tubes/bridge/result.json
+            tubes/bridge/skin-css-backup.css
+            tubes/bridge/skin-preview.png
+            tubes/bridge/motd-before-cleanup.html
+            tubes/bridge/motd-after-cleanup.html
+            tubes/bridge/njpw-before-motd.html
+            tubes/bridge/njpw-after-motd.html
+            tubes/bridge/njpw-before-css.css
+            tubes/bridge/njpw-after-css.css
+            tubes/bridge/njpw-compact-skin-preview.png
+            tubes/bridge/skin-before-deploy.css
+            tubes/bridge/skin-after-deploy.css
+            tubes/bridge/luchatube-arena-poster-preview.png
+            tubes/bridge/legacy-emote-cleanup.json
+            tubes/bridge/emotes-before-legacy-cleanup.json
+            tubes/bridge/backup/
+            tubes/bridge/emote-url-audit.json
+            tubes/bridge/playlist-media-audit.json
+            tubes/bridge/playlist-before-cleanup.json
+            tubes/bridge/emote-url-cleanup.json
+            tubes/bridge/emotes-before-cleanup.json
+          if-no-files-found: ignore
+          retention-days: 30

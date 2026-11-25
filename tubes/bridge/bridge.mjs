@@ -250,7 +250,10 @@ async function run(request){
       });
       // Exact CSS backup stays in a short-lived workflow artifact, not Git.
       await fs.writeFile('tubes/bridge/skin-css-backup.css',skin.css,'utf8');
-      await page.screenshot({path:'tubes/bridge/skin-preview.png',fullPage:false,
+      const reviewDir='tubes/bridge/backup/'+request.channel+'/skin-review';
+      await fs.mkdir(reviewDir,{recursive:true});
+      await fs.writeFile(reviewDir+'/review.json',JSON.stringify(skin,null,2)+'\n');
+      await page.screenshot({path:reviewDir+'/preview.png',fullPage:false,
         animations:'disabled',timeout:20000});
       delete skin.css;
       return {request_id:request.request_id,channel:request.channel,action:request.action,
@@ -343,7 +346,7 @@ else{
     if(Array.isArray(raw)){
       if(!raw.length||raw.length>10)throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
-      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes'].includes(r.action)))throw Error('Unsupported batch operation');
+      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes'].includes(r.action)))throw Error('Unsupported batch operation');
       const results=[];
       for(const request of requests){
         try{const result=await run(request);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}

@@ -33,7 +33,7 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
-  if(raw.action==='deploy_nwatna'){
+  if(['deploy_nwatna','install_nwatna_tools'].includes(raw.action)){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
@@ -183,6 +183,10 @@ async function run(request){
     if(request.action==='clean_motd_lucha'){
       const {cleanLuchaMotdLive}=await import('./motd-cleanup.mjs');
       return await cleanLuchaMotdLive({page,request,initial});
+    }
+    if(request.action==='install_nwatna_tools'){
+      const {installTools}=await import('../NWA-TNA/install-tools.mjs');
+      return await installTools({page,request,initial});
     }
     if(request.action==='deploy_nwatna'){
       const {deployNwatna}=await import('../NWA-TNA/deploy.mjs');

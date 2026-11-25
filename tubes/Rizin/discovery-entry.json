@@ -1,0 +1,18 @@
+{
+  "directory": "Rizin",
+  "key": "rizin",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|試合映像|フルファイト|無料公開)",
+  "youtube_search_queries": [
+    "full fight",
+    "試合映像"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
+      "name": "RIZIN FIGHTING FEDERATION"
+    }
+  ]
+}

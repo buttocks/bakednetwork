@@ -1,0 +1,22 @@
+{
+  "directory": "Sumo",
+  "key": "sumo",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(sumo|相撲|大相撲|本場所|取組|幕内)",
+  "youtube_search_queries": [
+    "grand sumo highlights",
+    "大相撲"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UC6ZZhovRZpUA4VafgBdECZQ",
+      "name": "日本相撲協会公式チャンネル"
+    },
+    {
+      "id": "UCSPEjw8F2nQDtmUKPFNF7_A",
+      "name": "NHK WORLD-JAPAN"
+    }
+  ]
+}

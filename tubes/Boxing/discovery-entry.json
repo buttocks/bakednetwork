@@ -1,0 +1,26 @@
+{
+  "directory": "Boxing",
+  "key": "boxing",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(full\\s*(fight|match|event)|free\\s*fight|classic\\s*fight)",
+  "youtube_search_queries": [
+    "full fight",
+    "classic fight"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UCbzRzJNHx7ZLlJML9BjZQVQ",
+      "name": "Top Rank Boxing"
+    },
+    {
+      "id": "UCWXYAGB9SadlL6p5Bb66wWw",
+      "name": "Premier Boxing Champions"
+    },
+    {
+      "id": "UC7LReVje9aPB4B6XAsXX8WQ",
+      "name": "Matchroom Boxing"
+    }
+  ]
+}

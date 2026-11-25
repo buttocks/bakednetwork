@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "seed": "rizin-20261125",
+  "channels": {
+    "rizin": {
+      "name": "BAKED TV · RIZIN",
+      "description": "Official combat sports programming",
+      "programs": [
+        {
+          "title": "Full Fight | 鈴木博昭 vs. 宮川日向 / Hiroaki Suzuki vs. Hyuga Miyagawa",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=FrBBUSDstgc",
+          "youtube_id": "FrBBUSDstgc",
+          "duration": 874,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 水野新太 vs. リー・カイウェン/ Arata Mizuno vs. Kaiwen Li",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=B3jmfsHoTXA",
+          "youtube_id": "B3jmfsHoTXA",
+          "duration": 641,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 雑賀“ヤン坊”達也vs “ブラックパンサー”ベイノア / Tatsuya “Yanbo” Saika vs. “BlackPanther”Beynoah",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=VQjfyeXrkBQ",
+          "youtube_id": "VQjfyeXrkBQ",
+          "duration": 827,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 芦澤竜誠 vs. 井上聖矢 / Ryusei Ashizawa vs. Seiya Inoue -  RIZIN LANDMARK 16 in NAGASAKI",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=Fmhh-ShiAC0",
+          "youtube_id": "Fmhh-ShiAC0",
+          "duration": 585,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | ケイト・ロータス vs. NOEL / Kate Lotus vs. NOEL - RIZIN LANDMARK 16 in NAGASAKI",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=tRUA1fWrQzs",
+          "youtube_id": "tRUA1fWrQzs",
+          "duration": 1405,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | ライアン・カファロ vs. 安井飛馬 / Ryan Cafaro vs. Hyuma Yasui -  RIZIN LANDMARK 16 in NAGASAKI",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=K_kSxOajbSg",
+          "youtube_id": "K_kSxOajbSg",
+          "duration": 1478,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | ビクター・コレスニック vs.松嶋こよみ / Viktor Kolesnik vs. Koyomi Matsushima - LANDMARK 16 in NAGASAKI",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=_X3aP4tRu1A",
+          "youtube_id": "_X3aP4tRu1A",
+          "duration": 797,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 堀江圭功 vs. 宇佐美正パトリック / Yoshinori Horie vs. Sho Patrick Usami - LANDMARK 16 in NAGASAKI",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=Qql3041SmF0",
+          "youtube_id": "Qql3041SmF0",
+          "duration": 1074,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | Kanna Asakura vs. Saori Oshima - RIZIN.31",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=UM689osiBoI",
+          "youtube_id": "UM689osiBoI",
+          "duration": 1415,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | トニー・ララミー vs. 山内渉 / Tony Laramie vs. Wataru Yamauchi - 2025.11.3 RIZIN LANDMARK 12",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=qvjidDaUiHU",
+          "youtube_id": "qvjidDaUiHU",
+          "duration": 1298,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | マニー・パッキャオ vs.  安保瑠輝也 / Manny Pacquiao vs. Rukiya Anpo - 超RIZIN.3",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=3q1A9MciIs0",
+          "youtube_id": "3q1A9MciIs0",
+          "duration": 1388,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 那須川天心 vs. フリッツ・ビアグタン / Tenshin Nasukawa vs. Fritz Biagtan - RIZIN.15",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=GcIcX4GI0Uc",
+          "youtube_id": "GcIcX4GI0Uc",
+          "duration": 850,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 平本蓮 vs. YA-MAN / Ren Hiramoto vs. YA-MAN - RIZIN.45",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=CoXiPlUEBGU",
+          "youtube_id": "CoXiPlUEBGU",
+          "duration": 1465,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 三浦孝太 vs. YUSHI / Kota Miura vs. YUSHI - RIZIN.33",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=KN3Hgzi7ZSA",
+          "youtube_id": "KN3Hgzi7ZSA",
+          "duration": 539,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 那須川天心 vs. 武尊 / Tenshin Nasukawa vs. Takeru - THE MATCH 2022",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=H9h-3KvBRww",
+          "youtube_id": "H9h-3KvBRww",
+          "duration": 1850,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 篠塚辰樹 vs. 冨澤大智 / Tatsuki Shinotsuka vs. Daichi Tomizawa - 2025.12.31 [RIZIN師走の超強者祭り]",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=Y0MMqBNoeBE",
+          "youtube_id": "Y0MMqBNoeBE",
+          "duration": 788,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 朝倉未来 vs  青木真也 / Mikuru Asakura vs. Shinya Aoki - 超RIZIN.5 浪速の超復活祭り",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=uz0DScK1lMg",
+          "youtube_id": "uz0DScK1lMg",
+          "duration": 531,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 後藤丈治 vs. ホセ・トーレス / Joji Goto vs. Jose Torres - 2025.12.31[RIZIN師走の超強者祭り]",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=Y2dpapbYN90",
+          "youtube_id": "Y2dpapbYN90",
+          "duration": 1309,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | ブアカーオ・バンチャメーク vs. 木村“フィリップ”ミノル / Buakaw Banchamek vs. Minoru“Philip”Kimura",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=q1qTLIAUpX0",
+          "youtube_id": "q1qTLIAUpX0",
+          "duration": 658,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | カルシャガ・ダウトベック vs  平本蓮 / Karshyga Dautbek vs  Ren Hiramoto - 超RIZIN.5 浪速の超復活祭り",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=R4R_i6qYjFk",
+          "youtube_id": "R4R_i6qYjFk",
+          "duration": 1603,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | ラジャブアリ・シェイドゥラエフ vs  AJ・マッキー / Razhabali Shaidulloev vs. AJ McKee - 超RIZIN.5 浪速の超復活祭り",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=hR6WVIFazho",
+          "youtube_id": "hR6WVIFazho",
+          "duration": 1798,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 秋元強真 vs. パッチー・ミックス / Kyoma Akimoto vs. Patchy Mix - 2026.3.7 [RIZIN.52]",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=wgHvErGwjzM",
+          "youtube_id": "wgHvErGwjzM",
+          "duration": 980,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | キム・スーチョル vs. フアン・アーチュレッタ / Soo Chul Kim vs. Juan Archuleta - RIZIN.40",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=xOgdKzaH9F4",
+          "youtube_id": "xOgdKzaH9F4",
+          "duration": 1567,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight |  ジョニー・ケース vs. 武田光司 / Johnny Case vs. Koji Takeda - 2022/7/31 [RIZIN.37]",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=pnb3BvJSur4",
+          "youtube_id": "pnb3BvJSur4",
+          "duration": 1598,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | フアン・アーチュレッタ vs  朝倉海 / Juan Archuleta vs. Kai Asakura - RIZIN.45",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=r_p85QBkPnc",
+          "youtube_id": "r_p85QBkPnc",
+          "duration": 1253,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | マーティン・ブランコ vs. 那須川天心 / Martin Blanco vs. Tenshin Nasukawa - RIZIN.16",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=slWpz88OMok",
+          "youtube_id": "slWpz88OMok",
+          "duration": 722,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 伊藤裕樹 vs. アリベク・ガジャマトフ / Yuki Ito vs. Alibek Gadzhammatov - RIZIN.54 - 2026.8.11",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=vuQDu3jhieE",
+          "youtube_id": "vuQDu3jhieE",
+          "duration": 1079,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        },
+        {
+          "title": "Full Fight | 冨澤大智 vs. 三浦孝太 / Daichi Tomizawa vs.Kota Miura - 雷神番外地",
+          "episode": "RIZIN FIGHTING FEDERATION · official programming",
+          "url": "https://www.youtube.com/watch?v=M3JnvfojSIY",
+          "youtube_id": "M3JnvfojSIY",
+          "duration": 445,
+          "source": "YouTube",
+          "source_channel": "RIZIN FIGHTING FEDERATION"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,552 @@
+{
+  "schema": 1,
+  "seed": "boxing-20261125",
+  "channels": {
+    "boxing": {
+      "name": "BAKED TV · BOXING",
+      "description": "Official combat sports programming",
+      "programs": [
+        {
+          "title": "All Angles of the Classic Fight between Devin Haney vs Vasiliy Lomachenko | Haney Returns Dec. 19",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=R4TK1il739Q",
+          "youtube_id": "R4TK1il739Q",
+          "duration": 692,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Pacquiao's \"HIM\" Moment | BEATDOWN OF MORALES | FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=p3uJ_8-V8t4",
+          "youtube_id": "p3uJ_8-V8t4",
+          "duration": 713,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Peak Pacquiao Was Terrifying (Pacquiao vs Cotto Full Fight)",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=4mPyYVRyB3M",
+          "youtube_id": "4mPyYVRyB3M",
+          "duration": 2631,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "ALL-TIME CLASSIC! | Aaron Pryor vs Alexis Arguello | FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=1rY9GN5tt-w",
+          "youtube_id": "1rY9GN5tt-w",
+          "duration": 2678,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Lopez Makes Marquez QUIT ON THE STOOL  | FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=ILd836qxDv4",
+          "youtube_id": "ILd836qxDv4",
+          "duration": 1793,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Mikey Garcia Drops Salido 4 Times in 1 fight | Mikey Garcia Orlando Salido | FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=a_q9UnViYX8",
+          "youtube_id": "a_q9UnViYX8",
+          "duration": 1707,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Remember When Lopez Had MSG Jumpin After KO Victory | FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=PR_SxTNjExo",
+          "youtube_id": "PR_SxTNjExo",
+          "duration": 1408,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "2023 UPSET OF THE YEAR | Rafael Espinoza Stuns Robeisy Ramirez To Become Champion | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=MqkCFZuB_yk",
+          "youtube_id": "MqkCFZuB_yk",
+          "duration": 2581,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Mbilli Proves He is That Dude | Christian Mbilli vs Rohan Murdock | FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=ia2S2WNZ21c",
+          "youtube_id": "ia2S2WNZ21c",
+          "duration": 1465,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Foster Shines in Top Rank Debut | O'Shaquie Foster vs Abraham Nova | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=e52hStyrEQY",
+          "youtube_id": "e52hStyrEQY",
+          "duration": 2518,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "One Great Classic Slugfest Fights | Ruslan Provodnikov vs Mike Alvarado | ON THIS DAY FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=GEY3ZLG_ty8",
+          "youtube_id": "GEY3ZLG_ty8",
+          "duration": 2360,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "One of Emanuel Navarrete's Best Performances | Emanuel Navarrete vs Pitufo Diaz | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=DerS1_bkFR4",
+          "youtube_id": "DerS1_bkFR4",
+          "duration": 2468,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Watch Navarrete & Gonzalez Throw 1,000 Power Punches in This War | ON THIS DAY FREE FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=zMdnAacxvi8",
+          "youtube_id": "zMdnAacxvi8",
+          "duration": 2851,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Terence Crawford vs Alejandro Sanabria | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=RXTMZNEu4hM",
+          "youtube_id": "RXTMZNEu4hM",
+          "duration": 1076,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Teofimo Lopez vs Vasiliy Lomachenko | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=Xi7sun7jdbY",
+          "youtube_id": "Xi7sun7jdbY",
+          "duration": 3034,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Teofimo Lopez vs Jamaine Ortiz | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=Wxa6lNP8Usw",
+          "youtube_id": "Wxa6lNP8Usw",
+          "duration": 2358,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Thomas Hearns vs Randy Shields | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=vN6TICQbuWE",
+          "youtube_id": "vN6TICQbuWE",
+          "duration": 2341,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Teofimo Lopez vs Sandor Martin | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=s_u3lKCASfk",
+          "youtube_id": "s_u3lKCASfk",
+          "duration": 2104,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Robson Conceicao vs Emanuel Navarrete | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=-QR4nueWzN0",
+          "youtube_id": "-QR4nueWzN0",
+          "duration": 2555,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Nonito Donaire vs Simpiwe Vetyeka | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=TVYbKqRHFyU",
+          "youtube_id": "TVYbKqRHFyU",
+          "duration": 1381,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Erik Morales vs In Jin Chi | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=0PP24MQXAgc",
+          "youtube_id": "0PP24MQXAgc",
+          "duration": 2902,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Devin Haney vs Vasiliy Lomachenko | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=SPHc2i3E4eY",
+          "youtube_id": "SPHc2i3E4eY",
+          "duration": 2533,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "MUHAMMAD ALI vs RICHARD DUNN | FULL FIGHT | MAY 24, 1976",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=WcrnAUTEHlc",
+          "youtube_id": "WcrnAUTEHlc",
+          "duration": 1284,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Terence Crawford Gives Dierry Jean TKO He Was Looking For | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=uvea29C77sw",
+          "youtube_id": "uvea29C77sw",
+          "duration": 2273,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Terence Crawford vs Felix Diaz | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=5YnlINHoxNw",
+          "youtube_id": "5YnlINHoxNw",
+          "duration": 1945,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Abdullah Mason vs Angel Barrera | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=5Uk1qKB4RY4",
+          "youtube_id": "5Uk1qKB4RY4",
+          "duration": 745,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Oscar Valdez vs Shakur Stevenson | Full Fight",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=lDIJWozKywQ",
+          "youtube_id": "lDIJWozKywQ",
+          "duration": 2617,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Manny Pacquiao vs Ricky Hatton | ON THIS DAY FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=pqfRkegXcMc",
+          "youtube_id": "pqfRkegXcMc",
+          "duration": 565,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Vasiliy Lomachenko's Incredible Comeback vs Jorge Linares | ON THIS DAY FULL FIGHT | MAY 12, 2018",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=1PVKL1bY6nw",
+          "youtube_id": "1PVKL1bY6nw",
+          "duration": 2145,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Manny Pacquiao vs. Miguel Cotto | Full Fight",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=s6bCmZmy9aQ",
+          "youtube_id": "s6bCmZmy9aQ",
+          "duration": 3244,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Roy Jones Jr vs Thomas Tate | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=KCYlQAegMlU",
+          "youtube_id": "KCYlQAegMlU",
+          "duration": 687,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Bruce Carrington vs Yeuri Andujar | Full Fight",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=PQUvc5O-7Wo",
+          "youtube_id": "PQUvc5O-7Wo",
+          "duration": 1165,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Abdullah Mason vs Jeremia Nakathila | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=VZ73C6RwPnI",
+          "youtube_id": "VZ73C6RwPnI",
+          "duration": 1104,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "FULL FIGHT: Vasyl Lomachenko vs Romulo Koasicha | Knockout Victory",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=zzNlpL6z3SM",
+          "youtube_id": "zzNlpL6z3SM",
+          "duration": 2333,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Devin Haney vs Vasiliy Lomachenko | FULL FIGHT | MAY 20, 2023",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=WrXdOrHpLvQ",
+          "youtube_id": "WrXdOrHpLvQ",
+          "duration": 3067,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Terence Crawford vs Shawn Porter | ON THIS DAY FREE FIGHT | CRAWFORD RETAINS",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=zKZSjHTt9lc",
+          "youtube_id": "zKZSjHTt9lc",
+          "duration": 2219,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "JAMAINE ORTIZ vs JOSEPH ADORNO | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=hXBmNfzVJtk",
+          "youtube_id": "hXBmNfzVJtk",
+          "duration": 1904,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Mike McCallum vs James Toney 1 | FULL FIGHT | DECEMBER 13, 1991",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=yVo4qoTPIJE",
+          "youtube_id": "yVo4qoTPIJE",
+          "duration": 2561,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "ROY JONES JR. vs THULANI MALINGA  | FULL FIGHT | AUGUST 14, 1993",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=olKLvnNmyjw",
+          "youtube_id": "olKLvnNmyjw",
+          "duration": 1602,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Terence Crawford vs Yuriorkis Gamboa | FREE FIGHT ON THIS DAY",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=RMsgZuztnqY",
+          "youtube_id": "RMsgZuztnqY",
+          "duration": 2090,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Roberto Duran's Legendary Night Against Iran Barkley | FULL FIGHT",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=5c5MDIP9CAs",
+          "youtube_id": "5c5MDIP9CAs",
+          "duration": 2801,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Juan Manuel Marquez vs Mike Alvarado | FREE FIGHT ON THIS DAY",
+          "episode": "Top Rank Boxing · official programming",
+          "url": "https://www.youtube.com/watch?v=mGtACQfxbgw",
+          "youtube_id": "mGtACQfxbgw",
+          "duration": 2516,
+          "source": "YouTube",
+          "source_channel": "Top Rank Boxing"
+        },
+        {
+          "title": "Davis vs Martin FULL FIGHT: June 15, 2024 | PBC on Prime Video",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=stJH6XgImoU",
+          "youtube_id": "stJH6XgImoU",
+          "duration": 2608,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Benavidez vs Morrell FULL FIGHT: February 1, 2025 | PBC on Prime Video PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=hc8rh_Vv8U4",
+          "youtube_id": "hc8rh_Vv8U4",
+          "duration": 3698,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Davis vs Cruz FULL FIGHT: December 5, 2021 | PBC on Showtime PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=DB2MDhIu2ro",
+          "youtube_id": "DB2MDhIu2ro",
+          "duration": 3726,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Davis vs Romero FULL FIGHT: May 28, 2022 | PBC on Showtime PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=v5B0woS0R7M",
+          "youtube_id": "v5B0woS0R7M",
+          "duration": 2358,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Pacquiao vs Broner FULL FIGHT: January 19, 2019 - PBC on Showtime",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=gM9zTdzI98k",
+          "youtube_id": "gM9zTdzI98k",
+          "duration": 3325,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "PBC FULL FIGHT: Fundora vs Thurman | March 28, 2026",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=HPFmFfXPvgE",
+          "youtube_id": "HPFmFfXPvgE",
+          "duration": 1673,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Benavidez vs Medina FULL FIGHT: May 20, 2017 | PBC on FS1",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=Ee6GwJRAYe0",
+          "youtube_id": "Ee6GwJRAYe0",
+          "duration": 1932,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Spence vs Ugas FULL FIGHT: April 16, 2022 | PBC on Showtime PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=Uq0D54AptIk",
+          "youtube_id": "Uq0D54AptIk",
+          "duration": 2934,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Cruz vs Romero FULL FIGHT: March 30, 2024 | PBC on Prime Video PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=A-Ug__-5KK8",
+          "youtube_id": "A-Ug__-5KK8",
+          "duration": 2292,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Davis vs Gamboa FULL FIGHT: December 28, 2019 - PBC on Showtime",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=KZtVQo8lpqY",
+          "youtube_id": "KZtVQo8lpqY",
+          "duration": 3783,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Dirrell vs Benavidez FULL FIGHT: September 28, 2019 - PBC on FOX PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=_WLMz2Wj5yc",
+          "youtube_id": "_WLMz2Wj5yc",
+          "duration": 2710,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Ennis vs Chukhadzhian FULL FIGHT: January 7, 2023 | PBC on Showtime PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=-rkOp8ub2R8",
+          "youtube_id": "-rkOp8ub2R8",
+          "duration": 3175,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Gervonta Davis vs Hector Garcia FULL FIGHT: January 7, 2023 | PBC on Showtime PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=D4iSoNAhhEs",
+          "youtube_id": "D4iSoNAhhEs",
+          "duration": 2954,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Canelo Alvarez vs Caleb Plant FULL FIGHT: November 6, 2021 | Canelo vs Plant",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=6mXp-TEFMqQ",
+          "youtube_id": "6mXp-TEFMqQ",
+          "duration": 3810,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Figueroa vs Fulton 2 FULL FIGHT: February 1, 2025 | PBC on Prime Video PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=B94U2sXu0hQ",
+          "youtube_id": "B94U2sXu0hQ",
+          "duration": 3184,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Moton vs Zaldivar FULL FIGHT: February 1, 2025 | PBC on Prime Video",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=YNSgocBMxuA",
+          "youtube_id": "YNSgocBMxuA",
+          "duration": 895,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Magsayo vs Mata FULL FIGHT: July 19, 2025 | PBC on Prime Video",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=QGXhys0za50",
+          "youtube_id": "QGXhys0za50",
+          "duration": 2637,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        },
+        {
+          "title": "Isaac Cruz vs Giovanni Cabrera FULL FIGHT: July 29, 2023 | PBC on Showtime PPV",
+          "episode": "Premier Boxing Champions · official programming",
+          "url": "https://www.youtube.com/watch?v=zrD1sHDbEj8",
+          "youtube_id": "zrD1sHDbEj8",
+          "duration": 3441,
+          "source": "YouTube",
+          "source_channel": "Premier Boxing Champions"
+        }
+      ]
+    }
+  }
+}

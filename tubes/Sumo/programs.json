@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "seed": "sumo-20261125",
+  "channels": {
+    "sumo": {
+      "name": "BAKED TV · SUMO",
+      "description": "Official combat sports programming",
+      "programs": [
+        {
+          "title": "【九州場所全取組】若隆景(荒汐部屋)＆旭富士(伊勢ヶ濱部屋) ＜令和8年九州場所＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=2vx8NTuipRA",
+          "youtube_id": "2vx8NTuipRA",
+          "duration": 3054,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "【九州場所全取組】横綱 大の里(二所ノ関部屋)＆若元春(荒汐部屋) ＜令和8年九州場所＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=D77xSjCWzLw",
+          "youtube_id": "D77xSjCWzLw",
+          "duration": 2634,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "大相撲　幕下上位五番＜令和８年九州場所・千秋楽＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=Ey72TD5Lix0",
+          "youtube_id": "Ey72TD5Lix0",
+          "duration": 421,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "【全取組公開】琴勝峰 初優勝＆安青錦＜令和7年名古屋場所＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=lNncKV8PVII",
+          "youtube_id": "lNncKV8PVII",
+          "duration": 2523,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "【九月場所全取組】朝乃山(高砂部屋)＆藤ノ川(伊勢ノ海部屋) ＜令和8年九月場所＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=e2HLoQfZdUI",
+          "youtube_id": "e2HLoQfZdUI",
+          "duration": 2514,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "【九月場所全取組】横綱 大の里 ＆横綱 豊昇龍＜令和7年九月場所＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=UQKktNbG42w",
+          "youtube_id": "UQKktNbG42w",
+          "duration": 2632,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "【激闘の15日間  】安青錦・若隆景の全取組を完全収録！三賞受賞力士！名勝負連発！｜2025五月場所",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=YxSxYJDRS5M",
+          "youtube_id": "YxSxYJDRS5M",
+          "duration": 2466,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "大相撲百周年場所　SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=spSvgGenSOw",
+          "youtube_id": "spSvgGenSOw",
+          "duration": 2460,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "【九月場所全取組】横綱 大の里(二所ノ関部屋)＆大関 安青錦(安治川部屋) ＜令和8年九月場所＞SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=ede8_uGAXKk",
+          "youtube_id": "ede8_uGAXKk",
+          "duration": 2385,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        },
+        {
+          "title": "公演から観光まで全て見せます！大相撲ロンドン公演 総集編　SUMO",
+          "episode": "日本相撲協会公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=REK1RHc-twg",
+          "youtube_id": "REK1RHc-twg",
+          "duration": 1236,
+          "source": "YouTube",
+          "source_channel": "日本相撲協会公式チャンネル"
+        }
+      ]
+    }
+  }
+}

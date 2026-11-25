@@ -129,6 +129,24 @@
           "duration": 5329,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Lex Luger faces a young Undertaker | NWA U.S. Title Match: WCW Great American Bash 1990",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=emN-E7zYB8Q",
+          "youtube_id": "emN-E7zYB8Q",
+          "duration": 923,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Great American Bash 1992 | Sting vs. Vader; NWA Tag Team Title Tournament",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=PcPbApTmAOs",
+          "youtube_id": "PcPbApTmAOs",
+          "duration": 10191,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

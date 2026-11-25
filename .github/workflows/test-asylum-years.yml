@@ -66,51 +66,40 @@ jobs:
           }
           JS
       - run: npm install --no-save --ignore-scripts playwright@1.56.1
-      - run: npx playwright install --with-deps chromium
-      - name: Compare native video playback and browser codec support
+      - name: Check installed Chrome and media probe tools
+        run: |
+          google-chrome --version
+          ffprobe -version | head -n 1
+      - name: Inspect actual video and audio codecs in sampled archive files
         run: |
           node --input-type=module <<'JS'
-          import {chromium} from 'playwright';
+          import {spawnSync} from 'node:child_process';
           const catalog=await (await fetch('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/programs.json?probe='+Date.now())).json();
           const archive=catalog.channels['nwa-tna-early'].programs.filter(p=>p.source==='Internet Archive');
-          const samples=[archive[0],archive.find(p=>p.title.includes('PPV #27'))].filter(Boolean);
-          for(const engine of ['chromium','chrome']){
-            let browser;
-            try{
-              browser=await chromium.launch({...(engine==='chrome'?{channel:'chrome'}:{}),headless:true,args:['--autoplay-policy=no-user-gesture-required']});
-              const page=await browser.newPage();
-              await page.goto('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/feed.html?channel=nwa-tna-early&embed=standard');
-              await page.route('**/programs.json*',route=>route.abort());
-              const codec=await page.evaluate(()=>{const v=document.createElement('video');return {h264:v.canPlayType('video/mp4; codecs="avc1.64001f, mp4a.40.2"'),hevc:v.canPlayType('video/mp4; codecs="hvc1.1.6.L93.B0"'),vp9:v.canPlayType('video/webm; codecs="vp9, opus"')}});
-              console.log('MEDIA_CODEC '+JSON.stringify({engine,codec}));
-              for(const p of samples){
-                const response=[];
-                const failed=[];
-                const onResponse=r=>{if(r.request().resourceType()==='media')response.push({status:r.status(),type:r.headers()['content-type']})};
-                const onFailed=r=>{if(r.resourceType()==='media')failed.push(r.failure()?.errorText)};
-                page.on('response',onResponse);page.on('requestfailed',onFailed);
-                const result=await page.evaluate(async src=>{
-                  const v=document.createElement('video');v.muted=true;v.preload='auto';v.playsInline=true;document.body.append(v);
-                  const result=await new Promise(resolve=>{
-                    let done=false;const finish=event=>{if(done)return;done=true;clearTimeout(timer);resolve({event,error:v.error?{code:v.error.code,message:v.error.message}:null,readyState:v.readyState,networkState:v.networkState,duration:Number.isFinite(v.duration)?v.duration:null,width:v.videoWidth,height:v.videoHeight,currentTime:v.currentTime});};
-                    const timer=setTimeout(()=>finish('timeout'),18000);
-                    v.addEventListener('error',()=>finish('error'),{once:true});
-                    v.addEventListener('playing',()=>finish('playing'),{once:true});
-                    v.src=src;v.play().catch(e=>{if(v.error)finish(e.name);});
-                  });
-                  v.pause();v.removeAttribute('src');v.load();v.remove();return result;
-                },p.url);
-                console.log('MEDIA_PROBE '+JSON.stringify({engine,title:p.title,...result,response,failed}));
-                page.off('response',onResponse);page.off('requestfailed',onFailed);
-              }
-            }catch(e){console.log('MEDIA_PROBE_ENGINE '+JSON.stringify({engine,error:String(e.message).slice(0,400)}))}
-            finally{await browser?.close()}
+          const samples=[archive[0],archive.find(p=>p.title.includes('PPV #27')),archive.find(p=>p.title.includes('PPV #38'))].filter(Boolean);
+          for(const p of samples){
+            const result=spawnSync('ffprobe',['-v','error','-rw_timeout','10000000','-show_entries','stream=index,codec_type,codec_name,width,height:format=duration','-of','json',p.url],{encoding:'utf8',timeout:25000,maxBuffer:100000});
+            let streams=null;try{streams=JSON.parse(result.stdout)}catch{}
+            console.log('STREAM_PROBE '+JSON.stringify({title:p.title,streams,error:result.error?.message||result.stderr?.slice(0,300),exit:result.status}));
           }
           JS
-      - run: node tubes/feeds/test-browser.mjs
+      - name: Verify actual published feed in Chrome with retry
+        run: |
+          for attempt in 1 2 3; do
+            echo "Chrome full-feed verification attempt $attempt"
+            if node tubes/feeds/test-browser.mjs; then
+              cp feed-browser-results.json "asylum-attempt-$attempt.json"
+              exit 0
+            fi
+            if [ -f feed-browser-results.json ]; then cp feed-browser-results.json "asylum-attempt-$attempt.json"; fi
+            sleep 10
+          done
+          exit 1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: asylum-years-playback-result
-          path: feed-browser-results.json
+          path: |
+            feed-browser-results.json
+            asylum-attempt-*.json
           retention-days: 30

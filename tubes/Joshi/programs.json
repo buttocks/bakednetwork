@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "seed": "joshi-20261125",
+  "channels": {
+    "joshi": {
+      "name": "BAKED TV · JOSHI",
+      "description": "Official wrestling programming",
+      "programs": [
+        {
+          "title": "【📺第4試合までYouTube無料配信‼️】11・23『第16回 ゴッデス・オブ・スターダム ～タッグリーグ戦～ in KORIYAMA』福島・ビッグパレットふくしま",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=KtPog729T9Y",
+          "youtube_id": "KtPog729T9Y",
+          "duration": 3545,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】11・22『第16回 ゴッデス・オブ・スターダム ～タッグリーグ戦～ in FUKUSHIMA』福島トヨタ クラウンアリーナ メインアリーナ（福島市）",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=X3tc7HgpV0s",
+          "youtube_id": "X3tc7HgpV0s",
+          "duration": 2961,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】11・18『第16回 ゴッデス・オブ・スターダム ～タッグリーグ戦～ in KORAKUEN vol.2』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=Kkfqt7fq9JQ",
+          "youtube_id": "Kkfqt7fq9JQ",
+          "duration": 2689,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第4試合までYouTube無料配信‼️】11・11『第16回 ゴッデス・オブ・スターダム ～タッグリーグ戦～ in KORAKUEN vol.1』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=xl_CzltUMNw",
+          "youtube_id": "xl_CzltUMNw",
+          "duration": 2769,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】11・8『第16回 ゴッデス・オブ・スターダム ～タッグリーグ戦～ in TAKASAKI』群馬・Gメッセ群馬 メインホール（高崎市）",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=3GYvcnO0V6M",
+          "youtube_id": "3GYvcnO0V6M",
+          "duration": 2724,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】11・1『第16回 ゴッデス・オブ・スターダム ～タッグリーグ開幕戦～』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=csOrbbdRlc4",
+          "youtube_id": "csOrbbdRlc4",
+          "duration": 2634,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】10・29『STARDOM CRIMSON NIGHTMARE 2026』東京・EBARA WAVEアリーナおおた（大田区総合体育館）",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=tGUOlN88swA",
+          "youtube_id": "tGUOlN88swA",
+          "duration": 2495,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】10・27『STARDOM NIGHTER in KORAKUEN 2026 Oct.2』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=q9QtqUlea08",
+          "youtube_id": "q9QtqUlea08",
+          "duration": 3234,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】10・20『STARDOM NIGHTER in KORAKUEN 2026 Oct.1』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=_8jKaAJs910",
+          "youtube_id": "_8jKaAJs910",
+          "duration": 3033,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】10・18『STARDOM Path of Thunder 2026』栃木・ライトキューブ宇都宮",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=T-Oua_BxXwY",
+          "youtube_id": "T-Oua_BxXwY",
+          "duration": 3419,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】10・11『STARDOM in KORAKUEN 2026 Oct.』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=pvTXuFCWnfw",
+          "youtube_id": "pvTXuFCWnfw",
+          "duration": 4175,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】10・10『STARDOM in CHIBA 2026 Oct.』千葉・TKPガーデンシティ千葉 3Fシンフォニア",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=7Prw--g3kPk",
+          "youtube_id": "7Prw--g3kPk",
+          "duration": 2341,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】10・3『STARDOM in SAKAE 2026 Oct. ～Day2～』愛知・中日ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=BDr6XXzVwxQ",
+          "youtube_id": "BDr6XXzVwxQ",
+          "duration": 2236,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】10・2『STARDOM in SAKAE 2026 Oct. ～Day1～』愛知・中日ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=CADotoAJYlw",
+          "youtube_id": "CADotoAJYlw",
+          "duration": 1769,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】9・29『STARDOM NIGHTER in KORAKUEN 2026 Sep.』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=D_ZZNvXe50s",
+          "youtube_id": "D_ZZNvXe50s",
+          "duration": 2981,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】9・27『STARDOM SILVER WEEK TOUR 2026 in MAIBARA』滋賀県立文化産業交流館イベントホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=I0Z9EfZeOL4",
+          "youtube_id": "I0Z9EfZeOL4",
+          "duration": 2446,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【🔥緊急決定🔥📺全試合YouTube無料配信‼️】9・26『STARDOM SILVER WEEK TOUR 2026 in OSAKA』大阪・ATCホール Cホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=8uv5VK-mjfc",
+          "youtube_id": "8uv5VK-mjfc",
+          "duration": 9739,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】9・23『STARDOM SILVER WEEK TOUR 2026 in SHIMONOSEKI』山口・海峡メッセ下関 展示見本市会場",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=mXpeNGImG9M",
+          "youtube_id": "mXpeNGImG9M",
+          "duration": 1906,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】9・22『STARDOM SILVER WEEK TOUR 2026 in FUKUOKA』アクロス福岡 イベントホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=IJ0QWiQm16g",
+          "youtube_id": "IJ0QWiQm16g",
+          "duration": 1795,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第2試合までYouTube無料配信‼️】9・12『STARDOM TO THE WORLD 2026』神奈川・横浜武道館",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=u-2T7ciSCJ8",
+          "youtube_id": "u-2T7ciSCJ8",
+          "duration": 3513,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺第3試合までYouTube無料配信‼️】9・6『STARDOM in KORAKUEN 2026 Sep.』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=FQf-IWksHRk",
+          "youtube_id": "FQf-IWksHRk",
+          "duration": 4422,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【FULL MATCH】中野たむ vs 上谷沙弥 敗者スターダム退団スペシャルシングルマッチ3月3日後楽園ホール大会『STARDOM NIGHTER 2025 in KORAKUEN Mar.』",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=eziVVK8wtJc",
+          "youtube_id": "eziVVK8wtJc",
+          "duration": 2790,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【🔥全試合無料配信🔥】9・27『STARDOM in KORAKUEN 2025 Sep.』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=qdL6ru6ZMfA",
+          "youtube_id": "qdL6ru6ZMfA",
+          "duration": 12279,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【📺全試合無料配信‼️】8・18『Sammy presents STARDOM 5★STAR GP 2026 in KORAKUEN Aug.2』東京・後楽園ホール",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=Fb2uFKponzk",
+          "youtube_id": "Fb2uFKponzk",
+          "duration": 11583,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【第2試合まで 無料配信】8・12『5★STAR GP 2024 in UTSUNOMIYA ～Day part～』　※スターダムワールドで全試合LIVE配信！",
+          "episode": "STARDOM · official programming",
+          "url": "https://www.youtube.com/watch?v=pvmzXm1TdHU",
+          "youtube_id": "pvmzXm1TdHU",
+          "duration": 2178,
+          "source": "YouTube",
+          "source_channel": "STARDOM"
+        },
+        {
+          "title": "【全試合ダイジェスト】荒井と山下の前哨戦がいよいよ始まる❗️｜2026年6月13日横浜ラジアントホール【TJPW SPRING TOUR 2026～NEXT DOOR～in YOKOHAMA】",
+          "episode": "東京女子プロレスofficial - TJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=B-OgFh8S44M",
+          "youtube_id": "B-OgFh8S44M",
+          "duration": 1821,
+          "source": "YouTube",
+          "source_channel": "東京女子プロレスofficial - TJPW"
+        },
+        {
+          "title": "【第1試合まで無料で生配信‼️】3.29両国国技館【GRAND PRINCESS '26】特撮、声優、アイドル、漫画、アニメ。夢を全部乗せの巨大エンタメ空間！",
+          "episode": "東京女子プロレスofficial - TJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=Gwa3VF2RbME",
+          "youtube_id": "Gwa3VF2RbME",
+          "duration": 3020,
+          "source": "YouTube",
+          "source_channel": "東京女子プロレスofficial - TJPW"
+        },
+        {
+          "title": "【国内最後の前哨戦】両国国技館大会直前‼️ 激戦、未詩vs荒井❗️ アイアンマンの行方は❓️ ぽむパンダ現る 全試合ダイジェスト｜2026.3.15両国KFC",
+          "episode": "東京女子プロレスofficial - TJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=siVm6n29Otc",
+          "youtube_id": "siVm6n29Otc",
+          "duration": 1604,
+          "source": "YouTube",
+          "source_channel": "東京女子プロレスofficial - TJPW"
+        },
+        {
+          "title": "Texas Goes Wild❗ THIS is TJPW — 【Full Match】Shoko Nakajima vs Miu Watanabe🤠",
+          "episode": "東京女子プロレスofficial - TJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=eDLGif2NW2Q",
+          "youtube_id": "eDLGif2NW2Q",
+          "duration": 1264,
+          "source": "YouTube",
+          "source_channel": "東京女子プロレスofficial - TJPW"
+        },
+        {
+          "title": "FULL MATCH - 長野じゅりあvs宮本もか 2023.10.9 WRESTLE PRINCESS Ⅳ",
+          "episode": "東京女子プロレスofficial - TJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=6uuViEYv6VE",
+          "youtube_id": "6uuViEYv6VE",
+          "duration": 656,
+          "source": "YouTube",
+          "source_channel": "東京女子プロレスofficial - TJPW"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "directory": "Joshi",
+  "key": "joshi",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+  "youtube_search_queries": [
+    "full match",
+    "無料試合"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UCIRohOzkvDyspUb08yG085g",
+      "name": "STARDOM"
+    },
+    {
+      "id": "UCQPAIKyGyLCBnbvdwG0j6BQ",
+      "name": "東京女子プロレスofficial - TJPW"
+    }
+  ]
+}

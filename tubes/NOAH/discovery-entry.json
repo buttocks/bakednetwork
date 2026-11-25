@@ -1,0 +1,18 @@
+{
+  "directory": "NOAH",
+  "key": "noah",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|free\\s*match|無料試合|無料公開|全試合|試合無料|フルマッチ|第[０-９0-9一二三四五六七八九十]+試合|Battle Library|DDT Archives)",
+  "youtube_search_queries": [
+    "full match",
+    "無料試合"
+  ],
+  "seed_count": 0,
+  "youtube_channels": [
+    {
+      "id": "UC4T0v46s8yxJuTOW1_mD1xA",
+      "name": "プロレスリング・ノア公式チャンネル"
+    }
+  ]
+}

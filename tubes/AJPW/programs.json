@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "seed": "ajpw-20261125",
+  "channels": {
+    "ajpw": {
+      "name": "BAKED TV · AJPW",
+      "description": "Official wrestling programming",
+      "programs": [
+        {
+          "title": "北の大地、激闘の記憶【北海道ダイナマイトシリーズ2026 全試合ハイライト】",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=ogOQMsnoB1Y",
+          "youtube_id": "ogOQMsnoB1Y",
+          "duration": 1196,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        },
+        {
+          "title": "【全席完売＆第2試合まで無料】第13回 王道トーナメント 9月17日 東京・新木場1stRING大会＜生配信＞",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=Y75QgG_WdVs",
+          "youtube_id": "Y75QgG_WdVs",
+          "duration": 2361,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        },
+        {
+          "title": "【全席完売＆第2試合まで無料】第13回 王道トーナメント 9月16日 東京・新木場1stRING大会＜生配信＞",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=LwZV8J62XEc",
+          "youtube_id": "LwZV8J62XEc",
+          "duration": 1946,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        },
+        {
+          "title": "【動画で振り返り】激動のジュニフェス2026もいよいよ終盤!!8.9 後楽園大会〜8.23 久留米大会 公式戦全試合ハイライト【ジュニフェス】",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=8286lHbS0lM",
+          "youtube_id": "8286lHbS0lM",
+          "duration": 447,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        },
+        {
+          "title": "【第4試合まで無料】スーパーパワーシリーズ2026 6月11日 東京・新宿FACE大会＜生配信＞",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=-oD6FOsaOJM",
+          "youtube_id": "-oD6FOsaOJM",
+          "duration": 5306,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        },
+        {
+          "title": "[English commentary]ALL JAPAN PRO-WRESTLING 〜AJP Prime Night〜 13 December 2020 Full Show",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=2CcLezI1JII",
+          "youtube_id": "2CcLezI1JII",
+          "duration": 7487,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        }
+      ]
+    }
+  }
+}

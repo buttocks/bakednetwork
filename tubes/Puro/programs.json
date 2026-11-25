@@ -1,0 +1,372 @@
+{
+  "schema": 1,
+  "seed": "puro-20261125",
+  "channels": {
+    "puro": {
+      "name": "BAKED TV · PURORESU",
+      "description": "Official wrestling programming",
+      "programs": [
+        {
+          "title": "【全試合ダイジェスト】超満員の聖地！内藤哲也 vs 拳王、GHCヘビー！NOAH Jr. GRAND PRIX 2 開幕戦！11.9後楽園まとめ｜11.9後楽園大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=m__mdQ6pxmI",
+          "youtube_id": "m__mdQ6pxmI",
+          "duration": 2174,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【全試合ダイジェスト】秋の両国、GHC6大王座戦！内藤哲也 vs OZAWA、大熱狂のGHCヘビー級選手権！10.25両国大会まとめ！｜10.25両国大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=YuxEHlyiSGs",
+          "youtube_id": "YuxEHlyiSGs",
+          "duration": 2463,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【緊急無料公開】両国直前！煌牙が、清宮・Inamura・OZAWA【方舟御三家】を大糾弾！丸藤 & 拳王 & 煌牙 vs 清宮 &  Inamura & 小柳｜2026.10.20保土ヶ谷",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=kQ93sptarTQ",
+          "youtube_id": "kQ93sptarTQ",
+          "duration": 1018,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【全試合ダイジェスト】いざ、秋の両国決戦へ！GHC6大王座の前哨戦！拳王vsマサ北宮、ランバージャックデスマッチ！10.15後楽園大会まとめ！｜10.15後楽園大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=4JvZH-GnKKI",
+          "youtube_id": "4JvZH-GnKKI",
+          "duration": 2087,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【全試合ダイジェスト】LINEヤフー presents N-1 VICTORY 2026 優勝決定戦！10.4代々木大会まとめ！｜10.4代々木大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=owpf88HgvWg",
+          "youtube_id": "owpf88HgvWg",
+          "duration": 2303,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【無料公開ファン投票1位】2026.9.16アクロス福岡  清宮海斗 vs Yoshiki Inamura 【N-1公式戦ファン投票ベストバウト】｜10.4代々木大会チケット好評発売中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=b-q0azOf0YY",
+          "youtube_id": "b-q0azOf0YY",
+          "duration": 2060,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.11.23 熊本城ホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=PDqc5tdR43M",
+          "youtube_id": "PDqc5tdR43M",
+          "duration": 1511,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.11.15 神奈川・メルキュールホテル横須賀 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=v8JoLw76dxk",
+          "youtube_id": "v8JoLw76dxk",
+          "duration": 1168,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.11.8 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=Omb11tXBg6E",
+          "youtube_id": "Omb11tXBg6E",
+          "duration": 1053,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.11.5 東京・後楽園ホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=xAT0txx5Vn8",
+          "youtube_id": "xAT0txx5Vn8",
+          "duration": 1151,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.24 京都・KBSホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=ZWSapxxKYi4",
+          "youtube_id": "ZWSapxxKYi4",
+          "duration": 1462,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.22 PRIME ZONE Plus＋ Vol.22 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=Ba3MLAHKaLA",
+          "youtube_id": "Ba3MLAHKaLA",
+          "duration": 1036,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.18 アクロス福岡 夜の部 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=squrKoAYOx8",
+          "youtube_id": "squrKoAYOx8",
+          "duration": 1369,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.18 アクロス福岡 昼の部 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=Bvz06kySFuk",
+          "youtube_id": "Bvz06kySFuk",
+          "duration": 1015,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.11 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=vI3c7wgr1wo",
+          "youtube_id": "vI3c7wgr1wo",
+          "duration": 1355,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.10 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=ZZ0Wfnx_h5E",
+          "youtube_id": "ZZ0Wfnx_h5E",
+          "duration": 1216,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.10.2 東京・後楽園ホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=PFjhVcUOuf4",
+          "youtube_id": "PFjhVcUOuf4",
+          "duration": 1469,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.9.27 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=y0odxQvY9JE",
+          "youtube_id": "y0odxQvY9JE",
+          "duration": 1100,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.9.20 宮城・仙台サンフェスタ 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=h5uJvJjSdt0",
+          "youtube_id": "h5uJvJjSdt0",
+          "duration": 1102,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】9.12 TOKIO ∞ hPa 2026 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=eOwckPAz-wA",
+          "youtube_id": "eOwckPAz-wA",
+          "duration": 1092,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.9.3 東京・後楽園ホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=iXStbxQfRt4",
+          "youtube_id": "iXStbxQfRt4",
+          "duration": 1066,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.30 なら100年会館 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=wuPwBoB6T9s",
+          "youtube_id": "wuPwBoB6T9s",
+          "duration": 1053,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.23 アクロス福岡 夜の部 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=fqTicwyvmEQ",
+          "youtube_id": "fqTicwyvmEQ",
+          "duration": 788,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.23 アクロス福岡 昼の部 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=yB1o63DLQeQ",
+          "youtube_id": "yB1o63DLQeQ",
+          "duration": 1060,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.18 PRIME ZONE Plus＋ Vol.21 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=Wnr4s8dNhGU",
+          "youtube_id": "Wnr4s8dNhGU",
+          "duration": 1460,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.16 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=u9f1tINUq3o",
+          "youtube_id": "u9f1tINUq3o",
+          "duration": 988,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.11 大阪・梅田ステラホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=yd9fhIF2MAo",
+          "youtube_id": "yd9fhIF2MAo",
+          "duration": 1411,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.8.4 東京・後楽園ホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=QURfMQmQd8E",
+          "youtube_id": "QURfMQmQd8E",
+          "duration": 1920,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.7.26 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=Ae-dVEEIHww",
+          "youtube_id": "Ae-dVEEIHww",
+          "duration": 1436,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】7.20 KOBEプロレスフェスティバル 2026 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=C2F53ZUCaQI",
+          "youtube_id": "C2F53ZUCaQI",
+          "duration": 522,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【公式】DRAGONGATE NETWORK　2023.6.1 東京・後楽園ホール 第1試合 LIVE配信",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=fb__WQHvSIc",
+          "youtube_id": "fb__WQHvSIc",
+          "duration": 1457,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.2.7 兵庫・神戸芸術センター 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=sSEbZt5SOA0",
+          "youtube_id": "sSEbZt5SOA0",
+          "duration": 992,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2026.5.4 京都・KBSホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=9QIZ2s-bBF4",
+          "youtube_id": "9QIZ2s-bBF4",
+          "duration": 1461,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【公式】DRAGONGATE NETWORK　11.3 THE GATE OF DESTINY 2024 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=ECIuKOZJgb0",
+          "youtube_id": "ECIuKOZJgb0",
+          "duration": 1560,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "【DRAGONGATE NETWORK】2025.8.11 兵庫・神戸サンボーホール 第1試合",
+          "episode": "DRAGONGATE · official programming",
+          "url": "https://www.youtube.com/watch?v=LFWii1F9QL4",
+          "youtube_id": "LFWii1F9QL4",
+          "duration": 703,
+          "source": "YouTube",
+          "source_channel": "DRAGONGATE"
+        },
+        {
+          "title": "NJPW Academy Showcase Spring 2026 | FULL EVENT",
+          "episode": "NJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=ObiaRPte7V4",
+          "youtube_id": "ObiaRPte7V4",
+          "duration": 6542,
+          "source": "YouTube",
+          "source_channel": "NJPW"
+        },
+        {
+          "title": "FREE MATCH! El Desperado vs Jon Moxley No DQ July 30 2022",
+          "episode": "NJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=TT8CSWx4n8Q",
+          "youtube_id": "TT8CSWx4n8Q",
+          "duration": 1648,
+          "source": "YouTube",
+          "source_channel": "NJPW"
+        },
+        {
+          "title": "FREE MATCH  Will Ospreay vs. Amazing Red SUPER J-CUP 2019",
+          "episode": "NJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=8yKk4ixzxp0",
+          "youtube_id": "8yKk4ixzxp0",
+          "duration": 1913,
+          "source": "YouTube",
+          "source_channel": "NJPW"
+        },
+        {
+          "title": "FREE MATCH FinJuice vs GoD The New Beginning in Atlanta 2020",
+          "episode": "NJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=N7PMKvzwIsQ",
+          "youtube_id": "N7PMKvzwIsQ",
+          "duration": 1698,
+          "source": "YouTube",
+          "source_channel": "NJPW"
+        },
+        {
+          "title": "FREE MATCH: LIJ vs BULLET CLUB: Showdown in LA",
+          "episode": "NJPW · official programming",
+          "url": "https://www.youtube.com/watch?v=YSfOYYvjqOY",
+          "youtube_id": "YSfOYYvjqOY",
+          "duration": 1792,
+          "source": "YouTube",
+          "source_channel": "NJPW"
+        }
+      ]
+    }
+  }
+}

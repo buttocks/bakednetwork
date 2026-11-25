@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "seed": "noah-20261125",
+  "channels": {
+    "noah": {
+      "name": "BAKED TV · NOAH",
+      "description": "Official wrestling programming",
+      "programs": [
+        {
+          "title": "【全試合ダイジェスト】超満員の聖地！内藤哲也 vs 拳王、GHCヘビー！NOAH Jr. GRAND PRIX 2 開幕戦！11.9後楽園まとめ｜11.9後楽園大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=m__mdQ6pxmI",
+          "youtube_id": "m__mdQ6pxmI",
+          "duration": 2174,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【全試合ダイジェスト】秋の両国、GHC6大王座戦！内藤哲也 vs OZAWA、大熱狂のGHCヘビー級選手権！10.25両国大会まとめ！｜10.25両国大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=YuxEHlyiSGs",
+          "youtube_id": "YuxEHlyiSGs",
+          "duration": 2463,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【緊急無料公開】両国直前！煌牙が、清宮・Inamura・OZAWA【方舟御三家】を大糾弾！丸藤 & 拳王 & 煌牙 vs 清宮 &  Inamura & 小柳｜2026.10.20保土ヶ谷",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=kQ93sptarTQ",
+          "youtube_id": "kQ93sptarTQ",
+          "duration": 1018,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【全試合ダイジェスト】いざ、秋の両国決戦へ！GHC6大王座の前哨戦！拳王vsマサ北宮、ランバージャックデスマッチ！10.15後楽園大会まとめ！｜10.15後楽園大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=4JvZH-GnKKI",
+          "youtube_id": "4JvZH-GnKKI",
+          "duration": 2087,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【全試合ダイジェスト】LINEヤフー presents N-1 VICTORY 2026 優勝決定戦！10.4代々木大会まとめ！｜10.4代々木大会はレッスルユニバースで見逃し配信中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=owpf88HgvWg",
+          "youtube_id": "owpf88HgvWg",
+          "duration": 2303,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        },
+        {
+          "title": "【無料公開ファン投票1位】2026.9.16アクロス福岡  清宮海斗 vs Yoshiki Inamura 【N-1公式戦ファン投票ベストバウト】｜10.4代々木大会チケット好評発売中！",
+          "episode": "プロレスリング・ノア公式チャンネル · official programming",
+          "url": "https://www.youtube.com/watch?v=b-q0azOf0YY",
+          "youtube_id": "b-q0azOf0YY",
+          "duration": 2060,
+          "source": "YouTube",
+          "source_channel": "プロレスリング・ノア公式チャンネル"
+        }
+      ]
+    }
+  }
+}

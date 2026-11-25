@@ -1,0 +1,21 @@
+{
+  "directory": "DDT",
+  "key": "ddt",
+  "archive_ids": [],
+  "archive_title_pattern": "(?!)",
+  "youtube_channels": [
+    {
+      "id": "UC6oCIQ4TRcIWgljXqlDFUyA",
+      "name": "Pro-Wrestling DDT"
+    },
+    {
+      "id": "UCTHzm-6pQM3ODcGjkCncIFA",
+      "name": "Pro-Wrestling DDT sub-channel"
+    }
+  ],
+  "youtube_title_pattern": "(?i)(full\\s*(match|event|show)|DDT Archives|無料試合|全試合|試合無料|フルマッチ|生配信)",
+  "seed_count": 0,
+  "youtube_search_queries": [
+    "DDT full match"
+  ]
+}

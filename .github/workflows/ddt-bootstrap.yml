@@ -1,0 +1,32 @@
+name: Bootstrap independent DDT feed
+on:
+  push:
+    branches: [main]
+    paths: ['tubes/DDT/discovery-entry.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: baked-ddt-catalog
+  cancel-in-progress: false
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate official programs
+        env:
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
+        run: python tubes/DDT/bootstrap.py
+      - name: Save verified catalog
+        run: |
+          git config user.name 'Baked TV Discovery Bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tubes/DDT/programs.json
+          git diff --cached --quiet || git commit -m 'Seed independent DDT TV with verified official programs'
+          git pull --rebase origin main
+          git push origin HEAD:main

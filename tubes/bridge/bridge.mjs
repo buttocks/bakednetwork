@@ -265,7 +265,7 @@ async function run(request){
         const references=[...css.matchAll(/url\(\s*(['"]?)(.*?)\1\s*\)/g)]
           .map(match=>match[2].trim()).filter(Boolean);
         const images=[...document.querySelectorAll('img')].slice(0,30)
-          .map(img=>({src:img.currentSrc||img.src,alt:img.alt||'',broken:img.complete&&!img.naturalWidth,visible:!!img.getClientRects().length}));
+          .map(img=>({src:img.currentSrc||img.src,alt:img.alt||'',location:img.closest('#motdwrap')?'motd':img.closest('#messagebuffer')?'chat':img.closest('#queue')?'playlist':img.closest('nav')?'navbar':'other',broken:img.complete&&!img.naturalWidth,visible:!!img.getClientRects().length}));
         const rect=s=>{const e=document.querySelector(s);if(!e||!e.getClientRects().length)return null;const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,height:r.height,width:r.width}};
         const nav=rect('nav.navbar,.navbar'),header=rect('#rw-header'),users=rect('#userlist'),messages=rect('#messagebuffer');
         const health={brokenVisibleImages:images.filter(i=>i.broken&&i.visible).length,headerOverlap:!!(nav&&header&&nav.bottom>header.top&&nav.top<header.bottom),chatBottomGap:users&&messages?Math.round(messages.bottom-users.bottom):null,customScriptsIgnored:!!window.USEROPTS?.ignore_channeljs,baseInitialized:!!window.CLIENT?.modules,toolsMounted:!!document.querySelector('#bpt-toolbar')};
@@ -283,7 +283,7 @@ async function run(request){
       await fs.writeFile(reviewDir+'/review.json',JSON.stringify(skin,null,2)+'\n');
       await page.screenshot({path:reviewDir+'/preview.png',fullPage:false,
         animations:'disabled',timeout:20000});
-      const broken=skin.images.filter(i=>i.broken&&i.visible).map(i=>({src:i.src,alt:i.alt}));
+      const broken=skin.images.filter(i=>i.broken&&i.visible).map(i=>({src:i.src,alt:i.alt,location:i.location}));
       console.log('Broken image review '+request.channel+' '+JSON.stringify(broken));
       console.log('Skin health '+request.channel+' '+JSON.stringify({cssLength:skin.cssLength,jsLength:skin.jsLength,hasExternalCSS:!!skin.externalCss,hasExternalJS:!!skin.externalJs,...skin.health}));
       delete skin.css;

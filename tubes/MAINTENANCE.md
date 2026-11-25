@@ -67,3 +67,5 @@ MTV verified rank 3, 708 entries, backup and skin audit successful, zero legacy 
 RetroWrestling v1.3.5 deployed; user confirms better layout and captions gone. Design standards: full-size fading overlays, native Tools dropdown, no redundant header controls. Latest browser test 45542978471 seven established feeds passed, NWA-TNA playback still failed. Submitted shared wrestling base deployment and structured read-only skin health scan across registry.
 
 Skin health scan 45543653807: all 28 completed. Broken visible images: NJPWALT 3, DG/DGalt/joshi/puro 1 each. Prioritize exact image URL review before replacement. Automation failed to detect JS modules even on user-confirmed working RetroWrestling; runtime results not conclusive. NWA-TNA external shared base URL configured, runtime unverified (45543653796).
+
+Priority audit 45544108485 confirmed broken visible assets: NJPWALT Discord/Gyazo/Uproxx; DG and DGalt Wikimedia Dglogo3.png; joshi Discord GIF; puro Discord PNG. Added original text-based Dragon Gate fallback wordmark (not official logo), pending location verification and guarded replacement. No live artwork changed.

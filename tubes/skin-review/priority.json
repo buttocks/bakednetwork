@@ -1,31 +1,31 @@
 [
   {
     "schema": 1,
-    "request_id": "broken_asset_review_NJPWALT",
+    "request_id": "asset_location_NJPWALT",
     "channel": "NJPWALT",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "broken_asset_review_DG",
+    "request_id": "asset_location_DG",
     "channel": "DG",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "broken_asset_review_DGalt",
+    "request_id": "asset_location_DGalt",
     "channel": "DGalt",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "broken_asset_review_joshi",
+    "request_id": "asset_location_joshi",
     "channel": "joshi",
     "action": "audit_skin"
   },
   {
     "schema": 1,
-    "request_id": "broken_asset_review_puro",
+    "request_id": "asset_location_puro",
     "channel": "puro",
     "action": "audit_skin"
   }

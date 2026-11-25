@@ -2,17 +2,17 @@
   "schema": 1,
   "channels": {
     "luchatube/lucha": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.ia.mp4",
         "https://archive.org/download/approved_match_picks_06_2025/%2806.01%29%20%7BAJPW%7D%20Dan%20Tamura%20vs.%20Seiki%20Yoshioka%20%5BAJPW%20World%20Tag%20Team%20Title%5D%20%28Super%20Power%20Series%202025%29.mp4",
         "https://archive.org/download/syuri-c-vs-kira-iwgp-title-cmll-njpw-lucha-kingdom-2026.11.16/Syuri%20%28c%29%20vs%20Kira%20~%20IWGP%20Title%20~%20CMLL-NJPW%20Lucha%20Kingdom%20%282026.11.16%29%5B1080p30%5D.mp4"
       ],
-      "last_scan": "2026-11-25T00:54:40.903705+00:00",
+      "last_scan": "2026-11-25T00:56:57.986581+00:00",
       "last_added": "2026-11-24T17:51:42.905518+00:00"
     },
     "NJPW/classics": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
         "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
@@ -25,13 +25,15 @@
         "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.18a-NJPW-WPW-OP-6.23OA-Kantaro%20Hoshino%2C%20Shiro%20Koshinaka%2C%20Kuniaki%20Kobayashi%2C%20Takayuki%20Iizuka%20VS%20BLOND%20OUTLAWS.mp4",
         "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.06.18b-NJPW-Keiji%20Muto%2C%20Masahiro%20Chono%20VS%20Shinya%20Hashimoto%2C%20Kensuke%20Sasaki.mp4",
         "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.04b-NJPW-Jyushin%20Thunder%20Liger%2C%20El%20Samurai%2C%20Kendo%20Kashin%20VS%20Shinjiro%20Otani%2C%20Koji%20Kanemoto%2C%20Tatsuhito%20Takaiwa.mp4",
-        "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.04d-NJPW-Shiro%20Koshinaka%2C%20Tatsutoshi%20Goto%2C%20Michiyoshi%20Ohara%20VS%20Keiji%20Muto%2C%20nWo%20Sting%2C%20Hiroyoshi%20Tenzan.mp4"
+        "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.04d-NJPW-Shiro%20Koshinaka%2C%20Tatsutoshi%20Goto%2C%20Michiyoshi%20Ohara%20VS%20Keiji%20Muto%2C%20nWo%20Sting%2C%20Hiroyoshi%20Tenzan.mp4",
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.08d-NJPW-Tiger%20Toguchi%20VS%20Wahoo%20McDaniel.mp4",
+        "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.08e-NJPW-Antonio%20Inoki%2C%20Tatsumi%20Fujinami%2C%20Tiger%20Mask%20VS%20Abdullah%20the%20Butcher%2C%20Dynamite%20Kid%2C%20Baby%20Face.mp4"
       ],
-      "last_scan": "2026-11-25T00:54:42.913917+00:00",
-      "last_added": "2026-11-25T00:54:42.913827+00:00"
+      "last_scan": "2026-11-25T00:56:59.408766+00:00",
+      "last_added": "2026-11-25T00:56:59.408732+00:00"
     },
     "NJPW/events": {
-      "archive_cursor": 0,
+      "archive_cursor": 1,
       "seen": [
         "https://archive.org/download/njpw-g-1-climax-35-final-17-08-25/NJPW%20G1%20Climax%2035%20Final%2017-08-25.mp4",
         "https://archive.org/download/njpw-g-1-climax-36-day-19-16-08-26/NJPW%20G1%20Climax%2036%20Day%2019%2016-08-26.mp4",
@@ -45,7 +47,7 @@
         "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt1.mp4",
         "https://archive.org/download/njpw-4.1.2008-pt-1/NJPW%204.1.2008%20pt2.mp4"
       ],
-      "last_scan": "2026-11-25T00:54:44.241046+00:00",
+      "last_scan": "2026-11-25T00:57:01.796469+00:00",
       "last_added": "2026-11-25T00:54:44.240991+00:00"
     },
     "WCW/wcw": {
@@ -56,7 +58,7 @@
         "https://archive.org/download/270412-monday-nitro-hour-2/270412%20Monday%20Nitro%20Hour%202.mp4"
       ],
       "last_added": "2026-11-25T00:46:37.473694+00:00",
-      "last_scan": "2026-11-25T00:54:45.549706+00:00"
+      "last_scan": "2026-11-25T00:57:05.294054+00:00"
     },
     "WWE-WWF/wwf-wwe": {
       "archive_cursor": 0,
@@ -68,7 +70,7 @@
         "https://archive.org/download/wwe-2-k-25-toy-chica-vs-toriel-2-out-of-3-falls-match-stinkface/WWE%202K25%20Toy%20Chica%20vs%20Toriel%20%282%20out%20of%203%20falls%20match%29%20STINKFACE.mp4"
       ],
       "last_added": "2026-11-25T00:54:46.726610+00:00",
-      "last_scan": "2026-11-25T00:54:46.726662+00:00"
+      "last_scan": "2026-11-25T00:57:14.554040+00:00"
     },
     "RetroWrestling/retro": {
       "archive_cursor": 0,
@@ -78,7 +80,7 @@
         "https://archive.org/download/gene-le-bells-nwa-hollywood-wrestling-vol-4/Gene%20LeBell%27s%20NWA%20Hollywood%20Wrestling%20vol%204.mp4"
       ],
       "last_added": "2026-11-25T00:46:43.719298+00:00",
-      "last_scan": "2026-11-25T00:54:47.968478+00:00"
+      "last_scan": "2026-11-25T00:57:17.208693+00:00"
     },
     "WrestleTube/wrestling": {
       "archive_cursor": 0,
@@ -90,7 +92,7 @@
         "https://archive.org/download/tna-destination-x-2026-ppv-mp-4-mania/TNA%20-%20Destination%20X%202026%20-%20PPV%20%28Mp4Mania%29.mp4"
       ],
       "last_added": "2026-11-25T00:54:49.233550+00:00",
-      "last_scan": "2026-11-25T00:54:49.233598+00:00"
+      "last_scan": "2026-11-25T00:57:19.363872+00:00"
     }
   },
   "next_channel": 0

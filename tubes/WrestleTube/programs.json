@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "seed": "wrestling-20261124",
+  "source_note": "Discovery candidates only; verify playback and permission to embed before registering as a channel feed.",
+  "channels": {
+    "wrestling": {
+      "name": "BAKED TV · WRESTLING",
+      "description": "Independent wrestling programming.",
+      "programs": []
+    }
+  }
+}

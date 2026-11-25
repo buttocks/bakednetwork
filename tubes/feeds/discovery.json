@@ -74,6 +74,66 @@
       ],
       "youtube_title_pattern": "(?i)(full\\s*match|full\\s*fight|[試]合映像|NJPW\\s*Full\\s*Match)",
       "seed_count": 16
+    },
+    {
+      "directory": "WCW",
+      "key": "wcw",
+      "archive_ids": [],
+      "archive_search": "mediatype:movies AND (title:\"WCW\" OR title:\"World Championship Wrestling\" OR title:\"Monday Nitro\" OR title:\"WCW Thunder\")",
+      "archive_title_pattern": "(?i)(WCW|World Championship Wrestling|Monday Nitro|WCW Thunder)",
+      "youtube_channels": [
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(?=.*(WCW|World Championship Wrestling|Monday Nitro|WCW Thunder))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "seed_count": 0
+    },
+    {
+      "directory": "WWE-WWF",
+      "key": "wwf-wwe",
+      "archive_ids": [],
+      "archive_search": "mediatype:movies AND (title:\"WWF\" OR title:\"WWE\" OR title:\"WrestleMania\" OR title:\"Royal Rumble\" OR title:\"SummerSlam\")",
+      "archive_title_pattern": "(?i)(WWF|WWE|WrestleMania|Royal Rumble|SummerSlam)",
+      "youtube_channels": [
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(?=.*(WWF|WWE|WrestleMania|Royal Rumble|SummerSlam))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "seed_count": 0
+    },
+    {
+      "directory": "RetroWrestling",
+      "key": "retro",
+      "archive_ids": [],
+      "archive_search": "mediatype:movies AND (title:\"AWA\" OR title:\"NWA\" OR title:\"World Class Championship Wrestling\" OR title:\"Mid-South Wrestling\" OR title:\"Smoky Mountain Wrestling\")",
+      "archive_title_pattern": "(?i)(AWA|NWA|World Class Championship Wrestling|Mid-South Wrestling|Smoky Mountain Wrestling)",
+      "youtube_channels": [
+        {
+          "id": "UCJ5v_MCY6GNUBTO8-D3XoAg",
+          "name": "WWE"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(?=.*(AWA|NWA|World Class Championship Wrestling|Mid-South Wrestling|Smoky Mountain Wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "seed_count": 0
+    },
+    {
+      "directory": "WrestleTube",
+      "key": "wrestling",
+      "archive_ids": [],
+      "archive_search": "mediatype:movies AND (title:\"AEW\" OR title:\"Ring of Honor\" OR title:\"TNA\" OR title:\"Impact Wrestling\" OR title:\"professional wrestling\")",
+      "archive_title_pattern": "(?i)(AEW|Ring of Honor|TNA|Impact Wrestling|professional wrestling)",
+      "youtube_channels": [
+        {
+          "id": "UCFN4JkGP_bVhAdBsoV9xftA",
+          "name": "All Elite Wrestling"
+        }
+      ],
+      "youtube_title_pattern": "(?i)(?=.*(AEW|Ring of Honor|TNA|Impact Wrestling|professional wrestling))(?=.*(full\\s*(match|episode|event)|classic\\s*match))",
+      "seed_count": 0
     }
   ]
 }

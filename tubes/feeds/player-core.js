@@ -10,6 +10,7 @@ if(!/^[a-z0-9-]{2,32}$/.test(channel)||!video||!shell||!status)return;
 const url=new URL('./programs.json',location.href);
 let track=null, yt=null,ytPromise=null,ytReady=false,ytPlaying=false,mode='archive';
 let muted=true, activeUrl='', activeDay='', bad=new Set(), day='', ordered=[];
+let activeProgram=null, nextTrack=null, activeIndex=-1;
 let guideOpen=false,hoveringControls=false,keyboardNavigation=false,overlayTimer=null;
 let seekWanted=0,playbackStarted=false,playbackTimer=null;
 const firstFade=5500,revealFade=3200;
@@ -177,7 +178,7 @@ async function startYouTube(p,seek,id){
           if(activeUrl!==id)return;
           const s=YT.PlayerState;
           if(e.data===s.PLAYING){ytPlaying=true;status.hidden=true;reveal(firstFade)}
-          else if(e.data===s.ENDED){bad.add(id);activeUrl='';stopYT();tune(true)}
+          else if(e.data===s.ENDED){activeUrl='';stopYT();tune(true,true)}
           else if(e.data===s.PAUSED){ytPlaying=false;reveal()}
         },
         onError:()=>{if(activeUrl===id)failCurrent('YouTube cannot embed this match')}
@@ -185,13 +186,19 @@ async function startYouTube(p,seek,id){
     });
   }catch{if(activeUrl===id)failCurrent('YouTube unavailable')}
 }
-function tune(force=false){
+function tune(force=false,advance=false){
   if(!track)return;
-  const chosen=select();
+  if(!force&&activeUrl)return; // Do not interrupt active programming on catalog refresh or UTC rollover.
+  if(nextTrack){track=nextTrack;nextTrack=null;day='';}
+  let chosen=select();
+  if(advance&&activeProgram&&ordered.length){
+    const prev=ordered.findIndex(p=>p.url===activeProgram.url);
+    for(let i=1;i<=ordered.length;i++){const index=((prev>=0?prev:activeIndex)+i+ordered.length)%ordered.length;const p=ordered[index];if(!bad.has(p.url)){chosen={p,index,seek:0};break;}}
+  }
   if(!chosen){showStatus('No available matches. Retrying automatically.');return}
   const {p,seek}=chosen;
   if(!force&&activeUrl===p.url)return;
-  activeUrl=p.url;setOverlay(p);
+  activeUrl=p.url;activeProgram=p;activeIndex=chosen.index;setOverlay(p);
   clearTimeout(playbackTimer);status.hidden=false;
   if(p.source==='YouTube'){stopYT();startYouTube(p,seek,p.url);return}
   stopYT();mode='archive';shell.hidden=true;video.hidden=false;
@@ -210,7 +217,7 @@ function tune(force=false){
 video.addEventListener('playing',()=>{if(mode!=='archive')return;status.hidden=true;reveal(firstFade)});
 video.addEventListener('pause',()=>{if(mode==='archive')reveal()});
 video.addEventListener('error',()=>{if(mode==='archive')failCurrent('Video source unavailable')});
-video.addEventListener('ended',()=>{if(mode==='archive'){bad.add(activeUrl);activeUrl='';tune(true)}});
+video.addEventListener('ended',()=>{if(mode==='archive'){activeUrl='';tune(true,true)}});
 $('audio').onclick=()=>{
   muted=!muted;updateAudio();
   if(mode==='youtube'&&ytReady){try{yt.playVideo()}catch{}}
@@ -231,8 +238,8 @@ async function refresh(){
     const items=next.programs.filter(valid);
     if(!items.length)throw Error('No playable direct-video or YouTube entries');
     const changed=!track||JSON.stringify(items.map(p=>p.url))!==JSON.stringify(track.programs.map(p=>p.url));
-    track={name:next.name||channel,programs:items};
-    if(changed){day='';bad.clear()}
+    const incoming={name:next.name||channel,programs:items};
+    if(activeUrl){if(changed)nextTrack=incoming;}else{track=incoming;if(changed){day='';bad.clear()}}
     tune();
   }catch{if(!track)showStatus('Feed catalog unavailable. Retrying automatically.')}
 }

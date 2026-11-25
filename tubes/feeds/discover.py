@@ -16,7 +16,7 @@ CHANNELS=ROOT.parent
 CONFIG=ROOT/"discovery.json"
 STATE=ROOT/"discovery-state.json"
 START=time.monotonic()
-MAX_RUNTIME=240
+MAX_RUNTIME=420
 
 def load(p): return json.loads(p.read_text(encoding="utf8"))
 def write(p, obj):
@@ -179,8 +179,12 @@ def main():
     assert 20<=defaults["max_catalog_items"]<=200
     assert 1<=defaults["max_new_per_channel_per_run"]<=5
     added=0
-    for entry in config["channels"]:
+    entries=config["channels"]
+    # Rotate discovery order so additional feeds are not starved by the budget.
+    start=int(state.get('next_channel',0))%len(entries)
+    for i,entry in enumerate(entries[start:]+entries[:start]):
         if time.monotonic()-START>MAX_RUNTIME:break
+        state['next_channel']=(start+i+1)%len(entries)
         name=entry["directory"]+"/"+entry["key"]
         record=state["channels"].setdefault(name,{"archive_cursor":0,"seen":[]})
         try:added+=refresh_one(entry,defaults,record)

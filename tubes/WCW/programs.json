@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "seed": "wcw-20261124",
+  "source_note": "Discovery candidates only; verify playback and permission to embed before registering as a channel feed.",
+  "channels": {
+    "wcw": {
+      "name": "BAKED TV · WCW CLASSICS",
+      "description": "Independent wrestling programming.",
+      "programs": []
+    }
+  }
+}

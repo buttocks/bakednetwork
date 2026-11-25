@@ -1,134 +1,32 @@
 [
   {
     "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_Wrestling",
+    "request_id": "wrestletube_family_chat_inventory_20261125_Wrestling",
     "channel": "Wrestling",
     "action": "inventory_chat_sync"
   },
   {
     "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_luchatube",
-    "channel": "luchatube",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_NJPW",
-    "channel": "NJPW",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_RetroWrestling",
-    "channel": "RetroWrestling",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_WWF-WWE",
-    "channel": "WWF-WWE",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_WCW",
-    "channel": "WCW",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_joshi",
-    "channel": "joshi",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_puro",
-    "channel": "puro",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_ajpw",
-    "channel": "ajpw",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_Noah",
-    "channel": "Noah",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_wrestling2",
+    "request_id": "wrestletube_family_chat_inventory_20261125_wrestling2",
     "channel": "wrestling2",
     "action": "inventory_chat_sync"
   },
   {
     "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_indies",
-    "channel": "indies",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_shoot",
-    "channel": "shoot",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_wrestling3",
+    "request_id": "wrestletube_family_chat_inventory_20261125_wrestling3",
     "channel": "wrestling3",
     "action": "inventory_chat_sync"
   },
   {
     "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_Wrestling4",
+    "request_id": "wrestletube_family_chat_inventory_20261125_Wrestling4",
     "channel": "Wrestling4",
     "action": "inventory_chat_sync"
   },
   {
     "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_DGalt",
-    "channel": "DGalt",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_DG",
-    "channel": "DG",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_wrestling5",
+    "request_id": "wrestletube_family_chat_inventory_20261125_wrestling5",
     "channel": "wrestling5",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_NJPWALT",
-    "channel": "NJPWALT",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_NWA-TNA",
-    "channel": "NWA-TNA",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_joshi2",
-    "channel": "joshi2",
-    "action": "inventory_chat_sync"
-  },
-  {
-    "schema": 1,
-    "request_id": "chat_sync_inventory_20261125_ddt",
-    "channel": "ddt",
     "action": "inventory_chat_sync"
   }
 ]

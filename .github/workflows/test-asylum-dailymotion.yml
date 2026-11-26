@@ -1,0 +1,88 @@
+name: Verify Asylum Years Dailymotion candidates
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-asylum-dailymotion.yml'
+permissions:
+  contents: read
+concurrency:
+  group: asylum-dailymotion-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Validate public metadata and official embedded playback
+        run: |
+          node --input-type=module <<'JS'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const ids=['x3bombh','x5u0oha','xjngh','xwvo27','x23uqb0','x1rlvdt','x2vpgw6','x3bv85t','xwvmn1','xwvnev','xwvn4u','x84fq0h','x84q0fp','x84g88p','x83mc91'];
+          const candidates=[];
+          for(const id of ids){
+            try{
+              const response=await fetch('https://api.dailymotion.com/video/'+id+'?fields=id,title,description,duration,allow_embed,embed_url,owner.screenname',{signal:AbortSignal.timeout(12000)});
+              const data=await response.json();
+              const embed=new URL(data.embed_url||'https://www.dailymotion.com/embed/video/'+id);
+              const allowedHosts=['www.dailymotion.com','geo.dailymotion.com','dailymotion.com'];
+              if(!response.ok||data.id!==id||data.allow_embed!==true||!Number.isFinite(data.duration)||data.duration<60||!allowedHosts.includes(embed.hostname)||embed.protocol!=='https:'){
+                console.log('DM_REJECT '+JSON.stringify({id,status:response.status,title:data.title,allow:data.allow_embed,duration:data.duration}));continue;
+              }
+              candidates.push({id,title:data.title,duration:data.duration,owner:data['owner.screenname'],embed:embed.href});
+              console.log('DM_METADATA '+JSON.stringify(candidates.at(-1)));
+            }catch(e){console.log('DM_METADATA_ERROR '+JSON.stringify({id,error:e.message}));}
+          }
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          const results=[];
+          try{
+            for(const p of candidates){
+              const page=await browser.newPage();
+              try{
+                // Serve only a local test fixture at the feed's public origin; the Dailymotion iframe is live.
+                await page.route('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/dm-probe.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><body style="margin:0"><div id="target"></div></body></html>'}));
+                await page.goto('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/dm-probe.html');
+                const embed=new URL(p.embed);
+                embed.searchParams.set('autoplay','1');embed.searchParams.set('mute','1');
+                await page.evaluate(src=>{const f=document.createElement('iframe');f.src=src;f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;f.style='width:100vw;height:100vh;border:0';document.querySelector('#target').append(f)},embed.href);
+                let verified=null;const initial=new Map();const until=Date.now()+35000;
+                while(Date.now()<until&&!verified){
+                  for(const frame of page.frames().slice(1)){
+                    try{
+                      const videos=await frame.evaluate(()=>Array.from(document.querySelectorAll('video')).map(v=>({time:v.currentTime,width:v.videoWidth,height:v.videoHeight,duration:Number.isFinite(v.duration)?v.duration:0,paused:v.paused})));
+                      for(const [index,v] of videos.entries()){
+                        // Duration must match the requested program rather than an advertisement.
+                        if(v.width<1||v.height<1||v.paused||Math.abs(v.duration-p.duration)>Math.max(5,p.duration*.03))continue;
+                        const key=frame.url()+'|'+index;
+                        if(!initial.has(key))initial.set(key,v.time);
+                        if(v.time>initial.get(key)+1){verified=v;break;}
+                      }
+                    }catch{}
+                  }
+                  if(!verified)await page.waitForTimeout(750);
+                }
+                results.push({...p,verified:!!verified,video:verified});
+              }catch(e){results.push({...p,verified:false,error:e.message});}
+              finally{await page.close();}
+              console.log('DM_PLAYBACK '+JSON.stringify(results.at(-1)));
+            }
+          }finally{await browser.close();}
+          fs.writeFileSync('asylum-dailymotion-results.json',JSON.stringify({candidates,results},null,2));
+          console.log('DM_SUMMARY '+JSON.stringify({candidates:candidates.length,verified:results.filter(p=>p.verified).length}));
+          if(!results.some(p=>p.verified))process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: asylum-dailymotion-results
+          path: asylum-dailymotion-results.json
+          retention-days: 30

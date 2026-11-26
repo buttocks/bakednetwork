@@ -1,0 +1,31 @@
+name: Audit RDH native and custom overlap
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/rdh-native-overlap.yml','tubes/RDH/audit-native-overlap.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/RDH/audit-native-overlap.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/RDH/audit-native-overlap.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rdh-native-overlap-review
+          path: rdh-native-overlap-review/
+          retention-days: 30

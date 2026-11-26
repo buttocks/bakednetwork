@@ -50,7 +50,7 @@
       "archive_first": true,
       "archive_search_rows": 40,
       "archive_candidate_limit": 12,
-      "seed_count": 2,
+      "seed_count": 27,
       "youtube_candidate_ids": [
         "NDca-lQjF9g",
         "ybcJlX4aEa0",
@@ -339,7 +339,7 @@
         "full match",
         "無料試合"
       ],
-      "seed_count": 13,
+      "seed_count": 24,
       "youtube_channels": [
         {
           "id": "UCekKOhczmszWjqBFLvdFy4A",
@@ -451,7 +451,7 @@
         "full match",
         "無料試合"
       ],
-      "seed_count": 12,
+      "seed_count": 27,
       "youtube_channels": [
         {
           "id": "UCekKOhczmszWjqBFLvdFy4A",

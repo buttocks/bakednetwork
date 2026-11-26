@@ -1,5 +1,5 @@
 /* BEGIN DDT HEADER v2 */
-body{background-color:#33465c!important;background-blend-mode:multiply!important}
+html body{background-color:#33465c!important;background-blend-mode:multiply!important}
 #motdwrap#motdwrap{padding:0!important;margin:8px 0 12px!important;background:#101c2a!important;border:1px solid #45617c!important;border-radius:7px!important;overflow:visible!important}
 #motdwrap#motdwrap #motd{padding:0!important;margin:0!important}
 #motdwrap .dds-header{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:106px;padding:8px 12px!important;box-sizing:border-box;background:linear-gradient(110deg,#122235,#29445f,#122235)!important;border-bottom:2px solid #82a8ce;border-radius:6px 6px 0 0;color:#eef5ff;text-align:center!important}
@@ -17,10 +17,10 @@ body{background-color:#33465c!important;background-blend-mode:multiply!important
 #motdwrap .dds-panel a{color:#b6d9ff!important}
 #motdwrap .dds-panel img{max-width:100%;height:auto}
 #motdwrap .dds-bar>details:not([open])>.dds-panel{display:none!important}
-.navbar,#messagebuffer,#userlist,#queue,#chatline,#notepad{background:#101b29!important;color:#edf4fb!important;border-color:#405970!important}
-.navbar .navbar-nav>li>a,.navbar .navbar-brand{color:#e0ebf7!important;text-shadow:none!important}
-#queue .queue_entry:not(.queue_active):not(.active):not(.queue_temp){background:#172739!important;color:#e5edf6!important;border-color:#405970!important}
-#queue .queue_active,#queue .queue_entry.active{background:#355571!important;color:#fff!important}
+body .navbar,body #messagebuffer,body #userlist,body #queue,body #chatline,body #notepad{background:#101b29!important;color:#edf4fb!important;border-color:#405970!important}
+body .navbar .navbar-nav>li>a,body .navbar .navbar-brand{color:#e0ebf7!important;text-shadow:none!important}
+body #queue .queue_entry:not(.queue_active):not(.active):not(.queue_temp){background:#172739!important;color:#e5edf6!important;border-color:#405970!important}
+body #queue .queue_active,body #queue .queue_entry.active{background:#355571!important;color:#fff!important}
 body :is(#chatwrap,#videowrap,#playlistcontrols,#leftcontrols,#rightcontrols,#customcontrols) .btn:not(.btn-danger):not(.btn-success){background:#29445f!important;color:#edf5ff!important;border-color:#597a9b!important;text-shadow:none!important}
 body.cinemachat .dds-header,body.cinemachat .dds-bar{display:none!important}
 @media(max-width:760px){#motdwrap .dds-header img.dds-logo{height:56px!important;max-height:56px!important}#motdwrap .dds-purpose{font-size:10px!important}}

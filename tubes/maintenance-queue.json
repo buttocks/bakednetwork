@@ -79,17 +79,24 @@
     },
     {
       "id": "joshi-toolbar",
-      "status": "verification-queued",
+      "status": "deployed-verified",
       "workflow": "deploy-joshi-headers.yml",
       "mode": "CSS-only; preserve existing MOTD, JS, external URLs and queue",
-      "evidence": "Run 45864245179 failed due to hovered Rules button; corrected resting-state test in b04a5017, run 45864640226."
+      "evidence": "Run 45864640226 succeeded for both channels; resting button background and text verified; MOTD and JS preserved, no queue writes."
     },
     {
       "id": "puro-ddt-headers",
-      "status": "read-only-audit-queued",
+      "status": "audit-passed-header-work-pending",
       "workflow": "priority-skin-review.yml",
       "mode": "Preserve existing branding, artwork where functional, JS and queues; review exact live layout before changes",
-      "evidence": "Run 45864699303; retain existing DDT logo, review Puro artwork."
+      "evidence": "Run 45864699303: both authenticated, zero broken visible images or overlaps; Puro 82 entries, DDT 5. Earlier MOTD audit 45767887150: Puro 293px, DDT 270px; preserve Puro controls because legacy dialog sources are not in its MOTD."
+    },
+    {
+      "id": "joshi-feed-visibility",
+      "status": "verification-in-progress",
+      "workflow": "verify-joshi-feed.yml",
+      "mode": "exact owned iframe only; add if missing; no moves, deletion, playback or skin changes",
+      "evidence": "Operator reports Baked TV entry not visible in Joshi; run 45865037759 checks position and restores if absent."
     }
   ]
 }

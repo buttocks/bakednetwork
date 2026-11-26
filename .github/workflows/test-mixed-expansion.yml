@@ -1,0 +1,101 @@
+name: Verify six mixed-provider feeds
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-mixed-expansion.yml'
+      - 'tubes/feeds/player-core-mixed.js'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        feed: [dg, dgalt, noah, indies, rizin, wid]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Verify actual nested feed playback and guide
+        env:
+          FEED: ${{ matrix.feed }}
+        run: |
+          node --check tubes/feeds/player-core-mixed.js
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          const key=process.env.FEED;
+          const dir={dg:'DragonGate',dgalt:'DragonGate/secondary/DGalt',noah:'NOAH',indies:'Indies',rizin:'Rizin',wid:'WID'}[key];
+          const origin='https://buttocks.github.io/bakednetwork/';
+          const root=origin+'tubes/'+dir+'/';
+          const data=JSON.parse(fs.readFileSync('tubes/'+dir+'/programs.json'));
+          const programs=data.channels[key].programs;
+          const dm=programs.filter(p=>p.source==='Dailymotion');
+          assert.ok(dm.length>=10);
+          assert.equal(new Set(programs.map(p=>p.url)).size,programs.length,'Duplicate program URL');
+          assert.ok(dm.every(p=>p.playback_verified_run===45733706339));
+          const config=JSON.parse(fs.readFileSync('tubes/feeds/discovery.json'));
+          assert.equal(config.channels.find(c=>c.key===key).seed_count,dm.length);
+          assert.ok(programs.slice(0,dm.length).every(p=>p.source==='Dailymotion'));
+          fs.mkdirSync('mixed-proof',{recursive:true});
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          const page=await browser.newPage({viewport:{width:1280,height:800}});
+          const errors=[];
+          page.on('pageerror',e=>errors.push(e.message));
+          page.on('console',m=>{if(m.type()==='warning'||m.type()==='error')errors.push(m.text().slice(0,500))});
+          let verified=null,guide=null;
+          try{
+            await page.route(origin+'**',async route=>{
+              const u=new URL(route.request().url());
+              const relative=u.pathname.slice('/bakednetwork/'.length);
+              if(u.href===root+'test-parent.html')return route.fulfill({contentType:'text/html',body:'<!doctype html><iframe allow="autoplay; fullscreen; picture-in-picture" style="width:98vw;height:95vh;border:0" src="'+root+'feed.html?channel='+key+'&embed=standard"></iframe>'});
+              const allowed=['tubes/'+dir+'/feed.html','tubes/'+dir+'/programs.json','tubes/feeds/player-core-mixed.js'];
+              if(!allowed.includes(relative))return route.continue();
+              return route.fulfill({contentType:relative.endsWith('.js')?'application/javascript':relative.endsWith('.json')?'application/json':'text/html',body:fs.readFileSync(relative)});
+            });
+            await page.goto(root+'test-parent.html',{waitUntil:'domcontentloaded'});
+            let last=null;const until=Date.now()+150000;
+            while(Date.now()<until&&!verified){
+              const feed=page.frames().find(f=>f.url().startsWith(root+'feed.html'));
+              if(feed){
+                const now=await feed.evaluate(()=>({name:document.querySelector('#program-name')?.textContent,provider:document.querySelector('#channel-name')?.textContent,status:document.querySelector('#status-text')?.textContent,hidden:document.querySelector('#status')?.hidden})).catch(()=>null);
+                if(now)for(const f of feed.childFrames()){
+                  if(!/dailymotion\.com|dmcdn\.net/.test(f.url()))continue;
+                  try{
+                    for(const v of await f.evaluate(()=>[...document.querySelectorAll('video')].filter(v=>!v.paused&&v.videoWidth>0).map(v=>({time:v.currentTime,duration:v.duration,width:v.videoWidth,height:v.videoHeight})))){
+                      const p=dm.find(p=>p.title===now.name);
+                      if(!p||!now.hidden||Math.abs(v.duration-p.duration)>Math.max(5,p.duration*.03))continue;
+                      if(last?.name===now.name&&v.time>last.time+1)verified={...now,video:v};
+                      else if(last?.name!==now.name)last={name:now.name,time:v.time};
+                    }
+                  }catch{}
+                }
+              }
+              if(!verified)await page.waitForTimeout(1000);
+            }
+            await page.screenshot({path:'mixed-proof/playback.png'});
+            const feed=page.frames().find(f=>f.url().startsWith(root+'feed.html'));
+            if(feed){
+              guide=await feed.evaluate(()=>{document.querySelector('#guide-toggle').click();return {visible:!document.querySelector('#guide').hidden,items:document.querySelectorAll('#guide-list li').length,text:document.querySelector('#guide-title').textContent}});
+              await page.screenshot({path:'mixed-proof/guide.png'});
+            }
+            const result={feed:key,dm:dm.length,programs:programs.length,verified,guide,errors:errors.slice(-20)};
+            fs.writeFileSync('mixed-proof/results.json',JSON.stringify(result,null,2));
+            console.log('MIXED_EXPANSION '+JSON.stringify(result));
+            assert.ok(verified,'No verified Dailymotion playback in actual feed');
+            assert.ok(guide?.visible&&guide.items>0,'Guide not populated');
+          }finally{await browser.close()}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mixed-proof-${{ matrix.feed }}
+          path: mixed-proof/
+          retention-days: 30

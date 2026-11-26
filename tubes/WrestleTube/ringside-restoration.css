@@ -55,4 +55,16 @@ body.cinemachat .wt-broadcast-header,body.cinemachat .wt-house-rules{display:non
 #motdwrap .wt-info-bar .wt-chat-guide code{background:#30262e;color:#f4bbc5}
 #motdwrap .wt-info-bar>details:not([open])>.wt-info-panel,#motdwrap .wt-info-bar>details:not([open])>.wt-rules-panel{display:none!important}
 body.cinemachat .wt-info-bar{display:none!important}
+
+/* v3: concise, actionable header and playback reference. */
+#motdwrap .wt-channel-badge{font-size:11px!important;letter-spacing:.06em;padding:8px 11px!important}
+#motdwrap .wt-channel-badge small{font-size:11px!important;letter-spacing:0!important;text-transform:none}
+#motdwrap .wt-quick-help{margin:0!important}
+#motdwrap .wt-quick-help dt{font-weight:800;color:#f4c4cc;margin:9px 0 2px}
+#motdwrap .wt-quick-help dt:first-child{margin-top:0}
+#motdwrap .wt-quick-help dd{margin:0 0 8px;color:#eaeaf0}
+#motdwrap .wt-quick-help dd:last-child{margin-bottom:0}
+#motdwrap .wt-info-bar .wt-chat-guide{font-weight:400!important}
+#motdwrap .wt-info-bar .wt-chat-guide> b{font-weight:400!important}
+#motdwrap .wt-info-bar .wt-chat-guide h4{font-size:14px;font-weight:800;border-bottom:1px solid #4a333b;padding-bottom:4px}
 /* END WRESTLETUBE RINGSIDE RESTORATION v1 */

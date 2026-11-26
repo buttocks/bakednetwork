@@ -1,0 +1,89 @@
+name: Verify Asylum Years mixed-provider feed
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-asylum-mixed.yml'
+      - 'tubes/NWA-TNA/player-core-asylum.js'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Test real Dailymotion SDK inside nested feed and mixed schedule
+        run: |
+          node --check tubes/NWA-TNA/player-core-asylum.js
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          const root='https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/';
+          const catalog=JSON.parse(fs.readFileSync('tubes/NWA-TNA/programs.json'));
+          const early=catalog.channels['nwa-tna-early'];
+          assert.equal(early.programs.filter(p=>p.source==='Dailymotion').length,15);
+          assert.ok(early.programs.some(p=>p.source==='Internet Archive'));
+          assert.ok(early.programs.some(p=>p.source==='YouTube'));
+          assert.ok(!early.programs.some(p=>p.url.includes('/nwa-tna-weekly-ppv-2003/')));
+          fs.mkdirSync('asylum-mixed-proof',{recursive:true});
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          const page=await browser.newPage({viewport:{width:1280,height:800}});
+          const messages=[];
+          page.on('console',m=>{if(m.type()==='warning'||m.type()==='error')messages.push(m.text().slice(0,500))});
+          page.on('pageerror',e=>messages.push(e.message));
+          try{
+            // Serve committed feed files at their intended origin; provider requests remain live.
+            await page.route(root+'**',async route=>{
+              const url=new URL(route.request().url());
+              const file=url.pathname.split('/').at(-1);
+              if(file==='test-parent.html')return route.fulfill({contentType:'text/html',body:'<iframe allow="autoplay; fullscreen; picture-in-picture" style="width:100vw;height:95vh;border:0" src="'+root+'feed.html?channel=nwa-tna-early&embed=standard"></iframe>'});
+              if(!['feed.html','programs.json','player-core-asylum.js'].includes(file))return route.continue();
+              return route.fulfill({contentType:file.endsWith('.js')?'application/javascript':file.endsWith('.json')?'application/json':'text/html',body:fs.readFileSync('tubes/NWA-TNA/'+file)});
+            });
+            await page.goto(root+'test-parent.html',{waitUntil:'domcontentloaded'});
+            let last=null,verified=null;
+            const until=Date.now()+100000;
+            while(Date.now()<until&&!verified){
+              const parent=page.frames().find(f=>f.url().startsWith(root+'feed.html'));
+              if(parent){
+                const now=await parent.evaluate(()=>({name:document.querySelector('#program-name')?.textContent,provider:document.querySelector('#channel-name')?.textContent,status:document.querySelector('#status-text')?.textContent,hidden:document.querySelector('#status')?.hidden}));
+                for(const frame of parent.childFrames()){
+                  if(!/dailymotion\.com|dmcdn\.net/.test(frame.url()))continue;
+                  try{
+                    const samples=await frame.evaluate(()=>Array.from(document.querySelectorAll('video')).filter(v=>!v.paused&&v.videoWidth>0).map(v=>({time:v.currentTime,duration:v.duration,width:v.videoWidth,height:v.videoHeight})));
+                    for(const v of samples){
+                      const program=early.programs.find(p=>p.source==='Dailymotion'&&p.title===now.name);
+                      if(!program||!now.hidden||Math.abs(v.duration-program.duration)>Math.max(5,program.duration*.03))continue;
+                      if(last?.name===now.name&&v.time>last.time+1)verified={...now,video:v};
+                      else if(last?.name!==now.name)last={name:now.name,time:v.time};
+                    }
+                  }catch{}
+                }
+              }
+              if(!verified)await page.waitForTimeout(900);
+            }
+            await page.screenshot({path:'asylum-mixed-proof/playback.png'});
+            const feed=page.frames().find(f=>f.url().startsWith(root+'feed.html'));
+            if(feed){
+              await feed.evaluate(()=>document.querySelector('#guide-toggle').click());
+              await page.screenshot({path:'asylum-mixed-proof/guide.png'});
+            }
+            const result={verified,errors:messages.slice(-30)};
+            fs.writeFileSync('asylum-mixed-proof/results.json',JSON.stringify(result,null,2));
+            console.log('ASYLUM_MIXED '+JSON.stringify(result));
+            assert.ok(verified,'No confirmed Dailymotion content playback in integrated feed');
+          }finally{await browser.close()}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: asylum-mixed-proof
+          path: asylum-mixed-proof/
+          retention-days: 30

@@ -85,10 +85,10 @@ try{
  else{
  targetMotd=source.html;
  targetCss=stripOld(before.css).replace(/\/\* BEGIN DDT HEADER v2 \*\/[\s\S]*?\/\* END DDT HEADER v2 \*\//g,'').trimEnd()+'\n\n'+template;
- const compactMode=Buffer.byteLength(targetCss)>19980;
- const importRule='@import url("https://buttocks.github.io/bakednetwork/tubes/DDT/header.css");';
+ let compactMode=Buffer.byteLength(targetCss)>19980;
+ const importRule='@import url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@53cf66efa087b2542a449efefdcae0696e86a8c0/tubes/DDT/header.css");';
  if(compactMode){
-  const response=await p.request.get("https://buttocks.github.io/bakednetwork/tubes/DDT/header.css",{timeout:15000});
+  const response=await p.request.get("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@53cf66efa087b2542a449efefdcae0696e86a8c0/tubes/DDT/header.css",{timeout:15000});
   assert.ok(response.ok(),'Hosted stylesheet unavailable; no writes');
   assert.equal((await response.text()).trim(),template.trim(),'Hosted stylesheet differs from approved version; no writes');
   const existing=stripOld(before.css).replace(/\/\* BEGIN DDT HEADER v2 \*\/[\s\S]*?\/\* END DDT HEADER v2 \*\//g,'').split(importRule).join('');
@@ -99,13 +99,15 @@ try{
   },{existing,compact});
   console.log('DDT_CSS_COMPACT '+JSON.stringify({slug,beforeBytes:Buffer.byteLength(existing),afterBytes:Buffer.byteLength(compact),...matches}));
   assert.ok(matches.same&&matches.rules>0,'Existing stylesheet rules changed in compact representation; no writes');
-  targetCss=importRule+'\n'+compact;
+  const inline=compact+'\n'+template;
+  if(Buffer.byteLength(inline)<=19980){targetCss=inline;compactMode=false;}
+  else targetCss=importRule+'\n'+compact;
   assert.ok(Buffer.byteLength(targetCss)<=19980,'Cannot fit under conservative CSS size cap without structural changes; no writes');
  }
  console.log('DDT_CSS_SIZE '+JSON.stringify({slug,original:Buffer.byteLength(before.css),proposed:Buffer.byteLength(targetCss),compactMode}));
  assert.ok(Buffer.byteLength(targetCss)<=19980);
  await fs.writeFile(dir+'/proposed.css',targetCss);await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
- const style=await p.addStyleTag({content:compactMode?importRule:template});const old=await p.locator('#motd').evaluate((e,html)=>{const x=e.innerHTML;e.innerHTML=html;return x},targetMotd);
+ const style=await p.addStyleTag({content:template});const old=await p.locator('#motd').evaluate((e,html)=>{const x=e.innerHTML;e.innerHTML=html;return x},targetMotd);
  try{
   await p.waitForFunction(()=>document.querySelector('.dds-logo')?.complete&&document.querySelector('.dds-logo')?.naturalWidth>0,null,{timeout:15000});
   await p.waitForFunction(()=>getComputedStyle(document.querySelector('.dds-header')).display==='flex'&&document.querySelector('.dds-logo').getBoundingClientRect().height<=90,null,{timeout:15000});
@@ -122,7 +124,7 @@ try{
  }
  const applied=await write('motd',before.motd,targetMotd,targetCss);targetMotd=applied.motd;motdWritten=true;
  await p.waitForFunction(()=>document.querySelector('.dds-logo')?.complete&&document.querySelector('.dds-logo')?.naturalWidth>0,null,{timeout:15000});
- const after=await state();assert.ok(auth(after)&&valid(after));assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);assert.equal(after.playing,before.playing);
+ const after=await state();assert.ok(auth(after)&&valid(after));assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);assert.equal(after.playing,before.playing);assert.equal(after.logo.src,source.logo);
  for(const e of await p.locator('.dds-bar>details').all()){await e.locator('summary').click();assert.ok(await e.evaluate(x=>x.open));await e.locator('summary').click()}
  await p.screenshot({path:dir+'/after.png'});
  console.log('DDT_HEADER '+JSON.stringify({slug,status:'verified',queue:after.entries.length,header:after.header,logo:after.logo.height,legacyPopupsRemoved:true,jsPreserved:true,streamPreserved:true}));

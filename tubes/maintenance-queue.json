@@ -86,10 +86,10 @@
     },
     {
       "id": "puro-ddt-headers",
-      "status": "deployment-queued",
+      "status": "deployed-verified",
       "workflow": "targeted-header-followup.yml",
       "mode": "Preserve existing branding, artwork where functional, JS and queues; review exact live layout before changes",
-      "evidence": "Both audits passed; original artwork and Rules/Links retained. CSS-only compaction with preview validation and rollback. Run 45865596415."
+      "evidence": "Run 45865596415 completed successfully. Puro header 293.1875 to 179.1875px; DDT 269.796875 to 153.796875px; both logos 68px high. Existing logo sources, buttons, MOTD, JS and queues preserved."
     },
     {
       "id": "joshi-feed-visibility",

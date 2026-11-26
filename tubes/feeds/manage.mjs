@@ -152,7 +152,7 @@ async function main(){
           const body=await response.text();
           const banner=feed.banner||(feed.tube==='luchatube'?'LUCHA LIBRE':'NJPW');
           const ok=response.status()===200&&body.includes(banner)&&
-            body.includes('id="video"')&&body.includes('player-core.js');
+            body.includes('id="video"')&&(body.includes('player-core.js')||body.includes('player-core-mixed.js'));
           await response.dispose();
           if(!ok){report.actions.push({feed:feed.id,result:'page-not-verified'});continue}
           await page.evaluate(({src,title})=>window.socket.emit('queue',{

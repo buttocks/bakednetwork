@@ -38,7 +38,8 @@ def get_json(url):
     except (OSError, ValueError, TimeoutError):return None
 def approved_url(s):
     return isinstance(s,str) and (s.startswith("https://archive.org/download/") or
-        bool(re.fullmatch(r"https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}",s)))
+        bool(re.fullmatch(r"https://www\.youtube\.com/watch\?v=[A-Za-z0-9_-]{11}",s)) or
+        bool(re.fullmatch(r"https://www\.dailymotion\.com/video/[A-Za-z0-9]{2,30}",s)))
 def archive(entry, defaults, cursor):
     names=entry["archive_ids"]
     chosen=[names[(cursor+i)%len(names)] for i in range(min(2,len(names)))] if names else []

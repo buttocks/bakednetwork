@@ -1,0 +1,73 @@
+/* BEGIN AJPW RINGSIDE MASTHEAD v2 */
+#motdwrap#motdwrap{padding:0!important;margin:8px 0 12px!important;background:#121318!important;border:1px solid #393941!important;border-radius:7px!important;overflow:visible!important}
+#motdwrap#motdwrap #motd{padding:0!important}
+#motdwrap .ajpw-masthead{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(115px,235px) auto;align-items:center;gap:clamp(8px,2vw,24px);position:relative;isolation:isolate;padding:14px 24px!important;min-height:118px;box-sizing:border-box;width:100%;background:repeating-linear-gradient(132deg,transparent 0 25px,#ffffff05 26px 27px,transparent 28px 50px),linear-gradient(110deg,#0a0a0d,#4b1721 48%,#0c0c10)!important;border-bottom:3px solid #ef535f;border-radius:6px 6px 0 0;text-align:left!important}
+#motdwrap .ajpw-overline{font:800 10px/1.3 system-ui,Arial,sans-serif!important;letter-spacing:.21em;color:#ffc4c8!important}
+#motdwrap .ajpw-brand{margin:3px 0 4px;font:950 clamp(27px,4.4vw,61px)/1 Impact,"Arial Black",system-ui,sans-serif!important;letter-spacing:-.035em;color:#fff!important;text-shadow:3px 3px #000;white-space:normal}
+#motdwrap .ajpw-tagline{font:750 10px/1.4 system-ui,Arial,sans-serif!important;letter-spacing:.12em;color:#ddd1d4!important}
+#motdwrap#motdwrap#motdwrap#motdwrap .ajpw-masthead img.ajpw-original-logo{display:block!important;position:relative!important;justify-self:center!important;width:100%!important;height:96px!important;max-width:225px!important;max-height:96px!important;min-height:0!important;object-fit:contain!important;margin:0!important;filter:drop-shadow(0 3px 7px #000)}
+#motdwrap .ajpw-tv-mark{padding:9px 12px;text-align:center;color:#f8e8ea!important;border:1px solid #c44350;border-radius:4px;background:#09090bd9;font:900 12px/1.5 system-ui,sans-serif!important;letter-spacing:.08em;white-space:nowrap}
+#motdwrap .ajpw-tv-mark small{display:block;margin-top:3px;font-size:10px;color:#cdb8bf}
+#motdwrap .ajpw-rules{display:block!important;margin:0!important;padding:0!important;background:#111217;color:#eee;text-align:left!important}
+#motdwrap .ajpw-rules summary{display:list-item!important;padding:6px 15px;cursor:pointer;color:#f4d3d7!important;font:750 12px/1.4 system-ui,Arial,sans-serif!important;border-top:1px solid #34343c}
+#motdwrap .ajpw-rules summary:hover{background:#352127}
+#motdwrap .ajpw-rules-content{padding:9px 18px 12px;background:#191b21}
+#motdwrap .ajpw-rules-content ol{margin:5px 0 0;padding-left:21px}
+#motdwrap .ajpw-rules-content li{padding:2px 0}
+#motdwrap .ajpw-rules:not([open]) .ajpw-rules-content{display:none!important}
+nav.navbar,body .navbar{opacity:1!important;background:linear-gradient(90deg,#111217,#2d2428,#111217)!important}
+nav.navbar .nav>li>a,nav.navbar .navbar-text,nav.navbar .navbar-brand{color:#e6e6eb!important;opacity:1!important}
+@media(max-width:760px){#motdwrap .ajpw-masthead{grid-template-columns:minmax(0,1fr) minmax(85px,140px);padding:12px!important;min-height:98px;gap:8px}#motdwrap .ajpw-tv-mark{display:none!important}#motdwrap .ajpw-brand{font-size:clamp(22px,5vw,34px)!important}#motdwrap .ajpw-overline,#motdwrap .ajpw-tagline{font-size:9px!important;letter-spacing:.06em}#motdwrap#motdwrap#motdwrap#motdwrap .ajpw-masthead img.ajpw-original-logo{height:72px!important;max-height:72px!important}}
+
+#motdwrap .ajpw-brand{font-size:clamp(25px,4vw,54px)!important}
+#motdwrap .ajpw-wordmark{font:950 clamp(26px,5vw,60px)/1 Impact,"Arial Black",sans-serif!important;color:#f3c4c9!important;text-align:center;letter-spacing:.06em;text-shadow:2px 3px #14070c}
+#motdwrap .ajpw-rules-content #header{display:none!important}
+#motdwrap .ajpw-rules-content .well{margin-bottom:0!important}
+body{background:radial-gradient(ellipse at 50% 0,#27171c 0,transparent 42rem),#101014!important;color:#eee8eb!important}
+#wrap{background-color:transparent!important}
+#messagebuffer,#userlist,#queue,#chatline{background-color:#1b1a20!important;color:#eae4e7;border-color:#3d343c!important}
+#chatheader,#currenttitle,#videowrap-header{background:#30232a!important;border-color:#503b42!important;color:#f2e9ed!important}
+#queue .queue_entry{background:#211e24!important;color:#eee8eb!important;border:0!important;border-bottom:1px solid #3e343d!important;border-left:3px solid transparent!important;padding:8px 10px!important}
+#queue .queue_entry:nth-child(even){background:#28242b!important}
+#queue .queue_entry:hover{background:#3c2b34!important}
+#queue .queue_entry.queue_active,#queue .queue_entry.active{background:linear-gradient(90deg,#51232c,#2e252b)!important;border-left-color:#ef535f!important;color:#fff!important}
+#queue .qe_title,#queue .qe_title_text{color:inherit!important;font-weight:600}
+#queue .qe_blame{color:#c2b6bf!important}
+#queue .qe_time{color:#d3c6ce!important;font-variant-numeric:tabular-nums}
+.panel,.well,.modal-content,.dropdown-menu{background-color:#241e25!important;border-color:#43363f!important;color:#eee8eb!important}
+.panel-heading,.panel-default>.panel-heading,.panel-footer{background:#33262e!important;border-color:#43363f!important;color:#eee8eb!important}
+.form-control{background-color:#1b1a20!important;color:#eee8eb!important;border-color:#59414c!important}
+.form-control:focus{border-color:#ef535f!important}
+.btn-default{background-color:#372a32;border-color:#59414c;color:#eee8eb}
+.btn-default:hover,.btn-default:focus{background-color:#51313b!important;border-color:#ef535f!important;color:#fff!important}
+.dropdown-menu>li>a{color:#eee8eb!important}.dropdown-menu>li>a:hover{background:#492e39!important}
+a{color:#f0b9c2}a:hover,a:focus{color:#fff}
+@media(max-width:760px){#motdwrap .ajpw-brand{font-size:clamp(20px,5vw,34px)!important}}
+
+/* v2.1: eliminate legacy red image textures, preserve only the AJPW identity */
+html,body,body #wrap,body #motdrow,body #motdwrap,body #motd,body #chatwrap,body #videowrap,body #playlistwrap,body #footer,body #chatheader,body #currenttitle,body #playlistcontrols,body #videocontrols,body #messagebuffer,body #userlist,body #queue,body .well,body .panel,body .panel-heading,body .panel-footer,body .modal-content,body .modal-header,body .modal-body,body .modal-footer,body .dropdown-menu,body .navbar,body .navbar-collapse{background-image:none!important}
+html,body{background-color:#101014!important}
+body #wrap{background-color:#101014!important}
+body #motdwrap{background-color:#19161c!important}
+body #motdwrap .ajpw-masthead{background:repeating-linear-gradient(132deg,transparent 0 25px,#ffffff05 26px 27px,transparent 28px 50px),linear-gradient(110deg,#0a0a0d,#4b1721 48%,#0c0c10)!important}
+body #motdwrap .ajpw-rules{background:#19161c!important}
+body #motdwrap .ajpw-rules summary{padding:3px 12px!important;font-size:11px!important;line-height:18px!important}
+body #motdwrap .ajpw-rules-content{padding:8px 14px!important}
+body #motdwrap .ajpw-rules-content ol{margin:0!important}
+body #motdwrap .ajpw-rules-content li{font-size:12px!important;line-height:1.4!important}
+body .modal-content,body .modal-header,body .modal-body,body .modal-footer{background-color:#211c23!important;color:#eee8eb!important;border-color:#43363f!important}
+body nav.navbar,body .navbar{background-color:#19161c!important;border-bottom:2px solid #c44350!important}
+body .navbar .nav>li>a{color:#eee8eb!important}
+/* Shared compact House Rules treatment, modeled on the podcast tube. */
+body #motdwrap .ajpw-rules{text-align:center!important;padding:6px 10px!important}
+body #motdwrap .ajpw-rules summary{display:inline-block!important;list-style:none!important;border:1px solid #c44350!important;border-radius:5px!important;padding:5px 12px!important;margin:0!important;background:#251b22!important;color:#f4d3d7!important;cursor:pointer}
+body #motdwrap .ajpw-rules summary::-webkit-details-marker{display:none}
+body #motdwrap .ajpw-rules summary::after{content:" ▾";font-size:10px}
+body #motdwrap .ajpw-rules[open] summary::after{content:" ▴"}
+body #motdwrap .ajpw-rules-content{max-width:520px;margin:8px auto 2px!important;padding:10px 14px!important;background:#1a171d!important;border:1px solid #55333e!important;border-radius:6px!important;text-align:left!important}
+body #motdwrap .ajpw-rules-content ol{padding-left:18px!important}
+body #motdwrap .ajpw-rules-content li{color:#eee8eb!important;font:500 13px/1.5 system-ui,Arial,sans-serif!important}
+body #motdwrap .ajpw-rules-content li::marker{font-weight:800}
+#motdwrap .ajpw-brand{font-size:clamp(22px,3.7vw,50px)!important}
+@media(max-width:760px){#motdwrap .ajpw-brand{font-size:clamp(19px,4.4vw,30px)!important}}
+/* END AJPW RINGSIDE MASTHEAD v2 */

@@ -66,6 +66,7 @@ try{
  const after=await state();assert.ok(auth(after)&&check(after),'Live header failed');assert.equal(after.js,before.js);assert.equal(after.css,targetCss);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
  await p.locator('.noah-rules summary').click();assert.equal((await state()).details.open,true);await p.screenshot({path:dir+'/rules-open.png'});await p.locator('.noah-rules summary').click();await p.screenshot({path:dir+'/after.png'});
  console.log('NOAH_HEADER '+JSON.stringify({status:'verified',logo:after.logo,header:after.header,legacyMotdPreserved:true,collapsed:true,queue:after.entries.length,streamPresent:true,jsPreserved:true,wordmark:after.wordmark}));
+ }
 }catch(e){
  console.log('NOAH_HEADER_ERROR '+String(e.message||e));
  try{const x=await state();if(auth(x)&&x.js===before?.js){if(motdWritten&&x.motd===targetMotd&&x.css===targetCss)await write('motd',targetMotd,before.motd,targetCss);const y=await state();if(cssWritten&&y.css===targetCss&&y.motd===before.motd)await write('css',targetCss,before.css,before.motd);console.log('NOAH_HEADER_ROLLBACK checked')}}catch(r){console.log('NOAH_HEADER_ROLLBACK_BLOCKED '+r.message)}

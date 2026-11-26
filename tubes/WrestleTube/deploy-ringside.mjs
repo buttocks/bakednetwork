@@ -13,11 +13,11 @@ const state=()=>p.evaluate(()=>{
  const c=window.CHANNEL||{},o=c.opts||{};
  const entries=[...document.querySelectorAll('#queue .queue_entry')].map(el=>{const q=window.jQuery(el),m=q.data('media')||{},t=document.createElement('textarea');t.innerHTML=String(m.meta?.embed?.src||'');return {uid:q.data('uid'),title:m.title||'',src:t.value}});
  const h=document.querySelector('#motd .wt-broadcast-header'),r=h?.getBoundingClientRect(),d=document.querySelector('#motd .wt-house-rules');
- return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,user:window.CLIENT?.name,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,entries,header:r?{width:r.width,height:r.height}:null,rules:d?{open:d.open,count:d.querySelectorAll('.wt-rules-panel>ol>li').length,hidden:!d.querySelector('.wt-rules-panel')?.getClientRects().length,help:d.querySelectorAll('.wt-help-details').length}:null,background:getComputedStyle(document.body).backgroundImage,wrap:getComputedStyle(document.querySelector('#wrap')).backgroundImage,visible:['#videowrap','#messagebuffer','#queue'].every(q=>!!document.querySelector(q)?.getClientRects().length)};
+ return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,user:window.CLIENT?.name,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,entries,header:r?{width:r.width,height:r.height}:null,rules:d?{open:d.open,count:d.querySelectorAll('.wt-rules-panel>ol>li').length,hidden:!d.querySelector('.wt-rules-panel')?.getClientRects().length,help:document.querySelectorAll('#motd .wt-info-bar>.wt-info-menu').length}:null,sections:document.querySelectorAll('#motd .wt-sections-v2>details').length,kicker:document.querySelector('#motd .wt-kicker')?.textContent.trim(),background:getComputedStyle(document.body).backgroundImage,wrap:getComputedStyle(document.querySelector('#wrap')).backgroundImage,visible:['#videowrap','#messagebuffer','#queue'].every(q=>!!document.querySelector(q)?.getClientRects().length)};
 });
 const auth=x=>x.connected&&x.loggedIn&&x.rank>=3&&x.user?.toLowerCase()==='buttman-gpt'&&x.name?.toLowerCase()==='wrestling';
 const hasFeed=x=>x.entries.some(e=>e.src===feed.url);
-const valid=x=>x.header?.height>=95&&x.header.height<=185&&x.rules?.count===7&&x.rules.help===2&&!x.rules.open&&x.rules.hidden&&x.background.includes('/assets/rinng.jpg')&&x.wrap==='none'&&x.visible&&hasFeed(x);
+const valid=x=>x.header?.height>=95&&x.header.height<=185&&x.rules?.count===7&&x.rules.help===3&&x.sections===4&&x.kicker==='BAKED NETWORK'&&!x.rules.open&&x.rules.hidden&&x.background.includes('/assets/rinng.jpg')&&x.wrap==='none'&&x.visible&&hasFeed(x);
 let before,targetCss,targetMotd,cssWritten=false,motdWritten=false;
 async function write(field,expected,next,other){
  await p.evaluate(({field,expected,next,other,originalJs,externalCss,externalJs})=>{
@@ -40,11 +40,11 @@ try{
  if(valid(before)){console.log('WRESTLETUBE_RINGSIDE '+JSON.stringify({status:'already-verified',image:dimensions,queue:before.entries.length,noWrites:true}));}
  else{
  // Use the latest live chat guide, not a stale archived copy, if present.
- const guide=await p.evaluate(m=>{const d=new DOMParser().parseFromString(m,'text/html');return d.querySelector('#StyleEffects .modal-body')?.innerHTML||null},before.motd);
+ const guide=await p.evaluate(m=>{const d=new DOMParser().parseFromString(m,'text/html');return d.querySelector('.wt-chat-guide')?.innerHTML||d.querySelector('#StyleEffects .modal-body')?.innerHTML||[...d.querySelectorAll('.wt-help-details')].find(e=>e.querySelector('summary')?.textContent.includes('Chat shortcuts'))?.innerHTML.replace(/<summary[^>]*>[\s\S]*?<\/summary>/i,'')||null},before.motd);
  const legacyModals=await p.evaluate(m=>[...new DOMParser().parseFromString(m,'text/html').querySelectorAll('.modal')].map(x=>x.id),before.motd);
  assert.ok(legacyModals.every(x=>['about','StyleEffects'].includes(x)),'Unexpected live MOTD popup; manual review required');
  targetMotd=proposed;
- if(guide){targetMotd=await p.evaluate(({html,guide})=>{const d=new DOMParser().parseFromString(html,'text/html');const e=[...d.querySelectorAll('.wt-help-details')].find(e=>e.querySelector('summary')?.textContent.includes('Chat shortcuts'));const summary=e.querySelector('summary').outerHTML;e.innerHTML=summary+guide;return d.body.innerHTML},{html:proposed,guide});}
+ if(guide){targetMotd=await p.evaluate(({html,guide})=>{const d=new DOMParser().parseFromString(html,'text/html');const e=d.querySelector('.wt-chat-guide');e.innerHTML=guide;return d.body.innerHTML},{html:proposed,guide});}
  targetCss=before.css.replace(/\/\* BEGIN WRESTLETUBE RINGSIDE RESTORATION v1[^*]*\*\/[\s\S]*?\/\* END WRESTLETUBE RINGSIDE RESTORATION v1 \*\//g,'').trimEnd()+'\n\n'+template;
  assert.ok(Buffer.byteLength(targetCss)<30000,'CSS length review required');
  await fs.writeFile(dir+'/proposed.css',targetCss);await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
@@ -55,9 +55,11 @@ try{
   const v=await state();console.log('WRESTLETUBE_PREVIEW '+JSON.stringify({header:v.header,rules:v.rules,background:v.background,wrap:v.wrap,visible:v.visible,image:dimensions,cssBytes:Buffer.byteLength(targetCss)}));
   assert.ok(valid(v),'Desktop preview failed');
   await p.locator('.wt-house-rules>summary').click();assert.ok((await state()).rules.open);
-  await p.locator('.wt-help-details').last().locator('summary').click();assert.ok(await p.locator('.wt-help-details').last().evaluate(e=>e.open));
+  await p.locator('.wt-house-rules>summary').click();assert.ok(!(await state()).rules.open);
+  await p.locator('.wt-chat-menu>summary').click();assert.ok(await p.locator('.wt-chat-menu').evaluate(e=>e.open));
   await p.screenshot({path:dir+'/preview-help.png'});
-  await p.locator('.wt-house-rules>summary').click();
+  await p.locator('.wt-chat-menu>summary').click();
+  for(const menu of ['.wt-playlist-menu','.wt-community-menu']){await p.locator(menu+'>summary').click();assert.ok(await p.locator(menu).evaluate(e=>e.open));await p.locator(menu+'>summary').click()}
   await p.screenshot({path:dir+'/preview.png'});
   await p.setViewportSize({width:390,height:844});await p.waitForTimeout(300);
   assert.ok(await p.locator('.wt-broadcast-header').evaluate(e=>{const r=e.getBoundingClientRect();return r.width<=innerWidth&&r.width>100&&r.height<220}));
@@ -68,7 +70,7 @@ try{
  const applied=await write('motd',before.motd,targetMotd,targetCss);motdWritten=true;targetMotd=applied.motd;
  await p.waitForTimeout(500);const after=await state();assert.ok(auth(after)&&valid(after),'Live layout validation failed');
  assert.equal(after.css,targetCss);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
- await p.locator('.wt-house-rules>summary').click();assert.ok((await state()).rules.open);await p.locator('.wt-house-rules>summary').click();
+ for(const menu of ['.wt-house-rules','.wt-playlist-menu','.wt-chat-menu','.wt-community-menu']){await p.locator(menu+'>summary').click();assert.ok(await p.locator(menu).evaluate(e=>e.open));await p.locator(menu+'>summary').click()}
  await p.screenshot({path:dir+'/after.png'});
  const report={status:'verified',image:dimensions,header:after.header,rules:after.rules,queue:after.entries.length,streamPreserved:true,jsPreserved:true,externalSettingsPreserved:true,liveChatGuidePreserved:!!guide};
  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));console.log('WRESTLETUBE_RINGSIDE '+JSON.stringify(report));

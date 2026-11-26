@@ -37,4 +37,22 @@ body:not(.cinemachat) #chatheader,body:not(.cinemachat) #currenttitle,body:not(.
 body:not(.cinemachat) #queue .queue_entry.queue_active{background:#42212a!important;border-left:3px solid var(--wt-accent)!important}
 body.cinemachat .wt-broadcast-header,body.cinemachat .wt-house-rules{display:none!important}
 @media(max-width:760px){#motdwrap .wt-broadcast-header{grid-template-columns:minmax(0,1fr) auto;padding:12px!important;gap:8px;min-height:96px}#motdwrap .wt-channel-badge{display:none!important}#motdwrap .wt-brand{font-size:clamp(27px,6vw,45px)!important}#motdwrap .wt-ringmark{width:68px;height:52px}#motdwrap .wt-kicker,#motdwrap .wt-tagline{font-size:9px!important;letter-spacing:.04em}}
+
+/* v2: separate compact navigation and individually expandable panels. */
+#motdwrap .wt-info-bar{display:flex!important;position:relative;justify-content:center;align-items:flex-start;gap:7px;flex-wrap:wrap;padding:6px 10px!important;background:#111217!important}
+#motdwrap .wt-info-bar>details{display:block!important;padding:0!important;background:transparent!important;margin:0!important;text-align:left!important;max-width:100%}
+#motdwrap .wt-info-bar>details>summary{display:table!important;list-style:none!important;cursor:pointer;margin:0 auto!important;padding:5px 12px!important;border:1px solid #60404a;border-radius:5px;background:#211a20!important;color:#f4dde1!important;font:750 12px/1.4 system-ui,Arial,sans-serif!important;white-space:nowrap}
+#motdwrap .wt-info-bar>details>summary::-webkit-details-marker{display:none}
+#motdwrap .wt-info-bar>details>summary::after{content:" ▾"}
+#motdwrap .wt-info-bar>details[open]>summary::after{content:" ▴"}
+#motdwrap .wt-info-bar>details[open]>summary,#motdwrap .wt-info-bar>details>summary:hover{border-color:#d93c4b;background:#38212a!important}
+#motdwrap .wt-info-bar>details[open]{flex:0 1 100%;order:1}
+#motdwrap .wt-info-bar .wt-rules-panel,#motdwrap .wt-info-bar .wt-info-panel{width:min(620px,100%);max-width:620px;max-height:min(64vh,540px);overflow:auto;box-sizing:border-box;margin:7px auto 2px!important;padding:12px 16px!important;background:#19171d!important;border:1px solid #69404b;border-radius:6px;color:#eaeaf0!important;text-align:left!important;font:500 13px/1.5 system-ui,Arial,sans-serif!important}
+#motdwrap .wt-info-bar .wt-info-panel p{margin:0}
+#motdwrap .wt-info-bar .wt-info-panel a{color:#f0bdc4!important}
+#motdwrap .wt-info-bar .wt-info-panel .wt-help{border:0;padding:0;margin:0}
+#motdwrap .wt-info-bar .wt-chat-guide h4{margin:12px 0 6px;color:#fff}
+#motdwrap .wt-info-bar .wt-chat-guide code{background:#30262e;color:#f4bbc5}
+#motdwrap .wt-info-bar>details:not([open])>.wt-info-panel,#motdwrap .wt-info-bar>details:not([open])>.wt-rules-panel{display:none!important}
+body.cinemachat .wt-info-bar{display:none!important}
 /* END WRESTLETUBE RINGSIDE RESTORATION v1 */

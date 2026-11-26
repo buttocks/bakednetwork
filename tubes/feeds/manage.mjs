@@ -145,8 +145,16 @@ async function main(){
           report.actions.push({feed:feed.id,result:'unknown-health-preserved'});continue;
         }
         if(desired===true&&existing.length===0){
-          if(!initial.permissions.add||!initial.permissions.custom||!initial.permissions.permanent){
-            report.actions.push({feed:feed.id,result:'missing-add-permissions'});continue;
+          // Permissions can arrive after the authenticated rank snapshot. Wait
+          // for all three real server permissions, never override them.
+          const canAdd=s=>authenticated(s)&&s.rank>=3&&s.permissions.add&&s.permissions.custom&&s.permissions.permanent;
+          if(!canAdd(initial)){
+            try{initial=await wait(page,canAdd,'Playlist permissions unavailable',10000);}
+            catch{report.actions.push({feed:feed.id,result:'missing-add-permissions'});continue;}
+          }
+          // A concurrent manual insertion during the wait must not duplicate it.
+          if(initial.queue.some(x=>x.src===currentUrl)){
+            report.actions.push({feed:feed.id,result:'already-present'});continue;
           }
           const response=await page.request.get(currentUrl,{timeout:20000,failOnStatusCode:false});
           const body=await response.text();

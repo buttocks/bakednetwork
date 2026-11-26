@@ -1,3 +1,24 @@
+/* ScaryTube live-chat compatibility: normalize optional chat metadata. */
+(function(w){
+ if(!/^\/(tv|r)\/scarytube\/?$/i.test(w.location.pathname)||w.__scaryChatCompatibility)return;
+ w.__scaryChatCompatibility=true;
+ const normalize=data=>data&&typeof data==='object'&&(!data.meta||typeof data.meta!=='object')?Object.assign({},data,{meta:{}}):data;
+ function wrap(owner,key){
+   const original=owner&&owner[key];
+   if(typeof original!=='function'||original.__scaryChatMetaFix)return;
+   function guarded(data,...args){return original.call(this,normalize(data),...args);}
+   guarded.__scaryChatMetaFix=true;
+   owner[key]=guarded;
+ }
+ function install(){
+   wrap(w,'addChatMessage');
+   wrap(w.Callbacks,'chatMsg');
+ }
+ install();
+ // The legacy modules can replace the renderer asynchronously.
+ let count=0;
+ const timer=w.setInterval(()=>{install();if(++count>=120)w.clearInterval(timer);},250);
+})(window);
 /* ScaryTube v1.0: original WrestleTube engine with themed filter guide. */
 (function(w,d){
  if(!/^\/(tv|r)\//i.test(w.location.pathname)||w.__scaryTubeRunning)return;

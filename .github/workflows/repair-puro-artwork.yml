@@ -1,0 +1,83 @@
+name: Repair expired Puro artwork
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/repair-puro-artwork.yml']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Replace only the verified expired MOTD image
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import {chromium} from 'playwright';
+          const channel='puro';
+          const oldPath='/attachments/778840832773586954/859554452980629514/DXXKFVu.png';
+          const nextUrl='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4652d32b2b3d02eb2e921b4de0e411d28930368f/tubes/Puro/assets/puro-wordmark.svg';
+          const browser=await chromium.launch({channel:'chrome',headless:true});
+          const page=await browser.newPage({viewport:{width:1440,height:900}});
+          await fs.mkdir('puro-repair',{recursive:true});
+          const capture=()=>page.evaluate(()=>({name:window.CHANNEL?.name,motd:window.CHANNEL?.motd,css:window.CHANNEL?.css,js:window.CHANNEL?.js,externalCss:window.CHANNEL?.opts?.externalcss,externalJs:window.CHANNEL?.opts?.externaljs}));
+          try{
+            await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
+            const form=page.locator('form[action="/login"]').last();
+            await form.locator('input[name="name"]').fill('buttman-gpt');
+            await form.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);
+            await form.locator('button[type="submit"]').click();
+            await page.waitForLoadState('domcontentloaded');
+            await page.goto('https://baked.live/tv/puro',{waitUntil:'domcontentloaded',timeout:45000});
+            await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.name?.toLowerCase()==='buttman-gpt'&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()==='puro',{timeout:45000});
+            await page.waitForTimeout(5000);
+            const before=await capture();
+            if(typeof before.motd!=='string')throw Error('MOTD not available');
+            const images=await page.evaluate(path=>[...document.querySelectorAll('#motdwrap img')].filter(i=>{try{const u=new URL(i.src);return u.hostname==='media.discordapp.net'&&u.pathname===path}catch{return false}}).map(i=>({src:i.getAttribute('src'),broken:i.complete&&!i.naturalWidth})),oldPath);
+            if(images.length!==1||!images[0].broken)throw Error('Expected exactly one confirmed broken original image');
+            const old=images[0].src;
+            const candidates=[...before.motd.matchAll(/<img\b[^>]*>/gi)].map(m=>m[0]).filter(t=>t.includes(oldPath));
+            if(candidates.length!==1)throw Error('Original markup ambiguous');
+            const match=candidates[0].match(/\bsrc\s*=\s*(["'])(.*?)\1/i);
+            if(!match)throw Error('Missing source attribute');
+            const original=new URL(match[2].replaceAll('&amp;','&'));
+            if(original.hostname!=='media.discordapp.net'||original.pathname!==oldPath)throw Error('Original URL differs');
+            const loaded=await page.evaluate(url=>new Promise(resolve=>{const i=new Image();const timer=setTimeout(()=>resolve(false),15000);i.onload=()=>{clearTimeout(timer);resolve(i.naturalWidth>0)};i.onerror=()=>{clearTimeout(timer);resolve(false)};i.src=url}),nextUrl);
+            if(!loaded)throw Error('Replacement failed image decoding');
+            const next=before.motd.replace(candidates[0],candidates[0].replace(match[0],'src="'+nextUrl+'"'));
+            await fs.writeFile('puro-repair/before.html',before.motd);
+            await fs.writeFile('puro-repair/proposed.html',next);
+            await page.screenshot({path:'puro-repair/before.png'});
+            const set=async(expected,motd)=>{
+              await page.evaluate(({expected,motd})=>{if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.name?.toLowerCase()!=='buttman-gpt'||window.CLIENT?.rank<3||window.CHANNEL?.name?.toLowerCase()!=='puro'||window.CHANNEL.motd!==expected)throw Error('Channel state changed');window.socket.emit('setMotd',{motd})},{expected,motd});
+              for(let i=0;i<80;i++){if((await capture()).motd===motd)return;await page.waitForTimeout(250)}
+              throw Error('MOTD persistence not confirmed');
+            };
+            try{
+              await set(before.motd,next);
+              await page.waitForFunction(url=>[...document.querySelectorAll('#motdwrap img')].some(i=>i.src===url&&i.complete&&i.naturalWidth>0),nextUrl,{timeout:20000});
+              const after=await capture();
+              if(after.motd!==next||['css','js','externalCss','externalJs'].some(k=>after[k]!==before[k]))throw Error('Unexpected settings difference');
+              await page.screenshot({path:'puro-repair/after.png'});
+              console.log('PURO_ARTWORK_REPAIRED '+JSON.stringify({channel,motdOnly:true,cssPreserved:true,jsPreserved:true,decoded:true}));
+            }catch(e){if((await capture()).motd===next)await set(next,before.motd);throw e}
+          }finally{await browser.close()}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: puro-artwork-repair
+          path: puro-repair/
+          retention-days: 30

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "scarytube_chrome_playback_20261125",
+  "request_id": "scarytube_chat_diagnostic_20261125",
   "channel": "ScaryTube",
-  "action": "verify_scarytube_playback"
+  "action": "diagnose_scarytube_chat"
 }

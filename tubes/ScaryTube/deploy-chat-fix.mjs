@@ -44,7 +44,24 @@ export async function deployScaryChatFix({page,request,initial}){
     const pattern='**/tubes/ScaryTube/skin.js*';
     await page.route(pattern,route=>route.fulfill({status:200,contentType:'application/javascript',body:code}));
     await page.reload({waitUntil:'domcontentloaded',timeout:45000});
-    const pilot=await proof();console.log('SCARY_CHAT_PILOT '+JSON.stringify({pilot,network,errors}));
+    const pilot=await proof();
+    const runtime=await page.evaluate(()=>{
+      const w=window;
+      return {ignoreChannelJs:w.USEROPTS?.ignore_channeljs,externalJs:w.CHANNEL?.opts?.externaljs,inlineJsBytes:typeof w.CHANNEL?.js==='string'?w.CHANNEL.js.length:null,
+        scripts:[...document.scripts].map(s=>s.src).filter(Boolean).map(s=>s.split('?')[0]).slice(0,40),
+        callbacks:typeof w.Callbacks?.chatMsg==='function'?String(w.Callbacks.chatMsg).slice(0,1200):null,
+        nativeRenderer:typeof w.addChatMessage==='function'?String(w.addChatMessage).slice(0,900):null,
+        jsControls:[...document.querySelectorAll('input,textarea,button,select')].filter(e=>/channel.?js|external.?js|ignore.?js|custom.?js/i.test(e.id+' '+e.name)).map(e=>({id:e.id,name:e.name,type:e.type,checked:e.checked}))};
+    });
+    console.log('SCARY_CHAT_PILOT '+JSON.stringify({pilot,network,errors,runtime}));
+    if(!passed(pilot)){
+      const boundary=code.indexOf('/* ScaryTube v1.0:');
+      if(boundary<1)throw Error('Compatibility patch boundary missing');
+      await page.evaluate(source=>{(0,eval)(source)},code.slice(0,boundary));
+      const injected=await proof();
+      console.log('SCARY_CHAT_LOCAL_INJECTION '+JSON.stringify({injected,errors}));
+      await fs.writeFile(dir+'/local-injection.json',JSON.stringify({injected,runtime,errors},null,2));
+    }
     await fs.writeFile(dir+'/pilot.json',JSON.stringify({pilot,network,errors},null,2));
     await page.unroute(pattern);
     if(!passed(pilot))throw Error('Isolated test did not pass; live settings unchanged');

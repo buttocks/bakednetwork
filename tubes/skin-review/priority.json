@@ -1,32 +1,14 @@
 [
   {
     "schema": 1,
-    "request_id": "asset_location_NJPWALT",
-    "channel": "NJPWALT",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "asset_location_DG",
-    "channel": "DG",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "asset_location_DGalt",
-    "channel": "DGalt",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "asset_location_joshi",
-    "channel": "joshi",
-    "action": "audit_skin"
-  },
-  {
-    "schema": 1,
-    "request_id": "asset_location_puro",
+    "request_id": "header_followup_20261126_puro",
     "channel": "puro",
+    "action": "audit_skin"
+  },
+  {
+    "schema": 1,
+    "request_id": "header_followup_20261126_ddt",
+    "channel": "ddt",
     "action": "audit_skin"
   }
 ]

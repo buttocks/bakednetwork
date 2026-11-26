@@ -1,0 +1,66 @@
+import fs from 'node:fs/promises';
+const old='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@72a28c8b075659e26dcd91d26f379b3ee460ff1b/tubes/ScaryTube/skin.js';
+const next='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@0c2826b71f2dca6c0cc0a00a2e4f65351a569327/tubes/ScaryTube/skin.js';
+export async function deployScaryChatFix({page,request,initial}){
+  if(String(initial.channel).toLowerCase()!=='scarytube'||initial.rank<3||!initial.loggedIn)throw Error('Verified ScaryTube admin required');
+  const capture=()=>page.evaluate(()=>({externaljs:window.CHANNEL?.opts?.externaljs||'',externalcss:window.CHANNEL?.opts?.externalcss||'',css:window.CHANNEL?.css,js:window.CHANNEL?.js,motd:window.CHANNEL?.motd,rank:window.CLIENT?.rank,connected:!!window.socket?.connected,channel:window.CHANNEL?.name}));
+  const before=await capture();
+  if(![old,next].includes(before.externaljs))throw Error('Unexpected external JS; no change');
+  const dir='tubes/bridge/backup/ScaryTube/chat-fix';
+  await fs.mkdir(dir,{recursive:true});await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));
+  const response=await page.request.get(next,{timeout:25000});
+  const code=await response.text();const mime=response.headers()['content-type'];
+  console.log('SCARY_CHAT_CDN '+JSON.stringify({status:response.status(),mime,bytes:code.length}));
+  if(!response.ok()||!code.includes('__scaryChatMetaFix'))throw Error('Candidate CDN source not available');
+  new Function(code);await response.dispose();
+  const errors=[],network=[];
+  page.on('pageerror',e=>errors.push(String(e.message).slice(0,250)));
+  page.on('response',r=>{if(r.url().includes('/ScaryTube/skin.js'))network.push({status:r.status(),url:r.url().split('?')[0]});});
+  async function proof(){
+    await page.waitForTimeout(8000);
+    return await page.evaluate(()=>{
+      const w=window,b=document.querySelector('#messagebuffer'),fn=w.addChatMessage,cb=w.Callbacks?.chatMsg;
+      const result={skinRunning:!!w.__scaryTubeRunning,patchRunning:!!w.__scaryChatCompatibility,handlerWrapped:!!fn?.__scaryChatMetaFix,callbackWrapped:!!cb?.__scaryChatMetaFix,connected:!!w.socket?.connected,tests:[]};
+      if(!b||typeof fn!=='function')return result;
+      const last=w.LASTCHAT&&{...w.LASTCHAT};
+      const marker='Local chat proof '+Date.now();
+      for(const [i,test] of ['normal','missing-meta','callback-missing-meta'].entries()){
+        const time=Date.now()+10000+i*10;
+        const data={username:'LocalDiagnostic',msg:marker+' '+test,time,...(test==='normal'?{meta:{}}:{})};
+        try{
+          if(test==='callback-missing-meta'){if(typeof cb!=='function')throw Error('Callback inaccessible');cb.call(w.Callbacks,data);}
+          else fn(data);
+          result.tests.push({test,rendered:b.textContent.includes(marker+' '+test)});
+        }catch(e){result.tests.push({test,rendered:false,error:String(e.message).slice(0,250)});}
+      }
+      for(const node of [...b.children])if(node.textContent.includes(marker))node.remove();
+      if(last&&w.LASTCHAT)Object.assign(w.LASTCHAT,last);
+      return result;
+    });
+  }
+  const passed=p=>p.connected&&p.patchRunning&&p.handlerWrapped&&p.tests.length===3&&p.tests.every(t=>t.rendered);
+  // Substitute only the old public script response in this test browser; no live write.
+  if(before.externaljs===old){
+    const pattern='**/tubes/ScaryTube/skin.js*';
+    await page.route(pattern,route=>route.fulfill({status:200,contentType:'application/javascript',body:code}));
+    await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+    const pilot=await proof();console.log('SCARY_CHAT_PILOT '+JSON.stringify({pilot,network,errors}));
+    await fs.writeFile(dir+'/pilot.json',JSON.stringify({pilot,network,errors},null,2));
+    await page.unroute(pattern);
+    if(!passed(pilot))throw Error('Isolated test did not pass; live settings unchanged');
+  }
+  async function set(url){
+    await page.evaluate(externaljs=>{if(!window.socket?.connected||window.CLIENT?.rank<3||String(window.CHANNEL?.name).toLowerCase()!=='scarytube')throw Error('Admin connection lost');window.socket.emit('setOptions',{externaljs});},url);
+    for(let i=0;i<60;i++){if((await capture()).externaljs===url)return;await page.waitForTimeout(250);}
+    throw Error('External script update not confirmed');
+  }
+  try{
+    if(before.externaljs!==next)await set(next);
+    await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+    const live=await proof(),after=await capture();
+    console.log('SCARY_CHAT_LIVE '+JSON.stringify({live,network,errors}));
+    await fs.writeFile(dir+'/after.json',JSON.stringify({after,live,network,errors},null,2));
+    if(!passed(live)||after.externaljs!==next||['externalcss','css','js','motd'].some(k=>after[k]!==before[k]))throw Error('Live verification failed');
+    return {request_id:request.request_id,channel:request.channel,action:request.action,status:'chat-fix-installed',live};
+  }catch(e){if(before.externaljs!==next&&(await capture()).externaljs===next)await set(before.externaljs);throw e;}
+}

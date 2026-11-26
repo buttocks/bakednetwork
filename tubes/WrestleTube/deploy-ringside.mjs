@@ -50,39 +50,41 @@ try{
  await p.waitForTimeout(5000);
  before=await state();assert.ok(auth(before)&&hasFeed(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
- // Existing four-menu header: update only the live MOTD's four opening tags.
- // No stylesheet, channel JS, external setting or playlist write is necessary.
+ // Existing header: the server strips the HTML name attribute, so use an opt-in channel script.
  if(before.sections===4){
-  targetCss=before.css;
-  let matched=0;
-  targetMotd=before.motd.replace(/<details\b[^>]*>/gi,tag=>{
-   const cls=tag.match(/\bclass\s*=\s*["']([^"']*)["']/i)?.[1]?.split(/\s+/)||[];
-   if(!cls.some(c=>['wt-house-rules','wt-playlist-menu','wt-chat-menu','wt-community-menu'].includes(c)))return tag;
-   matched++;
-   if(/\bname\s*=/i.test(tag)){
-    if(!/\bname\s*=\s*["']wt-main-header-menu["']/i.test(tag))throw Error('Unexpected dropdown group; no change');
-    return tag;
+  const patch="/* BEGIN WRESTLETUBE HEADER ACCORDION */\n(function(){\n if(!/^\\/(tv|r)\\/wrestling\\/?$/i.test(location.pathname)||window.__wtHeaderAccordion)return;\n window.__wtHeaderAccordion=true;\n const selector='#motd .wt-info-bar.wt-sections-v5>details';\n document.addEventListener('toggle',function(e){\n  const menu=e.target;\n  if(!(menu instanceof HTMLDetailsElement)||!menu.open||!menu.matches(selector))return;\n  for(const other of document.querySelectorAll(selector))if(other!==menu&&other.open)other.open=false;\n },true);\n})();\n/* END WRESTLETUBE HEADER ACCORDION */";
+  const menus=p.locator(menuSelector);
+  async function testAccordion(){
+   for(const e of await menus.all())if(await e.evaluate(x=>x.open))await e.locator(':scope>summary').click();
+   for(const i of [0,1,2,3,0,2,1,3]){
+    await menus.nth(i).locator(':scope>summary').click();
+    await p.waitForFunction(({selector,i})=>[...document.querySelectorAll(selector)].every((e,j)=>e.open===(i===j)),{selector:menuSelector,i},{timeout:3000});
    }
-   return tag.replace(/^<details/i,'<details name="wt-main-header-menu"');
-  });
-  assert.equal(matched,4,'Unexpected live menu markup; no change');
-  await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
-  const original=await p.locator('#motd').evaluate((e,html)=>{const old=e.innerHTML;e.innerHTML=html;return old},targetMotd);
-  try{await verifyExclusive()}finally{await p.locator('#motd').evaluate((e,html)=>e.innerHTML=html,original)}
-  if(targetMotd!==before.motd){
-   const applied=await write('motd',before.motd,targetMotd,before.css);
-   motdWritten=true;targetMotd=applied.motd;
+   await menus.nth(3).locator(':scope>summary').click();
+   assert.ok(await menus.evaluateAll(es=>es.every(e=>!e.open)));
   }
+  await fs.writeFile(dir+'/before.js',before.js);
+  const next=before.js.includes('/* BEGIN WRESTLETUBE HEADER ACCORDION */')?before.js:before.js.trimEnd()+'\n\n'+patch+'\n';
+  // Verify the exact add-on in this isolated browser, never changing the user's script permission.
+  await p.evaluate(source=>{(0,eval)(source)},patch);
+  await testAccordion();
+  async function setJS(expected,value){
+   await p.evaluate(({expected,value,b})=>{
+    const c=window.CHANNEL,o=c.opts||{};
+    if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.rank<3||window.CLIENT?.name?.toLowerCase()!=='buttman-gpt'||c.name?.toLowerCase()!=='wrestling'||c.js!==expected||c.css!==b.css||c.motd!==b.motd||(o.externalcss||'')!==b.externalCss||(o.externaljs||'')!==b.externalJs)throw Error('Concurrent settings change; no write');
+    window.socket.emit('setChannelJS',{js:value});
+   },{expected,value,b:{css:before.css,motd:before.motd,externalCss:before.externalCss,externalJs:before.externalJs}});
+   for(let i=0;i<100;i++){if((await state()).js===value)return;await p.waitForTimeout(250)}
+   throw Error('Inline script persistence not confirmed');
+  }
+  if(next!==before.js)await setJS(before.js,next);
   await p.reload({waitUntil:'domcontentloaded',timeout:45000});
-  await p.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&document.querySelectorAll('#motd .wt-info-bar.wt-sections-v5>details').length===4,{timeout:45000});
-  await verifyExclusive();
-  const after=await state();
-  assert.ok(auth(after));
-  assert.equal(after.motd,targetMotd);
-  assert.equal(after.css,before.css);assert.equal(after.js,before.js);
-  assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);
-  await p.screenshot({path:dir+'/after.png'});
-  const report={status:'exclusive-dropdowns-verified',menus:4,motdOnly:true,cssPreserved:true,jsPreserved:true,externalSettingsPreserved:true,queueWrites:0};
+  await p.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&document.querySelectorAll('#motd .wt-info-bar.wt-sections-v5>details').length===4,null,{timeout:45000});
+  const after=await state();assert.ok(auth(after));assert.equal(after.js,next);assert.equal(after.css,before.css);assert.equal(after.motd,before.motd);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);
+  // Respect the site's script approval mechanism; do not force or bypass it.
+  const running=await p.evaluate(()=>!!window.__wtHeaderAccordion);
+  if(running){try{await testAccordion()}catch(e){if(next!==before.js)await setJS(next,before.js);throw e}}
+  const report={status:running?'exclusive-dropdowns-verified':'saved-user-script-approval-required',isolatedBrowserTest:true,menus:4,motdPreserved:true,cssPreserved:true,existingJsPreserved:true,externalSettingsPreserved:true,queueWrites:0};
   await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));console.log('WRESTLETUBE_RINGSIDE '+JSON.stringify(report));
  }else{
  const dimensions=await p.evaluate(url=>new Promise(resolve=>{const i=new Image(),t=setTimeout(()=>resolve(null),15000);i.onload=()=>{clearTimeout(t);resolve([i.naturalWidth,i.naturalHeight])};i.onerror=()=>{clearTimeout(t);resolve(null)};i.src=url}),image);

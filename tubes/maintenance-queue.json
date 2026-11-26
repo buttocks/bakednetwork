@@ -25,8 +25,9 @@
     },
     {
       "id": "puro-artwork",
-      "status": "pending-asset-selection",
-      "mode": "review exact MOTD artwork and choose replacement"
+      "status": "functional-replacement-verified",
+      "mode": "retain current artwork unless operator requests redesign",
+      "evidence": "Current hosted Puro wordmark loaded in audits 45864699303 and deployment 45865596415; no broken visible images. Original expired Discord image was replaced previously."
     },
     {
       "id": "wrestling-base-rollout",
@@ -95,7 +96,7 @@
       "id": "joshi-feed-visibility",
       "status": "deployed-verified",
       "workflow": "targeted-header-followup.yml",
-      "mode": "exact owned iframe only; add if missing; no moves, deletion, playback or skin changes",
+      "mode": "one approved native move of existing owned iframe; no add, delete or playback changes",
       "evidence": "Run 45865596415 Joshi job passed. UID 12 moved from live position 18 to 1; all 456 entries, relative order of other entries, and current playback preserved."
     }
   ]

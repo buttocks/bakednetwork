@@ -9,6 +9,15 @@
       "goodStreak": 0,
       "badStreak": 0,
       "pageBadStreak": 0
+    },
+    "nwa-tna-early": {
+      "available": true,
+      "verification": "Chrome nested iframe: Dailymotion program decoded moving video at scheduled seek; run 45732947139",
+      "verifiedDate": "2026-11-26",
+      "automatedPlayback": "verified",
+      "goodStreak": 1,
+      "badStreak": 0,
+      "pageBadStreak": 0
     }
   }
 }

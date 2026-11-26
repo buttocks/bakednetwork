@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "channels": {
+    "roh": {
+      "available": null,
+      "verification": "awaiting metadata discovery and hosted playback verification"
+    }
+  }
+}

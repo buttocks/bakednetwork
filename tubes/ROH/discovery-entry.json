@@ -1,0 +1,22 @@
+{
+  "directory": "ROH",
+  "key": "roh",
+  "archive_ids": [],
+  "archive_title_pattern": "(?i)\\bRing[ -]+of[ -]+Honor\\b",
+  "youtube_title_pattern": "(?i)(?:full\\s*(?:match|episode|event|show|ppv)|classic\\s*match|free\\s*match|throwback\\s*thursday|ROH (?:TV|YouTube) special)",
+  "youtube_search_queries": [
+    "full match",
+    "full event",
+    "ROH special"
+  ],
+  "youtube_channels": [
+    {
+      "id": "UC4_uDa6w1kOyzsikIzReCKQ",
+      "name": "Ring of Honor Wrestling"
+    }
+  ],
+  "youtube_candidate_ids": [
+    "F8wM0O5FZDY"
+  ],
+  "seed_count": 0
+}

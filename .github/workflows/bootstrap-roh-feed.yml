@@ -1,0 +1,93 @@
+name: Bootstrap missing ROH feed
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/bootstrap-roh-feed.yml']
+permissions:
+  contents: write
+concurrency:
+  group: baked-roh-onboarding
+  cancel-in-progress: false
+jobs:
+  bootstrap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Verify ROH channel and playlist permissions without modifying it
+        run: |
+          node --input-type=module <<'JS'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const b=await chromium.launch({channel:'chrome',headless:true});
+          try{
+            const p=await b.newPage();
+            await p.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
+            const f=p.locator('form[action="/login"]').last();
+            await f.locator('input[name="name"]').fill('buttman-gpt');
+            await f.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);
+            await f.locator('button[type="submit"]').click();
+            await p.waitForLoadState('domcontentloaded');
+            await p.goto('https://baked.live/tv/roh',{waitUntil:'domcontentloaded',timeout:45000});
+            await p.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.name?.toLowerCase()==='buttman-gpt'&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()==='roh',{timeout:45000});
+            await p.waitForTimeout(4000);
+            const info=await p.evaluate(()=>({slug:window.CHANNEL.name,rank:window.CLIENT.rank,count:document.querySelectorAll('#queue .queue_entry').length,add:!!window.hasPermission('playlistadd'),custom:!!window.hasPermission('playlistaddcustom'),permanent:!!window.hasPermission('addnontemp'),cssBytes:typeof window.CHANNEL.css==='string'?window.CHANNEL.css.length:null,externalCss:!!window.CHANNEL.opts?.externalcss}));
+            console.log('ROH_AUTH '+JSON.stringify(info));
+            fs.writeFileSync('roh-auth.json',JSON.stringify(info));
+          }finally{await b.close()}
+          JS
+      - name: Discover official embeddable ROH full matches
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          sys.path.insert(0,'tubes/feeds')
+          import discover
+          root=Path('tubes/ROH')
+          entry=discover.load(root/'discovery-entry.json')
+          defaults=discover.load(discover.CONFIG)['defaults']
+          if not os.environ.get('YOUTUBE_DATA_API_KEY'):raise SystemExit('YouTube API secret unavailable')
+          programs=list({p['url']:p for p in discover.youtube(entry,defaults)}.values())[:60]
+          if len(programs)<3:raise SystemExit('Insufficient official playable metadata; no catalog published')
+          discover.write(root/'programs.json',{'schema':1,'seed':'roh-official','channels':{'roh':{'name':'BAKED TV · RING OF HONOR','description':'Official Ring of Honor matches and events','programs':programs}}})
+          print('ROH_CATALOG',len(programs))
+          c=discover.load(Path('tubes/channels.json'))
+          a=json.load(open('roh-auth.json'))
+          if not any(x['slug'].lower()=='roh' for x in c['channels']):
+              c['channels'].append({'slug':a['slug'],'directory':'tubes/ROH','stage':'onboarding','adminVerified':True,'backupVerified':False,'skinReview':'pending'})
+              discover.write(Path('tubes/channels.json'),c)
+          cfg=discover.load(discover.CONFIG)
+          if not any(x['key']=='roh' for x in cfg['channels']):
+              entry['seed_count']=len(programs)
+              cfg['channels'].append(entry)
+              discover.write(discover.CONFIG,cfg)
+          PY
+      - name: Publish verified metadata (queue insertion deferred until browser playback)
+        run: |
+          git config user.name 'Baked TV Discovery Bot'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tubes/ROH/programs.json tubes/channels.json tubes/feeds/discovery.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Register authenticated ROH tube and official full-match catalog'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: roh-bootstrap
+          path: |
+            roh-auth.json
+            tubes/ROH/programs.json
+          retention-days: 7

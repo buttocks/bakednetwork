@@ -1,0 +1,1 @@
+Upload the recovered original photo here as `wrestletube-ring.jpg`. Do not use an unrelated image.

@@ -1,0 +1,40 @@
+/* BEGIN WRESTLETUBE RINGSIDE RESTORATION v1 — staged, not live */
+:root{--wt-ring-bg:url("https://buttocks.github.io/bakednetwork/tubes/WrestleTube/assets/wrestletube-ring.jpg");--wt-accent:#d93c4b;--wt-text:#eaeaf0;--wt-border:#45434b}
+body:not(.cinemachat){background-color:#050507!important;background-image:linear-gradient(0deg,#05050755,#05050715),var(--wt-ring-bg)!important;background-size:cover!important;background-position:center center!important;background-repeat:no-repeat!important;background-attachment:fixed!important}
+body:not(.cinemachat) #wrap#wrap{background:transparent!important}
+body:not(.cinemachat) #motdrow{background:transparent!important}
+body:not(.cinemachat) #footer{background:transparent!important}
+#motdwrap#motdwrap{padding:0!important;background:#121217ed!important;border:1px solid var(--wt-border)!important;border-radius:7px!important;overflow:visible!important;margin:8px 0 12px!important}
+#motdwrap #motd{padding:0!important}
+#motdwrap .wt-broadcast-header{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(85px,170px) auto;align-items:center;gap:clamp(8px,2vw,24px);min-height:112px;position:relative;box-sizing:border-box;padding:14px 24px!important;border-bottom:3px solid var(--wt-accent);border-radius:6px 6px 0 0;text-align:left!important;background:linear-gradient(110deg,#080809ef,#381019d9 55%,#09090bd9),var(--wt-ring-bg)!important;background-size:cover!important;background-position:center 46%!important}
+#motdwrap .wt-kicker{font:800 10px/1.4 system-ui,Arial,sans-serif!important;letter-spacing:.18em;color:#ddd!important}
+#motdwrap .wt-brand{font:950 clamp(30px,5vw,66px)/1 Impact,"Arial Black",system-ui,sans-serif!important;color:#fff!important;text-shadow:3px 3px #000;letter-spacing:-.035em}
+#motdwrap .wt-brand span{color:#f16a76!important}
+#motdwrap .wt-tagline{font:750 10px/1.4 system-ui,Arial,sans-serif!important;letter-spacing:.1em;color:#ddd!important;margin-top:5px}
+#motdwrap .wt-channel-badge{border:1px solid var(--wt-accent);border-radius:4px;background:#080809dc;padding:10px 12px;text-align:center;color:#fff!important;white-space:nowrap;font:800 12px/1.5 system-ui,sans-serif!important;letter-spacing:.08em}
+#motdwrap .wt-channel-badge small{display:block;color:#c2b9bd!important;font-size:10px}
+#motdwrap .wt-ringmark{width:100px;height:58px;position:relative;justify-self:center;transform:skewY(-9deg);border:3px solid #e6e6e6;border-top:none;box-shadow:0 2px 0 #888}
+#motdwrap .wt-ringmark span{position:absolute;left:0;right:0;border-top:2px solid #e6e6e6}
+#motdwrap .wt-ringmark span:nth-child(1){top:9px}#motdwrap .wt-ringmark span:nth-child(2){top:21px}#motdwrap .wt-ringmark span:nth-child(3){top:33px}#motdwrap .wt-ringmark span:nth-child(4){bottom:4px;border-color:#aaa}
+#motdwrap .wt-house-rules{padding:6px 10px!important;text-align:center!important;background:#111217!important;color:var(--wt-text)!important}
+#motdwrap .wt-house-rules>summary{display:inline-block!important;list-style:none!important;cursor:pointer;padding:5px 12px!important;background:#241b20;border:1px solid #ac3946;border-radius:5px;color:#f5dce0!important;font:750 12px/1.4 system-ui,sans-serif!important}
+#motdwrap .wt-house-rules>summary::-webkit-details-marker{display:none}
+#motdwrap .wt-house-rules>summary::after{content:" ▾"}
+#motdwrap .wt-house-rules[open]>summary::after{content:" ▴"}
+#motdwrap .wt-rules-panel{max-width:620px;margin:8px auto 3px!important;padding:10px 14px!important;background:#1a171d!important;border:1px solid #55333e;border-radius:6px;text-align:left!important;color:var(--wt-text)!important}
+#motdwrap .wt-house-rules:not([open]) .wt-rules-panel{display:none!important}
+#motdwrap .wt-rules-panel ol{margin:0;padding-left:20px;font:500 13px/1.55 system-ui,sans-serif}
+#motdwrap .wt-rules-panel li::marker{font-weight:800}
+#motdwrap .wt-help,#motdwrap .wt-help-details{margin-top:8px;border-top:1px solid #4a3b40;padding-top:7px;font-size:12px}
+#motdwrap .wt-help-details summary{cursor:pointer;color:#f0bdc4!important}
+#motdwrap .wt-help a{color:#f0bdc4!important}
+body nav.navbar,body #nav-collapsible{background:#101014!important;color:var(--wt-text)!important}
+body nav.navbar .nav>li>a{color:var(--wt-text)!important}
+body nav.navbar{border-bottom:2px solid var(--wt-accent)!important}
+body .modal-content,body .modal-header,body .modal-body,body .modal-footer{background:#19191f!important;border-color:var(--wt-border)!important;color:var(--wt-text)!important}
+body:not(.cinemachat) #messagebuffer,body:not(.cinemachat) #userlist,body:not(.cinemachat) #queue{background-color:#15151ce8!important;border-color:var(--wt-border)!important}
+body:not(.cinemachat) #chatheader,body:not(.cinemachat) #currenttitle,body:not(.cinemachat) #videowrap-header{background:#23232b!important;color:var(--wt-text)!important}
+body:not(.cinemachat) #queue .queue_entry.queue_active{background:#42212a!important;border-left:3px solid var(--wt-accent)!important}
+body.cinemachat .wt-broadcast-header,body.cinemachat .wt-house-rules{display:none!important}
+@media(max-width:760px){#motdwrap .wt-broadcast-header{grid-template-columns:minmax(0,1fr) auto;padding:12px!important;gap:8px;min-height:96px}#motdwrap .wt-channel-badge{display:none!important}#motdwrap .wt-brand{font-size:clamp(27px,6vw,45px)!important}#motdwrap .wt-ringmark{width:68px;height:52px}#motdwrap .wt-kicker,#motdwrap .wt-tagline{font-size:9px!important;letter-spacing:.04em}}
+/* END WRESTLETUBE RINGSIDE RESTORATION v1 */

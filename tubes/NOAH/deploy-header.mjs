@@ -35,13 +35,13 @@ try{
  await p.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()==='noah',{timeout:45000});
  await p.waitForTimeout(5000);
  before=await state();assert.ok(auth(before)&&hasFeed(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string'&&!before.externalCss);
- if(before.motd.includes('noah-rules-only-v21')&&before.css.includes('v2.1: eliminate legacy red')){assert.ok(check(before),'Existing NOAH masthead failed validation');console.log('NOAH_HEADER '+JSON.stringify({status:'already-verified',queue:before.entries.length,logo:before.logo,header:before.header,wordmark:before.wordmark}));}else{
+ if(before.motd.includes('noah-rules-only-v22')&&before.css.includes('v2.1: eliminate legacy red')){assert.ok(check(before),'Existing NOAH masthead failed validation');console.log('NOAH_HEADER '+JSON.stringify({status:'already-verified',queue:before.entries.length,logo:before.logo,header:before.header,wordmark:before.wordmark}));}else{
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
  // The old rules/links modals, welcome and other old MOTD markup are
  // intentionally discarded. Preserve the working masthead logo.
  const rules=['Limit off topic posts in the playlist','Respect other tubers',"Don't break kayfabe",'No embedding NSFW images','No advertising of any kind','Have fun!'];
  const logo=before.logo?.src&&before.logo.naturalWidth>100?'<img class="noah-original-logo" src="'+escape(before.logo.src)+'" alt="Pro Wrestling NOAH">':'<div class="noah-wordmark">NOAH</div>';
- targetMotd='<div class="noah-masthead"><div class="noah-identity"><div class="noah-overline">BAKED NETWORK / PURORESU</div><div class="noah-brand">PRO WRESTLING NOAH</div><div class="noah-tagline">GHC CHAMPIONSHIPS &bull; CLASSIC MATCHES &bull; NOAH TV</div></div>'+logo+'<div class="noah-tv-mark">NOAH TV<small>24/7 WRESTLING</small></div></div><details class="noah-rules noah-rules-only-v21"><summary>Rules</summary><div class="noah-rules-content"><ol>'+rules.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ol></div></details>';
+ targetMotd='<div class="noah-masthead"><div class="noah-identity"><div class="noah-overline">BAKED NETWORK / PURORESU</div><div class="noah-brand">PRO WRESTLING NOAH</div><div class="noah-tagline">LIVE EVENTS &bull; GHC CHAMPIONSHIPS &bull; CLASSIC MATCHES</div></div>'+logo+'<div class="noah-tv-mark">NOAH TV<small>LIVE EVENTS + 24/7</small></div></div><details class="noah-rules noah-rules-only-v22"><summary>Rules</summary><div class="noah-rules-content"><ol>'+rules.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ol></div></details>';
  targetCss=before.css.replace(/\/\* BEGIN NOAH RINGSIDE MASTHEAD v2 \*\/[\s\S]*?\/\* END NOAH RINGSIDE MASTHEAD v2 \*\//g,'').trimEnd()+'\n\n'+template;
  assert.ok(Buffer.byteLength(targetCss)<24000,'CSS size limit');
  await fs.writeFile(dir+'/proposed.css',targetCss);await fs.writeFile(dir+'/proposed-motd.html',targetMotd);

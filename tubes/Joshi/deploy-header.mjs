@@ -135,7 +135,17 @@ try{
    '#queue{background:#2b2434!important;border-color:#685b78!important}',
    '#queue .queue_entry:not(.queue_active):not(.active):not(.queue_temp){background-color:#352c40!important;color:#f5edf9!important;border-color:#6b597a!important}',
    '#queue .queue_active,#queue .queue_entry.active{background-color:#625174!important;color:#fff!important}',
-   '#chatwrap .btn-default,#queue .btn-default,#playlistcontrols .btn-default{background:#f1e7fa!important;color:#352442!important;border-color:#9c83b4!important;text-shadow:none!important}',
+   // Unified flat mauve controls; preserve semantic danger/success and disabled states.
+   ...(()=>{const b='body :is(#wrap,#main,#mainpage,#chatwrap,#videowrap,#queue,#playlistcontrols,#leftcontrols,#rightcontrols,#customcontrols,#leftpane,#rightpane) :is(.btn,button.dropdown-toggle),body :is(.btn-group,.input-group-btn)>.btn,body :is(button,a,input).btn';const selectors=b.split(/,(?=body )/);const q=(suffix)=>selectors.map(s=>s+suffix).join(',');return [
+    q(':not(.btn-danger):not(.btn-success)')+'{background:#514260!important;color:#fff5ff!important;border:1px solid #917ba5!important;border-radius:4px!important;text-shadow:none!important;box-shadow:none!important;font-weight:600!important}',
+    q(':not(.btn-danger):not(.btn-success):hover')+'{background:#69557b!important;color:#fff!important;border-color:#c1a9d6!important}',
+    q(':not(.btn-danger):not(.btn-success):is(:active,.active,[aria-expanded="true"])')+'{background:#392c49!important;color:#fff!important;border-color:#c1a9d6!important;box-shadow:inset 0 1px 3px #241b30!important}',
+    q(':focus-visible')+'{outline:2px solid #e7c9ff!important;outline-offset:2px!important}',
+    q(':is(:disabled,.disabled,[aria-disabled="true"])')+'{opacity:.55!important;cursor:not-allowed!important}',
+    '#motdwrap .jts-bar>details>summary{background:#514260!important;color:#fff5ff!important;border-color:#917ba5!important;text-shadow:none!important;box-shadow:none!important}',
+    '#motdwrap .jts-bar>details>summary:hover{background:#69557b!important;border-color:#c1a9d6!important}',
+    '#playlistcontrols .btn,#leftcontrols .btn,#rightcontrols .btn,#customcontrols .btn{min-height:30px!important;padding:5px 9px!important}'
+   ]})(),
    ...(schedule?[schedule+'{background:#2f263d!important;color:#f7f0ff!important;border:1px solid #806b99!important;border-radius:7px!important;padding:10px 12px!important;box-sizing:border-box}',schedule+' li{color:#f7f0ff!important;line-height:1.55;margin:3px 0}',schedule+' a{color:#e6c9ff!important;text-decoration:underline}']:[])
   ].join('\n')+'\n'+markerEnd;
   let base=before.css.replace(/\/\* BEGIN JOSHI SKIN CONTRAST v2 \*\/[\s\S]*?\/\* END JOSHI SKIN CONTRAST v2 \*\//g,'').replace(/\/\* JOSHI LOGO CONTRAST \*\/\s*#motdwrap\s+\.jts-header\{background:linear-gradient\(110deg,#896bb3,#a68bcb,#896bb3\)!important\}/g,'').replace(originalGradient,lighterGradient).trimEnd();

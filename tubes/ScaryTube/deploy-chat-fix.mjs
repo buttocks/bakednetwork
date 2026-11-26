@@ -55,6 +55,26 @@ export async function deployScaryChatFix({page,request,initial}){
     });
     console.log('SCARY_CHAT_PILOT '+JSON.stringify({pilot,network,errors,runtime}));
     if(!passed(pilot)){
+      // Inspect public client loader code and official callback names, not credentials or chat history.
+      const loader=[];
+      for(const name of ['callbacks.js','ui.js','util.js','data.js']){
+        try{
+          const res=await page.request.get('https://baked.live/js/'+name,{timeout:15000});
+          const src=await res.text();
+          const matches=[...src.matchAll(/externaljs|ignore_channeljs|channelJS|channelJs|setChannelJS|customJS|customJs|allowChannelJS|allow_channeljs|channeljs/gi)];
+          loader.push({name,status:res.status(),matches:matches.slice(0,35).map(m=>src.slice(Math.max(0,m.index-150),m.index+220))});
+          await res.dispose();
+        }catch(e){loader.push({name,error:String(e.message).slice(0,150)});}
+      }
+      const native=await page.evaluate(()=>{
+        const w=window;
+        return {callbackNames:Object.keys(w.Callbacks||{}).filter(k=>/css|js|script|option|chat/i.test(k)),
+          callbacks:Object.fromEntries(Object.entries(w.Callbacks||{}).filter(([k,v])=>/channeljs|channelcss|channelopts|channeloptions|setoptions|chatmsg/i.test(k)&&typeof v==='function').map(([k,v])=>[k,String(v).slice(0,3500)])),
+          relevantOptionNames:Object.keys(w.CHANNEL?.opts||{}).filter(k=>/js|script|custom/i.test(k)),
+          relevantPreferences:Object.fromEntries(Object.entries(w.USEROPTS||{}).filter(([k,v])=>/channeljs|customjs|script/i.test(k)&&['boolean','number'].includes(typeof v)))};
+      });
+      console.log('SCARY_CHAT_LOADER '+JSON.stringify({loader,native}));
+      await fs.writeFile(dir+'/loader.json',JSON.stringify({loader,native},null,2));
       const boundary=code.indexOf('/* ScaryTube v1.0:');
       if(boundary<1)throw Error('Compatibility patch boundary missing');
       await page.evaluate(source=>{(0,eval)(source)},code.slice(0,boundary));

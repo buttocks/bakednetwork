@@ -103,7 +103,7 @@
       "id": "ddt-modern-header",
       "status": "deployed-verified",
       "workflow": "deploy-ddt-header.yml",
-      "evidence": "Runs 45867839954 and 45868633707 succeeded; navy header, Rules only, existing logo, live events subtitle, all five queue entries and JS preserved."
+      "evidence": "Runs 45867839954, 45868633707 and 45869340602 passed. Navy Rules-only header, live events subtitle, DDT TUBE wordmark left of original logo, desktop/mobile verified, all five playlist entries and JS preserved."
     }
   ],
   "motdPolicy": {

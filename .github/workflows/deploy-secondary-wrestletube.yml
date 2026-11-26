@@ -1,0 +1,37 @@
+name: Compact secondary WrestleTube headers
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/deploy-secondary-wrestletube.yml','tubes/WrestleTube/secondary/header.css','tubes/WrestleTube/secondary/deploy-header.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-secondary-header-rollout
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        tube: [wrestling2, wrestling3, Wrestling4, wrestling5]
+    env:
+      TUBE: ${{ matrix.tube }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/WrestleTube/secondary/deploy-header.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/WrestleTube/secondary/deploy-header.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: secondary-header-${{ matrix.tube }}
+          path: secondary-header-review/
+          retention-days: 30

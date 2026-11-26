@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import {chromium} from 'playwright';
 const registry=JSON.parse(await fs.readFile('tubes/channels.json','utf8'));
-const allow=new Set(['luchatube','njpw','retrowrestling','wwf-wwe','wid','wcw','joshi','puro','wrestling2','indies','shoot','wrestling3','wrestling4','dgalt','dg','wrestling5','njpwalt','nwa-tna','joshi2','ddt']);
+const allow=new Set(['luchatube','njpw','retrowrestling','wwf-wwe','wcw','joshi','puro','wrestling2','indies','shoot','wrestling3','wrestling4','dgalt','dg','wrestling5','njpwalt','nwa-tna','joshi2','ddt']);
 const scope=registry.channels.filter(c=>c.adminVerified&&allow.has(c.slug.toLowerCase()));
 const batch=Number(process.env.BATCH);
 if(!Number.isInteger(batch)||batch<0||batch>=4)throw Error('Invalid batch');

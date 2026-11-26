@@ -1,0 +1,25 @@
+/* BEGIN DRAGON GATE HEADER v1 */
+#motdwrap#motdwrap{padding:0!important;background:#141419!important;border:1px solid #49414a!important;border-radius:7px!important;overflow:visible!important;margin:8px 0 12px!important}
+#motdwrap#motdwrap #motd{padding:0!important}
+#motdwrap .dgs-header{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:106px;padding:9px 14px!important;box-sizing:border-box;background:linear-gradient(110deg,#101014,#3b3020,#101014)!important;border-bottom:2px solid #d2ad6b;border-radius:6px 6px 0 0;color:#eee;text-align:center!important}
+#motdwrap .dgs-kicker{font:800 10px/1.3 system-ui,Arial,sans-serif!important;letter-spacing:.18em;color:#ddd!important}
+#motdwrap .dgs-header img.dgs-logo{display:block!important;position:static!important;width:auto!important;height:68px!important;max-width:95%!important;max-height:68px!important;min-width:0!important;min-height:0!important;object-fit:contain!important;margin:0 auto!important;filter:none!important}
+#motdwrap .dgs-purpose{font:750 11px/1.4 system-ui,Arial,sans-serif!important;letter-spacing:.05em;color:#eee!important}
+#motdwrap .dgs-bar{display:flex!important;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:7px;padding:6px 10px!important;background:#111217!important;color:#eee!important}
+#motdwrap .dgs-bar>details{display:block!important;padding:0!important;margin:0!important;max-width:100%;text-align:left!important}
+#motdwrap .dgs-bar>details>summary{display:table!important;list-style:none!important;cursor:pointer;margin:0 auto!important;padding:5px 12px!important;border:1px solid #67563e!important;border-radius:5px!important;background:#29231a!important;color:#f3ead7!important;font:750 12px/1.4 system-ui,Arial,sans-serif!important;white-space:nowrap}
+#motdwrap .dgs-bar>details>summary::-webkit-details-marker{display:none}
+#motdwrap .dgs-bar>details>summary::after{content:" ▾"}
+#motdwrap .dgs-bar>details[open]>summary::after{content:" ▴"}
+#motdwrap .dgs-bar>details[open]{flex:0 1 100%;order:1}
+#motdwrap .dgs-bar>details>summary:hover{background:#42351f!important;border-color:#d2ad6b!important}
+#motdwrap .dgs-panel{width:min(680px,100%);max-width:680px;max-height:55vh;overflow:auto;box-sizing:border-box;margin:7px auto 2px!important;padding:10px 15px!important;background:#19171d!important;border:1px solid #67563e;border-radius:6px;color:#eaeaf0!important;text-align:left!important;font:500 13px/1.5 system-ui,Arial,sans-serif!important}
+#motdwrap .dgs-panel a{color:#efd3a0!important}
+#motdwrap .dgs-panel img{max-width:100%;height:auto}
+#motdwrap .dgs-bar>details:not([open])>.dgs-panel{display:none!important}
+body.cinemachat .dgs-header,body.cinemachat .dgs-bar{display:none!important}
+@media(max-width:760px){#motdwrap .dgs-header img.dgs-logo{height:56px!important;max-height:56px!important}#motdwrap .dgs-header{min-height:92px!important}#motdwrap .dgs-purpose{font-size:10px!important}}
+#motdwrap .dgs-panel .dgs-links-heading{font-size:12px;font-weight:800;color:#efd3a0;border-top:1px solid #67563e;padding-top:8px;margin-top:10px}
+#motdwrap .dgs-panel ol,#motdwrap .dgs-panel ul{padding-left:22px}
+#motdwrap .dgs-panel .modal-footer,#motdwrap .dgs-panel [data-dismiss="modal"]{display:none!important}
+/* END DRAGON GATE HEADER v1 */

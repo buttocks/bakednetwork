@@ -93,10 +93,10 @@
     },
     {
       "id": "joshi-feed-visibility",
-      "status": "verification-in-progress",
+      "status": "present-visibility-followup",
       "workflow": "verify-joshi-feed.yml",
       "mode": "exact owned iframe only; add if missing; no moves, deletion, playback or skin changes",
-      "evidence": "Operator reports Baked TV entry not visible in Joshi; run 45865037759 checks position and restores if absent."
+      "evidence": "Run 45865037759 succeeded. Exactly one permanent BAKED TV — JOSHI entry, position 13 of 456, UID 12, not playing. No playlist writes. Consider moving existing entry to top with operator approval."
     }
   ]
 }

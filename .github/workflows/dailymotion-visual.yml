@@ -1,0 +1,63 @@
+name: Dailymotion visual comparison
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/dailymotion-visual.yml'
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Capture visual comparison and live embed responses
+        run: |
+          node --input-type=module <<'JS'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs';
+          const url='https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/dailymotion-test.html';
+          // The local fixture is the exact committed test page, at its intended origin.
+          // Only the test page is intercepted. The actual player endpoints remain live.
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          fs.mkdirSync('dailymotion-visual',{recursive:true});
+          try{
+            for(const id of ['x84sh87','x3bombh']){
+              const page=await browser.newPage({viewport:{width:1440,height:950}});
+              const responses=[],errors=[];
+              await page.route(url+'*',route=>route.fulfill({contentType:'text/html',body:fs.readFileSync('tubes/NWA-TNA/dailymotion-test.html','utf8')}));
+              page.on('response',r=>{if(r.request().resourceType()==='document'&&/dailymotion\.com/.test(r.url()))responses.push({url:r.url(),status:r.status()})});
+              page.on('pageerror',e=>errors.push(e.message));
+              await page.goto(url+'?video='+id,{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForTimeout(12000);
+              await page.screenshot({path:'dailymotion-visual/'+id+'-initial.png',fullPage:true});
+              for(const name of ['old','modern']){
+                try{await page.locator('#'+name+' iframe').click({position:{x:200,y:110},timeout:4000});}catch{}
+              }
+              await page.waitForTimeout(15000);
+              await page.screenshot({path:'dailymotion-visual/'+id+'-after-click.png',fullPage:true});
+              const frames=[];
+              for(const f of page.frames().slice(1)){
+                try{frames.push({url:f.url(),state:await f.evaluate(()=>({text:document.body?.innerText.slice(0,350),videos:Array.from(document.querySelectorAll('video')).map(v=>({width:v.videoWidth,height:v.videoHeight,time:v.currentTime,paused:v.paused}))}))});}catch{}
+              }
+              const result={id,responses,frames,errors};
+              fs.writeFileSync('dailymotion-visual/'+id+'.json',JSON.stringify(result,null,2));
+              console.log('DM_VISUAL '+JSON.stringify(result));
+              await page.close();
+            }
+          }finally{await browser.close();}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dailymotion-visual
+          path: dailymotion-visual/
+          retention-days: 30

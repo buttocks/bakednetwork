@@ -677,6 +677,24 @@
           "duration": 2010,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Sid Vicious: WCW Halloween Havoc 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=qri_u0yhkoU",
+          "youtube_id": "qri_u0yhkoU",
+          "duration": 802,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Vader vs. Cactus Jack | Texas Death Match: Halloween Havoc 1993",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Wb9tHuTvnoU",
+          "youtube_id": "Wb9tHuTvnoU",
+          "duration": 1116,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

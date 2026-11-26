@@ -1,0 +1,94 @@
+name: Audit multipart queues
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/audit-multipart-queues.yml'
+      - 'tubes/feeds/multipart.js'
+      - 'tubes/feeds/test-multipart.mjs'
+permissions:
+  contents: read
+concurrency:
+  group: baked-live-iframe-bridge
+  cancel-in-progress: false
+jobs:
+  catalogs:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --experimental-default-type=module tubes/feeds/test-multipart.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: multipart-catalog-audit
+          path: multipart-catalog-audit.json
+  queues:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        batch: [batch-1, batch-2, batch-3, batch-4, batch-5, batch-6]
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+      BATCH: ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Inspect playlists without moving or deleting entries
+        run: |
+          node --experimental-default-type=module --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {chromium} from 'playwright';
+          import {multipartBlocks} from './tubes/feeds/multipart.js';
+          const channels=[...new Set(JSON.parse(fs.readFileSync('tubes/playlist-review/'+process.env.BATCH+'.json')).map(x=>x.channel))];
+          const browser=await chromium.launch({channel:'chrome',headless:true});
+          const reports=[];
+          for(const channel of channels){
+            const context=await browser.newContext();
+            const page=await context.newPage();
+            let report={channel,status:'unverified',noChangesMade:true};
+            try{
+              await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
+              const form=page.locator('form[action="/login"]').last();
+              await form.locator('input[name="name"]').fill('buttman-gpt');
+              await form.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);
+              await form.locator('button[type="submit"]').click();
+              await page.waitForLoadState('domcontentloaded');
+              await page.goto('https://baked.live/tv/'+channel,{waitUntil:'domcontentloaded',timeout:45000});
+              await page.waitForFunction(c=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.name?.toLowerCase()==='buttman-gpt'&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()===c.toLowerCase(),channel,{timeout:45000});
+              await page.waitForTimeout(4000);
+              const snapshot=await page.evaluate(()=>({playing:window.PL_CURRENT,canMove:!!window.hasPermission?.('playlistmove'),entries:[...document.querySelectorAll('#queue .queue_entry')].map((el,i)=>{
+                const q=window.jQuery(el),m=q.data('media')||{};
+                return {uid:q.data('uid'),position:i+1,title:String(m.title||el.querySelector('.qe_title')?.textContent||'').trim(),type:m.type||'',mediaId:m.id||'',duration:m.seconds||0,owner:'',url:String(q.data('uid')??'')};
+              })}));
+              const entries=snapshot.entries.filter(e=>e.uid!=null&&e.title);
+              if(!entries.length||entries.length!==snapshot.entries.length||new Set(entries.map(e=>e.uid)).size!==entries.length)throw Error('Incomplete or empty queue snapshot');
+              const {blocks,unresolved}=multipartBlocks(entries);
+              const complete=blocks.filter(b=>b.group).map(b=>{
+                const parts=b.parts.map(p=>({uid:p.uid,title:p.title,position:p.position,type:p.type,mediaId:p.mediaId}));
+                return {key:b.group,parts,ordered:parts.every((p,i)=>!i||p.position===parts[i-1].position+1),touchesPlaying:parts.some(p=>String(p.uid)===String(snapshot.playing)),touchesProtectedTop:parts.some(p=>p.position<=60)};
+              });
+              report={...report,status:'audited',count:entries.length,playing:snapshot.playing,canMove:snapshot.canMove,complete,unresolved:unresolved.map(g=>({key:g.key,expected:g.expected,parts:g.items.map(p=>({uid:p.uid,title:p.title,position:p.position}))})),split:complete.filter(g=>!g.ordered)};
+            }catch(e){report.error=e.message.split('\n')[0].slice(0,250)}
+            finally{await context.close();}
+            reports.push(report);
+            console.log('MULTIPART_QUEUE '+JSON.stringify({channel,status:report.status,count:report.count,complete:report.complete?.length,split:report.split?.length,unresolved:report.unresolved?.length,error:report.error}));
+          }
+          await browser.close();
+          fs.writeFileSync('multipart-queues.json',JSON.stringify(reports,null,2));
+          if(reports.some(r=>r.status!=='audited'))process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: multipart-queues-${{ matrix.batch }}
+          path: multipart-queues.json
+          retention-days: 30

@@ -13,11 +13,11 @@ const state=()=>p.evaluate(()=>{
  const c=window.CHANNEL||{},o=c.opts||{};
  const entries=[...document.querySelectorAll('#queue .queue_entry')].map(el=>{const q=window.jQuery(el),m=q.data('media')||{},t=document.createElement('textarea');t.innerHTML=String(m.meta?.embed?.src||'');return {uid:q.data('uid'),title:m.title||'',src:t.value}});
  const h=document.querySelector('#motd .wt-broadcast-header'),r=h?.getBoundingClientRect(),d=document.querySelector('#motd .wt-house-rules');
- return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,user:window.CLIENT?.name,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,entries,header:r?{width:r.width,height:r.height}:null,rules:d?{open:d.open,count:d.querySelectorAll('.wt-rules-panel>ol>li').length,hidden:!d.querySelector('.wt-rules-panel')?.getClientRects().length,help:document.querySelectorAll('#motd .wt-info-bar>.wt-info-menu').length}:null,sections:document.querySelectorAll('#motd .wt-sections-v3>details').length,kicker:document.querySelector('#motd .wt-kicker')?.textContent.trim(),tagline:document.querySelector('#motd .wt-tagline')?.textContent.trim(),guideTip:document.querySelector('#motd .wt-channel-badge')?.textContent.replace(/\s+/g,' ').trim(),quickHelp:document.querySelectorAll('#motd .wt-quick-help dt').length,background:getComputedStyle(document.body).backgroundImage,wrap:getComputedStyle(document.querySelector('#wrap')).backgroundImage,visible:['#videowrap','#messagebuffer','#queue'].every(q=>!!document.querySelector(q)?.getClientRects().length)};
+ return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,user:window.CLIENT?.name,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,entries,header:r?{width:r.width,height:r.height}:null,rules:d?{open:d.open,count:d.querySelectorAll('.wt-rules-panel>ol>li').length,hidden:!d.querySelector('.wt-rules-panel')?.getClientRects().length,help:document.querySelectorAll('#motd .wt-info-bar>.wt-info-menu').length}:null,sections:document.querySelectorAll('#motd .wt-sections-v5>details').length,kicker:document.querySelector('#motd .wt-kicker')?.textContent.trim(),tagline:document.querySelector('#motd .wt-tagline')?.textContent.trim(),decorations:document.querySelectorAll('#motd .wt-ringmark,#motd .wt-channel-badge').length,logo:document.querySelector('#motd .wt-brand-logo')?.naturalWidth||0,navLogo:document.querySelector('.navbar-brand')?getComputedStyle(document.querySelector('.navbar-brand')).backgroundImage:'',quickHelp:document.querySelectorAll('#motd .wt-quick-help dt').length,background:getComputedStyle(document.body).backgroundImage,wrap:getComputedStyle(document.querySelector('#wrap')).backgroundImage,visible:['#videowrap','#messagebuffer','#queue'].every(q=>!!document.querySelector(q)?.getClientRects().length)};
 });
 const auth=x=>x.connected&&x.loggedIn&&x.rank>=3&&x.user?.toLowerCase()==='buttman-gpt'&&x.name?.toLowerCase()==='wrestling';
 const hasFeed=x=>x.entries.some(e=>e.src===feed.url);
-const valid=x=>x.header?.height>=95&&x.header.height<=185&&x.rules?.count===7&&x.rules.help===3&&x.sections===4&&x.kicker==='BAKED NETWORK'&&x.tagline==='LIVE EVENTS · 24/7 WRESTLING · COMMUNITY PLAYLIST'&&x.guideTip?.includes('Inside the Baked TV player')&&x.quickHelp===4&&!x.rules.open&&x.rules.hidden&&x.background.includes('/assets/rinng.jpg')&&x.wrap==='none'&&x.visible&&hasFeed(x);
+const valid=x=>x.header?.height>=95&&x.header.height<=185&&x.rules?.count===7&&x.rules.help===3&&x.sections===4&&x.kicker==='BAKED NETWORK'&&x.tagline==='LIVE EVENTS · 24/7 WRESTLING · COMMUNITY PLAYLIST'&&x.decorations===0&&x.logo===400&&x.navLogo.includes('/navbar-web.png')&&x.quickHelp===4&&!x.rules.open&&x.rules.hidden&&x.background.includes('/assets/rinng.jpg')&&x.wrap==='none'&&x.visible&&hasFeed(x);
 let before,targetCss,targetMotd,cssWritten=false,motdWritten=false;
 async function write(field,expected,next,other){
  await p.evaluate(({field,expected,next,other,originalJs,externalCss,externalJs})=>{
@@ -37,6 +37,10 @@ try{
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
  const dimensions=await p.evaluate(url=>new Promise(resolve=>{const i=new Image(),t=setTimeout(()=>resolve(null),15000);i.onload=()=>{clearTimeout(t);resolve([i.naturalWidth,i.naturalHeight])};i.onerror=()=>{clearTimeout(t);resolve(null)};i.src=url}),image);
  assert.deepEqual(dimensions,[2048,1536],'Exact hosted ring image not available; no changes made');
+ for(const [url,w,h] of [['https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4d03e39156a081f731c60ea46551cf9712392256/tubes/WrestleTube/assets/wordmark-web.png',400,75],['https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4d03e39156a081f731c60ea46551cf9712392256/tubes/WrestleTube/assets/navbar-web.png',96,83]]){
+  const dims=await p.evaluate(url=>new Promise(resolve=>{const i=new Image(),t=setTimeout(()=>resolve(null),15000);i.onload=()=>{clearTimeout(t);resolve([i.naturalWidth,i.naturalHeight])};i.onerror=()=>{clearTimeout(t);resolve(null)};i.src=url}),url);
+  assert.deepEqual(dims,[w,h],'Supplied branding image unavailable');
+ }
  if(valid(before)){console.log('WRESTLETUBE_RINGSIDE '+JSON.stringify({status:'already-verified',image:dimensions,queue:before.entries.length,noWrites:true}));}
  else{
  // Use the latest live chat guide, not a stale archived copy, if present.
@@ -52,6 +56,7 @@ try{
  const oldHtml=await p.locator('#motd').evaluate((el,html)=>{const old=el.innerHTML;el.innerHTML=html;return old},targetMotd);
  try{
   await p.waitForTimeout(400);
+  await p.waitForFunction(()=>document.querySelector('#motd .wt-brand-logo')?.naturalWidth===400,null,{timeout:15000});
   const v=await state();console.log('WRESTLETUBE_PREVIEW '+JSON.stringify({header:v.header,rules:v.rules,background:v.background,wrap:v.wrap,visible:v.visible,image:dimensions,cssBytes:Buffer.byteLength(targetCss)}));
   assert.ok(valid(v),'Desktop preview failed');
   await p.locator('.wt-house-rules>summary').click();assert.ok((await state()).rules.open);
@@ -68,6 +73,7 @@ try{
  }finally{await p.locator('#motd').evaluate((el,html)=>el.innerHTML=html,oldHtml);await style.evaluate(e=>e.remove());await p.setViewportSize({width:1440,height:1000})}
  if(targetCss!==before.css){await write('css',before.css,targetCss,before.motd);cssWritten=true}
  const applied=await write('motd',before.motd,targetMotd,targetCss);motdWritten=true;targetMotd=applied.motd;
+ await p.waitForFunction(()=>document.querySelector('#motd .wt-brand-logo')?.naturalWidth===400,null,{timeout:15000});
  await p.waitForTimeout(500);const after=await state();assert.ok(auth(after)&&valid(after),'Live layout validation failed');
  assert.equal(after.css,targetCss);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
  for(const menu of ['.wt-house-rules','.wt-playlist-menu','.wt-chat-menu','.wt-community-menu']){await p.locator(menu+'>summary').click();assert.ok(await p.locator(menu).evaluate(e=>e.open));await p.locator(menu+'>summary').click()}

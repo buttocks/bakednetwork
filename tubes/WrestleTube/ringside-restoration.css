@@ -67,4 +67,11 @@ body.cinemachat .wt-info-bar{display:none!important}
 #motdwrap .wt-info-bar .wt-chat-guide{font-weight:400!important}
 #motdwrap .wt-info-bar .wt-chat-guide> b{font-weight:400!important}
 #motdwrap .wt-info-bar .wt-chat-guide h4{font-size:14px;font-weight:800;border-bottom:1px solid #4a333b;padding-bottom:4px}
+/* v5: supplied original wordmark and navigation emblem. */
+#motdwrap .wt-broadcast-header{display:flex!important;justify-content:center!important;align-items:center!important;text-align:center!important;min-height:104px!important;padding:10px 16px!important}
+#motdwrap .wt-identity{text-align:center!important;width:100%;min-width:0}
+#motdwrap .wt-brand-logo{display:block!important;width:min(400px,95%)!important;height:auto!important;max-height:75px!important;object-fit:contain!important;margin:5px auto!important}
+#motdwrap .wt-tagline{margin-top:4px!important}
+body .navbar .navbar-brand{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4d03e39156a081f731c60ea46551cf9712392256/tubes/WrestleTube/assets/navbar-web.png")!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;width:52px!important;min-width:52px!important;max-width:52px!important;padding-left:0!important;padding-right:0!important}
+@media(max-width:760px){#motdwrap .wt-brand-logo{width:min(300px,94%)!important;max-height:60px!important}#motdwrap .wt-broadcast-header{min-height:96px!important;padding:9px 10px!important}}
 /* END WRESTLETUBE RINGSIDE RESTORATION v1 */

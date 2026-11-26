@@ -33,7 +33,7 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
-  if(['verify_scarytube_playback','diagnose_scarytube_chat'].includes(raw.action)){
+  if(['verify_scarytube_playback','diagnose_scarytube_chat','deploy_scarytube_chat_fix'].includes(raw.action)){
     if(raw.channel!=='ScaryTube'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
        Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid ScaryTube verification request');
@@ -248,6 +248,10 @@ async function run(request){
     const before=initial.queue.map(entry=>({index:entry.index,title:entry.title,src:entry.src,temp:entry.temp}));
     console.log('Authenticated '+USERNAME+' on '+request.channel+
       '; rank='+initial.rank+'; items='+before.length);
+    if(request.action==='deploy_scarytube_chat_fix'){
+      const {deployScaryChatFix}=await import('../ScaryTube/deploy-chat-fix.mjs');
+      return await deployScaryChatFix({page,request,initial});
+    }
     if(request.action==='diagnose_scarytube_chat'){
       const errors=[];
       page.on('pageerror',e=>errors.push(String(e.message).slice(0,250)));

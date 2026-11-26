@@ -18,10 +18,10 @@
     },
     {
       "id": "playlist-review",
-      "status": "independent-evidence-reviewed",
+      "status": "shortlist-complete-policy-review-required",
       "workflow": "network-playlist-review.yml",
       "mode": "read-only",
-      "evidence": "Run 45867325110 all 29 channels: 69 flagged; 44 YouTube absent from API, 11 direct files repeated 404, 14 Dailymotion require further review. Existing automated cleanup authorization limited to Wrestling/luchatube/WID, protects first 60 positions, current playback, multipart titles and custom/live streams. No deletions authorized in this review."
+      "evidence": "Run 45870540465: all 69 flagged entries reviewed from exact audit artifacts; 55 strong, 14 need further review, zero eligible under existing automatic deletion policy. No writes. Exact CSV/JSON shortlist attached to run. Do not expand deletion scope without operator approval."
     },
     {
       "id": "puro-artwork",

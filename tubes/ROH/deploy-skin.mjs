@@ -41,6 +41,16 @@ try{
  before=await capture();assert.ok(auth(before));assert.equal(typeof before.css,'string');assert.equal(typeof before.js,'string');assert.ok(!before.externalCss,'External CSS needs separate review');assert.ok(hasFeed(before),'Permanent stream missing');assert.ok(before.logo?.src&&before.logo.naturalWidth>100,'Existing logo unavailable');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd||'');await page.screenshot({path:dir+'/before.png',fullPage:false});
  logoSrc=before.logo.src;
+ // A successful prior save may already have fixed the live skin even if a
+ // later consistency check encountered a concurrent change. Do not rewrite it.
+ const existing=await capture();
+ if(existing.marker==='1'&&existing.logoUnclipped&&existing.logo?.width>50&&existing.logo.height>20&&existing.logo.height<=130&&existing.headerHeight<=342&&Object.values(existing.visible).every(Boolean)&&hasFeed(existing)&&existing.css.includes('--roh-red:#dc424c')){
+  const logoPaint=await page.evaluate(src=>{const i=[...document.querySelectorAll('#motdwrap img')].find(x=>x.getAttribute('src')===src);const r=i?.getBoundingClientRect();if(!r)return false;const e=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return e===i||i.contains(e)},logoSrc);
+  assert.ok(logoPaint,'Original logo center is obscured');
+  const report={channel:'roh',status:'verified-existing-skin',logoUnclipped:true,logoPaint,logoWidth:existing.logo.width,logoHeight:existing.logo.height,headerHeight:existing.headerHeight,queueItems:existing.entries.length,streamPresent:true,visible:existing.visible,cssBytes:Buffer.byteLength(existing.css),noWrites:true};
+  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));await fs.writeFile(dir+'/verified.css',existing.css);await page.screenshot({path:dir+'/verified.png'});console.log('ROH_SKIN '+JSON.stringify(report));
+ }else{
+
  const logoSelector='#motdwrap#motdwrap#motdwrap#motdwrap img[src='+JSON.stringify(logoSrc)+']';
  let block=template.replaceAll('__ROH_LOGO__',logoSelector);
  const clean=before.css.replace(/\/\* BEGIN BAKED NETWORK ROH SKIN v1 \*\/[\s\S]*$/g,'').trimEnd();
@@ -76,11 +86,13 @@ try{
  await fs.writeFile(dir+'/proposed.css',target);
  if(before.css!==target)await set(before.css,target);
  await page.waitForTimeout(2000);
- const after=await capture();console.log('ROH_LOGO_LIVE '+JSON.stringify({height:after.logo?.height,width:after.logo?.width,header:after.headerHeight,images:after.logoImages}));await page.screenshot({path:dir+'/applied-before-validation.png',fullPage:false});assert.ok(auth(after));assert.equal(after.css,target);assert.equal(after.marker,'1');assert.equal(after.js,before.js);assert.equal(after.motd,before.motd);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.ok(hasFeed(after));assert.deepEqual(after.entries.map(e=>e.uid),before.entries.map(e=>e.uid));assert.ok(Object.values(after.visible).every(Boolean));assert.ok(after.logoUnclipped&&after.logo?.naturalWidth&&after.logo.src===before.logo.src&&after.logo.width>50&&after.logo.height>20&&after.logo.height<=chosen.cap);assert.ok(after.headerHeight<=Math.max(337,before.headerHeight)+5);
+ const after=await capture();console.log('ROH_CONSISTENCY '+JSON.stringify({auth:auth(after),css:after.css===target,js:after.js===before.js,motd:after.motd===before.motd,externalCss:after.externalCss===before.externalCss,externalJs:after.externalJs===before.externalJs,queue:JSON.stringify(after.entries.map(e=>e.uid))===JSON.stringify(before.entries.map(e=>e.uid)),logoUnclipped:after.logoUnclipped}));console.log('ROH_LOGO_LIVE '+JSON.stringify({height:after.logo?.height,width:after.logo?.width,header:after.headerHeight,images:after.logoImages}));await page.screenshot({path:dir+'/applied-before-validation.png',fullPage:false});assert.ok(auth(after));assert.equal(after.css,target);assert.equal(after.marker,'1');assert.equal(after.js,before.js);assert.equal(after.motd,before.motd);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.ok(hasFeed(after));assert.deepEqual(after.entries.map(e=>e.uid),before.entries.map(e=>e.uid));assert.ok(Object.values(after.visible).every(Boolean));assert.ok(after.logoUnclipped&&after.logo?.naturalWidth&&after.logo.src===before.logo.src&&after.logo.width>50&&after.logo.height>20&&after.logo.height<=chosen.cap);assert.ok(after.headerHeight<=Math.max(337,before.headerHeight)+5);
  await page.screenshot({path:dir+'/after.png',fullPage:false});
  const report={channel:'roh',status:'skin-upgraded',layout:chosen.name,logoPreserved:true,logoUnclipped:true,logoBefore:before.logo.height,logoAfter:after.logo.height,headerBefore:before.headerHeight,headerAfter:after.headerHeight,queueItems:after.entries.length,queuePreserved:true,streamPresent:true,jsPreserved:true,motdPreserved:true,visible:after.visible,cssBytes:Buffer.byteLength(target)};
  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));console.log('ROH_SKIN '+JSON.stringify(report));
+ }
 }catch(e){
- if(before&&target&&target!==before.css&&(await capture()).css===target){await set(target,before.css);console.log('ROH_SKIN_ROLLBACK confirmed')}
+ console.log('ROH_SKIN_VALIDATION_FAILURE '+String(e.message||e).slice(0,400));
+ if(before&&target&&target!==before.css&&(await capture()).css===target){try{await set(target,before.css);console.log('ROH_SKIN_ROLLBACK confirmed')}catch(rollback){console.log('ROH_SKIN_ROLLBACK_BLOCKED '+String(rollback.message||rollback).slice(0,200))}}
  throw e;
 }finally{await browser.close()}

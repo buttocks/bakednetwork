@@ -65,6 +65,13 @@ body.youtube-mode.overlay-idle #menu-reveal:hover,body.youtube-mode.overlay-idle
 <button id="menu-reveal" type="button" aria-label="Show Baked TV controls">☰ Baked TV</button>
 <div class="overlay-hotspot" id="hotspot-top" aria-hidden="true"></div>
 <div class="overlay-hotspot" id="hotspot-bottom" aria-hidden="true"></div>
-<script src="../feeds/player-core.js?v=embed-diagnostics-20261125"></script>
+<script>
+if(new URLSearchParams(location.search).get('channel')==='nwa-tna-early'){
+  document.querySelector('#guide footer').textContent='Dailymotion, Internet Archive and official YouTube programming. Times shown locally. Provider ads and playback restrictions may apply.';
+  const script=document.createElement('script');script.src='./player-core-asylum.js?v=dm-pilot-1';document.body.append(script);
+}else{
+  const script=document.createElement('script');script.src='../feeds/player-core.js?v=embed-diagnostics-20261125';document.body.append(script);
+}
+</script>
 </body>
 </html>

@@ -11,17 +11,17 @@
     },
     {
       "id": "nwatna-base",
-      "status": "runtime-diagnostic-queued",
+      "status": "runtime-comparison-inconclusive",
       "workflow": "nwatna-deploy.yml",
       "mode": "manual dispatch after recovery",
-      "evidence": "Run 45867360153 compares NWA-TNA with RetroWrestling without changing live settings."
+      "evidence": "Run 45867360153: both NWA-TNA and RetroWrestling native loader URLs configured; neither showed module globals or toolbar in automated browser. Do not change live loader until discrepancy is understood."
     },
     {
       "id": "playlist-review",
-      "status": "read-only-recheck-queued",
+      "status": "29-channel-recheck-complete",
       "workflow": "network-playlist-review.yml",
       "mode": "read-only",
-      "evidence": "All six batches inspected; all 29 channel requests audit_playlist_media only. Run 45867325110."
+      "evidence": "Run 45867325110: all six batches passed; 69 not-publicly-playable candidates across 12 channels. No deletions. Separate validation required."
     },
     {
       "id": "puro-artwork",
@@ -43,9 +43,9 @@
     },
     {
       "id": "queue-attribution",
-      "status": "28-of-29-deployed-review-queued",
+      "status": "28-of-29-deployed-blocked",
       "mode": "CSS-only with backup",
-      "evidence": "Wrestling 5 previous write unacknowledged; read-only size/equivalence and visual preview run 45867360153. No CSS writes in diagnostic."
+      "evidence": "Run 45867360153: Wrestling 5 CSS 19,965 bytes; proposed 20,250; @import prevents safe compaction; no qe_blame sample in 13 entries. No writes."
     },
     {
       "id": "baked-tv-recovery",
@@ -98,11 +98,18 @@
       "workflow": "targeted-header-followup.yml",
       "mode": "one approved native move of existing owned iframe; no add, delete or playback changes",
       "evidence": "Run 45865596415 Joshi job passed. UID 12 moved from live position 18 to 1; all 456 entries, relative order of other entries, and current playback preserved."
+    },
+    {
+      "id": "ddt-modern-header",
+      "status": "deployed-verified",
+      "workflow": "deploy-ddt-header.yml",
+      "evidence": "Runs 45867839954 and 45868633707 succeeded; navy header, Rules only, existing logo, live events subtitle, all five queue entries and JS preserved."
     }
   ],
   "motdPolicy": {
     "usefulLinks": "Remove Links / Useful Links from every MOTD during future cleanups; do not add a replacement links dropdown.",
     "rules": "Preserve existing rules unless the operator requests edits.",
-    "preserve": "Existing logos, playlists, current playback and channel JavaScript; retain non-link functional controls unless separately approved."
+    "preserve": "Existing logos, playlists, current playback and channel JavaScript; retain non-link functional controls unless separately approved.",
+    "liveEvents": "Identify live events in subtitles for channels with live-event streams; distinguish archive-only channels."
   }
 }

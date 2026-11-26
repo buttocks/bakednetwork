@@ -57,8 +57,8 @@ try{
  before=await state();assert.ok(auth(before)&&hasFeeds(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
  if(valid(before)){
-  // Existing Joshi header: change only the banner palette. Joshi2 remains unchanged.
-  if(slug==='joshi'){
+  // Existing Joshi family headers: change only the banner palette on either approved channel.
+  if(allowed.includes(slug)){
    const originalGradient='linear-gradient(110deg,#101014,#32223f,#101014)';
    const lighterGradient='linear-gradient(110deg,#896bb3,#a68bcb,#896bb3)';
    const override='#motdwrap .jts-header{background:'+lighterGradient+'!important}';

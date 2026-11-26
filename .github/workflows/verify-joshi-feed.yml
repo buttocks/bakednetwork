@@ -1,0 +1,266 @@
+name: Verify and restore Joshi Baked TV entry
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/verify-joshi-feed.yml']
+permissions:
+  contents: read
+concurrency:
+  group: baked-live-iframe-bridge
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Verify exact registered Joshi feed, add only if absent
+        run: |
+          cat > .joshi-feed-check.mjs <<'JS'
+          #!/usr/bin/env node
+          /* Reconcile only explicitly registered Baked TV-owned iframe entries.
+             Never touch unknown embeds, currently playing items, or live JS/CSS/MOTD.
+             Uncertain health is always a no-op; confirmed offline removes, recovery adds. */
+          import fs from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          const SITE='https://baked.live',USER='buttman-gpt';
+          const CONFIG='tubes/feeds/managed.json',REPORT='tubes/feeds/last-reconcile.json';
+          function safeUrl(raw){
+            const url=new URL(raw);
+            if(url.protocol!=='https:'||url.host!=='buttocks.github.io'||
+               !url.pathname.startsWith('/bakednetwork/tubes/')||
+               !url.pathname.endsWith('/feed.html')||url.username||url.password||url.hash)
+              throw Error('Feed URL outside approved GitHub Pages path');
+            return url.href;
+          }
+          const iframe=src=>'<iframe src="'+src+'" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+          async function state(page){
+            return page.evaluate(()=>{
+              const permission=p=>typeof window.hasPermission==='function'&&!!window.hasPermission(p);
+              const queue=[...document.querySelectorAll('#queue .queue_entry')].map((el,i)=>{
+                const jq=window.jQuery?.(el),media=jq?.data('media')||{};
+                let src=media.meta?.embed?.src||'';
+                if(media.type==='cu'&&typeof src==='string'){
+                  const el=document.createElement('textarea');el.innerHTML=src;
+                  try{src=new URL(el.value,location.href).href}catch{src=''}
+                }else src='';
+                return {uid:jq?.data('uid'),index:i,title:media.title||el.textContent||'',
+                  type:media.type,src,temp:!!jq?.data('temp')};
+              });
+              return {connected:!!window.socket?.connected,username:window.CLIENT?.name,
+                loggedIn:!!window.CLIENT?.logged_in,rank:window.CLIENT?.rank,
+                channel:window.CHANNEL?.name,playing:window.PL_CURRENT,
+                permissions:{add:permission('playlistadd'),custom:permission('playlistaddcustom'),
+                  permanent:permission('addnontemp'),remove:permission('playlistdelete'),move:permission('playlistmove')},queue};
+            });
+          }
+          async function wait(page,predicate,msg,ms=20000){
+            const deadline=Date.now()+ms;
+            while(Date.now()<deadline){
+              const s=await state(page);if(predicate(s))return s;
+              await page.waitForTimeout(350);
+            }
+            throw Error(msg);
+          }
+          async function login(page,password){
+            await page.goto(SITE+'/login',{waitUntil:'domcontentloaded',timeout:45000});
+            const form=page.locator('form[action="/login"]').last();
+            await form.locator('input[name="name"]').waitFor({state:'visible',timeout:20000});
+            await form.locator('input[name="name"]').fill(USER);
+            await form.locator('input[name="password"]').fill(password);
+            await form.locator('button[type="submit"]').click();
+            await page.waitForLoadState('domcontentloaded');
+            if(/Login Failed|Invalid username\/password/i.test(await page.locator('body').innerText()))throw Error('Baked.live login failed');
+          }
+          async function main(){
+            const cfg=JSON.parse(await fs.readFile(CONFIG,'utf8'));
+            if(cfg.schema!==1||!Array.isArray(cfg.managed)||cfg.managed.length>60)throw Error('Invalid owned-feed registry');
+            const ids=new Set(),urls=new Set(),statuses=new Map();
+            for(const e of cfg.managed){
+              if(typeof e.id!=='string'||!/^[-a-z0-9]{4,64}$/.test(e.id)||ids.has(e.id))throw Error('Duplicate or invalid feed ID');
+              ids.add(e.id); const url=safeUrl(e.url);if(urls.has(url))throw Error('Duplicate feed URL');urls.add(url);
+              if(e.previousUrls!==undefined&&(!Array.isArray(e.previousUrls)||e.previousUrls.length>8))throw Error('Invalid previous URLs');
+              for(const old of e.previousUrls||[]){
+                const legacy=safeUrl(old);
+                if(urls.has(legacy))throw Error('Duplicate feed URL or alias');
+                urls.add(legacy);
+              }
+              if(typeof e.tube!=='string'||!/^[A-Za-z0-9-]{2,35}$/.test(e.tube)||
+                 typeof e.title!=='string'||e.title.length<8||e.title.length>95||
+                 typeof e.statusFile!=='string'||!/^tubes\/[A-Za-z0-9-]+\/feed-status\.json$/.test(e.statusFile)||
+                 typeof e.statusKey!=='string'||!/^[a-z0-9-]+$/.test(e.statusKey))
+                throw Error('Invalid registered feed config');
+              if(!statuses.has(e.statusFile))
+                statuses.set(e.statusFile,JSON.parse(await fs.readFile(e.statusFile,'utf8')));
+            }
+            if(process.argv.includes('--self-test')){
+              assert.equal(cfg.managed.length,ids.size);
+              assert.throws(()=>safeUrl('https://example.org/feed.html'));
+              assert.ok(iframe(cfg.managed[0].url).includes('allowfullscreen'));
+              console.log('PASS: owned feed configuration, unique URLs and URL allowlist');
+              return;
+            }
+            const password=process.env.BAKED_LIVE_PASSWORD;if(!password)throw Error('Missing Baked.live secret');
+            const {chromium}=await import('playwright');
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            const report={at:new Date().toISOString(),actions:[],channels:{}};
+            try{
+              const probeContext=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
+              const page=await probeContext.newPage();
+              // A service outage must not be interpreted as a feed failure.
+              let reachable=false;
+              try{
+                const probe=await page.request.get(SITE+'/login',{timeout:15000,failOnStatusCode:false});
+                reachable=probe.ok()&&(await probe.text()).includes('name="password"');
+                await probe.dispose();
+              }catch{}
+              if(!reachable){report.actions.push({result:'site-unavailable-no-changes'});console.log('Baked.live unavailable; reconciliation skipped');return;}
+              await probeContext.close();
+              for(const tube of ['joshi']){
+                // Match the successful bridge: isolate login and socket state per channel.
+                const context=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
+                const page=await context.newPage();
+                page.setDefaultTimeout(20000);
+                try {
+                let initial;
+                const authenticated=s=>s.connected&&s.loggedIn&&String(s.username||'').toLowerCase()===USER&&String(s.channel||'').toLowerCase()===tube.toLowerCase();
+                try{
+                  await login(page,password);
+                  await page.goto(SITE+'/tv/'+tube,{waitUntil:'domcontentloaded',timeout:45000});
+                  // Retry a disconnected socket once; never relax identity or rank checks.
+                  try{
+                    initial=await wait(page,authenticated,'Cannot verify connected bot identity on '+tube,30000);
+                  }catch(e){
+                    const snapshot=await state(page).catch(()=>({}));
+                    if(snapshot.connected||snapshot.loggedIn)throw e;
+                    console.log('CHANNEL_AUTH '+tube+' disconnected; retrying channel navigation once');
+                    await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+                    initial=await wait(page,authenticated,'Cannot verify connected bot identity on retry for '+tube,30000);
+                  }
+                  await page.waitForTimeout(2200);
+                  initial=await wait(page,s=>authenticated(s)&&Number.isFinite(s.rank)&&s.rank>=3,'Cannot verify admin identity on '+tube,8000);
+                }catch(e){
+                  const snapshot=await state(page).catch(()=>({}));
+                  const diagnostic={connected:!!snapshot.connected,loggedIn:!!snapshot.loggedIn,expectedUsername:String(snapshot.username||'').toLowerCase()===USER,expectedChannel:String(snapshot.channel||'').toLowerCase()===tube.toLowerCase(),rank:Number.isFinite(snapshot.rank)?snapshot.rank:null};
+                  report.channels[tube]={status:'authentication-unverified',diagnostic};
+                  report.actions.push({tube,result:'authentication-unverified-no-changes'});
+                  console.log('CHANNEL_AUTH '+tube+' '+JSON.stringify(diagnostic));
+                  continue;
+                }
+                console.log('CHANNEL_AUTH '+tube+' verified rank='+initial.rank);
+                report.channels[tube]={before:initial.queue.map(e=>({uid:e.uid,title:e.title,src:e.src})),
+                  playing:initial.playing,rank:initial.rank};
+                for(const feed of cfg.managed.filter(x=>x.tube===tube)){
+                  const desired=statuses.get(feed.statusFile)?.channels?.[feed.statusKey]?.available;
+                  const currentUrl=safeUrl(feed.url);
+                  const legacyUrls=new Set((feed.previousUrls||[]).map(safeUrl));
+                  const existing=initial.queue.filter(x=>x.src===currentUrl);
+                  console.log('JOSHI_FEED_BEFORE '+JSON.stringify({total:initial.queue.length,matches:existing.map(e=>({index:e.index+1,title:e.title,uid:e.uid,temp:e.temp})),similar:initial.queue.filter(e=>/baked\s*tv/i.test(e.title)).map(e=>({index:e.index+1,title:e.title,src:e.src}))}));
+                  const oldCopies=initial.queue.filter(x=>legacyUrls.has(x.src));
+                  if(existing.length>1||oldCopies.length>8){
+                    report.actions.push({feed:feed.id,result:'ambiguous-copies-skipped'});
+                    continue;
+                  }
+                  if(desired!==true&&desired!==false){
+                    report.actions.push({feed:feed.id,result:'unknown-health-preserved'});continue;
+                  }
+                  if(desired===true&&existing.length===0){
+                    // Permissions can arrive after the authenticated rank snapshot. Wait
+                    // for all three real server permissions, never override them.
+                    const canAdd=s=>authenticated(s)&&s.rank>=3&&s.permissions.add&&s.permissions.custom&&s.permissions.permanent;
+                    if(!canAdd(initial)){
+                      try{initial=await wait(page,canAdd,'Playlist permissions unavailable',10000);}
+                      catch{report.actions.push({feed:feed.id,result:'missing-add-permissions'});continue;}
+                    }
+                    // A concurrent manual insertion during the wait must not duplicate it.
+                    if(initial.queue.some(x=>x.src===currentUrl)){
+                      report.actions.push({feed:feed.id,result:'already-present'});continue;
+                    }
+                    const response=await page.request.get(currentUrl,{timeout:20000,failOnStatusCode:false});
+                    const body=await response.text();
+                    const banner=feed.banner||(feed.tube==='luchatube'?'LUCHA LIBRE':'NJPW');
+                    const ok=response.status()===200&&body.includes(banner)&&
+                      body.includes('id="video"')&&(body.includes('player-core.js')||body.includes('player-core-mixed.js'));
+                    await response.dispose();
+                    if(!ok){report.actions.push({feed:feed.id,result:'page-not-verified'});continue}
+                    await page.evaluate(({src,title})=>window.socket.emit('queue',{
+                      id:'<iframe src="'+src+'" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
+                      title,type:'cu',pos:'end',temp:false
+                    }),{src:currentUrl,title:feed.title});
+                    initial=await wait(page,s=>s.queue.some(x=>x.src===currentUrl&&!x.temp),
+                      'Failed to verify owned iframe insertion for '+feed.id);
+                    report.actions.push({feed:feed.id,result:'added'});
+                  }
+                  if(feed.addOnly){if(existing.length===1)report.actions.push({feed:feed.id,result:'already-present'});const matches=initial.queue.filter(e=>e.src===currentUrl&&!e.temp);console.log('JOSHI_FEED_AFTER '+JSON.stringify({total:initial.queue.length,matches:matches.map(e=>({index:e.index+1,title:e.title,uid:e.uid,playing:e.uid===initial.playing}))}));assert.equal(matches.length,1,'Expected exactly one permanent Joshi Baked TV entry');continue;}
+                  // If a versioned iframe replaces an older URL, remove only the exact
+                  // registered old URL once the new iframe has been confirmed present.
+                  // This is also safe if both versions were queued before the migration.
+                  if(desired===true){
+                    const newReady=initial.queue.some(x=>x.src===currentUrl&&!x.temp);
+                    if(!newReady){report.actions.push({feed:feed.id,result:'new-version-not-ready'});continue}
+                    for(const legacy of initial.queue.filter(x=>legacyUrls.has(x.src))){
+                      if(legacy.uid===initial.playing){
+                        report.actions.push({feed:feed.id,result:'previous-version-playing-protected'});
+                        continue;
+                      }
+                      if(!initial.permissions.remove){
+                        report.actions.push({feed:feed.id,result:'missing-remove-permissions'});
+                        continue;
+                      }
+                      await page.evaluate(uid=>window.socket.emit('delete',uid),legacy.uid);
+                      initial=await wait(page,s=>!s.queue.some(x=>x.uid===legacy.uid),
+                        'Failed to verify previous-version cleanup for '+feed.id);
+                      report.actions.push({feed:feed.id,result:'previous-version-removed'});
+                    }
+                    if(existing.length===1&&!oldCopies.length)
+                      report.actions.push({feed:feed.id,result:'already-present'});
+                  }else if(desired===false){
+                    for(const item of initial.queue.filter(x=>x.src===currentUrl||legacyUrls.has(x.src))){
+                      if(item.uid===initial.playing){
+                        report.actions.push({feed:feed.id,result:'playing-protected'});
+                        continue;
+                      }
+                      if(!initial.permissions.remove){
+                        report.actions.push({feed:feed.id,result:'missing-remove-permissions'});
+                        continue;
+                      }
+                      await page.evaluate(uid=>window.socket.emit('delete',uid),item.uid);
+                      initial=await wait(page,s=>!s.queue.some(x=>x.uid===item.uid),
+                        'Failed to verify owned offline iframe deletion for '+feed.id);
+                      report.actions.push({feed:feed.id,result:'removed-confirmed-offline'});
+                    }
+                    if(existing.length===0&&oldCopies.length===0)
+                      report.actions.push({feed:feed.id,result:'already-absent'});
+                  }
+                }
+                report.channels[tube].after=initial.queue.map(x=>({uid:x.uid,title:x.title,src:x.src}));
+                report.channels[tube].unchangedNonManaged=report.channels[tube].before
+                  .filter(x=>!urls.has(x.src))
+                  .every(x=>report.channels[tube].after.some(y=>y.uid===x.uid));
+                if(!report.channels[tube].unchangedNonManaged)
+                  throw Error('An unmanaged playlist entry disappeared during reconciliation');
+                } finally { await context.close(); }
+              }
+            }finally{await browser.close();await fs.writeFile(REPORT,JSON.stringify(report,null,2)+'\n');}
+            console.log('RECONCILE_RESULTS '+JSON.stringify(report.actions));
+            if(!report.channels.joshi?.after||!report.actions.some(x=>x.feed==='joshi-baked-tv'&&['added','already-present'].includes(x.result)))process.exitCode=1;
+          }
+          main().catch(e=>{console.error('Managed feed reconciliation failed: '+String(e.message||e).slice(0,300));process.exitCode=1});
+          
+          JS
+          node --check .joshi-feed-check.mjs
+          node .joshi-feed-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: joshi-feed-verification
+          path: tubes/feeds/last-reconcile.json
+          retention-days: 7

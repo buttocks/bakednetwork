@@ -1,0 +1,37 @@
+name: Targeted Joshi Puro DDT follow-up
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/targeted-header-followup.yml','tubes/skin-review/targeted-followup.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-live-iframe-bridge
+  cancel-in-progress: false
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        tube: [joshi, puro, ddt]
+    env:
+      TUBE: ${{ matrix.tube }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/skin-review/targeted-followup.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/skin-review/targeted-followup.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: targeted-followup-${{ matrix.tube }}
+          path: targeted-review/
+          retention-days: 30

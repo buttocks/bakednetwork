@@ -1,0 +1,100 @@
+name: Audit deployed mixed-provider playback
+on:
+  schedule:
+    - cron: '37 9 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/audit-live-mixed-feeds.yml']
+permissions:
+  contents: read
+concurrency:
+  group: mixed-feed-readonly-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        feed: [nwa-tna-early, dg, dgalt, noah, indies, rizin, wid]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Check public feed, verified catalog and real playback
+        env:
+          FEED: ${{ matrix.feed }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          const key=process.env.FEED;
+          const cfg=JSON.parse(fs.readFileSync('tubes/feeds/managed.json'));
+          const entry=cfg.managed.find(e=>e.statusKey===key);
+          assert.ok(entry,'Feed not registered');
+          const root=new URL('./',entry.url);
+          const errors=[];
+          fs.mkdirSync('live-audit',{recursive:true});
+          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
+          let result={feed:key,url:entry.url,checkedAt:new Date().toISOString(),state:'inconclusive',errors};
+          try{
+            const page=await browser.newPage({viewport:{width:1280,height:800}});
+            page.on('pageerror',e=>errors.push(e.message.slice(0,500)));
+            page.on('console',m=>{if(m.type()==='warning'||m.type()==='error')errors.push(m.text().slice(0,500))});
+            const response=await page.goto(entry.url,{waitUntil:'domcontentloaded',timeout:45000});
+            result.httpStatus=response?.status();
+            const catalogResponse=await page.request.get(new URL('programs.json',root).href,{timeout:20000});
+            assert.ok(catalogResponse.ok(),'Public catalog request failed');
+            const catalog=(await catalogResponse.json()).channels[key].programs;
+            result.catalog={total:catalog.length,dailymotion:catalog.filter(p=>p.source==='Dailymotion'&&p.playback_verified_run).length};
+            assert.ok(result.catalog.dailymotion>=10,'Verified Dailymotion catalog unexpectedly small');
+            assert.equal(new Set(catalog.map(p=>p.url)).size,catalog.length,'Duplicate program URLs');
+            let previous=null;
+            const deadline=Date.now()+150000;
+            while(Date.now()<deadline&&result.state!=='playing'){
+              const now=await page.evaluate(()=>({name:document.querySelector('#program-name')?.textContent,provider:document.querySelector('#channel-name')?.textContent,hidden:document.querySelector('#status')?.hidden,status:document.querySelector('#status-text')?.textContent})).catch(()=>null);
+              if(now)result.lastStatus=now;
+              const program=catalog.find(p=>p.title===now?.name);
+              if(now?.hidden&&program){
+                for(const frame of page.frames()){
+                  const eligible=frame===page.mainFrame()||/dailymotion\.com|dmcdn\.net|youtube(?:-nocookie)?\.com/.test(frame.url());
+                  if(!eligible)continue;
+                  try{
+                    for(const v of await frame.evaluate(()=>[...document.querySelectorAll('video')].filter(v=>!v.paused&&v.videoWidth>0&&v.videoHeight>0).map(v=>({time:v.currentTime,duration:v.duration,width:v.videoWidth,height:v.videoHeight})))){
+                      if(!Number.isFinite(v.duration)||Math.abs(v.duration-program.duration)>Math.max(5,program.duration*.03))continue;
+                      if(previous?.url===program.url&&v.time>previous.time+1){result.state='playing';result.playback={title:program.title,source:program.source,...v};break}
+                      if(previous?.url!==program.url||v.time<previous.time)previous={url:program.url,time:v.time};
+                    }
+                  }catch{}
+                  if(result.state==='playing')break;
+                }
+              }
+              if(result.state!=='playing')await page.waitForTimeout(1000);
+            }
+            await page.screenshot({path:'live-audit/playback.png'}).catch(()=>{});
+            if(result.state==='playing'){
+              result.guide=await page.evaluate(()=>{document.querySelector('#guide-toggle')?.click();return {visible:!document.querySelector('#guide')?.hidden,items:document.querySelectorAll('#guide-list li').length}});
+              if(!result.guide.visible||!result.guide.items)result.state='inconclusive';
+            }
+          }catch(e){errors.push(e.message)}
+          finally{
+            await browser.close();
+            result.errors=errors.slice(-25);
+            fs.writeFileSync('live-audit/results.json',JSON.stringify(result,null,2));
+            console.log('LIVE_MIXED_AUDIT '+JSON.stringify(result));
+          }
+          // A failed observation is evidence for review, never an automatic
+          // offline declaration or permission to delete a playlist entry.
+          if(result.state!=='playing')process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-audit-${{ matrix.feed }}
+          path: live-audit/
+          retention-days: 14

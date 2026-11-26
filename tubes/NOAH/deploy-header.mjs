@@ -18,7 +18,7 @@ const state=()=>p.evaluate(()=>{
 });
 const auth=x=>x.connected&&x.loggedIn&&x.rank>=3&&x.user?.toLowerCase()==='buttman-gpt'&&x.name?.toLowerCase()==='noah';
 const hasFeed=x=>x.entries.some(e=>e.src===feed.url);
-const check=x=>(x.wordmark||(x.logo?.paint&&x.logo.naturalWidth>100&&x.logo.height>=55&&x.logo.height<=106))&&x.header?.height>=95&&x.header.height<=175&&!!x.details&&!x.details.open&&x.details.contentHidden&&x.visible&&hasFeed(x);
+const check=x=>(x.wordmark||(x.logo?.paint&&x.logo.naturalWidth>100&&x.logo.height>=55&&x.logo.height<=106))&&x.header?.height>=95&&x.header.height<=175&&!!x.details&&x.details.count===6&&!x.details.open&&x.details.contentHidden&&x.visible&&hasFeed(x);
 let before,targetCss,targetMotd,cssWritten=false,motdWritten=false;
 async function write(field,expected,next,other){
  await p.evaluate(({field,expected,next,other,originalJs,externalCss,externalJs})=>{
@@ -35,17 +35,13 @@ try{
  await p.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()==='noah',{timeout:45000});
  await p.waitForTimeout(5000);
  before=await state();assert.ok(auth(before)&&hasFeed(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string'&&!before.externalCss);
- if(before.motd.includes('noah-masthead')){assert.ok(check(before),'Existing NOAH masthead failed validation');console.log('NOAH_HEADER '+JSON.stringify({status:'already-verified',queue:before.entries.length,logo:before.logo,header:before.header,wordmark:before.wordmark}));}else{
+ if(before.motd.includes('noah-rules-only-v21')&&before.css.includes('v2.1: eliminate legacy red')){assert.ok(check(before),'Existing NOAH masthead failed validation');console.log('NOAH_HEADER '+JSON.stringify({status:'already-verified',queue:before.entries.length,logo:before.logo,header:before.header,wordmark:before.wordmark}));}else{
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
- // Preserve the existing MOTD content in the collapsible panel, including any
- // existing rules, links and modal triggers. Only the old main logo is relocated.
- const legacy=await p.evaluate(({motd,src})=>{
-  const doc=new DOMParser().parseFromString(motd,'text/html');
-  if(src){for(const i of doc.querySelectorAll('img'))if(i.getAttribute('src')===src)i.remove()}
-  return doc.body.innerHTML;
- },{motd:before.motd,src:before.logo?.src||null});
+ // The old rules/links modals, welcome and other old MOTD markup are
+ // intentionally discarded. Preserve the working masthead logo.
+ const rules=['Limit off topic posts in the playlist','Respect other tubers',"Don't break kayfabe",'No embedding NSFW images','No advertising of any kind','Have fun!'];
  const logo=before.logo?.src&&before.logo.naturalWidth>100?'<img class="noah-original-logo" src="'+escape(before.logo.src)+'" alt="Pro Wrestling NOAH">':'<div class="noah-wordmark">NOAH</div>';
- targetMotd='<div class="noah-masthead"><div class="noah-identity"><div class="noah-overline">BAKED NETWORK / PURORESU</div><div class="noah-brand">PRO WRESTLING NOAH</div><div class="noah-tagline">GHC CHAMPIONSHIPS &bull; CLASSIC MATCHES &bull; NOAH TV</div></div>'+logo+'<div class="noah-tv-mark">NOAH TV<small>24/7 WRESTLING</small></div></div><details class="noah-rules"><summary>Rules &amp; Links</summary><div class="noah-rules-content">'+legacy+'</div></details>';
+ targetMotd='<div class="noah-masthead"><div class="noah-identity"><div class="noah-overline">BAKED NETWORK / PURORESU</div><div class="noah-brand">PRO WRESTLING NOAH</div><div class="noah-tagline">GHC CHAMPIONSHIPS &bull; CLASSIC MATCHES &bull; NOAH TV</div></div>'+logo+'<div class="noah-tv-mark">NOAH TV<small>24/7 WRESTLING</small></div></div><details class="noah-rules noah-rules-only-v21"><summary>Rules</summary><div class="noah-rules-content"><ol>'+rules.map(x=>'<li>'+escape(x)+'</li>').join('')+'</ol></div></details>';
  targetCss=before.css.replace(/\/\* BEGIN NOAH RINGSIDE MASTHEAD v2 \*\/[\s\S]*?\/\* END NOAH RINGSIDE MASTHEAD v2 \*\//g,'').trimEnd()+'\n\n'+template;
  assert.ok(Buffer.byteLength(targetCss)<24000,'CSS size limit');
  await fs.writeFile(dir+'/proposed.css',targetCss);await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
@@ -63,9 +59,9 @@ try{
  let applied=await write('motd',before.motd,targetMotd,targetCss);motdWritten=true;
  targetMotd=applied.motd;
  await p.waitForFunction(()=>!!document.querySelector('.noah-wordmark')||(document.querySelector('.noah-original-logo')?.complete&&document.querySelector('.noah-original-logo')?.naturalWidth>100),{timeout:15000});
- const after=await state();assert.ok(auth(after)&&check(after),'Live header failed');assert.equal(after.js,before.js);assert.equal(after.css,targetCss);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
+ const after=await state();assert.ok(auth(after)&&check(after),'Live header failed');assert.equal(await p.locator('#motd .modal,#motd [data-toggle="modal"]').count(),0,'Legacy popup remains');assert.ok(await p.evaluate(()=>['body','#wrap','#motdwrap','#motd','#messagebuffer','#queue'].every(q=>{const el=document.querySelector(q);return !el||getComputedStyle(el).backgroundImage==='none'})),'Legacy texture remains');assert.equal(after.js,before.js);assert.equal(after.css,targetCss);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
  await p.locator('.noah-rules summary').click();assert.equal((await state()).details.open,true);await p.screenshot({path:dir+'/rules-open.png'});await p.locator('.noah-rules summary').click();await p.screenshot({path:dir+'/after.png'});
- console.log('NOAH_HEADER '+JSON.stringify({status:'verified',logo:after.logo,header:after.header,legacyMotdPreserved:true,collapsed:true,queue:after.entries.length,streamPresent:true,jsPreserved:true,wordmark:after.wordmark}));
+ console.log('NOAH_HEADER '+JSON.stringify({status:'verified',logo:after.logo,header:after.header,legacyMotdRemoved:true,rules:6,collapsed:true,queue:after.entries.length,streamPresent:true,jsPreserved:true,wordmark:after.wordmark}));
  }
 }catch(e){
  console.log('NOAH_HEADER_ERROR '+String(e.message||e));

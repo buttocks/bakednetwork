@@ -43,4 +43,19 @@ body{background:radial-gradient(ellipse at 50% 0,#14271e 0,transparent 42rem),#0
 .dropdown-menu>li>a{color:#e4eee8!important}.dropdown-menu>li>a:hover{background:#2e4938!important}
 a{color:#a1e1ba}a:hover,a:focus{color:#fff}
 @media(max-width:760px){#motdwrap .noah-brand{font-size:clamp(20px,5vw,34px)!important}}
+
+/* v2.1: eliminate legacy red image textures, preserve only the NOAH identity */
+html,body,body #wrap,body #motdrow,body #motdwrap,body #motd,body #chatwrap,body #videowrap,body #playlistwrap,body #footer,body #chatheader,body #currenttitle,body #playlistcontrols,body #videocontrols,body #messagebuffer,body #userlist,body #queue,body .well,body .panel,body .panel-heading,body .panel-footer,body .modal-content,body .modal-header,body .modal-body,body .modal-footer,body .dropdown-menu,body .navbar,body .navbar-collapse{background-image:none!important}
+html,body{background-color:#0b100e!important}
+body #wrap{background-color:#0b100e!important}
+body #motdwrap{background-color:#111a15!important}
+body #motdwrap .noah-masthead{background:repeating-linear-gradient(132deg,transparent 0 25px,#ffffff05 26px 27px,transparent 28px 50px),linear-gradient(110deg,#0a0a0d,#103d2e 48%,#0c0c10)!important}
+body #motdwrap .noah-rules{background:#111a15!important}
+body #motdwrap .noah-rules summary{padding:3px 12px!important;font-size:11px!important;line-height:18px!important}
+body #motdwrap .noah-rules-content{padding:8px 14px!important}
+body #motdwrap .noah-rules-content ol{margin:0!important}
+body #motdwrap .noah-rules-content li{font-size:12px!important;line-height:1.4!important}
+body .modal-content,body .modal-header,body .modal-body,body .modal-footer{background-color:#17231c!important;color:#e4eee8!important;border-color:#35463b!important}
+body nav.navbar,body .navbar{background-color:#111a15!important;border-bottom:2px solid #329865!important}
+body .navbar .nav>li>a{color:#e4eee8!important}
 /* END NOAH RINGSIDE MASTHEAD v2 */

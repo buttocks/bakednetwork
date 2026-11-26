@@ -668,7 +668,8 @@
       "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"WCW Starrcade\" OR title:\"WWF Survivor Series\" OR title:\"NJPW World Tag League\" OR title:\"AEW World Championship Eliminator Tournament\")",
       "archive_search_rows": 40,
       "archive_candidate_limit": 10,
-      "archive_first": true
+      "archive_first": true,
+      "max_catalog_items": 120
     },
     {
       "directory": "WrestleTube/secondary/wrestling2",

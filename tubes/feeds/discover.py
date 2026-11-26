@@ -273,7 +273,7 @@ def retain_catalog(items,keep,cap):
     return [p for i,p in enumerate(items) if i in chosen]
 
 def refresh_one(entry,defaults,record):
-    defaults={**defaults,**{k:entry[k] for k in ("min_duration_seconds","max_duration_seconds") if k in entry}}
+    defaults={**defaults,**{k:entry[k] for k in ("min_duration_seconds","max_duration_seconds","max_catalog_items") if k in entry}}
     target=CHANNELS/entry["directory"]/"programs.json"
     j=load(target)
     key=entry["key"]

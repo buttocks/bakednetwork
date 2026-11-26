@@ -4,6 +4,14 @@
 function installUiFixes(){
    if(w.__rdhRdhTransientUiFixes||!document.body)return;
    const body=document.body;
+   function removeAddedByTitle(root){
+    const candidates=[];
+    if(root?.nodeType===1&&root.hasAttribute("title"))candidates.push(root);
+    if(root?.querySelectorAll)candidates.push(...root.querySelectorAll("[title]"));
+    candidates.forEach(el=>{
+     if(el.closest("#queue")&&/^added by:/i.test(el.getAttribute("title")||""))el.removeAttribute("title");
+    });
+   }
    const state={activeEntry:null,openTimer:null,closeTimer:null,observer:null};
    const style=document.createElement("style");
    style.id="rdh-transient-ui-fixes";
@@ -12,7 +20,18 @@ function installUiFixes(){
     "#messagebuffer .chat-msg-_server_.rdh-presence-dissolve:before{transition:opacity .85s ease}",
     "#messagebuffer .chat-msg-_server_.rdh-presence-fading{opacity:0!important;max-height:0!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;border-color:transparent!important;transform:translateY(-3px);pointer-events:none!important}",
     "#messagebuffer .chat-msg-_server_.rdh-presence-fading:before{opacity:0!important}",
-    "body:not(.rdh-hover-preview-open) .rdh-video-url-pill,body:not(.rdh-hover-preview-open) .native-playlist-preview{visibility:hidden!important;opacity:0!important;pointer-events:none!important}"
+    "body:not(.rdh-hover-preview-open) .rdh-video-url-pill,body:not(.rdh-hover-preview-open) .native-playlist-preview{visibility:hidden!important;opacity:0!important;pointer-events:none!important}",
+    "#queue .queue_entry.rdh-featured{position:relative!important;padding-left:44px!important}",
+    "#queue .queue_entry.rdh-featured:before{position:absolute!important;left:6px!important;top:50%!important;transform:translateY(-50%)!important;display:inline-block!important;min-width:29px!important;padding:1px 4px!important;border-radius:3px!important;font-size:9px!important;line-height:13px!important;font-weight:900!important;letter-spacing:.25px!important;text-align:center!important;z-index:2!important}",
+    "#queue .queue_entry.rdh-featured-wor:before{content:\"WOR\"!important;color:#241600!important;background:#ffc342!important}",
+    "#queue .queue_entry.rdh-featured-wol:before{content:\"WOL\"!important;color:#002117!important;background:#68e6b0!important}",
+    "#queue .queue_entry.rdh-featured-bv:before{content:\"B&V\"!important;color:#001d22!important;background:#55eafa!important}",
+    "#queue .queue_entry.rdh-featured-bvv:before{content:\"BVV\"!important;color:#06132b!important;background:#598cff!important}",
+    "#queue .queue_entry.rdh-featured-ltbh:before{content:\"LTBH\"!important;color:#211038!important;background:#c6a2ff!important}",
+    "#queue .queue_entry.rdh-featured-ctm:before{content:\"CTM\"!important;color:#310c19!important;background:#ff8ab4!important}",
+    "#queue .queue_entry.rdh-featured-f4d:before{content:\"F4D\"!important;color:#182600!important;background:#c4ef68!important}",
+    "#queue .queue_entry.rdh-featured-ad:before{content:\"AFTER DARK\"!important;color:#351016!important;background:#ff8791!important}",
+    "#queue .queue_entry.rdh-featured-bsc:before{content:\"BSC\"!important;color:#10202b!important;background:#a8c9d8!important}",
    ].join("\\n");
    (document.head||body).appendChild(style);
    const entryFor=node=>node&&node.closest?node.closest("#queue .queue_entry .qe_title")?.closest(".queue_entry"):null;
@@ -70,13 +89,15 @@ function installUiFixes(){
     });
    }
    markPresence(body);
+   removeAddedByTitle(body);
    state.observer=new MutationObserver(records=>{
     records.forEach(record=>{
-     record.addedNodes.forEach(markPresence);
-     if(record.type==="characterData")markPresence(record.target);
+     record.addedNodes.forEach(node=>{markPresence(node);removeAddedByTitle(node);});
+     if(record.type==="characterData"){markPresence(record.target);removeAddedByTitle(record.target.parentElement);}
+     if(record.type==="attributes"&&record.attributeName==="title")removeAddedByTitle(record.target);
     });
    });
-   state.observer.observe(body,{childList:true,characterData:true,subtree:true});
+   state.observer.observe(body,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["title"]});
    w.__rdhRdhTransientUiFixes=state;
   }
    installUiFixes();

@@ -28,6 +28,21 @@ async function write(field,expected,next,other){
  for(let i=0;i<100;i++){const x=await state();if(x[field]===next)return x;if(field==='motd'&&next===targetMotd&&x.motd!==expected&&x.motd.includes('wt-broadcast-header')&&x.motd.includes('wt-house-rules'))return x;await p.waitForTimeout(250)}
  throw Error(field+' persistence not confirmed');
 }
+const menuSelector='#motd .wt-info-bar.wt-sections-v5>details';
+const menuGroup='wt-main-header-menu';
+async function verifyExclusive(){
+ const menus=p.locator(menuSelector);
+ assert.equal(await menus.count(),4);
+ assert.deepEqual(await menus.evaluateAll(es=>es.map(e=>e.getAttribute('name'))),Array(4).fill(menuGroup),'Native group was not retained');
+ // Begin closed; then switch directly between every menu without manually closing the previous one.
+ for(const e of await menus.all())if(await e.evaluate(x=>x.open))await e.locator(':scope>summary').click();
+ for(const i of [0,1,2,3,0,2,1,3]){
+  await menus.nth(i).locator(':scope>summary').click();
+  assert.deepEqual(await menus.evaluateAll(es=>es.map(e=>e.open)),[0,1,2,3].map(j=>j===i),'Opening a menu must close all others');
+ }
+ await menus.nth(3).locator(':scope>summary').click();
+ assert.ok(await menus.evaluateAll(es=>es.every(e=>!e.open)),'Clicking the active menu must close it');
+}
 try{
  await p.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});const f=p.locator('form[action="/login"]').last();await f.locator('input[name="name"]').fill('buttman-gpt');await f.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);await f.locator('button[type="submit"]').click();await p.waitForLoadState('domcontentloaded');
  await p.goto('https://baked.live/tv/Wrestling',{waitUntil:'domcontentloaded',timeout:45000});
@@ -35,6 +50,41 @@ try{
  await p.waitForTimeout(5000);
  before=await state();assert.ok(auth(before)&&hasFeed(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
+ // Existing four-menu header: update only the live MOTD's four opening tags.
+ // No stylesheet, channel JS, external setting or playlist write is necessary.
+ if(before.sections===4){
+  targetCss=before.css;
+  let matched=0;
+  targetMotd=before.motd.replace(/<details\b[^>]*>/gi,tag=>{
+   const cls=tag.match(/\bclass\s*=\s*["']([^"']*)["']/i)?.[1]?.split(/\s+/)||[];
+   if(!cls.some(c=>['wt-house-rules','wt-playlist-menu','wt-chat-menu','wt-community-menu'].includes(c)))return tag;
+   matched++;
+   if(/\bname\s*=/i.test(tag)){
+    if(!/\bname\s*=\s*["']wt-main-header-menu["']/i.test(tag))throw Error('Unexpected dropdown group; no change');
+    return tag;
+   }
+   return tag.replace(/^<details/i,'<details name="wt-main-header-menu"');
+  });
+  assert.equal(matched,4,'Unexpected live menu markup; no change');
+  await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
+  const original=await p.locator('#motd').evaluate((e,html)=>{const old=e.innerHTML;e.innerHTML=html;return old},targetMotd);
+  try{await verifyExclusive()}finally{await p.locator('#motd').evaluate((e,html)=>e.innerHTML=html,original)}
+  if(targetMotd!==before.motd){
+   const applied=await write('motd',before.motd,targetMotd,before.css);
+   motdWritten=true;targetMotd=applied.motd;
+  }
+  await p.reload({waitUntil:'domcontentloaded',timeout:45000});
+  await p.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&document.querySelectorAll('#motd .wt-info-bar.wt-sections-v5>details').length===4,{timeout:45000});
+  await verifyExclusive();
+  const after=await state();
+  assert.ok(auth(after));
+  assert.equal(after.motd,targetMotd);
+  assert.equal(after.css,before.css);assert.equal(after.js,before.js);
+  assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);
+  await p.screenshot({path:dir+'/after.png'});
+  const report={status:'exclusive-dropdowns-verified',menus:4,motdOnly:true,cssPreserved:true,jsPreserved:true,externalSettingsPreserved:true,queueWrites:0};
+  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));console.log('WRESTLETUBE_RINGSIDE '+JSON.stringify(report));
+ }else{
  const dimensions=await p.evaluate(url=>new Promise(resolve=>{const i=new Image(),t=setTimeout(()=>resolve(null),15000);i.onload=()=>{clearTimeout(t);resolve([i.naturalWidth,i.naturalHeight])};i.onerror=()=>{clearTimeout(t);resolve(null)};i.src=url}),image);
  assert.deepEqual(dimensions,[2048,1536],'Exact hosted ring image not available; no changes made');
  for(const [url,w,h] of [['https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4d03e39156a081f731c60ea46551cf9712392256/tubes/WrestleTube/assets/wordmark-web.png',400,75],['https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4d03e39156a081f731c60ea46551cf9712392256/tubes/WrestleTube/assets/navbar-web.png',96,83]]){
@@ -65,6 +115,7 @@ try{
   await p.screenshot({path:dir+'/preview-help.png'});
   await p.locator('.wt-chat-menu>summary').click();
   for(const menu of ['.wt-playlist-menu','.wt-community-menu']){await p.locator(menu+'>summary').click();assert.ok(await p.locator(menu).evaluate(e=>e.open));await p.locator(menu+'>summary').click()}
+  await verifyExclusive();
   await p.screenshot({path:dir+'/preview.png'});
   await p.setViewportSize({width:390,height:844});await p.waitForTimeout(300);
   assert.ok(await p.locator('.wt-broadcast-header').evaluate(e=>{const r=e.getBoundingClientRect();return r.width<=innerWidth&&r.width>100&&r.height<220}));
@@ -77,9 +128,11 @@ try{
  await p.waitForTimeout(500);const after=await state();assert.ok(auth(after)&&valid(after),'Live layout validation failed');
  assert.equal(after.css,targetCss);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
  for(const menu of ['.wt-house-rules','.wt-playlist-menu','.wt-chat-menu','.wt-community-menu']){await p.locator(menu+'>summary').click();assert.ok(await p.locator(menu).evaluate(e=>e.open));await p.locator(menu+'>summary').click()}
+ await verifyExclusive();
  await p.screenshot({path:dir+'/after.png'});
  const report={status:'verified',image:dimensions,header:after.header,rules:after.rules,queue:after.entries.length,streamPreserved:true,jsPreserved:true,externalSettingsPreserved:true,liveChatGuidePreserved:!!guide};
  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));console.log('WRESTLETUBE_RINGSIDE '+JSON.stringify(report));
+ }
  }
 }catch(e){
  console.log('WRESTLETUBE_RINGSIDE_ERROR '+String(e.message||e));

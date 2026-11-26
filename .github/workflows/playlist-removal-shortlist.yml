@@ -1,0 +1,80 @@
+name: Generate protected playlist removal shortlist
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/playlist-removal-shortlist.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  shortlist:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 45867325110
+          github-token: ${{ github.token }}
+          pattern: playlist-review-batch-*
+          path: source-audits
+      - name: Build read-only shortlist from exact audit snapshots
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import assert from 'node:assert/strict';
+          const reports=[];
+          async function walk(dir){
+            for(const e of await fs.readdir(dir,{withFileTypes:true})){
+              const p=path.join(dir,e.name);
+              if(e.isDirectory())await walk(p);
+              else if(e.name==='report.json'&&p.includes('/playlist-audit/'))reports.push(p);
+            }
+          }
+          await walk('source-audits');
+          assert.equal(reports.length,29,'Expected all 29 per-channel audit reports');
+          const output=[],seen=new Set();
+          const allowed=new Set(['Wrestling','luchatube','WID']);
+          const part=/(?:^|[\s_\-–—:.(\[])(?:part|pt\.?|disc|disk|cd|episode|ep\.?|segment)[\s._-]*\d{1,3}\b|\b\d{1,2}\s*(?:of|\/)\s*\d{1,2}\b/i;
+          const key=t=>String(t||'').toLowerCase().replace(part,' ').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+          for(const file of reports){
+            const report=JSON.parse(await fs.readFile(file,'utf8'));
+            const snapshot=JSON.parse(await fs.readFile(path.join(path.dirname(file),'before.json'),'utf8'));
+            assert.ok(report.noChangesMade&&report.channel===snapshot.channel&&!seen.has(report.channel));
+            seen.add(report.channel);
+            const entries=snapshot.entries;
+            assert.equal(entries.length,report.playlistItems);
+            const suspects=report.results.filter(x=>x.status==='not-publicly-playable');
+            const evidence=report.independentVerification?.youtubeEvidence||[];
+            for(const x of suspects){
+              const item=entries.find(e=>e.uid===x.uid);
+              assert.ok(item&&item.id===x.id&&item.type===x.type);
+              const reasons=[];
+              const strong=x.first?.status===404&&x.second?.status===404&&(x.type==='fi'||x.type==='yt'&&evidence.some(e=>e.uid===x.uid&&e.id===x.id&&e.returned===false));
+              if(!strong)reasons.push(x.type==='dm'?'Dailymotion requires independent review':'insufficient independent evidence');
+              if(!allowed.has(report.channel))reasons.push('outside existing automatic cleanup scope');
+              if(item.index<60)reasons.push('protected first 60 positions');
+              if(snapshot.playing==null)reasons.push('current playback unknown');
+              if(String(item.uid)===String(snapshot.playing))reasons.push('currently playing at audit');
+              if(item.temp)reasons.push('temporary entry');
+              if(part.test(item.title||'')||entries.some(e=>e.uid!==item.uid&&part.test(e.title||'')&&key(e.title)===key(item.title)))reasons.push('possible multipart program');
+              output.push({channel:report.channel,position:item.index+1,uid:item.uid,type:item.type,title:item.title,mediaId:item.id,evidence:strong?'strong': 'review',decision:reasons.length?'retain':'eligible after live recheck',reasons});
+            }
+          }
+          assert.equal(output.length,69,'Expected exactly 69 flagged entries from original audit');
+          output.sort((a,b)=>a.channel.localeCompare(b.channel)||a.position-b.position);
+          const eligible=output.filter(x=>x.decision==='eligible after live recheck');
+          const summary={sourceRun:45867325110,channels:seen.size,flagged:output.length,strong:output.filter(x=>x.evidence==='strong').length,eligible:eligible.length,retained:output.length-eligible.length,noWrites:true};
+          await fs.mkdir('shortlist',{recursive:true});
+          await fs.writeFile('shortlist/review.json',JSON.stringify({summary,entries:output},null,2)+'\n');
+          const csv=v=>'"'+String(v??'').replaceAll('"','""')+'"';
+          await fs.writeFile('shortlist/review.csv',['channel,position,uid,type,title,evidence,decision,reasons',...output.map(x=>[x.channel,x.position,x.uid,x.type,x.title,x.evidence,x.decision,x.reasons.join('; ')].map(csv).join(','))].join('\n')+'\n');
+          for(const x of output)console.log('SHORTLIST_ENTRY '+JSON.stringify({channel:x.channel,position:x.position,uid:x.uid,title:x.title,evidence:x.evidence,decision:x.decision,reasons:x.reasons}));
+          console.log('SHORTLIST_SUMMARY '+JSON.stringify(summary));
+          JS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: playlist-removal-shortlist
+          path: shortlist/
+          retention-days: 30

@@ -3834,3 +3834,41 @@ div#userlist {
         width: calc(100vw - 36px) !important;
     }
 }
+
+
+/* =========================================================
+   RDH NAVBAR DROPDOWN HOVER INTENT
+   Ignore brief cursor passes; dismiss promptly after leaving.
+   Click and keyboard-opened menus remain immediate.
+   ========================================================= */
+.navbar-nav > li.dropdown > .dropdown-menu {
+    display: block !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity .12s ease, visibility 0s linear .12s !important;
+}
+
+.navbar-nav > li.dropdown:hover > .dropdown-menu {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: opacity .12s ease .35s, visibility 0s linear .35s !important;
+}
+
+.navbar-nav > li.dropdown.open > .dropdown-menu,
+.navbar-nav > li.dropdown:focus-within > .dropdown-menu {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition-delay: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar-nav > li.dropdown > .dropdown-menu,
+    .navbar-nav > li.dropdown:hover > .dropdown-menu,
+    .navbar-nav > li.dropdown.open > .dropdown-menu,
+    .navbar-nav > li.dropdown:focus-within > .dropdown-menu {
+        transition: none !important;
+    }
+}

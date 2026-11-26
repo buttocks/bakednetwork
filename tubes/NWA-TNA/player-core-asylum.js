@@ -197,7 +197,7 @@ async function startDM(p,seek,id){
   if(!current()){try{player.destroy()}catch{}return;}
   dm=player;const events=api.events;
   const state=s=>{if(!current()||s?.videoId!==p.dailymotion_id)return;dmTime=Number(s.videoTime)||0};
-  player.on(events.VIDEO_TIMECHANGE,s=>{state(s);if(current()&&s?.videoId===p.dailymotion_id&&dmTime>0&&s.playerIsPlaying){dmPlaying=true;clearTimeout(playbackTimer);status.hidden=true;reveal(firstFade)}});
+  player.on(events.VIDEO_TIMECHANGE,s=>{state(s);if(current()&&s?.videoId===p.dailymotion_id&&dmTime>0&&s.playerIsPlaying){if(!dmPlaying){dmPlaying=true;clearTimeout(playbackTimer);status.hidden=true;reveal(firstFade)}}});
   player.on(events.VIDEO_PLAYING,s=>{if(!current()||s?.videoId!==p.dailymotion_id)return;state(s);dmPlaying=true;clearTimeout(playbackTimer);status.hidden=true;reveal(firstFade)});
   player.on(events.VIDEO_PAUSE,()=>{if(current()){dmPlaying=false;reveal()}});
   player.on(events.VIDEO_END,()=>{if(current()){activeUrl='';stopDM();tune(true,true)}});

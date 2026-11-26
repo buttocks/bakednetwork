@@ -1,0 +1,78 @@
+name: Verify Wrestling 5 queue and NWA-TNA runtime
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/verify-remaining-wrestling.yml']
+permissions:
+  contents: read
+concurrency:
+  group: baked-remaining-wrestling
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        tube: [wrestling5, NWA-TNA, RetroWrestling]
+    env:
+      TUBE: ${{ matrix.tube }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Inspect live state without changing channel settings
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          import {compactWhitespace} from './tubes/bridge/queue-attribution.mjs';
+          const slug=process.env.TUBE;
+          assert.ok(['wrestling5','NWA-TNA','RetroWrestling'].includes(slug));
+          const browser=await chromium.launch({channel:'chrome',headless:true});
+          const p=await browser.newPage({viewport:{width:1440,height:1000}});
+          const errors=[],scripts=[];
+          await fs.mkdir('remaining-review',{recursive:true});
+          const safe=u=>{try{const x=new URL(u);return x.origin+x.pathname}catch{return ''}};
+          p.on('pageerror',e=>errors.push(String(e.message).slice(0,200)));
+          p.on('response',r=>{if(/(?:githubusercontent|github\.io|jsdelivr)/i.test(r.url())&&/\.js(?:\?|$)/i.test(r.url()))scripts.push({url:safe(r.url()),status:r.status()})});
+          try{
+            await p.goto('https://baked.live/login',{waitUntil:'domcontentloaded'});
+            const f=p.locator('form[action="/login"]').last();await f.locator('input[name="name"]').fill('buttman-gpt');await f.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);await f.locator('button[type="submit"]').click();await p.waitForLoadState('domcontentloaded');
+            errors.length=0;scripts.length=0;
+            await p.goto('https://baked.live/tv/'+slug,{waitUntil:'domcontentloaded',timeout:45000});
+            await p.waitForFunction(slug=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.name?.toLowerCase()==='buttman-gpt'&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()===slug.toLowerCase(),slug,{timeout:45000});
+            await p.waitForTimeout(10000);
+            const state=()=>p.evaluate(()=>{
+              const c=window.CHANNEL||{},o=c.opts||{},b=document.querySelector('#queue .qe_blame'),s=b&&getComputedStyle(b);
+              return {css:c.css,jsLength:(c.js||'').length,externalJS:o.externaljs||'',ignoreJS:window.USEROPTS?.ignore_channeljs??null,base:!!window.CLIENT?.modules,brand:window.BakedWrestlingBrand?.name||null,scrollButton:!!document.querySelector('#scroll-btn'),tools:!!document.querySelector('#bpt-toolbar'),queue:document.querySelectorAll('#queue .queue_entry').length,blame:b?{float:s.cssFloat,margin:s.marginLeft,fontSize:s.fontSize}:null};
+            });
+            const x=await state();assert.equal(typeof x.css,'string');
+            await fs.writeFile('remaining-review/before.css',x.css);await p.screenshot({path:'remaining-review/before.png'});
+            const {css,...rest}=x;
+            if(slug==='wrestling5'){
+              const layer='#queue .qe_blame{float:right!important;margin-left:12px!important;font-size:11px!important;color:inherit!important;opacity:.85;white-space:nowrap}\n#queue .queue_entry::after{content:"";display:table;clear:both}';
+              const base=css.replace(/\/\* BEGIN MANAGED QUEUE ATTRIBUTION \*\/[\s\S]*?\/\* END MANAGED QUEUE ATTRIBUTION \*\//g,'');
+              const compact=compactWhitespace(base);
+              const equivalent=await p.evaluate(({base,compact})=>{if(/@import\b/i.test(base))return false;const parse=t=>{const s=new CSSStyleSheet();s.replaceSync(t);return [...s.cssRules].map(r=>r.cssText)};return JSON.stringify(parse(base))===JSON.stringify(parse(compact))},{base,compact});
+              const target=(equivalent?compact:base)+'\n/* BEGIN MANAGED QUEUE ATTRIBUTION */\n'+layer+'\n/* END MANAGED QUEUE ATTRIBUTION */';
+              const style=await p.addStyleTag({content:layer});const preview=await state();await p.screenshot({path:'remaining-review/preview.png'});await style.evaluate(e=>e.remove());
+              const report={slug,beforeBytes:Buffer.byteLength(css),proposedBytes:Buffer.byteLength(target),equivalent,hasImport:/@import\b/i.test(base),before:rest.blame,preview:preview.blame,queue:x.queue,noWrites:true};
+              await fs.writeFile('remaining-review/proposed.css',target);console.log('W5_QUEUE_REVIEW '+JSON.stringify(report));
+            }else{
+              console.log('WRESTLING_RUNTIME '+JSON.stringify({slug,...rest,scripts,errors,noWrites:true}));
+            }
+          }finally{await browser.close()}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: remaining-review-${{ matrix.tube }}
+          path: remaining-review/
+          retention-days: 30

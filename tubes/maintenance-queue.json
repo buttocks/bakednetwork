@@ -93,10 +93,10 @@
     },
     {
       "id": "joshi-feed-visibility",
-      "status": "deployment-queued",
+      "status": "deployed-verified",
       "workflow": "targeted-header-followup.yml",
       "mode": "exact owned iframe only; add if missing; no moves, deletion, playback or skin changes",
-      "evidence": "Verified permanent entry at position 13 of 456; operator approved follow-up. Native move only; no playback changes. Run 45865596415."
+      "evidence": "Run 45865596415 Joshi job passed. UID 12 moved from live position 18 to 1; all 456 entries, relative order of other entries, and current playback preserved."
     }
   ]
 }

@@ -195,6 +195,9 @@ try{
   await p.waitForFunction(()=>document.querySelector('.jts-logo')?.complete&&document.querySelector('.jts-logo')?.naturalWidth>0,null,{timeout:15000});
   const after=await state();assert.ok(auth(after)&&valid(after)&&await verify(),'Persisted skin verification failed');
   assert.equal(after.motd,before.motd);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.equal(after.logo.src,before.logo.src);
+  // Preview clicks leave the pointer on Rules; verify its resting state off-hover.
+  await p.mouse.move(0,0);
+  await p.waitForFunction(()=>{const e=document.querySelector('.jts-bar>details>summary');return e&&!e.matches(':hover')&&getComputedStyle(e).backgroundColor==='rgb(81, 66, 96)'},null,{timeout:5000});
   const buttonProof=await p.evaluate(()=>{const e=document.querySelector('.jts-bar>details>summary');const s=getComputedStyle(e);return {background:s.backgroundColor,color:s.color}});
   assert.equal(buttonProof.background,'rgb(81, 66, 96)','Rules button background mismatch');
   assert.equal(buttonProof.color,'rgb(255, 245, 255)','Rules button text mismatch');

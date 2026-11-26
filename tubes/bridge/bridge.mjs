@@ -33,7 +33,7 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
-  if(raw.action==='verify_scarytube_playback'){
+  if(['verify_scarytube_playback','diagnose_scarytube_chat'].includes(raw.action)){
     if(raw.channel!=='ScaryTube'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
        Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid ScaryTube verification request');
@@ -248,6 +248,34 @@ async function run(request){
     const before=initial.queue.map(entry=>({index:entry.index,title:entry.title,src:entry.src,temp:entry.temp}));
     console.log('Authenticated '+USERNAME+' on '+request.channel+
       '; rank='+initial.rank+'; items='+before.length);
+    if(request.action==='diagnose_scarytube_chat'){
+      const errors=[];
+      page.on('pageerror',e=>errors.push(String(e.message).slice(0,250)));
+      await page.waitForTimeout(6000);
+      const diagnostic=await page.evaluate(()=>{
+        const w=window,b=document.querySelector('#messagebuffer');
+        const fn=w.addChatMessage;
+        const result={connected:!!w.socket?.connected,skinRunning:!!w.__scaryTubeRunning,externalJs:w.CHANNEL?.opts?.externaljs||'',customHandler:typeof fn==='function'&&String(fn).includes('increscentStore'),formatter:typeof w.formatChatMessage,smartScroll:!!w.CLIENT?.smartScroll,scrollChat:w.SCROLLCHAT,ignoreChannelJs:!!w.USEROPTS?.ignore_channeljs,jquery:w.jQuery?.fn?.jquery,chatListeners:typeof w.socket?.listeners==='function'?w.socket.listeners('chatMsg').map(f=>String(f).slice(0,450)):[],lastTime:typeof w.LASTCHAT==='object'?w.LASTCHAT.time:null,tests:[]};
+        if(!b||typeof fn!=='function')return result;
+        // Local synthetic messages only: no socket emit or real chat post.
+        const last=w.LASTCHAT&&{...w.LASTCHAT};
+        const marker='Local diagnostic '+Date.now();
+        for(const [name,meta] of [['normal',{}],['missing-meta',undefined],['same-timestamp',{}]]){
+          const time=name==='same-timestamp'?(w.LASTCHAT?.time||Date.now()):Date.now()+1000;
+          const data={username:'LocalDiagnostic',msg:marker+' '+name,time,...(meta?{meta}:{})};
+          try{
+            fn(data);
+            result.tests.push({name,rendered:b.textContent.includes(marker+' '+name)});
+          }catch(e){result.tests.push({name,rendered:false,error:String(e.message).slice(0,250)});}
+        }
+        for(const node of [...b.children])if(node.textContent.includes(marker))node.remove();
+        if(last&&w.LASTCHAT)Object.assign(w.LASTCHAT,last);
+        result.scroll={height:b.scrollHeight,client:b.clientHeight,top:b.scrollTop};
+        return result;
+      });
+      console.log('SCARY_CHAT_DIAGNOSTIC '+JSON.stringify({diagnostic,errors}));
+      return {request_id:request.request_id,channel:request.channel,action:request.action,status:'chat-diagnosed',diagnostic,errors};
+    }
     if(request.action==='verify_scarytube_playback'){
       const src='https://pc-mint.tail7c671f.ts.net:10000/';
       const hits=exactMatches(initial,src);

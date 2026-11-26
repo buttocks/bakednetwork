@@ -56,7 +56,41 @@ try{
  await p.waitForTimeout(4500);
  before=await state();assert.ok(auth(before)&&hasFeeds(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
- if(valid(before)){console.log('JOSHI_HEADER '+JSON.stringify({slug,status:'already-verified',queue:before.entries.length}));}
+ if(valid(before)){
+  // Existing Joshi header: change only the banner palette. Joshi2 remains unchanged.
+  if(slug==='joshi'){
+   const originalGradient='linear-gradient(110deg,#101014,#32223f,#101014)';
+   const lighterGradient='linear-gradient(110deg,#896bb3,#a68bcb,#896bb3)';
+   const override='#motdwrap .jts-header{background:'+lighterGradient+'!important}';
+   const colorMarker='/* JOSHI LOGO CONTRAST */';
+   const verifyColor=()=>p.locator('#motdwrap .jts-header').evaluate(e=>getComputedStyle(e).backgroundImage.includes('rgb(166, 139, 203)'));
+   targetMotd=before.motd;
+   if(before.css.includes(originalGradient)){
+    targetCss=before.css.replace(originalGradient,lighterGradient);
+   }else if(before.css.includes(lighterGradient)){
+    targetCss=before.css;
+   }else{
+    assert.ok(before.css.includes('tubes/Joshi/header.css'),'Expected hosted or inline Joshi header CSS; no writes');
+    targetCss=before.css.trimEnd()+'\n'+colorMarker+'\n'+override;
+    if(Buffer.byteLength(targetCss)>19980){
+     const compact=compactWhitespace(before.css);
+     const same=await p.evaluate(({a,b})=>{const parse=x=>{const s=document.createElement('style');s.media='not all';s.textContent=x;document.head.append(s);try{return [...s.sheet.cssRules].map(r=>r.cssText)}finally{s.remove()}};return JSON.stringify(parse(a))===JSON.stringify(parse(b))},{a:before.css,b:compact});
+     assert.ok(same,'Existing CSS rules changed by compaction; no writes');
+     targetCss=compact+'\n'+colorMarker+'\n'+override;
+    }
+   }
+   assert.ok(Buffer.byteLength(targetCss)<=19980,'Updated CSS exceeds size cap; no writes');
+   await fs.writeFile(dir+'/proposed.css',targetCss);
+   const style=await p.addStyleTag({content:override});
+   try{assert.ok(await verifyColor(),'Lighter banner preview failed');assert.ok(valid(await state()),'Header preview validation failed');await p.screenshot({path:dir+'/preview.png'})}
+   finally{await style.evaluate(e=>e.remove())}
+   if(targetCss!==before.css){await write('css',before.css,targetCss,before.motd);cssWritten=true}
+   await p.waitForFunction(()=>getComputedStyle(document.querySelector('#motdwrap .jts-header')).backgroundImage.includes('rgb(166, 139, 203)'),null,{timeout:15000});
+   const after=await state();assert.ok(auth(after)&&valid(after));assert.equal(after.motd,before.motd);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
+   await p.screenshot({path:dir+'/after.png'});
+   console.log('JOSHI_HEADER '+JSON.stringify({slug,status:'lighter-logo-verified',queue:after.entries.length,cssChanged:targetCss!==before.css,logoPreserved:true,motdPreserved:true,jsPreserved:true}));
+  }else{console.log('JOSHI_HEADER '+JSON.stringify({slug,status:'already-verified',queue:before.entries.length}));}
+ }
  else{
  const source=await p.evaluate(({html,slug})=>{
   const d=new DOMParser().parseFromString(html,'text/html'),m=document.querySelector('#motd');

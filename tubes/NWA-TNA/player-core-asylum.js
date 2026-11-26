@@ -130,7 +130,7 @@ function weightedLineup(programs,key){
 }
 function select(date=new Date()){
   const utcDay=date.toISOString().slice(0,10);
-  if(utcDay!==day){
+  if(utcDay!==day&&!(activeUrl&&activeProgram&&multipartInfo(activeProgram))){
     day=utcDay;ordered=weightedLineup(track?.programs||[],channel+'|'+utcDay);
   }
   if(!ordered.length)return null;
@@ -142,7 +142,7 @@ function select(date=new Date()){
     t-=ordered[index].duration;
   }
   const original=index;
-  while(bad.has(ordered[index].url)){
+  while(bad.has(ordered[index].url)||(index!==original&&multipartInfo(ordered[index])?.part>1)){
     index=(index+1)%ordered.length;t=0;
     if(index===original)return null;
   }

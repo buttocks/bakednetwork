@@ -1,6 +1,8 @@
 name: Audit multipart queues
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '23 10 * * 2'
   push:
     branches: [main]
     paths:
@@ -80,6 +82,8 @@ jobs:
             }catch(e){report.error=e.message.split('\n')[0].slice(0,250)}
             finally{await context.close();}
             reports.push(report);
+            for(const g of report.unresolved||[])console.log('MULTIPART_REVIEW '+JSON.stringify({channel,kind:'unresolved',...g}));
+            for(const g of report.split||[])console.log('MULTIPART_REVIEW '+JSON.stringify({channel,kind:'split',...g}));
             console.log('MULTIPART_QUEUE '+JSON.stringify({channel,status:report.status,count:report.count,complete:report.complete?.length,split:report.split?.length,unresolved:report.unresolved?.length,error:report.error}));
           }
           await browser.close();

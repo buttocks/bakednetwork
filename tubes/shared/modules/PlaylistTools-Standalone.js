@@ -79,6 +79,9 @@
     });
   }
   function protectedEntry(entry) {
+    // Single-row deletes can leave half a show behind. Multipart items
+    // require intentional native/manual review of the entire set.
+    if(/(?:^|[\s_\-–—:.(\[])(?:part|pt\.?|disc|disk|cd)[\s._-]*\d{1,3}\b/i.test(entry.title||''))return true;
     return entry.pos <= S.count || entry.active || entry.uid === undefined || entry.uid === null || entry.uid === '';
   }
   function getTargets() {
@@ -119,7 +122,7 @@
   function preview() {
     const entries = getEntries(), candidates = getTargets();
     const list = candidates.slice(0, 6).map(e => '  ' + e.pos + '. ' + (e.title || '(untitled)'));
-    const message = [entries.length + ' total · ' + S.count + ' top entries protected · ' + candidates.length + ' to remove'];
+    const message = [entries.length + ' total · ' + S.count + ' top entries protected · multipart rows protected · ' + candidates.length + ' to remove'];
     if (id('mode').value === 'others' && !entries.some(e => e.active)) message.push('No active video detected — cannot delete all other entries.');
     if (list.length) message.push(...list);
     if (candidates.length > 6) message.push('  … and ' + (candidates.length-6) + ' more');
@@ -187,7 +190,7 @@
     const selected = getTargets();
     if (!selected.length) return;
     const count = selected.length;
-    if (!window.confirm('Remove ' + count + ' playlist entr' + (count===1?'y':'ies') + '?\nCurrently playing and the first ' + S.count + ' positions stay protected.\nThis cannot be undone.')) return;
+    if (!window.confirm('Remove ' + count + ' playlist entr' + (count===1?'y':'ies') + '?\nCurrently playing and the first ' + S.count + ' positions and multipart rows stay protected.\nThis cannot be undone.')) return;
     if (count >= 20 && window.prompt('For safety, type DELETE ' + count + ' to confirm:') !== 'DELETE ' + count) { status('Cancelled.'); return; }
     S.busy = true; S.cancel = false;
     id('cancel').hidden = false; id('delete').disabled = true;

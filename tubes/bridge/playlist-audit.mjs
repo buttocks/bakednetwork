@@ -176,6 +176,9 @@ export async function auditPlaylistMedia({page,request,initial}){
     candidates.push(...yt.filter(x=>absent.has(x.uid)&&x.first?.status===404&&x.second?.status===404));
     if(candidates.length>50||candidates.length>Math.ceil(state.entries.length*0.1))throw Error('Playlist cleanup exceeds safety cap');
     for(const x of candidates){
+      // Never automatically remove a multipart segment, even when it is
+      // independently confirmed dead. Resolve the entire program first.
+      if(/(?:^|[\s_\-–—:.(\[])(?:part|pt\.?|disc|disk|cd)[\s._-]*\d{1,3}\b/i.test(x.title||'')){skipped.push(x.uid);continue;}
       if(!['Wrestling','luchatube','WID'].includes(request.channel))continue;
       const result=await page.evaluate(({uid,id,type})=>{
         const entries=[...document.querySelectorAll('#queue .queue_entry')];

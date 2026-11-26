@@ -9,6 +9,8 @@ on:
       - '.github/workflows/audit-multipart-queues.yml'
       - 'tubes/feeds/multipart.js'
       - 'tubes/feeds/test-multipart.mjs'
+      - 'tubes/feeds/test-multipart-retention.py'
+      - 'tubes/feeds/discover.py'
 permissions:
   contents: read
 concurrency:
@@ -23,6 +25,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --experimental-default-type=module tubes/feeds/test-multipart.mjs
+      - run: python3 tubes/feeds/test-multipart-retention.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

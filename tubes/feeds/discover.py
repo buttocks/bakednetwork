@@ -243,6 +243,7 @@ def youtube(entry,defaults):
 def multipart_key(p):
     """Match the player grouping rule. Distinct providers and uploaders stay separate."""
     title=str(p.get("title","")).strip()
+    if re.fullmatch(r"Billy Idol\s*[-–—:]\s*White Wedding\s+(?:Pt\.?|Part)\s*1",title,re.I):return None
     m=re.fullmatch(r"(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|/)\s*(\d{1,3}))?\s*[)\]]?\s*",title,re.I)
     if not m:return None
     part=int(m[2]); total=int(m[3]) if m[3] else None

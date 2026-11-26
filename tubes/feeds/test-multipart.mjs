@@ -5,6 +5,7 @@ import {multipartInfo,multipartBlocks} from './multipart.js';
 const p=(title,url,source='YouTube',owner='Same uploader',duration=600)=>({title,url,source,source_channel:owner,duration});
 const fixture=[p('Championship Final (Part 3 of 3)','c'),p('Different match','d','Internet Archive'),p('Championship Final (Part 1 of 3)','a'),p('Championship Final (Part 2 of 3)','b'),p('Other show Part 1 of 2','missing'),p('Show Episode 2','e'),p('Championship Final Part 2','foreign','YouTube','Other uploader')];
 assert.equal(multipartInfo(fixture[5]),null);
+assert.equal(multipartInfo(p('Billy Idol - White Wedding Pt 1','music')),null);
 const grouped=multipartBlocks(fixture);
 assert.deepEqual(grouped.blocks.find(b=>b.group).parts.map(x=>x.url),['a','b','c']);
 assert.equal(grouped.unresolved.length,2);

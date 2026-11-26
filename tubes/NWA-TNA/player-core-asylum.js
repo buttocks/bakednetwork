@@ -64,6 +64,8 @@ function valid(p){
 function multipartInfo(p) {
   if(!p || typeof p.title!=='string')return null;
   const title=p.title.trim();
+  // Known standalone song title, not a divided video.
+  if(/^Billy Idol\s*[-–—:]\s*White Wedding\s+(?:Pt\.?|Part)\s*1$/i.test(title))return null;
   const m=title.match(/^(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|\/)\s*(\d{1,3}))?\s*[)\]]?\s*$/i);
   if(!m||!m[1].trim())return null;
   const part=Number(m[2]),total=m[3]?Number(m[3]):null;

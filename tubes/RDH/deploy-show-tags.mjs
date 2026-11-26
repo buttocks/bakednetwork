@@ -89,7 +89,7 @@ function installUiFixes(){
    installUiFixes();
   })(window);
 `;
-const completeAddon=addon.replace("/* END RDH SHOW TAGS COMPATIBILITY */",uiAddon+"\\n/* END RDH SHOW TAGS COMPATIBILITY */");
+const completeAddon=addon.replace("/* END RDH SHOW TAGS COMPATIBILITY */",uiAddon+"\n/* END RDH SHOW TAGS COMPATIBILITY */");
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
 const errors=[];page.on('pageerror',e=>errors.push(String(e.message).slice(0,300)));
@@ -127,7 +127,7 @@ try{
  const loader=await page.request.get('https://baked.live'+old,{timeout:25000});
  const body=await loader.text();console.log('RDH_NATIVE_LOADER '+JSON.stringify({status:loader.status(),bytes:body.length,contentType:loader.headers()['content-type'],references:[...new Set(body.match(/https?:[^"'\s<>]+/g)||[])].filter(x=>/bakednetwork|rdh/i.test(x)).slice(0,10),mentionsRDH:/rdh/i.test(body)}));await loader.dispose();
  assert.equal(typeof before.js,'string');new Function(completeAddon);
- const startMarker='/* BEGIN RDH SHOW TAGS COMPATIBILITY */';const endMarker='/* END RDH SHOW TAGS COMPATIBILITY */';const start=before.js.indexOf(startMarker);const end=start<0?-1:before.js.indexOf(endMarker,start);next=start>=0&&end>=start?before.js.slice(0,start)+completeAddon+before.js.slice(end+endMarker.length):before.js.trimEnd()+'\\n\\n'+completeAddon+'\\n';if(before.js!==next){await setJS(before.js,next);changed=true;}
+ const startMarker='/* BEGIN RDH SHOW TAGS COMPATIBILITY */';const endMarker='/* END RDH SHOW TAGS COMPATIBILITY */';const start=before.js.indexOf(startMarker);const end=start<0?-1:before.js.indexOf(endMarker,start);next=start>=0&&end>=start?before.js.slice(0,start)+completeAddon+before.js.slice(end+endMarker.length):before.js.trimEnd()+'\n\n'+completeAddon+'\n';if(before.js!==next){await setJS(before.js,next);changed=true;}
  await page.reload({waitUntil:'domcontentloaded',timeout:45000});
  await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()==='rdh'&&document.querySelector('#queue .queue_entry'),null,{timeout:45000});
  await page.waitForTimeout(3000);

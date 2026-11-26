@@ -275,8 +275,12 @@ def refresh_one(entry,defaults,record):
         # Protect original seed entries, keep newest discovered entries, retain
         # unique URLs and evict older discovered entries when cap is reached.
         cap=defaults["max_catalog_items"]
-        fixed=items[:keep]
-        recent=items[keep:]
+        # Preserve browser-verified Dailymotion programs by identity, not
+        # merely by their current position in the catalog.
+        fixed=[p for i,p in enumerate(items) if i<keep or
+               (p.get("source")=="Dailymotion" and p.get("playback_verified_run") and approved_url(p.get("url")))]
+        fixed_urls={p["url"] for p in fixed}
+        recent=[p for p in items if p["url"] not in fixed_urls]
         budget=max(0,cap-len(fixed))
         updated=fixed+recent[-budget:] if budget else fixed
         j["channels"][key]["programs"]=updated

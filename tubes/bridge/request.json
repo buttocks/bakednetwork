@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "scarytube_chat_diagnostic_20261125",
+  "request_id": "scarytube_chat_repair_20261126",
   "channel": "ScaryTube",
-  "action": "diagnose_scarytube_chat"
+  "action": "deploy_scarytube_chat_fix"
 }

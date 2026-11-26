@@ -8,12 +8,34 @@ const addon="/* BEGIN RDH SHOW TAGS COMPATIBILITY */\n(function(w){\n \"use stri
 // Keep the currently deployed inline script hash stable. Changing the revision requires renewed user approval.
 const buildRef='47369905e36f3c2a71ac2621886aa0117063eb0e';
 const uiAddon=`(function(w,d){
- if(w.__rdhRdhTransientUiLoader)return;
- w.__rdhRdhTransientUiLoader=true;
- var s=d.createElement("script");
- s.src="https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@${buildRef}/tubes/RDH/rdh-transient-ui-fixes.js";
- s.async=true;
- (d.head||d.documentElement).appendChild(s);
+  if(w.__rdhRdhTransientUiLoader)return;
+  w.__rdhRdhTransientUiLoader=true;
+  var style=d.createElement("style");
+  style.id="rdh-show-tags-and-title-fix";
+  style.textContent='#queue .queue_entry.rdh-featured{position:relative!important;padding-left:44px!important}#queue .queue_entry.rdh-featured:before{position:absolute!important;left:6px!important;top:50%!important;transform:translateY(-50%)!important;display:inline-block!important;min-width:29px!important;padding:1px 4px!important;border-radius:3px!important;font-size:9px!important;line-height:13px!important;font-weight:900!important;letter-spacing:.25px!important;text-align:center!important;z-index:2!important}#queue .queue_entry.rdh-featured-wor:before{content:"WOR"!important;color:#241600!important;background:#ffc342!important}#queue .queue_entry.rdh-featured-wol:before{content:"WOL"!important;color:#002117!important;background:#68e6b0!important}#queue .queue_entry.rdh-featured-bv:before{content:"B&V"!important;color:#001d22!important;background:#55eafa!important}#queue .queue_entry.rdh-featured-bvv:before{content:"BVV"!important;color:#06132b!important;background:#598cff!important}#queue .queue_entry.rdh-featured-ltbh:before{content:"LTBH"!important;color:#211038!important;background:#c6a2ff!important}#queue .queue_entry.rdh-featured-ctm:before{content:"CTM"!important;color:#310c19!important;background:#ff8ab4!important}#queue .queue_entry.rdh-featured-f4d:before{content:"F4D"!important;color:#182600!important;background:#c4ef68!important}#queue .queue_entry.rdh-featured-ad:before{content:"AFTER DARK"!important;color:#351016!important;background:#ff8791!important}#queue .queue_entry.rdh-featured-bsc:before{content:"BSC"!important;color:#10202b!important;background:#a8c9d8!important}';
+  (d.head||d.documentElement).appendChild(style);
+  var cleanAddedByTitle=function(root){
+   if(!root||root.nodeType!==1)return;
+   var nodes=[];
+   if(root.hasAttribute("title"))nodes.push(root);
+   if(root.querySelectorAll)nodes.push.apply(nodes,root.querySelectorAll("[title]"));
+   nodes.forEach(function(node){
+    var title=node.getAttribute("title")||"";
+    if(node.closest("#queue")&&/^added by:/i.test(title.trim()))node.removeAttribute("title");
+   });
+  };
+  cleanAddedByTitle(d.body);
+  var observer=new MutationObserver(function(records){
+   records.forEach(function(record){
+    if(record.type==="attributes")cleanAddedByTitle(record.target);
+    else record.addedNodes.forEach(cleanAddedByTitle);
+   });
+  });
+  observer.observe(d.body,{childList:true,subtree:true,attributes:true,attributeFilter:["title"]});
+  var s=d.createElement("script");
+  s.src="https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@${buildRef}/tubes/RDH/rdh-transient-ui-fixes.js";
+  s.async=true;
+  (d.head||d.documentElement).appendChild(s);
 })(window,document);`;
 const completeAddon=addon.replace("/* END RDH SHOW TAGS COMPATIBILITY */",uiAddon+"\n/* END RDH SHOW TAGS COMPATIBILITY */");
 const browser=await chromium.launch({channel:'chrome',headless:true});

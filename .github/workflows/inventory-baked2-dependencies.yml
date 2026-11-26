@@ -1,0 +1,87 @@
+name: Inventory Baked 2.0 script dependencies
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inventory-baked2-dependencies.yml'
+permissions:
+  contents: read
+concurrency:
+  group: baked2-readonly-inventory
+  cancel-in-progress: false
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        batch: [0, 1, 2, 3, 4, 5]
+    env:
+      BATCH: ${{ matrix.batch }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Read authenticated channel script inventory
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {chromium} from 'playwright';
+          const all=JSON.parse(fs.readFileSync('tubes/channels.json')).channels.filter(c=>c.adminVerified);
+          const channels=all.filter((c,i)=>i%6===Number(process.env.BATCH));
+          const browser=await chromium.launch({channel:'chrome',headless:true});
+          const reports=[];
+          function safeUrl(s){
+            try{
+              const u=new URL(s,'https://baked.live');
+              if(!['http:','https:'].includes(u.protocol)||u.username||u.password)return null;
+              // Only public host and recognized script basename; no query,
+              // fragment, arbitrary path segments or private config contents.
+              const file=u.pathname.split('/').at(-1);
+              return {host:u.hostname,file:/^[a-zA-Z0-9_.-]+\.js$/i.test(file)?file:null};
+            }catch{return null}
+          }
+          for(const ch of channels){
+            const context=await browser.newContext();
+            let report={channel:ch.slug,status:'unverified',noChangesMade:true};
+            try{
+              const page=await context.newPage();
+              await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
+              const form=page.locator('form[action="/login"]').last();
+              await form.locator('input[name="name"]').fill('buttman-gpt');
+              await form.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);
+              await form.locator('button[type="submit"]').click();
+              await page.waitForLoadState('domcontentloaded');
+              await page.goto('https://baked.live/tv/'+ch.slug,{waitUntil:'domcontentloaded',timeout:45000});
+              await page.waitForFunction(c=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.name?.toLowerCase()==='buttman-gpt'&&window.CLIENT?.rank>=3&&window.CHANNEL?.name?.toLowerCase()===c.toLowerCase(),ch.slug,{timeout:45000});
+              await page.waitForTimeout(8000);
+              const state=await page.evaluate(()=>{
+                const c=window.CHANNEL;
+                const mods=window.CLIENT?.modules?.modules||{};
+                return {js:typeof c.js==='string'?c.js:null,external:typeof c.opts?.externaljs==='string'?c.opts.externaljs:'',rank:window.CLIENT.rank,resources:[...document.scripts].map(s=>s.src).filter(Boolean).concat(performance.getEntriesByType('resource').filter(r=>r.initiatorType==='script').map(r=>r.name)),modules:Object.entries(mods).map(([name,m])=>({name,active:!!m?.active,url:typeof m?.url==='string'?m.url:'',done:m?.done===true})),markers:{playlistTools:!!document.querySelector('#bpt-toolbar'),scrollQueue:!!document.querySelector('#scroll-btn'),playlistAttribution:!!document.querySelector('.qe_blame'),playlistThumbnails:!!document.querySelector('#queue img'),chat:!!document.querySelector('#messagebuffer'),userlist:!!document.querySelector('#userlist')},version:typeof window.BAKED_VERSION==='string'?window.BAKED_VERSION.slice(0,40):null};
+              });
+              if(state.js===null)throw Error('Inline JavaScript unavailable');
+              const references=[...state.js.matchAll(/(?:module_[a-z0-9_]+(?:\.min)?\.js|library_chaticons\.min\.js|AvatarClient\.min\.js|custom_fancysheet\.min\.js)/gi)].map(m=>m[0]);
+              report={...report,status:'inventoried',rank:state.rank,inlineBytes:Buffer.byteLength(state.js),inlineSha256:createHash('sha256').update(state.js).digest('hex'),external:safeUrl(state.external)||null,xaekaiMarker:/xaekai|XaeModule|Sequenced Module Loader/i.test(state.js),inlineModuleReferences:[...new Set(references)],runtimeModules:state.modules.filter(m=>/^[a-zA-Z0-9_-]{1,40}$/.test(m.name)).map(m=>({...m,url:safeUrl(m.url)})),scriptResources:[...new Map(state.resources.map(safeUrl).filter(Boolean).map(s=>[JSON.stringify(s),s])).values()],observedControls:state.markers,reportedVersion:state.version,nativeParity:'not established'};
+              if(!state.external)report.external=null;
+            }catch(e){report.error=String(e.message||e).split('\n')[0].slice(0,200)}
+            finally{await context.close()}
+            reports.push(report);
+            console.log('BAKED2_INVENTORY '+JSON.stringify({channel:report.channel,status:report.status,inlineBytes:report.inlineBytes,xaekaiMarker:report.xaekaiMarker,external:report.external,moduleCount:report.runtimeModules?.length,activeModules:report.runtimeModules?.filter(m=>m.active).map(m=>m.name),inlineModuleReferences:report.inlineModuleReferences,observedControls:report.observedControls,reportedVersion:report.reportedVersion,error:report.error}));
+          }
+          await browser.close();
+          fs.writeFileSync('baked2-inventory.json',JSON.stringify(reports,null,2));
+          if(reports.some(r=>r.status!=='inventoried'))process.exitCode=1;
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baked2-inventory-${{ matrix.batch }}
+          path: baked2-inventory.json
+          retention-days: 30

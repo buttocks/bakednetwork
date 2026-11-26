@@ -1,5 +1,5 @@
-/* BEGIN WRESTLETUBE RINGSIDE RESTORATION v1 — staged, not live */
-:root{--wt-ring-bg:url("https://buttocks.github.io/bakednetwork/tubes/WrestleTube/assets/wrestletube-ring.jpg");--wt-accent:#d93c4b;--wt-text:#eaeaf0;--wt-border:#45434b}
+/* BEGIN WRESTLETUBE RINGSIDE RESTORATION v1 */
+:root{--wt-ring-bg:url("https://buttocks.github.io/bakednetwork/tubes/WrestleTube/assets/rinng.jpg");--wt-accent:#d93c4b;--wt-text:#eaeaf0;--wt-border:#45434b}
 body:not(.cinemachat){background-color:#050507!important;background-image:linear-gradient(0deg,#05050755,#05050715),var(--wt-ring-bg)!important;background-size:cover!important;background-position:center center!important;background-repeat:no-repeat!important;background-attachment:fixed!important}
 body:not(.cinemachat) #wrap#wrap{background:transparent!important}
 body:not(.cinemachat) #motdrow{background:transparent!important}

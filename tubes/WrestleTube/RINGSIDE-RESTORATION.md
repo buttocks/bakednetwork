@@ -1,6 +1,6 @@
 # WrestleTube background restoration — staged
 
-The uploaded black-and-white ring photo belongs at `assets/wrestletube-ring.jpg`. Until it is uploaded and its public URL returns the actual image, do not apply the CSS or MOTD.
+The uploaded black-and-white ring photo belongs at `assets/rinng.jpg`. The uploaded photo's Git blob SHA matches the recovered JPEG exactly. Deployment validates the published image before applying any changes.
 
 - `ringside-restoration.css`: append to the current channel CSS (do not replace original chat-effect rules).
 - `ringside-motd.html`: proposed replacement for the old welcome boxes and popups, using the archived chat shortcut guide. Preserve the existing main-channel no-politics rule in addition to the new standard house rules.

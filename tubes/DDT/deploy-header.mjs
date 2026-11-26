@@ -58,22 +58,40 @@ try{
  before=await state();assert.ok(auth(before)&&hasFeeds(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
  if(valid(before)){
- const oldLabel="DDT PRO-WRESTLING · MATCH ARCHIVE · 24/7 WRESTLING",newLabel="DDT PRO-WRESTLING · LIVE EVENTS · 24/7 MATCHES";
- if(before.motd.includes(oldLabel)){
-  assert.equal(before.motd.split(oldLabel).length,2,'Ambiguous old label');
-  targetCss=before.css;targetMotd=before.motd.replace(oldLabel,newLabel);
-  await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
-  const applied=await write('motd',before.motd,targetMotd,before.css);targetMotd=applied.motd;motdWritten=true;
-  const after=await state();
-  assert.ok(auth(after)&&valid(after)&&after.motd.includes(newLabel)&&!after.motd.includes(oldLabel));
-  assert.equal(after.css,before.css);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);
-  assert.deepEqual(after.entries,before.entries);assert.equal(after.logo.src,before.logo.src);
-  await p.screenshot({path:dir+'/after.png'});
-  console.log('DDT_HEADER '+JSON.stringify({slug,status:'live-events-label-verified',queue:after.entries.length,cssPreserved:true,jsPreserved:true}));
- }else{
-  assert.ok(before.motd.includes(newLabel),'Unexpected existing subtitle; no writes');
-  console.log('DDT_HEADER '+JSON.stringify({slug,status:'already-verified',queue:before.entries.length}));
- }
+ const label='DDT PRO-WRESTLING · LIVE EVENTS · 24/7 MATCHES';
+ assert.ok(before.motd.includes(label),'Expected verified live events label');
+ const layer='/* BEGIN DDT WORDMARK */\n#motdwrap .dds-wordmark{display:flex!important;align-items:center;justify-content:center;gap:12px;max-width:100%;color:#eef5ff!important}\n#motdwrap .dds-name{font:900 clamp(22px,4vw,38px)/1 system-ui,Arial,sans-serif!important;letter-spacing:.045em;white-space:nowrap;color:#eef5ff!important}\n#motdwrap .dds-wordmark img.dds-logo{margin:0!important}\n/* END DDT WORDMARK */';
+ targetCss=before.css.replace(/\/\* BEGIN DDT WORDMARK \*\/[\s\S]*?\/\* END DDT WORDMARK \*\//g,'').trimEnd()+'\n'+layer;
+ assert.ok(Buffer.byteLength(targetCss)<=19980,'CSS cap exceeded');
+ targetMotd=await p.evaluate(html=>{
+  const d=new DOMParser().parseFromString(html,'text/html'),h=d.querySelector('.dds-header'),i=h?.querySelector('.dds-logo');
+  if(!h||!i||h.querySelectorAll('.dds-logo').length!==1)throw Error('Unexpected logo structure');
+  if(h.querySelector('.dds-wordmark'))return html;
+  const w=d.createElement('div');w.className='dds-wordmark';
+  const n=d.createElement('span');n.className='dds-name';n.textContent='DDT TUBE';
+  i.replaceWith(w);w.append(n,i);return d.body.innerHTML;
+ },before.motd);
+ const check=()=>p.evaluate(()=>{
+  const w=document.querySelector('#motd .dds-wordmark'),n=w?.querySelector('.dds-name'),i=w?.querySelector('.dds-logo');
+  if(!w||!n||!i)return false;
+  const a=n.getBoundingClientRect(),b=i.getBoundingClientRect();
+  return n.textContent==='DDT TUBE'&&getComputedStyle(w).display==='flex'&&a.right<=b.left+1&&Math.abs((a.top+a.bottom-b.top-b.bottom)/2)<3&&b.right<=innerWidth&&a.left>=0&&i.complete&&i.naturalWidth>0;
+ });
+ await fs.writeFile(dir+'/proposed-motd.html',targetMotd);await fs.writeFile(dir+'/proposed.css',targetCss);
+ const style=await p.addStyleTag({content:layer});const original=await p.locator('#motd').evaluate((e,html)=>{const old=e.innerHTML;e.innerHTML=html;return old},targetMotd);
+ try{
+  await p.waitForFunction(()=>document.querySelector('.dds-logo')?.complete&&document.querySelector('.dds-logo')?.naturalWidth>0,null,{timeout:15000});
+  assert.ok(await check()&&valid(await state()),'Desktop wordmark preview failed');
+  await p.screenshot({path:dir+'/preview.png'});
+  await p.setViewportSize({width:390,height:844});await p.waitForTimeout(300);assert.ok(await check(),'Mobile wordmark preview failed');await p.screenshot({path:dir+'/mobile.png'});
+ }finally{await p.setViewportSize({width:1440,height:1000});await p.locator('#motd').evaluate((e,html)=>e.innerHTML=html,original);await style.evaluate(e=>e.remove())}
+ if(targetCss!==before.css){await write('css',before.css,targetCss,before.motd);cssWritten=true}
+ if(targetMotd!==before.motd){const applied=await write('motd',before.motd,targetMotd,targetCss);targetMotd=applied.motd;motdWritten=true}
+ await p.waitForFunction(()=>document.querySelector('.dds-logo')?.complete&&document.querySelector('.dds-logo')?.naturalWidth>0,null,{timeout:15000});
+ const after=await state();assert.ok(auth(after)&&valid(after)&&await check());assert.equal(after.logo.src,before.logo.src);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);assert.equal(after.playing,before.playing);
+ const rule=p.locator('.dds-bar>details');await rule.locator('summary').click();assert.ok(await rule.evaluate(e=>e.open));await rule.locator('summary').click();
+ await p.screenshot({path:dir+'/after.png'});
+ console.log('DDT_HEADER '+JSON.stringify({slug,status:'wordmark-verified',text:'DDT TUBE',logoOnRight:true,queue:after.entries.length,jsPreserved:true}));
  }
  else{
  const source=await p.evaluate(({html,slug})=>{

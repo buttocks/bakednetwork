@@ -1,0 +1,20 @@
+/* BEGIN BAKED NETWORK STARTER SKIN — CSS ONLY */
+:root{--bn-starter-skin:1;--bn-accent:__ACCENT__;--bn-base:#11161d;--bn-panel:#1a222d;--bn-border:#33404d;--bn-text:#e4e9f0;--bn-muted:#aab7c5}
+body{background-color:var(--bn-base);color:var(--bn-text)}
+.navbar,.navbar-default,.navbar-inverse{background-color:#151c25;border-color:var(--bn-border);border-bottom:2px solid var(--bn-accent)}
+.navbar .navbar-brand{color:var(--bn-text);font-weight:700}
+.navbar .navbar-nav>li>a{color:var(--bn-text)}
+.panel,.well,.modal-content,.dropdown-menu{background-color:var(--bn-panel);border-color:var(--bn-border);color:var(--bn-text)}
+.panel-heading,.panel-default>.panel-heading,.panel-footer{background-color:#202a36;color:var(--bn-text);border-color:var(--bn-border)}
+#messagebuffer,#userlist,#queue{background-color:var(--bn-panel);color:var(--bn-text);border-color:var(--bn-border)}
+#queue .queue_entry{border-color:var(--bn-border);background-color:var(--bn-panel);color:var(--bn-text)}
+#queue .queue_entry.queue_active,#queue .queue_entry.active{background-color:#283848;border-left:3px solid var(--bn-accent);color:#fff}
+#queue .qe_title,#queue .qe_title_text{color:inherit}
+#queue .qe_blame{color:var(--bn-muted)}
+a{color:#8fc9f6}
+a:hover,a:focus{color:#d3eaff}
+.btn-default{background-color:#253241;border-color:#415164;color:var(--bn-text)}
+.btn-default:hover,.btn-default:focus{background-color:#35465a;color:#fff}
+.form-control{background-color:#121a23;color:var(--bn-text);border-color:#415164}
+.form-control::placeholder{color:var(--bn-muted)}
+/* END BAKED NETWORK STARTER SKIN */

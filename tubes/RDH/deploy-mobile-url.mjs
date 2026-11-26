@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 const dir='rdh-mobile-url-review';await fs.mkdir(dir,{recursive:true});
 const old='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@3f2bc46691159372ed4b65483c110bb88aedab58/tubes/RDH/rdh-custom-only-v1.2.js';
-const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@83c1facb1287d3841acd486678a05b87e019cf58/tubes/RDH/rdh-custom-only-v1.3.js';
+const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@8fbef05799c4ac6c319b0a005c466b02737580e0/tubes/RDH/rdh-custom-only-v1.3.1.js';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const context=await browser.newContext({viewport:{width:1440,height:1000},permissions:['clipboard-read','clipboard-write']});
 const page=await context.newPage();
@@ -54,7 +54,7 @@ async function mobileProof(){
  const row=page.locator('#queue .queue_entry.rdh-featured').filter({has:page.locator('.rdh-video-url-pill')}).first();
  await row.locator('.qe_title').scrollIntoViewIfNeeded();await row.locator('.qe_title').hover();
  const btn=row.locator('.rdh-video-url-pill');await btn.waitFor({state:'visible'});
- const placement=await btn.evaluate(el=>{const line=el.closest('.rdh-url-line'),parent=line.parentElement;const range=document.createRange();range.selectNodeContents(parent);const r=el.getBoundingClientRect();const text=[...parent.childNodes].filter(n=>n!==line);const boxes=[];for(const n of text){const q=document.createRange();q.selectNode(n);boxes.push(...q.getClientRects())}const a=boxes.filter(x=>x.width>0&&x.height>0);return {fallback:line.classList.contains('rdh-url-fallback'),parent:parent.className,attribution:parent.textContent.includes('Added by:'),gap:a.length?Math.round(r.left-Math.max(...a.map(x=>x.right))):null,vertical:a.length?Math.round(Math.abs(r.top+r.height/2-(a[0].top+a[0].height/2))):null}});
+ const placement=await btn.evaluate(el=>{const line=el.closest('.rdh-url-line'),parent=line.parentElement;const range=document.createRange();range.selectNodeContents(parent);const r=el.getBoundingClientRect();const text=[...parent.childNodes].filter(n=>n!==line);const boxes=[];for(const n of text){const walker=document.createTreeWalker(n,NodeFilter.SHOW_TEXT);const texts=n.nodeType===3?[n]:[];while(walker.nextNode())texts.push(walker.currentNode);for(const t of texts){if(!t.textContent.trim())continue;const q=document.createRange();q.selectNodeContents(t);boxes.push(...q.getClientRects())}}const a=boxes.filter(x=>x.width>0&&x.height>0);return {fallback:line.classList.contains('rdh-url-fallback'),parent:parent.className,attribution:parent.textContent.includes('Added by:'),gap:a.length?Math.round(r.left-Math.max(...a.map(x=>x.right))):null,vertical:a.length?Math.round(Math.abs(r.top+r.height/2-(a[0].top+a[0].height/2))):null}});
  assert.ok(!placement.fallback&&placement.attribution&&placement.gap!==null&&placement.gap>=0&&placement.gap<=22&&placement.vertical<=15,'Desktop placement failed: '+JSON.stringify(placement));
  await page.mouse.move(1,1);await btn.evaluate(e=>e.blur());
  const cdp=await context.newCDPSession(page);

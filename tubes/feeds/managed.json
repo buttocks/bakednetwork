@@ -220,6 +220,16 @@
       "statusKey": "wrestling5",
       "banner": "WRESTLING 5",
       "addOnly": true
+    },
+    {
+      "tube": "NWA-TNA",
+      "id": "nwa-tna-early-baked-tv",
+      "title": "BAKED TV — NWA-TNA ASYLUM YEARS",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/feed.html?channel=nwa-tna-early&embed=standard",
+      "statusFile": "tubes/NWA-TNA/feed-status.json",
+      "statusKey": "nwa-tna-early",
+      "banner": "NWA-TNA",
+      "addOnly": true
     }
   ]
 }

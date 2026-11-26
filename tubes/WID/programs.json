@@ -1025,6 +1025,24 @@
           "duration": 1116,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Sid gets arrested; Page & Nash vs. 3-Count | WCW Monday Nitro, Dec. 4, 2000",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=Lktrv3RnnsY",
+          "youtube_id": "Lktrv3RnnsY",
+          "duration": 5270,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EVENT: WCW Halloween Havoc 2000 | Booker T vs. Steiner; Goldberg vs. KroniK |",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=-vWCmMTAszk",
+          "youtube_id": "-vWCmMTAszk",
+          "duration": 10107,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

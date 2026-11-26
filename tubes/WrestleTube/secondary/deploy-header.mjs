@@ -33,11 +33,11 @@ const state=()=>p.evaluate(()=>{
  const logo=m?.querySelector('.wts-logo'),h=m?.querySelector('.wts-header');
  return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,user:window.CLIENT?.name,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,entries,
  logo:logo?{src:logo.getAttribute('src'),loaded:logo.complete&&logo.naturalWidth>0,width:logo.getBoundingClientRect().width,height:logo.getBoundingClientRect().height}:null,header:h?.getBoundingClientRect().height,
- menus:[...m.querySelectorAll('.wts-bar>details')].map(e=>({open:e.open,hidden:!e.querySelector('.wts-panel')?.getClientRects().length})),event:!!m.querySelector('.wts-event-control')||[...m.querySelectorAll('button,a,summary')].some(e=>/schedule and events/i.test(e.textContent)),visible:['#videowrap','#messagebuffer','#queue'].every(q=>!!document.querySelector(q)?.getClientRects().length)};
+ rulesCount:m.querySelectorAll('.wts-house-rules ol>li').length,rulesImages:m.querySelectorAll('.wts-house-rules img,.wts-house-rules a').length,menus:[...m.querySelectorAll('.wts-bar>details')].map(e=>({label:e.querySelector('summary')?.textContent.trim(),open:e.open,hidden:!e.querySelector('.wts-panel')?.getClientRects().length})),event:!!m.querySelector('.wts-event-control')||[...m.querySelectorAll('button,a,summary')].some(e=>/schedule and events/i.test(e.textContent)),visible:['#videowrap','#messagebuffer','#queue'].every(q=>!!document.querySelector(q)?.getClientRects().length)};
 });
 const auth=x=>x.connected&&x.loggedIn&&x.rank>=3&&x.user?.toLowerCase()==='buttman-gpt'&&x.name?.toLowerCase()===slug.toLowerCase();
 const hasFeeds=x=>feeds.every(f=>x.entries.some(e=>e.src===f.url));
-const valid=x=>x.logo?.loaded&&x.logo.width>30&&x.logo.height>30&&x.logo.height<=72&&x.header>=88&&x.header<=150&&x.menus.length===2&&x.menus.every(m=>!m.open&&m.hidden)&&!x.event&&x.visible&&hasFeeds(x);
+const valid=x=>x.logo?.loaded&&x.logo.width>30&&x.logo.height>30&&x.logo.height<=72&&x.header>=88&&x.header<=150&&x.rulesCount>=6&&x.rulesImages===0&&JSON.stringify(x.menus.map(m=>m.label))===JSON.stringify(['House Rules','Playlist & Playback','Chat Tools','Community & Help'])&&x.menus.every(m=>!m.open&&m.hidden)&&!x.event&&x.visible&&hasFeeds(x);
 let before,targetCss,targetMotd,cssWritten=false,motdWritten=false;
 async function write(field,expected,next,other){
  await p.evaluate(({slug,field,expected,next,other,js,externalCss,externalJs})=>{
@@ -72,17 +72,41 @@ try{
   const header=d.createElement('div');header.className='wts-header';
   const kicker=d.createElement('div');kicker.className='wts-kicker';kicker.textContent="THE BAKED NETWORK'S";header.append(kicker,image);
   const purpose=d.createElement('div');purpose.className='wts-purpose';purpose.textContent='WRESTLETUBE '+slug.replace(/\D/g,'')+' · LIVE EVENTS · 24/7 WRESTLING';header.append(purpose);
-  const bar=d.createElement('div');bar.className='wts-bar';
-  for(const [label,content] of [['Rules & Links',rulesBody],['Chat Tools',chatBody]]){
-   const details=d.createElement('details'),summary=d.createElement('summary'),body=d.createElement('div');summary.textContent=label;body.className='wts-panel';body.innerHTML=content.innerHTML;details.append(summary,body);bar.append(details);
+  const bar=d.createElement('div');bar.className='wts-bar wts-clean-v2';
+  const add=(label,cls)=>{const details=d.createElement('details'),summary=d.createElement('summary'),body=d.createElement('div');details.className=cls;details.setAttribute('name','wts-header-menu');summary.textContent=label;body.className='wts-panel';details.append(summary,body);bar.append(details);return body};
+  const oldText=rulesBody.textContent.replace(/\s+/g,' ');
+  const expected=[/off.topic/i,/racism|respect other tubers/i,/kayfabe/i,/NSFW/i,/advertis/i,/have fun/i];
+  if(!expected.every(r=>r.test(oldText)))return {error:'Unrecognized channel rules; review required'};
+  const rulesList=['Limit off-topic posts in the playlist.','No racism or hate. Respect other tubers.',"Don't break kayfabe.",'No embedding NSFW images.','No advertising.','Have fun.'];
+  // Check for additional numbered conduct rules before dropping the old block.
+  const chunks=oldText.split(/\b\d+\s*[.)]\s*\)?\s*/).slice(1);
+  for(const chunk of chunks){
+   if(expected.some(r=>r.test(chunk))||/external javascript|xaekai/i.test(chunk))continue;
+   const line=chunk.trim();
+   if(line&&/no politics|no political/i.test(line))rulesList.splice(rulesList.length-1,0,'No politics.');
+   else if(line)return {error:'Additional legacy rule requires review'};
   }
+  const rp=add('House Rules','wts-house-rules'),ol=d.createElement('ol');ol.style.margin='0';ol.style.paddingLeft='21px';
+  for(const rule of rulesList){const li=d.createElement('li');li.textContent=rule;ol.append(li)}rp.append(ol);
+  const pp=add('Playlist & Playback','wts-playback');
+  pp.innerHTML='<p><strong>TV Guide:</strong> Open it inside the Baked TV player for upcoming programming.</p><p><strong>Add a video:</strong> Use Add below the player and choose At End. Keep multipart uploads together in order.</p><p><strong>Playback problems:</strong> Use Refresh below the video player.</p>';
+  add('Chat Tools','wts-chat-tools').innerHTML=chatBody.innerHTML;
+  const cp=add('Community & Help','wts-community'),ul=d.createElement('ul');ul.style.margin='0';ul.style.paddingLeft='21px';
+  for(const old of rulesBody.querySelectorAll('a[href]')){
+   const href=old.getAttribute('href');if(!/^(https?:\/\/|\/[^/])/i.test(href||''))continue;
+   const label=old.textContent.trim()||old.querySelector('img')?.alt?.trim();if(!label)continue;
+   const li=d.createElement('li'),a=d.createElement('a');a.href=href;a.textContent=label;a.target='_blank';a.rel='noopener noreferrer';li.append(a);ul.append(li);
+  }
+  if(ul.children.length)cp.append(ul);else cp.textContent='Use the channel chat or moderation controls for help.';
   return {html:header.outerHTML+bar.outerHTML,logo:image.src};
  },{html:before.motd,slug});
  if(source.error){console.log('SECONDARY_HEADER '+JSON.stringify({slug,status:'skipped',reason:source.error,noWrites:true}));}
  else{
  targetMotd=source.html;
  targetCss=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').trimEnd()+'\n\n'+template;
- const compactMode=['Wrestling4','wrestling5'].includes(slug);
+ const existingHeader=before.header>=88&&before.header<=150&&before.logo?.loaded;
+ const compactMode=!existingHeader&&['Wrestling4','wrestling5'].includes(slug);
+ if(existingHeader)targetCss=before.css;
  const previousImportRule='@import url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@de893138778cf89aa07be032185f06837272a6fc/tubes/WrestleTube/secondary/header.css");';
  const importRule='@import url("https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/header.css");';
  if(compactMode){
@@ -123,7 +147,7 @@ try{
  const after=await state();assert.ok(auth(after)&&valid(after));assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);
  for(const e of await p.locator('.wts-bar>details').all()){await e.locator('summary').click();assert.ok(await e.evaluate(x=>x.open));await e.locator('summary').click()}
  await p.screenshot({path:dir+'/after.png'});
- console.log('SECONDARY_HEADER '+JSON.stringify({slug,status:'verified',queue:after.entries.length,header:after.header,logo:after.logo.height,unusedScheduleRemoved:true,jsPreserved:true,streamPreserved:true}));
+ console.log('SECONDARY_HEADER '+JSON.stringify({slug,status:'verified',queue:after.entries.length,header:after.header,logo:after.logo.height,unusedScheduleRemoved:true,separatedRules:true,jsPreserved:true,streamPreserved:true}));
  }
  }
 }catch(e){

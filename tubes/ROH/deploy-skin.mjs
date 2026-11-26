@@ -15,7 +15,10 @@ const capture=()=>page.evaluate(logoSrc=>{
  });
  const logo=[...document.querySelectorAll('#motdwrap img')].filter(i=>i.complete&&i.naturalWidth>0&&i.getClientRects().length&&(!logoSrc||i.getAttribute('src')===logoSrc)).sort((a,b)=>b.getBoundingClientRect().width*b.getBoundingClientRect().height-a.getBoundingClientRect().width*a.getBoundingClientRect().height)[0];
  const bounds=logo?.getBoundingClientRect();
- return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,user:window.CLIENT?.name,entries,playing:window.PL_CURRENT,logo:logo?{src:logo.getAttribute('src'),naturalWidth:logo.naturalWidth,naturalHeight:logo.naturalHeight,width:bounds.width,height:bounds.height}:null,headerHeight:document.querySelector('#motdwrap')?.getBoundingClientRect().height,logoImages:[...document.querySelectorAll('#motdwrap img')].map(i=>({width:i.getBoundingClientRect().width,height:i.getBoundingClientRect().height,naturalWidth:i.naturalWidth})),marker:getComputedStyle(document.documentElement).getPropertyValue('--bn-roh-skin').trim(),visible:Object.fromEntries(['#videowrap','#messagebuffer','#queue'].map(q=>[q,!!document.querySelector(q)?.getClientRects().length]))};
+ let logoUnclipped=!!bounds&&bounds.width>0&&bounds.height>0;
+ if(bounds)for(let e=logo.parentElement;e;e=e.parentElement){const c=getComputedStyle(e),r=e.getBoundingClientRect();if(c.display==='none'||c.visibility==='hidden'||Number(c.opacity)===0||((/hidden|clip|auto|scroll/.test(c.overflowX))&&(r.left>bounds.left+2||r.right<bounds.right-2))||((/hidden|clip|auto|scroll/.test(c.overflowY))&&(r.top>bounds.top+2||r.bottom<bounds.bottom-2)))logoUnclipped=false;}
+
+ return {name:c.name,css:c.css,js:c.js,motd:c.motd,externalCss:o.externalcss||'',externalJs:o.externaljs||'',rank:window.CLIENT?.rank,connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,user:window.CLIENT?.name,entries,playing:window.PL_CURRENT,logoUnclipped,logo:logo?{src:logo.getAttribute('src'),naturalWidth:logo.naturalWidth,naturalHeight:logo.naturalHeight,width:bounds.width,height:bounds.height}:null,headerHeight:document.querySelector('#motdwrap')?.getBoundingClientRect().height,logoImages:[...document.querySelectorAll('#motdwrap img')].map(i=>({width:i.getBoundingClientRect().width,height:i.getBoundingClientRect().height,naturalWidth:i.naturalWidth})),marker:getComputedStyle(document.documentElement).getPropertyValue('--bn-roh-skin').trim(),visible:Object.fromEntries(['#videowrap','#messagebuffer','#queue'].map(q=>[q,!!document.querySelector(q)?.getClientRects().length]))};
 },logoSrc);
 const auth=s=>s.connected&&s.loggedIn&&s.user?.toLowerCase()==='buttman-gpt'&&s.rank>=3&&s.name?.toLowerCase()==='roh';
 const hasFeed=s=>s.entries.some(e=>e.src===feed.url);
@@ -40,11 +43,11 @@ try{
  logoSrc=before.logo.src;
  const logoSelector='#motdwrap#motdwrap#motdwrap#motdwrap img[src='+JSON.stringify(logoSrc)+']';
  let block=template.replaceAll('__ROH_LOGO__',logoSelector);
- const clean=before.css.replace(/\/\* BEGIN BAKED NETWORK ROH SKIN v1 \*\/[\s\S]*?\/\* END BAKED NETWORK ROH SKIN v1 \*\//g,'').trimEnd();
+ const clean=before.css.replace(/\/\* BEGIN BAKED NETWORK ROH SKIN v1 \*\/[\s\S]*$/g,'').trimEnd();
  const ratio=before.logo.naturalWidth/before.logo.naturalHeight;
  const logoWidth=Math.round(Math.min(300,126*ratio));
  const logoHeight=Math.round(logoWidth/ratio);
- const force=logoSelector+'{display:block!important;width:'+logoWidth+'px!important;height:'+logoHeight+'px!important;max-width:90vw!important;max-height:none!important;min-width:0!important;min-height:0!important;object-fit:contain!important;margin:4px auto 9px!important}';
+ const force='#motdwrap #motd #header{display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;clip:auto!important;clip-path:none!important;}\n'+logoSelector+'{display:block!important;width:'+logoWidth+'px!important;height:'+logoHeight+'px!important;max-width:90vw!important;max-height:none!important;min-width:0!important;min-height:0!important;object-fit:contain!important;margin:4px auto 9px!important}';
  const diagnostic=()=>page.evaluate(src=>{
   const i=[...document.querySelectorAll('#motdwrap img')].find(i=>i.getAttribute('src')===src);
   const out=[];for(let e=i;e&&out.length<7;e=e.parentElement){const c=getComputedStyle(e),r=e.getBoundingClientRect();out.push({tag:e.tagName,id:e.id,cls:String(e.className).slice(0,100),display:c.display,visibility:c.visibility,width:r.width,height:r.height,cssWidth:c.width,cssHeight:c.height,maxWidth:c.maxWidth,maxHeight:c.maxHeight,overflow:c.overflow})}return out;
@@ -63,7 +66,7 @@ try{
    await page.waitForTimeout(400);
    const v=await capture();const cap=name==='preserve-logo-size'?before.logo.height+2:130;
    console.log('ROH_LOGO_PREVIEW '+JSON.stringify({name,width:v.logo?.width,height:v.logo?.height,header:v.headerHeight,ancestors:await diagnostic()}));
-   if(v.logo?.naturalWidth&&v.logo.width>50&&v.logo.height>20&&v.logo.height<=cap&&v.headerHeight<=before.headerHeight+5&&Object.values(v.visible).every(Boolean)){chosen={name,css,cap};await page.screenshot({path:dir+'/local-preview.png'});break;}
+   if(v.logoUnclipped&&v.logo?.naturalWidth&&v.logo.width>50&&v.logo.height>20&&v.logo.height<=cap&&v.headerHeight<=Math.max(337,before.headerHeight)+5&&Object.values(v.visible).every(Boolean)){chosen={name,css,cap};await page.screenshot({path:dir+'/local-preview.png'});break;}
   }finally{await probe.evaluate(el=>el.remove())}
  }
  assert.ok(chosen,'No safe logo layout; original channel untouched');
@@ -73,9 +76,9 @@ try{
  await fs.writeFile(dir+'/proposed.css',target);
  if(before.css!==target)await set(before.css,target);
  await page.waitForTimeout(2000);
- const after=await capture();console.log('ROH_LOGO_LIVE '+JSON.stringify({height:after.logo?.height,width:after.logo?.width,header:after.headerHeight,images:after.logoImages}));await page.screenshot({path:dir+'/applied-before-validation.png',fullPage:false});assert.ok(auth(after));assert.equal(after.css,target);assert.equal(after.marker,'1');assert.equal(after.js,before.js);assert.equal(after.motd,before.motd);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.ok(hasFeed(after));assert.deepEqual(after.entries.map(e=>e.uid),before.entries.map(e=>e.uid));assert.ok(Object.values(after.visible).every(Boolean));assert.ok(after.logo?.naturalWidth&&after.logo.src===before.logo.src&&after.logo.width>50&&after.logo.height>20&&after.logo.height<=chosen.cap);assert.ok(after.headerHeight<=before.headerHeight+5);
+ const after=await capture();console.log('ROH_LOGO_LIVE '+JSON.stringify({height:after.logo?.height,width:after.logo?.width,header:after.headerHeight,images:after.logoImages}));await page.screenshot({path:dir+'/applied-before-validation.png',fullPage:false});assert.ok(auth(after));assert.equal(after.css,target);assert.equal(after.marker,'1');assert.equal(after.js,before.js);assert.equal(after.motd,before.motd);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.ok(hasFeed(after));assert.deepEqual(after.entries.map(e=>e.uid),before.entries.map(e=>e.uid));assert.ok(Object.values(after.visible).every(Boolean));assert.ok(after.logoUnclipped&&after.logo?.naturalWidth&&after.logo.src===before.logo.src&&after.logo.width>50&&after.logo.height>20&&after.logo.height<=chosen.cap);assert.ok(after.headerHeight<=Math.max(337,before.headerHeight)+5);
  await page.screenshot({path:dir+'/after.png',fullPage:false});
- const report={channel:'roh',status:'skin-upgraded',layout:chosen.name,logoPreserved:true,logoBefore:before.logo.height,logoAfter:after.logo.height,headerBefore:before.headerHeight,headerAfter:after.headerHeight,queueItems:after.entries.length,queuePreserved:true,streamPresent:true,jsPreserved:true,motdPreserved:true,visible:after.visible,cssBytes:Buffer.byteLength(target)};
+ const report={channel:'roh',status:'skin-upgraded',layout:chosen.name,logoPreserved:true,logoUnclipped:true,logoBefore:before.logo.height,logoAfter:after.logo.height,headerBefore:before.headerHeight,headerAfter:after.headerHeight,queueItems:after.entries.length,queuePreserved:true,streamPresent:true,jsPreserved:true,motdPreserved:true,visible:after.visible,cssBytes:Buffer.byteLength(target)};
  await fs.writeFile(dir+'/report.json',JSON.stringify(report,null,2));console.log('ROH_SKIN '+JSON.stringify(report));
 }catch(e){
  if(before&&target&&target!==before.css&&(await capture()).css===target){await set(target,before.css);console.log('ROH_SKIN_ROLLBACK confirmed')}

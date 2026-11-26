@@ -317,7 +317,7 @@
         "full match",
         "無料試合"
       ],
-      "seed_count": 17,
+      "seed_count": 30,
       "youtube_channels": [
         {
           "id": "UC4T0v46s8yxJuTOW1_mD1xA",
@@ -587,7 +587,7 @@
         "full fight",
         "試合映像"
       ],
-      "seed_count": 13,
+      "seed_count": 15,
       "youtube_channels": [
         {
           "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
@@ -634,7 +634,7 @@
       ],
       "archive_ids": [],
       "archive_title_pattern": "(?i)\\b(?:Professional[ -]+Wrestling[ -]+Match|WCW[ -]+Starrcade|WWF[ -]+Survivor[ -]+Series|NJPW[ -]+World[ -]+Tag[ -]+League|AEW[ -]+World[ -]+Championship[ -]+Eliminator[ -]+Tournament)\\b",
-      "seed_count": 18,
+      "seed_count": 29,
       "youtube_channels": [
         {
           "id": "UCMA4MOXJ3L5K9jKEDyFX6LQ",

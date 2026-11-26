@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/deploy-rdh-show-tags.yml','tubes/RDH/deploy-show-tags.mjs']
+    paths: ['.github/workflows/deploy-rdh-show-tags.yml','tubes/RDH/deploy-show-tags.mjs','tubes/RDH/rdh-transient-ui-fixes.js']
 permissions:
   contents: read
 concurrency:

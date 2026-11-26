@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated": "2026-11-25",
+  "updated": "2026-11-26",
   "tasks": [
     {
       "id": "ddt-nwatna-feeds",
@@ -52,6 +52,44 @@
       "workflow": "test-feed-browser.yml",
       "mode": "retry failed playback tests only",
       "evidence": "Run 45683360627 first attempt 14/28 passed; failed jobs resubmitted against hosted players. Do not register unverified feeds."
+    },
+    {
+      "id": "network-29-streams",
+      "status": "posted",
+      "mode": "retain existing queues; Baked 2.0 migration deferred",
+      "evidence": "Operator handoff reports 29/29 posted; no migration authorized."
+    },
+    {
+      "id": "indies-header",
+      "status": "deployed-verified",
+      "workflow": "deploy-indies-header.yml",
+      "evidence": "Successful run 45854531676."
+    },
+    {
+      "id": "dragongate-headers",
+      "status": "deployed-verified",
+      "workflow": "deploy-dragongate-header.yml",
+      "evidence": "Successful run 45856673021."
+    },
+    {
+      "id": "joshi-header-rules",
+      "status": "deployed-verified",
+      "workflow": "deploy-joshi-headers.yml",
+      "evidence": "Both channels verified run 45861727658; lighter logo banner, original logos, Rules 1–6, no Useful Links, live-event label."
+    },
+    {
+      "id": "joshi-toolbar",
+      "status": "verification-queued",
+      "workflow": "deploy-joshi-headers.yml",
+      "mode": "CSS-only; preserve existing MOTD, JS, external URLs and queue",
+      "evidence": "Run 45864245179 failed due to hovered Rules button; corrected resting-state test in b04a5017, run 45864640226."
+    },
+    {
+      "id": "puro-ddt-headers",
+      "status": "read-only-audit-queued",
+      "workflow": "priority-skin-review.yml",
+      "mode": "Preserve existing branding, artwork where functional, JS and queues; review exact live layout before changes",
+      "evidence": "Run 45864699303; retain existing DDT logo, review Puro artwork."
     }
   ]
 }

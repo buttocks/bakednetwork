@@ -20,7 +20,7 @@ function installUiFixes(){
     "#messagebuffer .chat-msg-_server_.rdh-presence-fading{opacity:0!important;max-height:0!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;border-color:transparent!important;transform:translateY(-3px);pointer-events:none!important}",
     "#messagebuffer .chat-msg-_server_.rdh-presence-fading:before{opacity:0!important}",
     "body:not(.rdh-hover-preview-open) .rdh-video-url-pill,body:not(.rdh-hover-preview-open) .native-playlist-preview{visibility:hidden!important;opacity:0!important;pointer-events:none!important}"
-   ].join("\n");
+   ].join("\\n");
    (document.head||body).appendChild(style);
    const entryFor=node=>node&&node.closest?node.closest("#queue .queue_entry .qe_title")?.closest(".queue_entry"):null;
    const isPreview=node=>!!(node&&node.closest&&node.closest(".rdh-video-url-pill,.native-playlist-preview"));
@@ -52,7 +52,7 @@ function installUiFixes(){
    },true);
 
    const presenceSelector="#messagebuffer .chat-msg-_server_";
-   const presencePattern=/\bjoined\b|\bdisconnected\b|\bleft(?:\s+the)?\s+(?:channel|room)\b/i;
+   const presencePattern=/\\bjoined\\b|\\bdisconnected\\b|\\bleft(?:\\s+the)?\\s+(?:channel|room)\\b/i;
    function markPresence(node){
     if(!node)return;
     const rows=[];

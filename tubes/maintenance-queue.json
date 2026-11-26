@@ -86,17 +86,17 @@
     },
     {
       "id": "puro-ddt-headers",
-      "status": "audit-passed-header-work-pending",
-      "workflow": "priority-skin-review.yml",
+      "status": "deployment-queued",
+      "workflow": "targeted-header-followup.yml",
       "mode": "Preserve existing branding, artwork where functional, JS and queues; review exact live layout before changes",
-      "evidence": "Run 45864699303: both authenticated, zero broken visible images or overlaps; Puro 82 entries, DDT 5. Earlier MOTD audit 45767887150: Puro 293px, DDT 270px; preserve Puro controls because legacy dialog sources are not in its MOTD."
+      "evidence": "Both audits passed; original artwork and Rules/Links retained. CSS-only compaction with preview validation and rollback. Run 45865596415."
     },
     {
       "id": "joshi-feed-visibility",
-      "status": "present-visibility-followup",
-      "workflow": "verify-joshi-feed.yml",
+      "status": "deployment-queued",
+      "workflow": "targeted-header-followup.yml",
       "mode": "exact owned iframe only; add if missing; no moves, deletion, playback or skin changes",
-      "evidence": "Run 45865037759 succeeded. Exactly one permanent BAKED TV — JOSHI entry, position 13 of 456, UID 12, not playing. No playlist writes. Consider moving existing entry to top with operator approval."
+      "evidence": "Verified permanent entry at position 13 of 456; operator approved follow-up. Native move only; no playback changes. Run 45865596415."
     }
   ]
 }

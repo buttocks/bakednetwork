@@ -99,5 +99,10 @@
       "mode": "one approved native move of existing owned iframe; no add, delete or playback changes",
       "evidence": "Run 45865596415 Joshi job passed. UID 12 moved from live position 18 to 1; all 456 entries, relative order of other entries, and current playback preserved."
     }
-  ]
+  ],
+  "motdPolicy": {
+    "usefulLinks": "Remove Links / Useful Links from every MOTD during future cleanups; do not add a replacement links dropdown.",
+    "rules": "Preserve existing rules unless the operator requests edits.",
+    "preserve": "Existing logos, playlists, current playback and channel JavaScript; retain non-link functional controls unless separately approved."
+  }
 }

@@ -10,7 +10,7 @@ from urllib.parse import urlencode, quote
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from concurrent.futures import ThreadPoolExecutor
-import json, re, time, os
+import json, re, time, os, unicodedata
 
 ROOT=Path(__file__).resolve().parent
 CHANNELS=ROOT.parent
@@ -240,6 +240,37 @@ def youtube(entry,defaults):
                 "duration":seconds,"source":"YouTube","source_channel":source["name"]}
     with ThreadPoolExecutor(max_workers=3) as pool:
         return [r for r in pool.map(detail,candidates[:9]) if r]
+def multipart_key(p):
+    """Match the player grouping rule. Distinct providers and uploaders stay separate."""
+    title=str(p.get("title","")).strip()
+    m=re.fullmatch(r"(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|/)\s*(\d{1,3}))?\s*[)\]]?\s*",title,re.I)
+    if not m:return None
+    part=int(m[2]); total=int(m[3]) if m[3] else None
+    if not 1<=part<=100 or total is not None and not part<=total<=100:return None
+    base=re.sub(r"[\s_\-–—:.,]+"," ",unicodedata.normalize("NFKC",m[1]).lower()).strip()
+    if len(base)<5:return None
+    return (str(p.get("source","")).lower(),unicodedata.normalize("NFKC",str(p.get("source_channel") or p.get("owner") or "")).lower().strip(),base)
+
+def retain_catalog(items,keep,cap):
+    """Retain pinned programs and complete groups atomically; never evict a single part."""
+    groups={}
+    for i,p in enumerate(items):
+        key=multipart_key(p)
+        groups.setdefault(("multipart",key) if key else ("single",p["url"]),[]).append(i)
+    fixed={i for i,p in enumerate(items) if i<keep or
+           (p.get("source")=="Dailymotion" and p.get("playback_verified_run") and approved_url(p.get("url")))}
+    for indices in groups.values():
+        if fixed.intersection(indices):fixed.update(indices)
+    chosen=set(fixed)
+    budget=max(0,cap-len(fixed))
+    for indices in sorted(groups.values(),key=max,reverse=True):
+        if chosen.intersection(indices):continue
+        if len(indices)<=budget:
+            chosen.update(indices)
+            budget-=len(indices)
+    # Keep the original order, including the seed prefix.
+    return [p for i,p in enumerate(items) if i in chosen]
+
 def refresh_one(entry,defaults,record):
     defaults={**defaults,**{k:entry[k] for k in ("min_duration_seconds","max_duration_seconds") if k in entry}}
     target=CHANNELS/entry["directory"]/"programs.json"
@@ -275,14 +306,7 @@ def refresh_one(entry,defaults,record):
         # Protect original seed entries, keep newest discovered entries, retain
         # unique URLs and evict older discovered entries when cap is reached.
         cap=defaults["max_catalog_items"]
-        # Preserve browser-verified Dailymotion programs by identity, not
-        # merely by their current position in the catalog.
-        fixed=[p for i,p in enumerate(items) if i<keep or
-               (p.get("source")=="Dailymotion" and p.get("playback_verified_run") and approved_url(p.get("url")))]
-        fixed_urls={p["url"] for p in fixed}
-        recent=[p for p in items if p["url"] not in fixed_urls]
-        budget=max(0,cap-len(fixed))
-        updated=fixed+recent[-budget:] if budget else fixed
+        updated=retain_catalog(items,keep,cap)
         j["channels"][key]["programs"]=updated
         write(target,j)
         record["last_added"]=datetime.now(timezone.utc).isoformat()

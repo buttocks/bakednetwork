@@ -85,18 +85,20 @@ jobs:
           const catalog=await (await fetch('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/programs.json?probe='+Date.now())).json();
           const known=catalog.channels['nwa-tna-early'].programs;
           const ids=new Set(['nwa-tna-weekly-ppv-2003']);
-          const q='mediatype:movies AND (title:"NWA TNA" OR title:"NWA-TNA" OR title:"TNA Asylum") AND (title:2002 OR title:2003 OR title:2004)';
+          const q='mediatype:movies AND (title:(TNA) OR title:(Asylum)) AND (title:(2002 OR 2003 OR 2004 OR PPV OR Xplosion))';
           try{
-            const params=new URLSearchParams({q,'fl[]':'identifier',rows:'30',output:'json'});
+            const params=new URLSearchParams({q,'fl[]':'identifier',rows:'60',output:'json'});
             const data=await (await fetch('https://archive.org/advancedsearch.php?'+params,{signal:AbortSignal.timeout(20000)})).json();
             for(const x of data.response?.docs||[])if(/^[a-zA-Z0-9._-]{4,160}$/.test(x.identifier))ids.add(x.identifier);
           }catch(e){console.log('ALTERNATIVE_SEARCH_ERROR '+e.message);}
           const candidates=[];
-          for(const id of [...ids].slice(0,15)){
+          console.log('ARCHIVE_SEARCH_IDS '+JSON.stringify([...ids]));
+          for(const id of [...ids].slice(0,25)){
             try{
               const res=await fetch('https://archive.org/metadata/'+encodeURIComponent(id),{signal:AbortSignal.timeout(15000)});
               const m=await res.json();
               const title=String(m.metadata?.title||'');
+              console.log('ARCHIVE_FILE_INVENTORY '+JSON.stringify({id,title,files:(m.files||[]).filter(f=>/\.(mp4|webm|m4v|mkv|avi)$/i.test(f.name||'')).slice(0,30).map(f=>({name:f.name,format:f.format,source:f.source,length:f.length}))}));
               if(/minecraft|simulation|gameplay|WWE 2K/i.test(title))continue;
               for(const f of m.files||[]){
                 const n=String(f.name||'');
@@ -105,97 +107,28 @@ jobs:
                 const url='https://archive.org/download/'+encodeURIComponent(id)+'/'+n.split('/').map(encodeURIComponent).join('/');
                 if(known.some(p=>p.url===url))continue;
                 const duration=Number(f.length);
-                if(!Number.isFinite(duration)||duration<420||duration>28800)continue;
+                if(Number.isFinite(duration)&&duration>0&&(duration<420||duration>28800))continue;
                 candidates.push({title:n,archive:id,format:f.format,source:f.source,duration,url});
               }
             }catch(e){console.log('ALTERNATIVE_METADATA_ERROR '+id+' '+e.message);}
           }
           candidates.sort((a,b)=>Number(b.source==='derivative')-Number(a.source==='derivative')||b.duration-a.duration);
           const results=[];
-          for(const p of candidates.slice(0,18)){
-            const probe=spawnSync('ffprobe',['-v','error','-rw_timeout','8000000','-show_entries','stream=codec_type,codec_name,width,height','-of','json',p.url],{encoding:'utf8',timeout:15000,maxBuffer:100000});
-            let streams=[];try{streams=JSON.parse(probe.stdout).streams||[]}catch{}
+          for(const p of candidates.slice(0,30)){
+            const probe=spawnSync('ffprobe',['-v','error','-rw_timeout','8000000','-show_entries','stream=codec_type,codec_name,width,height:format=duration','-of','json',p.url],{encoding:'utf8',timeout:15000,maxBuffer:100000});
+            let streams=[],actualDuration=p.duration;try{const meta=JSON.parse(probe.stdout);streams=meta.streams||[];actualDuration=Number(meta.format?.duration)||p.duration;}catch{}
             const video=streams.find(v=>v.codec_type==='video');
             const compatible=!!video&&['h264','vp8','vp9','av1'].includes(video.codec_name)&&video.width>0&&video.height>0;
-            const result={...p,video,compatible,error:probe.error?.message||probe.stderr?.slice(0,150)};
+            const result={...p,duration:actualDuration,video,compatible:compatible&&actualDuration>=420&&actualDuration<=28800,error:probe.error?.message||probe.stderr?.slice(0,150)};
             results.push(result);console.log('ALTERNATIVE_SOURCE '+JSON.stringify(result));
           }
+          console.log('ALTERNATIVE_COUNTS '+JSON.stringify({candidates:candidates.length,tested:results.length,compatible:results.filter(x=>x.compatible).length}));
           fs.writeFileSync('asylum-alternative-sources.json',JSON.stringify({candidateCount:candidates.length,results},null,2));
-          JS
-      - name: Identify source codecs and verify actual decoded frames
-        run: |
-          node --input-type=module <<'JS'
-          import {spawnSync} from 'node:child_process';
-          import {chromium} from 'playwright';
-          import fs from 'node:fs';
-          const base='https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/';
-          const catalog=await (await fetch(base+'programs.json?probe='+Date.now())).json();
-          const archive=catalog.channels['nwa-tna-early'].programs.filter(p=>p.source==='Internet Archive');
-          const samples=[archive[0],archive.find(p=>p.title.includes('PPV #27')),archive.find(p=>p.title.includes('PPV #38'))].filter(Boolean);
-          for(const p of samples){
-            const result=spawnSync('ffprobe',['-v','error','-rw_timeout','10000000','-show_entries','stream=index,codec_type,codec_name,width,height:format=duration','-of','json',p.url],{encoding:'utf8',timeout:25000,maxBuffer:100000});
-            let streams=null;try{streams=JSON.parse(result.stdout)}catch{}
-            console.log('STREAM_PROBE '+JSON.stringify({title:p.title,streams,error:result.error?.message||result.stderr?.slice(0,300),exit:result.status}));
-          }
-          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
-          const results=[];
-          try{
-            for(const p of archive){
-              const page=await browser.newPage();
-              try{
-                await page.goto(base+'feed.html?channel=diagnostic',{waitUntil:'domcontentloaded',timeout:20000});
-                const result=await page.evaluate(async src=>{
-                  const v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';document.body.append(v);
-                  return await new Promise(resolve=>{
-                    let done=false;
-                    const finish=event=>{if(done)return;done=true;clearInterval(poll);clearTimeout(timer);resolve({event,width:v.videoWidth,height:v.videoHeight,time:v.currentTime,error:v.error?.code||null});v.pause();v.removeAttribute('src');v.load();v.remove();};
-                    const poll=setInterval(()=>{if(v.videoWidth>0&&v.videoHeight>0&&v.currentTime>1)finish('video-verified');},250);
-                    const timer=setTimeout(()=>finish('timeout'),15000);
-                    v.addEventListener('error',()=>finish('error'),{once:true});
-                    v.src=src;v.play().catch(()=>{if(v.error)finish('error');});
-                  });
-                },p.url);
-                results.push({title:p.title,url:p.url,...result});
-              }catch(e){results.push({title:p.title,url:p.url,event:'probe-failed',error:e.message});}
-              finally{await page.close();}
-              console.log('VIDEO_PROOF '+JSON.stringify(results.at(-1)));
-            }
-          }finally{await browser.close();}
-          fs.writeFileSync('asylum-source-proof.json',JSON.stringify(results,null,2));
-          JS
-      - name: Verify full published feed and identify failing stage
-        run: |
-          node --input-type=module <<'JS'
-          import {chromium} from 'playwright';
-          import fs from 'node:fs';
-          const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
-          const page=await browser.newPage();
-          const errors=[],diagnostics=[];
-          page.on('pageerror',e=>errors.push(e.message));
-          page.on('console',m=>{if(m.text().includes('[Baked TV]'))diagnostics.push(m.text())});
-          let stage='navigation',ok=false;
-          try{
-            await page.goto('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/feed.html?channel=nwa-tna-early&embed=standard&verify='+Date.now(),{waitUntil:'domcontentloaded',timeout:45000});
-            stage='catalog';await page.waitForFunction(()=>document.querySelector('#program-name')?.textContent!=='Tuning…',{},{timeout:60000});
-            stage='decoded video';await page.waitForFunction(()=>{const v=document.querySelector('video');return document.querySelector('#status')?.hidden&&!v.hidden&&!v.paused&&v.videoWidth>0&&v.videoHeight>0&&v.currentTime>1;},{},{timeout:120000});
-            const first=await page.evaluate(()=>({src:document.querySelector('video').currentSrc,time:document.querySelector('video').currentTime}));
-            await page.waitForFunction(a=>{const v=document.querySelector('video');return v.currentSrc===a.src&&v.currentTime>a.time+1;},first,{timeout:15000});
-            stage='guide';await page.locator('#guide-toggle').click();
-            if(!await page.locator('#guide-list li').count())throw Error('Empty guide');
-            await page.locator('#guide-toggle').click();
-            ok=!errors.length;
-          }catch(e){errors.push(stage+': '+e.message);}
-          const state=await page.evaluate(()=>({title:document.querySelector('#program-name')?.textContent,status:document.querySelector('#status-text')?.textContent,source:document.querySelector('#channel-name')?.textContent,width:document.querySelector('video')?.videoWidth,height:document.querySelector('video')?.videoHeight,time:document.querySelector('video')?.currentTime})).catch(()=>({}));
-          const result={playing:ok,stage,errors,diagnostics,...state};
-          console.log('FULL_FEED_PROOF '+JSON.stringify(result));fs.writeFileSync('feed-browser-results.json',JSON.stringify(result,null,2));
-          await browser.close();if(!ok)process.exitCode=1;
           JS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: asylum-years-playback-result
           path: |
-            feed-browser-results.json
-            asylum-source-proof.json
             asylum-alternative-sources.json
           retention-days: 30

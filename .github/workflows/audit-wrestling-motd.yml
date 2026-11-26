@@ -1,0 +1,37 @@
+name: Audit remaining wrestling tube headers
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/audit-wrestling-motd.yml','tubes/skin-review/audit-motd.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-motd-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        batch: [0, 1, 2, 3]
+    env:
+      BATCH: ${{ matrix.batch }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/skin-review/audit-motd.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/skin-review/audit-motd.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wrestling-motd-audit-${{ matrix.batch }}
+          path: motd-audit/
+          retention-days: 7

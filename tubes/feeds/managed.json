@@ -230,6 +230,66 @@
       "statusKey": "nwa-tna-early",
       "banner": "NWA-TNA",
       "addOnly": true
+    },
+    {
+      "tube": "DG",
+      "id": "dg-baked-tv",
+      "title": "BAKED TV — DRAGON GATE",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/DragonGate/feed.html?channel=dg&embed=standard",
+      "statusFile": "tubes/DG/feed-status.json",
+      "statusKey": "dg",
+      "banner": "DRAGON GATE",
+      "addOnly": true
+    },
+    {
+      "tube": "DGALT",
+      "id": "dgalt-baked-tv",
+      "title": "BAKED TV — DRAGON GATE ALT",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/DragonGate/secondary/DGalt/feed.html?channel=dgalt&embed=standard",
+      "statusFile": "tubes/DGALT/feed-status.json",
+      "statusKey": "dgalt",
+      "banner": "DRAGON GATE ALT",
+      "addOnly": true
+    },
+    {
+      "tube": "NOAH",
+      "id": "noah-baked-tv",
+      "title": "BAKED TV — NOAH",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/NOAH/feed.html?channel=noah&embed=standard",
+      "statusFile": "tubes/NOAH/feed-status.json",
+      "statusKey": "noah",
+      "banner": "NOAH",
+      "addOnly": true
+    },
+    {
+      "tube": "Indies",
+      "id": "indies-baked-tv",
+      "title": "BAKED TV — INDIES",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Indies/feed.html?channel=indies&embed=standard",
+      "statusFile": "tubes/Indies/feed-status.json",
+      "statusKey": "indies",
+      "banner": "INDIES",
+      "addOnly": true
+    },
+    {
+      "tube": "RIZIN",
+      "id": "rizin-baked-tv",
+      "title": "BAKED TV — RIZIN",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/Rizin/feed.html?channel=rizin&embed=standard",
+      "statusFile": "tubes/Rizin/feed-status.json",
+      "statusKey": "rizin",
+      "banner": "RIZIN",
+      "addOnly": true
+    },
+    {
+      "tube": "WID",
+      "id": "wid-baked-tv",
+      "title": "BAKED TV — WID SPORTS",
+      "url": "https://buttocks.github.io/bakednetwork/tubes/WID/feed.html?channel=wid&embed=standard",
+      "statusFile": "tubes/WID/feed-status.json",
+      "statusKey": "wid",
+      "banner": "WID SPORTS",
+      "addOnly": true
     }
   ]
 }

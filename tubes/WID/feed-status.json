@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "channels": {
+    "wid": {
+      "available": true,
+      "verification": "Chrome nested iframe verified decoded Dailymotion video and populated TV guide; run 45734787664",
+      "verifiedDate": "2026-11-26",
+      "automatedPlayback": "verified",
+      "goodStreak": 1,
+      "badStreak": 0,
+      "pageBadStreak": 0
+    }
+  }
+}

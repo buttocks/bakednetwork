@@ -57,7 +57,24 @@ try{
  await p.waitForTimeout(4500);
  before=await state();assert.ok(auth(before)&&hasFeeds(before)&&typeof before.css==='string'&&typeof before.motd==='string'&&typeof before.js==='string');
  await fs.writeFile(dir+'/before.css',before.css);await fs.writeFile(dir+'/before-motd.html',before.motd);await p.screenshot({path:dir+'/before.png'});
- if(valid(before)){console.log('DDT_HEADER '+JSON.stringify({slug,status:'already-verified',queue:before.entries.length}));}
+ if(valid(before)){
+ const oldLabel="DDT PRO-WRESTLING · MATCH ARCHIVE · 24/7 WRESTLING",newLabel="DDT PRO-WRESTLING · LIVE EVENTS · 24/7 MATCHES";
+ if(before.motd.includes(oldLabel)){
+  assert.equal(before.motd.split(oldLabel).length,2,'Ambiguous old label');
+  targetCss=before.css;targetMotd=before.motd.replace(oldLabel,newLabel);
+  await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
+  const applied=await write('motd',before.motd,targetMotd,before.css);targetMotd=applied.motd;motdWritten=true;
+  const after=await state();
+  assert.ok(auth(after)&&valid(after)&&after.motd.includes(newLabel)&&!after.motd.includes(oldLabel));
+  assert.equal(after.css,before.css);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);
+  assert.deepEqual(after.entries,before.entries);assert.equal(after.logo.src,before.logo.src);
+  await p.screenshot({path:dir+'/after.png'});
+  console.log('DDT_HEADER '+JSON.stringify({slug,status:'live-events-label-verified',queue:after.entries.length,cssPreserved:true,jsPreserved:true}));
+ }else{
+  assert.ok(before.motd.includes(newLabel),'Unexpected existing subtitle; no writes');
+  console.log('DDT_HEADER '+JSON.stringify({slug,status:'already-verified',queue:before.entries.length}));
+ }
+ }
  else{
  const source=await p.evaluate(({html,slug})=>{
   const d=new DOMParser().parseFromString(html,'text/html'),m=document.querySelector('#motd');
@@ -71,7 +88,7 @@ try{
   const image=d.createElement('img');image.className='dds-logo';image.src=logo.src;image.alt='DDT Pro-Wrestling';
   const header=d.createElement('div');header.className='dds-header';
   const kicker=d.createElement('div');kicker.className='dds-kicker';kicker.textContent="THE BAKED NETWORK'S";header.append(kicker,image);
-  const purpose=d.createElement('div');purpose.className='dds-purpose';purpose.textContent='DDT PRO-WRESTLING · MATCH ARCHIVE · 24/7 WRESTLING';header.append(purpose);
+  const purpose=d.createElement('div');purpose.className='dds-purpose';purpose.textContent='DDT PRO-WRESTLING · LIVE EVENTS · 24/7 MATCHES';header.append(purpose);
   const bar=d.createElement('div');bar.className='dds-bar';
   for(const [label,source] of [['Rules',rulesBody]]){
    const details=d.createElement('details'),summary=d.createElement('summary'),body=d.createElement('div');

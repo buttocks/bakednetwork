@@ -17,7 +17,7 @@ const state=()=>p.evaluate(()=>{
 });
 const auth=x=>x.connected&&x.loggedIn&&x.rank>=3&&x.user?.toLowerCase()==='buttman-gpt'&&x.name?.toLowerCase()==='wrestling';
 const hasFeed=x=>x.entries.some(e=>e.src===feed.url);
-const valid=x=>x.header?.height>=95&&x.header.height<=185&&x.rules?.count===7&&x.rules.help===3&&x.sections===4&&x.kicker==='BAKED NETWORK'&&x.tagline==='LIVE EVENTS · 24/7 WRESTLING · COMMUNITY PLAYLIST'&&x.decorations===0&&x.logo===400&&x.navLogo.includes('/navbar-web.png')&&x.quickHelp===4&&!x.rules.open&&x.rules.hidden&&x.background.includes('/assets/rinng.jpg')&&x.wrap==='none'&&x.visible&&hasFeed(x);
+const valid=x=>x.header?.height>=95&&x.header.height<=185&&x.rules?.count===7&&x.rules.help===3&&x.sections===4&&x.kicker==='THE BAKED NETWORK\'S'&&x.tagline==='LIVE EVENTS · 24/7 WRESTLING · COMMUNITY PLAYLIST'&&x.decorations===0&&x.logo===400&&x.navLogo.includes('/navbar-web.png')&&x.quickHelp===4&&!x.rules.open&&x.rules.hidden&&x.background.includes('/assets/rinng.jpg')&&x.wrap==='none'&&x.visible&&hasFeed(x);
 let before,targetCss,targetMotd,cssWritten=false,motdWritten=false;
 async function write(field,expected,next,other){
  await p.evaluate(({field,expected,next,other,originalJs,externalCss,externalJs})=>{

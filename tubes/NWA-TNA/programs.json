@@ -336,6 +336,72 @@
           "duration": 10179,
           "source": "YouTube",
           "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "NWA-TNA - 2003-04-02 - NWA-TNA PPV #39 WEBRip-720p",
+          "episode": "Original NWA-TNA programming (2002–2004)",
+          "url": "https://archive.org/download/nwa-tna-weekly-ppv-2003/NWA-TNA%20-%202003-04-02%20-%20NWA-TNA%20PPV%20%2339%20WEBRip-720p.mp4",
+          "duration": 6871,
+          "source": "Internet Archive",
+          "source_channel": "NWA-TNA - Weekly PPV 2003"
+        },
+        {
+          "title": "NWA-TNA - 2003-04-09 - NWA-TNA PPV #40 WEBRip-720p",
+          "episode": "Original NWA-TNA programming (2002–2004)",
+          "url": "https://archive.org/download/nwa-tna-weekly-ppv-2003/NWA-TNA%20-%202003-04-09%20-%20NWA-TNA%20PPV%20%2340%20WEBRip-720p.mp4",
+          "duration": 6863,
+          "source": "Internet Archive",
+          "source_channel": "NWA-TNA - Weekly PPV 2003"
+        },
+        {
+          "title": "NWA-TNA - 2003-04-16 - NWA-TNA PPV #41 WEBRip-720p",
+          "episode": "Original NWA-TNA programming (2002–2004)",
+          "url": "https://archive.org/download/nwa-tna-weekly-ppv-2003/NWA-TNA%20-%202003-04-16%20-%20NWA-TNA%20PPV%20%2341%20WEBRip-720p.mp4",
+          "duration": 6634,
+          "source": "Internet Archive",
+          "source_channel": "NWA-TNA - Weekly PPV 2003"
+        },
+        {
+          "title": "NWA-TNA - 2003-04-23 - NWA-TNA PPV #42 WEBRip-720p",
+          "episode": "Original NWA-TNA programming (2002–2004)",
+          "url": "https://archive.org/download/nwa-tna-weekly-ppv-2003/NWA-TNA%20-%202003-04-23%20-%20NWA-TNA%20PPV%20%2342%20WEBRip-720p.mp4",
+          "duration": 6617,
+          "source": "Internet Archive",
+          "source_channel": "NWA-TNA - Weekly PPV 2003"
+        },
+        {
+          "title": "NWA-TNA - 2003-04-30 - NWA-TNA PPV #43 WEBRip-720p",
+          "episode": "Original NWA-TNA programming (2002–2004)",
+          "url": "https://archive.org/download/nwa-tna-weekly-ppv-2003/NWA-TNA%20-%202003-04-30%20-%20NWA-TNA%20PPV%20%2343%20WEBRip-720p.mp4",
+          "duration": 6616,
+          "source": "Internet Archive",
+          "source_channel": "NWA-TNA - Weekly PPV 2003"
+        },
+        {
+          "title": "NWA-TNA - 2003-05-07 - NWA-TNA PPV #44 WEBRip-720p",
+          "episode": "Original NWA-TNA programming (2002–2004)",
+          "url": "https://archive.org/download/nwa-tna-weekly-ppv-2003/NWA-TNA%20-%202003-05-07%20-%20NWA-TNA%20PPV%20%2344%20WEBRip-720p.mp4",
+          "duration": 6616,
+          "source": "Internet Archive",
+          "source_channel": "NWA-TNA - Weekly PPV 2003"
+        },
+        {
+          "title": "The ESSENTIAL TNA Matches From 2004 | Jeff Hardy, AJ Styles, Randy Savage & MORE!",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=TW4abcuUZTY",
+          "youtube_id": "TW4abcuUZTY",
+          "duration": 9372,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Wrestling's 1st Anniversary: FULL SHOW (NWA-TNA PPV #50) | IMPACT Wrestling Full Events",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=lQ7KrsF0sV8",
+          "youtube_id": "lQ7KrsF0sV8",
+          "duration": 6659,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
         }
       ]
     }

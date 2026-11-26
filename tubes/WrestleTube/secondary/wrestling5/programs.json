@@ -659,6 +659,24 @@
           "duration": 9909,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "FULL EPISODE: Ron Garvin celebrates World Title win; Taylor steals Koloff’s title | WCW, Oct 3, 1987",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=qyRQF_3QdUs",
+          "youtube_id": "qyRQF_3QdUs",
+          "duration": 2890,
+          "source": "YouTube",
+          "source_channel": "WCW"
+        },
+        {
+          "title": "FULL MATCH: Hulk Hogan vs. Ric Flair | WCW World Title Steel Cage Match: WCW Halloween Havoc 1994",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=jnm8_7cHyIU",
+          "youtube_id": "jnm8_7cHyIU",
+          "duration": 2010,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

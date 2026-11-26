@@ -11,17 +11,17 @@
     },
     {
       "id": "nwatna-base",
-      "status": "deployed-runtime-verification-pending",
+      "status": "runtime-diagnostic-queued",
       "workflow": "nwatna-deploy.yml",
       "mode": "manual dispatch after recovery",
-      "evidence": "Base configuration deployed; automatic module initialization still requires validation."
+      "evidence": "Run 45867360153 compares NWA-TNA with RetroWrestling without changing live settings."
     },
     {
       "id": "playlist-review",
-      "status": "pending-recheck",
+      "status": "read-only-recheck-queued",
       "workflow": "network-playlist-review.yml",
       "mode": "read-only",
-      "evidence": "44 candidates across six channels; independent metadata verification required."
+      "evidence": "All six batches inspected; all 29 channel requests audit_playlist_media only. Run 45867325110."
     },
     {
       "id": "puro-artwork",
@@ -43,9 +43,9 @@
     },
     {
       "id": "queue-attribution",
-      "status": "28-of-29-deployed",
+      "status": "28-of-29-deployed-review-queued",
       "mode": "CSS-only with backup",
-      "evidence": "Wrestling 5 write not acknowledged in run 45691645571; remaining skin repair requires inspection."
+      "evidence": "Wrestling 5 previous write unacknowledged; read-only size/equivalence and visual preview run 45867360153. No CSS writes in diagnostic."
     },
     {
       "id": "baked-tv-recovery",

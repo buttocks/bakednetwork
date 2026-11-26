@@ -250,6 +250,14 @@
       "skinReview": "repair-candidate",
       "adminVerified": true,
       "backupVerified": true
+    },
+    {
+      "slug": "roh",
+      "directory": "tubes/ROH",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": false,
+      "skinReview": "pending"
     }
   ]
 }

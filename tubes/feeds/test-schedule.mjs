@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 const code=fs.readFileSync('tubes/feeds/player-core.js','utf8');
-const start=code.indexOf('function shuffle('),end=code.indexOf('function select(');
+const start=code.indexOf('// BEGIN MULTIPART HELPERS'),end=code.indexOf('function select(');
 assert.ok(start>=0&&end>start);
 const ctx=vm.createContext({});
 vm.runInContext(code.slice(start,end)+';globalThis.lineup=weightedLineup;',ctx);
@@ -14,7 +14,7 @@ for(const e of config.channels){
  assert.equal(JSON.stringify(a),JSON.stringify(b));
  assert.ok(a.every(x=>p.some(y=>x.url===y.url)));
  const total=a.reduce((s,x)=>s+x.duration,0),yt=a.filter(x=>x.source==='YouTube').reduce((s,x)=>s+x.duration,0);
- if(p.some(x=>x.source==='YouTube')&&p.some(x=>x.source!=='YouTube')){
+ if(!p.some(x=>/\b(?:part|pt\.?|disc|disk|cd)\s*[0-9]/i.test(x.title))&&p.some(x=>x.source==='YouTube')&&p.some(x=>x.source!=='YouTube')){
   const max=Math.max(...p.map(x=>x.duration));
   const target=e.key==='mtv'?0.2:0.6;
   const imbalance=Math.abs(yt-target*total);

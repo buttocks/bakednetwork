@@ -1,0 +1,31 @@
+name: Move RDH registration link to bottom MOTD row
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/rdh-motd-registration-row.yml','tubes/RDH/move-registration-row.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/RDH/move-registration-row.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/RDH/move-registration-row.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rdh-motd-registration-row-review
+          path: rdh-motd-registration-row-review/
+          retention-days: 30

@@ -245,6 +245,10 @@ def refresh_one(entry,defaults,record):
     j=load(target)
     key=entry["key"]
     items=j["channels"][key]["programs"]
+    # Asylum uses browser-verified entries only until new-source verification is automated.
+    if key=="nwa-tna-early":
+        print("Asylum catalog: automatic unverified discovery paused")
+        return 0
     keep=int(entry.get("seed_count",0))
     if not 0<=keep<=len(items):raise ValueError("Invalid seed protection count")
     existing={p["url"] for p in items if approved_url(p.get("url"))}

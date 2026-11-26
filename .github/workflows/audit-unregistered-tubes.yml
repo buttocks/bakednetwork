@@ -1,0 +1,81 @@
+name: Find unregistered administered tubes
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/audit-unregistered-tubes.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Compare visible directory and account channel links with registry
+        run: |
+          node --input-type=module <<'JS'
+          import {chromium} from 'playwright';
+          import fs from 'node:fs/promises';
+          const site='https://baked.live';
+          const reg=JSON.parse(await fs.readFile('tubes/channels.json','utf8'));
+          const managed=JSON.parse(await fs.readFile('tubes/feeds/managed.json','utf8')).managed;
+          const known=new Set(reg.channels.map(x=>x.slug.toLowerCase()));
+          const browser=await chromium.launch({channel:'chrome',headless:true});
+          const candidates=new Map(), accountLinks=new Map(), results=[];
+          const ctx=await browser.newContext();
+          const p=await ctx.newPage();
+          const collect=async source=>{
+            const links=await p.evaluate(()=>Array.from(document.querySelectorAll('a[href]'),a=>({href:a.href,label:a.innerText.trim().slice(0,100)})));
+            for(const a of links){
+              try{
+                const u=new URL(a.href);
+                if(u.origin!==site)continue;
+                const m=u.pathname.match(/^\/tv\/([A-Za-z0-9-]{2,35})\/?$/i);
+                if(m&&!known.has(m[1].toLowerCase()))candidates.set(m[1].toLowerCase(),{slug:m[1],source});
+                if(/^\/(?:account|profile|channels|mychannels|userpanel)\/?$/i.test(u.pathname)&&!u.search&&!u.hash)accountLinks.set(u.href,a.label);
+              }catch{}
+            }
+          };
+          try{
+            await p.goto(site+'/login',{waitUntil:'domcontentloaded',timeout:45000});
+            const f=p.locator('form[action="/login"]').last();
+            await f.locator('input[name="name"]').fill('buttman-gpt');
+            await f.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD);
+            await f.locator('button[type="submit"]').click();
+            await p.waitForLoadState('domcontentloaded');
+            await collect('login-landing');
+            await p.goto(site,{waitUntil:'domcontentloaded',timeout:45000});
+            await collect('directory');
+            for(const url of [...accountLinks.keys()].slice(0,8)){
+              await p.goto(url,{waitUntil:'domcontentloaded',timeout:20000});
+              await collect('account-navigation');
+            }
+            console.log('REGISTRY_SUMMARY '+JSON.stringify({registeredTubes:known.size,managedStreams:managed.length,visibleUnregistered:candidates.size,accountPages:accountLinks.size}));
+            for(const ch of [...candidates.values()].slice(0,40)){
+              const q=await ctx.newPage();
+              try{
+                await q.goto(site+'/tv/'+ch.slug,{waitUntil:'domcontentloaded',timeout:25000});
+                await q.waitForFunction(slug=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CLIENT?.name?.toLowerCase()==='buttman-gpt'&&window.CHANNEL?.name?.toLowerCase()===slug.toLowerCase()&&Number.isFinite(window.CLIENT.rank),ch.slug,{timeout:15000});
+                await q.waitForTimeout(1800);
+                const s=await q.evaluate(()=>({rank:window.CLIENT.rank,channel:window.CHANNEL.name,queueItems:document.querySelectorAll('#queue .queue_entry').length,permissions:['playlistadd','playlistaddcustom','addnontemp'].every(x=>typeof window.hasPermission==='function'&&window.hasPermission(x)),cssBytes:typeof window.CHANNEL.css==='string'?window.CHANNEL.css.length:null,externalCss:!!window.CHANNEL.opts?.externalcss}));
+                results.push({...ch,...s,status:s.rank>=3?'admin-candidate-review-ownership':'not-admin'});
+              }catch{results.push({...ch,status:'unverified'})}
+              finally{await q.close()}
+            }
+            for(const r of results)console.log('UNREGISTERED_TUBE '+JSON.stringify(r));
+            await fs.writeFile('unregistered-tubes.json',JSON.stringify({scope:'Visible directory and linked account pages only; inactive unlisted channels may be absent. Admin access does not establish ownership.',registered:known.size,managed:managed.length,results},null,2));
+          }finally{await browser.close()}
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unregistered-tube-review
+          path: unregistered-tubes.json
+          retention-days: 7

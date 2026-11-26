@@ -77,6 +77,51 @@ jobs:
           command -v ffprobe
           ffprobe -version > /tmp/ffprobe-version.txt
           head -n 1 /tmp/ffprobe-version.txt
+      - name: Locate existing browser-compatible alternative archive files
+        run: |
+          node --input-type=module <<'JS'
+          import {spawnSync} from 'node:child_process';
+          import fs from 'node:fs';
+          const catalog=await (await fetch('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/programs.json?probe='+Date.now())).json();
+          const known=catalog.channels['nwa-tna-early'].programs;
+          const ids=new Set(['nwa-tna-weekly-ppv-2003']);
+          const q='mediatype:movies AND (title:"NWA TNA" OR title:"NWA-TNA" OR title:"TNA Asylum") AND (title:2002 OR title:2003 OR title:2004)';
+          try{
+            const params=new URLSearchParams({q,'fl[]':'identifier',rows:'30',output:'json'});
+            const data=await (await fetch('https://archive.org/advancedsearch.php?'+params,{signal:AbortSignal.timeout(20000)})).json();
+            for(const x of data.response?.docs||[])if(/^[a-zA-Z0-9._-]{4,160}$/.test(x.identifier))ids.add(x.identifier);
+          }catch(e){console.log('ALTERNATIVE_SEARCH_ERROR '+e.message);}
+          const candidates=[];
+          for(const id of [...ids].slice(0,15)){
+            try{
+              const res=await fetch('https://archive.org/metadata/'+encodeURIComponent(id),{signal:AbortSignal.timeout(15000)});
+              const m=await res.json();
+              const title=String(m.metadata?.title||'');
+              if(/minecraft|simulation|gameplay|WWE 2K/i.test(title))continue;
+              for(const f of m.files||[]){
+                const n=String(f.name||'');
+                const context=n+' '+title;
+                if(!/\\.(mp4|webm|m4v)$/i.test(n)||!/\\b(?:2002|2003|2004)\\b/.test(context)||!/NWA.?TNA|TNA|Asylum/i.test(context)||/sample|trailer|gameplay|simulation/i.test(n))continue;
+                const url='https://archive.org/download/'+encodeURIComponent(id)+'/'+n.split('/').map(encodeURIComponent).join('/');
+                if(known.some(p=>p.url===url))continue;
+                const duration=Number(f.length);
+                if(!Number.isFinite(duration)||duration<420||duration>28800)continue;
+                candidates.push({title:n,archive:id,format:f.format,source:f.source,duration,url});
+              }
+            }catch(e){console.log('ALTERNATIVE_METADATA_ERROR '+id+' '+e.message);}
+          }
+          candidates.sort((a,b)=>Number(b.source==='derivative')-Number(a.source==='derivative')||b.duration-a.duration);
+          const results=[];
+          for(const p of candidates.slice(0,18)){
+            const probe=spawnSync('ffprobe',['-v','error','-rw_timeout','8000000','-show_entries','stream=codec_type,codec_name,width,height','-of','json',p.url],{encoding:'utf8',timeout:15000,maxBuffer:100000});
+            let streams=[];try{streams=JSON.parse(probe.stdout).streams||[]}catch{}
+            const video=streams.find(v=>v.codec_type==='video');
+            const compatible=!!video&&['h264','vp8','vp9','av1'].includes(video.codec_name)&&video.width>0&&video.height>0;
+            const result={...p,video,compatible,error:probe.error?.message||probe.stderr?.slice(0,150)};
+            results.push(result);console.log('ALTERNATIVE_SOURCE '+JSON.stringify(result));
+          }
+          fs.writeFileSync('asylum-alternative-sources.json',JSON.stringify({candidateCount:candidates.length,results},null,2));
+          JS
       - name: Identify source codecs and verify actual decoded frames
         run: |
           node --input-type=module <<'JS'
@@ -152,4 +197,5 @@ jobs:
           path: |
             feed-browser-results.json
             asylum-source-proof.json
+            asylum-alternative-sources.json
           retention-days: 30

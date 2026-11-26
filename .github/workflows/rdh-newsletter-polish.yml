@@ -1,0 +1,31 @@
+name: Polish RDH newsletter controls
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/rdh-newsletter-polish.yml','tubes/RDH/polish-newsletter-controls.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/RDH/polish-newsletter-controls.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/RDH/polish-newsletter-controls.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rdh-newsletter-polish-review
+          path: rdh-newsletter-polish-review/
+          retention-days: 30

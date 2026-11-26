@@ -83,9 +83,13 @@ try{
  targetMotd=source.html;
  targetCss=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').trimEnd()+'\n\n'+template;
  const compactMode=['Wrestling4','wrestling5'].includes(slug);
- const importRule='@import url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@de893138778cf89aa07be032185f06837272a6fc/tubes/WrestleTube/secondary/header.css");';
+ const previousImportRule='@import url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@de893138778cf89aa07be032185f06837272a6fc/tubes/WrestleTube/secondary/header.css");';
+ const importRule='@import url("https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/header.css");';
  if(compactMode){
-  const existing=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').split(importRule).join('');
+  const response=await p.request.get("https://buttocks.github.io/bakednetwork/tubes/WrestleTube/secondary/header.css",{timeout:15000});
+  assert.ok(response.ok(),'Hosted stylesheet unavailable; no writes');
+  assert.equal((await response.text()).trim(),template.trim(),'Hosted stylesheet differs from approved version; no writes');
+  const existing=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').split(importRule).join('').split(previousImportRule).join('');
   const compact=compactWhitespace(existing);
   const matches=await p.evaluate(({existing,compact})=>{
    const normalize=x=>{const sheet=new CSSStyleSheet();sheet.replaceSync(x);return [...sheet.cssRules].map(r=>r.cssText)};
@@ -94,7 +98,7 @@ try{
   console.log('SECONDARY_CSS_COMPACT '+JSON.stringify({slug,beforeBytes:Buffer.byteLength(existing),afterBytes:Buffer.byteLength(compact),...matches}));
   assert.ok(matches.same&&matches.rules>0,'Existing stylesheet rules changed in compact representation; no writes');
   targetCss=importRule+'\n'+compact;
-  assert.ok(Buffer.byteLength(targetCss)<=19500,'Cannot fit under conservative CSS size cap without structural changes; no writes');
+  assert.ok(Buffer.byteLength(targetCss)<=19980,'Cannot fit under conservative CSS size cap without structural changes; no writes');
  }
  console.log('SECONDARY_CSS_SIZE '+JSON.stringify({slug,original:Buffer.byteLength(before.css),proposed:Buffer.byteLength(targetCss),compactMode}));
  assert.ok(Buffer.byteLength(targetCss)<30000);

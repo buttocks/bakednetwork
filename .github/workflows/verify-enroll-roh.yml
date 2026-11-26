@@ -27,10 +27,11 @@ jobs:
       - name: Verify deployed catalog
         run: |
           for i in $(seq 1 20); do
-            if curl -fsSL --max-time 15 https://buttocks.github.io/bakednetwork/tubes/ROH/programs.json | node -e 'let b="";process.stdin.on("data",c=>b+=c);process.stdin.on("end",()=>{try{if(JSON.parse(b).channels.roh.programs.length<3)process.exitCode=1}catch{process.exitCode=1}})'; then exit 0; fi
+            if curl -fsSL --max-time 15 https://buttocks.github.io/bakednetwork/tubes/ROH/programs.json | node -e 'let b="";process.stdin.on("data",c=>b+=c);process.stdin.on("end",()=>{try{if(JSON.parse(b).channels.roh.programs.filter(p=>p.dailymotion_id&&p.playback_verified_run===45751503494).length<8)process.exitCode=1}catch{process.exitCode=1}})'; then exit 0; fi
             sleep 10
           done
           exit 1
+      # Retry against the mixed-provider catalog published in this commit.
       - name: Confirm actual ROH feed playback
         run: node tubes/feeds/test-browser.mjs
       - name: Add permanent feed only after playback proof

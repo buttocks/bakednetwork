@@ -834,16 +834,9 @@
         "full event",
         "ROH special"
       ],
-      "youtube_channels": [
-        {
-          "id": "UC4_uDa6w1kOyzsikIzReCKQ",
-          "name": "Ring of Honor Wrestling"
-        }
-      ],
-      "youtube_candidate_ids": [
-        "F8wM0O5FZDY"
-      ],
-      "seed_count": 19
+      "youtube_channels": [],
+      "youtube_candidate_ids": [],
+      "seed_count": 8
     }
   ]
 }

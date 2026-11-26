@@ -5,90 +5,15 @@ const dir='rdh-show-tags-review';await fs.mkdir(dir,{recursive:true});
 const old='/js/channel-loaders/ac9b86cf2e985f1572e1485b32df0033cf6c74d087b67f18d38a6b2d0d81fa5d.js';
 const addon="/* BEGIN RDH SHOW TAGS COMPATIBILITY */\n(function(w){\n \"use strict\";\n if(!/^\\/(tv|r)\\/rdh\\/?$/i.test(w.location.pathname)||w.__rdhShowTagsCompat)return;\n function initialize(){\n  if(!w.CHANNEL?.name||!w.jQuery||!document.body)return false;\n  if(w[w.CHANNEL.name]?.modern?.modules?.premiumPlaylist?.started)return true;\n  if(w.__rdhShowTagsCompat?.started)return true;\n  const $=w.jQuery;\n  const m={\n        observer: null,\n        timer: null,\n        interval: null,\n\n        types: [\n            { key: \"wor\",  pattern: /(?:^|[^a-z0-9])WOR(?:[^a-z0-9]|$)|wrestling\\s+observer\\s+radio/i },\n            { key: \"wol\",  pattern: /(?:^|[^a-z0-9])WOL(?:[^a-z0-9]|$)|wrestling\\s+observer(?:[^a-z0-9]+|\\s+)live/i },\n            { key: \"f4d\",  pattern: /(?:^|[^a-z0-9])F4D(?:[^a-z0-9]|$)|filthy\\s+four\\s+daily/i },\n            { key: \"ad\",   pattern: /(?:^|[^a-z0-9])AFTER\\s+DARK(?:\\s+RADIO)?(?:[^a-z0-9]|$)/i },\n            { key: \"ltbh\", pattern: /(?:^|[^a-z0-9])LTB\\s*(?:&\\s*)?[HD](?=[^a-z0-9]|$)|lions\\s*,?\\s*tigers\\s*,?\\s*bears\\s*(?:&|and)\\s*(?:head|dirt|disco)\\b/i },\n            { key: \"bvv\",  pattern: /(?:^|[^a-z0-9])BVV(?:[^a-z0-9]|$)|big\\s+vinny\\s+v/i },\n            { key: \"bv\",   pattern: /(?:^|[^a-z0-9])B\\s*&\\s*V(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])BVT(?:[^a-z0-9]|$)|^\\s*bryan\\s*(?:&|and)\\s+/i },\n            { key: \"ctm\",  pattern: /castrating\\s+the\\s+marks/i }\n        ],\n\n        getType: function (title) {\n            const raw = String(title || \"\");\n            const normalized = raw\n                .replace(/[\\u200B-\\u200D\\uFEFF]/g, \"\")\n                .replace(/\\u00a0/g, \" \")\n                .replace(/[–—]/g, \"-\")\n                .replace(/\\s+/g, \" \")\n                .trim();\n            const upper = normalized.toUpperCase();\n\n            // Direct recurring-show aliases first. These intentionally avoid\n            // relying on punctuation-sensitive regexes because older playlist\n            // titles use several inconsistent naming formats.\n            if (/^WOR\\b/.test(upper) || upper.includes(\"WRESTLING OBSERVER RADIO\")) return \"wor\";\n            if (/(?:^|[^A-Z0-9])WOL(?:[^A-Z0-9]|$)/.test(upper) || /WRESTLING\\s+OBSERVER(?:[^A-Z0-9]+|\\s+)LIVE/.test(upper)) return \"wol\";\n            if (/^F4D\\b/.test(upper) || upper.includes(\"FILTHY FOUR DAILY\") || upper.includes(\"FIGURE FOUR DAILY\")) return \"f4d\";\n            if (upper.includes(\"AFTER DARK\")) return \"ad\";\n            // Lions, Tigers, Bears & Head (new name) / Dirt or Disco (older name).\n            // Group both eras under the same featured-show category.\n            if (/(?:^|[^A-Z0-9])LTB\\s*(?:&\\s*)?[HD](?=[^A-Z0-9]|$)/.test(upper) ||\n                /LIONS\\s*,?\\s*TIGERS\\s*,?\\s*BEARS\\s*(?:&|AND)\\s*(?:HEAD|DIRT|DISCO)\\b/.test(upper)) return \"ltbh\";\n            if (upper.startsWith(\"BIG VINNY V\") || /(?:^|[^A-Z0-9])BVV(?:[^A-Z0-9]|$)/.test(upper)) return \"bvv\";\n            if (/(?:^|[^A-Z0-9])BVT(?:[^A-Z0-9]|$)/.test(upper)) return \"bv\";\n            if (/^B\\s*&\\s*V\\b/.test(upper)) return \"bv\";\n            if (/^BRYAN\\s*(?:&|AND)\\s+/.test(upper) || /(?:^|\\b)BRYAN\\s*(?:&|AND)\\s+VINNY(?:\\s+SHOW)?\\b/.test(upper)) return \"bv\";\n            if (upper.includes(\"CASTRATING THE MARKS\")) return \"ctm\";\n\n            for (let i = 0; i < this.types.length; i++) {\n                if (this.types[i].pattern.test(normalized)) return this.types[i].key;\n            }\n            return \"\";\n        },\n\n        scan: function () {\n            const self = this;\n            const typeClasses = \"rdh-featured rdh-featured-wor rdh-featured-wol rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc\";\n\n            $(\"#queue li.queue_entry, #queue .queue_entry\").each(function () {\n                const $entry = $(this);\n                const $title = $entry.find(\".qe_title\").first();\n                const title = ($title.length ? $title.text() : $entry.text()).trim();\n                const type = self.getType(title);\n                const wantedClass = type ? \"rdh-featured-\" + type : \"\";\n\n                const hasCorrectState =\n                    (!!type === $entry.hasClass(\"rdh-featured\")) &&\n                    (!type || $entry.hasClass(wantedClass));\n\n                if (!hasCorrectState) {\n                    $entry.removeClass(typeClasses);\n                    if (type) $entry.addClass(\"rdh-featured \" + wantedClass);\n                }\n            });\n        },\n\n        scheduleScan: function () {\n            const self = this;\n            clearTimeout(self.timer);\n            self.timer = setTimeout(function () {\n                self.scan();\n            }, 80);\n        },\n\n        start: function () {\n            const self = this;\n            self.scan();\n\n            // Watch the whole page rather than one queue node. Baked can replace\n            // or virtualize playlist DOM while scrolling, which otherwise leaves\n            // newly-rendered rows untagged.\n            self.observer = new MutationObserver(function () {\n                self.scheduleScan();\n            });\n\n            self.observer.observe(document.body, {\n                childList: true,\n                subtree: true,\n                characterData: true\n            });\n\n            // Periodic safety scan catches virtualized/reused rows even if the\n            // site mutates attributes/properties without a useful DOM event.\n            self.interval = setInterval(function () {\n                self.scan();\n            }, 1000);\n        },\n\n        stop: function () {\n            clearTimeout(this.timer);\n            clearInterval(this.interval);\n            this.interval = null;\n            if (this.observer) this.observer.disconnect();\n            this.observer = null;\n            $(\"#queue .rdh-featured, #queue [class*='rdh-featured-']\")\n                .removeClass(\"rdh-featured rdh-featured-wor rdh-featured-wol rdh-featured-bv rdh-featured-bvv rdh-featured-ltbh rdh-featured-ctm rdh-featured-f4d rdh-featured-ad rdh-featured-bsc\");\n        }\n    };\n  m.start();m.started=true;w.__rdhShowTagsCompat=m;return true;\n }\n if(!initialize()){let n=0;const timer=w.setInterval(()=>{if(initialize()||++n>=120)w.clearInterval(timer);},250);}\n})(window);\n/* END RDH SHOW TAGS COMPATIBILITY */";
 
-const uiAddon=`
-  (function(w){
-   "use strict";
-function installUiFixes(){
-   if(w.__rdhRdhTransientUiFixes||!document.body)return;
-   const body=document.body;
-   const state={activeEntry:null,openTimer:null,closeTimer:null,observer:null};
-   const style=document.createElement("style");
-   style.id="rdh-transient-ui-fixes";
-   style.textContent=[
-    "#messagebuffer .chat-msg-_server_.rdh-presence-dissolve{max-height:80px;overflow:hidden!important;transition:opacity .85s ease,max-height .85s ease,margin .85s ease,padding .85s ease,transform .85s ease}",
-    "#messagebuffer .chat-msg-_server_.rdh-presence-dissolve:before{transition:opacity .85s ease}",
-    "#messagebuffer .chat-msg-_server_.rdh-presence-fading{opacity:0!important;max-height:0!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;border-color:transparent!important;transform:translateY(-3px);pointer-events:none!important}",
-    "#messagebuffer .chat-msg-_server_.rdh-presence-fading:before{opacity:0!important}",
-    "body:not(.rdh-hover-preview-open) .rdh-video-url-pill,body:not(.rdh-hover-preview-open) .native-playlist-preview{visibility:hidden!important;opacity:0!important;pointer-events:none!important}"
-   ].join("\\n");
-   (document.head||body).appendChild(style);
-   const entryFor=node=>node&&node.closest?node.closest("#queue .queue_entry .qe_title")?.closest(".queue_entry"):null;
-   const isPreview=node=>!!(node&&node.closest&&node.closest(".rdh-video-url-pill,.native-playlist-preview"));
-   function hidePreview(){clearTimeout(state.openTimer);body.classList.remove("rdh-hover-preview-open");}
-   function closeLater(){
-    clearTimeout(state.closeTimer);
-    state.closeTimer=w.setTimeout(()=>{hidePreview();state.activeEntry=null;},450);
-   }
-   document.addEventListener("pointerover",event=>{
-    const entry=entryFor(event.target);
-    if(entry){
-     clearTimeout(state.closeTimer);
-     if(state.activeEntry===entry)return;
-     hidePreview();
-     state.activeEntry=entry;
-     if(!entry.classList.contains("rdh-featured"))return;
-     state.openTimer=w.setTimeout(()=>{
-      if(state.activeEntry===entry&&entry.matches(":hover"))body.classList.add("rdh-hover-preview-open");
-     },1000);
-     return;
-    }
-    if(isPreview(event.target)&&state.activeEntry?.classList.contains("rdh-featured"))clearTimeout(state.closeTimer);
-   },true);
-   document.addEventListener("pointerout",event=>{
-    if(!entryFor(event.target)&&!isPreview(event.target))return;
-    const next=event.relatedTarget;
-    if(next&&(entryFor(next)===state.activeEntry||isPreview(next)))return;
-    closeLater();
-   },true);
-
-   const presenceSelector="#messagebuffer .chat-msg-_server_";
-   const presencePattern=/\\bjoined\\b|\\bdisconnected\\b|\\bleft(?:\\s+the)?\\s+(?:channel|room)\\b/i;
-   function markPresence(node){
-    if(!node)return;
-    const rows=[];
-    if(node.nodeType===1){
-     if(node.matches(presenceSelector))rows.push(node);
-     if(node.querySelectorAll)rows.push(...node.querySelectorAll(presenceSelector));
-    }else if(node.nodeType===3){
-     const row=node.parentElement?.closest(presenceSelector);
-     if(row)rows.push(row);
-    }
-    rows.forEach(row=>{
-     if(row.dataset.rdhPresenceDissolve)return;
-     const text=row.querySelector(".server-whisper")?.textContent||row.textContent||"";
-     if(!presencePattern.test(text))return;
-     row.dataset.rdhPresenceDissolve="pending";
-     w.setTimeout(()=>{
-      if(!row.isConnected)return;
-      row.dataset.rdhPresenceDissolve="fading";
-      row.classList.add("rdh-presence-dissolve","rdh-presence-fading");
-      w.setTimeout(()=>row.remove(),900);
-     },7000);
-    });
-   }
-   markPresence(body);
-   state.observer=new MutationObserver(records=>{
-    records.forEach(record=>{
-     record.addedNodes.forEach(markPresence);
-     if(record.type==="characterData")markPresence(record.target);
-    });
-   });
-   state.observer.observe(body,{childList:true,characterData:true,subtree:true});
-   w.__rdhRdhTransientUiFixes=state;
-  }
-   installUiFixes();
-  })(window);
-`;
+const buildRef=process.env.GITHUB_SHA||'main';
+const uiAddon=`(function(w,d){
+ if(w.__rdhRdhTransientUiLoader)return;
+ w.__rdhRdhTransientUiLoader=true;
+ var s=d.createElement("script");
+ s.src="https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@${buildRef}/tubes/RDH/rdh-transient-ui-fixes.js";
+ s.async=true;
+ (d.head||d.documentElement).appendChild(s);
+})(window,document);`;
 const completeAddon=addon.replace("/* END RDH SHOW TAGS COMPATIBILITY */",uiAddon+"\n/* END RDH SHOW TAGS COMPATIBILITY */");
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});

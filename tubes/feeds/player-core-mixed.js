@@ -57,6 +57,44 @@ function valid(p){
       p.url==='https://www.youtube.com/watch?v='+p.youtube_id;
   return /^https:\/\/archive\.org\/download\/[^\s?#]+/i.test(p.url);
 }
+// BEGIN MULTIPART HELPERS
+/* Strict multipart recognition. Preserve metadata; never join unrelated numbered episodes.
+   A complete group starts at 1, has no gaps or duplicate indices, and matches any declared total.
+   Unresolved parts stay in the catalog but are withheld from automatic scheduling. */
+function multipartInfo(p) {
+  if(!p || typeof p.title!=='string')return null;
+  const title=p.title.trim();
+  const m=title.match(/^(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|\/)\s*(\d{1,3}))?\s*[)\]]?\s*$/i);
+  if(!m||!m[1].trim())return null;
+  const part=Number(m[2]),total=m[3]?Number(m[3]):null;
+  if(part<1||part>100||total!==null&&(total<part||total>100))return null;
+  const base=m[1].normalize('NFKC').toLowerCase().replace(/[\s_\-–—:.,]+/g,' ').trim();
+  if(base.length<5)return null;
+  // Different uploaders/providers can have different cuts of the same program.
+  const owner=String(p.source_channel||p.owner||'').normalize('NFKC').toLowerCase().trim();
+  const provider=String(p.source||p.type||'').toLowerCase();
+  const key=[provider,owner,base].join('|');
+  return {key,base,part,total};
+}
+function multipartBlocks(items){
+ const grouped=new Map(),blocks=[],unresolved=[];
+ for(const p of items){
+  const info=multipartInfo(p);
+  if(!info){blocks.push({parts:[p],duration:p.duration||0,source:p.source,url:p.url});continue;}
+  if(!grouped.has(info.key))grouped.set(info.key,[]);
+  grouped.get(info.key).push({p,...info});
+ }
+ for(const [key,rows] of grouped){
+  rows.sort((a,b)=>a.part-b.part);
+  const totals=[...new Set(rows.map(r=>r.total).filter(n=>n!==null))];
+  const complete=rows.length>=2&&rows.every((r,i)=>r.part===i+1)&&totals.length<=1&&(!totals.length||totals[0]===rows.length);
+  if(!complete){unresolved.push({key,parts:rows.map(r=>r.part),expected:totals[0]||null,items:rows.map(r=>r.p)});continue;}
+  const parts=rows.map(r=>r.p);
+  blocks.push({parts,duration:parts.reduce((s,p)=>s+(p.duration||0),0),source:parts[0].source,url:parts[0].url,group:key});
+ }
+ return {blocks,unresolved};
+}
+// END MULTIPART HELPERS
 function shuffle(list,key){
   const a=list.slice();let s=2166136261;
   for(const char of key){s^=char.charCodeAt(0);s=Math.imul(s,16777619)}
@@ -65,11 +103,11 @@ function shuffle(list,key){
   return a;
 }
 function weightedLineup(programs,key){
- const unique=[...new Map(programs.map(p=>[p.url,p])).values()];
+ const unique=multipartBlocks([...new Map(programs.map(p=>[p.url,p])).values()]).blocks;
  const queues=['Dailymotion','YouTube','Internet Archive'].map(s=>shuffle(unique.filter(p=>p.source===s),key+'|'+s));
  const weights=[.75,.15,.10],used=[0,0,0],seconds=[0,0,0],result=[];
  const active=queues.map((q,i)=>q.length?i:-1).filter(i=>i>=0);
- if(active.length===1)return queues[active[0]];
+ if(active.length===1)return queues[active[0]].flatMap(b=>b.parts);
  const norm=active.reduce((s,i)=>s+weights[i],0);
  const horizon=Math.max(86400,unique.reduce((s,p)=>s+p.duration,0));
  while(seconds.reduce((s,v)=>s+v,0)<horizon){
@@ -79,7 +117,7 @@ function weightedLineup(programs,key){
   const error=i=>{const p=queues[i][used[i]%queues[i].length];return active.reduce((s,j)=>s+Math.abs(seconds[j]+(i===j?p.duration:0)-(total+p.duration)*weights[j]/norm),0)};
   const i=options.sort((a,b)=>error(a)-error(b))[0],p=queues[i][used[i]++%queues[i].length];seconds[i]+=p.duration;result.push(p);
  }
- return result;
+ return result.flatMap(b=>b.parts);
 }
 function select(date=new Date()){
   const utcDay=date.toISOString().slice(0,10);
@@ -201,6 +239,8 @@ function failCurrent(reason='Source temporarily unavailable',providerFailure=fal
   console.warn('[Baked TV] playback failure', {channel,source:activeProgram?.source,reason,attempt,videoId:activeProgram?.youtube_id,host:embedHost});
   if(providerFailure&&activeProgram?.source==='YouTube')providerBlockedUntil=Date.now()+60000;
   const badUrl=activeUrl;if(badUrl)bad.add(badUrl);
+  const failedPart=activeProgram&&multipartInfo(activeProgram);
+  if(failedPart)for(const p of ordered)if(multipartInfo(p)?.key===failedPart.key)bad.add(p.url);
   preferFallbackSource=activeProgram?.source==='Dailymotion'?'Internet Archive':'Dailymotion';
   stopDM();stopYT();clearTimeout(playbackTimer);video.pause();
   showStatus(reason+' — tuning another match…');
@@ -248,19 +288,22 @@ async function startYouTube(p,seek,id){
 function tune(force=false,advance=false){
   if(!track)return;
   if(!force&&activeUrl)return; // Do not interrupt active programming on catalog refresh or UTC rollover.
-  if(nextTrack){track=nextTrack;nextTrack=null;day='';}
-  let chosen=select();
+  // Complete the current multipart block before changing the UTC day/catalog.
+  const here=activeProgram&&multipartInfo(activeProgram),next=ordered[activeIndex+1],there=next&&multipartInfo(next);
+  const continuation=advance&&here&&there&&here.key===there.key&&there.part===here.part+1&&!bad.has(next.url);
+  if(!continuation&&nextTrack){track=nextTrack;nextTrack=null;day='';}
+  let chosen=continuation?{p:next,index:activeIndex+1,seek:0}:select();
   if(preferFallbackSource&&ordered.length){
     const start=chosen?.index??0;
-    for(let i=0;i<ordered.length;i++){const index=(start+i)%ordered.length;const p=ordered[index];if(p.source===preferFallbackSource&&!bad.has(p.url)){chosen={p,index,seek:0};break;}}
+    for(let i=0;i<ordered.length;i++){const index=(start+i)%ordered.length;const p=ordered[index];if(p.source===preferFallbackSource&&!bad.has(p.url)&&(!multipartInfo(p)||multipartInfo(p).part===1)){chosen={p,index,seek:0};break;}}
     preferFallbackSource=null;
   }
-  if(advance&&activeProgram&&ordered.length){
+  if(advance&&!continuation&&activeProgram&&ordered.length){
     const prev=ordered.findIndex(p=>p.url===activeProgram.url);
-    for(let i=1;i<=ordered.length;i++){const index=((prev>=0?prev:activeIndex)+i+ordered.length)%ordered.length;const p=ordered[index];if(!bad.has(p.url)){chosen={p,index,seek:0};break;}}
+    for(let i=1;i<=ordered.length;i++){const index=((prev>=0?prev:activeIndex)+i+ordered.length)%ordered.length;const p=ordered[index];if(!bad.has(p.url)&&(!multipartInfo(p)||multipartInfo(p).part===1)){chosen={p,index,seek:0};break;}}
   }
   if(providerBlockedUntil>Date.now()&&chosen?.p.source==='YouTube'){
-    const index=ordered.findIndex(p=>p.source!=='YouTube'&&!bad.has(p.url));
+    const index=ordered.findIndex(p=>p.source!=='YouTube'&&!bad.has(p.url)&&(!multipartInfo(p)||multipartInfo(p).part===1));
     if(index>=0)chosen={p:ordered[index],index,seek:0};else{showStatus('YouTube temporarily unavailable. Retrying shortly.');retryLater(Math.max(1000,providerBlockedUntil-Date.now()));return;}
   }
   if(!chosen){showStatus('No available matches. Retrying automatically.');retryLater(60000);return}

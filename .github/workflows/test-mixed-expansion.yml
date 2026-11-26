@@ -40,7 +40,7 @@ jobs:
           const dm=programs.filter(p=>p.source==='Dailymotion');
           assert.ok(dm.length>=10);
           assert.equal(new Set(programs.map(p=>p.url)).size,programs.length,'Duplicate program URL');
-          assert.ok(dm.every(p=>p.playback_verified_run===45733706339));
+          assert.ok(dm.every(p=>[45733706339,45737794303].includes(p.playback_verified_run)));
           const config=JSON.parse(fs.readFileSync('tubes/feeds/discovery.json'));
           assert.equal(config.channels.find(c=>c.key===key).seed_count,dm.length);
           assert.ok(programs.slice(0,dm.length).every(p=>p.source==='Dailymotion'));

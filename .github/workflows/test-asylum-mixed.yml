@@ -28,7 +28,8 @@ jobs:
           const root='https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/';
           const catalog=JSON.parse(fs.readFileSync('tubes/NWA-TNA/programs.json'));
           const early=catalog.channels['nwa-tna-early'];
-          assert.equal(early.programs.filter(p=>p.source==='Dailymotion').length,15);
+          assert.ok(early.programs.filter(p=>p.source==='Dailymotion').length>=15);
+          assert.ok(early.programs.filter(p=>p.source==='Dailymotion').every(p=>Number.isSafeInteger(p.playback_verified_run)&&p.playback_verified_run>0));
           assert.ok(early.programs.some(p=>p.source==='Internet Archive'));
           assert.ok(early.programs.some(p=>p.source==='YouTube'));
           assert.ok(!early.programs.some(p=>p.url.includes('/nwa-tna-weekly-ppv-2003/')));

@@ -13,7 +13,7 @@ concurrency:
 jobs:
   probe:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,12 +38,12 @@ jobs:
               if(!response.ok||data.id!==id||data.allow_embed!==true||!Number.isFinite(data.duration)||data.duration<60||!allowedHosts.includes(embed.hostname)||embed.protocol!=='https:'){
                 console.log('DM_REJECT '+JSON.stringify({id,status:response.status,title:data.title,allow:data.allow_embed,duration:data.duration}));continue;
               }
-              candidates.push({id,title:data.title,duration:data.duration,owner:data['owner.screenname'],embed:embed.href});
+              candidates.push({id,title:data.title,duration:data.duration,owner:data['owner.screenname'],embed:'https://geo.dailymotion.com/player/x8lr5.html?video='+id});
               console.log('DM_METADATA '+JSON.stringify(candidates.at(-1)));
             }catch(e){console.log('DM_METADATA_ERROR '+JSON.stringify({id,error:e.message}));}
           }
           const browser=await chromium.launch({channel:'chrome',headless:true,args:['--autoplay-policy=no-user-gesture-required']});
-          const results=[];
+          const results=[];fs.mkdirSync('asylum-dm-screens',{recursive:true});
           try{
             for(const p of candidates){
               const page=await browser.newPage();
@@ -52,9 +52,9 @@ jobs:
                 await page.route('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/dm-probe.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><body style="margin:0"><div id="target"></div></body></html>'}));
                 await page.goto('https://buttocks.github.io/bakednetwork/tubes/NWA-TNA/dm-probe.html');
                 const embed=new URL(p.embed);
-                embed.searchParams.set('autoplay','1');embed.searchParams.set('mute','1');
+                embed.searchParams.set('autoplay','true');embed.searchParams.set('startTime','20');
                 await page.evaluate(src=>{const f=document.createElement('iframe');f.src=src;f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;f.style='width:100vw;height:100vh;border:0';document.querySelector('#target').append(f)},embed.href);
-                let verified=null;const initial=new Map();const until=Date.now()+35000;
+                let verified=null;const initial=new Map();const until=Date.now()+45000;
                 while(Date.now()<until&&!verified){
                   for(const frame of page.frames().slice(1)){
                     try{
@@ -70,7 +70,7 @@ jobs:
                   }
                   if(!verified)await page.waitForTimeout(750);
                 }
-                results.push({...p,verified:!!verified,video:verified});
+                await page.screenshot({path:'asylum-dm-screens/'+p.id+'.png'});results.push({...p,verified:!!verified,video:verified});
               }catch(e){results.push({...p,verified:false,error:e.message});}
               finally{await page.close();}
               console.log('DM_PLAYBACK '+JSON.stringify(results.at(-1)));
@@ -84,5 +84,7 @@ jobs:
         if: always()
         with:
           name: asylum-dailymotion-results
-          path: asylum-dailymotion-results.json
+          path: |
+            asylum-dailymotion-results.json
+            asylum-dm-screens/
           retention-days: 30

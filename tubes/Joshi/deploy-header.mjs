@@ -63,6 +63,7 @@ try{
    const panel=d.querySelector('.jts-panel'),summary=d.querySelector('.jts-bar>details>summary'),purpose=d.querySelector('.jts-purpose');
    if(!panel||!summary||!purpose)throw Error('Expected existing compact header');
    const headings=[...panel.querySelectorAll('.jts-links-heading')];
+   let alreadyClean=headings.length===0&&summary.textContent.trim()==='Rules'&&/LIVE EVENTS/.test(purpose.textContent);
    if(headings.length>1)throw Error('Ambiguous useful links section');
    if(headings.length===1){
     const heading=headings[0];
@@ -76,6 +77,7 @@ try{
    const ordered=[...panel.querySelectorAll('ol')].filter(ol=>!ol.parentElement.closest('ol')&&Number(ol.getAttribute('start')||1)===1&&!ol.hasAttribute('reversed')&&[...ol.children].filter(e=>e.tagName==='LI').length>=6);
    if(ordered.length===1){
     const items=[...ordered[0].children].filter(e=>e.tagName==='LI');
+    alreadyClean=alreadyClean&&items.length===6;
     if(items.slice(0,6).some((e,i)=>e.hasAttribute('value')&&Number(e.getAttribute('value'))!==i+1))throw Error('Nonsequential ordered rules');
     const range=d.createRange();range.setStartAfter(items[5]);range.setEnd(panel,panel.childNodes.length);range.deleteContents();
    }else if(ordered.length===0){
@@ -88,6 +90,7 @@ try{
     const first=markers.findIndex(m=>m.number===1);
     if(first<0||markers.slice(first,first+6).length!==6||markers.slice(first,first+6).some((m,i)=>m.number!==i+1))throw Error('Could not safely identify original rules 1–6');
     const seventh=markers[first+6];
+    alreadyClean=alreadyClean&&!seventh;
     if(seventh){if(seventh.number!==7)throw Error('Unexpected rule numbering after 6');const range=d.createRange();range.setStart(seventh.n,seventh.offset);range.setEnd(panel,panel.childNodes.length);range.deleteContents();}
    }else throw Error('Multiple possible numbered rules lists');
    summary.textContent='Rules';
@@ -114,9 +117,12 @@ try{
     }
     const sel=selector(box);if(document.querySelectorAll(sel).length===1)schedule=sel;
    }
-   return {motd:d.body.innerHTML,schedule};
+   return {alreadyClean,schedule};
   },{html:before.motd,slug});
-  targetMotd=plan.motd;
+  // Toolbar-only follow-up to the verified Rules cleanup.
+  // Never reserialize or write the existing live MOTD.
+  assert.ok(plan.alreadyClean,'Existing Rules and live-event label need separate review; no writes');
+  targetMotd=before.motd;
   const originalGradient='linear-gradient(110deg,#101014,#32223f,#101014)';
   const lighterGradient='linear-gradient(110deg,#896bb3,#a68bcb,#896bb3)';
   const markerStart='/* BEGIN JOSHI SKIN CONTRAST v2 */',markerEnd='/* END JOSHI SKIN CONTRAST v2 */';
@@ -185,10 +191,14 @@ try{
    await p.locator('.jts-bar>details>summary').click();await p.screenshot({path:dir+'/rules-preview.png'});await p.locator('.jts-bar>details>summary').click();
   }finally{await p.locator('#motd').evaluate((e,html)=>e.innerHTML=html,old);await style.evaluate(e=>e.remove())}
   if(targetCss!==before.css){await write('css',before.css,targetCss,before.motd);cssWritten=true}
-  if(targetMotd!==before.motd){const applied=await write('motd',before.motd,targetMotd,targetCss);targetMotd=applied.motd;motdWritten=true}
+  assert.equal((await state()).motd,before.motd,'MOTD changed concurrently');
   await p.waitForFunction(()=>document.querySelector('.jts-logo')?.complete&&document.querySelector('.jts-logo')?.naturalWidth>0,null,{timeout:15000});
   const after=await state();assert.ok(auth(after)&&valid(after)&&await verify(),'Persisted skin verification failed');
-  assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.equal(after.logo.src,before.logo.src);
+  assert.equal(after.motd,before.motd);assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.equal(after.logo.src,before.logo.src);
+  const buttonProof=await p.evaluate(()=>{const e=document.querySelector('.jts-bar>details>summary');const s=getComputedStyle(e);return {background:s.backgroundColor,color:s.color}});
+  assert.equal(buttonProof.background,'rgb(81, 66, 96)','Rules button background mismatch');
+  assert.equal(buttonProof.color,'rgb(255, 245, 255)','Rules button text mismatch');
+  console.log('JOSHI_TOOLBAR '+JSON.stringify({slug,...buttonProof,motdPreserved:true}));
   await p.screenshot({path:dir+'/after.png'});
   console.log('JOSHI_SKIN '+JSON.stringify({slug,status:'verified',schedule:!!schedule,rules:'1–6 only',usefulLinksRemoved:true,liveEventsLabel:true,jsPreserved:true,queueWrites:false}));
  }

@@ -10,6 +10,21 @@ assert.ok(registry.channels.some(c=>c.slug===slug&&c.adminVerified));
 const feeds=JSON.parse(await fs.readFile('tubes/feeds/managed.json','utf8')).managed.filter(f=>f.tube.toLowerCase()===slug.toLowerCase());
 assert.ok(feeds.length);
 const template=await fs.readFile('tubes/WrestleTube/secondary/header.css','utf8');
+// Retain all CSS tokens; compress only whitespace outside comments, strings and escapes.
+function compactWhitespace(css){
+ let out='',quote='',comment=false;
+ for(let i=0;i<css.length;){
+  const c=css[i],n=css[i+1];
+  if(comment){out+=c;i++;if(c==='*'&&n==='/'){out+=n;i++;comment=false}continue}
+  if(c==='\\'){out+=c+(n||'');i+=n?2:1;continue}
+  if(quote){out+=c;i++;if(c===quote)quote='';continue}
+  if(c==='/'&&n==='*'){out+='/*';i+=2;comment=true;continue}
+  if(c==='"'||c==="'"){quote=c;out+=c;i++;continue}
+  if(/[ \t\r\n\f]/.test(c)){let j=i+1;while(j<css.length&&/[ \t\r\n\f]/.test(css[j]))j++;out+=' ';i=j;continue}
+  out+=c;i++;
+ }
+ return out.trim();
+}
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const p=await browser.newPage({viewport:{width:1440,height:1000}});
 const state=()=>p.evaluate(()=>{
@@ -69,7 +84,18 @@ try{
  targetCss=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').trimEnd()+'\n\n'+template;
  const compactMode=['Wrestling4','wrestling5'].includes(slug);
  const importRule='@import url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@de893138778cf89aa07be032185f06837272a6fc/tubes/WrestleTube/secondary/header.css");';
- if(compactMode){const existing=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'');targetCss=existing.includes(importRule)?existing:importRule+'\n'+existing;}
+ if(compactMode){
+  const existing=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').split(importRule).join('');
+  const compact=compactWhitespace(existing);
+  const matches=await p.evaluate(({existing,compact})=>{
+   const normalize=x=>{const sheet=new CSSStyleSheet();sheet.replaceSync(x);return [...sheet.cssRules].map(r=>r.cssText)};
+   const a=normalize(existing),b=normalize(compact);return {same:JSON.stringify(a)===JSON.stringify(b),rules:a.length};
+  },{existing,compact});
+  console.log('SECONDARY_CSS_COMPACT '+JSON.stringify({slug,beforeBytes:Buffer.byteLength(existing),afterBytes:Buffer.byteLength(compact),...matches}));
+  assert.ok(matches.same&&matches.rules>0,'Existing stylesheet rules changed in compact representation; no writes');
+  targetCss=importRule+'\n'+compact;
+  assert.ok(Buffer.byteLength(targetCss)<=19500,'Cannot fit under conservative CSS size cap without structural changes; no writes');
+ }
  console.log('SECONDARY_CSS_SIZE '+JSON.stringify({slug,original:Buffer.byteLength(before.css),proposed:Buffer.byteLength(targetCss),compactMode}));
  assert.ok(Buffer.byteLength(targetCss)<30000);
  await fs.writeFile(dir+'/proposed.css',targetCss);await fs.writeFile(dir+'/proposed-motd.html',targetMotd);

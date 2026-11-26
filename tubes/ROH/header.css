@@ -1,0 +1,21 @@
+/* BEGIN ROH RINGSIDE MASTHEAD v2 */
+#motdwrap#motdwrap{padding:0!important;margin:8px 0 12px!important;background:#121318!important;border:1px solid #393941!important;border-radius:7px!important;overflow:visible!important}
+#motdwrap#motdwrap #motd{padding:0!important}
+#motdwrap .roh-masthead{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(115px,235px) auto;align-items:center;gap:clamp(8px,2vw,24px);position:relative;isolation:isolate;padding:14px 24px!important;min-height:118px;box-sizing:border-box;width:100%;background:repeating-linear-gradient(132deg,transparent 0 25px,#ffffff05 26px 27px,transparent 28px 50px),linear-gradient(110deg,#0a0a0d,#40131d 48%,#0c0c10)!important;border-bottom:3px solid #dc424c;border-radius:6px 6px 0 0;text-align:left!important}
+#motdwrap .roh-overline{font:800 10px/1.3 system-ui,Arial,sans-serif!important;letter-spacing:.21em;color:#efc3c7!important}
+#motdwrap .roh-brand{margin:3px 0 4px;font:950 clamp(27px,4.4vw,61px)/1 Impact,"Arial Black",system-ui,sans-serif!important;letter-spacing:-.035em;color:#fff!important;text-shadow:3px 3px #000;white-space:normal}
+#motdwrap .roh-tagline{font:750 10px/1.4 system-ui,Arial,sans-serif!important;letter-spacing:.12em;color:#c5bfc3!important}
+#motdwrap#motdwrap#motdwrap#motdwrap .roh-masthead img.roh-original-logo{display:block!important;position:relative!important;justify-self:center!important;width:100%!important;height:96px!important;max-width:225px!important;max-height:96px!important;min-height:0!important;object-fit:contain!important;margin:0!important;mix-blend-mode:screen;filter:drop-shadow(0 3px 7px #000)}
+#motdwrap .roh-tv-mark{padding:9px 12px;text-align:center;color:#f7e6e8!important;border:1px solid #c83d49;border-radius:4px;background:#09090bd9;font:900 12px/1.5 system-ui,sans-serif!important;letter-spacing:.08em;white-space:nowrap}
+#motdwrap .roh-tv-mark small{display:block;margin-top:3px;font-size:10px;color:#bfb4b9}
+#motdwrap .roh-rules{display:block!important;margin:0!important;padding:0!important;background:#111217;color:#eee;text-align:left!important}
+#motdwrap .roh-rules summary{display:list-item!important;padding:6px 15px;cursor:pointer;color:#e9c7cb!important;font:750 12px/1.4 system-ui,Arial,sans-serif!important;border-top:1px solid #34343c}
+#motdwrap .roh-rules summary:hover{background:#2a2026}
+#motdwrap .roh-rules-content{padding:9px 18px 12px;background:#191b21}
+#motdwrap .roh-rules-content ol{margin:5px 0 0;padding-left:21px}
+#motdwrap .roh-rules-content li{padding:2px 0}
+#motdwrap .roh-rules:not([open]) .roh-rules-content{display:none!important}
+nav.navbar,body .navbar{opacity:1!important;background:linear-gradient(90deg,#111217,#252329,#111217)!important}
+nav.navbar .nav>li>a,nav.navbar .navbar-text,nav.navbar .navbar-brand{color:#e6e6eb!important;opacity:1!important}
+@media(max-width:760px){#motdwrap .roh-masthead{grid-template-columns:minmax(0,1fr) minmax(85px,140px);padding:12px!important;min-height:98px;gap:8px}#motdwrap .roh-tv-mark{display:none!important}#motdwrap .roh-brand{font-size:clamp(22px,5vw,34px)!important}#motdwrap .roh-overline,#motdwrap .roh-tagline{font-size:9px!important;letter-spacing:.06em}#motdwrap#motdwrap#motdwrap#motdwrap .roh-masthead img.roh-original-logo{height:72px!important;max-height:72px!important}}
+/* END ROH RINGSIDE MASTHEAD v2 */

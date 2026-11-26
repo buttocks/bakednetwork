@@ -199,7 +199,11 @@ async function run(request){
   const password=process.env.BAKED_LIVE_PASSWORD;
   if(!password)throw Error('Missing GitHub Actions secret BAKED_LIVE_PASSWORD; see tubes/bridge/README.md');
   const {chromium}=await import('playwright');
-  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+  const scaryVerify=request.action==='verify_scarytube_playback';
+  // GitHub's Ubuntu hosted image includes Google Chrome, which supports AVC/AAC.
+  // Keep all other bridge operations on their existing browser.
+  const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(scaryVerify?{channel:'chrome'}:{})});
+  if(scaryVerify)console.log('ScaryTube verification using Google Chrome '+browser.version());
   let page;
   try{
     const context=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});

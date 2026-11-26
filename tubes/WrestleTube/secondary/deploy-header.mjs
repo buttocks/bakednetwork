@@ -31,6 +31,7 @@ async function write(field,expected,next,other){
   window.socket.emit(field==='css'?'setChannelCSS':'setMotd',{[field]:next});
  },{slug,field,expected,next,other,js:before.js,externalCss:before.externalCss,externalJs:before.externalJs});
  for(let i=0;i<100;i++){const x=await state();if(x[field]===next)return x;if(field==='motd'&&next===targetMotd&&x.motd!==expected&&x.motd.includes('wts-header')&&x.motd.includes('wts-bar'))return x;await p.waitForTimeout(250)}
+ const observed=await state();console.log('SECONDARY_SAVE_DIAGNOSTIC '+JSON.stringify({slug,field,expectedBytes:Buffer.byteLength(expected),targetBytes:Buffer.byteLength(next),observedBytes:Buffer.byteLength(observed[field]||''),unchanged:observed[field]===expected}));
  throw Error('Persistence not confirmed: '+field);
 }
 try{
@@ -66,17 +67,27 @@ try{
  else{
  targetMotd=source.html;
  targetCss=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'').trimEnd()+'\n\n'+template;
+ const compactMode=['Wrestling4','wrestling5'].includes(slug);
+ const importRule='@import url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@de893138778cf89aa07be032185f06837272a6fc/tubes/WrestleTube/secondary/header.css");';
+ if(compactMode){const existing=before.css.replace(/\/\* BEGIN SECONDARY WRESTLETUBE HEADER v1 \*\/[\s\S]*?\/\* END SECONDARY WRESTLETUBE HEADER v1 \*\//g,'');targetCss=existing.includes(importRule)?existing:importRule+'\n'+existing;}
+ console.log('SECONDARY_CSS_SIZE '+JSON.stringify({slug,original:Buffer.byteLength(before.css),proposed:Buffer.byteLength(targetCss),compactMode}));
  assert.ok(Buffer.byteLength(targetCss)<30000);
  await fs.writeFile(dir+'/proposed.css',targetCss);await fs.writeFile(dir+'/proposed-motd.html',targetMotd);
- const style=await p.addStyleTag({content:template});const old=await p.locator('#motd').evaluate((e,html)=>{const x=e.innerHTML;e.innerHTML=html;return x},targetMotd);
+ const style=await p.addStyleTag({content:compactMode?importRule:template});const old=await p.locator('#motd').evaluate((e,html)=>{const x=e.innerHTML;e.innerHTML=html;return x},targetMotd);
  try{
   await p.waitForFunction(()=>document.querySelector('.wts-logo')?.complete&&document.querySelector('.wts-logo')?.naturalWidth>0,null,{timeout:15000});
+  await p.waitForFunction(()=>getComputedStyle(document.querySelector('.wts-header')).display==='flex'&&document.querySelector('.wts-logo').getBoundingClientRect().height<=72,null,{timeout:15000});
   const v=await state();assert.ok(valid(v),'Desktop preview failed');
   for(const e of await p.locator('.wts-bar>details').all()){await e.locator('summary').click();assert.ok(await e.evaluate(x=>x.open));await e.locator('summary').click()}
   await p.screenshot({path:dir+'/preview.png'});
   await p.setViewportSize({width:390,height:844});await p.waitForTimeout(300);assert.ok(await p.locator('.wts-header').evaluate(e=>e.getBoundingClientRect().width<=innerWidth));await p.screenshot({path:dir+'/mobile.png'});
  }finally{await p.setViewportSize({width:1440,height:1000});await p.locator('#motd').evaluate((e,html)=>e.innerHTML=html,old);await style.evaluate(e=>e.remove())}
  if(targetCss!==before.css){await write('css',before.css,targetCss,before.motd);cssWritten=true}
+ if(compactMode){
+ const original=await p.locator('#motd').evaluate((e,html)=>{const old=e.innerHTML;e.innerHTML=html;return old},targetMotd);
+ try{await p.waitForFunction(()=>document.querySelector('.wts-logo')?.naturalWidth>0&&getComputedStyle(document.querySelector('.wts-header')).display==='flex'&&document.querySelector('.wts-logo').getBoundingClientRect().height<=72,null,{timeout:15000});assert.ok(valid(await state()),'Persisted CSS preview failed');}
+ finally{await p.locator('#motd').evaluate((e,html)=>e.innerHTML=html,original)}
+ }
  const applied=await write('motd',before.motd,targetMotd,targetCss);targetMotd=applied.motd;motdWritten=true;
  await p.waitForFunction(()=>document.querySelector('.wts-logo')?.complete&&document.querySelector('.wts-logo')?.naturalWidth>0,null,{timeout:15000});
  const after=await state();assert.ok(auth(after)&&valid(after));assert.equal(after.js,before.js);assert.equal(after.externalCss,before.externalCss);assert.equal(after.externalJs,before.externalJs);assert.deepEqual(after.entries,before.entries);

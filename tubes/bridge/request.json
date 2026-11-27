@@ -1,50 +1,8 @@
 [
   {
     "schema": 1,
-    "request_id": "nativeclean_recheck_01",
-    "channel": "joshi",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_02",
-    "channel": "Noah",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_03",
-    "channel": "wrestling2",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_04",
-    "channel": "shoot",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_05",
-    "channel": "boxing",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_06",
-    "channel": "DGalt",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_07",
-    "channel": "wrestling5",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_recheck_08",
-    "channel": "sumo",
-    "action": "retire_legacy_native"
+    "request_id": "native_inventory_roh_20261127",
+    "channel": "roh",
+    "action": "inventory_legacy_native"
   }
 ]

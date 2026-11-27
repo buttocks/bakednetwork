@@ -1,4 +1,4 @@
-name: Audit remaining wrestling tube headers
+name: Review registered network tubes one by one
 on:
   workflow_dispatch:
   push:
@@ -12,7 +12,7 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 18
+    timeout-minutes: 35
     strategy:
       fail-fast: false
       max-parallel: 2

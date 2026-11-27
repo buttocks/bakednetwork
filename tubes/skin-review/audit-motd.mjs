@@ -1,8 +1,7 @@
 import fs from 'node:fs/promises';
 import {chromium} from 'playwright';
 const registry=JSON.parse(await fs.readFile('tubes/channels.json','utf8'));
-const allow=new Set(['luchatube','njpw','retrowrestling','wwf-wwe','wcw','joshi','puro','wrestling2','indies','shoot','wrestling3','wrestling4','dgalt','dg','wrestling5','njpwalt','nwa-tna','joshi2','ddt']);
-const scope=registry.channels.filter(c=>c.adminVerified&&allow.has(c.slug.toLowerCase()));
+const scope=registry.channels.filter(c=>c.adminVerified&&c.slug.toLowerCase()!=='rdh');
 const batch=Number(process.env.BATCH);
 if(!Number.isInteger(batch)||batch<0||batch>=4)throw Error('Invalid batch');
 const channels=scope.filter((c,i)=>i%4===batch);
@@ -27,6 +26,11 @@ try{
     const q=[...document.querySelectorAll('#queue .queue_entry')].map(e=>{const jq=window.jQuery(e),a=jq.data('media')||{},t=document.createElement('textarea');t.innerHTML=String(a.meta?.embed?.src||'');return {src:t.value}});
     if(!m||!root)throw Error('MOTD DOM unavailable');
     return {headerHeight:Math.round(r?.height||0),motdBytes:typeof window.CHANNEL.motd==='string'?window.CHANNEL.motd.length:null,
+      motdTextPresent:!!m.textContent.trim(),motdImageCount:m.querySelectorAll('img').length,
+      registrationLink:!!m.querySelector('a[href*="/register"]'),
+      externalCss:window.CHANNEL.opts?.externalcss||'',externalJs:window.CHANNEL.opts?.externaljs||'',
+      inlineCssBytes:String(window.CHANNEL.css||'').length,inlineJsBytes:String(window.CHANNEL.js||'').length,
+      layoutOverflow:document.documentElement.scrollWidth>innerWidth+4,
       buttons:[...m.querySelectorAll('button,a[data-toggle="modal"],summary')].filter(vis).map(e=>({label:clean(e.textContent),kind:e.tagName,modal:e.matches('[data-toggle="modal"]')})),
       modals:[...m.querySelectorAll('.modal')].map(e=>clean(e.querySelector('.modal-title')?.textContent)),
       images:[...m.querySelectorAll('img')].filter(e=>vis(e)&&!e.closest('.modal')).map(e=>({loaded:e.complete&&e.naturalWidth>0,width:Math.round(e.getBoundingClientRect().width),height:Math.round(e.getBoundingClientRect().height),alt:clean(e.alt)})),

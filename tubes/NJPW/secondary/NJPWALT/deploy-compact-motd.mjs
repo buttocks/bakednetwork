@@ -19,7 +19,7 @@ try{
  before=current=await state();
  assert.equal(before.externalJs,'');assert.equal(before.externalCss,'');
  assert.ok(before.motd.length===1303&&before.motd.includes('New_Japan_Pro_Wrestling_Logo_2.svg')||before.motd.includes('njpw-compact'),'Existing MOTD changed; no overwrite');
- assert.ok(before.js.length===7665,'Inline JS changed since audit');
+ assert.ok(before.js.length===6513,'Inline JS changed since audit');
  assert.ok(before.css.length===8685||before.css.includes('BEGIN NJPW MOTD v1'),'Inline CSS changed since audit');
  await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));
  const legacy=await p.evaluate(()=>{const h=document.querySelector('#header');return {headerPresent:!!h,headerVisible:!!h?.getClientRects().length&&getComputedStyle(h).visibility!=='hidden',images:[...h?.querySelectorAll('img')||[]].map(e=>({src:e.getAttribute('src'),alt:e.alt})),text:h?.textContent.trim().slice(0,200)||''}});

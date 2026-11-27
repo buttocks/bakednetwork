@@ -79,7 +79,7 @@ function validate(raw){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
-  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
   // ScaryTube is authorized only for its exact public viewer endpoint.
   if(raw.channel==='ScaryTube'&&raw.action==='add_iframe'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.stage==='established'&&c.adminVerified&&c.backupVerified)||
@@ -90,8 +90,8 @@ function validate(raw){
       throw Error('Invalid ScaryTube public embed request');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:raw.src};
   }
-  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist'].includes(raw.action))throw Error('New channel is read-only until verified');
-  if(ONBOARDING.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media'].includes(raw.action))throw Error('New channel onboarding is read-only');
+  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native'].includes(raw.action))throw Error('New channel is read-only until verified');
+  if(ONBOARDING.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media','inventory_legacy_native'].includes(raw.action))throw Error('New channel onboarding is read-only');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
   if(['audit_playlist_media','clean_dead_playlist'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');
@@ -112,7 +112,7 @@ function validate(raw){
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,offset,limit};
   }
   if(raw.offset!==undefined||raw.limit!==undefined)throw Error('Audit range on non-emote operation');
-  if(['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes'].includes(raw.action)){
+  if(['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','inventory_legacy_native'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Audit requests cannot contain mutations');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
   }
@@ -412,6 +412,28 @@ async function run(request){
       const {migrateLegacyOptions}=await import('./legacy-options.mjs');
       return await migrateLegacyOptions({page,request,initial});
     }
+    if(request.action==='inventory_legacy_native'){
+      if(!Number.isFinite(initial.rank)||initial.rank<3)throw Error('Verified channel admin required for native legacy inventory');
+      const live=await page.evaluate(()=>{
+        const c=window.CHANNEL||{},js=typeof c.js==='string'?c.js:'';
+        const names=['chatline','chatext','chatcolor','colormap','unimoji','dectalk','layout'];
+        const moduleHits=names.filter(name=>new RegExp('\\b'+name+'\\s*:\\s*\\{').test(js));
+        const legacyOptions={};
+        for(const name of names)if(new RegExp('\\b'+name+'\\s*:').test(js))legacyOptions[name]=true;
+        const retiredQueue=['collapse','hidePlaylist','inlineBlame','recentMedia','thumbnails','timeEstimates'];
+        const queueOptions=Object.fromEntries(retiredQueue.map(key=>[key,new RegExp('\\b'+key+'\\s*:\\s*true\\b').test(js)]).filter(([,v])=>v));
+        return {channel:c.name,js,jsBytes:js.length,externaljs:c.opts?.externaljs||'',
+          externalcss:c.opts?.externalcss||'',scriptConsentIgnored:!!window.USEROPTS?.ignore_channeljs,
+          moduleHits,legacyOptions,queueOptions};
+      });
+      const dir='tubes/bridge/backup/'+request.channel+'/native-legacy-inventory';
+      await fs.mkdir(dir,{recursive:true});
+      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(live,null,2)+'\n','utf8');
+      const {js,...summary}=live;
+      console.log('Native legacy inventory '+request.channel+' '+JSON.stringify(summary));
+      return {request_id:request.request_id,channel:request.channel,action:request.action,
+        status:'inventoried',rank:initial.rank,admin_verified:true,...summary};
+    }
     if(request.action==='audit_legacy_paths'){
       const refs=await page.evaluate(()=>{
         const c=window.CHANNEL||{};
@@ -613,7 +635,7 @@ else{
   try{
     const raw=JSON.parse(await fs.readFile(REQUEST_PATH,'utf8'));
     if(Array.isArray(raw)){
-      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync')?30:10))throw Error('Invalid audit batch size');
+      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync'||r?.action==='inventory_legacy_native')?30:10))throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
       if(requests.some(r=>r.action==='sync_wrestletube_chat')){
         const targets=requests.slice(1);

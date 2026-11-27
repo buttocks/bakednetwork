@@ -1,6 +1,176 @@
-{
-  "schema": 1,
-  "request_id": "scarytube_native_loader_20261126",
-  "channel": "ScaryTube",
-  "action": "deploy_scarytube_chat_fix"
-}
+[
+  {
+    "schema": 1,
+    "request_id": "native_inv_01_20261127",
+    "channel": "luchatube",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_02_20261127",
+    "channel": "NJPW",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_03_20261127",
+    "channel": "Wrestling",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_04_20261127",
+    "channel": "RetroWrestling",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_05_20261127",
+    "channel": "WWF-WWE",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_06_20261127",
+    "channel": "RDH",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_07_20261127",
+    "channel": "ScaryTube",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_08_20261127",
+    "channel": "WID",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_09_20261127",
+    "channel": "WCW",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_10_20261127",
+    "channel": "joshi",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_11_20261127",
+    "channel": "puro",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_12_20261127",
+    "channel": "ajpw",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_13_20261127",
+    "channel": "Noah",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_14_20261127",
+    "channel": "wrestling2",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_15_20261127",
+    "channel": "indies",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_16_20261127",
+    "channel": "shoot",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_17_20261127",
+    "channel": "wrestling3",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_18_20261127",
+    "channel": "Wrestling4",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_19_20261127",
+    "channel": "boxing",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_20_20261127",
+    "channel": "DGalt",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_21_20261127",
+    "channel": "DG",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_22_20261127",
+    "channel": "wrestling5",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_23_20261127",
+    "channel": "NJPWALT",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_24_20261127",
+    "channel": "rizin",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_25_20261127",
+    "channel": "sumo",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_26_20261127",
+    "channel": "NWA-TNA",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_27_20261127",
+    "channel": "joshi2",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_28_20261127",
+    "channel": "MTV",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inv_29_20261127",
+    "channel": "ddt",
+    "action": "inventory_legacy_native"
+  }
+]

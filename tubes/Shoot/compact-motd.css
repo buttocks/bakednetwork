@@ -20,4 +20,23 @@
 #motd .shoot-house-rules[open]{padding-top:27px}
 }
 body.cinemachat #motdwrap:has(.shoot-motd){display:none!important}
+/* Fight-card visual treatment; no geometry or player overrides outside the native header. */
+#motd .shoot-motd{background:linear-gradient(108deg,#201a17 0%,#302018 35%,#141719 72%);color:#f5e6cb;border:1px solid #80573b;border-top:3px solid #df8544;box-shadow:inset 0 -1px #342b25,0 2px 7px #0005;overflow:hidden}
+#motd .shoot-motd:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(125deg,transparent 0 32px,#d5a67c0c 32px 33px,transparent 33px 64px);pointer-events:none}
+#motd .shoot-title b{font:950 italic clamp(22px,3vw,34px)/1.02 Impact,"Arial Narrow",system-ui,sans-serif;letter-spacing:.065em;text-shadow:2px 2px #110e0b}
+#motd .shoot-title b span{color:#ef9c58}
+#motd .shoot-title small{color:#d9b99b;font-size:10px;letter-spacing:.08em}
+#motd .shoot-card{grid-column:3;grid-row:1;align-self:start;justify-self:end;text-align:right;min-width:0;padding:4px 0;color:#e9c19c;z-index:1}
+#motd .shoot-card b{display:block;font:850 13px/1.25 system-ui,sans-serif;letter-spacing:.17em}
+#motd .shoot-card small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#c5a68c;letter-spacing:.04em}
+#motd .shoot-house-rules summary{background:#39251a;color:#ffe6c6;border-color:#b57849;box-shadow:inset 0 1px #ffffff12}
+#motd .shoot-house-rules summary:hover,#motd .shoot-house-rules summary:focus-visible{background:#694027;border-color:#eeab70;color:#fff4e3}
+#motd .shoot-house-rules ol{background:#211a16;color:#f5e6cb;border-color:#9a663f}
+#motd .shoot-house-rules li::marker{color:#e79b60}
+@media(max-width:850px){#motd .shoot-card{display:none}#motd .shoot-title b{font-size:26px}}
+/* Coordinated interface accents, scoped to Shoot's native MOTD. */
+body:has(.shoot-motd) #chatheader,body:has(.shoot-motd) #playlistheader,body:has(.shoot-motd) #currenttitle{background-color:#32251d!important;border-color:#795237!important;color:#f3d7b8!important}
+body:has(.shoot-motd) #videocontrols,body:has(.shoot-motd) #playlistcontrols{border-color:#795237!important}
+body:has(.shoot-motd) #queue .queue_entry.queue_active{background-color:#4b3021!important;box-shadow:inset 3px 0 #e8904d;color:#ffe8cf!important}
+body:has(.shoot-motd) #queue .queue_entry.queue_active a,body:has(.shoot-motd) #queue .queue_entry.queue_active .qe_title{color:#ffe8cf!important}
 /* END SHOOT MOTD v1 */

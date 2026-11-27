@@ -131,6 +131,8 @@ export function cleanLegacyNativeFeatures(source){
     }
     const playlist=rewriteObject(optionSource,'playlist',parts=>setBoolean(parts,RETIRED_QUEUE_OPTIONS,'false'));
     if(playlist.changed){optionSource=playlist.source;changedOptions.push('playlist.native-overlap=false');}
+    const userlist=rewriteObject(optionSource,'userlist',parts=>setBoolean(parts,new Set(['autoHider']),'false'));
+    if(userlist.changed){optionSource=userlist.source;changedOptions.push('userlist.autoHider=false');}
     const vr=objectRange(optionSource,'various');
     if(vr&&objectSegments(optionSource,vr).some(part=>propName(part)==='emoteToggle')){
       optionSource=rewriteObject(optionSource,'various',parts=>removeNamed(parts,new Set(['emoteToggle']))).source;
@@ -157,7 +159,7 @@ export function cleanLegacyNativeFeatures(source){
     removedInputHooks,removedScrollControls:scrollMatches.length,removedLayoutOverrides:layoutCount,removedCredits};
 }
 export function legacyNativeSelfTest(){
-  const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';
+  const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},userlist:{autoHider:true,renderer:true},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';
   const result=cleanLegacyNativeFeatures(input);
   if(!result.changed||result.retiredModules.join(',')!=='chatline,chatext,dectalk,layout'||
     !result.source.includes('privmsg:{active:1}')||!result.source.includes('userlist:{active:1}')||

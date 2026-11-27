@@ -17,7 +17,7 @@ try{
 
  const state=()=>p.evaluate(()=>{const c=CHANNEL,o=c.opts||{};return {channel:c.name,css:c.css||'',motd:c.motd||'',js:c.js||'',externalCss:o.externalcss||'',externalJs:o.externaljs||''}});
  before=current=await state();
- assert.equal(before.externalJs,'/js/channel-loaders/c9df567f5c8ecf858088db40a97e099f6b4e0a8da33059865c2560f3f7f1a523.js');assert.equal(before.externalCss,'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@449b0ca386f28e74287684899a7ddc54d8d23a2a/wid/v3/wid-v3.css?utm_source=chatgpt.com');
+ assert.ok(['/js/channel-loaders/c9df567f5c8ecf858088db40a97e099f6b4e0a8da33059865c2560f3f7f1a523.js','/js/channel-loaders/4bfc0df88c58dbc6c9a2d01ff203c4507b658b569aa820779c117c82de3bb231.js'].includes(before.externalJs),'Unrecognized external loader; no overwrite');assert.equal(before.externalCss,'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@449b0ca386f28e74287684899a7ddc54d8d23a2a/wid/v3/wid-v3.css?utm_source=chatgpt.com');
  assert.ok(before.motd.length===2858&&before.motd.includes('wid-v3-motd')||before.motd.includes('wid-compact'),'Existing MOTD changed; no overwrite');
  assert.ok(before.js.length===0,'Inline JS changed since audit');
  assert.ok(before.css.length===286||before.css.includes('BEGIN WID MOTD v1'),'Inline CSS changed since audit');

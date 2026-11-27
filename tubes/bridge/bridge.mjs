@@ -524,7 +524,7 @@ async function run(request){
       const fresh=await capture();
       if(fresh.js!==before.js||fresh.css!==before.css||fresh.externaljs!==before.externaljs||fresh.externalcss!==before.externalcss||fresh.motd!==before.motd)
         throw Error('Channel settings changed during review; no cleanup applied');
-      await page.evaluate(({js,externaljs})=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');window.socket.emit('setOptions',{js,externaljs});},{js:cleaned.source,externaljs:nextExternal});
+      await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:cleaned.source,externaljs:nextExternal,setJs:cleaned.changed,setExternal:!!externalChange});
       let after=null;
       for(let i=0;i<80;i++){after=await capture();if(after.js===cleaned.source&&after.externaljs===nextExternal)break;await page.waitForTimeout(250);}
       if(after?.js!==cleaned.source||after.externaljs!==nextExternal)throw Error('Channel JS update was not confirmed; original retained');
@@ -536,7 +536,7 @@ async function run(request){
       if(!verified){
         const unchangedAsideFromTarget=after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
         if(unchangedAsideFromTarget&&after.js===cleaned.source&&after.externaljs===nextExternal){
-          await page.evaluate(({js,externaljs})=>window.socket.emit('setOptions',{js,externaljs}),{js:before.js,externaljs:before.externaljs});
+          await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:before.js,externaljs:before.externaljs,setJs:cleaned.changed,setExternal:!!externalChange});
           for(let i=0;i<40;i++){const restored=await capture();if(restored.js===before.js&&restored.externaljs===before.externaljs)break;await page.waitForTimeout(250);}
         }
         throw Error('Post-reload verification failed; attempted JS and external loader rollback only when target values were still live');

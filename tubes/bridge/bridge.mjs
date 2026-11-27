@@ -56,7 +56,7 @@ function validate(raw){
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
   }
   if(raw.action==='inventory_legacy_native'){
-    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
        Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))
       throw Error('Invalid native legacy inventory request');

@@ -479,7 +479,7 @@ async function run(request){
         }
         throw Error('Post-reload verification failed; attempted JS-only rollback when safe');
       }
-      const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,script_consent_ignored:!!(await page.evaluate(()=>window.USEROPTS?.ignore_channeljs))};
+      const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,removed_input_hooks:cleaned.removedInputHooks,removed_scroll_controls:cleaned.removedScrollControls,removed_layout_overrides:cleaned.removedLayoutOverrides,script_consent_ignored:!!(await page.evaluate(()=>window.USEROPTS?.ignore_channeljs))};
       console.log('Native legacy cleanup '+request.channel+' '+JSON.stringify(result));
       return result;
     }

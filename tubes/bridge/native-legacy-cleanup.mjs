@@ -169,7 +169,7 @@ export function legacyNativeSelfTest(){
     handlers.removedInputHooks.join(',')!=='emote-click-insert,username-click-insert'||
     handlers.source.includes('scroll-btn')||handlers.source.includes('.val('))
     throw Error('Native input and duplicate-scroll cleanup self-test failed');
-  const attributed='/*!\\n **|  All code written by Xaekai except where otherwise noted.\\n **|   Xaekai\'s Sequenced Module Loader\\n */\\nconsole.info("[XaeModule]");\\n';
+  const attributed=['/*!',' **|  All code written by Xaekai except where otherwise noted.',' */','/*!',' **|   Xaekai\'s Sequenced Module Loader',' */','console.info("[XaeModule]");'].join("\n");
   const cleanedAttribution=cleanLegacyNativeFeatures(attributed+input);
   if(cleanedAttribution.source.includes('Xaekai')||cleanedAttribution.source.includes('[XaeModule]')||
     !cleanedAttribution.source.includes('[Baked modules]'))

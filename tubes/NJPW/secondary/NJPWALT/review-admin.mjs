@@ -10,7 +10,7 @@ try{
  await p.waitForTimeout(8000);
  const data=await p.evaluate(()=>{const c=CHANNEL,o=c.opts||{};return {channel:c.name,css:c.css||'',js:c.js||'',motd:c.motd||'',externalJs:o.externaljs||'',externalCss:o.externalcss||''}});
  assert.equal(data.channel.toLowerCase(),'njpwalt');
- const source={adminVerified:true,css:data.css.length,js:data.js.length,motd:data.motd.length,externalJs:data.externalJs,externalCss:data.externalCss,
+ const source={reviewRevision:2,adminVerified:true,css:data.css.length,js:data.js.length,motd:data.motd.length,externalJs:data.externalJs,externalCss:data.externalCss,
   jsHeaderLines:data.js.split('\n').flatMap((line,i)=>{if(!/header|banner|motd|logo|rules|welcome|innerHTML|insertAdjacent|prepend|afterend|Xaekai|module_settings/i.test(line))return [];return [{line:i+1,excerpt:line.slice(0,1300)}]}).slice(0,60),
   cssHeaderLines:data.css.split('\n').flatMap((line,i)=>/header|banner|motd|logo|rules|navbar|mainpage/i.test(line)?[{line:i+1,excerpt:line.slice(0,500)}]:[]).slice(0,60)};
  const results=[];

@@ -32,4 +32,10 @@ body:has(.boxing-motd) #queue .queue_entry.queue_active{background:linear-gradie
 body:has(.boxing-motd) #queue .qe_title{color:#f2e3c9!important}
 body:has(.boxing-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default{background:#392c24!important;border-color:#9c7a49!important;color:#f1e1c2!important}
 body:has(.boxing-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default:hover{background:#5c3b2a!important;border-color:#d7b564!important}
+/* Swap the legacy navbar artwork with the gold wordmark, preserving the anchor. */
+body:has(.boxing-motd) .navbar .navbar-brand{background:none!important;background-image:none!important;width:auto!important;min-width:132px!important;height:50px!important;padding:0 14px!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important}
+body:has(.boxing-motd) .navbar .navbar-brand>*{display:none!important}
+body:has(.boxing-motd) .navbar .navbar-brand:before{content:"BOXING"!important;font:950 italic 26px/1 Impact,"Arial Black",system-ui,sans-serif;letter-spacing:.07em;color:#f1cd79;text-shadow:2px 2px #782b32}
+#motd .boxing-handwritten{display:block;width:auto!important;height:36px!important;max-width:100%!important;object-fit:contain;margin:0!important}
+@media(max-width:850px){#motd .boxing-handwritten{margin:0 auto!important}}
 /* END BOXING MOTD v1 */

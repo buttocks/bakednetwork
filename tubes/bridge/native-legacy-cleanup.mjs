@@ -75,6 +75,14 @@ function setBoolean(parts,names,value){
     return part.replace(/(:\s*)(?:true|false|!0|!1)(?=\s*(?:,|$))/,'$1'+value);
   });
 }
+function setNestedBooleans(parts,parentName,names,value){
+  const re=new RegExp('\\b('+[...names].join('|')+')\\s*:\\s*(?:true|false|!0|!1)\\b?','g');
+  return parts.map(part=>propName(part)===parentName?part.replace(re,(_,key)=>key+':'+value):part);
+}
+function disableAutoHider(parts){
+  const re=/\bautoHider\s*:\s*(?:!\([^,}]*\)|true|false|!0|!1)/;
+  return parts.map(part=>propName(part)==='userlist'?part.replace(re,'autoHider:false'):part);
+}
 function removeBoundCall(source,startPattern){
   const match=startPattern.exec(source);
   if(!match)return {source,removed:false};
@@ -129,9 +137,9 @@ export function cleanLegacyNativeFeatures(source){
       optionSource=rewriteObject(optionSource,'options',parts=>removeNamed(parts,new Set(['chatext']))).source;
       changedOptions.push('chatext');
     }
-    const playlist=rewriteObject(optionSource,'playlist',parts=>setBoolean(parts,RETIRED_QUEUE_OPTIONS,'false'));
+    const playlist=rewriteObject(optionSource,'options',parts=>setNestedBooleans(parts,'playlist',RETIRED_QUEUE_OPTIONS,'false'));
     if(playlist.changed){optionSource=playlist.source;changedOptions.push('playlist.native-overlap=false');}
-    const userlist=rewriteObject(optionSource,'userlist',parts=>setBoolean(parts,new Set(['autoHider']),'false'));
+    const userlist=rewriteObject(optionSource,'options',parts=>disableAutoHider(parts));
     if(userlist.changed){optionSource=userlist.source;changedOptions.push('userlist.autoHider=false');}
     const vr=objectRange(optionSource,'various');
     if(vr&&objectSegments(optionSource,vr).some(part=>propName(part)==='emoteToggle')){

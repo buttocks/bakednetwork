@@ -40,7 +40,7 @@ thumbnails:false,
 timeEstimates:false,
 volumeControl:false},
 
-userlist:{autoHider:true},
+userlist:{autoHider:false},
 various:{notepad:true}},
 modules:
 {settings:{active:1,rank:-1,url:"https://resources.pink.horse/js/module_settings.min.js",done:true},audio:

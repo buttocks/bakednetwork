@@ -45,6 +45,7 @@ jobs:
           node --check tubes/bridge/emote-cleanup.mjs
           node --check tubes/bridge/playlist-audit.mjs
           node --check tubes/bridge/legacy-options.mjs
+          node --check tubes/bridge/native-legacy-cleanup.mjs
           node --input-type=module -e "import {isImgurRemovedPlaceholder as f} from './tubes/bridge/emote-cleanup.mjs'; if (!f('https://i.imgur.com/removed.png') || !f('https://i.imgur.com/removed.png?token=1') || f('https://i.imgur.com/valid.png') || f('https://other.example/removed.png')) process.exit(1);"
           node tubes/bridge/bridge.mjs --self-test
           test -f tubes/bridge/request.json || { echo 'No bridge request: contact maintainer to create it.'; exit 1; }

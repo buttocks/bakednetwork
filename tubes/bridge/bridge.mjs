@@ -487,7 +487,7 @@ async function run(request){
     }
     if(request.action==='retire_legacy_native'){
       if(!Number.isFinite(initial.rank)||initial.rank<3)throw Error('Verified channel admin required for native legacy cleanup');
-      const capture=()=>page.evaluate(()=>{const c=window.CHANNEL||{};return {channel:c.name,js:typeof c.js==='string'?c.js:'',css:c.css,externaljs:c.opts?.externaljs||'',externalcss:c.opts?.externalcss||'',motd:c.motd};});
+      const capture=()=>page.evaluate(()=>{const c=window.CHANNEL||{};return {channel:c.name,js:typeof c.js==='string'?c.js:'',css:c.css,externaljs:c.opts?.externaljs||'',externalcss:c.opts?.externalcss||'',motd:JSON.stringify(c.motd??null)});
       const before=await capture();
       if(String(before.channel).toLowerCase()!==request.channel.toLowerCase())throw Error('Channel identity changed before cleanup');
       const cleaned=cleanLegacyNativeFeatures(before.js);

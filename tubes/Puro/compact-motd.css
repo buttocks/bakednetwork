@@ -1,11 +1,11 @@
 /* BEGIN PURO MOTD v2 */
-.navbar .navbar-brand{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4652d32b2b3d02eb2e921b4de0e411d28930368f/tubes/Puro/assets/puro-wordmark.svg")!important;background-repeat:no-repeat!important;background-position:center!important;background-size:136px 34px!important;min-width:150px!important;width:150px!important;font-size:0!important;color:transparent!important}
+.navbar .navbar-brand{background-image:url("https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@4652d32b2b3d02eb2e921b4de0e411d28930368f/tubes/Puro/assets/puro-wordmark.svg")!important;background-repeat:no-repeat!important;background-position:center!important;background-size:min(136px,calc(100% - 16px)) auto!important;min-width:150px!important;width:150px!important;font-size:0!important;color:transparent!important}
 #motdwrap#motdwrap:has(.puro-compact),#motdwrap#motdwrap #motd:has(.puro-compact){padding:0!important;margin:0!important;min-height:0!important;height:auto!important;background:transparent!important;border:0!important;box-shadow:none!important}
 #motdwrap#motdwrap:has(.puro-compact){margin:4px 0 12px!important}
 #motdwrap:has(.puro-compact)::before,#motd:has(.puro-compact)::before{content:none!important;display:none!important}
 #motd .puro-compact{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;position:relative;padding:6px 12px 7px;border:1px solid #7e3439;border-radius:3px;background:#1c1e22;color:#f2f0eb;text-align:center;overflow:hidden}
 #motd .puro-title{min-width:0;text-align:center}
-#motdwrap #motd .puro-main-logo:not(.modal img){display:block!important;width:auto!important;height:104px!important;max-height:104px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important}
+#motdwrap #motd .puro-main-logo:not(.modal img){display:block!important;width:auto!important;height:132px!important;max-height:132px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important}
 #motd .puro-house-rules{position:relative;min-height:28px;min-width:0;margin:0;padding:0;text-align:center;pointer-events:none}
 #motd .puro-house-rules summary{position:absolute;left:50%;right:auto;top:0;transform:translateX(-50%);display:inline-block;font:800 12px/1.4 system-ui,sans-serif;padding:4px 12px;border:1px solid #b6454a;border-radius:4px;background:#281a1d;color:#f2f0eb;white-space:nowrap;list-style:none;cursor:pointer;pointer-events:auto}
 #motd .puro-house-rules summary::-webkit-details-marker{display:none}
@@ -14,6 +14,6 @@
 #motd .puro-house-rules[open]{padding-top:27px}
 #motd .puro-house-rules ol{width:max-content;max-width:100%;box-sizing:border-box;margin:2px auto 0;padding:6px 9px 6px 27px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#15171b;color:#f2f0eb;border:1px solid #7e3439;border-radius:3px;overflow-wrap:break-word;pointer-events:auto}
 #motd .puro-house-rules:not([open]) ol{display:none!important}
-@media(max-width:760px){.navbar .navbar-brand{background-size:108px 27px!important;min-width:120px!important;width:120px!important}#motdwrap #motd .puro-main-logo:not(.modal img){height:82px!important;max-height:82px!important}}
+@media(max-width:760px){.navbar .navbar-brand{background-size:min(108px,calc(100% - 12px)) auto!important;min-width:120px!important;width:120px!important}#motdwrap #motd .puro-main-logo:not(.modal img){height:96px!important;max-height:96px!important}}
 body.cinemachat #motdwrap#motdwrap:has(.puro-compact){display:none!important}
 /* END PURO MOTD v2 */

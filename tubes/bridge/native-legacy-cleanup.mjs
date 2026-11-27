@@ -150,5 +150,14 @@ export function legacyNativeSelfTest(){
     !result.source.includes('hotkeys:{active:1}')||!result.source.includes('moveReporting:true')||
     /collapse:true|hidePlaylist:true|timeEstimates:true|chatext:\{|emoteToggle:true|chatline:\{|dectalk:\{|layout:\{/.test(result.source))
     throw Error('Native legacy source transform self-test failed');
+  const handlers=cleanLegacyNativeFeatures(input+"\n"+
+    "scrollbtn = $('<button id=\"scroll-btn\" />').on(\"click\", function() { scrollQueue(); });\n"+
+    "$('#chatwrap').on('click', '.channel-emote', function(e) { $('#chatline').val('x'); });\n"+
+    "$('#messagebuffer').on('click', '.username', function(e) { $('#chatline').val('x'); });\n"+
+    "USEROPTS.layout = \"fluid\";");
+  if(handlers.removedScrollControls!==1||handlers.removedLayoutOverrides!==1||
+    handlers.removedInputHooks.join(',')!=='emote-click-insert,username-click-insert'||
+    handlers.source.includes('scroll-btn')||handlers.source.includes('.val('))
+    throw Error('Native input and duplicate-scroll cleanup self-test failed');
   return true;
 }

@@ -752,6 +752,50 @@
           "duration": 5126,
           "source": "Internet Archive",
           "source_channel": "wwe-smackdown-smackdown-september-1-2006.mkv-vkvideodownload"
+        },
+        {
+          "title": "TNA Destination X 2010 (FULL EVENT) | Angle vs. Anderson, Styles vs. Abyss, Ultimate X",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=vU-N9w8vScA",
+          "youtube_id": "vU-N9w8vScA",
+          "duration": 10148,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Joe Hendry vs. Cedric Alexander vs. Moose (FULL MATCH) | TNA Genesis 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=8Uz7wsBW9hE",
+          "youtube_id": "8Uz7wsBW9hE",
+          "duration": 1313,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Amazing Red and Jerry Lynn vs. Triple X (FULL MATCH) | NWA-TNA PPV #41",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=DOL1Kh5zhXc",
+          "youtube_id": "DOL1Kh5zhXc",
+          "duration": 1080,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "Abyss vs. AJ Styles: TNA World Title (FULL MATCH) | TNA Destination X 2010",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=cEs1wP_Bkuw",
+          "youtube_id": "cEs1wP_Bkuw",
+          "duration": 1360,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "WWE Smackdown! Shut Your Mouth - King of The Ring Longplay",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/wwe-smackdown-shut-your-mouth-king-of-the-ring-longplay/WWE%20Smackdown%21%20Shut%20Your%20Mouth%20-%20King%20of%20The%20Ring%20Longplay.mp4",
+          "duration": 3323,
+          "source": "Internet Archive",
+          "source_channel": "WWE Smackdown! Shut Your Mouth King Of The Ring Longplay"
         }
       ]
     }

@@ -1060,6 +1060,24 @@
           "duration": 503,
           "source": "YouTube",
           "source_channel": "All Elite Wrestling"
+        },
+        {
+          "title": "TNA Genesis 2005 (FULL EVENT) | Christian Cage Debut, Elimination X, Abyss vs. Sabu",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=M-g8osUYjAw",
+          "youtube_id": "M-g8osUYjAw",
+          "duration": 10511,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "The Rising vs. The Beat Down Clan: LOSING GROUP DISBANDS! (FULL MATCH) | TNA iMPACT! July 1, 2016",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=6IAQDUDcxuI",
+          "youtube_id": "6IAQDUDcxuI",
+          "duration": 889,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
         }
       ]
     }

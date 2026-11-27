@@ -724,6 +724,40 @@
           "duration": 760,
           "source": "Internet Archive",
           "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "FREE MATCH: Aaron Solow & Misterioso vs Logan Riegel & Sterling Riegel: Lion's Break Project 2",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=59s2HyrnKYU",
+          "youtube_id": "59s2HyrnKYU",
+          "duration": 839,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH Yuji Nagata vs Lance Archer  The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=5ldhPNWaa98",
+          "youtube_id": "5ldhPNWaa98",
+          "duration": 928,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "1990.08.16b-NJPW-Animal Hamaguchi VS Masanobu Kurisu",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.08.16b-NJPW-Animal%20Hamaguchi%20VS%20Masanobu%20Kurisu.mp4",
+          "duration": 495,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
+        },
+        {
+          "title": "1990.08.16c-NJPW-Riki Choshu, Kengo Kimura VS Wayne Bloom, Mike Enos",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.08.16c-NJPW-Riki%20Choshu%2C%20Kengo%20Kimura%20VS%20Wayne%20Bloom%2C%20Mike%20Enos.mp4",
+          "duration": 628,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
         }
       ]
     },
@@ -1347,6 +1381,24 @@
           "url": "https://www.youtube.com/watch?v=TGojF-OuYtA",
           "youtube_id": "TGojF-OuYtA",
           "duration": 1023,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH: Aaron Solow & Misterioso vs Logan Riegel & Sterling Riegel: Lion's Break Project 2",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=59s2HyrnKYU",
+          "youtube_id": "59s2HyrnKYU",
+          "duration": 839,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "FREE MATCH Yuji Nagata vs Lance Archer  The New Beginning USA 2020",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=5ldhPNWaa98",
+          "youtube_id": "5ldhPNWaa98",
+          "duration": 928,
           "source": "YouTube",
           "source_channel": "NEW JAPAN PRO-WRESTLING"
         }

@@ -489,6 +489,24 @@
           "duration": 500,
           "source": "YouTube",
           "source_channel": "DDT"
+        },
+        {
+          "title": "北の大地、激闘の記憶【北海道ダイナマイトシリーズ2026 全試合ハイライト】",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=ogOQMsnoB1Y",
+          "youtube_id": "ogOQMsnoB1Y",
+          "duration": 1196,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
+        },
+        {
+          "title": "【全席完売＆第2試合まで無料】第13回 王道トーナメント 9月17日 東京・新木場1stRING大会＜生配信＞",
+          "episode": "全日本プロレス ALL JAPAN PRO-WRESTLEING · official programming",
+          "url": "https://www.youtube.com/watch?v=Y75QgG_WdVs",
+          "youtube_id": "Y75QgG_WdVs",
+          "duration": 2361,
+          "source": "YouTube",
+          "source_channel": "全日本プロレス ALL JAPAN PRO-WRESTLEING"
         }
       ]
     }

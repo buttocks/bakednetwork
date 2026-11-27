@@ -1,0 +1,37 @@
+name: Audit WrestleTube dropdown exclusivity
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/audit-wt-accordion.yml','tubes/shared/wrestling/motd-accordion.js','tubes/WrestleTube/secondary/audit-accordion.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        tube: [Wrestling, wrestling2, wrestling3, Wrestling4, wrestling5]
+    env:
+      TUBE: ${{ matrix.tube }}
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/WrestleTube/secondary/audit-accordion.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/WrestleTube/secondary/audit-accordion.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: motd-accordion-${{ matrix.tube }}
+          path: motd-accordion-review/
+          retention-days: 30

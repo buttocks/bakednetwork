@@ -1,20 +1,20 @@
 /* BEGIN RETRO INLINE RULES v1 */
 body:has(#rw-header #rw-inline-rules) #motdrow:has(.rw-static-header){display:none!important}
-#rw-header .rw-now:has(#rw-inline-rules){display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:12px!important;row-gap:0!important;padding:5px 15px!important}
-#rw-header .rw-now-title{display:flex;align-items:center;gap:10px;min-width:0;grid-column:1;grid-row:1}
+#rw-header .rw-now:has(#rw-inline-rules),#rw-header .rw-now:has(#rw-inline-rules[open]){position:relative;display:grid!important;grid-template-columns:minmax(0,1fr) 132px minmax(0,1fr);align-items:start;column-gap:12px!important;row-gap:0!important;padding:5px 15px!important}
+#rw-header .rw-now-title,#rw-header .rw-now:has(#rw-inline-rules[open]) .rw-now-title{display:flex;align-items:center;gap:10px;min-width:0;grid-column:1;grid-row:1;min-height:30px;align-self:start;position:relative;z-index:1;pointer-events:none}
 #rw-header .rw-now-title strong{color:#f2cc6e;letter-spacing:.1em;white-space:nowrap}
 #rw-header .rw-now-title #rw-song{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f9f1dc}
-#rw-header #rw-inline-rules{display:block;grid-column:2;grid-row:1;min-width:0}
-#rw-header #rw-inline-rules summary{grid-column:2;grid-row:1;justify-self:center;list-style:none;cursor:pointer;padding:4px 12px;border:1px solid #c8a04f;border-radius:4px;background:#261823;color:#ffe7a3;font:700 12px/1.4 system-ui,Arial,sans-serif;white-space:nowrap}
+#rw-header #rw-inline-rules,#rw-header #rw-inline-rules[open]{display:block;position:relative;grid-column:1/-1;grid-row:1;min-width:0;min-height:30px;padding:0;box-sizing:border-box;text-align:center;align-self:start;margin:0}
+#rw-header #rw-inline-rules summary,#rw-header #rw-inline-rules[open] summary{position:absolute;z-index:2;top:0;left:50%;transform:translateX(-50%);display:block;list-style:none;cursor:pointer;margin:0;padding:4px 12px;border:1px solid #c8a04f;border-radius:4px;background:#261823;color:#ffe7a3;font:700 12px/1.4 system-ui,Arial,sans-serif;white-space:nowrap}
 #rw-header #rw-inline-rules summary::-webkit-details-marker{display:none}
 #rw-header #rw-inline-rules summary:after{content:" ▾"}
 #rw-header #rw-inline-rules[open] summary:after{content:" ▴"}
 #rw-header #rw-inline-rules:not([open]) ol{display:none!important}
-#rw-header #rw-inline-rules[open]{display:block;grid-column:1/-1;grid-row:1/3;text-align:center;min-width:0}
-#rw-header .rw-now:has(#rw-inline-rules[open]){display:flex!important;flex-wrap:wrap;justify-content:center}
-#rw-header .rw-now:has(#rw-inline-rules[open]) .rw-now-title{flex:1 1 100%}
-#rw-header #rw-inline-rules[open]{flex:1 1 100%;padding-top:5px}
-#rw-header #rw-inline-rules[open] summary{display:table;margin:0 auto}
-#rw-header #rw-inline-rules ol{max-width:620px;margin:8px auto 3px;padding:9px 14px 9px 32px;border:1px solid #8f6327;border-radius:5px;background:#190f19;color:#f4ebda;text-align:left;box-sizing:border-box}
-@media(max-width:650px){#rw-header .rw-now:has(#rw-inline-rules){display:flex!important;flex-wrap:wrap;justify-content:center;gap:5px!important;padding:6px 9px!important}#rw-header .rw-now-title{flex:1 1 100%;justify-content:center}#rw-header #rw-inline-rules{display:block;flex:1 1 100%;text-align:center}#rw-header #rw-inline-rules summary{display:table;margin:0 auto}}
+#rw-header #rw-inline-rules[open]{padding-top:30px}
+#rw-header #rw-inline-rules ol{width:min(620px,100%);max-width:620px;margin:4px auto 3px;padding:9px 14px 9px 32px;border:1px solid #8f6327;border-radius:5px;background:#190f19;color:#f4ebda;text-align:left;box-sizing:border-box}
+@media(max-width:650px){
+ #rw-header .rw-now:has(#rw-inline-rules),#rw-header .rw-now:has(#rw-inline-rules[open]){display:grid!important;grid-template-columns:minmax(0,1fr);gap:5px!important;padding:6px 9px!important}
+ #rw-header .rw-now-title,#rw-header .rw-now:has(#rw-inline-rules[open]) .rw-now-title{grid-column:1;grid-row:1;justify-content:center;min-height:20px}
+ #rw-header #rw-inline-rules,#rw-header #rw-inline-rules[open]{grid-column:1;grid-row:2}
+}
 /* END RETRO INLINE RULES v1 */

@@ -1,0 +1,25 @@
+/* BEGIN NWATNA MOTD v1 */
+#motdwrap:has(.nwatna-compact),#motd:has(.nwatna-compact){padding:0!important;background:transparent!important;border:0!important}
+#motdwrap:has(.nwatna-compact){margin-bottom:2px!important}
+#motd .nwatna-compact{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 144px minmax(0,1fr);align-items:start;gap:3px 6px;margin:2px 0;padding:6px 12px;border:1px solid #74523a;border-left:4px solid #bc303c;border-radius:3px;background:repeating-linear-gradient(135deg,transparent 0 30px,#f3d58d0b 31px,transparent 32px 62px),linear-gradient(105deg,#3c171e,#181519 55%,#2b171b);color:#eee8dc;text-align:left;overflow:hidden}
+#motd .nwatna-title{grid-area:1/1;min-width:0}
+#motd .nwatna-compact .nwatna-brand{font:900 italic clamp(22px,3vw,34px)/1.05 Impact,"Arial Black",sans-serif;letter-spacing:.055em;color:#f3d58d;text-shadow:1px 2px #72222c}
+#motd .nwatna-compact .nwatna-tagline{font:700 10px/1.4 system-ui,sans-serif;margin:2px 0 0;letter-spacing:.035em;color:#e7c9a6}
+#motd .nwatna-era{grid-area:1/3;justify-self:end;text-align:right;padding:5px 0;min-width:0}
+#motd .nwatna-era b{display:block;font:900 italic 13px/1.3 system-ui,sans-serif;letter-spacing:.11em;color:#edc77e}
+#motd .nwatna-era small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#c7a995}
+#motd .nwatna-house-rules{grid-area:1/1/2/-1;position:relative;min-height:48px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
+#motd .nwatna-house-rules summary{position:absolute;left:50%;top:8px;transform:translateX(-50%);display:table;list-style:none;white-space:nowrap;padding:4px 12px;background:#56232d;color:#ffebbb;border:1px solid #b38b50;border-radius:3px;font:800 12px/1.4 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
+#motd .nwatna-house-rules summary:hover,#motd .nwatna-house-rules summary:focus-visible{background:#782c38;color:#fff3d6}
+#motd .nwatna-house-rules summary::-webkit-details-marker{display:none}
+#motd .nwatna-house-rules summary:after{content:" ▾"}
+#motd .nwatna-house-rules[open] summary:after{content:" ▴"}
+#motd .nwatna-house-rules[open]{padding-top:35px}
+#motd .nwatna-house-rules ol{width:max-content;max-width:100%;box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#21191d;color:#eee8dc;border:1px solid #9c754a;border-radius:3px;overflow-wrap:break-word;pointer-events:auto}
+#motd .nwatna-house-rules li::marker{color:#e3bd76}
+#motd .nwatna-house-rules:not([open]) ol{display:none!important}
+@media(max-width:850px){#motd .nwatna-compact{grid-template-columns:minmax(0,1fr);text-align:center}#motd .nwatna-era{display:none}#motd .nwatna-house-rules{grid-row:2;min-height:28px}#motd .nwatna-house-rules summary{top:0}#motd .nwatna-house-rules[open]{padding-top:27px}}
+body.cinemachat #motdwrap:has(.nwatna-compact){display:none!important}
+body:has(.nwatna-compact) .navbar .navbar-nav>li>a,body:has(.nwatna-compact) .navbar .navbar-text,body:has(.nwatna-compact) .navbar .navbar-brand{color:#e7d3ad!important;opacity:1!important}
+body:has(.nwatna-compact) #queue .queue_entry.queue_active{background:linear-gradient(100deg,#56232d,#312127)!important;box-shadow:inset 3px 0 #d9b36c}
+/* END NWATNA MOTD v1 */

@@ -1,61 +1,19 @@
 [
   {
     "schema": 1,
-    "request_id": "clean_native_scroll_01",
-    "channel": "Wrestling",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_02",
-    "channel": "RetroWrestling",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_03",
-    "channel": "WWF-WWE",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_04",
+    "request_id": "clean_native_scroll_retry_01",
     "channel": "ScaryTube",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "clean_native_scroll_05",
-    "channel": "WID",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_06",
+    "request_id": "clean_native_scroll_retry_02",
     "channel": "WCW",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "clean_native_scroll_07",
-    "channel": "wrestling3",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_08",
-    "channel": "Wrestling4",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_09",
-    "channel": "wrestling5",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "clean_native_scroll_10",
+    "request_id": "clean_native_scroll_retry_03",
     "channel": "NWA-TNA",
     "action": "retire_legacy_native"
   }

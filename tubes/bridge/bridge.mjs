@@ -19,7 +19,8 @@ const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
 const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
 const OUTPUT_PATH='tubes/bridge/result.json';
-const CLEAN_LOADER_COMMIT='cfda63ca19d17281a744256e8af88742c06c4690';
+const CLEAN_LOADER_COMMIT='969cb185f134f7f5a059cf856a5e6b25245ea135';
+const PREVIOUS_CLEAN_LOADER_COMMIT='cfda63ca19d17281a744256e8af88742c06c4690';
 const EXTERNAL_NATIVE_LOADERS=new Map([
   ['/js/channel-loaders/54a161ff3e9e926276646d75648cf9000be038a6ebfb782e1b5f3f396e2a1244.js','wrestletube.js'],
   ['/js/channel-loaders/ebd708a4686b9ebf5a59b922c6982bdf4a830c12ce49cf7930c253beb2692894.js','retrowrestling.js'],
@@ -496,22 +497,30 @@ async function run(request){
       if(before.externaljs){
         let externalUrl;
         try{externalUrl=new URL(before.externaljs,SITE);}catch{throw Error('Invalid external JS URL; cleanup stopped without changes');}
-        if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname)){
-          const assetName=EXTERNAL_NATIVE_LOADERS.get(externalUrl.pathname);
+        const sameOriginMatch=externalUrl.origin===SITE&&/^\\/js\\/channel-loaders\\/[a-f0-9]{64}\\.js$/i.test(externalUrl.pathname);
+        const cdnMatch=externalUrl.origin==='https://cdn.jsdelivr.net'&&
+          /^\\/gh\\/buttocks\\/bakednetwork@([a-f0-9]{40})\\/tubes\\/bridge\\/cleaned-loaders\\/([a-z0-9-]+\\.js)$/i.exec(externalUrl.pathname);
+        const cdnAllowed=cdnMatch&&[PREVIOUS_CLEAN_LOADER_COMMIT,CLEAN_LOADER_COMMIT].includes(cdnMatch[1])&&
+          [...EXTERNAL_NATIVE_LOADERS.values()].includes(cdnMatch[2]);
+        if(sameOriginMatch||cdnAllowed){
+          const assetName=sameOriginMatch?EXTERNAL_NATIVE_LOADERS.get(externalUrl.pathname):cdnMatch[2];
           if(!assetName)throw Error('Unmapped same-origin loader; cleanup stopped for review');
           let response;
           try{response=await page.request.get(externalUrl.href,{timeout:20000});if(!response.ok())throw Error('External loader fetch returned HTTP '+response.status());externalSource=await response.text();}
           finally{await response?.dispose();}
           const cleanExternal=cleanLegacyNativeFeatures(externalSource);
-          if(!cleanExternal.changed)throw Error('Expected legacy overrides were not found in external loader');
           const committedAsset=await fs.readFile(new URL('./cleaned-loaders/'+assetName,import.meta.url),'utf8');
           if(cleanExternal.source!==committedAsset)throw Error('External loader does not match the reviewed Git cleanup asset');
-          externalChange={oldUrl:before.externaljs,newUrl:cleanLoaderUrl(assetName),asset:assetName,
+          const newUrl=cleanLoaderUrl(assetName);
+          if(externalUrl.href!==newUrl)externalChange={oldUrl:before.externaljs,newUrl,asset:assetName,
             retiredModules:cleanExternal.retiredModules,changedOptions:cleanExternal.changedOptions,
             removedInputHooks:cleanExternal.removedInputHooks,removedScrollControls:cleanExternal.removedScrollControls,
             removedLayoutOverrides:cleanExternal.removedLayoutOverrides,removedCredits:cleanExternal.removedCredits};
-        }else if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\//i.test(externalUrl.pathname)){
+        }else if(externalUrl.origin===SITE&&/^\\/js\\/channel-loaders\\//i.test(externalUrl.pathname)){
           throw Error('Unrecognized same-origin loader; cleanup stopped for review');
+        }else if(externalUrl.origin==='https://cdn.jsdelivr.net'&&
+          /^\\/gh\\/buttocks\\/bakednetwork@[^/]+\\/tubes\\/bridge\\/cleaned-loaders\\//i.test(externalUrl.pathname)){
+          throw Error('Unapproved cleaned-loader CDN reference; cleanup stopped for review');
         }
       }
       const nextExternal=externalChange?.newUrl??before.externaljs;

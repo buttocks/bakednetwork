@@ -108,6 +108,16 @@ export function cleanLegacyNativeFeatures(source){
     for(const part of before){const key=propName(part);if(RETIRED_MODULES.has(key))retiredModules.push(key);}
     next=rewriteObject(next,'modules',parts=>removeNamed(parts,RETIRED_MODULES)).source;
   }
+  const removedCredits=[];
+  const loaderCredit=/\/\*!\s*\n\s*\*\*\|\s*Xaekai's Sequenced Module Loader[\s\S]*?\*\/\s*/i;
+  if(loaderCredit.test(next)){next=next.replace(loaderCredit,'');removedCredits.push('legacy-loader-attribution');}
+  const authorLine=/^\s*\*\*\|\s*All code written by Xaekai except where otherwise noted\.\s*$/gim;
+  const authorCount=(next.match(authorLine)||[]).length;
+  next=next.replace(authorLine,'');
+  if(authorCount)removedCredits.push('author-attribution');
+  const moduleLabel=(next.match(/\[XaeModule\]/g)||[]).length;
+  next=next.replace(/\[XaeModule\]/g,'[Baked modules]');
+  if(moduleLabel)removedCredits.push('loader-console-label');
   const changedOptions=[];
   if(objectRange(next,'options')){
     let optionSource=next;
@@ -140,7 +150,7 @@ export function cleanLegacyNativeFeatures(source){
   const layoutCount=(next.match(removedLayoutOverride)||[]).length;
   next=next.replace(removedLayoutOverride,'');
   return {source:next,changed:next!==source,retiredModules:[...new Set(retiredModules)],changedOptions,
-    removedInputHooks,removedScrollControls:scrollMatches.length,removedLayoutOverrides:layoutCount};
+    removedInputHooks,removedScrollControls:scrollMatches.length,removedLayoutOverrides:layoutCount,removedCredits};
 }
 export function legacyNativeSelfTest(){
   const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';

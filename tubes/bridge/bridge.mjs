@@ -441,10 +441,32 @@ async function run(request){
           externalcss:c.opts?.externalcss||'',scriptConsentIgnored:!!window.USEROPTS?.ignore_channeljs,
           moduleHits,legacyOptions,queueOptions};
       });
+      let externalJsSource='',externalJsError=null;
+      let externalModuleHits=[],externalQueueOptions={};
+      if(typeof live.externaljs==='string'&&live.externaljs){
+        try{
+          const externalUrl=new URL(live.externaljs,SITE);
+          if(externalUrl.origin===SITE&&/^\\/js\\/channel-loaders\\/[a-f0-9]{64}\\.js$/i.test(externalUrl.pathname)){
+            const response=await page.request.get(externalUrl.href,{timeout:20000});
+            if(response.ok()){
+              externalJsSource=await response.text();
+              const retired=['chatline','chatext','chatcolor','colormap','unimoji','dectalk','layout'];
+              externalModuleHits=retired.filter(name=>new RegExp('\\\\b'+name+'\\\\s*:\\s*\\\\{').test(externalJsSource));
+              externalQueueOptions=Object.fromEntries(['collapse','hidePlaylist','inlineBlame','recentMedia','thumbnails','timeEstimates']
+                .map(key=>[key,new RegExp('\\\\b'+key+'\\\\s*:\\s*true\\\\b').test(externalJsSource)]).filter(([,v])=>v));
+            }else externalJsError='HTTP '+response.status();
+            await response.dispose();
+          }else externalJsError='External script is outside the approved same-origin loader path';
+        }catch(error){externalJsError=String(error.message||error).slice(0,160);}
+      }
+      live.externalJsSource=externalJsSource;
+      live.externalJsError=externalJsError;
+      live.externalModuleHits=externalModuleHits;
+      live.externalQueueOptions=externalQueueOptions;
       const dir='tubes/bridge/backup/'+request.channel+'/native-legacy-inventory';
       await fs.mkdir(dir,{recursive:true});
-      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(live,null,2)+'\n','utf8');
-      const {js,...summary}=live;
+      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(live,null,2)+'\\n','utf8');
+      const {js,externalJsSource:discardedExternal,...summary}=live;
       console.log('Native legacy inventory '+request.channel+' '+JSON.stringify(summary));
       return {request_id:request.request_id,channel:request.channel,action:request.action,
         status:'inventoried',rank:initial.rank,admin_verified:true,...summary};

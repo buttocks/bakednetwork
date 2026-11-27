@@ -8,8 +8,8 @@
 #messagebuffer .scary-fx-midnight,#horror-effects-dropdown .scary-fx-midnight{color:#d6d3ea;font-family:Georgia,serif;font-style:italic;text-shadow:0 0 3px #aaa1d9,0 0 9px #7b6daf;animation:scary-ghost 5s ease-in-out 2}
 #messagebuffer .scary-fx-possessed,#horror-effects-dropdown .scary-fx-possessed{color:#e6bfd8;font-family:Georgia,serif;font-style:italic;text-shadow:1px 2px #5f2a67,-1px -1px #572c59,0 0 6px #a15d98;animation:scary-glitch 5s ease-in-out 2}
 #messagebuffer .horror-chip.scary-fx-consumed{display:none!important}
-#messagebuffer .scary-fade-presence{opacity:1;transition:opacity 2s ease}
-#messagebuffer .scary-fade-presence.scary-fading{opacity:0}
+#messagebuffer .scary-fade-presence{opacity:1;overflow:hidden!important;box-sizing:border-box;transition:opacity 2s ease,max-height 2s ease,margin 2s ease,padding 2s ease,transform 2s ease!important}
+#messagebuffer .scary-fade-presence.scary-fading{opacity:0!important;max-height:0!important;min-height:0!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;transform:translateY(-3px);pointer-events:none!important}
 #messagebuffer .scary-fade-presence.scary-gone{display:none!important}
 @keyframes scary-blood{0%,100%{text-shadow:0 1px #770922,0 0 5px #d12b49,0 0 9px #86102a}50%{text-shadow:0 2px #770922,0 0 8px #dc4057,0 0 12px #a81734}}
 @keyframes scary-ghost{0%,100%{text-shadow:0 0 3px #aaa1d9,0 0 9px #7b6daf}50%{text-shadow:0 0 6px #aaa1d9,0 0 13px #7b6daf}}

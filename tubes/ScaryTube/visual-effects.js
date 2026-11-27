@@ -11,25 +11,23 @@
   if(!nodes.some(n=>n.textContent.trim())){chip.textContent=label.toLowerCase().replace(/^./,c=>c.toUpperCase());return}
   const span=document.createElement('span');span.className='scary-visual-text scary-fx-'+tone;chip.after(span);for(const n of nodes)span.append(n);chip.classList.add('scary-fx-consumed');
  }
+ const presencePattern=/^(?:\[\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AP]M)?\]\s*)?(?:\[server\]\s*:\s*)?[a-z0-9_-]{1,40}\s+(?:has\s+)?(?:joined|left|disconnected)(?:\s+(?:from\s+)?(?:the\s+)?(?:channel|room))?(?:\s+\(aliases:\s*[^)\r\n]*\))?[.!]?\s*$/i;
  function presence(row){
-  if(!row||row.dataset.scaryPresence)return;
-  // Explicit native presence classes and legacy server-whisper rows only.
+  if(!row||row.dataset.scaryPresence||row.parentElement?.id!=='messagebuffer')return;
+  // RDH's proven native server identity normalization also recognizes chat-msg-_server_.
+  const serverClass=[...row.classList].some(c=>c.startsWith('chat-msg-')&&c.slice(9).replace(/[^a-z]/gi,'').toLowerCase()==='server');
   const explicit='.server-msg-join,.server-msg-leave,.server-msg-part,.server-msg-userjoin,.server-msg-userleave';
-  const notice=row.matches(explicit)?row:row.querySelector(explicit);
-  const whisper=row.matches('.server-whisper')?row:row.querySelector('.server-whisper');
-  const generic=row.matches('.server-msg')?row:row.querySelector('.server-msg');
+  const notice=row.matches(explicit)||!!row.querySelector(explicit);
+  const typed=row.matches('.server-msg,.server-whisper')||!!row.querySelector('.server-msg,.server-whisper');
   const chat=row.className.includes('chat-msg-')||row.classList.contains('baked-chat-message');
   const username=row.querySelector('.username')?.textContent.trim().replace(/:$/,'')||'';
-  const serverIdentity=/^(?:\[server\]|\$server\$|server)$/i.test(username)||/\$server\$|\\\$server\\\$|chat-msg-\\?\[server\\?\]/i.test(row.className);
-  if(!notice&&!(whisper&&serverIdentity)&&!(generic&&!chat))return;
-  // Strip server labels and timestamp nodes from a local copy, never alter the displayed text.
-  const copy=(notice||row).cloneNode(true);
-  copy.querySelectorAll('.timestamp,.username,.time').forEach(n=>{if(n.classList.contains('username')&&!serverIdentity)return;n.remove()});
-  const text=copy.textContent.replace(/^\s*\[\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AP]M)?\]\s*/i,'').replace(/^\s*(?:\[server\]|\$server\$|server)\s*:?\s*/i,'').trim();
-  if(!notice&&!/^\S+(?:\s+\(aliases:[^)]*\))?\s+(?:joined|left|disconnected)(?:\s+(?:the channel|the room|\(aliases:[^)]*\)))?[.!]?\s*$/i.test(text))return;
+  const serverName=/^(?:\[server\]|\$server\$|server)$/i.test(username);
+  if(!notice&&!serverClass&&!(typed&&(!chat||serverName)))return;
+  const text=(row.textContent||'').replace(/\s+/g,' ').trim();
+  if(!notice&&!presencePattern.test(text))return;
   row.dataset.scaryPresence='1';row.classList.add('scary-fade-presence');
-  setTimeout(()=>row.classList.add('scary-fading'),8000);
-  setTimeout(()=>row.classList.add('scary-gone'),10000);
+  setTimeout(()=>{if(row.isConnected){row.style.maxHeight=row.getBoundingClientRect().height+'px';void row.offsetHeight;row.classList.add('scary-fading')}},8000);
+  setTimeout(()=>{if(row.isConnected){row.classList.add('scary-gone');row.remove()}},10000);
  }
  const options={':bloodmoon:':['Blood Moon','blood','Blood-red glowing message'],':midnight:':['After Midnight','midnight','Ghostly lettering'],':possessed:':['Possessed','possessed','Haunted shadow distortion'],'[hwhisper]...[/hwhisper]':['Whisper','whisper','Quiet, spectral lettering'],'[hglitch]...[/hglitch]':['Glitch','glitch','Chromatic distortion'],'[hblood]...[/hblood]':['Blood Letters','blood','Crimson glow'],'[hstatic]...[/hstatic]':['Static','static','Old television lettering'],'[hspoiler]...[/hspoiler]':['Hidden Spoiler',null,'Reveal on hover'],'[hnight]...[/hnight]':['Night Vision','night','Green phosphor text']};
  function menu(){

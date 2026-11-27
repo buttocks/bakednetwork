@@ -15,6 +15,7 @@ const REGISTRY=JSON.parse(await fs.readFile(new URL('../channels.json',import.me
 const CHANNELS=new Set(REGISTRY.map(c=>c.slug));
 const ONBOARDING=new Set(REGISTRY.filter(c=>c.stage==='onboarding').map(c=>c.slug));
 const ORIGINAL_CHANNELS=new Set(['luchatube','NJPW']);
+const ONE_TIME_GALLIOS_ACFUN={request_id:'gallios_acfun_once_20261127',channel:'Gallios_Lair',action:'add_iframe',title:'AcFun Wrestling Uploads — プロレス愛Channel',src:'https://buttocks.github.io/suplex-baked-player/acfun-wrestling.html'};
 const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
 const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
@@ -47,7 +48,8 @@ function validate(raw){
   if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('Request must be an object');
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
-  if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  const oneTimeGallios=raw.schema===1&&raw.request_id===ONE_TIME_GALLIOS_ACFUN.request_id&&raw.channel===ONE_TIME_GALLIOS_ACFUN.channel&&raw.action===ONE_TIME_GALLIOS_ACFUN.action&&raw.title===ONE_TIME_GALLIOS_ACFUN.title&&raw.src===ONE_TIME_GALLIOS_ACFUN.src&&Object.keys(raw).length===6;
+  if(raw.schema!==1||(!CHANNELS.has(raw.channel)&&!oneTimeGallios))throw Error('Unsupported schema or unauthorized channel');
   if(raw.action==='retire_legacy_native'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
@@ -109,6 +111,9 @@ function validate(raw){
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
   if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(oneTimeGallios){
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title,src:safeUrl(raw.src)};
+  }
   // ScaryTube is authorized only for its exact public viewer endpoint.
   if(raw.channel==='ScaryTube'&&raw.action==='add_iframe'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.stage==='established'&&c.adminVerified&&c.backupVerified)||

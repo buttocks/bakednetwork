@@ -1,0 +1,121 @@
+/**
+ * Conservative source transform for retired native feature overrides.
+ * It edits only top-level properties inside the legacy loader's modules/options
+ * objects. Unknown formats are returned unchanged for manual review.
+ */
+const RETIRED_MODULES=new Set(['chatline','chatext','chatcolor','colormap','unimoji','dectalk','layout']);
+const RETIRED_QUEUE_OPTIONS=new Set(['collapse','hidePlaylist','inlineBlame','recentMedia','thumbnails','timeEstimates']);
+
+function objectRange(source,property,from=0,to=source.length){
+  const re=new RegExp('\\\\b'+property+'\\\\s*:\\\\s*\\\\{','g');
+  re.lastIndex=from;
+  const match=re.exec(source.slice(0,to));
+  if(!match)return null;
+  const open=from+match.index+match[0].lastIndexOf('{');
+  let depth=0,state='code';
+  for(let i=open;i<to;i++){
+    const c=source[i],n=source[i+1];
+    if(state==='line'){if(c==='\n')state='code';continue;}
+    if(state==='block'){if(c==='*'&&n==='/'){state='code';i++;}continue;}
+    if(state==='single'){if(c==='\\\\'){i++;continue;}if(c==="'")state='code';continue;}
+    if(state==='double'){if(c==='\\\\'){i++;continue;}if(c==='"')state='code';continue;}
+    if(state==='template'){if(c==='\\\\'){i++;continue;}if(c==='`')state='code';continue;}
+    if(c==='/'&&n==='/'){state='line';i++;continue;}
+    if(c==='/'&&n==='*'){state='block';i++;continue;}
+    if(c==="'"){state='single';continue;}
+    if(c==='"'){state='double';continue;}
+    if(c==='`'){state='template';continue;}
+    if(c==='{')depth++;
+    if(c==='}'&&--depth===0)return {open,close:i};
+    if(c==='}')depth++;
+  }
+  return null;
+}
+
+function objectSegments(source,range){
+  const parts=[];let start=range.open+1,brace=1,paren=0,bracket=0,state='code';
+  for(let i=start;i<range.close;i++){
+    const c=source[i],n=source[i+1];
+    if(state==='line'){if(c==='\n')state='code';continue;}
+    if(state==='block'){if(c==='*'&&n==='/'){state='code';i++;}continue;}
+    if(state==='single'){if(c==='\\\\'){i++;continue;}if(c==="'")state='code';continue;}
+    if(state==='double'){if(c==='\\\\'){i++;continue;}if(c==='"')state='code';continue;}
+    if(state==='template'){if(c==='\\\\'){i++;continue;}if(c==='`')state='code';continue;}
+    if(c==='/'&&n==='/'){state='line';i++;continue;}
+    if(c==='/'&&n==='*'){state='block';i++;continue;}
+    if(c==="'"){state='single';continue;}
+    if(c==='"'){state='double';continue;}
+    if(c==='`'){state='template';continue;}
+    if(c==='{')brace++;else if(c==='}')brace--;
+    else if(c==='(')paren++;else if(c===')')paren--;
+    else if(c==='[')bracket++;else if(c===']')bracket--;
+    else if(c===','&&brace===1&&paren===0&&bracket===0){parts.push(source.slice(start,i));start=i+1;}
+  }
+  if(start<range.close)parts.push(source.slice(start,range.close));
+  return parts;
+}
+function propName(segment){
+  const m=segment.match(/^\\s*(?:\/\\*[\\s\\S]*?\\*\/\\s*)*(?:([A-Za-z_$][\\w$]*)|["']([^"']+)["'])\\s*:/);
+  return m?(m[1]||m[2]):null;
+}
+function rewriteObject(source,property,transform,from=0,to=source.length){
+  const range=objectRange(source,property,from,to);
+  if(!range)return {source,changed:false};
+  const before=source.slice(0,range.open+1),after=source.slice(range.close);
+  const parts=objectSegments(source,range);
+  const next=transform(parts);
+  const result=before+next.join(',')+after;
+  return {source:result,changed:result!==source};
+}
+function removeNamed(parts,names){
+  return parts.filter(part=>!names.has(propName(part)));
+}
+function setBoolean(parts,names,value){
+  return parts.map(part=>{
+    if(!names.has(propName(part)))return part;
+    return part.replace(/(:\\s*)(?:true|false)(?=\\s*(?:,|$))/,'$1'+value);
+  });
+}
+export function cleanLegacyNativeFeatures(source){
+  if(typeof source!=='string'||!source)return {source,changed:false,retiredModules:[],changedOptions:[]};
+  let next=source;
+  const retiredModules=[];
+  const moduleRange=objectRange(next,'modules');
+  if(moduleRange){
+    const before=objectSegments(next,moduleRange);
+    for(const part of before){const key=propName(part);if(RETIRED_MODULES.has(key))retiredModules.push(key);}
+    const result=rewriteObject(next,'modules',parts=>removeNamed(parts,RETIRED_MODULES));
+    next=result.source;
+  }
+  const changedOptions=[];
+  const optionsRange=objectRange(next,'options');
+  if(optionsRange){
+    const outer=objectSegments(next,optionsRange);
+    const hasChatext=outer.some(part=>propName(part)==='chatext');
+    let optionSource=next;
+    if(hasChatext){
+      const result=rewriteObject(optionSource,'options',parts=>removeNamed(parts,new Set(['chatext'])));
+      optionSource=result.source;changedOptions.push('chatext');
+    }
+    const playlist=rewriteObject(optionSource,'playlist',parts=>setBoolean(parts,RETIRED_QUEUE_OPTIONS,'false'));
+    if(playlist.changed){optionSource=playlist.source;changedOptions.push('playlist.native-overlap=false');}
+    const variousRange=objectRange(optionSource,'various');
+    if(variousRange&&objectSegments(optionSource,variousRange).some(part=>propName(part)==='emoteToggle')){
+      const various=rewriteObject(optionSource,'various',parts=>removeNamed(parts,new Set(['emoteToggle'])));
+      optionSource=various.source;changedOptions.push('various.emoteToggle');
+    }
+    next=optionSource;
+  }
+  const uniqueModules=[...new Set(retiredModules)];
+  return {source:next,changed:next!==source,retiredModules:uniqueModules,changedOptions};
+}
+export function legacyNativeSelfTest(){
+  const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';
+  const result=cleanLegacyNativeFeatures(input);
+  if(!result.changed||result.retiredModules.join(',')!=='chatline,chatext,dectalk,layout'||
+    !result.source.includes('privmsg:{active:1}')||!result.source.includes('userlist:{active:1}')||
+    !result.source.includes('hotkeys:{active:1}')||!result.source.includes('moveReporting:true')||
+    /collapse:true|hidePlaylist:true|timeEstimates:true|chatext:\\{|emoteToggle:true|chatline:\\{|dectalk:\\{|layout:\\{/.test(result.source))
+    throw Error('Native legacy source transform self-test failed');
+  return true;
+}

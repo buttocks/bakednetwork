@@ -116,7 +116,7 @@ $("#navbar-autohide").remove();
 setInterval(function(){
     USEROPTS.sort_rank = 1;
     USEROPTS.sort_afk = 1;
-    USEROPTS.layout = "fluid";
+
 },1000);
 
 

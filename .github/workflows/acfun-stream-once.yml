@@ -1,0 +1,45 @@
+name: One-time Gallios AcFun stream post
+on:
+  push:
+    paths:
+      - tubes/bridge/acfun-stream-once.json
+permissions:
+  contents: read
+jobs:
+  add-stream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+      BAKED_BRIDGE_REQUEST: tubes/bridge/acfun-stream-once.json
+    steps:
+      - name: Check out reviewed request
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check bridge script
+        run: node --check tubes/bridge/bridge.mjs
+      - name: Check Baked.live account secret
+        run: |
+          if [ -z "$BAKED_LIVE_PASSWORD" ]; then
+            echo 'Configure repository secret BAKED_LIVE_PASSWORD first.'
+            exit 1
+          fi
+      - name: Install pinned browser automation
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Add stream to Gallios_Lair
+        run: node tubes/bridge/bridge.mjs
+      - name: Attach action result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: acfun-stream-one-time-result
+          path: tubes/bridge/result.json
+          if-no-files-found: ignore
+          retention-days: 30

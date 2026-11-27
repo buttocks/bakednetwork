@@ -457,7 +457,7 @@ async function run(request){
       const cleaned=cleanLegacyNativeFeatures(before.js);
       const dir='tubes/bridge/backup/'+request.channel+'/native-legacy-cleanup';
       await fs.mkdir(dir,{recursive:true});
-      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(before,null,2)+'\\n','utf8');
+      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(before,null,2)+'\n','utf8');
       await fs.writeFile(dir+'/channel-after.js',cleaned.source,'utf8');
       if(!cleaned.changed)return {request_id:request.request_id,channel:request.channel,action:request.action,status:'no-legacy-overrides',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions};
       const fresh=await capture();

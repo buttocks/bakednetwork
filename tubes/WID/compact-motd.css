@@ -1,0 +1,20 @@
+/* BEGIN WID MOTD v1 */
+#motdwrap:has(.wid-compact),#motd:has(.wid-compact){padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#motdwrap:has(.wid-compact){margin-bottom:2px!important}
+#motd .wid-compact{display:grid;position:relative;grid-template-columns:minmax(0,1fr) 144px minmax(0,1fr);align-items:start;gap:3px 6px;margin:2px 0;padding:6px 14px;background:linear-gradient(110deg,#212326,#101418 55%,#352419);border:1px solid #8d532d;border-top:3px solid #e88329;border-radius:5px;text-align:left;color:#eef1f2;overflow:hidden}
+#motd .wid-compact-title{grid-area:1/1;min-width:0}
+#motd .wid-compact-logo{display:block;width:auto!important;height:54px!important;max-width:100%!important;object-fit:contain;margin:0!important}
+#motd .wid-compact-title small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#aeb8bd;letter-spacing:.04em;text-transform:uppercase}
+#motd .wid-compact-schedule{grid-area:1/3;justify-self:end;padding:18px 10px 0 0}
+#motd .wid-compact-schedule a,#motd .wid-compact-rules summary{display:inline-block;font:800 12px/1.4 system-ui,sans-serif;padding:4px 12px;border:1px solid #a96532;border-radius:4px;background:#30241b;color:#ffb267!important;text-decoration:none;white-space:nowrap}
+#motd .wid-compact-rules{grid-area:1/1/2/-1;position:relative;min-height:68px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
+#motd .wid-compact-rules summary{position:absolute;left:50%;right:auto;top:18px;transform:translateX(-50%);list-style:none;cursor:pointer;pointer-events:auto}
+#motd .wid-compact-rules summary::-webkit-details-marker{display:none}
+#motd .wid-compact-rules summary:after{content:" ▾"}
+#motd .wid-compact-rules[open] summary:after{content:" ▴"}
+#motd .wid-compact-rules[open]{padding-top:45px}
+#motd .wid-compact-rules ol{width:max-content;max-width:min(100%,560px);box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#14181c;color:#eef1f2;border:1px solid #995d31;border-radius:4px;overflow-wrap:break-word;pointer-events:auto}
+#motd .wid-compact-rules:not([open]) ol{display:none!important}
+@media(max-width:850px){#motd .wid-compact{grid-template-columns:minmax(0,1fr);text-align:center}#motd .wid-compact-logo{margin:0 auto!important}#motd .wid-compact-rules{grid-area:2/1;min-height:28px}#motd .wid-compact-rules summary{top:0}#motd .wid-compact-rules[open]{padding-top:27px}#motd .wid-compact-schedule{grid-area:3/1;justify-self:center;padding:0}}
+body.cinemachat #motdwrap:has(.wid-compact){display:none!important}
+/* END WID MOTD v1 */

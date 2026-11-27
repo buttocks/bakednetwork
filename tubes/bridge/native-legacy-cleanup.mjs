@@ -188,5 +188,10 @@ export function legacyNativeSelfTest(){
   if(cleanedAttribution.source.includes('Xaekai')||cleanedAttribution.source.includes('[XaeModule]')||
     !cleanedAttribution.source.includes('[Baked modules]'))
     throw Error('Legacy loader attribution cleanup self-test failed');
+  const minified='({options:{playlist:Object.assign({},{collapse:!0,hidePlaylist:!0,inlineBlame:!0,recentMedia:!0,thumbnails:!0,timeEstimates:!0}),userlist:{autoHider:!(window.CyTube&&window.CyTube.roster&&1<=window.CyTube.roster.version)}},modules:{privmsg:{active:1},chatline:{active:1}}})';
+  const minifiedResult=cleanLegacyNativeFeatures(minified);
+  if(!minifiedResult.source.includes('privmsg:{active:1}')||minifiedResult.source.includes('chatline:{')||
+    minifiedResult.source.includes('collapse:!0')||minifiedResult.source.includes('autoHider:!('))
+    throw Error('Minified native option cleanup self-test failed');
   return true;
 }

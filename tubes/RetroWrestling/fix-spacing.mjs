@@ -23,20 +23,22 @@ try{
  const simulated=await p.evaluate(html=>{if(document.querySelector('#rw-header'))return false;const n=document.querySelector('nav.navbar,.navbar');if(!n)throw Error('Navbar missing');const s=document.createElement('section');s.id='rw-header';s.innerHTML=html;n.after(s);const spacer=document.createElement('div');spacer.id='rw-nav-spacer';spacer.style.cssText='display:block;height:0;flex:none;pointer-events:none';s.before(spacer);const r=s.getBoundingClientRect(),b=n.getBoundingClientRect();if(['fixed','sticky'].includes(getComputedStyle(n).position))spacer.style.height=Math.max(0,Math.ceil(b.bottom+8-r.top))+'px';return true},match[1]);
  const original=await geometry();await p.screenshot({path:dir+'/before.png'});
  const scope='body:has(#rw-header):has(#motd .rw-static-header) ';
- const candidates=[
- scope+'#wrap{padding-top:0!important}',
- scope+'#wrap{padding-top:0!important}'+scope+'#motdrow{margin-top:0!important}'+scope+'#motdwrap{margin-top:0!important}',
- scope+'#wrap{padding-top:0!important;margin-top:0!important}'+scope+'#motdrow{margin-top:0!important}'+scope+'#motdwrap{margin-top:0!important}'+scope+'#motd{margin-top:0!important}'
- ];
+ const ancestors=await p.evaluate(()=>{const a=[];for(let e=document.querySelector('#motdrow');e&&e!==document.body;e=e.parentElement){const c=getComputedStyle(e);a.push({id:e.id,tag:e.tagName,classes:String(e.className),paddingTop:c.paddingTop,marginTop:c.marginTop,borderTop:c.borderTopWidth})}return a});
+ const candidates=[];
+ for(const e of ancestors){if(e.id&&/^[\w-]+$/.test(e.id)){if(parseFloat(e.paddingTop)>=45)candidates.push(scope+'#'+e.id+'{padding-top:0!important}');if(parseFloat(e.marginTop)>=45)candidates.push(scope+'#'+e.id+'{margin-top:0!important}')}}
+ const correction=Math.max(0,original.gap-5);
+ candidates.push(scope+'#motdrow{margin-top:-'+correction+'px!important}');
+ candidates.push(scope+'#motdrow{position:relative;top:-'+correction+'px;margin-bottom:-'+correction+'px!important}');
  let selected=null,desktop,mobile;const trials=[];
- const valid=g=>g.gap!==null&&g.gap>=0&&g.gap<=14&&!g.overflow&&g.header.top>=g.nav.bottom-2&&g.rules.bottom<=Math.min(g.video.top,g.chat.top)+2;
- for(const candidate of candidates){const style=await p.addStyleTag({content:candidate});desktop=await geometry();await p.setViewportSize({width:390,height:844});mobile=await geometry();await p.setViewportSize({width:1440,height:1000});trials.push({candidate,desktop,mobile});await style.evaluate(e=>e.remove());if(valid(desktop)&&mobile.gap!==null&&mobile.gap>=0&&mobile.gap<=14&&!mobile.overflow){selected=candidate;break}}
- console.log('RETRO_SPACING_PREVIEW '+JSON.stringify({original,staticBefore,simulated,trials,selected}));
+ await p.setViewportSize({width:390,height:844});const mobileBefore=await geometry();await p.setViewportSize({width:1440,height:1000});
+ const valid=g=>g.gap!==null&&g.gap>=0&&g.gap<=14&&g.header.top>=g.nav.bottom-2&&g.rules.bottom<=Math.min(g.video.top,g.chat.top)+2&&g.rules.x>=-1&&g.rules.x+g.rules.width<=g.nav.width+1;
+ for(const candidate of candidates){const style=await p.addStyleTag({content:candidate});desktop=await geometry();await p.setViewportSize({width:390,height:844});mobile=await geometry();await p.setViewportSize({width:1440,height:1000});trials.push({candidate,desktopGap:desktop.gap,mobileGap:mobile.gap,desktopOverflow:desktop.overflow,mobileOverflow:mobile.overflow});await style.evaluate(e=>e.remove());if(valid(desktop)&&valid(mobile)&&!desktop.overflow&&(!mobile.overflow||mobileBefore.overflow)){selected=candidate;break}}
+ console.log('RETRO_SPACING_PREVIEW '+JSON.stringify({original,staticBefore,simulated,ancestors,mobileBaselineOverflow:mobileBefore.overflow,trials,selected}));
  assert.ok(selected,'No safe spacing correction; no writes');
  const patch='/* BEGIN RETRO HEADER SPACING v1 */\n'+selected+'\n/* END RETRO HEADER SPACING v1 */';
  const target=before.css.replace(/\/\* BEGIN RETRO HEADER SPACING v1 \*\/[\s\S]*?\/\* END RETRO HEADER SPACING v1 \*\//g,'').trimEnd()+'\n\n'+patch;
  assert.ok(Buffer.byteLength(target)<20000);
- const style=await p.addStyleTag({content:patch});await p.screenshot({path:dir+'/preview.png'});await p.locator('.rw-house-rules summary').click();assert.ok(await p.locator('.rw-house-rules').evaluate(e=>e.open));await p.locator('.rw-house-rules summary').click();await style.evaluate(e=>e.remove());
+ const style=await p.addStyleTag({content:patch});await p.screenshot({path:dir+'/preview.png'});await p.locator('.rw-house-rules summary').click();assert.ok(await p.locator('.rw-house-rules').evaluate(e=>e.open));assert.ok(valid(await geometry()),'Expanded rules overlap surrounding content');await p.locator('.rw-house-rules summary').click();await style.evaluate(e=>e.remove());
  if(simulated)await p.evaluate(()=>{document.querySelector('#rw-header')?.remove();document.querySelector('#rw-nav-spacer')?.remove()});
  if(simulated){const check=await p.addStyleTag({content:patch});const g=await geometry();assert.ok(Math.abs(g.rules.top-staticBefore.rules.top)<2,'Fallback moved');await check.evaluate(e=>e.remove())}
  await p.evaluate(({before,target})=>{const c=CHANNEL,o=c.opts||{};if(!socket.connected||!CLIENT.logged_in||CLIENT.rank<3||CLIENT.name?.toLowerCase()!=='buttman-gpt'||c.name.toLowerCase()!=='retrowrestling'||c.css!==before.css||c.js!==before.js||c.motd!==before.motd||(o.externalcss||'')!==before.externalCss||(o.externaljs||'')!==before.externalJs)throw Error('Concurrent settings change');socket.emit('setChannelCSS',{css:target})},{before,target});

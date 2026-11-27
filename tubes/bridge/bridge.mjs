@@ -531,8 +531,14 @@ async function run(request){
       await page.reload({waitUntil:'domcontentloaded',timeout:45000});
       await waitFor(page,state=>state.connected&&state.loggedIn&&String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
         'Could not reconnect after native legacy cleanup',30000);
-      after=await capture();
-      const verified=after.js===cleaned.source&&after.externaljs===nextExternal&&after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
+      after=null;
+      let verified=false;
+      for(let i=0;i<100;i++){
+        after=await capture();
+        verified=after.js===cleaned.source&&after.externaljs===nextExternal&&after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
+        if(verified)break;
+        await page.waitForTimeout(250);
+      }
       if(!verified){
         const mismatch={js:after.js===cleaned.source,externaljs:after.externaljs===nextExternal,css:after.css===before.css,
           externalcss:after.externalcss===before.externalcss,motd:after.motd===before.motd,

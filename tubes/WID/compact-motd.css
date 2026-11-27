@@ -3,7 +3,7 @@
 #motdwrap:has(.wid-compact){margin-bottom:12px!important}
 #motd .wid-compact{display:grid;position:relative;grid-template-columns:minmax(0,1fr);align-items:start;gap:3px;margin:2px 0;padding:6px 14px;background:linear-gradient(110deg,#212326,#101418 55%,#352419);border:1px solid #8d532d;border-top:3px solid #e88329;border-radius:5px;text-align:center;color:#eef1f2;overflow:hidden}
 #motd .wid-compact-title{grid-area:1/1;min-width:0;text-align:center}
-#motd .wid-compact-logo{display:block;width:auto!important;height:100px!important;max-width:100%!important;object-fit:contain;margin:0 auto!important;filter:invert(1) drop-shadow(0 1px 2px #0008)}
+#motd .wid-compact-logo{display:block;width:auto!important;height:125px!important;max-width:100%!important;object-fit:contain;margin:0 auto -12px!important;filter:invert(1) drop-shadow(0 1px 2px #0008);clip-path:inset(0 0 12% 0)}
 #motd .wid-compact-title small{display:block;font:700 12px/1.4 system-ui,sans-serif;color:#e5e9eb;letter-spacing:.04em;text-transform:uppercase}
 #motd .wid-compact-rules summary{display:inline-block;font:800 12px/1.4 system-ui,sans-serif;padding:4px 12px;border:1px solid #a96532;border-radius:4px;background:#30241b;color:#ffb267!important;text-decoration:none;white-space:nowrap}
 #motd .wid-compact-rules{grid-area:2/1;position:relative;min-height:28px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
@@ -14,6 +14,6 @@
 #motd .wid-compact-rules[open]{padding-top:27px}
 #motd .wid-compact-rules ol{width:max-content;max-width:min(100%,560px);box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#14181c;color:#eef1f2;border:1px solid #995d31;border-radius:4px;overflow-wrap:break-word;pointer-events:auto}
 #motd .wid-compact-rules:not([open]) ol{display:none!important}
-@media(max-width:480px){#motd .wid-compact-logo{height:85px!important}}
+@media(max-width:480px){#motd .wid-compact-logo{height:100px!important;margin-bottom:-10px!important}}
 body.cinemachat #motdwrap:has(.wid-compact){display:none!important}
 /* END WID MOTD v1 */

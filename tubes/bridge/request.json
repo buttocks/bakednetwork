@@ -1,8 +1,8 @@
 [
   {
     "schema": 1,
-    "request_id": "native_inventory_roh_20261127",
+    "request_id": "nativeclean_roh_20261127",
     "channel": "roh",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   }
 ]

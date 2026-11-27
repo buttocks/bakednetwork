@@ -465,7 +465,7 @@ async function run(request){
       live.externalQueueOptions=externalQueueOptions;
       const dir='tubes/bridge/backup/'+request.channel+'/native-legacy-inventory';
       await fs.mkdir(dir,{recursive:true});
-      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(live,null,2)+'\\n','utf8');
+      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(live,null,2)+'\n','utf8');
       const {js,externalJsSource:discardedExternal,...summary}=live;
       console.log('Native legacy inventory '+request.channel+' '+JSON.stringify(summary));
       return {request_id:request.request_id,channel:request.channel,action:request.action,

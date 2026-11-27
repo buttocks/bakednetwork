@@ -4,8 +4,7 @@
 #motd .boxing-title{grid-area:1/1;min-width:0}
 #motd .boxing-title b{display:block;font:950 italic clamp(22px,3vw,36px)/1 Impact,"Arial Black",system-ui,sans-serif;letter-spacing:.1em;color:#f1cd79;text-shadow:2px 2px #782b32}
 #motd .boxing-motd small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#d7c19c;letter-spacing:.045em}
-#motd .boxing-card{grid-area:1/3;justify-self:end;text-align:right;padding:3px 12px 0 0;min-width:0}
-#motd .boxing-card>a{display:inline-block;font:800 12px/1.3 system-ui,sans-serif;color:#f4d08b;text-decoration:none;padding:3px 8px;border:1px solid #977547;border-radius:3px;background:#382821}
+#motd .boxing-card{grid-area:1/3;justify-self:end;text-align:right;padding:12px 12px 0 0;min-width:0}
 #motd .boxing-card small a,#motd .boxing-credit a{color:#f4d08b;text-decoration:underline}
 #motd .boxing-house-rules{grid-area:1/1/2/-1;position:relative;min-height:50px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
 #motd .boxing-house-rules summary{position:absolute;left:50%;top:8px;transform:translateX(-50%);display:table;list-style:none;white-space:nowrap;padding:4px 12px;background:#573024;color:#ffe6b4;border:1px solid #bd9453;border-radius:3px;font:800 12px/1.4 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
@@ -36,6 +35,6 @@ body:has(.boxing-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#right
 body:has(.boxing-motd) .navbar .navbar-brand{background:none!important;background-image:none!important;width:auto!important;min-width:132px!important;height:50px!important;padding:0 14px!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important}
 body:has(.boxing-motd) .navbar .navbar-brand>*{display:none!important}
 body:has(.boxing-motd) .navbar .navbar-brand:before{content:"BOXING"!important;font:950 italic 26px/1 Impact,"Arial Black",system-ui,sans-serif;letter-spacing:.07em;color:#f1cd79;text-shadow:2px 2px #782b32}
-#motd .boxing-handwritten{display:block;width:auto!important;height:36px!important;max-width:100%!important;object-fit:contain;margin:0!important}
-@media(max-width:850px){#motd .boxing-handwritten{margin:0 auto!important}}
+#motd .boxing-handwritten{display:block;width:auto!important;height:44px!important;max-width:100%!important;object-fit:contain;margin:0!important}
+@media(max-width:850px){#motd .boxing-handwritten{height:40px!important;margin:0 auto!important}}
 /* END BOXING MOTD v1 */

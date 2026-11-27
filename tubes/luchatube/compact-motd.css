@@ -1,0 +1,24 @@
+/* BEGIN LUCHA MOTD v1 */
+#motdwrap:has(.lucha-compact),#motd:has(.lucha-compact){padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#motdwrap:has(.lucha-compact){margin:4px 0 12px!important;min-height:0!important}
+#motdwrap:has(.lucha-compact)::before{content:none!important;display:none!important}
+#motd .lucha-compact{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;position:relative;padding:5px 10px 6px;margin:0;background:linear-gradient(90deg,#185333,#231610 29%,#231610 71%,#8b1813);border:2px solid #d9a94f;border-radius:3px;text-align:center;color:#fff0c7;overflow:hidden}
+#motd .lucha-title{min-width:0;text-align:center}
+#motd .lucha-art{--art:320px;--mask:70.4px;--word:38.4px;--shift:10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;line-height:0;height:calc(var(--mask) + var(--word));margin:0 auto}
+#motd .lucha-art img{position:absolute;width:1px!important;height:1px!important;opacity:0;pointer-events:none}
+#motd .lucha-art::before,#motd .lucha-art::after{content:"";display:block;flex:0 0 auto;width:var(--art);background:url("https://i.imgur.com/GQsScF2.png") no-repeat;background-size:var(--art) auto}
+#motd .lucha-art::before{height:var(--mask);background-position:center top;transform:translateX(var(--shift))}
+#motd .lucha-art::after{height:var(--word);background-position:center calc(-1 * var(--mask))}
+#motd .lucha-house-rules{position:relative;min-height:28px;min-width:0;margin:0;padding:0;text-align:center;pointer-events:none}
+#motd .lucha-house-rules summary{position:absolute;left:50%;right:auto;top:0;transform:translateX(-50%);display:inline-block;font:800 12px/1.4 system-ui,sans-serif;padding:4px 12px;border:1px solid #c49c57;border-radius:3px;background:linear-gradient(#443027,#241812);color:#ffe8b5;white-space:nowrap;list-style:none;cursor:pointer;pointer-events:auto}
+#motd .lucha-house-rules summary::-webkit-details-marker{display:none}
+#motd .lucha-house-rules summary:after{content:" ▾"}
+#motd .lucha-house-rules[open] summary:after{content:" ▴"}
+#motd .lucha-house-rules[open]{padding-top:27px}
+#motd .lucha-house-rules ol{width:max-content;max-width:min(100%,480px);box-sizing:border-box;margin:2px auto 0;padding:6px 8px 6px 26px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#231910;color:#fff0c7;border:1px solid #c49c57;border-radius:3px;overflow-wrap:break-word;pointer-events:auto}
+#motd .lucha-house-rules li:nth-child(2){text-wrap:balance}
+#motd .lucha-house-rules:not([open]) ol{display:none!important}
+@media(max-width:480px){#motd .lucha-art{--art:250px;--mask:55px;--word:30px;--shift:8px}}
+@media(max-width:352px){#motd .lucha-art{--art:220px;--mask:48.4px;--word:26.4px;--shift:7px}}
+body.cinemachat #motdwrap:has(.lucha-compact){display:none!important}
+/* END LUCHA MOTD v1 */

@@ -451,9 +451,9 @@ async function run(request){
             if(response.ok()){
               externalJsSource=await response.text();
               const retired=['chatline','chatext','chatcolor','colormap','unimoji','dectalk','layout'];
-              externalModuleHits=retired.filter(name=>new RegExp('\\\\b'+name+'\\\\s*:\\s*\\\\{').test(externalJsSource));
+              externalModuleHits=retired.filter(name=>new RegExp('\\b'+name+'\\s*:\\s*\\{').test(externalJsSource));
               externalQueueOptions=Object.fromEntries(['collapse','hidePlaylist','inlineBlame','recentMedia','thumbnails','timeEstimates']
-                .map(key=>[key,new RegExp('\\\\b'+key+'\\\\s*:\\s*true\\\\b').test(externalJsSource)]).filter(([,v])=>v));
+                .map(key=>[key,new RegExp('\\b'+key+'\\s*:\\s*true\\b').test(externalJsSource)]).filter(([,v])=>v));
             }else externalJsError='HTTP '+response.status();
             await response.dispose();
           }else externalJsError='External script is outside the approved same-origin loader path';

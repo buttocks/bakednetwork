@@ -1,0 +1,29 @@
+name: Review Shoot visible header
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/shoot-header-review.yml','tubes/Shoot/review-header.mjs']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/Shoot/review-header.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/Shoot/review-header.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shoot-header-review
+          path: shoot-header-review/
+          retention-days: 14

@@ -72,7 +72,7 @@ function removeNamed(parts,names){
 function setBoolean(parts,names,value){
   return parts.map(part=>{
     if(!names.has(propName(part)))return part;
-    return part.replace(/(:\s*)(?:true|false)(?=\s*(?:,|$))/,'$1'+value);
+    return part.replace(/(:\s*)(?:true|false|!0|!1)(?=\s*(?:,|$))/,'$1'+value);
   });
 }
 function removeBoundCall(source,startPattern){

@@ -19,6 +19,20 @@ const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
 const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
 const OUTPUT_PATH='tubes/bridge/result.json';
+const CLEAN_LOADER_COMMIT='cfda63ca19d17281a744256e8af88742c06c4690';
+const EXTERNAL_NATIVE_LOADERS=new Map([
+  ['/js/channel-loaders/54a161ff3e9e926276646d75648cf9000be038a6ebfb782e1b5f3f396e2a1244.js','wrestletube.js'],
+  ['/js/channel-loaders/ebd708a4686b9ebf5a59b922c6982bdf4a830c12ce49cf7930c253beb2692894.js','retrowrestling.js'],
+  ['/js/channel-loaders/e5eae62effac20c1674e3f9997c3908c7941f65e55745887e1eb40d17468a11d.js','wwf-wwe.js'],
+  ['/js/channel-loaders/64cac0e7e4c1bc465108df98cdf8650cc03ccb1692d4ec0aeef45fef7e5dad8b.js','scarytube.js'],
+  ['/js/channel-loaders/4bfc0df88c58dbc6c9a2d01ff203c4507b658b569aa820779c117c82de3bb231.js','wid.js'],
+  ['/js/channel-loaders/509930e8eb22b405fa45ac2baacde61b02c1c0d8d3107796f7ebf953a2f2b1fb.js','wcw.js'],
+  ['/js/channel-loaders/597a3f8a9130b227837eee147f046cfbbcfb725f1961b83039533d5d27a4b951.js','nwa-tna.js']
+]);
+function cleanLoaderUrl(filename){
+  return 'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@'+CLEAN_LOADER_COMMIT+
+    '/tubes/bridge/cleaned-loaders/'+filename;
+}
 
 function safeUrl(value){
   if(typeof value!=='string' || value.length>600)throw Error('Invalid player URL');
@@ -477,31 +491,60 @@ async function run(request){
       const before=await capture();
       if(String(before.channel).toLowerCase()!==request.channel.toLowerCase())throw Error('Channel identity changed before cleanup');
       const cleaned=cleanLegacyNativeFeatures(before.js);
+      let externalChange=null,externalSource='';
+      if(before.externaljs){
+        let externalUrl;
+        try{externalUrl=new URL(before.externaljs,SITE);}catch{throw Error('Invalid external JS URL; cleanup stopped without changes');}
+        if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname)){
+          const assetName=EXTERNAL_NATIVE_LOADERS.get(externalUrl.pathname);
+          if(!assetName)throw Error('Unmapped same-origin loader; cleanup stopped for review');
+          let response;
+          try{response=await page.request.get(externalUrl.href,{timeout:20000});if(!response.ok())throw Error('External loader fetch returned HTTP '+response.status());externalSource=await response.text();}
+          finally{await response?.dispose();}
+          const cleanExternal=cleanLegacyNativeFeatures(externalSource);
+          if(!cleanExternal.changed)throw Error('Expected legacy overrides were not found in external loader');
+          const committedAsset=await fs.readFile(new URL('./cleaned-loaders/'+assetName,import.meta.url),'utf8');
+          if(cleanExternal.source!==committedAsset)throw Error('External loader does not match the reviewed Git cleanup asset');
+          externalChange={oldUrl:before.externaljs,newUrl:cleanLoaderUrl(assetName),asset:assetName,
+            retiredModules:cleanExternal.retiredModules,changedOptions:cleanExternal.changedOptions,
+            removedInputHooks:cleanExternal.removedInputHooks,removedScrollControls:cleanExternal.removedScrollControls,
+            removedLayoutOverrides:cleanExternal.removedLayoutOverrides,removedCredits:cleanExternal.removedCredits};
+        }else if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\//i.test(externalUrl.pathname)){
+          throw Error('Unrecognized same-origin loader; cleanup stopped for review');
+        }
+      }
+      const nextExternal=externalChange?.newUrl??before.externaljs;
       const dir='tubes/bridge/backup/'+request.channel+'/native-legacy-cleanup';
       await fs.mkdir(dir,{recursive:true});
-      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(before,null,2)+'\n','utf8');
+      await fs.writeFile(dir+'/channel-before.json',JSON.stringify({...before,externalJsSource:externalSource},null,2)+'\n','utf8');
       await fs.writeFile(dir+'/channel-after.js',cleaned.source,'utf8');
-      if(!cleaned.changed)return {request_id:request.request_id,channel:request.channel,action:request.action,status:'no-legacy-overrides',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions};
+      if(externalChange)await fs.writeFile(dir+'/external-before.js',externalSource,'utf8');
+      const anyChange=cleaned.changed||!!externalChange;
+      if(!anyChange)return {request_id:request.request_id,channel:request.channel,action:request.action,status:'no-legacy-overrides',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,external_loader:null};
       const fresh=await capture();
       if(fresh.js!==before.js||fresh.css!==before.css||fresh.externaljs!==before.externaljs||fresh.externalcss!==before.externalcss||fresh.motd!==before.motd)
         throw Error('Channel settings changed during review; no cleanup applied');
-      await page.evaluate(js=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');window.socket.emit('setOptions',{js});},cleaned.source);
+      await page.evaluate(({js,externaljs})=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');window.socket.emit('setOptions',{js,externaljs});},{js:cleaned.source,externaljs:nextExternal});
       let after=null;
-      for(let i=0;i<80;i++){after=await capture();if(after.js===cleaned.source)break;await page.waitForTimeout(250);}
-      if(after?.js!==cleaned.source)throw Error('Channel JS update was not confirmed; original retained');
+      for(let i=0;i<80;i++){after=await capture();if(after.js===cleaned.source&&after.externaljs===nextExternal)break;await page.waitForTimeout(250);}
+      if(after?.js!==cleaned.source||after.externaljs!==nextExternal)throw Error('Channel JS update was not confirmed; original retained');
       await page.reload({waitUntil:'domcontentloaded',timeout:45000});
       await waitFor(page,state=>state.connected&&state.loggedIn&&String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
         'Could not reconnect after native legacy cleanup',30000);
       after=await capture();
-      if(after.js!==cleaned.source||after.css!==before.css||after.externaljs!==before.externaljs||after.externalcss!==before.externalcss||after.motd!==before.motd){
-        const observed=after.js;
-        if(observed===cleaned.source){
-          await page.evaluate(js=>window.socket.emit('setOptions',{js}),before.js);
-          for(let i=0;i<40;i++){if((await capture()).js===before.js)break;await page.waitForTimeout(250);}
+      const verified=after.js===cleaned.source&&after.externaljs===nextExternal&&after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
+      if(!verified){
+        const unchangedAsideFromTarget=after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
+        if(unchangedAsideFromTarget&&after.js===cleaned.source&&after.externaljs===nextExternal){
+          await page.evaluate(({js,externaljs})=>window.socket.emit('setOptions',{js,externaljs}),{js:before.js,externaljs:before.externaljs});
+          for(let i=0;i<40;i++){const restored=await capture();if(restored.js===before.js&&restored.externaljs===before.externaljs)break;await page.waitForTimeout(250);}
         }
-        throw Error('Post-reload verification failed; attempted JS-only rollback when safe');
+        throw Error('Post-reload verification failed; attempted JS and external loader rollback only when target values were still live');
       }
-      const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,removed_input_hooks:cleaned.removedInputHooks,removed_scroll_controls:cleaned.removedScrollControls,removed_layout_overrides:cleaned.removedLayoutOverrides,removed_credits:cleaned.removedCredits,script_consent_ignored:!!(await page.evaluate(()=>window.USEROPTS?.ignore_channeljs))};
+      const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,
+        retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,removed_input_hooks:cleaned.removedInputHooks,
+        removed_scroll_controls:cleaned.removedScrollControls,removed_layout_overrides:cleaned.removedLayoutOverrides,
+        removed_credits:cleaned.removedCredits,external_loader:externalChange,script_consent_ignored:!!(await page.evaluate(()=>window.USEROPTS?.ignore_channeljs))};
       console.log('Native legacy cleanup '+request.channel+' '+JSON.stringify(result));
       return result;
     }

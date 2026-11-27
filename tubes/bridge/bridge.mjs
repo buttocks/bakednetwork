@@ -446,7 +446,7 @@ async function run(request){
       if(typeof live.externaljs==='string'&&live.externaljs){
         try{
           const externalUrl=new URL(live.externaljs,SITE);
-          if(externalUrl.origin===SITE&&/^\\/js\\/channel-loaders\\/[a-f0-9]{64}\\.js$/i.test(externalUrl.pathname)){
+          if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname)){
             const response=await page.request.get(externalUrl.href,{timeout:20000});
             if(response.ok()){
               externalJsSource=await response.text();

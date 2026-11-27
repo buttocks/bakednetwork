@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>AcFun Wrestling Desk — Baked Network</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0b10;--panel:#17171e;--line:#30303a;--ink:#f5f4f8;--muted:#aaa9b4;--pink:#fa4968;--gold:#edc16a;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#4b172c 0,#15111a 36rem,var(--bg) 74rem);color:var(--ink)}a{color:inherit}.wrap{width:min(1180px,calc(100% - 32px));margin:auto;padding:34px 0 56px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #ffffff1a;padding-bottom:16px}.brand{font-size:12px;font-weight:900;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}.source{font-size:12px;color:var(--muted)}
+.hero{padding:38px 0 24px}.kicker{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--pink)}h1{font-size:clamp(34px,6vw,68px);line-height:.98;letter-spacing:-.04em;margin:10px 0 14px}.hero p{max-width:760px;color:#d0cdd6;margin:0}.source-link{display:inline-flex;align-items:center;gap:8px;margin-top:19px;padding:10px 14px;border:1px solid #ffffff2a;border-radius:7px;text-decoration:none;background:#ffffff09;font-weight:700}.source-link:hover,.source-link:focus-visible{border-color:var(--pink);outline:none}
+.player{display:none;margin:14px 0 30px;border:1px solid #4d343c;border-radius:10px;background:#000;overflow:hidden}.player.open{display:block}.player-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 15px;background:#17131a}.player-head b{font-size:14px}.player-head a{color:#ffc5d0;font-size:12px}.framebox{aspect-ratio:16/9;background:#000}.framebox iframe{display:block;width:100%;height:100%;border:0}.player-note{margin:0;padding:10px 14px;color:#bcb7c3;background:#17131a;font-size:12px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:30px 0 15px}.section-head h2{font-size:21px;margin:0}.section-head p{margin:0;color:var(--muted);font-size:12px}.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}.filters button,.play{appearance:none;border:1px solid var(--line);border-radius:999px;background:#17171e;color:#dedce5;padding:7px 12px;font:700 12px system-ui;cursor:pointer}.filters button[aria-pressed="true"]{background:#582033;border-color:#d74768;color:#fff}.filters button:focus-visible,.play:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}.card{position:relative;border:1px solid var(--line);border-radius:10px;background:linear-gradient(145deg,#1b1a22,#111117);padding:16px;min-height:196px;display:flex;flex-direction:column}.card:hover{border-color:#8a3d54}.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:11px}.badge{display:inline-flex;padding:3px 8px;border:1px solid #71364a;border-radius:99px;color:#ffb7c5;font-weight:900;letter-spacing:.08em}.card h3{font-size:17px;line-height:1.3;margin:13px 0 8px}.card .details{color:#b9b6c1;font-size:12px;margin:0 0 15px}.actions{display:flex;align-items:center;gap:10px;margin-top:auto}.play{border-radius:6px;background:#d93c5d;border-color:#f55d7a;color:white;padding:9px 12px}.play:hover{background:#f24b6c}.external{font-size:12px;font-weight:700;color:#ffd5dd;text-decoration:none}.external:hover{text-decoration:underline}.empty{display:none;color:var(--muted);padding:25px;border:1px dashed var(--line);border-radius:8px}
+.note{margin-top:23px;padding:14px 16px;border-left:3px solid var(--gold);background:#ffffff08;color:#c9c6cf;font-size:12px}.note strong{color:#fff}.foot{margin-top:30px;color:#898792;font-size:11px}
+@media(max-width:600px){.wrap{width:min(100% - 22px,1180px);padding-top:18px}.topline{align-items:flex-start;flex-direction:column;gap:5px}.hero{padding-top:27px}.section-head{align-items:flex-start;flex-direction:column;gap:5px}.card{min-height:0}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="topline"><div class="brand">Baked Network · Alternate Sources</div><div class="source">AcFun wrestling pilot · link-first</div></div>
+  <section class="hero" aria-labelledby="title">
+    <div class="kicker">A Site / AcFun</div>
+    <h1 id="title">WRESTLING<br>DESK</h1>
+    <p>A small discovery feed for wrestling uploads from プロレス愛Channel. Choose a promotion, open a post on AcFun, or try its embedded player below. AcFun remains the source of the video.</p>
+    <a class="source-link" href="https://www.acfun.cn/u/2327201" target="_blank" rel="noopener noreferrer">Browse the full AcFun profile <span aria-hidden="true">↗</span></a>
+  </section>
+  <section class="player" id="player" aria-label="AcFun video player" aria-live="polite">
+    <div class="player-head"><b id="playing-title">AcFun video</b><a id="open-source" href="https://www.acfun.cn/u/2327201" target="_blank" rel="noopener noreferrer">Open on AcFun ↗</a></div>
+    <div class="framebox" id="framebox"></div>
+    <p class="player-note">If playback is blank or shows a browser notice, open the AcFun post directly. Playback has not been confirmed in every browser.</p>
+  </section>
+  <div class="section-head"><h2>Recent wrestling uploads</h2><p>Seeded from the public profile · checked 27 Nov 2026</p></div>
+  <nav class="filters" aria-label="Filter by promotion" id="filters">
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    <button type="button" data-filter="NJPW" aria-pressed="false">NJPW</button>
+    <button type="button" data-filter="AJPW" aria-pressed="false">AJPW</button>
+    <button type="button" data-filter="AEW" aria-pressed="false">AEW</button>
+    <button type="button" data-filter="TNA" aria-pressed="false">TNA</button>
+  </nav>
+  <section class="grid" id="grid" aria-label="AcFun wrestling videos"></section>
+  <div class="empty" id="empty">No uploads for this promotion in the pilot list.</div>
+  <aside class="note"><strong>Pilot scope:</strong> this page stores AcFun post IDs and titles only. It does not download, proxy, or rehost video. The player loads only after you choose a card. This is not yet registered in the Baked TV autoplay queue.</aside>
+  <footer class="foot">Source account: プロレス愛Channel · AcFun user 2327201 · Feed list currently seeded by hand while public-feed refresh and embedded playback are evaluated.</footer>
+</main>
+<script>
+(()=>{
+'use strict';
+const videos=[
+ {promotion:'NJPW',title:'NJPW World Tag League 2026 第四日 2026.11.27',id:'ac49029564',date:'2026-11-27'},
+ {promotion:'AJPW',title:'AJPW 世界最強タッグ決定リーグ戦2026 第六日 2026.11.26',id:'ac49027973',date:'2026-11-26'},
+ {promotion:'AEW',title:'AEW Collision #172 - Thanksgiving 2026.11.26',id:'ac49027922',date:'2026-11-26'},
+ {promotion:'TNA',title:'TNA iMPACT #141 2026.11.26',id:'ac49027801',date:'2026-11-26'},
+ {promotion:'AEW',title:'AEW Collision #172 2026.11.25 Bandido vs. 竹下幸之介',id:'ac49029607',date:'2026-11-25'}
+];
+const grid=document.getElementById('grid'),empty=document.getElementById('empty'),player=document.getElementById('player'),framebox=document.getElementById('framebox');
+function show(list){grid.replaceChildren();empty.style.display=list.length?'none':'block';for(const v of list){
+ const card=document.createElement('article');card.className='card';
+ const meta=document.createElement('div');meta.className='meta';
+ const badge=document.createElement('span');badge.className='badge';badge.textContent=v.promotion;
+ const date=document.createElement('time');date.dateTime=v.date;date.textContent=new Date(v.date+'T12:00:00').toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+ meta.append(badge,date);
+ const h=document.createElement('h3');h.textContent=v.title;
+ const detail=document.createElement('p');detail.className='details';detail.textContent='AcFun · プロレス愛Channel · '+v.id;
+ const actions=document.createElement('div');actions.className='actions';
+ const embed=document.createElement('button');embed.className='play';embed.type='button';embed.textContent='Try embedded player';embed.addEventListener('click',()=>play(v));
+ const link=document.createElement('a');link.className='external';link.href='https://www.acfun.cn/v/'+v.id;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open on AcFun ↗';
+ actions.append(embed,link);card.append(meta,h,detail,actions);grid.append(card);
+ }}
+function play(v){
+ document.getElementById('playing-title').textContent=v.title;
+ document.getElementById('open-source').href='https://www.acfun.cn/v/'+v.id;
+ const frame=document.createElement('iframe');frame.title=v.title+' — AcFun';frame.src='https://www.acfun.cn/player/'+v.id;frame.allow='autoplay; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
+ framebox.replaceChildren(frame);player.classList.add('open');player.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('button[data-filter]');if(!b)return;for(const x of document.querySelectorAll('#filters button'))x.setAttribute('aria-pressed',String(x===b));show(b.dataset.filter==='all'?videos:videos.filter(v=>v.promotion===b.dataset.filter));});
+show(videos);
+})();
+</script>
+</body>
+</html>

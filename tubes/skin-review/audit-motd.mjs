@@ -25,7 +25,33 @@ try{
     const vis=e=>!!e.getClientRects().length&&e.getBoundingClientRect().height>0&&getComputedStyle(e).visibility!=='hidden';
     const q=[...document.querySelectorAll('#queue .queue_entry')].map(e=>{const jq=window.jQuery(e),a=jq.data('media')||{},t=document.createElement('textarea');t.innerHTML=String(a.meta?.embed?.src||'');return {src:t.value}});
     if(!m||!root)throw Error('MOTD DOM unavailable');
-    return {headerHeight:Math.round(r?.height||0),motdBytes:typeof window.CHANNEL.motd==='string'?window.CHANNEL.motd.length:null,
+    const rect=e=>{const b=e.getBoundingClientRect();return {x:Math.round(b.x),y:Math.round(b.y),width:Math.round(b.width),height:Math.round(b.height),bottom:Math.round(b.bottom)}};
+    const onscreen=e=>vis(e)&&e.getBoundingClientRect().width>0&&getComputedStyle(e).display!=='none'&&getComputedStyle(e).opacity!=='0';
+    const navs=[...document.querySelectorAll('nav.navbar,.navbar,#navbar')].filter(onscreen).map(rect).filter(b=>b.y<150&&b.height<200);
+    const tops=['#videowrap','#chatwrap','#chatbox','#videobox'].map(selector=>{const e=document.querySelector(selector);return e&&onscreen(e)?{selector,...rect(e)}:null}).filter(Boolean);
+    const top=navs.length?Math.max(...navs.map(b=>b.bottom)):null;
+    const bottom=top!==null&&tops.length?Math.min(...tops.map(b=>b.y)):null;
+    const valid=top!==null&&bottom!==null&&bottom>=top;
+    const inside=e=>{if(!valid||!onscreen(e))return false;const b=e.getBoundingClientRect();return b.top>=top-3&&b.bottom<=bottom+3&&b.height>0&&b.width>0};
+    const elements=valid?[...document.body.querySelectorAll('*')].filter(e=>inside(e)&&!e.closest('.modal,[role="dialog"],script,style')):[];
+    const roots=elements.filter(e=>!elements.includes(e.parentElement));
+    const textNodes=elements.filter(e=>[...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())).map(e=>clean([...e.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' '))).filter(Boolean);
+    const graphics=[];
+    for(const e of elements){
+      const st=getComputedStyle(e);
+      for(const pseudo of ['', '::before','::after']){
+        const a=pseudo?getComputedStyle(e,pseudo):st;
+        if(pseudo&&(a.content==='none'||a.content==='normal'||a.display==='none'))continue;
+        if(/url\(/.test(a.backgroundImage)||pseudo&&/url\(/.test(a.content)||!pseudo&&e.matches('img,svg,canvas,picture')){
+          graphics.push({element:e.id?'#'+e.id:e.tagName.toLowerCase(),pseudo,box:rect(e),kind:e.tagName.toLowerCase(),background:a.backgroundImage.slice(0,220),content:pseudo?a.content.slice(0,120):'',loaded:e.tagName==='IMG'?e.complete&&e.naturalWidth>0:null});
+        }
+      }
+    }
+    const approval=[...document.querySelectorAll('.modal.in,.modal.show,[role="dialog"]')].filter(onscreen).map(e=>clean(e.querySelector('.modal-title')?.textContent||e.textContent)).filter(t=>/script|javascript|trust|approve/i.test(t));
+    const controls=elements.filter(e=>e.matches('button,a,summary,[role="button"]')).map(e=>({label:clean(e.textContent||e.getAttribute('aria-label')||e.title),kind:e.tagName})).filter(e=>e.label);
+    const header={definition:'navbar bottom to earliest visible video/chatbox top',boundsVerified:valid,top,bottom,height:valid?bottom-top:null,videoChat:tops,roots:roots.map(e=>({tag:e.tagName,id:e.id,classes:String(e.className||'').slice(0,150),box:rect(e)})).slice(0,25),text:[...new Set(textNodes)].slice(0,45),graphics:graphics.slice(0,30),controls:controls.slice(0,40),approval,ignoreChannelJs:!!window.USEROPTS?.ignore_channeljs};
+
+    return {header,headerHeight:header.height,nativeMotdHeight:Math.round(r?.height||0),motdBytes:typeof window.CHANNEL.motd==='string'?window.CHANNEL.motd.length:null,
       motdTextPresent:!!m.textContent.trim(),motdImageCount:m.querySelectorAll('img').length,
       registrationLink:!!m.querySelector('a[href*="/register"]'),
       externalCss:window.CHANNEL.opts?.externalcss||'',externalJs:window.CHANNEL.opts?.externaljs||'',
@@ -42,8 +68,9 @@ try{
    });
    const {feedUrls,...rest}=x;
    report={...report,...rest,status:'audited',feeds:feeds.filter(f=>f.tube.toLowerCase()===ch.slug.toLowerCase()).map(f=>({id:f.id,present:feedUrls.includes(f.url)}))};
-   report.priority=(report.buttons.some(b=>b.modal)?4:0)+(report.headerHeight>250?3:0)+(report.images.some(i=>!i.loaded)?3:0)+(!report.rulesDropdown?1:0);
-   if(x.headerHeight>0)await p.locator('#motdwrap').screenshot({path:'motd-audit/'+ch.slug+'.png',timeout:10000}).catch(()=>{});
+   report.reviewStatus=!x.header.boundsVerified?'geometry-unverified':x.header.approval.length?'script-approval-pending':'visual-review-required';
+   if(x.header.boundsVerified&&x.header.height>0&&x.header.bottom<=1000)await p.screenshot({path:'motd-audit/'+ch.slug+'-header.png',clip:{x:0,y:x.header.top,width:1440,height:x.header.height},timeout:10000}).catch(()=>{});
+   await p.screenshot({path:'motd-audit/'+ch.slug+'-viewport.png',timeout:10000}).catch(()=>{});
   }catch(e){report.error=String(e.message||e).split('\n')[0].slice(0,180)}
   finally{await ctx.close()}
   reports.push(report);console.log('MOTD_AUDIT '+JSON.stringify(report));

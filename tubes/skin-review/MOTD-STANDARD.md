@@ -1,0 +1,3 @@
+# Network MOTD review standard
+
+MOTD means the entire visible area between the bottom of the navbar and the top of the video player or chatbox, whichever starts higher. It includes native MOTD HTML, CSS-generated artwork and custom JavaScript headers. An empty native MOTD field is not a defect. Review the actual rendered area and its controls before proposing any changes. If a channel script is awaiting viewer approval, report that limitation rather than treating its missing header as a confirmed defect. Preserve distinct tube identities. RDH is in maintenance and excluded from this review unless specifically requested.

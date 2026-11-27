@@ -12,7 +12,8 @@
 #motd .wid-compact-rules summary:after{content:" ▾"}
 #motd .wid-compact-rules[open] summary:after{content:" ▴"}
 #motd .wid-compact-rules[open]{padding-top:27px}
-#motd .wid-compact-rules ol{width:max-content;max-width:min(100%,560px);box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#14181c;color:#eef1f2;border:1px solid #995d31;border-radius:4px;overflow-wrap:break-word;pointer-events:auto}
+#motd .wid-compact-rules ol{width:max-content;max-width:min(100%,420px);box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#14181c;color:#eef1f2;border:1px solid #995d31;border-radius:4px;overflow-wrap:break-word;pointer-events:auto}
+#motd .wid-compact-rules li:nth-child(2){text-wrap:balance}
 #motd .wid-compact-rules:not([open]) ol{display:none!important}
 @media(max-width:480px){#motd .wid-compact-logo{height:100px!important;margin-bottom:-10px!important}}
 body.cinemachat #motdwrap:has(.wid-compact){display:none!important}

@@ -1,176 +1,50 @@
 [
   {
     "schema": 1,
-    "request_id": "nativeclean_final_01",
-    "channel": "luchatube",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_02",
-    "channel": "NJPW",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_03",
-    "channel": "Wrestling",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_04",
-    "channel": "RetroWrestling",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_05",
-    "channel": "WWF-WWE",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_06",
-    "channel": "RDH",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_07",
-    "channel": "ScaryTube",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_08",
-    "channel": "WID",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_09",
-    "channel": "WCW",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_10",
+    "request_id": "nativeclean_recheck_01",
     "channel": "joshi",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_11",
-    "channel": "puro",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_12",
-    "channel": "ajpw",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_13",
+    "request_id": "nativeclean_recheck_02",
     "channel": "Noah",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_14",
+    "request_id": "nativeclean_recheck_03",
     "channel": "wrestling2",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_15",
-    "channel": "indies",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_16",
+    "request_id": "nativeclean_recheck_04",
     "channel": "shoot",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_17",
-    "channel": "wrestling3",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_18",
-    "channel": "Wrestling4",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_19",
+    "request_id": "nativeclean_recheck_05",
     "channel": "boxing",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_20",
+    "request_id": "nativeclean_recheck_06",
     "channel": "DGalt",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_21",
-    "channel": "DG",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_22",
+    "request_id": "nativeclean_recheck_07",
     "channel": "wrestling5",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "nativeclean_final_23",
-    "channel": "NJPWALT",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_24",
-    "channel": "rizin",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_25",
+    "request_id": "nativeclean_recheck_08",
     "channel": "sumo",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_26",
-    "channel": "NWA-TNA",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_27",
-    "channel": "joshi2",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_28",
-    "channel": "MTV",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "nativeclean_final_29",
-    "channel": "ddt",
     "action": "retire_legacy_native"
   }
 ]

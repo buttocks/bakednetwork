@@ -39,4 +39,30 @@ body:has(.shoot-motd) #chatheader,body:has(.shoot-motd) #playlistheader,body:has
 body:has(.shoot-motd) #videocontrols,body:has(.shoot-motd) #playlistcontrols{border-color:#795237!important}
 body:has(.shoot-motd) #queue .queue_entry.queue_active{background-color:#4b3021!important;box-shadow:inset 3px 0 #e8904d;color:#ffe8cf!important}
 body:has(.shoot-motd) #queue .queue_entry.queue_active a,body:has(.shoot-motd) #queue .queue_entry.queue_active .qe_title{color:#ffe8cf!important}
+/* Arena wall: texture and warm light are painted directly onto the page.
+   No overlay elements, positioning, sizing, or stacking changes. */
+body:has(.shoot-motd){
+ background-color:#171513!important;
+ background-image:radial-gradient(ellipse at 16% 0%,#a45b3329 0%,transparent 45%),radial-gradient(ellipse at 92% 52%,#7b442420 0%,transparent 49%),repeating-linear-gradient(125deg,transparent 0 33px,#d3966720 34px,transparent 35px 69px),linear-gradient(150deg,#2c241f 0%,#1b1918 44%,#101214 100%)!important;
+ background-attachment:fixed!important;
+ color:#eee0d1;
+}
+body:has(.shoot-motd) #mainpage,body:has(.shoot-motd) #main,body:has(.shoot-motd) #leftpane,body:has(.shoot-motd) #rightpane{background:transparent!important}
+body:has(.shoot-motd) nav.navbar{background:linear-gradient(180deg,#302720,#1c1815)!important;border-color:#64442e!important}
+body:has(.shoot-motd) nav.navbar .navbar-nav>li>a,body:has(.shoot-motd) nav.navbar .navbar-brand,body:has(.shoot-motd) nav.navbar .navbar-text{color:#e8d0b8!important}
+body:has(.shoot-motd) nav.navbar .navbar-nav>li>a:hover,body:has(.shoot-motd) nav.navbar .navbar-nav>.open>a{background-color:#513625!important;color:#fff1de!important}
+body:has(.shoot-motd) #chatwrap,body:has(.shoot-motd) #playlistwrap{background-color:#191715!important;border-color:#795237!important}
+body:has(.shoot-motd) #messagebuffer{background:linear-gradient(155deg,#24201c,#1a1918 75%)!important;border-color:#795237!important;color:#e8dfd5}
+body:has(.shoot-motd) #userlist{background:#1c1917!important;border-color:#795237!important}
+body:has(.shoot-motd) #chatline,body:has(.shoot-motd) #leftcontrols~div textarea,body:has(.shoot-motd) #leftpane textarea,body:has(.shoot-motd) #notepad{background:#151413!important;border-color:#765238!important;color:#f0e1cf!important}
+body:has(.shoot-motd) #chatline::placeholder,body:has(.shoot-motd) textarea::placeholder{color:#b7a695}
+body:has(.shoot-motd) #queue{background:#1c1917!important;border-color:#795237!important;color:#e8dfd5}
+body:has(.shoot-motd) #queue .queue_entry{background:#211d19!important;border-color:#604632!important}
+body:has(.shoot-motd) #queue .queue_entry:nth-child(even):not(.queue_active){background:#25201c!important}
+body:has(.shoot-motd) #queue .queue_entry:not(.queue_active):hover{background:#34271e!important}
+body:has(.shoot-motd) #queue .queue_entry.queue_active{background:linear-gradient(100deg,#593823,#30241d)!important;border-color:#af784e!important;box-shadow:inset 3px 0 #ef9c58!important}
+body:has(.shoot-motd) #queue .qe_title{color:#f1ddc9!important}
+body:has(.shoot-motd) #videocontrols .btn-default,body:has(.shoot-motd) #playlistcontrols .btn-default,body:has(.shoot-motd) #leftcontrols .btn-default,body:has(.shoot-motd) #rightcontrols .btn-default{background:linear-gradient(#493326,#30231b)!important;border-color:#94603b!important;color:#f4ddc4!important;text-shadow:none}
+body:has(.shoot-motd) #videocontrols .btn-default:hover,body:has(.shoot-motd) #playlistcontrols .btn-default:hover,body:has(.shoot-motd) #leftcontrols .btn-default:hover,body:has(.shoot-motd) #rightcontrols .btn-default:hover{background:#63412a!important;border-color:#d8935e!important}
+body:has(.shoot-motd) #footer,body:has(.shoot-motd) footer{background:#161412!important;border-top:1px solid #64442e!important;color:#bbad9c}
 /* END SHOOT MOTD v1 */

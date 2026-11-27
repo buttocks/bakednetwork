@@ -46,9 +46,9 @@ function safeUrl(value){
 function validate(raw){
   if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('Request must be an object');
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
-  const galliosAcfunOnce=raw.channel==='Gallios_Lair'&&raw.action==='add_iframe'&&raw.request_id==='acfunstream_20261127'&&raw.src==='https://buttocks.github.io/suplex-baked-player/acfun-wrestling-stream.html';
+
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
-  if(raw.schema!==1||(!CHANNELS.has(raw.channel)&&!galliosAcfunOnce))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
   if(raw.action==='retire_legacy_native'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
@@ -119,10 +119,6 @@ function validate(raw){
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))
       throw Error('Invalid ScaryTube public embed request');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:raw.src};
-  }
-  if(galliosAcfunOnce){
-    if(typeof raw.title!=='string'||raw.title.trim().length<4||raw.title.length>100)throw Error('Missing or invalid title');
-    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:safeUrl(raw.src)};
   }
   if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(ONBOARDING.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media','inventory_legacy_native'].includes(raw.action))throw Error('New channel onboarding is read-only');

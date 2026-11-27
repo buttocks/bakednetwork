@@ -1,0 +1,35 @@
+/* BEGIN WWF MOTD v1 */
+body:has(#wwf-era-strip #wwf-inline-rules) #motdrow:has(.wwf-static-header){display:none!important}
+#wwf-era-strip .wwf-restored-now:has(#wwf-inline-rules),#wwf-era-strip .wwf-restored-now:has(#wwf-inline-rules[open]){position:relative;display:grid!important;grid-template-columns:minmax(0,1fr) 132px minmax(0,1fr);align-items:start;column-gap:12px!important;row-gap:0!important;padding:3px 15px!important}
+#wwf-era-strip .wwf-now-title,#wwf-era-strip .wwf-restored-now:has(#wwf-inline-rules[open]) .wwf-now-title{display:flex;align-items:center;gap:10px;min-width:0;grid-column:1;grid-row:1;min-height:28px;align-self:start;position:relative;z-index:1;pointer-events:none}
+#wwf-era-strip .wwf-now-title strong{color:var(--ww-highlight,#eee);letter-spacing:.1em;white-space:nowrap}
+#wwf-era-strip .wwf-now-title #wwf-restored-track{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ww-text,#eee)}
+#wwf-era-strip #wwf-inline-rules,#wwf-era-strip #wwf-inline-rules[open]{display:block;position:relative;grid-column:1/-1;grid-row:1;min-width:0;min-height:28px;padding:0;box-sizing:border-box;text-align:center;align-self:start;margin:0}
+#wwf-era-strip #wwf-inline-rules summary,#wwf-era-strip #wwf-inline-rules[open] summary{position:absolute;z-index:2;top:0;left:50%;transform:translateX(-50%);display:block;list-style:none;cursor:pointer;margin:0;padding:4px 12px;border:1px solid var(--ww-accent,#c81422);border-radius:4px;background:var(--ww-panel2,#251418);color:var(--ww-text,#eee);font:700 12px/1.4 system-ui,Arial,sans-serif;white-space:nowrap}
+#wwf-era-strip #wwf-inline-rules summary::-webkit-details-marker{display:none}
+#wwf-era-strip #wwf-inline-rules summary:after{content:" ▾"}
+#wwf-era-strip #wwf-inline-rules[open] summary:after{content:" ▴"}
+#wwf-era-strip #wwf-inline-rules:not([open]) ol{display:none!important}
+#wwf-era-strip #wwf-inline-rules[open]{padding-top:28px}
+#wwf-era-strip #wwf-inline-rules ol{width:max-content;max-width:100%;margin:1px auto 1px;padding:6px 12px 6px 29px;border:1px solid var(--ww-accent,#c81422);border-radius:5px;background:var(--ww-panel,#161416);color:var(--ww-text,#eee);text-align:left;box-sizing:border-box}
+@media(max-width:650px){
+ #wwf-era-strip .wwf-restored-now:has(#wwf-inline-rules),#wwf-era-strip .wwf-restored-now:has(#wwf-inline-rules[open]){display:grid!important;grid-template-columns:minmax(0,1fr);gap:3px!important;padding:4px 9px!important}
+ #wwf-era-strip .wwf-now-title,#wwf-era-strip .wwf-restored-now:has(#wwf-inline-rules[open]) .wwf-now-title{grid-column:1;grid-row:1;justify-content:center;min-height:20px}
+ #wwf-era-strip #wwf-inline-rules,#wwf-era-strip #wwf-inline-rules[open]{grid-column:1;grid-row:2}
+}
+#motd .wwf-house-rules ol{width:max-content;max-width:100%;overflow-wrap:break-word}
+#wwf-era-strip #wwf-inline-rules ol{overflow-wrap:break-word}
+
+#motdwrap:has(.wwf-static-header){padding:0!important;background:transparent!important;border:0!important}
+#motd:has(.wwf-static-header){padding:0!important}
+#motd .wwf-static-header{padding:12px 15px;text-align:center;color:#f6f3f3;background:linear-gradient(111deg,#070708,#3f0a11 48%,#0b090a);border:1px solid #c81422;border-radius:5px;box-sizing:border-box}
+#motd .wwf-static-header b{display:block;font:900 clamp(25px,4vw,42px)/1.2 Impact,"Arial Black",sans-serif}
+#motd .wwf-static-header span{font:750 10px/1.4 system-ui,Arial,sans-serif;letter-spacing:.1em}
+#motd .wwf-house-bar{text-align:center;margin:3px auto;padding:0}
+#motd .wwf-house-rules summary{display:table;margin:0 auto;padding:4px 12px;color:#eee;background:#251418;border:1px solid #c81422;border-radius:4px;cursor:pointer;list-style:none;font:700 12px/1.4 system-ui,Arial,sans-serif}
+#motd .wwf-house-rules ol{margin:3px auto;padding:6px 12px 6px 29px;text-align:left;color:#eee;background:#161416;border:1px solid #c81422;border-radius:4px;box-sizing:border-box}
+body:has(#wwf-era-strip #wwf-inline-rules) #mainpage{padding-top:0!important}
+body:has(#wwf-era-strip #wwf-inline-rules) #wwf-era-strip .wwf-restored-wire{display:none!important}
+body.cinemachat #motdwrap:has(.wwf-static-header),body.cinemachat #wwf-era-strip{display:none!important}
+#wwf-era-strip .wwf-now-title #wwf-restored-track{font-size:12px}
+/* END WWF MOTD v1 */

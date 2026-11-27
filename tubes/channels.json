@@ -256,7 +256,7 @@
       "directory": "tubes/ROH",
       "stage": "onboarding",
       "adminVerified": true,
-      "backupVerified": false,
+      "backupVerified": true,
       "skinReview": "pending"
     }
   ]

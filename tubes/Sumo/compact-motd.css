@@ -2,7 +2,7 @@
 #motdwrap:has(.sumo-motd),#motd:has(.sumo-motd){padding:0!important;background:transparent!important;border:0!important}
 #motd .sumo-motd{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 144px minmax(0,1fr);align-items:start;gap:3px 6px;margin:2px 0;padding:6px 14px;border:1px solid #957956;border-top:3px solid #ba4934;border-radius:3px;background:repeating-linear-gradient(90deg,transparent 0 23px,#cbb1890b 24px,transparent 25px 48px),linear-gradient(110deg,#222e43,#172031 60%,#353039);color:#f2e6cf;text-align:left;overflow:hidden}
 #motd .sumo-title{grid-area:1/1;min-width:0;display:flex;align-items:center;gap:9px}
-#motd .sumo-title img.headimg{display:block!important;width:auto!important;height:56px!important;max-width:42%!important;object-fit:contain;margin:0!important;flex-shrink:0}
+#motd .sumo-emblem{box-sizing:border-box;display:grid;place-items:center;flex:0 0 56px;height:56px;border-radius:50%;background:radial-gradient(circle,#a23b2b 0 55%,#e0bd85 56% 59%,#222e43 60% 64%,#d7bb8c 65% 68%,transparent 69%);color:#fff1da;font:800 18px/1 "Noto Serif CJK JP","Yu Mincho",serif;text-shadow:0 1px 2px #402014;letter-spacing:-.08em}
 #motd .sumo-title b{display:block;font:800 clamp(16px,2.2vw,25px)/1.1 Georgia,serif;letter-spacing:.05em;color:#f4e5c8}
 #motd .sumo-motd small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#d5bb97;letter-spacing:.05em}
 #motd .sumo-card{grid-area:1/3;justify-self:end;text-align:right;padding:8px 0;min-width:0}
@@ -30,4 +30,7 @@ body:has(.sumo-motd) #queue .queue_entry.queue_active{background:linear-gradient
 body:has(.sumo-motd) #queue .qe_title{color:#eee3d1!important}
 body:has(.sumo-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default{background:#354054!important;border-color:#9b805f!important;color:#f0e4d2!important}
 body:has(.sumo-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default:hover{background:#53463f!important;border-color:#d6b98a!important}
+body:has(.sumo-motd) .navbar,body:has(.sumo-motd) #nav-collapsible{background:#202a3a!important;background-image:none!important}
+body:has(.sumo-motd) .navbar .navbar-nav>li>a,body:has(.sumo-motd) #nav-collapsible .navbar-nav>li>a,body:has(.sumo-motd) .navbar .navbar-brand,body:has(.sumo-motd) .navbar .navbar-text{color:#f0e4d2!important;opacity:1!important;text-shadow:none!important}
+body:has(.sumo-motd) .navbar .navbar-nav>li>a:hover,body:has(.sumo-motd) .navbar .navbar-nav>.open>a{background:#354054!important;color:#fff1d9!important}
 /* END SUMO MOTD v1 */

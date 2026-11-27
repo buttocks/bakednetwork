@@ -26,8 +26,7 @@ function objectRange(source,property,from=0,to=source.length){
     if(c==='"'){state='double';continue;}
     if(c.charCodeAt(0)===96){state='template';continue;}
     if(c==='{')depth++;
-    if(c==='}'&&--depth===0)return {open,close:i};
-    if(c==='}')depth++;
+    if(c==='}'){depth--;if(depth===0)return {open,close:i};}
   }
   return null;
 }

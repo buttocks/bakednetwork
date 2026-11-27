@@ -497,9 +497,9 @@ async function run(request){
       if(before.externaljs){
         let externalUrl;
         try{externalUrl=new URL(before.externaljs,SITE);}catch{throw Error('Invalid external JS URL; cleanup stopped without changes');}
-        const sameOriginMatch=externalUrl.origin===SITE&&/^\\/js\\/channel-loaders\\/[a-f0-9]{64}\\.js$/i.test(externalUrl.pathname);
+        const sameOriginMatch=externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname);
         const cdnMatch=externalUrl.origin==='https://cdn.jsdelivr.net'&&
-          /^\\/gh\\/buttocks\\/bakednetwork@([a-f0-9]{40})\\/tubes\\/bridge\\/cleaned-loaders\\/([a-z0-9-]+\\.js)$/i.exec(externalUrl.pathname);
+          /^\/gh\/buttocks\/bakednetwork@([a-f0-9]{40})\/tubes\/bridge\/cleaned-loaders\/([a-z0-9-]+\.js)$/i.exec(externalUrl.pathname);
         const cdnAllowed=cdnMatch&&[PREVIOUS_CLEAN_LOADER_COMMIT,CLEAN_LOADER_COMMIT].includes(cdnMatch[1])&&
           [...EXTERNAL_NATIVE_LOADERS.values()].includes(cdnMatch[2]);
         if(sameOriginMatch||cdnAllowed){
@@ -516,10 +516,10 @@ async function run(request){
             retiredModules:cleanExternal.retiredModules,changedOptions:cleanExternal.changedOptions,
             removedInputHooks:cleanExternal.removedInputHooks,removedScrollControls:cleanExternal.removedScrollControls,
             removedLayoutOverrides:cleanExternal.removedLayoutOverrides,removedCredits:cleanExternal.removedCredits};
-        }else if(externalUrl.origin===SITE&&/^\\/js\\/channel-loaders\\//i.test(externalUrl.pathname)){
+        }else if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\//i.test(externalUrl.pathname)){
           throw Error('Unrecognized same-origin loader; cleanup stopped for review');
         }else if(externalUrl.origin==='https://cdn.jsdelivr.net'&&
-          /^\\/gh\\/buttocks\\/bakednetwork@[^/]+\\/tubes\\/bridge\\/cleaned-loaders\\//i.test(externalUrl.pathname)){
+          /^\/gh\/buttocks\/bakednetwork@[^/]+\/tubes\/bridge\/cleaned-loaders\//i.test(externalUrl.pathname)){
           throw Error('Unapproved cleaned-loader CDN reference; cleanup stopped for review');
         }
       }

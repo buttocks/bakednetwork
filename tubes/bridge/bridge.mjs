@@ -538,7 +538,7 @@ async function run(request){
           externalcss:after.externalcss===before.externalcss,motd:after.motd===before.motd,
           observedJsBytes:after.js?.length??null,expectedJsBytes:cleaned.source.length,
           observedExternaljs:after.externaljs,expectedExternaljs:nextExternal};
-        await fs.writeFile(dir+'/channel-after-failure.json',JSON.stringify(after,null,2)+'\\n','utf8');
+        await fs.writeFile(dir+'/channel-after-failure.json',JSON.stringify(after,null,2)+'\n','utf8');
         const unchangedAsideFromTarget=after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
         if(unchangedAsideFromTarget&&after.js===cleaned.source&&after.externaljs===nextExternal){
           await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:before.js,externaljs:before.externaljs,setJs:cleaned.changed,setExternal:!!externalChange});

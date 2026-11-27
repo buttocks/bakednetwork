@@ -7,6 +7,7 @@
  */
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {cleanLegacyNativeFeatures,legacyNativeSelfTest} from './native-legacy-cleanup.mjs';
 
 const SITE='https://baked.live';
 const USERNAME='buttman-gpt';
@@ -33,6 +34,13 @@ function validate(raw){
   const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.action==='retire_legacy_native'){
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
+       typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
+       Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))
+      throw Error('Invalid native legacy cleanup request');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
+  }
   if(raw.action==='inventory_legacy_native'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
@@ -86,7 +94,7 @@ function validate(raw){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
-  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
   // ScaryTube is authorized only for its exact public viewer endpoint.
   if(raw.channel==='ScaryTube'&&raw.action==='add_iframe'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.stage==='established'&&c.adminVerified&&c.backupVerified)||
@@ -441,6 +449,40 @@ async function run(request){
       return {request_id:request.request_id,channel:request.channel,action:request.action,
         status:'inventoried',rank:initial.rank,admin_verified:true,...summary};
     }
+    if(request.action==='retire_legacy_native'){
+      if(!Number.isFinite(initial.rank)||initial.rank<3)throw Error('Verified channel admin required for native legacy cleanup');
+      const capture=()=>page.evaluate(()=>{const c=window.CHANNEL||{};return {channel:c.name,js:typeof c.js==='string'?c.js:'',css:c.css,externaljs:c.opts?.externaljs||'',externalcss:c.opts?.externalcss||'',motd:c.motd};});
+      const before=await capture();
+      if(String(before.channel).toLowerCase()!==request.channel.toLowerCase())throw Error('Channel identity changed before cleanup');
+      const cleaned=cleanLegacyNativeFeatures(before.js);
+      const dir='tubes/bridge/backup/'+request.channel+'/native-legacy-cleanup';
+      await fs.mkdir(dir,{recursive:true});
+      await fs.writeFile(dir+'/channel-before.json',JSON.stringify(before,null,2)+'\\n','utf8');
+      await fs.writeFile(dir+'/channel-after.js',cleaned.source,'utf8');
+      if(!cleaned.changed)return {request_id:request.request_id,channel:request.channel,action:request.action,status:'no-legacy-overrides',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions};
+      const fresh=await capture();
+      if(fresh.js!==before.js||fresh.css!==before.css||fresh.externaljs!==before.externaljs||fresh.externalcss!==before.externalcss||fresh.motd!==before.motd)
+        throw Error('Channel settings changed during review; no cleanup applied');
+      await page.evaluate(js=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');window.socket.emit('setOptions',{js});},cleaned.source);
+      let after=null;
+      for(let i=0;i<80;i++){after=await capture();if(after.js===cleaned.source)break;await page.waitForTimeout(250);}
+      if(after?.js!==cleaned.source)throw Error('Channel JS update was not confirmed; original retained');
+      await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+      await waitFor(page,state=>state.connected&&state.loggedIn&&String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
+        'Could not reconnect after native legacy cleanup',30000);
+      after=await capture();
+      if(after.js!==cleaned.source||after.css!==before.css||after.externaljs!==before.externaljs||after.externalcss!==before.externalcss||after.motd!==before.motd){
+        const observed=after.js;
+        if(observed===cleaned.source){
+          await page.evaluate(js=>window.socket.emit('setOptions',{js}),before.js);
+          for(let i=0;i<40;i++){if((await capture()).js===before.js)break;await page.waitForTimeout(250);}
+        }
+        throw Error('Post-reload verification failed; attempted JS-only rollback when safe');
+      }
+      const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,script_consent_ignored:!!(await page.evaluate(()=>window.USEROPTS?.ignore_channeljs))};
+      console.log('Native legacy cleanup '+request.channel+' '+JSON.stringify(result));
+      return result;
+    }
     if(request.action==='audit_legacy_paths'){
       const refs=await page.evaluate(()=>{
         const c=window.CHANNEL||{};
@@ -598,6 +640,7 @@ async function run(request){
   }finally{await browser.close();}
 }
 function selfTest(){
+  legacyNativeSelfTest();
   assert.equal(validate({schema:1,request_id:'test_queue_attribution',channel:'MTV',action:'fix_queue_attribution'}).action,'fix_queue_attribution');
   const nativeInventory=validate({schema:1,request_id:'native_inventory_test',channel:'MTV',action:'inventory_legacy_native'});
   assert.equal(nativeInventory.action,'inventory_legacy_native');
@@ -645,14 +688,14 @@ else{
   try{
     const raw=JSON.parse(await fs.readFile(REQUEST_PATH,'utf8'));
     if(Array.isArray(raw)){
-      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync'||r?.action==='inventory_legacy_native')?30:10))throw Error('Invalid audit batch size');
+      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync'||r?.action==='inventory_legacy_native'||r?.action==='retire_legacy_native')?30:10))throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
       if(requests.some(r=>r.action==='sync_wrestletube_chat')){
         const targets=requests.slice(1);
         if(requests[0].action!=='inventory_chat_sync'||requests[0].channel!=='Wrestling'||targets.length<1||targets.length>4||targets.some(r=>r.action!=='sync_wrestletube_chat')||new Set(targets.map(r=>r.channel)).size!==targets.length)throw Error('Sync requires fresh master followed by unique approved mirrors');
       }
       if(requests.some(r=>r.action==='pilot_chat_sync')&&!(requests.length===2&&requests[0].action==='inventory_chat_sync'&&requests[0].channel==='Wrestling'&&requests[1].action==='pilot_chat_sync'&&requests[1].channel==='wrestling2'))throw Error('Pilot requires fresh master inventory followed by Wrestling 2 only');
-      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution','inventory_chat_sync','inventory_legacy_native','pilot_chat_sync','sync_wrestletube_chat'].includes(r.action)))throw Error('Unsupported batch operation');
+      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution','inventory_chat_sync','inventory_legacy_native','retire_legacy_native','pilot_chat_sync','sync_wrestletube_chat'].includes(r.action)))throw Error('Unsupported batch operation');
       const results=[];
       for(const request of requests){
         try{const result=await run(request);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}

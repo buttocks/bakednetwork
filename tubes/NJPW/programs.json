@@ -699,6 +699,31 @@
           "duration": 595,
           "source": "Internet Archive",
           "source_channel": "NJPW Fighting Spirit '98, Hyper Battle '98 & Antonio Inoki Retirement Match ~ World Pro-Wr"
+        },
+        {
+          "title": "FREE MATCH- Cabana & Gresham vs. Archer & Taylor- New Beginning USA 2019",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=TGojF-OuYtA",
+          "youtube_id": "TGojF-OuYtA",
+          "duration": 1023,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "1982.02.05c-NJPW-Antonio Inoki & Tatsumi Fujinami VS Rusher Kimura & Animal Hamaguchi",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.02.05c-NJPW-Antonio%20Inoki%20%26%20Tatsumi%20Fujinami%20VS%20Rusher%20Kimura%20%26%20Animal%20Hamaguchi.mp4",
+          "duration": 1221,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "1982.02.12c-NJPW-Dusty Rhodes VS Abdullah the Butcher",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.02.12c-NJPW-Dusty%20Rhodes%20VS%20Abdullah%20the%20Butcher.mp4",
+          "duration": 760,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
         }
       ]
     },
@@ -1315,6 +1340,15 @@
           "duration": 9788,
           "source": "Internet Archive",
           "source_channel": "NJPW World Tag League 2026 Day 3 25-11-26"
+        },
+        {
+          "title": "FREE MATCH- Cabana & Gresham vs. Archer & Taylor- New Beginning USA 2019",
+          "episode": "NEW JAPAN PRO-WRESTLING · official programming",
+          "url": "https://www.youtube.com/watch?v=TGojF-OuYtA",
+          "youtube_id": "TGojF-OuYtA",
+          "duration": 1023,
+          "source": "YouTube",
+          "source_channel": "NEW JAPAN PRO-WRESTLING"
         }
       ]
     }

@@ -735,6 +735,23 @@
           "duration": 10107,
           "source": "YouTube",
           "source_channel": "WCW"
+        },
+        {
+          "title": "EXCLUSIVE: Brody King, Ciampa, The Jet, Ricochet & Jay White react to Continental Classic matchups",
+          "episode": "All Elite Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=D0lhTTw4wsE",
+          "youtube_id": "D0lhTTw4wsE",
+          "duration": 503,
+          "source": "YouTube",
+          "source_channel": "All Elite Wrestling"
+        },
+        {
+          "title": "wwe-smackdown-smackdown-september-1-2006.mkv-vkvideodownload",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/wwe-smackdown-smackdown-september-1-2006.mkv-vkvideodownload/wwe-smackdown-smackdown-september-1-2006.mkv-vkvideodownload.mp4",
+          "duration": 5126,
+          "source": "Internet Archive",
+          "source_channel": "wwe-smackdown-smackdown-september-1-2006.mkv-vkvideodownload"
         }
       ]
     }

@@ -1,0 +1,19 @@
+/* BEGIN RETRO MOTD FALLBACK v1 */
+#motdwrap:has(.rw-static-header){padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#motd:has(.rw-static-header){padding:0!important}
+#motd .rw-static-header{max-width:1500px;margin:6px auto 0;padding:13px 16px;text-align:center;background:linear-gradient(120deg,#2a101b,#841c2e 35%,#271222 72%,#140e18);border:2px solid #b78a30;border-radius:7px 7px 0 0;box-sizing:border-box}
+#motd .rw-static-header .rw-crown{margin:4px 0;font-size:clamp(19px,3vw,32px)}
+#motd .rw-static-header .rw-kicker{letter-spacing:.10em}
+#motd .rw-house-bar{max-width:1500px;margin:0 auto 8px;padding:5px 10px;text-align:center;background:#1d141d;border:1px solid #b78a30;border-radius:0 0 6px 6px;box-sizing:border-box}
+#motd .rw-house-rules{margin:0;padding:0}
+#motd .rw-house-rules summary{display:table;margin:0 auto;padding:5px 13px;cursor:pointer;border:1px solid #c8a04f;border-radius:4px;color:#ffe7a3;background:#261823;font-weight:700;list-style:none}
+#motd .rw-house-rules summary::-webkit-details-marker{display:none}
+#motd .rw-house-rules summary:after{content:" ▾"}
+#motd .rw-house-rules[open] summary:after{content:" ▴"}
+#motd .rw-house-rules ol{max-width:620px;margin:8px auto 3px;padding:9px 14px 9px 32px;border:1px solid #8f6327;border-radius:5px;background:#190f19;color:#f4ebda;text-align:left;box-sizing:border-box}
+body:has(#motd .rw-static-header):has(#rw-header) #motd .rw-static-header{display:none!important}
+body:has(#motd .rw-static-header) #rw-header .rw-controls,body:has(#motd .rw-static-header) #rw-header #rw-ticker{display:none!important}
+body:has(#motd .rw-static-header) #rw-header{margin-bottom:5px!important}
+body:has(#rw-header) #motd .rw-house-bar{border-radius:6px}
+@media(max-width:650px){#motd .rw-static-header{padding:10px 9px}#motd .rw-static-header .rw-kicker{font-size:9px;letter-spacing:.05em}}
+/* END RETRO MOTD FALLBACK v1 */

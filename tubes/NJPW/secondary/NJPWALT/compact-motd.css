@@ -1,0 +1,21 @@
+/* BEGIN NJPW MOTD v1 */
+#motdwrap:has(.njpw-compact),#motd:has(.njpw-compact){padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#motdwrap:has(.njpw-compact){margin:4px 0 12px!important}
+#motdwrap:has(.njpw-compact)::before{content:none!important;display:none!important}
+#motd .njpw-compact{display:grid;grid-template-columns:minmax(0,1fr);gap:3px;position:relative;margin:0;padding:7px 14px 6px;text-align:center;background:linear-gradient(115deg,#351816,#1d1716 50%,#351816);border:1px solid #94662f;border-top:3px solid #ae3529;border-radius:4px;color:#f4dfb9;overflow:hidden}
+#motd .njpw-title{display:flex;justify-content:center;align-items:center;gap:13px;min-width:0}
+#motd .njpw-lion{display:block;width:78px!important;height:78px!important;object-fit:contain;flex:none;margin:0!important;max-width:100%!important}
+#motd .njpw-wordmark{min-width:0;text-align:left}
+#motd .njpw-wordmark b{display:block;font:900 clamp(15px,2vw,24px)/1.15 system-ui,sans-serif;letter-spacing:.045em;color:#f4dfb9}
+#motd .njpw-wordmark small{display:block;font:750 10px/1.5 system-ui,sans-serif;letter-spacing:.12em;color:#e7b767;margin-top:3px}
+#motd .njpw-house-rules{position:relative;min-height:28px;min-width:0;margin:0;padding:0;text-align:center;pointer-events:none}
+#motd .njpw-house-rules summary{position:absolute;left:50%;right:auto;top:0;transform:translateX(-50%);display:inline-block;font:800 12px/1.4 system-ui,sans-serif;padding:4px 12px;border:1px solid #b68a47;border-radius:4px;background:#51221d;color:#f4dfb9;white-space:nowrap;list-style:none;cursor:pointer;pointer-events:auto}
+#motd .njpw-house-rules summary::-webkit-details-marker{display:none}
+#motd .njpw-house-rules summary:after{content:" ▾"}
+#motd .njpw-house-rules[open] summary:after{content:" ▴"}
+#motd .njpw-house-rules[open]{padding-top:27px}
+#motd .njpw-house-rules ol{width:max-content;max-width:100%;box-sizing:border-box;margin:2px auto 0;padding:6px 10px 6px 27px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#241c19;color:#f4dfb9;border:1px solid #94662f;border-radius:4px;overflow-wrap:break-word;pointer-events:auto}
+#motd .njpw-house-rules:not([open]) ol{display:none!important}
+@media(max-width:480px){#motd .njpw-title{gap:8px}#motd .njpw-lion{width:65px!important;height:65px!important}#motd .njpw-wordmark b{font-size:15px}#motd .njpw-wordmark small{font-size:9px;letter-spacing:.04em}}
+body.cinemachat #motdwrap:has(.njpw-compact){display:none!important}
+/* END NJPW MOTD v1 */

@@ -6,7 +6,7 @@
 #motd .boxing-motd small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#d7c19c;letter-spacing:.045em}
 #motd .boxing-credit a{color:#f4d08b;text-decoration:underline}
 #motd .boxing-house-rules{grid-area:1/1/2/-1;position:relative;min-height:50px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
-#motd .boxing-house-rules summary{position:absolute;right:0;top:12px;transform:none;display:table;list-style:none;white-space:nowrap;padding:4px 12px;background:#573024;color:#ffe6b4;border:1px solid #bd9453;border-radius:3px;font:800 12px/1.4 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
+#motd .boxing-house-rules summary{position:absolute;left:auto;right:0;top:12px;transform:none;display:table;list-style:none;white-space:nowrap;padding:4px 12px;background:#573024;color:#ffe6b4;border:1px solid #bd9453;border-radius:3px;font:800 12px/1.4 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
 #motd .boxing-house-rules summary:hover,#motd .boxing-house-rules summary:focus-visible{background:#79402d;color:#fff4d8}
 #motd .boxing-house-rules summary::-webkit-details-marker{display:none}
 #motd .boxing-house-rules summary:after{content:" ▾"}

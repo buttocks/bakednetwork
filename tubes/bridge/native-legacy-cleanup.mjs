@@ -163,7 +163,7 @@ export function legacyNativeSelfTest(){
   const result=cleanLegacyNativeFeatures(input);
   if(!result.changed||result.retiredModules.join(',')!=='chatline,chatext,dectalk,layout'||
     !result.source.includes('privmsg:{active:1}')||!result.source.includes('userlist:{active:1}')||
-    !result.source.includes('hotkeys:{active:1}')||!result.source.includes('moveReporting:true')||
+    !result.source.includes('hotkeys:{active:1}')||!result.source.includes('moveReporting:true')||!result.source.includes('renderer:true')||result.source.includes('autoHider:true')||
     /collapse:true|hidePlaylist:true|timeEstimates:true|chatext:\{|emoteToggle:true|chatline:\{|dectalk:\{|layout:\{/.test(result.source))
     throw Error('Native legacy source transform self-test failed');
   const handlers=cleanLegacyNativeFeatures(input+"\n"+

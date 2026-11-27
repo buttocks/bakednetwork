@@ -3,11 +3,12 @@ on:
   push:
     paths:
       - tubes/bridge/acfun-stream-once.json
+      - tubes/bridge/acfun-stream-retry.json
 permissions:
   contents: read
 jobs:
   add-stream:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}

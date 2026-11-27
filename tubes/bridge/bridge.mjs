@@ -534,12 +534,17 @@ async function run(request){
       after=await capture();
       const verified=after.js===cleaned.source&&after.externaljs===nextExternal&&after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
       if(!verified){
+        const mismatch={js:after.js===cleaned.source,externaljs:after.externaljs===nextExternal,css:after.css===before.css,
+          externalcss:after.externalcss===before.externalcss,motd:after.motd===before.motd,
+          observedJsBytes:after.js?.length??null,expectedJsBytes:cleaned.source.length,
+          observedExternaljs:after.externaljs,expectedExternaljs:nextExternal};
+        await fs.writeFile(dir+'/channel-after-failure.json',JSON.stringify(after,null,2)+'\\n','utf8');
         const unchangedAsideFromTarget=after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
         if(unchangedAsideFromTarget&&after.js===cleaned.source&&after.externaljs===nextExternal){
           await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:before.js,externaljs:before.externaljs,setJs:cleaned.changed,setExternal:!!externalChange});
           for(let i=0;i<40;i++){const restored=await capture();if(restored.js===before.js&&restored.externaljs===before.externaljs)break;await page.waitForTimeout(250);}
         }
-        throw Error('Post-reload verification failed; attempted JS and external loader rollback only when target values were still live');
+        throw Error('Post-reload verification failed: '+JSON.stringify(mismatch));
       }
       const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,
         retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,removed_input_hooks:cleaned.removedInputHooks,

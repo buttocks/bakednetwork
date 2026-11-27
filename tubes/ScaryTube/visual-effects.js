@@ -12,11 +12,21 @@
   const span=document.createElement('span');span.className='scary-visual-text scary-fx-'+tone;chip.after(span);for(const n of nodes)span.append(n);chip.classList.add('scary-fx-consumed');
  }
  function presence(row){
-  if(!row||row.dataset.scaryPresence||row.querySelector('.username')||row.matches('[class*="chat-msg-"]'))return;
-  const notice=row.matches('.server-msg,.server-msg-join,.server-msg-leave')?row:row.querySelector('.server-msg,.server-msg-join,.server-msg-leave');
-  if(!notice)return;
-  const text=notice.textContent.replace(/^\s*\[[^\]]+\]\s*/,'').trim();
-  if(!/^(?:\S+\s+)(?:joined|left)(?:\s+(?:the channel|the room|\(aliases:[^)]*\)))?[.!]?\s*$/i.test(text))return;
+  if(!row||row.dataset.scaryPresence)return;
+  // Explicit native presence classes and legacy server-whisper rows only.
+  const explicit='.server-msg-join,.server-msg-leave,.server-msg-part,.server-msg-userjoin,.server-msg-userleave';
+  const notice=row.matches(explicit)?row:row.querySelector(explicit);
+  const whisper=row.matches('.server-whisper')?row:row.querySelector('.server-whisper');
+  const generic=row.matches('.server-msg')?row:row.querySelector('.server-msg');
+  const chat=row.className.includes('chat-msg-')||row.classList.contains('baked-chat-message');
+  const username=row.querySelector('.username')?.textContent.trim().replace(/:$/,'')||'';
+  const serverIdentity=/^(?:\[server\]|\$server\$|server)$/i.test(username)||/\$server\$|\\\$server\\\$|chat-msg-\\?\[server\\?\]/i.test(row.className);
+  if(!notice&&!(whisper&&serverIdentity)&&!(generic&&!chat))return;
+  // Strip server labels and timestamp nodes from a local copy, never alter the displayed text.
+  const copy=(notice||row).cloneNode(true);
+  copy.querySelectorAll('.timestamp,.username,.time').forEach(n=>{if(n.classList.contains('username')&&!serverIdentity)return;n.remove()});
+  const text=copy.textContent.replace(/^\s*\[\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AP]M)?\]\s*/i,'').replace(/^\s*(?:\[server\]|\$server\$|server)\s*:?\s*/i,'').trim();
+  if(!notice&&!/^\S+(?:\s+\(aliases:[^)]*\))?\s+(?:joined|left|disconnected)(?:\s+(?:the channel|the room|\(aliases:[^)]*\)))?[.!]?\s*$/i.test(text))return;
   row.dataset.scaryPresence='1';row.classList.add('scary-fade-presence');
   setTimeout(()=>row.classList.add('scary-fading'),8000);
   setTimeout(()=>row.classList.add('scary-gone'),10000);

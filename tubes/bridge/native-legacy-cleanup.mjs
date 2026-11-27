@@ -75,6 +75,29 @@ function setBoolean(parts,names,value){
     return part.replace(/(:\s*)(?:true|false)(?=\s*(?:,|$))/,'$1'+value);
   });
 }
+function removeBoundCall(source,startPattern){
+  const match=startPattern.exec(source);
+  if(!match)return {source,removed:false};
+  const start=match.index;let paren=0,brace=0,bracket=0,state='code';
+  for(let i=start;i<source.length;i++){
+    const c=source[i],n=source[i+1];
+    if(state==='line'){if(c==='\n')state='code';continue;}
+    if(state==='block'){if(c==='*'&&n==='/'){state='code';i++;}continue;}
+    if(state==='single'){if(c==='\\'){i++;continue;}if(c==="'")state='code';continue;}
+    if(state==='double'){if(c==='\\'){i++;continue;}if(c==='"')state='code';continue;}
+    if(state==='template'){if(c==='\\'){i++;continue;}if(c.charCodeAt(0)===96)state='code';continue;}
+    if(c==='/'&&n==='/'){state='line';i++;continue;}
+    if(c==='/'&&n==='*'){state='block';i++;continue;}
+    if(c==="'"){state='single';continue;}
+    if(c==='"'){state='double';continue;}
+    if(c.charCodeAt(0)===96){state='template';continue;}
+    if(c==='(')paren++;else if(c===')')paren--;
+    else if(c==='{')brace++;else if(c==='}')brace--;
+    else if(c==='[')bracket++;else if(c===']')bracket--;
+    else if(c===';'&&paren===0&&brace===0&&bracket===0)return {source:source.slice(0,start)+source.slice(i+1),removed:true};
+  }
+  return {source,removed:false};
+}
 export function cleanLegacyNativeFeatures(source){
   if(typeof source!=='string'||!source)return {source,changed:false,retiredModules:[],changedOptions:[]};
   let next=source;
@@ -101,7 +124,23 @@ export function cleanLegacyNativeFeatures(source){
     }
     next=optionSource;
   }
-  return {source:next,changed:next!==source,retiredModules:[...new Set(retiredModules)],changedOptions};
+  const removedInputHooks=[];
+  for(const [name,pattern] of [
+    ['emote-click-insert',/\$\(\s*['"]#chatwrap['"]\s*\)\.on\(\s*['"]click['"]\s*,\s*['"]\.channel-emote['"]\s*,\s*function\s*\(\s*e\s*\)\s*\{/],
+    ['username-click-insert',/\$\(\s*['"]#messagebuffer['"]\s*\)\.on\(\s*['"]click['"]\s*,\s*['"]\.username['"]\s*,\s*function\s*\(\s*e\s*\)\s*\{/]
+  ]){
+    const result=removeBoundCall(next,pattern);
+    next=result.source;
+    if(result.removed)removedInputHooks.push(name);
+  }
+  const scrollControl=/scrollbtn\s*=\s*\$\('<button id="scroll-btn"[\s\S]*?\.on\("click",\s*function\(\)\s*\{\s*scrollQueue\(\);\s*\}\);/g;
+  const scrollMatches=next.match(scrollControl)||[];
+  next=next.replace(scrollControl,'');
+  const removedLayoutOverride=/^\s*USEROPTS\.layout\s*=\s*["']fluid["'];?\s*$/gm;
+  const layoutCount=(next.match(removedLayoutOverride)||[]).length;
+  next=next.replace(removedLayoutOverride,'');
+  return {source:next,changed:next!==source,retiredModules:[...new Set(retiredModules)],changedOptions,
+    removedInputHooks,removedScrollControls:scrollMatches.length,removedLayoutOverrides:layoutCount};
 }
 export function legacyNativeSelfTest(){
   const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';

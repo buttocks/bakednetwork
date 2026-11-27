@@ -2,7 +2,7 @@ name: WrestleTube shared filters and macros
 
 on:
   schedule:
-    - cron: '13 * * * *'
+    - cron: '13 9 1 * *'
   workflow_dispatch:
 
 permissions:

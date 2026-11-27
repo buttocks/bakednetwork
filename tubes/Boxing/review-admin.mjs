@@ -10,6 +10,8 @@ try{
  await p.waitForTimeout(8000);
  const data=await p.evaluate(()=>{const c=CHANNEL,o=c.opts||{};return {channel:c.name,css:c.css||'',js:c.js||'',motd:c.motd||'',externalJs:o.externaljs||'',externalCss:o.externalcss||''}});
  assert.equal(data.channel.toLowerCase(),'boxing');
+ const branding=await p.evaluate(()=>{const nav=document.querySelector('nav.navbar,.navbar');return {markup:nav?.querySelector('.navbar-header')?.outerHTML,brands:[...nav?.querySelectorAll('.navbar-brand,img,[id*=logo],[class*=logo]')||[]].map(e=>({markup:e.outerHTML.slice(0,1500),background:getComputedStyle(e).backgroundImage,before:getComputedStyle(e,'::before').content,after:getComputedStyle(e,'::after').content,width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))};});console.log('BOXING_NAV_BRANDING '+JSON.stringify(branding));
+ console.log('BOXING_BRAND_SOURCE '+JSON.stringify({css:data.css.split('\n').filter(x=>/logo|brand|nav.*img|nav.*url/i.test(x)),js:data.js.split('\n').filter(x=>/logo|brand|nav.*img|nav.*url/i.test(x)).map(x=>x.slice(0,2000))}));
  const source={adminVerified:true,css:data.css.length,js:data.js.length,motd:data.motd.length,externalJs:data.externalJs,externalCss:data.externalCss,
   jsHeaderLines:data.js.split('\n').flatMap((line,i)=>{if(!/header|banner|motd|logo|rules|welcome|innerHTML|insertAdjacent|prepend|afterend|Xaekai|module_settings/i.test(line))return [];return [{line:i+1,excerpt:line.slice(0,1300)}]}).slice(0,60),
   cssHeaderLines:data.css.split('\n').flatMap((line,i)=>/header|banner|motd|logo|rules|navbar|mainpage/i.test(line)?[{line:i+1,excerpt:line.slice(0,500)}]:[]).slice(0,60)};

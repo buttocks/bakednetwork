@@ -1,0 +1,37 @@
+/* BEGIN MTV MOTD v1 */
+#motdwrap:has(.mtv-motd),#motd:has(.mtv-motd){padding:0!important;background:transparent!important;border:0!important}
+#motd .mtv-motd{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 144px minmax(0,1fr);align-items:start;gap:3px 6px;margin:2px 0;padding:7px 12px;border:1px solid #5b456d;border-bottom:4px solid #f2de38;border-radius:3px;background:linear-gradient(110deg,#21203b 0%,#191621 58%,#321c35);color:#fff;text-align:left;overflow:hidden}
+#motd .mtv-motd:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 29px,#e762b414 30px 33px,transparent 34px 64px);pointer-events:none}
+#motd .mtv-title{grid-area:1/1;min-width:0;position:relative}
+#motd .mtv-title b{display:block;font:1000 clamp(23px,3.3vw,38px)/1 Impact,"Arial Black",system-ui,sans-serif;letter-spacing:-.035em;color:#f7e43c;text-shadow:2px 2px #bc388b}
+#motd .mtv-title b span{font:900 12px/1 system-ui,sans-serif;letter-spacing:.12em;color:#65e8e3;text-shadow:none;margin-left:8px;white-space:nowrap}
+#motd .mtv-motd small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#d6c9df;letter-spacing:.07em}
+#motd .mtv-card{grid-area:1/3;justify-self:end;text-align:right;padding:4px 0;min-width:0;position:relative}
+#motd .mtv-card b{display:block;font:900 italic 15px/1.3 system-ui,sans-serif;letter-spacing:.14em;color:#f586c6}
+#motd .mtv-house-rules{grid-area:1/1/2/-1;position:relative;min-height:52px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
+#motd .mtv-house-rules summary{position:absolute;left:50%;top:8px;transform:translateX(-50%);display:table;list-style:none;white-space:nowrap;padding:4px 12px;background:#f2de38;color:#211a29;border:1px solid #faeb6f;border-radius:2px;font:800 12px/1.4 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
+#motd .mtv-house-rules summary:hover,#motd .mtv-house-rules summary:focus-visible{background:#74e5e0}
+#motd .mtv-house-rules summary::-webkit-details-marker{display:none}
+#motd .mtv-house-rules summary:after{content:" ▾"}
+#motd .mtv-house-rules[open] summary:after{content:" ▴"}
+#motd .mtv-house-rules[open]{padding-top:35px}
+#motd .mtv-house-rules ol{width:max-content;max-width:100%;box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#211b30;color:#f1e8f7;border:1px solid #bd6aa9;border-radius:3px;overflow-wrap:break-word;pointer-events:auto}
+#motd .mtv-house-rules li::marker{color:#73ddd7}
+#motd .mtv-house-rules:not([open]) ol{display:none!important}
+@media(max-width:850px){#motd .mtv-motd{grid-template-columns:minmax(0,1fr);text-align:center}#motd .mtv-card{display:none}#motd .mtv-house-rules{grid-row:2;min-height:28px}#motd .mtv-house-rules summary{top:0}#motd .mtv-house-rules[open]{padding-top:27px}}
+body.cinemachat #motdwrap:has(.mtv-motd){display:none!important}
+/* Static analog broadcast surfaces; no layout or player changes. */
+body:has(.mtv-motd){--bn-border:#58466d;--bn-accent:#f2de38;--bn-text:#eae2ef;background-color:#171421!important;background-image:radial-gradient(ellipse at 8% 12%,#2e426c66,transparent 48%),radial-gradient(ellipse at 95% 5%,#832e6944,transparent 55%),repeating-linear-gradient(0deg,transparent 0 5px,#ffffff05 6px,transparent 7px 12px),linear-gradient(145deg,#222034,#171421 65%,#231928)!important;background-attachment:fixed!important;color:#eae2ef}
+body:has(.mtv-motd) :is(#wrap,#mainpage,#main,#leftpane,#rightpane){background:transparent!important}
+body:has(.mtv-motd) nav.navbar{background:#201b30!important;border-color:#6c4f84!important;border-bottom-color:#f2de38!important}
+body:has(.mtv-motd) nav.navbar .navbar-nav>li>a,body:has(.mtv-motd) nav.navbar .navbar-brand{color:#eee5f3!important}
+body:has(.mtv-motd) :is(#chatwrap,#playlistwrap,#messagebuffer,#userlist,#queue,#chatline,#notepad,#leftpane textarea){background:#1e192b!important;border-color:#66527c!important;color:#eee6f3}
+body:has(.mtv-motd) :is(#chatheader,#playlistheader,#currenttitle){background:#352744!important;border-color:#76588a!important;color:#f5eafa!important}
+body:has(.mtv-motd) #queue .queue_entry{background:#262034!important;border-color:#554461!important}
+body:has(.mtv-motd) #queue .queue_entry:nth-child(even):not(.queue_active){background:#2b233a!important}
+body:has(.mtv-motd) #queue .queue_entry.queue_active{background:linear-gradient(100deg,#3d3450,#234346)!important;box-shadow:inset 3px 0 #73ded8!important;color:#fff!important}
+body:has(.mtv-motd) #queue .qe_title{color:#efe6f5!important}
+body:has(.mtv-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default{background:#342940!important;border-color:#795b8b!important;color:#f0e5f6!important}
+body:has(.mtv-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default:hover{background:#594065!important;border-color:#72ddd5!important}
+body:has(.mtv-motd) :is(#footer,footer){background:#17131f!important;border-top:1px solid #574565!important;color:#bfb0cc}
+/* END MTV MOTD v1 */

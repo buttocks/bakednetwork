@@ -76,7 +76,7 @@ function setBoolean(parts,names,value){
   });
 }
 function setNestedBooleans(parts,parentName,names,value){
-  const re=new RegExp('\\b('+[...names].join('|')+')\\s*:\\s*(?:true|false|!0|!1)\\b?','g');
+  const re=new RegExp('\\b('+[...names].join('|')+')\\s*:\\s*(?:true|false|!0|!1)(?=\\s*(?:,|\\}|\\)|$))','g');
   return parts.map(part=>propName(part)===parentName?part.replace(re,(_,key)=>key+':'+value):part);
 }
 function disableAutoHider(parts){

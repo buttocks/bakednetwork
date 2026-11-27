@@ -1,0 +1,32 @@
+/* BEGIN SCARY MOTD v1 */
+#motdwrap:has(.scary-static-header),#motd:has(.scary-static-header){padding:0!important;background:transparent!important;border:0!important}
+#motd .scary-static-header{padding:9px 12px;text-align:center;color:#f0e8e0;background:linear-gradient(113deg,#080709,#39121f 54%,#0d0a10);border:1px solid #7d3445;border-top:3px solid #cf3548;border-radius:4px}
+#motd .scary-static-header b{display:block;font:950 clamp(25px,4vw,42px)/1.15 Impact,"Arial Black",sans-serif}
+#motd .scary-static-header small{font:750 10px/1.4 system-ui,Arial,sans-serif;color:#ceb6b7}
+#motd .scary-house-bar{text-align:center;margin:3px auto}
+.scary-house-rules summary{display:table;margin:0 auto;padding:4px 12px;color:#ffd2d9;background:#321521;border:1px solid #913b50;border-radius:4px;cursor:pointer;list-style:none;font:700 12px/1.4 system-ui,Arial,sans-serif;white-space:nowrap}
+.scary-house-rules summary::-webkit-details-marker{display:none}
+.scary-house-rules summary:after{content:" ▾"}
+.scary-house-rules[open] summary:after{content:" ▴"}
+.scary-house-rules ol{width:max-content;max-width:100%;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;color:#f0e8e0;background:#160d16;border:1px solid #913b50;border-radius:4px;box-sizing:border-box;overflow-wrap:break-word}
+.scary-house-rules:not([open]) ol{display:none!important}
+body:has(#horror-banner #scary-inline-rules) #motdrow:has(.scary-static-header){display:none!important}
+body:has(#horror-banner #scary-inline-rules) #mainpage{padding-top:0!important}
+#horror-banner:has(#scary-inline-rules){display:grid!important;grid-template-columns:minmax(0,1fr) 144px minmax(0,1fr);align-items:start;gap:3px 8px;padding:9px 18px;margin-bottom:4px}
+#horror-banner:has(#scary-inline-rules) .horror-banner-identity{grid-column:1;grid-row:1;align-self:start;min-width:0}
+#horror-banner:has(#scary-inline-rules) .horror-banner-identity strong{font-size:clamp(30px,4vw,52px)}
+#horror-banner:has(#scary-inline-rules) .horror-banner-side{grid-column:3;grid-row:1;justify-self:end;align-self:start}
+#horror-banner #scary-inline-rules{grid-column:1/-1;grid-row:1;position:relative;z-index:2;text-align:center;min-width:0;min-height:102px;margin:0;padding:0;pointer-events:none}
+#horror-banner #scary-inline-rules summary{position:absolute;left:50%;top:74px;transform:translateX(-50%);pointer-events:auto}
+#horror-banner #scary-inline-rules[open]{padding-top:101px}
+#horror-banner #scary-inline-rules ol{pointer-events:auto}
+@media(max-width:1000px){
+#horror-banner:has(#scary-inline-rules){grid-template-columns:minmax(0,1fr) auto;gap:3px 8px;padding:9px 12px}
+#horror-banner:has(#scary-inline-rules) .horror-banner-side{grid-column:2}
+#horror-banner:has(#scary-inline-rules) .horror-banner-identity strong{font-size:clamp(27px,6vw,43px)}
+#horror-banner #scary-inline-rules{grid-row:2;min-height:28px}
+#horror-banner #scary-inline-rules summary{top:0}
+#horror-banner #scary-inline-rules[open]{padding-top:27px}
+}
+body.cinemachat #motdwrap:has(.scary-static-header),body.cinemachat #horror-banner{display:none!important}
+/* END SCARY MOTD v1 */

@@ -106,6 +106,15 @@ function removeBoundCall(source,startPattern){
   }
   return {source,removed:false};
 }
+function removeCommaScrollControls(source){
+  let next=source,removed=0;
+  const patterns=[
+    /,\s*scrollbtn\s*=\s*\$\(\s*['"]<button id="scroll-btn"[\s\S]*?\.on\(\s*['"]click['"],\s*function\(\)\s*\{\s*scrollQueue\(\)\s*\}\s*\)\s*,(?=\s*\{\s*options\s*:)/g,
+    /,\s*document\.getElementById\(\s*['"]scroll-btn['"]\s*\)\s*\|\|\s*\$\(\s*['"]<button id="scroll-btn"[\s\S]*?\.on\(\s*['"]click['"],\s*function\(\)\s*\{[\s\S]*?\}\s*\)\s*,(?=\s*\{\s*options\s*:)/g
+  ];
+  for(const pattern of patterns)next=next.replace(pattern,()=>{removed++;return ',';});
+  return {source:next,removed};
+}
 export function cleanLegacyNativeFeatures(source){
   if(typeof source!=='string'||!source)return {source,changed:false,retiredModules:[],changedOptions:[]};
   let next=source;
@@ -160,11 +169,13 @@ export function cleanLegacyNativeFeatures(source){
   const scrollControl=/scrollbtn\s*=\s*\$\('<button id="scroll-btn"[\s\S]*?\.on\("click",\s*function\(\)\s*\{\s*scrollQueue\(\);\s*\}\);/g;
   const scrollMatches=next.match(scrollControl)||[];
   next=next.replace(scrollControl,'');
+  const commaScroll=removeCommaScrollControls(next);
+  next=commaScroll.source;
   const removedLayoutOverride=/^\s*USEROPTS\.layout\s*=\s*["']fluid["'];?\s*$/gm;
   const layoutCount=(next.match(removedLayoutOverride)||[]).length;
   next=next.replace(removedLayoutOverride,'');
   return {source:next,changed:next!==source,retiredModules:[...new Set(retiredModules)],changedOptions,
-    removedInputHooks,removedScrollControls:scrollMatches.length,removedLayoutOverrides:layoutCount,removedCredits};
+    removedInputHooks,removedScrollControls:scrollMatches.length+commaScroll.removed,removedLayoutOverrides:layoutCount,removedCredits};
 }
 export function legacyNativeSelfTest(){
   const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},userlist:{autoHider:true,renderer:true},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';
@@ -188,6 +199,12 @@ export function legacyNativeSelfTest(){
   if(cleanedAttribution.source.includes('Xaekai')||cleanedAttribution.source.includes('[XaeModule]')||
     !cleanedAttribution.source.includes('[Baked modules]'))
     throw Error('Legacy loader attribution cleanup self-test failed');
+  const commaScrollCases=["({branding:true,scrollbtn=$('<button id=\"scroll-btn\" />').append('<span/>').on(\"click\",function(){scrollQueue()}),{options:{}}})","({branding:true,document.getElementById(\"scroll-btn\")||$('<button id=\"scroll-btn\" />').on(\"click\",function(){typeof scrollQueue===\"function\"?scrollQueue():document.querySelector(\"#queue .queue_active\").scrollIntoView({block:\"center\"})}),{options:{}}})"];
+  for(const sample of commaScrollCases){
+    const cleaned=removeCommaScrollControls(sample);
+    if(cleaned.removed!==1||cleaned.source.includes('scroll-btn')||!cleaned.source.includes(',{options:'))
+      throw Error('Compact native scroll-control cleanup self-test failed');
+  }
   const minified='({options:{playlist:Object.assign({},{collapse:!0,hidePlaylist:!0,inlineBlame:!0,recentMedia:!0,thumbnails:!0,timeEstimates:!0}),userlist:{autoHider:!(window.CyTube&&window.CyTube.roster&&1<=window.CyTube.roster.version)}},modules:{privmsg:{active:1},chatline:{active:1}}})';
   const minifiedResult=cleanLegacyNativeFeatures(minified);
   if(!minifiedResult.source.includes('privmsg:{active:1}')||minifiedResult.source.includes('chatline:{')||

@@ -1,0 +1,33 @@
+/* BEGIN SUMO MOTD v1 */
+#motdwrap:has(.sumo-motd),#motd:has(.sumo-motd){padding:0!important;background:transparent!important;border:0!important}
+#motd .sumo-motd{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 144px minmax(0,1fr);align-items:start;gap:3px 6px;margin:2px 0;padding:6px 14px;border:1px solid #957956;border-top:3px solid #ba4934;border-radius:3px;background:repeating-linear-gradient(90deg,transparent 0 23px,#cbb1890b 24px,transparent 25px 48px),linear-gradient(110deg,#222e43,#172031 60%,#353039);color:#f2e6cf;text-align:left;overflow:hidden}
+#motd .sumo-title{grid-area:1/1;min-width:0;display:flex;align-items:center;gap:9px}
+#motd .sumo-title img.headimg{display:block!important;width:auto!important;height:56px!important;max-width:42%!important;object-fit:contain;margin:0!important;flex-shrink:0}
+#motd .sumo-title b{display:block;font:800 clamp(16px,2.2vw,25px)/1.1 Georgia,serif;letter-spacing:.05em;color:#f4e5c8}
+#motd .sumo-motd small{display:block;font:700 10px/1.4 system-ui,sans-serif;color:#d5bb97;letter-spacing:.05em}
+#motd .sumo-card{grid-area:1/3;justify-self:end;text-align:right;padding:8px 0;min-width:0}
+#motd .sumo-card b{display:block;font:800 15px/1.3 Georgia,serif;letter-spacing:.12em;color:#e9d3ad}
+#motd .sumo-house-rules{grid-area:1/1/2/-1;position:relative;min-height:56px;min-width:0;text-align:center;pointer-events:none;margin:0;padding:0;z-index:2}
+#motd .sumo-house-rules summary{position:absolute;left:50%;top:12px;transform:translateX(-50%);display:table;list-style:none;white-space:nowrap;padding:4px 12px;background:#e5d2ae;color:#332a24;border:1px solid #c7a577;border-radius:3px;font:800 12px/1.4 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
+#motd .sumo-house-rules summary::-webkit-details-marker{display:none}
+#motd .sumo-house-rules summary:after{content:" ▾"}
+#motd .sumo-house-rules[open] summary:after{content:" ▴"}
+#motd .sumo-house-rules[open]{padding-top:39px}
+#motd .sumo-house-rules ol{width:max-content;max-width:100%;box-sizing:border-box;margin:2px auto 0;padding:6px 12px 6px 29px;text-align:left;font:13px/1.5 system-ui,sans-serif;background:#202b3d;color:#f1e7d5;border:1px solid #a7885c;border-radius:3px;overflow-wrap:break-word;pointer-events:auto}
+#motd .sumo-house-rules li::marker{color:#e2b77e}
+#motd .sumo-house-rules:not([open]) ol{display:none!important}
+@media(max-width:850px){#motd .sumo-motd{grid-template-columns:minmax(0,1fr);text-align:center}#motd .sumo-title{justify-content:center}#motd .sumo-card{display:none}#motd .sumo-house-rules{grid-row:2;min-height:28px}#motd .sumo-house-rules summary{top:0}#motd .sumo-house-rules[open]{padding-top:27px}}
+body.cinemachat #motdwrap:has(.sumo-motd){display:none!important}
+body:has(.sumo-motd){background-color:#172131!important;background-image:radial-gradient(ellipse at 85% 0%,#9f493b30,transparent 50%),repeating-linear-gradient(45deg,transparent 0 22px,#d3b78309 23px,transparent 24px 46px),linear-gradient(140deg,#263449,#172131 60%,#242836)!important;background-attachment:fixed!important;color:#f0e4d2}
+body:has(.sumo-motd) :is(#wrap,#mainpage,#main,#leftpane,#rightpane){background:transparent!important}
+body:has(.sumo-motd) :is(nav.navbar,#nav-collapsible,#footer){background:#202a3a!important;border-color:#9a7957!important;color:#f0e4d2!important}
+body:has(.sumo-motd) nav.navbar .navbar-nav>li>a,body:has(.sumo-motd) nav.navbar .navbar-brand{color:#f0e4d2!important}
+body:has(.sumo-motd) :is(#chatwrap,#playlistwrap,#messagebuffer,#userlist,#queue,#chatline,#notepad,#leftpane textarea){background:#1b2637!important;border-color:#816a52!important;color:#eae0cf}
+body:has(.sumo-motd) :is(#chatheader,#playlistheader,#currenttitle){background:#354054!important;border-color:#a48960!important;color:#f5e6cf!important}
+body:has(.sumo-motd) #queue .queue_entry{background:#253144!important;border-color:#635a53!important}
+body:has(.sumo-motd) #queue .queue_entry:nth-child(even):not(.queue_active){background:#2b384b!important}
+body:has(.sumo-motd) #queue .queue_entry.queue_active{background:linear-gradient(100deg,#673a32,#3b3541)!important;box-shadow:inset 3px 0 #d87551!important;color:#fff1d9!important}
+body:has(.sumo-motd) #queue .qe_title{color:#eee3d1!important}
+body:has(.sumo-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default{background:#354054!important;border-color:#9b805f!important;color:#f0e4d2!important}
+body:has(.sumo-motd) :is(#videocontrols,#playlistcontrols,#leftcontrols,#rightcontrols) .btn-default:hover{background:#53463f!important;border-color:#d6b98a!important}
+/* END SUMO MOTD v1 */

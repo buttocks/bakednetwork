@@ -115,6 +115,10 @@ export function cleanLegacyNativeFeatures(source){
   const authorCount=(next.match(authorLine)||[]).length;
   next=next.replace(authorLine,'');
   if(authorCount)removedCredits.push('author-attribution');
+  const creditLines=/^\s*(?:\/\/\s*|\*+\s*|\*\*\|\s*)[^\r\n]*\bXaekai\b[^\r\n]*$/gim;
+  const creditLineCount=(next.match(creditLines)||[]).length;
+  next=next.replace(creditLines,'');
+  if(creditLineCount&&!removedCredits.includes('author-attribution'))removedCredits.push('author-attribution');
   const moduleLabel=(next.match(/\[XaeModule\]/g)||[]).length;
   next=next.replace(/\[XaeModule\]/g,'[Baked modules]');
   if(moduleLabel)removedCredits.push('loader-console-label');

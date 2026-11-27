@@ -1,0 +1,19 @@
+/* BEGIN SCARY CHAT EFFECTS v2 */
+#messagebuffer .horror-fx:not(.horror-spoiler),#messagebuffer .scary-visual-text,#horror-effects-dropdown .scary-visual-text{display:inline;padding:0;margin:0;border:0;border-radius:0;background:transparent!important;font-size:inherit;font-weight:inherit;letter-spacing:normal;vertical-align:baseline;box-shadow:none;filter:none;text-shadow:none}
+#messagebuffer .horror-text.horror-blood,#messagebuffer .scary-fx-blood,#horror-effects-dropdown .scary-fx-blood{color:#ff969e;text-shadow:0 1px #770922,0 0 5px #d12b49,0 0 9px #86102a;animation:scary-blood 4s ease-in-out 2}
+#messagebuffer .horror-text.horror-whisper,#messagebuffer .scary-fx-whisper,#horror-effects-dropdown .scary-fx-whisper{color:#b3a7bf;letter-spacing:.12em;font-style:italic;text-shadow:0 0 3px #81738b}
+#messagebuffer .horror-text.horror-glitch,#messagebuffer .scary-fx-glitch,#horror-effects-dropdown .scary-fx-glitch{color:#f4efff;text-shadow:-1px 0 #e85886,1px 0 #63b7c9;animation:scary-glitch 4s ease-in-out 2}
+#messagebuffer .horror-text.horror-static,#messagebuffer .scary-fx-static,#horror-effects-dropdown .scary-fx-static{font-family:Consolas,monospace;color:#dadce3;letter-spacing:.08em;text-shadow:1px 1px #636b82,-1px 0 #9699ae;animation:scary-static 5s ease-in-out 2}
+#messagebuffer .horror-text.horror-night,#messagebuffer .scary-fx-night,#horror-effects-dropdown .scary-fx-night{font-family:Consolas,monospace;color:#b5e2a0;text-shadow:0 0 4px #3d9a53,0 0 8px #2a623a}
+#messagebuffer .scary-fx-midnight,#horror-effects-dropdown .scary-fx-midnight{color:#d6d3ea;font-family:Georgia,serif;font-style:italic;text-shadow:0 0 3px #aaa1d9,0 0 9px #7b6daf;animation:scary-ghost 5s ease-in-out 2}
+#messagebuffer .scary-fx-possessed,#horror-effects-dropdown .scary-fx-possessed{color:#e6bfd8;font-family:Georgia,serif;font-style:italic;text-shadow:1px 2px #5f2a67,-1px -1px #572c59,0 0 6px #a15d98;animation:scary-glitch 5s ease-in-out 2}
+#messagebuffer .horror-chip.scary-fx-consumed{display:none!important}
+#messagebuffer .scary-fade-presence{opacity:1;transition:opacity 2s ease}
+#messagebuffer .scary-fade-presence.scary-fading{opacity:0}
+#messagebuffer .scary-fade-presence.scary-gone{display:none!important}
+@keyframes scary-blood{0%,100%{text-shadow:0 1px #770922,0 0 5px #d12b49,0 0 9px #86102a}50%{text-shadow:0 2px #770922,0 0 8px #dc4057,0 0 12px #a81734}}
+@keyframes scary-ghost{0%,100%{text-shadow:0 0 3px #aaa1d9,0 0 9px #7b6daf}50%{text-shadow:0 0 6px #aaa1d9,0 0 13px #7b6daf}}
+@keyframes scary-glitch{0%,100%{text-shadow:-1px 0 #e85886,1px 0 #63b7c9}50%{text-shadow:1px 1px #e85886,-1px 0 #63b7c9}}
+@keyframes scary-static{0%,100%{text-shadow:1px 1px #636b82,-1px 0 #9699ae}50%{text-shadow:-1px 1px #636b82,1px 0 #9699ae}}
+@media(prefers-reduced-motion:reduce){#messagebuffer .scary-visual-text,#messagebuffer .horror-fx,#horror-effects-dropdown .scary-visual-text{animation:none!important}#messagebuffer .scary-fade-presence{transition:none!important}}
+/* END SCARY CHAT EFFECTS v2 */

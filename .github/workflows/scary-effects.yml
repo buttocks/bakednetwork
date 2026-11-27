@@ -1,0 +1,31 @@
+name: ScaryTube visual chat effects and presence fade
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/scary-effects.yml','tubes/ScaryTube/deploy-visual-effects.mjs','tubes/ScaryTube/visual-effects.js','tubes/ScaryTube/visual-effects.css']
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/ScaryTube/deploy-visual-effects.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/ScaryTube/deploy-visual-effects.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scary-effects-review
+          path: scary-effects-review/
+          retention-days: 30

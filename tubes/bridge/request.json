@@ -1,8 +1,182 @@
 [
   {
     "schema": 1,
-    "request_id": "nativeclean_roh_20261127",
+    "request_id": "native-inventory-postclean-01",
+    "channel": "luchatube",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-02",
+    "channel": "NJPW",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-03",
+    "channel": "Wrestling",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-04",
+    "channel": "RetroWrestling",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-05",
+    "channel": "WWF-WWE",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-06",
+    "channel": "RDH",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-07",
+    "channel": "ScaryTube",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-08",
+    "channel": "WID",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-09",
+    "channel": "WCW",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-10",
+    "channel": "joshi",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-11",
+    "channel": "puro",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-12",
+    "channel": "ajpw",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-13",
+    "channel": "Noah",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-14",
+    "channel": "wrestling2",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-15",
+    "channel": "indies",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-16",
+    "channel": "shoot",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-17",
+    "channel": "wrestling3",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-18",
+    "channel": "Wrestling4",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-19",
+    "channel": "boxing",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-20",
+    "channel": "DGalt",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-21",
+    "channel": "DG",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-22",
+    "channel": "wrestling5",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-23",
+    "channel": "NJPWALT",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-24",
+    "channel": "rizin",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-25",
+    "channel": "sumo",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-26",
+    "channel": "NWA-TNA",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-27",
+    "channel": "joshi2",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-28",
+    "channel": "MTV",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-29",
+    "channel": "ddt",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native-inventory-postclean-30",
     "channel": "roh",
-    "action": "retire_legacy_native"
+    "action": "inventory_legacy_native"
   }
 ]

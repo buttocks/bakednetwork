@@ -146,7 +146,7 @@ function removeLegacyScrollControls(source){
   }
   return {source:next,removed};
 }
-export function cleanLegacyNativeFeatures(source){
+export function cleanLegacyNativeFeatures(source,options={}){
   if(typeof source!=='string'||!source)return {source,changed:false,retiredModules:[],changedOptions:[]};
   let next=source;
   const retiredModules=[];
@@ -207,7 +207,7 @@ export function cleanLegacyNativeFeatures(source){
   next=commaScroll.source;
   const legacyScroll=removeLegacyScrollControls(next);
   next=legacyScroll.source;
-  if(!/AudioNotice[\s\S]{0,80}Toggle/.test(next))next='(function(){try{if(!window.localStorage)return;["Squee","Poll","Priv","Video","Marked"].forEach(function(type){var key=CHANNEL.name+"_AudioNotice"+type+"Toggle";if(window.localStorage.getItem(key)===null)window.localStorage.setItem(key,"0")})}catch(e){}})();\n'+next;
+  if(options.defaultAudioNotice&&!/AudioNotice[\s\S]{0,80}Toggle/.test(next))next='(function(){try{if(!window.localStorage)return;["Squee","Poll","Priv","Video","Marked"].forEach(function(type){var key=CHANNEL.name+"_AudioNotice"+type+"Toggle";if(window.localStorage.getItem(key)===null)window.localStorage.setItem(key,"0")})}catch(e){}})();\n'+next;
   const removedLayoutOverride=/^\s*USEROPTS\.layout\s*=\s*["']fluid["'];?\s*$/gm;
   const layoutCount=(next.match(removedLayoutOverride)||[]).length;
   next=next.replace(removedLayoutOverride,'');

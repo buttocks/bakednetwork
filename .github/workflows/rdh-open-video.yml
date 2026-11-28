@@ -1,0 +1,34 @@
+name: Add RDH open-video button
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/rdh-open-video.yml
+      - tubes/RDH/deploy-open-video.mjs
+      - tubes/RDH/rdh-custom-only-v2.0.js
+permissions:
+  contents: read
+concurrency:
+  group: baked-skin-review
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      BAKED_LIVE_PASSWORD: ${{ secrets.BAKED_LIVE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check tubes/RDH/deploy-open-video.mjs
+      - run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - run: node tubes/RDH/deploy-open-video.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rdh-open-video-review
+          path: rdh-open-video-review/
+          retention-days: 30

@@ -44,7 +44,7 @@ try{
  await form.locator('button[type="submit"]').click();
  await page.waitForLoadState('domcontentloaded');
  await page.goto('https://baked.live/tv/rdh',{waitUntil:'domcontentloaded',timeout:45000});
- await ready();before=await state();assert.ok(auth(before),'RDH Admin session not confirmed');
+ await ready();before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
  assert.equal(before.customVersion,'1.9.0','Unexpected active custom layer; refusing to replace');
  assert.ok(before.taggedUrl,'Current tagged URL controls not active; refusing to replace');
  assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');

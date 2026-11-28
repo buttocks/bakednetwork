@@ -1401,6 +1401,24 @@
           "duration": 928,
           "source": "YouTube",
           "source_channel": "NEW JAPAN PRO-WRESTLING"
+        },
+        {
+          "title": "Chris Dickinson Vs. Tomohiro Ishii - NJPW Lone Star Shootout (2022.04.01)",
+          "episode": "NJPW Lone Star Shootout",
+          "url": "https://www.dailymotion.com/video/x8a2owg",
+          "dailymotion_id": "x8a2owg",
+          "duration": 1381,
+          "source": "Dailymotion",
+          "source_channel": "Wrestling Replay"
+        },
+        {
+          "title": "NJPW STRONG Feb 13, 2021 Episode 27 ROAD to THE NEW BEGINNING USA 2021",
+          "episode": "NJPW STRONG",
+          "url": "https://www.dailymotion.com/video/x7zacg2",
+          "dailymotion_id": "x7zacg2",
+          "duration": 3266,
+          "source": "Dailymotion",
+          "source_channel": "Baked Network 4"
         }
       ]
     }

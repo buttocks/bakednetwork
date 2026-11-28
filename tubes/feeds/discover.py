@@ -286,7 +286,7 @@ def multipart_key(p):
         m=re.fullmatch(r"(.*?)[\s_.-]+(\d{3})\s*",title)
         zero_based=bool(m)
     if not m:return None
-    part=int(m[2]); total=int(m[3]) if m[3] and not zero_based else None
+    part=int(m[2]); total=int(m[3]) if not zero_based and len(m.groups())>=3 and m[3] else None
     if (not 0<=part<=99 if zero_based else not 1<=part<=100) or total is not None and not part<=total<=100:return None
     base=re.sub(r"[\s_\-–—:.,]+"," ",unicodedata.normalize("NFKC",m[1]).lower()).strip()
     if len(base)<5:return None

@@ -212,10 +212,6 @@
       ],
       "dailymotion_channels": [
         {
-          "username": "baked4",
-          "name": "BakedNetwork · baked4"
-        },
-        {
           "username": "wtbaked",
           "name": "WrestleTube on Baked.live"
         },
@@ -402,7 +398,7 @@
           "name": "Baked Network DM #2"
         }
       ],
-      "dailymotion_title_pattern": "(?i)(ddt|dramatic dream|unchartered territory|uncharted territory)"
+      "dailymotion_title_pattern": "(?i)(ddt|dramatic dream|ddt is coming to america)"
     },
     {
       "directory": "AJPW",

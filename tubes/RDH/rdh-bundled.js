@@ -62,33 +62,25 @@ function initialize(){
             },
 
             playlist: {
-                collapse: true,
-                hidePlaylist: true,
-                inlineBlame: true,
+                collapse:false,
+                hidePlaylist:false,
+                inlineBlame:false,
                 moveReporting: true,
                 quickQuality: false,
-                recentMedia: true,
+                recentMedia:false,
                 simpleLeader: true,
                 syncCheck: true,
-                thumbnails: true,
-                timeEstimates: true,
+                thumbnails:false,
+                timeEstimates:false,
                 volumeControl: false
             },
 
-            chatext: {
-                persistIgnore: true,
-                smartScroll: true,
-                maxMessages: 220
-            },
-
             userlist: {
-                autoHider: true
+                autoHider:false
             },
 
             various: {
-                notepad: true,
-                emoteToggle: true
-            }
+                notepad: true}
         },
 
         modules: {
@@ -137,45 +129,10 @@ function initialize(){
                 rank: -1,
                 url: "https://resources.pink.horse/js/module_alerts.min.js"
             },
-            chatline: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_chatline.min.js"
-            },
-            chatext: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_chatext.min.js"
-            },
-            colormap: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_colormap.min.js"
-            },
-            unimoji: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_unimoji.min.js"
-            },
-            chatcolor: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_chatcolor.min.js"
-            },
-            dectalk: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_tts.min.js"
-            },
             hotkeys: {
                 active: 1,
                 rank: -1,
                 url: "https://resources.pink.horse/js/module_hotkeys.min.js"
-            },
-            layout: {
-                active: 1,
-                rank: -1,
-                url: "https://resources.pink.horse/js/module_layout.min.js"
             },
             various: {
                 active: 1,
@@ -362,7 +319,7 @@ function initialize(){
 
         USEROPTS.sort_rank = 1;
         USEROPTS.sort_afk = 1;
-        USEROPTS.layout = "fluid";
+
     }
 
     applyChannelDefaults();
@@ -1030,7 +987,7 @@ function initialize(){
      * SAFE MIGRATION FLAGS
      *
      * These features are ours and are safe to run beside the legacy modules.
-     * No legacy Xaekai module is disabled here.
+
      */
     modern.start("diagnostics");
     modern.start("emotes");

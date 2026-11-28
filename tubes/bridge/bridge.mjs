@@ -35,6 +35,15 @@ function cleanLoaderUrl(filename){
   return 'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@'+CLEAN_LOADER_COMMIT+
     '/tubes/bridge/cleaned-loaders/'+filename;
 }
+function reviewedCleanLoaderFilename(value){
+  let url;
+  try{url=new URL(value);}catch{return null;}
+  if(url.origin!=='https://cdn.jsdelivr.net')return null;
+  const match=/^\/gh\/buttocks\/bakednetwork@([a-f0-9]{40})\/tubes\/bridge\/cleaned-loaders\/([a-z0-9-]+\.js)$/i.exec(url.pathname);
+  if(!match||![CLEAN_LOADER_COMMIT,PREVIOUS_CLEAN_LOADER_COMMIT].includes(match[1])||
+     ![...EXTERNAL_NATIVE_LOADERS.values()].includes(match[2]))return null;
+  return match[2];
+}
 
 function safeUrl(value){
   if(typeof value!=='string' || value.length>600)throw Error('Invalid player URL');
@@ -525,7 +534,8 @@ async function run(request,session=null){
         try{
           const externalUrl=new URL(live.externaljs,SITE);
           const approvedPublicReviewSource=externalUrl.href==='https://files.catbox.moe/a76opy.js';
-          if((externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname))||approvedPublicReviewSource){
+          const reviewedCleanAsset=reviewedCleanLoaderFilename(externalUrl.href);
+          if((externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname))||approvedPublicReviewSource)||reviewedCleanAsset){
             const response=await page.request.get(externalUrl.href,{timeout:20000});
             if(response.ok()){
               externalJsSource=await response.text();
@@ -863,6 +873,9 @@ function selfTest(){
   assert.equal(validate({schema:1,request_id:'test_queue_attribution',channel:'MTV',action:'fix_queue_attribution'}).action,'fix_queue_attribution');
   const nativeInventory=validate({schema:1,request_id:'native_inventory_test',channel:'MTV',action:'inventory_legacy_native'});
   assert.equal(nativeInventory.action,'inventory_legacy_native');
+  assert.equal(reviewedCleanLoaderFilename(cleanLoaderUrl('wrestletube.js')),'wrestletube.js');
+  assert.equal(reviewedCleanLoaderFilename('https://cdn.jsdelivr.net/gh/other/repo@'+CLEAN_LOADER_COMMIT+'/tubes/bridge/cleaned-loaders/wrestletube.js'),null);
+  assert.equal(reviewedCleanLoaderFilename(cleanLoaderUrl('unknown.js')),null);
   assert.throws(()=>validate({schema:1,request_id:'native_inventory_bad',channel:'ROH',action:'inventory_legacy_native'}));
   const audit=validate({schema:1,request_id:'test_audit_01',channel:'luchatube',action:'audit'});
   assert.equal(audit.action,'audit');

@@ -8,6 +8,8 @@ const state=()=>page.evaluate(()=>({
  channel:window.CHANNEL?.name,
  user:window.CLIENT?.name,
  rank:window.CLIENT?.rank,
+ globalRank:window.CLIENT?.global_rank??null,
+ channelOwner:window.CHANNEL?.owner??null,
  connected:!!window.socket?.connected,
  loggedIn:!!window.CLIENT?.logged_in,
  externaljs:window.CHANNEL?.opts?.externaljs||'',
@@ -43,6 +45,10 @@ async function setExternal(expected,value,b){
   window.socket.emit('setOptions',{externaljs:value});
  },{expected,value,b:{js:b.js,css:b.css,motd:b.motd,externalcss:b.externalcss}});
  await page.waitForTimeout(900);
+ const evidence=await page.evaluate(()=>window.__rdhOpenVideoEvidence||[]);
+ console.log('RDH_OPEN_VIDEO_SAVE_RESPONSE '+JSON.stringify(evidence));
+ const rejected=evidence.find(e=>e.name==='validationError');
+ if(rejected)throw Error('Baked.live rejected external-JS save: '+String(rejected.data?.message||'validation error'));
  await page.reload({waitUntil:'domcontentloaded',timeout:45000});
  await ready();
  const observed=await state();

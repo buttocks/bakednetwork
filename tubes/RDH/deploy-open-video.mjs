@@ -4,47 +4,60 @@ import {chromium} from 'playwright';
 
 const dir='rdh-open-video-review';
 await fs.mkdir(dir,{recursive:true});
-const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@1ab56ce685b620076f59f745a35f5818d2bc4749/tubes/RDH/rdh-custom-only-v1.8.2.js';
+const patch=await fs.readFile('tubes/RDH/rdh-open-video-inline.js','utf8');
+new Function(patch);
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
-const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};return{
- channel:c.name,user:window.CLIENT?.name,rank:window.CLIENT?.rank,
- connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,
- externaljs:o.externaljs||'',externalcss:o.externalcss||'',css:c.css,js:c.js,motd:c.motd,
+const state=()=>page.evaluate(()=>({
+ channel:window.CHANNEL?.name,
+ user:window.CLIENT?.name,
+ rank:window.CLIENT?.rank,
+ connected:!!window.socket?.connected,
+ loggedIn:!!window.CLIENT?.logged_in,
+ externaljs:window.CHANNEL?.opts?.externaljs||'',
+ externalcss:window.CHANNEL?.opts?.externalcss||'',
+ css:window.CHANNEL?.css,
+ js:window.CHANNEL?.js,
+ motd:window.CHANNEL?.motd,
  rows:document.querySelectorAll('#queue .queue_entry').length,
- customVersion:window.__rdhCustomOnly?.version||null,taggedUrl:!!window.__rdhTaggedUrl
-}});
+ openButtons:document.querySelectorAll('#queue .rdh-open-video-pill').length,
+ patchLoaded:window.__rdhOpenVideoPatch?.version||null
+}));
 const auth=s=>s.connected&&s.loggedIn&&Number(s.rank)>=3&&
  s.channel?.toLowerCase()==='rdh'&&s.user?.toLowerCase()==='buttman-gpt';
 const ready=async()=>{
  await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&
-  window.CHANNEL?.name?.toLowerCase()==='rdh'&&document.querySelector('#queue .queue_entry'),null,{timeout:45000});
- await page.waitForTimeout(10000);
+  window.CHANNEL?.name?.toLowerCase()==='rdh'&&document.querySelector('#queue .queue_entry'),
+  null,{timeout:45000});
+ // Allow the logged-in account's rank to populate before reading settings or writing.
+ await page.waitForTimeout(2500);
  await page.waitForFunction(()=>Number(window.CLIENT?.rank)>=3,null,{timeout:15000});
 };
 let before,changed=false;
-async function setExternal(expected,value){
+async function setInline(expected,value,b){
  await page.evaluate(({expected,value,b})=>{
-  const c=window.CHANNEL,o=c.opts||{};
+  const c=window.CHANNEL||{};
   if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.rank<3||
      window.CLIENT?.name?.toLowerCase()!=='buttman-gpt'||c.name?.toLowerCase()!=='rdh'||
-     o.externaljs!==expected||c.css!==b.css||c.js!==b.js||c.motd!==b.motd||
-     o.externalcss!==b.externalcss)throw Error('Concurrent channel change; refusing write');
+     c.js!==expected||c.css!==b.css||c.motd!==b.motd||
+     (c.opts?.externaljs||'')!==b.externaljs||
+     (c.opts?.externalcss||'')!==b.externalcss)
+    throw Error('Concurrent RDH setting change; refusing inline-JS write');
   window.__rdhOpenVideoEvidence=[];
-  for(const name of ['validationPassed','validationError'])window.socket.once(name,data=>{if(data?.target==='#cs-externaljs')window.__rdhOpenVideoEvidence.push({name,data})});
-  window.socket.once('channelOpts',opts=>window.__rdhOpenVideoEvidence.push({name:'channelOpts',externaljs:opts?.externaljs||''}));
-  window.socket.emit('setOptions',{externaljs:value});
- },{expected,value,b:before});
- for(let i=0;i<20;i++){
-  if((await state()).externaljs===value)return;
+  for(const name of ['validationPassed','validationError'])
+   window.socket.on(name,data=>{window.__rdhOpenVideoEvidence.push({name,data})});
+  window.socket.emit('setChannelJS',{js:value});
+ },{expected,value,b:{css:b.css,motd:b.motd,externaljs:b.externaljs,externalcss:b.externalcss}});
+ for(let i=0;i<80;i++){
+  const s=await state();
+  if(s.js===value)return;
+  const errors=await page.evaluate(()=>window.__rdhOpenVideoEvidence||[]);
+  if(errors.some(e=>e.name==='validationError'))break;
   await page.waitForTimeout(250);
  }
- const immediate=await state();
- const evidence=await page.evaluate(()=>({events:window.__rdhOpenVideoEvidence||[],connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,rank:window.CLIENT?.rank,channel:window.CHANNEL?.name,validationErrors:[...document.querySelectorAll('#chatlog .chat-msg, #messagebuffer .chat-msg')].slice(-5).map(e=>e.textContent).filter(x=>/external|option|permission/i.test(x))}));
- console.log('RDH_OPEN_VIDEO_SETTINGS_EVIDENCE '+JSON.stringify({current:immediate.externaljs,evidence}));
- await page.reload({waitUntil:'domcontentloaded',timeout:45000});await ready();
- if((await state()).externaljs===value)return;
- throw Error('External JS change not confirmed after reconnect');
+ const detail=await page.evaluate(()=>({events:window.__rdhOpenVideoEvidence||[],connected:!!window.socket?.connected,rank:window.CLIENT?.rank,channel:window.CHANNEL?.name}));
+ console.log('RDH_OPEN_VIDEO_INLINE_EVIDENCE '+JSON.stringify(detail));
+ throw Error('Inline RDH JavaScript write was not confirmed');
 }
 try{
  await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
@@ -54,28 +67,39 @@ try{
  await form.locator('button[type="submit"]').click();
  await page.waitForLoadState('domcontentloaded');
  await page.goto('https://baked.live/tv/rdh',{waitUntil:'domcontentloaded',timeout:45000});
- await ready();before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
- if(before.externaljs!==candidate){
-  assert.ok(/rdh-custom-only-v1[.]8(?:[.]\\d+)?[.]js(?:$|[?#])/.test(before.externaljs),
-   'Unexpected active custom layer; refusing to replace');
- }
- assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');
- const response=await page.request.get(candidate,{timeout:25000});
- assert.ok(response.ok(),'Could not retrieve candidate script');
- const code=await response.text();await response.dispose();new Function(code);
- for(const token of ['rdh-open-video-pill','w.open(url,"_blank","noopener,noreferrer")','line.append(btn,open)'])
-  assert.ok(code.includes(token),'Candidate is missing '+token);
- await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));
- if(before.externaljs!==candidate){await setExternal(before.externaljs,candidate);changed=true;}
- else{await page.reload({waitUntil:'domcontentloaded',timeout:45000});await ready();}
- const after=await state();assert.ok(auth(after));assert.equal(after.externaljs,candidate);
- for(const k of ['js','css','motd','externalcss'])assert.equal(after[k],before[k]);
+ await ready();
+ before=await state();
+ console.log('RDH_OPEN_VIDEO_INLINE_BEFORE '+JSON.stringify({...before,jsBytes:String(before.js||'').length}));
+ await fs.writeFile(dir+'/before.json',JSON.stringify({...before,jsBytes:String(before.js||'').length},null,2));
+ assert.ok(auth(before),'RDH admin session not confirmed');
+ assert.equal(typeof before.js,'string');
+ if(before.js!==patch)assert.equal(before.js,'','Refusing to overwrite unrelated inline JavaScript');
+ assert.ok(before.externaljs&&/rdh-custom-only-v1[.]8(?:[.]\d+)?[.]js(?:$|[?#])/.test(before.externaljs),
+  'Unexpected external JavaScript; refusing write');
+ if(before.js!==patch){await setInline(before.js,patch,before);changed=true;}
+ await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+ await ready();
+ await page.waitForFunction(()=>document.querySelector('#queue .rdh-open-video-pill'),null,{timeout:15000});
+ const after=await state();
+ assert.ok(auth(after));
+ assert.equal(after.js,patch);
+ assert.equal(after.externaljs,before.externaljs);
+ for(const k of ['css','motd','externalcss'])assert.equal(after[k],before[k]);
+ assert.ok(after.openButtons>0,'Open video button was not added to queue rows');
  await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2));
- console.log('RDH_OPEN_VIDEO_RESULT '+JSON.stringify({status:'saved',candidate,externalJs:after.externaljs,
-  inlineJsPreserved:true,cssPreserved:true,motdPreserved:true,queueWrites:0}));
+ console.log('RDH_OPEN_VIDEO_INLINE_RESULT '+JSON.stringify({
+  status:'deployed-and-verified',rank:after.rank,openButtons:after.openButtons,
+  inlinePatch:true,externalJsPreserved:true,cssPreserved:true,motdPreserved:true,
+  queueWrites:0
+ }));
 }catch(e){
- console.log('RDH_OPEN_VIDEO_ERROR '+e.message);
- if(changed){try{const current=await state();if(auth(current)&&current.externaljs===candidate)
-  await setExternal(candidate,before.externaljs)}catch(rollback){console.log('RDH_OPEN_VIDEO_ROLLBACK_BLOCKED '+rollback.message)}}
+ console.log('RDH_OPEN_VIDEO_INLINE_ERROR '+e.message);
+ if(changed){
+  try{
+   const current=await state();
+   if(auth(current)&&current.js===patch)
+    await setInline(patch,before.js,current);
+  }catch(rollback){console.log('RDH_OPEN_VIDEO_INLINE_ROLLBACK_BLOCKED '+rollback.message)}
+ }
  throw e;
 }finally{await browser.close()}

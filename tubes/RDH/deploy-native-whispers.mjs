@@ -21,7 +21,13 @@ try {
   await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&window.CHANNEL?.name?.toLowerCase()==='rdh',null,{timeout:45000});
   const before=await state();
   if(!auth(before))throw Error('RDH admin session was not confirmed; no channel setting changed.');
-  if(!ownedSource(before.externaljs))throw Error('RDH currently has an unrecognized external script; refusing to replace it.');
+  let activeCode='';
+  if(before.externaljs){
+    const activeUrl=before.externaljs.startsWith('/')?'https://baked.live'+before.externaljs:before.externaljs;
+    try{const active=await page.request.get(activeUrl,{timeout:20000});if(active.ok())activeCode=await active.text();await active.dispose()}catch{}
+  }
+  const activeHasFade=activeCode.includes('__rdhPresenceDissolve')||activeCode.includes('rdh-presence-fading')||activeCode.includes('fade-server-msg');
+  if(!ownedSource(before.externaljs)&&!activeHasFade)throw Error('RDH external script does not match a known RDH build with the whisper fade; refusing to replace it.');
   const response=await page.request.get(candidate,{timeout:25000});
   if(!response.ok())throw Error('Candidate script could not be fetched.');
   const code=await response.text();

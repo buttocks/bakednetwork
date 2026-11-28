@@ -1,26 +1,32 @@
 [
   {
     "schema": 1,
-    "request_id": "native_inventory_sumo_20261128",
-    "channel": "sumo",
+    "request_id": "native_inventory_wrestling2_20261128",
+    "channel": "wrestling2",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_trek_20261128",
-    "channel": "Trek",
+    "request_id": "native_inventory_wrestling3_20261128",
+    "channel": "wrestling3",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_wcw_20261128",
-    "channel": "WCW",
+    "request_id": "native_inventory_wrestling4_20261128",
+    "channel": "Wrestling4",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_wrestling_20261128",
-    "channel": "Wrestling",
+    "request_id": "native_inventory_wrestling5_20261128",
+    "channel": "wrestling5",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "native_inventory_wwf-wwe_20261128",
+    "channel": "WWF-WWE",
     "action": "inventory_legacy_native"
   }
 ]

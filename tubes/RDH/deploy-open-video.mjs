@@ -4,7 +4,7 @@ import {chromium} from 'playwright';
 
 const dir='rdh-open-video-review';
 await fs.mkdir(dir,{recursive:true});
-const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@169ec01719ffd8d6ea376fd902e4ef3199c0b222/tubes/RDH/rdh-custom-only-v2.0.js';
+const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@c585dca216772ff8062986ede621b081baf082aa/tubes/RDH/rdh-custom-only-v1.8.1.js';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
 const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};return{
@@ -44,11 +44,11 @@ try{
  await form.locator('button[type="submit"]').click();
  await page.waitForLoadState('domcontentloaded');
  await page.goto('https://baked.live/tv/rdh',{waitUntil:'domcontentloaded',timeout:45000});
- await ready();before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
- assert.equal(before.customVersion,'1.9.0','Unexpected active custom layer; refusing to replace');
+ await ready();await page.waitForFunction(()=>window.__rdhTaggedUrl&&window.__rdhCustomOnly?.version==='1.8.0',null,{timeout:20000});before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
+ assert.equal(before.customVersion,'1.8.0','Unexpected active custom layer; refusing to replace');
  assert.ok(before.taggedUrl,'Current tagged URL controls not active; refusing to replace');
  assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');
- assert.ok(/rdh-custom-only-v1[.]9[.]js(?:$|[?#])/.test(before.externaljs),
+ assert.ok(/rdh-custom-only-v1[.]8[.]js(?:$|[?#])/.test(before.externaljs),
   'Expected current v1.9 external script; refusing to overwrite another layer');
  const response=await page.request.get(candidate,{timeout:25000});
  assert.ok(response.ok(),'Could not retrieve candidate script');

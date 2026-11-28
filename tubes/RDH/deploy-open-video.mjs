@@ -14,19 +14,19 @@ const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};retur
  rows:document.querySelectorAll('#queue .queue_entry').length,
  customVersion:window.__rdhCustomOnly?.version||null,taggedUrl:!!window.__rdhTaggedUrl
 }});
-const auth=s=>s.connected&&s.loggedIn&&Number(s.rank)>=256&&
+const auth=s=>s.connected&&s.loggedIn&&Number(s.rank)>=3&&
  s.channel?.toLowerCase()==='rdh'&&s.user?.toLowerCase()==='buttman-gpt';
 const ready=async()=>{
  await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&
   window.CHANNEL?.name?.toLowerCase()==='rdh'&&document.querySelector('#queue .queue_entry'),null,{timeout:45000});
  await page.waitForTimeout(2500);
- await page.waitForFunction(()=>Number(window.CLIENT?.rank)>=256,null,{timeout:15000});
+ await page.waitForFunction(()=>Number(window.CLIENT?.rank)>=3,null,{timeout:15000});
 };
 let before,changed=false;
 async function setExternal(expected,value){
  await page.evaluate(({expected,value,b})=>{
   const c=window.CHANNEL,o=c.opts||{};
-  if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.rank<256||
+  if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.rank<3||
      window.CLIENT?.name?.toLowerCase()!=='buttman-gpt'||c.name?.toLowerCase()!=='rdh'||
      o.externaljs!==expected||c.css!==b.css||c.js!==b.js||c.motd!==b.motd||
      o.externalcss!==b.externalcss)throw Error('Concurrent channel change; refusing write');

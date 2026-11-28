@@ -66,17 +66,20 @@ function multipartInfo(p) {
   const title=p.title.trim();
   // Known standalone song title, not a divided video.
   if(/^Billy Idol\s*[-–—:]\s*White Wedding\s+(?:Pt\.?|Part)\s*1$/i.test(title))return null;
-  const m=title.match(/^(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|\/)\s*(\d{1,3}))?\s*[)\]]?\s*$/i);
-  if(!m||!m[1].trim())return null;
-  const part=Number(m[2]),total=m[3]?Number(m[3]):null;
-  if(part<1||part>100||total!==null&&(total<part||total>100))return null;
-  const base=m[1].normalize('NFKC').toLowerCase().replace(/[\s_\-–—:.,]+/g,' ').trim();
+  const m=title.match(/^(.*?)[\\s_\\-–—:.(\\[]+(?:part|pt\\.?|disc|disk|cd)[\\s._-]*(\\d{1,3})(?:\\s*(?:of|\\/)\\s*(\\d{1,3}))?\\s*[)\\]]?\\s*$/i);
+  const seq=title.match(/^(.*?)[\\s_.-]+(\\d{3})\\s*$/);
+  if(!m&&!seq)return null;
+  const zeroBased=!m&&!!seq,hit=m||seq;
+  if(!hit[1].trim())return null;
+  const part=Number(hit[2]),total=m&&m[3]?Number(m[3]):null;
+  if((zeroBased?(part>99):(part<1||part>100))||total!==null&&(total<part||total>100))return null;
+  const base=hit[1].normalize('NFKC').toLowerCase().replace(/[\\s_\\-–—:.,]+/g,' ').trim();
   if(base.length<5)return null;
   // Different uploaders/providers can have different cuts of the same program.
   const owner=String(p.source_channel||p.owner||'').normalize('NFKC').toLowerCase().trim();
   const provider=String(p.source||p.type||'').toLowerCase();
   const key=[provider,owner,base].join('|');
-  return {key,base,part,total};
+  return {key,base,part,total,zeroBased};
 }
 function multipartBlocks(items){
  const grouped=new Map(),blocks=[],unresolved=[];
@@ -89,7 +92,8 @@ function multipartBlocks(items){
  for(const [key,rows] of grouped){
   rows.sort((a,b)=>a.part-b.part);
   const totals=[...new Set(rows.map(r=>r.total).filter(n=>n!==null))];
-  const complete=rows.length>=2&&rows.every((r,i)=>r.part===i+1)&&totals.length<=1&&(!totals.length||totals[0]===rows.length);
+  const zeroBased=rows[0].zeroBased;
+  const complete=rows.length>=2&&rows.every((r,i)=>r.zeroBased===zeroBased&&r.part===i+(zeroBased?0:1))&&totals.length<=1&&(!totals.length||totals[0]===rows.length);
   if(!complete){unresolved.push({key,parts:rows.map(r=>r.part),expected:totals[0]||null,items:rows.map(r=>r.p)});continue;}
   const parts=rows.map(r=>r.p);
   blocks.push({parts,duration:parts.reduce((s,p)=>s+(p.duration||0),0),source:parts[0].source,url:parts[0].url,group:key});
@@ -136,7 +140,7 @@ function select(date=new Date()){
     t-=ordered[index].duration;
   }
   const original=index;
-  while(bad.has(ordered[index].url)||(index!==original&&multipartInfo(ordered[index])?.part>1)){
+  while(bad.has(ordered[index].url)||(index!==original&&(()=>{const m=multipartInfo(ordered[index]);return m&&(m.zeroBased?m.part>0:m.part>1)})())){
     index=(index+1)%ordered.length;t=0;
     if(index===original)return null;
   }

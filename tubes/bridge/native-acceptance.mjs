@@ -1,6 +1,6 @@
 const SITE='https://baked.live';
 const USERNAME='buttman-gpt';
-const TARGETS=['Gallios_Lair','Trek','Wrestling','NWA-TNA'];
+const TARGETS=['Gallios_Lair'];
 const URLS={
  Gallios_Lair:'https://files.catbox.moe/a76opy.js',
  Trek:'https://files.catbox.moe/a76opy.js',

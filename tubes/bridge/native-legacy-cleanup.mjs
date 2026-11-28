@@ -184,6 +184,9 @@ export function cleanLegacyNativeFeatures(source){
     next=result.source;
     if(result.removed)removedInputHooks.push(name);
   }
+  const unimojiControlPattern=/^[ \t]*\$\(["']#unimojiDropLabel["']\s*\)\.text\(\s*["']\s*["']\s*\)\s*;?[ \t]*$/gm;
+  const removedUnimojiControls=(next.match(unimojiControlPattern)||[]).length;
+  next=next.replace(unimojiControlPattern,'');
   const scrollControl=/scrollbtn\s*=\s*\$\('<button id="scroll-btn"[\s\S]*?\.on\("click",\s*function\(\)\s*\{\s*scrollQueue\(\);\s*\}\);/g;
   const scrollMatches=next.match(scrollControl)||[];
   next=next.replace(scrollControl,'');
@@ -195,7 +198,7 @@ export function cleanLegacyNativeFeatures(source){
   const layoutCount=(next.match(removedLayoutOverride)||[]).length;
   next=next.replace(removedLayoutOverride,'');
   return {source:next,changed:next!==source,retiredModules:[...new Set(retiredModules)],changedOptions,
-    removedInputHooks,removedScrollControls:scrollMatches.length+commaScroll.removed+legacyScroll.removed,removedLayoutOverrides:layoutCount,removedCredits};
+    removedInputHooks,removedUnimojiControls,removedScrollControls:scrollMatches.length+commaScroll.removed+legacyScroll.removed,removedLayoutOverrides:layoutCount,removedCredits};
 }
 export function legacyNativeSelfTest(){
   const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},userlist:{autoHider:true,renderer:true},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';
@@ -219,6 +222,9 @@ export function legacyNativeSelfTest(){
   if(cleanedAttribution.source.includes('Xaekai')||cleanedAttribution.source.includes('[XaeModule]')||
     !cleanedAttribution.source.includes('[Baked modules]'))
     throw Error('Legacy loader attribution cleanup self-test failed');
+  const unimojiResult=cleanLegacyNativeFeatures('$("#unimojiDropLabel").text("");');
+  if(unimojiResult.removedUnimojiControls!==1||unimojiResult.source.includes('unimojiDropLabel'))
+    throw Error('Legacy Unimoji label cleanup self-test failed');
   const commaScrollCases=["({branding:true,scrollbtn=$('<button id=\"scroll-btn\" />').append('<span/>').on(\"click\",function(){scrollQueue()}),{options:{}}})","({branding:true,document.getElementById(\"scroll-btn\")||$('<button id=\"scroll-btn\" />').on(\"click\",function(){typeof scrollQueue===\"function\"?scrollQueue():document.querySelector(\"#queue .queue_active\").scrollIntoView({block:\"center\"})}),{options:{}}})"];
   for(const sample of commaScrollCases){
     const cleaned=removeCommaScrollControls(sample);

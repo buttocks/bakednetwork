@@ -576,7 +576,7 @@ async function run(request){
           const newUrl=cleanLoaderUrl(assetName);
           if(externalUrl.href!==newUrl)externalChange={oldUrl:before.externaljs,newUrl,asset:assetName,
             retiredModules:cleanExternal.retiredModules,changedOptions:cleanExternal.changedOptions,
-            removedInputHooks:cleanExternal.removedInputHooks,removedScrollControls:cleanExternal.removedScrollControls,
+            removedInputHooks:cleanExternal.removedInputHooks,removedUnimojiControls:cleanExternal.removedUnimojiControls,removedScrollControls:cleanExternal.removedScrollControls,
             removedLayoutOverrides:cleanExternal.removedLayoutOverrides,removedCredits:cleanExternal.removedCredits};
         }else if(externalUrl.origin===SITE&&/^\/js\/channel-loaders\//i.test(externalUrl.pathname)){
           throw Error('Unrecognized same-origin loader; cleanup stopped for review');
@@ -625,7 +625,7 @@ async function run(request){
         throw Error('Post-reload verification failed: '+JSON.stringify(mismatch));
       }
       const result={request_id:request.request_id,channel:request.channel,action:request.action,status:'cleaned-and-reconnected',rank:initial.rank,
-        retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,removed_input_hooks:cleaned.removedInputHooks,
+        retired_modules:cleaned.retiredModules,changed_options:cleaned.changedOptions,removed_input_hooks:cleaned.removedInputHooks,removed_unimoji_controls:cleaned.removedUnimojiControls,
         removed_scroll_controls:cleaned.removedScrollControls,removed_layout_overrides:cleaned.removedLayoutOverrides,
         removed_credits:cleaned.removedCredits,external_loader:externalChange,script_consent_ignored:!!(await page.evaluate(()=>window.USEROPTS?.ignore_channeljs))};
       console.log('Native legacy cleanup '+request.channel+' '+JSON.stringify(result));

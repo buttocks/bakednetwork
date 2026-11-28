@@ -1,26 +1,26 @@
 [
   {
     "schema": 1,
-    "request_id": "native_inventory_rizin_20261128",
-    "channel": "rizin",
+    "request_id": "native_inventory_sumo_20261128",
+    "channel": "sumo",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_roh_20261128",
-    "channel": "roh",
+    "request_id": "native_inventory_trek_20261128",
+    "channel": "Trek",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_scarytube_20261128",
-    "channel": "ScaryTube",
+    "request_id": "native_inventory_wcw_20261128",
+    "channel": "WCW",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_shoot_20261128",
-    "channel": "shoot",
+    "request_id": "native_inventory_wrestling_20261128",
+    "channel": "Wrestling",
     "action": "inventory_legacy_native"
   }
 ]

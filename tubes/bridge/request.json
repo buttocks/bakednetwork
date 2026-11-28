@@ -1,182 +1,26 @@
 [
   {
     "schema": 1,
-    "request_id": "native_inventory_ajpw_20261128",
-    "channel": "ajpw",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_boxing_20261128",
-    "channel": "boxing",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_ddt_20261128",
-    "channel": "ddt",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_dg_20261128",
-    "channel": "DG",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_dgalt_20261128",
-    "channel": "DGalt",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_grindhouse_20261128",
-    "channel": "grindhouse",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_indies_20261128",
-    "channel": "indies",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_joshi_20261128",
-    "channel": "joshi",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_joshi2_20261128",
-    "channel": "joshi2",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_luchatube_20261128",
+    "request_id": "native_inventory_retry_luchatube_20261128",
     "channel": "luchatube",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_mtv_20261128",
-    "channel": "MTV",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_njpw_20261128",
+    "request_id": "native_inventory_retry_njpw_20261128",
     "channel": "NJPW",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_njpwalt_20261128",
+    "request_id": "native_inventory_retry_njpwalt_20261128",
     "channel": "NJPWALT",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_noah_20261128",
+    "request_id": "native_inventory_retry_noah_20261128",
     "channel": "Noah",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_nwa-tna_20261128",
-    "channel": "NWA-TNA",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_puro_20261128",
-    "channel": "puro",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_rdh_20261128",
-    "channel": "RDH",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_retrowrestling_20261128",
-    "channel": "RetroWrestling",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_rizin_20261128",
-    "channel": "rizin",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_roh_20261128",
-    "channel": "roh",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_scarytube_20261128",
-    "channel": "ScaryTube",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_shoot_20261128",
-    "channel": "shoot",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_sumo_20261128",
-    "channel": "sumo",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_trek_20261128",
-    "channel": "Trek",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wcw_20261128",
-    "channel": "WCW",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wid_20261128",
-    "channel": "WID",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling_20261128",
-    "channel": "Wrestling",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling2_20261128",
-    "channel": "wrestling2",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling3_20261128",
-    "channel": "wrestling3",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling4_20261128",
-    "channel": "Wrestling4",
     "action": "inventory_legacy_native"
   }
 ]

@@ -59,6 +59,13 @@ function validate(raw){
       throw Error('Invalid native legacy cleanup request');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
   }
+  if(raw.action==='verify_native_acceptance'){
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified)||
+       typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
+       Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))
+      throw Error('Invalid native acceptance request');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action};
+  }
   if(raw.action==='inventory_legacy_native'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
@@ -492,6 +499,10 @@ async function run(request){
     if(['plan_legacy_options','migrate_legacy_options'].includes(request.action)){
       const {migrateLegacyOptions}=await import('./legacy-options.mjs');
       return await migrateLegacyOptions({page,request,initial});
+    }
+    if(request.action==='verify_native_acceptance'){
+      const {verifyNativeAcceptance}=await import('./native-acceptance.mjs');
+      return await verifyNativeAcceptance({page,request,initial,password});
     }
     if(request.action==='inventory_legacy_native'){
       if(!Number.isFinite(initial.rank)||initial.rank<3)throw Error('Verified channel admin required for native legacy inventory');

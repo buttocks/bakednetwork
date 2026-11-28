@@ -500,6 +500,15 @@
           "duration": 546,
           "source": "Dailymotion",
           "source_channel": "Wrestling Replay"
+        },
+        {
+          "title": "FULL EVENT: WCW Halloween Havoc 1991 | Luger vs. Simmons, Chamber of Horrors",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=RgbPgLOoAAs",
+          "youtube_id": "RgbPgLOoAAs",
+          "duration": 10064,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

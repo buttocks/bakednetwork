@@ -72,22 +72,6 @@
           "source_channel": "NJPW World Pro-Wrestling"
         },
         {
-          "title": "1990.05.24a-NJPW-WPW-OP-5.26OA-Masa Saito, Shinya Hashimoto, Koji Kitao VS Big Van Vader, Crusher Bam Bam Bigelow, Steve Williams",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.05.24a-NJPW-WPW-OP-5.26OA-Masa%20Saito%2C%20Shinya%20Hashimoto%2C%20Koji%20Kitao%20VS%20Big%20Van%20Vader%2C%20Crusher%20Bam%20Bam%20Bigelow%2C%20Steve%20Williams.mp4",
-          "duration": 1442,
-          "source": "Internet Archive",
-          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
-        },
-        {
-          "title": "1990.05.24b-NJPW-Choshu VS Fighting Spirit 3 Musketeers Single 3 Match Series #1-Riki Choshu VS Keiji Muto",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.05.24b-NJPW-Choshu%20VS%20Fighting%20Spirit%203%20Musketeers%20Single%203%20Match%20Series%20%231-Riki%20Choshu%20VS%20Keiji%20Muto.mp4",
-          "duration": 1235,
-          "source": "Internet Archive",
-          "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
-        },
-        {
           "title": "1998.01.26b-NJPW-Jyushin Thunder Liger & Hayato Nanjo VS Shinjiro Otani & Tatsuhito Takaiwa",
           "episode": "Archived match",
           "url": "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.01.26b-NJPW-Jyushin%20Thunder%20Liger%20%26%20Hayato%20Nanjo%20VS%20Shinjiro%20Otani%20%26%20Tatsuhito%20Takaiwa.mp4",
@@ -758,6 +742,22 @@
           "duration": 686,
           "source": "Internet Archive",
           "source_channel": "NJPW Fighting Spirit '98, Hyper Battle '98 & Antonio Inoki Retirement Match ~ World Pro-Wr"
+        },
+        {
+          "title": "1982.02.12d-NJPW-WWF Jr. Heavyweight Championship-Tiger Mask (C-V3) VS Baby Face",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.02.12d-NJPW-WWF%20Jr.%20Heavyweight%20Championship-Tiger%20Mask%20%28C-V3%29%20VS%20Baby%20Face.mp4",
+          "duration": 1200,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
+        },
+        {
+          "title": "1982.02.12e-NJPW-Special Match-Antonio Inoki VS Rusher Kimura",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.02.12e-NJPW-Special%20Match-Antonio%20Inoki%20VS%20Rusher%20Kimura.mp4",
+          "duration": 1211,
+          "source": "Internet Archive",
+          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
         }
       ]
     },

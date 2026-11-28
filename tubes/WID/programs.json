@@ -297,15 +297,6 @@
           "playback_verified_run": 45737794303
         },
         {
-          "title": "LUCHA COMPLETA: El Fiscal vs. Galeno: AAA Héroes Inmortales 2025",
-          "episode": "Lucha Libre AAA · official programming",
-          "url": "https://www.youtube.com/watch?v=WDNavWrTyp8",
-          "youtube_id": "WDNavWrTyp8",
-          "duration": 464,
-          "source": "YouTube",
-          "source_channel": "Lucha Libre AAA"
-        },
-        {
           "title": "LUCHA COMPLETA: Mascarita Sagrada vs. Mini Abismo Negro: AAA Héroes Inmortales 2025",
           "episode": "Lucha Libre AAA · official programming",
           "url": "https://www.youtube.com/watch?v=w7uz1SB9AAw",
@@ -1094,6 +1085,24 @@
           "url": "https://www.youtube.com/watch?v=PgxFvHrIKJg",
           "youtube_id": "PgxFvHrIKJg",
           "duration": 955,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "JDC's FINAL Match vs. Eddie Edwards (FULL MATCH) | TNA Genesis 2026",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=61QbqqSuJTU",
+          "youtube_id": "61QbqqSuJTU",
+          "duration": 1446,
+          "source": "YouTube",
+          "source_channel": "TNA Wrestling"
+        },
+        {
+          "title": "TNA Genesis 2007 (FULL EVENT) | Booker T and Sting vs. Nash and Angle, Christian vs. Kaz",
+          "episode": "TNA Wrestling · official programming",
+          "url": "https://www.youtube.com/watch?v=-IBmbFHdqws",
+          "youtube_id": "-IBmbFHdqws",
+          "duration": 10600,
           "source": "YouTube",
           "source_channel": "TNA Wrestling"
         }

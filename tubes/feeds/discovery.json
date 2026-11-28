@@ -1169,7 +1169,7 @@
           "name": "Box y Lucha Libre"
         }
       ],
-      "dailymotion_title_pattern": "(?i)(njpw|new japan|ddt|pro wrestling noah|\\bnoah\\b|ajpw|all japan|dragon gate|puroresu|tjpw|tokyo joshi|hana kimura|stardom)"
+      "dailymotion_title_pattern": "(?i)(njpw|new japan|ddt|pro wrestling noah|\\bnoah\\b|ajpw|all japan|dragon gate|puroresu|tjpw|tokyo joshi|hana kimura|stardom|全日本プロレス|新日本プロレス|プロレスリング・ノア|ドラゴンゲート|スターダム|東京女子プロレス|大日本プロレス|センダイガールズ|仙女|アイスリボン|ozアカデミー|wave|全日本女子プロレス|jwp|seadlinning|marigold)"
     },
     {
       "directory": "NJPW/secondary/NJPWALT",

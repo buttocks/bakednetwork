@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Lightweight scheduled program discovery for all managed Baked TV channels.
-Source preference: official embeddable YouTube, then Archive direct videos.
+The mixed player balances scheduled runtime evenly across available Dailymotion, YouTube, and Internet Archive programs.
 The repository stores only metadata. Every catalog is bounded and deduplicated.
 """
 from __future__ import annotations

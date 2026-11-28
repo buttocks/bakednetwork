@@ -20,7 +20,7 @@ START=time.monotonic()
 MAX_RUNTIME=420
 SEARCH_BLOCKED=False
 SEARCH_USED=0
-API_CACHE={}
+API_CACHE={}\nDAILYMOTION_CACHE={}
 
 def load(p): return json.loads(p.read_text(encoding="utf8"))
 def write(p, obj):
@@ -112,9 +112,13 @@ def dailymotion(entry,defaults):
         username=str(source.get("username","")).strip()
         name=str(source.get("name") or username).strip()
         if not re.fullmatch(r"[A-Za-z0-9._-]{2,80}",username):continue
-        params=urlencode({"fields":"id,title,duration,owner,created_time","limit":100,"sort":"recent"})
-        data=get_json("https://api.dailymotion.com/user/"+quote(username,safe="")+"/videos?"+params)
-        rows=data.get("list",data.get("data",[])) if isinstance(data,dict) else []
+        cache_key=username.lower()
+        if cache_key not in DAILYMOTION_CACHE:
+            params=urlencode({"fields":"id,title,duration,owner,created_time","limit":100,"sort":"recent"})
+            data=get_json("https://api.dailymotion.com/user/"+quote(username,safe="")+"/videos?"+params)
+            rows=data.get("list",data.get("data",[])) if isinstance(data,dict) else []
+            DAILYMOTION_CACHE[cache_key]=rows if isinstance(rows,list) else []
+        rows=DAILYMOTION_CACHE[cache_key]
         if not isinstance(rows,list):continue
         for video in rows:
             if not isinstance(video,dict):continue

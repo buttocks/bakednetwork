@@ -4,7 +4,7 @@ import {chromium} from 'playwright';
 
 const dir='rdh-open-video-review';
 await fs.mkdir(dir,{recursive:true});
-const candidate='https://cdn.jsdelivr.net/gh/buttman-gpt/bakednetwork@c585dca216772ff8062986ede621b081baf082aa/tubes/RDH/rdh-custom-only-v1.8.1.js';
+const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@c585dca216772ff8062986ede621b081baf082aa/tubes/RDH/rdh-custom-only-v1.8.1.js';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
 const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};return{

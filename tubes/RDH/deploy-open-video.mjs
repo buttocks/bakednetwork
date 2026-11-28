@@ -19,7 +19,7 @@ const auth=s=>s.connected&&s.loggedIn&&Number(s.rank)>=3&&
 const ready=async()=>{
  await page.waitForFunction(()=>window.socket?.connected&&window.CLIENT?.logged_in&&
   window.CHANNEL?.name?.toLowerCase()==='rdh'&&document.querySelector('#queue .queue_entry'),null,{timeout:45000});
- await page.waitForTimeout(2500);
+ await page.waitForTimeout(10000);
  await page.waitForFunction(()=>Number(window.CLIENT?.rank)>=3,null,{timeout:15000});
 };
 let before,changed=false;

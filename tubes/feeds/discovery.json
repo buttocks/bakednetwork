@@ -611,7 +611,8 @@
           "username": "BOXYLUCHALIBRE",
           "name": "Box y Lucha Libre"
         }
-      ]
+      ],
+      "max_catalog_items": 120
     },
     {
       "directory": "NWA-TNA",

@@ -458,7 +458,7 @@ style.id="rdh-tagged-url-style";
 style.textContent=
 "#queue .rdh-video-url-pill,#queue .rdh-open-video-pill{display:inline-flex!important;align-items:center;justify-content:center;padding:2px 7px;margin:0;max-width:100%;border:1px solid #397f90;border-radius:5px;background:#102c35;color:#b6f7ff;font-size:11px;line-height:16px;cursor:pointer;pointer-events:auto!important;vertical-align:middle;position:relative;z-index:2;text-decoration:none!important}"+
 "#queue .rdh-video-url-pill:hover,#queue .rdh-video-url-pill:focus-visible,#queue .rdh-open-video-pill:hover,#queue .rdh-open-video-pill:focus-visible{border-color:#7df3ff;color:white;background:#194653}"+
-"#queue .rdh-attribution-group{display:inline-flex!important;align-items:center;justify-content:flex-start;gap:0;flex-wrap:wrap;flex:0 1 auto;max-width:100%;text-align:left}"+
+"#queue .rdh-attribution-group{display:flex!important;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;flex:1 1 100%;width:100%;max-width:100%;text-align:left}"+
 "#queue .rdh-url-line{display:none;align-items:center;gap:6px;margin-left:8px;vertical-align:middle;text-align:left;white-space:normal}"+
 "#queue .queue_entry.rdh-featured:hover .rdh-url-line,#queue .queue_entry.rdh-featured:focus-within .rdh-url-line{display:inline-flex}"+
 "#queue .rdh-url-line.rdh-url-fallback{margin-left:0;clear:both}"+
@@ -487,7 +487,7 @@ function ensure(row){
   try{if(!navigator.clipboard?.writeText)throw Error("Clipboard unavailable");await navigator.clipboard.writeText(url);btn.textContent="Copied!";w.setTimeout(()=>{btn.textContent="Copy video URL"},1400)}
   catch(err){let field=line.querySelector("input");if(!field){field=d.createElement("input");field.type="text";field.readOnly=true;field.value=url;field.setAttribute("aria-label","Original video URL");line.append(field)}field.focus();field.select();btn.textContent="Copy selected URL";}
  });
- const open=d.createElement("button");open.type="button";open.className="rdh-open-video-pill";open.textContent="Open";open.title="Open source video in a new tab";open.setAttribute("aria-label","Open source video in a new tab");open.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();const tab=w.open(url,"_blank","noopener,noreferrer");if(tab)tab.opener=null});
+ const open=d.createElement("button");open.type="button";open.className="rdh-open-video-pill";open.style.setProperty("display","inline-flex","important");open.textContent="Open video";open.title="Open source video in a new tab";open.setAttribute("aria-label","Open source video in a new tab");open.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();const tab=w.open(url,"_blank","noopener,noreferrer");if(tab)tab.opener=null});
  line.append(btn,open);
  // Match the visible native attribution, rather than modifying native action controls.
  const attribution=[...row.querySelectorAll("span,div,small,p")].filter(el=>!el.closest(".btn-group,.rdh-url-line")&&/^\s*Added by\s*:/i.test(el.textContent)&&el.textContent.trim().length<130&&el.getClientRects().length).sort((a,b)=>a.textContent.length-b.textContent.length).find(el=>!el.querySelector(".qe_title"));

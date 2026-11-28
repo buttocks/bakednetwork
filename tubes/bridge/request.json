@@ -1,44 +1,44 @@
 [
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_wrestling",
+    "request_id": "native_cleanup_retry_20261128_wrestling",
     "channel": "Wrestling",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_retro",
+    "request_id": "native_cleanup_retry_20261128_retro",
     "channel": "RetroWrestling",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_wwfwwe",
+    "request_id": "native_cleanup_retry_20261128_wwfwwe",
     "channel": "WWF-WWE",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_scary",
+    "request_id": "native_cleanup_retry_20261128_scary",
     "channel": "ScaryTube",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_wid",
+    "request_id": "native_cleanup_retry_20261128_wid",
     "channel": "WID",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_wcw",
+    "request_id": "native_cleanup_retry_20261128_wcw",
     "channel": "WCW",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_20261128_nwatna",
+    "request_id": "native_cleanup_retry_20261128_nwatna",
     "channel": "NWA-TNA",
-    "action": "inventory_legacy_native"
+    "action": "retire_legacy_native"
   }
 ]

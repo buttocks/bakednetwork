@@ -63,7 +63,7 @@ async function verifyPage(page,slug){
     queueHide:has('native-queue-hide'),queueCurrent:has('native-queue-current'),
     queueRecent:has('native-queue-recent'),cinema:has('cinematoggle'),
     autoHide:related.some(x=>/auto.?hide/i.test(x.id+' '+x.label)),
-    pm:related.some(x=>/pm|private|inbox/i.test(x.id+' '+x.label)),
+    pm:related.some(x=>/pm|private|inbox|messages?/i.test(x.id+' '+x.label)),
     color:related.some(x=>/color|palette/i.test(x.id+' '+x.label))
    },
    relevantControls:related.slice(0,40),visibleFields:fields
@@ -111,10 +111,13 @@ export async function verifyNativeAcceptance({page,request,password}){
   const failures=[];
   for(const [browser,reports] of [['chromium',results.chromium],['firefox',results.firefox]]){
    for(const report of reports)if(!report.connected||!report.ignoreChannelJs||report.channelModulesLoaded||
-      !report.chatBuffer||!report.chatRenderer||!report.localRender.length||report.localRender.some(t=>!t.visible))
+      !report.chatBuffer||!report.chatRenderer||!report.localRender.length||report.localRender.some(t=>!t.visible)||
+      (report.channel==='Gallios_Lair'&&(!report.controls.queueHide||!report.controls.queueCurrent||
+       !report.controls.queueRecent||!report.controls.cinema||!report.controls.autoHide||
+       !report.controls.pm||!report.controls.color)))
      failures.push({browser,channel:report.channel,connected:report.connected,ignoreChannelJs:report.ignoreChannelJs,
       channelModulesLoaded:report.channelModulesLoaded,chatBuffer:report.chatBuffer,chatRenderer:report.chatRenderer,
-      rendered:report.localRender.length>0&&report.localRender.every(t=>t.visible)});
+      controls:report.controls,rendered:report.localRender.length>0&&report.localRender.every(t=>t.visible)});
   }
   results.status=failures.length?'verification-failed':'verified';
   results.failed=failures;

@@ -4,7 +4,7 @@ import {chromium} from 'playwright';
 
 const dir='rdh-open-video-review';
 await fs.mkdir(dir,{recursive:true});
-const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@c585dca216772ff8062986ede621b081baf082aa/tubes/RDH/rdh-custom-only-v1.8.1.js';
+const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@d1a6f22bf01ad16414486045e5bcd1bc499af48c/tubes/RDH/rdh-custom-only-v1.8.2.js';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
 const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};return{
@@ -61,7 +61,7 @@ try{
  const response=await page.request.get(candidate,{timeout:25000});
  assert.ok(response.ok(),'Could not retrieve candidate script');
  const code=await response.text();await response.dispose();new Function(code);
- for(const token of ['rdh-open-video-pill','target="_blank"','rel="noopener noreferrer"','line.append(btn,open)'])
+ for(const token of ['rdh-open-video-pill','w.open(url,"_blank","noopener,noreferrer")','line.append(btn,open)'])
   assert.ok(code.includes(token),'Candidate is missing '+token);
  await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));
  if(before.externaljs!==candidate){await setExternal(before.externaljs,candidate);changed=true;}

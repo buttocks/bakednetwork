@@ -4,6 +4,7 @@ on:
     paths:
       - 'tubes/shared/wrestling/**'
       - 'tubes/NWA-TNA/channel-internal.js'
+      - 'tubes/bridge/cleaned-loaders/**'
       - '.github/workflows/check-wrestling-base.yml'
   workflow_dispatch:
 permissions:
@@ -14,4 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: node --check tubes/shared/wrestling/channel-base.js && node --check tubes/NWA-TNA/channel-internal.js
+      - run: for file in tubes/bridge/cleaned-loaders/*.js; do node --check "$file"; done
       - run: tail -n +2 tubes/NWA-TNA/channel-internal.js | cmp - tubes/shared/wrestling/channel-base.js

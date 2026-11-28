@@ -51,7 +51,7 @@ and branding retained.
 
 ## Wrestling source mix
 
-The shared player schedules whole programs toward 60% YouTube and 40% Internet Archive by duration, using a deterministic UTC-day lineup. When only one source is present it uses that source. Source discovery prefers official YouTube. Actual playback can differ because of outages, ads, catalog availability, and day boundaries. SlamVision is separate.
+The mixed player schedules whole programs toward 75% Dailymotion, 15% YouTube, and 10% Internet Archive by duration, using a deterministic UTC-day lineup. When only one source is present it uses that source. Dailymotion metadata is discovered from configured public profiles; source videos remain hosted and played by Dailymotion. Actual playback can differ because of outages, ads, catalog availability, and day boundaries. SlamVision is separate.
 
 ## Official YouTube discovery
 Set the repository Actions secret `YOUTUBE_DATA_API_KEY` to a key restricted to YouTube Data API v3. The discovery job uses official uploads and video metadata, checks public and embeddable status and duration, and skips region-restricted entries. If the key is absent, existing yt-dlp metadata discovery remains available but hosted runners may encounter anti-bot errors. Archive discovery is independent. Metadata verification does not guarantee playback on every device.

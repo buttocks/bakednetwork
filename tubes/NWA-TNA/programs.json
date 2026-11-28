@@ -191,6 +191,14 @@
           "duration": 5103,
           "source": "Internet Archive",
           "source_channel": "TNA Impact Wrestling 05-11-26"
+        },
+        {
+          "title": "TNA Impact Wrestling 26-11-26",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/tna-impact-wrestling-26-11-26/TNA%20Impact%20Wrestling%2026-11-26.mp4",
+          "duration": 5578,
+          "source": "Internet Archive",
+          "source_channel": "TNA Impact Wrestling 26-11-26"
         }
       ]
     },

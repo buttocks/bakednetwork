@@ -72,22 +72,6 @@
           "source_channel": "NJPW World Pro-Wrestling"
         },
         {
-          "title": "1982.01.01c-NJPW-Riki Choshu VS Animal Hamaguchi",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01c-NJPW-Riki%20Choshu%20VS%20Animal%20Hamaguchi.mp4",
-          "duration": 714,
-          "source": "Internet Archive",
-          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
-        },
-        {
-          "title": "1982.01.01d-NJPW-WWF Jr. Heavyweight Throne Decisive Battle-Tiger Mask VS Dynamite Kid",
-          "episode": "Archived match",
-          "url": "https://archive.org/download/njpw-world-pro-wrestling-1982-2-1983-60fps/1982.01.01d-NJPW-WWF%20Jr.%20Heavyweight%20Throne%20Decisive%20Battle-Tiger%20Mask%20VS%20Dynamite%20Kid.mp4",
-          "duration": 947,
-          "source": "Internet Archive",
-          "source_channel": "NJPW 1982~1983.2 World Pro-Wrestling (60fps)"
-        },
-        {
           "title": "1990.05.24a-NJPW-WPW-OP-5.26OA-Masa Saito, Shinya Hashimoto, Koji Kitao VS Big Van Vader, Crusher Bam Bam Bigelow, Steve Williams",
           "episode": "Archived match",
           "url": "https://archive.org/download/njpw-crush-the-super-heavy-burning-wave-series-wrestling-scramble-wpw/1990.05.24a-NJPW-WPW-OP-5.26OA-Masa%20Saito%2C%20Shinya%20Hashimoto%2C%20Koji%20Kitao%20VS%20Big%20Van%20Vader%2C%20Crusher%20Bam%20Bam%20Bigelow%2C%20Steve%20Williams.mp4",
@@ -758,6 +742,22 @@
           "duration": 628,
           "source": "Internet Archive",
           "source_channel": "NJPW Crush The Super Heavy, Burning Wave Series, Wrestling Scramble, Summer Festival in Gr"
+        },
+        {
+          "title": "1998.02.15c-NJPW-Different Seed Martial Arts Battle-Naoya Ogawa VS Don Frye",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.02.15c-NJPW-Different%20Seed%20Martial%20Arts%20Battle-Naoya%20Ogawa%20VS%20Don%20Frye.mp4",
+          "duration": 842,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Fighting Spirit '98, Hyper Battle '98 & Antonio Inoki Retirement Match ~ World Pro-Wr"
+        },
+        {
+          "title": "1998.03.14b-NJPW-Jyushin Thunder Liger VS Kendo Kashin",
+          "episode": "Archived match",
+          "url": "https://archive.org/download/fighting-spirit-98-hyper-battle-98-and-antonio-inoki-retirement-match-world-pro-wrestling/1998.03.14b-NJPW-Jyushin%20Thunder%20Liger%20VS%20Kendo%20Kashin.mp4",
+          "duration": 686,
+          "source": "Internet Archive",
+          "source_channel": "NJPW Fighting Spirit '98, Hyper Battle '98 & Antonio Inoki Retirement Match ~ World Pro-Wr"
         }
       ]
     },

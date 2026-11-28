@@ -445,6 +445,15 @@
           "duration": 10040,
           "source": "Internet Archive",
           "source_channel": "WWF Survivor Series 1993"
+        },
+        {
+          "title": "FULL MATCH: Sting vs. Cactus Jack | Submit or Surrender Match: WCW Power Hour, Nov. 23, 1991",
+          "episode": "WCW · official programming",
+          "url": "https://www.youtube.com/watch?v=bKzv7UkWCJY",
+          "youtube_id": "bKzv7UkWCJY",
+          "duration": 864,
+          "source": "YouTube",
+          "source_channel": "WCW"
         }
       ]
     }

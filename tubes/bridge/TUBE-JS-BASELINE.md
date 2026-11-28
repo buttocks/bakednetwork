@@ -27,3 +27,9 @@ When future development warrants a shared JS module, separate shared logic from 
 - Only request human intervention for access/permissions that the available connection actually cannot perform.
 - Keep built-in CSS/JS only when capacity allows; prefer GitHub-hosted additions when the internal size cap would be exceeded. Never overwrite external script/style links without first comparing and backing them up.
 - For each tube, preserve its customized JavaScript while using WrestleTube as the shared reference.
+
+## Native overlap audit — 2026-11-28
+
+A sitewide read-only bridge inventory covered all 33 registered channels. No live inline script contained the retired `chatline`, `chatext`, `chatcolor`, `colormap`, `unimoji`, `dectalk`, or `layout` module registrations, or the retired native-overlap playlist options. Channel script consent remained enabled (the per-user opt-out was not ignored). The seven current GitHub-hosted legacy loaders were checked at their pinned cleaned revision; those loaders retain `userlist.autoHider:false` and their remaining modules, with no TTS or Unimoji references. RDH's pinned custom-only script and Trek's approved external script also had no retired module registrations.
+
+Gallios_Lair currently has no inline or external JavaScript; its existing external `wtube.css` stylesheet was preserved. A full channel backup was captured before the final guarded retirement check, which returned `no-legacy-overrides`. Historical vendor modules and original loader versions remain archived for rollback; no live channel customization required removal in this audit.

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "gallios_lair_inventory_20261128",
+  "request_id": "native_ui_acceptance_20261128",
   "channel": "Gallios_Lair",
-  "action": "inventory_legacy_native"
+  "action": "verify_native_acceptance"
 }

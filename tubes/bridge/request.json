@@ -12,7 +12,7 @@
     "request_id": "slamvision_embed_jwp",
     "channel": "joshi",
     "action": "add_iframe",
-    "title": "JWP",
+    "title": "JWP Wrestling",
     "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=jwp"
   },
   {
@@ -108,7 +108,7 @@
     "request_id": "slamvision_embed_xwf",
     "channel": "indies",
     "action": "add_iframe",
-    "title": "XWF",
+    "title": "XWF Wrestling",
     "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=xwf"
   },
   {

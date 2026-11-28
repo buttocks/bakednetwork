@@ -1,26 +1,26 @@
 [
   {
     "schema": 1,
-    "request_id": "native_inventory_nwa-tna_20261128",
-    "channel": "NWA-TNA",
+    "request_id": "native_inventory_rizin_20261128",
+    "channel": "rizin",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_puro_20261128",
-    "channel": "puro",
+    "request_id": "native_inventory_roh_20261128",
+    "channel": "roh",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_rdh_20261128",
-    "channel": "RDH",
+    "request_id": "native_inventory_scarytube_20261128",
+    "channel": "ScaryTube",
     "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "native_inventory_retrowrestling_20261128",
-    "channel": "RetroWrestling",
+    "request_id": "native_inventory_shoot_20261128",
+    "channel": "shoot",
     "action": "inventory_legacy_native"
   }
 ]

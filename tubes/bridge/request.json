@@ -1,32 +1,6 @@
-[
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling2_20261128",
-    "channel": "wrestling2",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling3_20261128",
-    "channel": "wrestling3",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling4_20261128",
-    "channel": "Wrestling4",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wrestling5_20261128",
-    "channel": "wrestling5",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_wwf-wwe_20261128",
-    "channel": "WWF-WWE",
-    "action": "inventory_legacy_native"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "gallios_lair_retire_native_20261128",
+  "channel": "Gallios_Lair",
+  "action": "retire_legacy_native"
+}

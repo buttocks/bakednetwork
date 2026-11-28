@@ -106,7 +106,7 @@ def dailymotion(entry,defaults):
     sources=entry.get("dailymotion_channels",[])
     if not sources:return found
     match=re.compile(entry.get("dailymotion_title_pattern",r"(?i)wrestling"))
-    excluded=re.compile(r"(?i)(?:\\bWWE\\s*2K\\d*\\b|\\bAEW Fight Forever\\b|\\bgameplay\\b|\\bvideo game\\b|\\bwatchalong\\b|\\bwatch along\\b|\\breaction\\b|\\bsimulation\\b)")
+    excluded=re.compile(r"(?i)(?:\bWWE\s*2K\d*\b|\bAEW Fight Forever\b|\bgameplay\b|\bvideo game\b|\bwatchalong\b|\bwatch along\b|\breaction\b|\bsimulation\b)")
     for source in sources:
         if time.monotonic()-START>MAX_RUNTIME-20:break
         username=str(source.get("username","")).strip()
@@ -119,7 +119,7 @@ def dailymotion(entry,defaults):
         for video in rows:
             if not isinstance(video,dict):continue
             ident=str(video.get("id",""))
-            title=re.sub(r"\\s+"," ",str(video.get("title",""))).strip()
+            title=re.sub(r"\s+"," ",str(video.get("title",""))).strip()
             if not re.fullmatch(r"[A-Za-z0-9]{2,30}",ident) or len(title)<8:continue
             if not match.search(title) or excluded.search(title):continue
             try:seconds=int(float(video.get("duration") or 0))
@@ -135,7 +135,7 @@ def youtube_api(entry,defaults,key):
     """Use official YouTube Data API metadata; no cookies or media downloads."""
     match=re.compile(entry["youtube_title_pattern"])
     found=[]
-    excluded=re.compile("(?i)(?:\\bWWE\\s*2K\\d*\\b|\\bAEW Fight Forever\\b|\\bgameplay\\b|\\bvideo game\\b|\\bwatchalong\\b|\\bwatch along\\b|\\breaction\\b|\\bsimulation\\b)")
+    excluded=re.compile(r"(?i)(?:\bWWE\s*2K\d*\b|\bAEW Fight Forever\b|\bgameplay\b|\bvideo game\b|\bwatchalong\b|\bwatch along\b|\breaction\b|\bsimulation\b)")
     def call(resource,params):
         global SEARCH_BLOCKED, SEARCH_USED
         cache_key=(resource,json.dumps(params,sort_keys=True))
@@ -276,9 +276,13 @@ def multipart_key(p):
     title=str(p.get("title","")).strip()
     if re.fullmatch(r"Billy Idol\s*[-–—:]\s*White Wedding\s+(?:Pt\.?|Part)\s*1",title,re.I):return None
     m=re.fullmatch(r"(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|/)\s*(\d{1,3}))?\s*[)\]]?\s*",title,re.I)
+    zero_based=False
+    if not m:
+        m=re.fullmatch(r"(.*?)[\s_.-]+(\d{3})\s*",title)
+        zero_based=bool(m)
     if not m:return None
-    part=int(m[2]); total=int(m[3]) if m[3] else None
-    if not 1<=part<=100 or total is not None and not part<=total<=100:return None
+    part=int(m[2]); total=int(m[3]) if m[3] and not zero_based else None
+    if (not 0<=part<=99 if zero_based else not 1<=part<=100) or total is not None and not part<=total<=100:return None
     base=re.sub(r"[\s_\-–—:.,]+"," ",unicodedata.normalize("NFKC",m[1]).lower()).strip()
     if len(base)<5:return None
     return (str(p.get("source","")).lower(),unicodedata.normalize("NFKC",str(p.get("source_channel") or p.get("owner") or "")).lower().strip(),base)

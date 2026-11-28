@@ -27,7 +27,7 @@ try {
     try{const active=await page.request.get(activeUrl,{timeout:20000});if(active.ok())activeCode=await active.text();await active.dispose()}catch{}
   }
   const activeHasFade=activeCode.includes('__rdhPresenceDissolve')||activeCode.includes('rdh-presence-fading')||activeCode.includes('fade-server-msg');
-  console.log('RDH_NO_FADE_PRECHECK '+JSON.stringify({externaljs:before.externaljs,activeBytes:activeCode.length,activeHasFade,inlineBytes:before.js.length,inlineHasFade:/__rdhPresenceDissolve|rdh-presence-fading|rdh-presence-dissolve|fade-server-msg/.test(before.js),externalCssHasFade:/fade-server-msg|rdh-presence/.test(before.externalcss)}));
+  console.log('RDH_NO_FADE_PRECHECK '+JSON.stringify({externaljs:before.externaljs,activeBytes:activeCode.length,activeHasFade,inlineBytes:before.js.length,inlineHasFade:/__rdhPresenceDissolve|rdh-presence-fading|rdh-presence-dissolve|fade-server-msg/.test(before.js),externalCssHasFade:/fade-server-msg|rdh-presence/.test(before.externalcss),channelCssHasFade:/fade-server-msg|rdh-presence/.test(before.css),channelCssExcerpt:(()=>{const x=String(before.css||''),i=x.search(/fade-server-msg|rdh-presence/i);return i<0?'':x.slice(Math.max(0,i-100),i+220)})()}));
   if(!ownedSource(before.externaljs)&&!activeHasFade)throw Error('RDH external script does not match a known RDH build with the whisper fade; refusing to replace it.');
   const response=await page.request.get(candidate,{timeout:25000});
   if(!response.ok())throw Error('Candidate script could not be fetched.');

@@ -48,16 +48,16 @@ async function setInline(expected,value,b){
    window.socket.on(name,data=>{window.__rdhOpenVideoEvidence.push({name,data})});
   window.socket.emit('setChannelJS',{js:value});
  },{expected,value,b:{css:b.css,motd:b.motd,externaljs:b.externaljs,externalcss:b.externalcss}});
- for(let i=0;i<80;i++){
-  const s=await state();
-  if(s.js===value)return;
-  const errors=await page.evaluate(()=>window.__rdhOpenVideoEvidence||[]);
-  if(errors.some(e=>e.name==='validationError'))break;
-  await page.waitForTimeout(250);
- }
- const detail=await page.evaluate(()=>({events:window.__rdhOpenVideoEvidence||[],connected:!!window.socket?.connected,rank:window.CLIENT?.rank,channel:window.CHANNEL?.name}));
+ // Baked.live may close the socket after a successful channel-JS save.
+ // Reopen RDH and verify the persisted value instead of reading stale page memory.
+ await page.waitForTimeout(800);
+ await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+ await ready();
+ const observed=await state();
+ if(observed.js===value)return observed;
+ const detail=await page.evaluate(()=>({events:window.__rdhOpenVideoEvidence||[],connected:!!window.socket?.connected,rank:window.CLIENT?.rank,channel:window.CHANNEL?.name,jsBytes:String(window.CHANNEL?.js||'').length}));
  console.log('RDH_OPEN_VIDEO_INLINE_EVIDENCE '+JSON.stringify(detail));
- throw Error('Inline RDH JavaScript write was not confirmed');
+ throw Error('Inline RDH JavaScript write was not confirmed after reconnect');
 }
 try{
  await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});

@@ -2,12 +2,106 @@
   "schema": 1,
   "channels": [
     {
+      "slug": "ajpw",
+      "directory": "tubes/AJPW",
+      "stage": "onboarding",
+      "family": "puro",
+      "relationship": "specialist",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "boxing",
+      "directory": "tubes/Boxing",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "ddt",
+      "directory": "tubes/DDT",
+      "stage": "onboarding",
+      "skinReview": "repair-candidate",
+      "adminVerified": true,
+      "backupVerified": true
+    },
+    {
+      "slug": "DG",
+      "directory": "tubes/DragonGate",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "repair-candidate"
+    },
+    {
+      "slug": "DGalt",
+      "directory": "tubes/DragonGate/secondary/DGalt",
+      "stage": "onboarding",
+      "family": "DG",
+      "relationship": "secondary",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "repair-candidate"
+    },
+    {
+      "slug": "Gallios_Lair",
+      "directory": "tubes/Gallios_Lair",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": false,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "grindhouse",
+      "directory": "tubes/Grindhouse",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": false,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "indies",
+      "directory": "tubes/Indies",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "joshi",
+      "directory": "tubes/Joshi",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "repair-candidate"
+    },
+    {
+      "slug": "joshi2",
+      "directory": "tubes/Joshi/secondary/joshi2",
+      "stage": "onboarding",
+      "family": "joshi",
+      "relationship": "secondary",
+      "skinReview": "pending",
+      "adminVerified": true,
+      "backupVerified": true
+    },
+    {
       "slug": "luchatube",
       "directory": "tubes/luchatube",
       "stage": "established",
       "adminVerified": true,
       "backupVerified": true,
       "skinReview": "pending"
+    },
+    {
+      "slug": "MTV",
+      "directory": "tubes/MTV",
+      "stage": "onboarding",
+      "skinReview": "pending",
+      "adminVerified": true,
+      "backupVerified": true
     },
     {
       "slug": "NJPW",
@@ -18,8 +112,44 @@
       "skinReview": "pending"
     },
     {
-      "slug": "Wrestling",
-      "directory": "tubes/WrestleTube",
+      "slug": "NJPWALT",
+      "directory": "tubes/NJPW/secondary/NJPWALT",
+      "stage": "onboarding",
+      "family": "NJPW",
+      "relationship": "secondary",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "main-skin-mirrored"
+    },
+    {
+      "slug": "Noah",
+      "directory": "tubes/NOAH",
+      "stage": "onboarding",
+      "family": "puro",
+      "relationship": "specialist",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "NWA-TNA",
+      "directory": "tubes/NWA-TNA",
+      "stage": "onboarding",
+      "skinReview": "base-configured-runtime-unverified",
+      "adminVerified": true,
+      "backupVerified": true
+    },
+    {
+      "slug": "puro",
+      "directory": "tubes/Puro",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "repair-candidate"
+    },
+    {
+      "slug": "RDH",
+      "directory": "tubes/RDH",
       "stage": "established",
       "adminVerified": true,
       "backupVerified": true,
@@ -34,17 +164,17 @@
       "skinReview": "pending"
     },
     {
-      "slug": "WWF-WWE",
-      "directory": "tubes/WWE-WWF",
-      "stage": "established",
+      "slug": "rizin",
+      "directory": "tubes/Rizin",
+      "stage": "onboarding",
       "adminVerified": true,
       "backupVerified": true,
       "skinReview": "pending"
     },
     {
-      "slug": "RDH",
-      "directory": "tubes/RDH",
-      "stage": "established",
+      "slug": "roh",
+      "directory": "tubes/ROH",
+      "stage": "onboarding",
       "adminVerified": true,
       "backupVerified": true,
       "skinReview": "pending"
@@ -52,6 +182,38 @@
     {
       "slug": "ScaryTube",
       "directory": "tubes/ScaryTube",
+      "stage": "established",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "shoot",
+      "directory": "tubes/Shoot",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "sumo",
+      "directory": "tubes/Sumo",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": true,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "Trek",
+      "directory": "tubes/Trek",
+      "stage": "onboarding",
+      "adminVerified": true,
+      "backupVerified": false,
+      "skinReview": "pending"
+    },
+    {
+      "slug": "WCW",
+      "directory": "tubes/WCW",
       "stage": "established",
       "adminVerified": true,
       "backupVerified": true,
@@ -66,45 +228,9 @@
       "skinReview": "pending"
     },
     {
-      "slug": "WCW",
-      "directory": "tubes/WCW",
+      "slug": "Wrestling",
+      "directory": "tubes/WrestleTube",
       "stage": "established",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "joshi",
-      "directory": "tubes/Joshi",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "repair-candidate"
-    },
-    {
-      "slug": "puro",
-      "directory": "tubes/Puro",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "repair-candidate"
-    },
-    {
-      "slug": "ajpw",
-      "directory": "tubes/AJPW",
-      "stage": "onboarding",
-      "family": "puro",
-      "relationship": "specialist",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "Noah",
-      "directory": "tubes/NOAH",
-      "stage": "onboarding",
-      "family": "puro",
-      "relationship": "specialist",
       "adminVerified": true,
       "backupVerified": true,
       "skinReview": "pending"
@@ -115,22 +241,6 @@
       "stage": "onboarding",
       "family": "Wrestling",
       "relationship": "secondary",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "indies",
-      "directory": "tubes/Indies",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "shoot",
-      "directory": "tubes/Shoot",
-      "stage": "onboarding",
       "adminVerified": true,
       "backupVerified": true,
       "skinReview": "pending"
@@ -156,32 +266,6 @@
       "skinReview": "pending"
     },
     {
-      "slug": "boxing",
-      "directory": "tubes/Boxing",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "DGalt",
-      "directory": "tubes/DragonGate/secondary/DGalt",
-      "stage": "onboarding",
-      "family": "DG",
-      "relationship": "secondary",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "repair-candidate"
-    },
-    {
-      "slug": "DG",
-      "directory": "tubes/DragonGate",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "repair-candidate"
-    },
-    {
       "slug": "wrestling5",
       "directory": "tubes/WrestleTube/secondary/wrestling5",
       "stage": "onboarding",
@@ -192,69 +276,9 @@
       "skinReview": "pending"
     },
     {
-      "slug": "NJPWALT",
-      "directory": "tubes/NJPW/secondary/NJPWALT",
-      "stage": "onboarding",
-      "family": "NJPW",
-      "relationship": "secondary",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "main-skin-mirrored"
-    },
-    {
-      "slug": "rizin",
-      "directory": "tubes/Rizin",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "sumo",
-      "directory": "tubes/Sumo",
-      "stage": "onboarding",
-      "adminVerified": true,
-      "backupVerified": true,
-      "skinReview": "pending"
-    },
-    {
-      "slug": "NWA-TNA",
-      "directory": "tubes/NWA-TNA",
-      "stage": "onboarding",
-      "skinReview": "base-configured-runtime-unverified",
-      "adminVerified": true,
-      "backupVerified": true
-    },
-    {
-      "slug": "joshi2",
-      "directory": "tubes/Joshi/secondary/joshi2",
-      "stage": "onboarding",
-      "family": "joshi",
-      "relationship": "secondary",
-      "skinReview": "pending",
-      "adminVerified": true,
-      "backupVerified": true
-    },
-    {
-      "slug": "MTV",
-      "directory": "tubes/MTV",
-      "stage": "onboarding",
-      "skinReview": "pending",
-      "adminVerified": true,
-      "backupVerified": true
-    },
-    {
-      "slug": "ddt",
-      "directory": "tubes/DDT",
-      "stage": "onboarding",
-      "skinReview": "repair-candidate",
-      "adminVerified": true,
-      "backupVerified": true
-    },
-    {
-      "slug": "roh",
-      "directory": "tubes/ROH",
-      "stage": "onboarding",
+      "slug": "WWF-WWE",
+      "directory": "tubes/WWE-WWF",
+      "stage": "established",
       "adminVerified": true,
       "backupVerified": true,
       "skinReview": "pending"

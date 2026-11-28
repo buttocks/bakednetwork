@@ -1,26 +1,20 @@
 [
   {
     "schema": 1,
-    "request_id": "retire_native_final_retry_01",
-    "channel": "joshi",
-    "action": "retire_legacy_native"
+    "request_id": "native_inventory_newrooms_01",
+    "channel": "Trek",
+    "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "retire_native_final_retry_02",
-    "channel": "shoot",
-    "action": "retire_legacy_native"
+    "request_id": "native_inventory_newrooms_02",
+    "channel": "grindhouse",
+    "action": "inventory_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "retire_native_final_retry_03",
-    "channel": "wrestling5",
-    "action": "retire_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "retire_native_final_retry_04",
-    "channel": "MTV",
-    "action": "retire_legacy_native"
+    "request_id": "native_inventory_newrooms_03",
+    "channel": "Gallios_Lair",
+    "action": "inventory_legacy_native"
   }
 ]

@@ -1,20 +1,182 @@
 [
   {
     "schema": 1,
-    "request_id": "clean_native_scroll_retry_01",
+    "request_id": "retire_native_batch01_01",
+    "channel": "luchatube",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_02",
+    "channel": "NJPW",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_03",
+    "channel": "Wrestling",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_04",
+    "channel": "RetroWrestling",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_05",
+    "channel": "WWF-WWE",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_06",
+    "channel": "RDH",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_07",
     "channel": "ScaryTube",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "clean_native_scroll_retry_02",
+    "request_id": "retire_native_batch01_08",
+    "channel": "WID",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_09",
     "channel": "WCW",
     "action": "retire_legacy_native"
   },
   {
     "schema": 1,
-    "request_id": "clean_native_scroll_retry_03",
+    "request_id": "retire_native_batch01_10",
+    "channel": "joshi",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_11",
+    "channel": "puro",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_12",
+    "channel": "ajpw",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_13",
+    "channel": "Noah",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_14",
+    "channel": "wrestling2",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_15",
+    "channel": "indies",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_16",
+    "channel": "shoot",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_17",
+    "channel": "wrestling3",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_18",
+    "channel": "Wrestling4",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_19",
+    "channel": "boxing",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_20",
+    "channel": "DGalt",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_21",
+    "channel": "DG",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_22",
+    "channel": "wrestling5",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_23",
+    "channel": "NJPWALT",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_24",
+    "channel": "rizin",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_25",
+    "channel": "sumo",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_26",
     "channel": "NWA-TNA",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_27",
+    "channel": "joshi2",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_28",
+    "channel": "MTV",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_29",
+    "channel": "ddt",
+    "action": "retire_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "retire_native_batch01_30",
+    "channel": "roh",
     "action": "retire_legacy_native"
   }
 ]

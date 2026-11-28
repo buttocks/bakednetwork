@@ -613,8 +613,25 @@ async function run(request,session=null){
       const fresh=await capture();
       if(fresh.js!==before.js||fresh.css!==before.css||fresh.externaljs!==before.externaljs||fresh.externalcss!==before.externalcss||fresh.motd!==before.motd)
         throw Error('Channel settings changed during review; no cleanup applied');
-      await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:cleaned.source,externaljs:nextExternal,setJs:cleaned.changed,setExternal:!!externalChange});
-      await page.waitForTimeout(600);
+      const updateAck=await page.evaluate(({js,externaljs,setJs,setExternal})=>new Promise(resolve=>{
+        const socket=window.socket;
+        if(!socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');
+        const result={js:!setJs,externaljs:!setExternal,errors:[]};
+        const finish=()=>{if(result.js&&result.externaljs){clearTimeout(timer);cleanup();resolve(result)}};
+        const onJs=data=>{if(data?.js===js)result.js=true;finish()};
+        const onOptions=data=>{if(data?.externaljs===externaljs)result.externaljs=true;finish()};
+        const onError=data=>result.errors.push(data?.msg||data?.message||String(data));
+        const cleanup=()=>{socket.off('channelCSSJS',onJs);socket.off('channelOpts',onOptions);socket.off('errorMsg',onError);socket.off('validationError',onError)};
+        const timer=setTimeout(()=>{cleanup();resolve(result)},8000);
+        if(setJs)socket.on('channelCSSJS',onJs);
+        if(setExternal)socket.on('channelOpts',onOptions);
+        socket.on('errorMsg',onError);
+        socket.on('validationError',onError);
+        if(setJs)socket.emit('setChannelJS',{js});
+        if(setExternal)socket.emit('setOptions',{externaljs});
+        finish();
+      }),{js:cleaned.source,externaljs:nextExternal,setJs:cleaned.changed,setExternal:!!externalChange});
+      if(!updateAck.js||!updateAck.externaljs)throw Error('Save event was not acknowledged: '+JSON.stringify(updateAck));
       await page.reload({waitUntil:'domcontentloaded',timeout:45000});
       await waitFor(page,state=>state.connected&&state.loggedIn&&String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
         'Could not reconnect after native legacy cleanup',30000);

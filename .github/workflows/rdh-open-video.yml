@@ -6,7 +6,7 @@ on:
     paths:
       - .github/workflows/rdh-open-video.yml
       - tubes/RDH/deploy-open-video.mjs
-      - tubes/RDH/rdh-custom-only-v1.8.1.js
+      - tubes/RDH/rdh-custom-only-v1.8.2.js
 permissions:
   contents: read
 concurrency:

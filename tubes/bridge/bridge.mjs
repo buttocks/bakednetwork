@@ -15,6 +15,7 @@ const REGISTRY=JSON.parse(await fs.readFile(new URL('../channels.json',import.me
 const CHANNELS=new Set(REGISTRY.map(c=>c.slug));
 const ONBOARDING=new Set(REGISTRY.filter(c=>c.stage==='onboarding').map(c=>c.slug));
 const ORIGINAL_CHANNELS=new Set(['luchatube','NJPW']);
+const IFRAME_WRITE_CHANNELS=new Set(['WWF-WWE','puro','joshi','RetroWrestling','indies']);
 const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
 const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
@@ -112,6 +113,15 @@ function validate(raw){
   }
   if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
   // ScaryTube is authorized only for its exact public viewer endpoint.
+  if(raw.action==='add_iframe'&&IFRAME_WRITE_CHANNELS.has(raw.channel)){
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
+       raw.old_src!==undefined||raw.offset!==undefined||raw.limit!==undefined||
+       typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
+       typeof raw.title!=='string'||raw.title.trim().length<4||raw.title.length>100)
+      throw Error('Invalid approved tube iframe request');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,
+      title:raw.title.trim(),src:safeUrl(raw.src)};
+  }
   if(raw.channel==='ScaryTube'&&raw.action==='add_iframe'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.stage==='established'&&c.adminVerified&&c.backupVerified)||
        raw.src!=='https://pc-mint.tail7c671f.ts.net:10000/'||
@@ -121,8 +131,9 @@ function validate(raw){
       throw Error('Invalid ScaryTube public embed request');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:raw.src};
   }
-  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native'].includes(raw.action))throw Error('New channel is read-only until verified');
-  if(ONBOARDING.has(raw.channel)&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media','inventory_legacy_native'].includes(raw.action))throw Error('New channel onboarding is read-only');
+  const approvedIframeWrite=raw.action==='add_iframe'&&IFRAME_WRITE_CHANNELS.has(raw.channel);
+  if(!ORIGINAL_CHANNELS.has(raw.channel)&&!approvedIframeWrite&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native'].includes(raw.action))throw Error('New channel is read-only until verified');
+  if(ONBOARDING.has(raw.channel)&&!approvedIframeWrite&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media','inventory_legacy_native'].includes(raw.action))throw Error('New channel onboarding is read-only');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
   if(['audit_playlist_media','clean_dead_playlist'].includes(raw.action)){
     if(raw.src||raw.old_src||raw.title)throw Error('Playlist audit cannot mutate');
@@ -775,14 +786,14 @@ else{
   try{
     const raw=JSON.parse(await fs.readFile(REQUEST_PATH,'utf8'));
     if(Array.isArray(raw)){
-      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync'||r?.action==='inventory_legacy_native'||r?.action==='retire_legacy_native')?30:10))throw Error('Invalid audit batch size');
+      if(!raw.length||raw.length>(raw.every(r=>r?.action==='fix_queue_attribution'||r?.action==='inventory_chat_sync'||r?.action==='inventory_legacy_native'||r?.action==='retire_legacy_native'||r?.action==='add_iframe')?30:10))throw Error('Invalid audit batch size');
       const requests=raw.map(validate);
       if(requests.some(r=>r.action==='sync_wrestletube_chat')){
         const targets=requests.slice(1);
         if(requests[0].action!=='inventory_chat_sync'||requests[0].channel!=='Wrestling'||targets.length<1||targets.length>4||targets.some(r=>r.action!=='sync_wrestletube_chat')||new Set(targets.map(r=>r.channel)).size!==targets.length)throw Error('Sync requires fresh master followed by unique approved mirrors');
       }
       if(requests.some(r=>r.action==='pilot_chat_sync')&&!(requests.length===2&&requests[0].action==='inventory_chat_sync'&&requests[0].channel==='Wrestling'&&requests[1].action==='pilot_chat_sync'&&requests[1].channel==='wrestling2'))throw Error('Pilot requires fresh master inventory followed by Wrestling 2 only');
-      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution','inventory_chat_sync','inventory_legacy_native','retire_legacy_native','pilot_chat_sync','sync_wrestletube_chat'].includes(r.action)))throw Error('Unsupported batch operation');
+      if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution','inventory_chat_sync','inventory_legacy_native','retire_legacy_native','pilot_chat_sync','sync_wrestletube_chat','add_iframe'].includes(r.action)))throw Error('Unsupported batch operation');
       const results=[];
       for(const request of requests){
         try{const result=await run(request);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}

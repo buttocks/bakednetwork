@@ -37,10 +37,11 @@ async function setExternal(expected,value){
   if((await state()).externaljs===value)return;
   await page.waitForTimeout(250);
  }
+ const immediate=await state();
+ const evidence=await page.evaluate(()=>({events:window.__rdhOpenVideoEvidence||[],connected:!!window.socket?.connected,loggedIn:!!window.CLIENT?.logged_in,rank:window.CLIENT?.rank,channel:window.CHANNEL?.name,validationErrors:[...document.querySelectorAll('#chatlog .chat-msg, #messagebuffer .chat-msg')].slice(-5).map(e=>e.textContent).filter(x=>/external|option|permission/i.test(x))}));
+ console.log('RDH_OPEN_VIDEO_SETTINGS_EVIDENCE '+JSON.stringify({current:immediate.externaljs,evidence}));
  await page.reload({waitUntil:'domcontentloaded',timeout:45000});await ready();
  if((await state()).externaljs===value)return;
- const evidence=await page.evaluate(()=>window.__rdhOpenVideoEvidence||[]);
- console.log('RDH_OPEN_VIDEO_SETTINGS_EVIDENCE '+JSON.stringify({current:(await state()).externaljs,evidence}));
  throw Error('External JS change not confirmed after reconnect');
 }
 try{

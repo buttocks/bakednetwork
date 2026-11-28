@@ -47,10 +47,11 @@ function safeUrl(value){
 }
 function validate(raw){
   if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('Request must be an object');
-  const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit'];
+  const allowed=['schema','request_id','channel','action','title','src','old_src','offset','limit','items'];
 
   for(const key of Object.keys(raw))if(!allowed.includes(key))throw Error('Unknown request key: '+key);
   if(raw.schema!==1||!CHANNELS.has(raw.channel))throw Error('Unsupported schema or unauthorized channel');
+  if(raw.items!==undefined&&raw.action!=='add_iframes_batch')throw Error('Items only allowed for iframe batches');
   if(raw.action==='retire_legacy_native'){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
@@ -111,8 +112,34 @@ function validate(raw){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
-  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','add_iframes_batch','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
   // ScaryTube is authorized only for its exact public viewer endpoint.
+  if(raw.action==='add_iframes_batch'){
+    const verified=channel=>IFRAME_WRITE_CHANNELS.has(channel)&&
+      REGISTRY.some(c=>c.slug===channel&&c.adminVerified&&c.backupVerified);
+    if(!verified(raw.channel)||typeof raw.request_id!=='string'||
+       !/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||
+       raw.title!==undefined||raw.src!==undefined||raw.old_src!==undefined||
+       raw.offset!==undefined||raw.limit!==undefined||
+       !Array.isArray(raw.items)||raw.items.length<1||raw.items.length>30)
+      throw Error('Invalid approved tube iframe batch');
+    const urls=new Set();
+    const items=raw.items.map(item=>{
+      if(!item||typeof item!=='object'||Array.isArray(item)||
+         Object.keys(item).some(k=>!['channel','title','src'].includes(k))||
+         !verified(item.channel)||typeof item.title!=='string'||
+         item.title.trim().length<4||item.title.length>100)
+        throw Error('Invalid iframe batch item');
+      const src=safeUrl(item.src);
+      if(urls.has(src))throw Error('Duplicate iframe URL in batch');
+      urls.add(src);
+      return {channel:item.channel,title:item.title.trim(),src};
+    });
+    if(items[0].channel!==raw.channel)
+      throw Error('Batch must start in its first destination tube');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,
+      action:raw.action,items};
+  }
   if(raw.action==='add_iframe'&&IFRAME_WRITE_CHANNELS.has(raw.channel)){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        raw.old_src!==undefined||raw.offset!==undefined||raw.limit!==undefined||
@@ -131,7 +158,7 @@ function validate(raw){
       throw Error('Invalid ScaryTube public embed request');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:raw.src};
   }
-  const approvedIframeWrite=raw.action==='add_iframe'&&IFRAME_WRITE_CHANNELS.has(raw.channel);
+  const approvedIframeWrite=['add_iframe','add_iframes_batch'].includes(raw.action)&&IFRAME_WRITE_CHANNELS.has(raw.channel);
   if(!ORIGINAL_CHANNELS.has(raw.channel)&&!approvedIframeWrite&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(ONBOARDING.has(raw.channel)&&!approvedIframeWrite&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media','inventory_legacy_native'].includes(raw.action))throw Error('New channel onboarding is read-only');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
@@ -681,6 +708,59 @@ async function run(request){
     if(!Number.isFinite(initial.rank)||initial.rank<3)
       throw Error('buttman-gpt does not have verified Admin rank on '+request.channel);
     mutationAllowed(initial,request.action);
+    if(request.action==='add_iframes_batch'){
+      const outcomes=[];
+      const groups=[];
+      for(const item of request.items){
+        let group=groups.find(g=>g.channel===item.channel);
+        if(!group){group={channel:item.channel,items:[]};groups.push(group);}
+        group.items.push(item);
+      }
+      let state=initial;
+      for(const group of groups){
+        if(String(state.channel||'').toLowerCase()!==group.channel.toLowerCase()){
+          await page.goto(SITE+'/tv/'+group.channel,{waitUntil:'domcontentloaded',timeout:45000});
+          state=await waitFor(page,s=>s.connected&&s.loggedIn&&
+            String(s.username||'').toLowerCase()===USERNAME&&
+            String(s.channel||'').toLowerCase()===group.channel.toLowerCase(),
+            'Could not confirm authenticated account and channel connection on '+group.channel,30000);
+          await page.waitForTimeout(2200);
+          state=await snapshot(page);
+        }
+        if(!Number.isFinite(state.rank)||state.rank<3)
+          state=await waitFor(page,s=>s.rank>=3&&s.loggedIn&&
+            String(s.username||'').toLowerCase()===USERNAME&&
+            String(s.channel||'').toLowerCase()===group.channel.toLowerCase(),
+            'Channel Admin rank not observed on '+group.channel,8000);
+        mutationAllowed(state,'add_iframe');
+        for(const item of group.items){
+          try{
+            const matches=exactMatches(state,item.src);
+            if(matches.length>1)throw Error('Multiple existing copies; refusing duplicate actions');
+            if(matches.length===1){
+              outcomes.push({channel:group.channel,title:item.title,status:matches[0].temp?'already-present-temporary':'already-present',src:item.src});
+              continue;
+            }
+            await page.evaluate(({markup,title})=>{
+              window.socket.emit('queue',{id:markup,title,type:'cu',pos:'end',temp:false});
+            },{markup:embedHtml(item.src),title:item.title});
+            const after=await waitFor(page,s=>exactMatches(s,item.src).length===1,
+              'Baked.live did not confirm iframe in '+group.channel);
+            const added=exactMatches(after,item.src)[0];
+            if(added.temp)throw Error('New iframe was only added temporarily');
+            outcomes.push({channel:group.channel,title:item.title,status:'added',src:item.src});
+            console.log('Verified permanent iframe added in '+group.channel+': '+item.src);
+            state=after;
+          }catch(error){
+            outcomes.push({channel:group.channel,title:item.title,status:'failed',error:String(error.message||error).slice(0,180),src:item.src});
+            console.log('Iframe batch item failed in '+group.channel+': '+String(error.message||error).slice(0,180));
+          }
+        }
+      }
+      const failed=outcomes.some(x=>x.status==='failed');
+      return {request_id:request.request_id,channel:'multiple',action:request.action,
+        status:failed?'partial':'completed',items:outcomes};
+    }
     const already=exactMatches(initial,request.src);
     if(already.length>1)throw Error('Multiple existing copies of target iframe; refusing duplicate actions');
     if(request.channel==='ScaryTube'&&already.some(x=>x.temp))throw Error('Existing ScaryTube iframe is temporary; refusing duplicate');

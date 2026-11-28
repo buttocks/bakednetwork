@@ -32,24 +32,7 @@ function initialize(){
             .appendTo("head");
     }
 
-    /* ---------------------------------------------------------
-       Scroll playlist to current item
-       --------------------------------------------------------- */
-    $("#scroll-btn").remove();
-
-    $("<button>", {
-        id: "scroll-btn",
-        class: "btn btn-sm btn-default",
-        title: "Scroll playlist to current item",
-        type: "button"
-    })
-        .append('<span class="glyphicon glyphicon-hand-right"></span>')
-        .prependTo("#videocontrols")
-        .on("click", function () {
-            if (typeof scrollQueue === "function") {
-                scrollQueue();
-            }
-        });
+    
 
     /* ---------------------------------------------------------
        Xaekai sequenced module loader

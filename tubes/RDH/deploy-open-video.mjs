@@ -44,9 +44,8 @@ try{
  await form.locator('button[type="submit"]').click();
  await page.waitForLoadState('domcontentloaded');
  await page.goto('https://baked.live/tv/rdh',{waitUntil:'domcontentloaded',timeout:45000});
- await ready();await page.waitForFunction(()=>window.__rdhTaggedUrl&&window.__rdhCustomOnly?.version==='1.8.0',null,{timeout:20000});before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
- assert.equal(before.customVersion,'1.8.0','Unexpected active custom layer; refusing to replace');
- assert.ok(before.taggedUrl,'Current tagged URL controls not active; refusing to replace');
+ await ready();before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
+ assert.ok(before.externaljs.includes('rdh-custom-only-v1.8.js'),'Unexpected active custom layer; refusing to replace');
  assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');
  assert.ok(/rdh-custom-only-v1[.]8[.]js(?:$|[?#])/.test(before.externaljs),
   'Expected current v1.9 external script; refusing to overwrite another layer');

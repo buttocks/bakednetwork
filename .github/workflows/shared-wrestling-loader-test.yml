@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'tubes/shared/wrestling/**'
+      - 'tubes/NWA-TNA/channel-internal.js'
       - '.github/workflows/shared-wrestling-loader-test.yml'
   workflow_dispatch:
 permissions:

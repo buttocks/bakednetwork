@@ -28,6 +28,9 @@ async function setExternal(expected,value){
      window.CLIENT?.name?.toLowerCase()!=='buttman-gpt'||c.name?.toLowerCase()!=='rdh'||
      o.externaljs!==expected||c.css!==b.css||c.js!==b.js||c.motd!==b.motd||
      o.externalcss!==b.externalcss)throw Error('Concurrent channel change; refusing write');
+  window.__rdhOpenVideoEvidence=[];
+  for(const name of ['validationPassed','validationError'])window.socket.once(name,data=>{if(data?.target==='#cs-externaljs')window.__rdhOpenVideoEvidence.push({name,data})});
+  window.socket.once('channelOpts',opts=>window.__rdhOpenVideoEvidence.push({name:'channelOpts',externaljs:opts?.externaljs||''}));
   window.socket.emit('setOptions',{externaljs:value});
  },{expected,value,b:before});
  for(let i=0;i<20;i++){
@@ -36,6 +39,8 @@ async function setExternal(expected,value){
  }
  await page.reload({waitUntil:'domcontentloaded',timeout:45000});await ready();
  if((await state()).externaljs===value)return;
+ const evidence=await page.evaluate(()=>window.__rdhOpenVideoEvidence||[]);
+ console.log('RDH_OPEN_VIDEO_SETTINGS_EVIDENCE '+JSON.stringify({current:(await state()).externaljs,evidence}));
  throw Error('External JS change not confirmed after reconnect');
 }
 try{

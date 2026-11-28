@@ -587,7 +587,7 @@ async function run(request,session=null){
           let response;
           try{response=await page.request.get(externalUrl.href,{timeout:20000});if(!response.ok())throw Error('External loader fetch returned HTTP '+response.status());externalSource=await response.text();}
           finally{await response?.dispose();}
-          const cleanExternal=cleanLegacyNativeFeatures(externalSource);
+          const cleanExternal=cleanLegacyNativeFeatures(externalSource,{defaultAudioNotice:true});
           const committedAsset=await fs.readFile(new URL('./cleaned-loaders/'+assetName,import.meta.url),'utf8');
           if(cleanExternal.source!==committedAsset)throw Error('External loader does not match the reviewed Git cleanup asset');
           const newUrl=cleanLoaderUrl(assetName);
@@ -614,13 +614,11 @@ async function run(request,session=null){
       if(fresh.js!==before.js||fresh.css!==before.css||fresh.externaljs!==before.externaljs||fresh.externalcss!==before.externalcss||fresh.motd!==before.motd)
         throw Error('Channel settings changed during review; no cleanup applied');
       await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(!window.socket?.connected||window.CLIENT?.rank<3)throw Error('Admin connection lost');if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:cleaned.source,externaljs:nextExternal,setJs:cleaned.changed,setExternal:!!externalChange});
-      let after=null;
-      for(let i=0;i<80;i++){after=await capture();if(after.js===cleaned.source&&after.externaljs===nextExternal)break;await page.waitForTimeout(250);}
-      if(after?.js!==cleaned.source||after.externaljs!==nextExternal)throw Error('Channel JS update was not confirmed; original retained');
+      await page.waitForTimeout(600);
       await page.reload({waitUntil:'domcontentloaded',timeout:45000});
       await waitFor(page,state=>state.connected&&state.loggedIn&&String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
         'Could not reconnect after native legacy cleanup',30000);
-      after=null;
+      let after=null;
       let verified=false;
       for(let i=0;i<100;i++){
         after=await capture();
@@ -637,6 +635,10 @@ async function run(request,session=null){
         const unchangedAsideFromTarget=after.css===before.css&&after.externalcss===before.externalcss&&after.motd===before.motd;
         if(unchangedAsideFromTarget&&after.js===cleaned.source&&after.externaljs===nextExternal){
           await page.evaluate(({js,externaljs,setJs,setExternal})=>{if(setJs)window.socket.emit('setChannelJS',{js});if(setExternal)window.socket.emit('setOptions',{externaljs});},{js:before.js,externaljs:before.externaljs,setJs:cleaned.changed,setExternal:!!externalChange});
+          await page.waitForTimeout(600);
+          await page.reload({waitUntil:'domcontentloaded',timeout:45000});
+          await waitFor(page,state=>state.connected&&state.loggedIn&&String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
+            'Could not reconnect after native cleanup rollback',30000);
           for(let i=0;i<40;i++){const restored=await capture();if(restored.js===before.js&&restored.externaljs===before.externaljs)break;await page.waitForTimeout(250);}
         }
         throw Error('Post-reload verification failed: '+JSON.stringify(mismatch));

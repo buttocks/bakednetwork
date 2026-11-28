@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "gallios_native_acceptance_20261128b",
+  "request_id": "gallios_native_acceptance_20261128c",
   "channel": "Gallios_Lair",
   "action": "verify_native_acceptance"
 }

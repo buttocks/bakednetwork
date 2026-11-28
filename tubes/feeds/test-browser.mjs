@@ -25,7 +25,7 @@ try {
      videoProof=await page.evaluate(()=>{const v=document.querySelector('video');return {width:v.videoWidth,height:v.videoHeight,time:v.currentTime,readyState:v.readyState};});
    }
    await page.evaluate(()=>document.body.classList.add('overlay-idle'));
-   if(await page.locator('body.youtube-mode').count()===0)await page.locator('#menu-reveal').click();
+   await page.mouse.move(12,12);
    const toolbarSeparated=await page.evaluate(()=>{
      const body=document.body, was=body.classList.contains('youtube-mode');
      body.classList.add('youtube-mode');body.classList.remove('overlay-idle');

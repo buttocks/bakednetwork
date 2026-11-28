@@ -971,7 +971,46 @@
       "youtube_search_queries": [
         "free match",
         "full event"
-      ]
+      ],
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(njpw|new japan|njpw strong|njpw world|new beginning|g1 climax|wrestle kingdom)"
     },
     {
       "directory": "DragonGate/secondary/DGalt",
@@ -993,7 +1032,46 @@
       "archive_search": "mediatype:movies AND (title:\"Dragon Gate Wrestling\" OR title:\"Dragon Gate Pro Wrestling\" OR title:\"Dragon Gate King of Gate\" OR title:\"Toryumon\")",
       "archive_search_rows": 40,
       "archive_candidate_limit": 10,
-      "archive_first": true
+      "archive_first": true,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(dragon gate|dragongate|king of gate|gate of destiny|dead or alive|toryumon)"
     },
     {
       "directory": "Joshi/secondary/joshi2",
@@ -1019,7 +1097,46 @@
       "archive_search": "mediatype:movies AND (title:\"GAEA Japan\" OR title:\"JWP Wrestling\" OR title:\"Ladies Legend Pro Wrestling\" OR title:\"Joshi Puroresu\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
-      "archive_first": true
+      "archive_first": true,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(tjpw|tokyo joshi|joshi|hana kimura|maki itoh|shoko nakajima|yuki kamifuku|yuki aino|miyu yamashita|pom harajuku|raku\\b|mizuki|suzume|arisu endo|riho|aja kong|stardom|xochitl hamada|la diabolica|luvia|chanyota)"
     },
     {
       "directory": "Indies",
@@ -1116,7 +1233,46 @@
           "id": "UCZZ0UGjWsRdM8_5bsqtxYaQ",
           "name": "RIZIN FIGHTING FEDERATION"
         }
-      ]
+      ],
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(pancrase|パンクラス|uwf|uwfi|lidet|gleat|battlarts|fujiwara gumi|rings fighting network|shoot style|shoot wrestling)"
     },
     {
       "directory": "Boxing",
@@ -1240,7 +1396,46 @@
       "archive_search_rows": 40,
       "archive_candidate_limit": 10,
       "archive_first": true,
-      "max_catalog_items": 120
+      "max_catalog_items": 120,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(wrestling|wrestler|puroresu|puro|njpw|ajpw|noah|ddt|tjpw|stardom|aew|tna|impact|wwe|wwf|wcw|ecw|roh|nwa|gcw|chikara|shimmer|match|championship|tag league|プロレス|試合|\\bvs\\b)"
     },
     {
       "directory": "WrestleTube/secondary/wrestling2",
@@ -1266,7 +1461,46 @@
       "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Ring of Honor Wrestling\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
-      "archive_first": true
+      "archive_first": true,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(aew|all elite wrestling|tna|impact|roh|ring of honor|gcw|cwa|wrestling revolver|match|full event)"
     },
     {
       "directory": "WrestleTube/secondary/wrestling3",
@@ -1296,7 +1530,46 @@
       "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Territory Wrestling\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
-      "archive_first": true
+      "archive_first": true,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(wcw|nitro|thunder|starrcade|havoc|bash|wwe|wwf|nxt|raw\\b|smackdown|wrestlemania|royal rumble|match)"
     },
     {
       "directory": "WrestleTube/secondary/Wrestling4",
@@ -1318,7 +1591,46 @@
       "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Classic Wrestling\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
-      "archive_first": true
+      "archive_first": true,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(lucha|luchador|aaa|triple\\s*a|cmll|iwr[gf]|wwa|mexico|lucha fiesta)"
     },
     {
       "directory": "WrestleTube/secondary/wrestling5",
@@ -1364,7 +1676,46 @@
       "archive_search": "mediatype:movies AND (title:\"Professional Wrestling Match\" OR title:\"Independent Wrestling\")",
       "archive_search_rows": 30,
       "archive_candidate_limit": 8,
-      "archive_first": true
+      "archive_first": true,
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "WrestleTube on Baked.live"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "Baked Network DM #2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "Baked Network 4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork"
+        },
+        {
+          "username": "LuchaClick1",
+          "name": "Lucha Click"
+        },
+        {
+          "username": "luisvega335",
+          "name": "Wrestling Replay"
+        },
+        {
+          "username": "sirumair38",
+          "name": "Free Watch Wrestling"
+        },
+        {
+          "username": "sumantarock",
+          "name": "Wrestling Eternity"
+        }
+      ],
+      "dailymotion_title_pattern": "(?i)(wrestling|wrestler|match|championship|full event|full show|njpw|ajpw|noah|ddt|tjpw|aew|tna|impact|wwe|wwf|wcw|ecw|roh|nwa|gcw|chikara|shimmer|プロレス|試合|\\bvs\\b)"
     },
     {
       "directory": "MTV",

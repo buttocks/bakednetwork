@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "gallios_lair_native_backup_20261128",
+  "request_id": "gallios_lair_native_inventory_20261128",
   "channel": "Gallios_Lair",
-  "action": "backup_skin"
+  "action": "inventory_legacy_native"
 }

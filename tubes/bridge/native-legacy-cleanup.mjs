@@ -3,8 +3,8 @@
  * It edits only top-level properties inside the legacy loader's modules/options
  * objects. Unknown formats are returned unchanged for manual review.
  */
-const RETIRED_MODULES=new Set(['chatline','chatext','chatcolor','colormap','unimoji','dectalk','layout']);
-const RETIRED_QUEUE_OPTIONS=new Set(['collapse','hidePlaylist','inlineBlame','recentMedia','thumbnails','timeEstimates']);
+const RETIRED_MODULES=new Set(['privmsg','chatline','chatext','chatcolor','colormap','unimoji','dectalk','layout']);
+const RETIRED_QUEUE_OPTIONS=new Set(['hidePlaylist','recentMedia','thumbnails','timeEstimates']);
 
 function objectRange(source,property,from=0,to=source.length){
   const re=new RegExp('\\b'+property+'\\s*:\\s*\\{','g');
@@ -79,9 +79,22 @@ function setNestedBooleans(parts,parentName,names,value){
   const re=new RegExp('\\b('+[...names].join('|')+')\\s*:\\s*(?:true|false|!0|!1)(?=\\s*(?:,|\\}|\\)|$))','g');
   return parts.map(part=>propName(part)===parentName?part.replace(re,(_,key)=>key+':'+value):part);
 }
+function cleanNativeQueueSettings(parts){
+  const names=[...RETIRED_QUEUE_OPTIONS].join('|');
+  const re=new RegExp('(?:,\\s*)?(?:'+names+')\\s*:\\s*(?:true|false|!0|!1)(?=\\s*(?:,|\\}))','g');
+  return parts.map(part=>{
+    if(propName(part)!=='playlist')return part;
+    return part.replace(re,'').replace(/\{\s*,/g,'{').replace(/,\s*\}/g,'}')
+      .replace(/,\s*\{\s*collapse\s*:\s*false\s*,\s*inlineBlame\s*:\s*false\s*\}(?=,\s*(?:window\.|$))/g,'');
+  });
+}
 function disableAutoHider(parts){
-  const re=/\bautoHider\s*:\s*(?:!\([^,}]*\)|true|false|!0|!1)/;
-  return parts.map(part=>propName(part)==='userlist'?part.replace(re,'autoHider:false'):part);
+  const re=/\bautoHider\s*:\s*(?:!\([^,}]*\)|true|false|!0|!1)(?=\s*(?:,|\}))/g;
+  return parts.flatMap(part=>{
+    if(propName(part)!=='userlist')return [part];
+    const next=part.replace(re,'').replace(/\{\s*,/g,'{').replace(/,\s*\}/g,'}');
+    return /^\s*userlist\s*:\s*\{\s*\}\s*$/.test(next)?[]:[next];
+  });
 }
 function removeBoundCall(source,startPattern){
   const match=startPattern.exec(source);
@@ -164,7 +177,7 @@ export function cleanLegacyNativeFeatures(source){
       optionSource=rewriteObject(optionSource,'options',parts=>removeNamed(parts,new Set(['chatext']))).source;
       changedOptions.push('chatext');
     }
-    const playlist=rewriteObject(optionSource,'options',parts=>setNestedBooleans(parts,'playlist',RETIRED_QUEUE_OPTIONS,'false'));
+    const playlist=rewriteObject(optionSource,'options',parts=>cleanNativeQueueSettings(setNestedBooleans(parts,'playlist',new Set(['collapse','inlineBlame']),'false')));
     if(playlist.changed){optionSource=playlist.source;changedOptions.push('playlist.native-overlap=false');}
     const userlist=rewriteObject(optionSource,'options',parts=>disableAutoHider(parts));
     if(userlist.changed){optionSource=userlist.source;changedOptions.push('userlist.autoHider=false');}
@@ -194,6 +207,7 @@ export function cleanLegacyNativeFeatures(source){
   next=commaScroll.source;
   const legacyScroll=removeLegacyScrollControls(next);
   next=legacyScroll.source;
+  if(!/AudioNotice[\s\S]{0,80}Toggle/.test(next))next='(function(){try{if(!window.localStorage)return;["Squee","Poll","Priv","Video","Marked"].forEach(function(type){var key=CHANNEL.name+"_AudioNotice"+type+"Toggle";if(window.localStorage.getItem(key)===null)window.localStorage.setItem(key,"0")})}catch(e){}})();\n'+next;
   const removedLayoutOverride=/^\s*USEROPTS\.layout\s*=\s*["']fluid["'];?\s*$/gm;
   const layoutCount=(next.match(removedLayoutOverride)||[]).length;
   next=next.replace(removedLayoutOverride,'');
@@ -203,8 +217,8 @@ export function cleanLegacyNativeFeatures(source){
 export function legacyNativeSelfTest(){
   const input='({options:{playlist:{collapse:true,hidePlaylist:true,moveReporting:true,timeEstimates:true},chatext:{maxMessages:200},userlist:{autoHider:true,renderer:true},various:{notepad:true,emoteToggle:true}},modules:{privmsg:{active:1},userlist:{active:1},chatline:{active:1},chatext:{active:1},dectalk:{active:1},layout:{active:1},playlist:{active:1},hotkeys:{active:1}}})';
   const result=cleanLegacyNativeFeatures(input);
-  if(!result.changed||result.retiredModules.join(',')!=='chatline,chatext,dectalk,layout'||
-    !result.source.includes('privmsg:{active:1}')||!result.source.includes('userlist:{active:1}')||
+  if(!result.changed||result.retiredModules.join(',')!=='privmsg,chatline,chatext,dectalk,layout'||
+    result.source.includes('privmsg:{')||!result.source.includes('userlist:{active:1}')||
     !result.source.includes('hotkeys:{active:1}')||!result.source.includes('moveReporting:true')||!result.source.includes('renderer:true')||result.source.includes('autoHider:true')||
     /collapse:true|hidePlaylist:true|timeEstimates:true|chatext:\{|emoteToggle:true|chatline:\{|dectalk:\{|layout:\{/.test(result.source))
     throw Error('Native legacy source transform self-test failed');
@@ -239,7 +253,7 @@ export function legacyNativeSelfTest(){
   }
   const minified='({options:{playlist:Object.assign({},{collapse:!0,hidePlaylist:!0,inlineBlame:!0,recentMedia:!0,thumbnails:!0,timeEstimates:!0}),userlist:{autoHider:!(window.CyTube&&window.CyTube.roster&&1<=window.CyTube.roster.version)}},modules:{privmsg:{active:1},chatline:{active:1}}})';
   const minifiedResult=cleanLegacyNativeFeatures(minified);
-  if(!minifiedResult.source.includes('privmsg:{active:1}')||minifiedResult.source.includes('chatline:{')||
+  if(minifiedResult.source.includes('privmsg:{')||minifiedResult.source.includes('chatline:{')||
     minifiedResult.source.includes('collapse:!0')||minifiedResult.source.includes('autoHider:!('))
     throw Error('Minified native option cleanup self-test failed');
   return true;

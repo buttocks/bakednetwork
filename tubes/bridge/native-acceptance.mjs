@@ -108,11 +108,16 @@ export async function verifyNativeAcceptance({page,request,password}){
    }
    await context.close();
   }finally{await browser.close();}
-  const all=[...results.chromium,...results.firefox];
-  const failed=all.filter(x=>!x.connected||!x.ignoreChannelJs||x.channelModulesLoaded||
-    !x.chatBuffer||!x.chatRenderer||!x.localRender.length||x.localRender.some(t=>!t.visible));
-  results.status=failed.length?'verification-failed':'verified';
-  results.failed=failed.map(x=>({channel:x.channel,browser:x===null?'unknown':undefined}));
+  const failures=[];
+  for(const [browser,reports] of [['chromium',results.chromium],['firefox',results.firefox]]){
+   for(const report of reports)if(!report.connected||!report.ignoreChannelJs||report.channelModulesLoaded||
+      !report.chatBuffer||!report.chatRenderer||!report.localRender.length||report.localRender.some(t=>!t.visible))
+     failures.push({browser,channel:report.channel,connected:report.connected,ignoreChannelJs:report.ignoreChannelJs,
+      channelModulesLoaded:report.channelModulesLoaded,chatBuffer:report.chatBuffer,chatRenderer:report.chatRenderer,
+      rendered:report.localRender.length>0&&report.localRender.every(t=>t.visible)});
+  }
+  results.status=failures.length?'verification-failed':'verified';
+  results.failed=failures;
   return {request_id:request.request_id,channel:request.channel,action:request.action,...results};
  }catch(error){
   results.status='verification-blocked';

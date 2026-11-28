@@ -2,6 +2,7 @@
   "schema": 1,
   "defaults": {
     "source_priority": [
+      "Dailymotion",
       "YouTube",
       "Internet Archive"
     ],
@@ -25,7 +26,8 @@
       "yusuf-x-poudi-today-reffing-my-first-boxing-match-sticking-to-the-kode-yusuf-"
     ],
     "archive_blocked_identifier_pattern": "(?i)^\\d{6}-monday-nitro-hour-\\d+$",
-    "max_search_calls_per_run": 8
+    "max_search_calls_per_run": 8,
+    "max_dailymotion_per_run": 6
   },
   "channels": [
     {
@@ -240,6 +242,29 @@
       "youtube_search_queries": [
         "full match",
         "full event"
+      ],
+      "dailymotion_title_pattern": "(?i)(wrestling|wrestler|puroresu|puro|njpw|ajpw|noah|ddt|tjpw|stardom|aew|tna|impact|wwe|wwf|wcw|ecw|roh|nwa|gcw|chikara|shimmer|match|championship|tag league|プロレス|試合)",
+      "dailymotion_channels": [
+        {
+          "username": "baked4",
+          "name": "BakedNetwork · baked4"
+        },
+        {
+          "username": "wtbaked",
+          "name": "BakedNetwork · wtbaked"
+        },
+        {
+          "username": "bakeddm2",
+          "name": "BakedNetwork · bakeddm2"
+        },
+        {
+          "username": "wooodm4",
+          "name": "BakedNetwork · wooodm4"
+        },
+        {
+          "username": "allison-paige",
+          "name": "BakedNetwork · allison-paige"
+        }
       ]
     },
     {

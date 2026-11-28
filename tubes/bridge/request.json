@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "retire_trek_inline_native_01",
+  "request_id": "trek_external_review_inventory_01",
   "channel": "Trek",
-  "action": "retire_legacy_native"
+  "action": "inventory_legacy_native"
 }

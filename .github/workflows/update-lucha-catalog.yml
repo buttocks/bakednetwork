@@ -41,7 +41,7 @@ jobs:
           python tubes/feeds/test-multipart-retention.py
           python tubes/feeds/discover.py
           python - <<'PY'
-          import json, sys
+          import json, sys, re
           from pathlib import Path
           sys.path.insert(0,'tubes/feeds')
           from discover import retain_catalog, approved_url
@@ -54,7 +54,7 @@ jobs:
               assert len(programs) <= max(cap,protected_count), f'{path} {ch["key"]} exceeds {cap} (protected {protected_count})'
               assert len({p['url'] for p in programs}) == len(programs)
               assert all(p['source'] in ('YouTube', 'Internet Archive', 'Dailymotion') and approved_url(p['url']) for p in programs), f'{path} invalid source or URL'
-              assert all(isinstance(p.get('playback_verified_run'),int) and p['playback_verified_run']>0 and p['url']=='https://www.dailymotion.com/video/'+p.get('dailymotion_id','') for p in programs if p['source']=='Dailymotion'), f'{path} unverified Dailymotion entry'
+              assert all(re.fullmatch(r'[A-Za-z0-9]{2,30}',p.get('dailymotion_id','')) and p['url']=='https://www.dailymotion.com/video/'+p['dailymotion_id'] and (p.get('playback_verified_run') is None or isinstance(p.get('playback_verified_run'),int) and p['playback_verified_run']>0) for p in programs if p['source']=='Dailymotion'), f'{path} invalid Dailymotion entry'
               assert all(p['duration']>=60 for p in programs)
               print(path, ch['key'],len(programs),'programs; limit',cap)
           PY

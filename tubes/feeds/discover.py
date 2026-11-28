@@ -342,6 +342,9 @@ def refresh_one(entry,defaults,record):
         n=0
         for p in candidates:
             if n>=limit or len(additions)>=defaults["max_new_per_channel_per_run"]:break
+            # Profile scans surface candidates only. A Dailymotion video must
+            # have a successful browser playback verification before scheduling.
+            if p.get("source")=="Dailymotion" and not p.get("playback_verified_run"):continue
             if not approved_url(p.get("url")) or p["url"] in existing or p["url"] in skip:continue
             if source != p.get("source"):continue
             additions.append(p);existing.add(p["url"]);n+=1

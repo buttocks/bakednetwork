@@ -30,11 +30,13 @@ async function setExternal(expected,value){
      o.externalcss!==b.externalcss)throw Error('Concurrent channel change; refusing write');
   window.socket.emit('setOptions',{externaljs:value});
  },{expected,value,b:before});
- for(let i=0;i<100;i++){
+ for(let i=0;i<20;i++){
   if((await state()).externaljs===value)return;
   await page.waitForTimeout(250);
  }
- throw Error('External JS change not confirmed');
+ await page.reload({waitUntil:'domcontentloaded',timeout:45000});await ready();
+ if((await state()).externaljs===value)return;
+ throw Error('External JS change not confirmed after reconnect');
 }
 try{
  await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
@@ -45,17 +47,19 @@ try{
  await page.waitForLoadState('domcontentloaded');
  await page.goto('https://baked.live/tv/rdh',{waitUntil:'domcontentloaded',timeout:45000});
  await ready();before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
- assert.ok(before.externaljs.includes('rdh-custom-only-v1.8.js'),'Unexpected active custom layer; refusing to replace');
+ if(before.externaljs!==candidate){
+  assert.ok(/rdh-custom-only-v1[.]8[.]js(?:$|[?#])/.test(before.externaljs),
+   'Unexpected active custom layer; refusing to replace');
+ }
  assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');
- assert.ok(/rdh-custom-only-v1[.]8[.]js(?:$|[?#])/.test(before.externaljs),
-  'Expected current v1.9 external script; refusing to overwrite another layer');
  const response=await page.request.get(candidate,{timeout:25000});
  assert.ok(response.ok(),'Could not retrieve candidate script');
  const code=await response.text();await response.dispose();new Function(code);
  for(const token of ['rdh-open-video-pill','target="_blank"','rel="noopener noreferrer"','line.append(btn,open)'])
   assert.ok(code.includes(token),'Candidate is missing '+token);
  await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));
- await setExternal(before.externaljs,candidate);changed=true;
+ if(before.externaljs!==candidate){await setExternal(before.externaljs,candidate);changed=true;}
+ else{await page.reload({waitUntil:'domcontentloaded',timeout:45000});await ready();}
  const after=await state();assert.ok(auth(after));assert.equal(after.externaljs,candidate);
  for(const k of ['js','css','motd','externalcss'])assert.equal(after[k],before[k]);
  await fs.writeFile(dir+'/after.json',JSON.stringify(after,null,2));

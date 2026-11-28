@@ -1,6 +1,74 @@
-{
-  "schema": 1,
-  "request_id": "gallios_lair_inventory_20261128",
-  "channel": "Gallios_Lair",
-  "action": "inventory_legacy_native"
-}
+[
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_1_20261128",
+    "channel": "NWA-TNA",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_2_20261128",
+    "channel": "RDH",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_3_20261128",
+    "channel": "ScaryTube",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_4_20261128",
+    "channel": "WCW",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_5_20261128",
+    "channel": "WID",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_6_20261128",
+    "channel": "WWF-WWE",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_7_20261128",
+    "channel": "Wrestling4",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_8_20261128",
+    "channel": "RetroWrestling",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_9_20261128",
+    "channel": "Wrestling",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_10_20261128",
+    "channel": "wrestling2",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_11_20261128",
+    "channel": "wrestling3",
+    "action": "inventory_legacy_native"
+  },
+  {
+    "schema": 1,
+    "request_id": "cleanloader_audit_12_20261128",
+    "channel": "wrestling5",
+    "action": "inventory_legacy_native"
+  }
+]

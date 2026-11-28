@@ -1,4 +1,5 @@
 /* Baked TV mixed player — Dailymotion, Archive and YouTube.
+   Target equal scheduled runtime across each available provider.
    No media is hosted or downloaded. YouTube may show ads or disallow embedding.
    Program schedule is synchronized by UTC day, independent of viewer reloads. */
 (()=>{
@@ -108,7 +109,7 @@ function shuffle(list,key){
 function weightedLineup(programs,key){
  const unique=multipartBlocks([...new Map(programs.map(p=>[p.url,p])).values()]).blocks;
  const queues=['Dailymotion','YouTube','Internet Archive'].map(s=>shuffle(unique.filter(p=>p.source===s),key+'|'+s));
- const weights=[.75,.15,.10],used=[0,0,0],seconds=[0,0,0],result=[];
+ const weights=[1,1,1],used=[0,0,0],seconds=[0,0,0],result=[];
  const active=queues.map((q,i)=>q.length?i:-1).filter(i=>i>=0);
  if(!active.length)return [];
  if(active.length===1)return queues[active[0]].flatMap(b=>b.parts);

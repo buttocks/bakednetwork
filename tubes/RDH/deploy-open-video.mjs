@@ -4,7 +4,7 @@ import {chromium} from 'playwright';
 
 const dir='rdh-open-video-review';
 await fs.mkdir(dir,{recursive:true});
-const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@d1a6f22bf01ad16414486045e5bcd1bc499af48c/tubes/RDH/rdh-custom-only-v1.8.2.js';
+const candidate='https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@1ab56ce685b620076f59f745a35f5818d2bc4749/tubes/RDH/rdh-custom-only-v1.8.2.js';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1000}});
 const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};return{
@@ -54,7 +54,7 @@ try{
  await page.goto('https://baked.live/tv/rdh',{waitUntil:'domcontentloaded',timeout:45000});
  await ready();before=await state();console.log('RDH_OPEN_VIDEO_BEFORE '+JSON.stringify(before));await fs.writeFile(dir+'/before.json',JSON.stringify(before,null,2));assert.ok(auth(before),'RDH Admin session not confirmed');
  if(before.externaljs!==candidate){
-  assert.ok(/rdh-custom-only-v1[.]8[.]js(?:$|[?#])/.test(before.externaljs),
+  assert.ok(/rdh-custom-only-v1[.]8(?:[.]\\d+)?[.]js(?:$|[?#])/.test(before.externaljs),
    'Unexpected active custom layer; refusing to replace');
  }
  assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');

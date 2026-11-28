@@ -283,19 +283,20 @@ async function login(page,password){
   if(/Login Failed|Invalid username\/password/i.test(body))throw Error('Baked.live login failed');
   // The channel's CLIENT state below provides the authoritative login/rank check.
 }
-async function run(request){
+async function run(request,session=null){
   const password=process.env.BAKED_LIVE_PASSWORD;
   if(!password)throw Error('Missing GitHub Actions secret BAKED_LIVE_PASSWORD; see tubes/bridge/README.md');
+  const ownsBrowser=!session;
   const {chromium}=await import('playwright');
   const scaryVerify=request.action==='verify_scarytube_playback';
   // GitHub's Ubuntu hosted image includes Google Chrome, which supports AVC/AAC.
   // Keep all other bridge operations on their existing browser.
-  const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(scaryVerify?{channel:'chrome'}:{})});
+  const browser=session?.browser??await chromium.launch({headless:true,args:['--no-sandbox'],...(scaryVerify?{channel:'chrome'}:{})});
   if(scaryVerify)console.log('ScaryTube verification using Google Chrome '+browser.version());
   let page;
   try{
-    const context=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
-    page=await context.newPage();
+    const context=session?.context??await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
+    page=session?.page??await context.newPage();
     const scaryNet={embedded:{},direct:{}};
     function observeScaryNetwork(target,bucket){
       const classify=raw=>{
@@ -317,7 +318,7 @@ async function run(request){
     }
     if(request.action==='verify_scarytube_playback')observeScaryNetwork(page,scaryNet.embedded);
     page.setDefaultTimeout(20000);
-    await login(page,password);
+    if(!session)await login(page,password);
     await page.goto(SITE+'/tv/'+request.channel,{waitUntil:'domcontentloaded',timeout:45000});
     let initial=await waitFor(page,state=>state.connected&&state.loggedIn&&
       String(state.username||'').toLowerCase()===USERNAME&&String(state.channel||'').toLowerCase()===request.channel.toLowerCase(),
@@ -855,7 +856,7 @@ async function run(request){
     return {request_id:request.request_id,channel:request.channel,action:request.action,
       status:request.action==='replace_iframe'?'replaced':'added',src:request.src,
       old_src:request.old_src||undefined,items_before:initial.queue.length,items_after:after.queue.length};
-  }finally{await browser.close();}
+  }finally{if(ownsBrowser)await browser.close();}
 }
 function selfTest(){
   legacyNativeSelfTest();
@@ -918,11 +919,23 @@ else{
       if(requests.some(r=>r.action==='pilot_chat_sync')&&!(requests.length===2&&requests[0].action==='inventory_chat_sync'&&requests[0].channel==='Wrestling'&&requests[1].action==='pilot_chat_sync'&&requests[1].channel==='wrestling2'))throw Error('Pilot requires fresh master inventory followed by Wrestling 2 only');
       if(requests.some(r=>!['audit_legacy_paths','backup_skin','audit_skin','audit_emotes','audit_playlist_media','clean_dead_playlist','plan_legacy_options','migrate_legacy_options','clean_dead_emotes','repair_dg_logo','fix_queue_attribution','inventory_chat_sync','inventory_legacy_native','retire_legacy_native','pilot_chat_sync','sync_wrestletube_chat','add_iframe'].includes(r.action)))throw Error('Unsupported batch operation');
       const results=[];
-      for(const request of requests){
-        try{const result=await run(request);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}
-        catch(error){results.push({channel:request.channel,status:'failed',error:String(error.message||error).slice(0,200)});console.log('Batch '+request.channel+' '+request.action+' failed: '+String(error.message||error).slice(0,200));if(requests.some(r=>r.action==='sync_wrestletube_chat'))break;}
-        await fs.writeFile(OUTPUT_PATH,JSON.stringify({results},null,2)+'\n');
+      const canReuseSession=requests.every(r=>['inventory_legacy_native','retire_legacy_native'].includes(r.action));
+      let session=null;
+      if(canReuseSession){
+        const {chromium}=await import('playwright');
+        const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+        const context=await browser.newContext({viewport:{width:1380,height:880},acceptDownloads:false});
+        const page=await context.newPage();page.setDefaultTimeout(20000);
+        try{await login(page,process.env.BAKED_LIVE_PASSWORD);session={browser,context,page};}
+        catch(error){await browser.close();throw error;}
       }
+      try{
+        for(const request of requests){
+          try{const result=await run(request,session);results.push(result);console.log('Batch '+request.channel+' '+result.status+(result.legacy?' admin='+result.admin_verified+' rank='+result.rank+' legacy='+Object.values(result.legacy).flat().length:''));}
+          catch(error){results.push({channel:request.channel,status:'failed',error:String(error.message||error).slice(0,200)});console.log('Batch '+request.channel+' '+request.action+' failed: '+String(error.message||error).slice(0,200));if(requests.some(r=>r.action==='sync_wrestletube_chat'))break;}
+          await fs.writeFile(OUTPUT_PATH,JSON.stringify({results},null,2)+'\n');
+        }
+      }finally{if(session)await session.browser.close();}
       if(results.some(r=>r.status==='failed'))process.exitCode=1;
     }else{
       const request=validate(raw);

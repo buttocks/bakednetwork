@@ -1,20 +1,6 @@
-[
-  {
-    "schema": 1,
-    "request_id": "native_inventory_newrooms_01",
-    "channel": "Trek",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_newrooms_02",
-    "channel": "grindhouse",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_inventory_newrooms_03",
-    "channel": "Gallios_Lair",
-    "action": "inventory_legacy_native"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "retire_trek_inline_native_01",
+  "channel": "Trek",
+  "action": "retire_legacy_native"
+}

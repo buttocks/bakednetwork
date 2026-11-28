@@ -48,7 +48,7 @@ try{
  assert.equal(before.customVersion,'1.9.0','Unexpected active custom layer; refusing to replace');
  assert.ok(before.taggedUrl,'Current tagged URL controls not active; refusing to replace');
  assert.equal(before.js,'','Unexpected inline channel JS; refusing to replace');
- assert.ok(/rdh-custom-only-v1\\.9\\.js(?:$|[?#])/.test(before.externaljs),
+ assert.ok(/rdh-custom-only-v1[.]9[.]js(?:$|[?#])/.test(before.externaljs),
   'Expected current v1.9 external script; refusing to overwrite another layer');
  const response=await page.request.get(candidate,{timeout:25000});
  assert.ok(response.ok(),'Could not retrieve candidate script');

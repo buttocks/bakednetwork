@@ -1,7 +1,6 @@
 {
   "schema": 1,
-  "request_id": "remove_unavailable_portland_20261128",
-  "channel": "RetroWrestling",
-  "action": "remove_iframe",
-  "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=p-tv"
+  "request_id": "native_acceptance_gallios_20261128",
+  "channel": "Gallios_Lair",
+  "action": "verify_native_acceptance"
 }

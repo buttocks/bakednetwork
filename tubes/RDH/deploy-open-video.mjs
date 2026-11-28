@@ -15,7 +15,7 @@ const state=()=>page.evaluate(()=>{const c=window.CHANNEL||{},o=c.opts||{};retur
  customVersion:window.__rdhCustomOnly?.version||null,taggedUrl:!!window.__rdhTaggedUrl
 }});
 const auth=s=>s.connected&&s.loggedIn&&Number(s.rank)>=3&&
- s.channel?.toLowerCase()==='rdh'&&s.user?.toLowerCase()==='buttman-gpt';
+ s.channel?.toLowerCase()==='rdh'&&s.user?.toLowerCase()==='buttocks';
 const ready=()=>page.waitForFunction(()=>window.socket?.connected&&
  window.CLIENT?.logged_in&&window.CLIENT?.rank>=3&&
  window.CHANNEL?.name?.toLowerCase()==='rdh'&&
@@ -25,7 +25,7 @@ async function setExternal(expected,value){
  await page.evaluate(({expected,value,b})=>{
   const c=window.CHANNEL,o=c.opts||{};
   if(!window.socket?.connected||!window.CLIENT?.logged_in||window.CLIENT?.rank<3||
-     window.CLIENT?.name?.toLowerCase()!=='buttman-gpt'||c.name?.toLowerCase()!=='rdh'||
+     window.CLIENT?.name?.toLowerCase()!=='buttocks'||c.name?.toLowerCase()!=='rdh'||
      o.externaljs!==expected||c.css!==b.css||c.js!==b.js||c.motd!==b.motd||
      o.externalcss!==b.externalcss)throw Error('Concurrent channel change; refusing write');
   window.__rdhOpenVideoEvidence=[];
@@ -47,7 +47,7 @@ async function setExternal(expected,value){
 try{
  await page.goto('https://baked.live/login',{waitUntil:'domcontentloaded',timeout:45000});
  const form=page.locator('form[action="/login"]').last();
- await form.locator('input[name="name"]').fill('buttman-gpt');
+ await form.locator('input[name="name"]').fill('buttocks');
  await form.locator('input[name="password"]').fill(process.env.BAKED_LIVE_PASSWORD||'');
  await form.locator('button[type="submit"]').click();
  await page.waitForLoadState('domcontentloaded');

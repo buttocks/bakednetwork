@@ -208,7 +208,7 @@
       "directory": "tubes/Trek",
       "stage": "onboarding",
       "adminVerified": true,
-      "backupVerified": false,
+      "backupVerified": true,
       "skinReview": "pending"
     },
     {

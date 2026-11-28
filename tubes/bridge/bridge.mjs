@@ -112,7 +112,7 @@ function validate(raw){
     if(raw.channel!=='NWA-TNA'||!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id)||Object.keys(raw).some(k=>!['schema','request_id','channel','action'].includes(k)))throw Error('Invalid NWA-TNA deployment request');
     return {schema:1,channel:raw.channel,action:raw.action,request_id:raw.request_id};
   }
-  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','add_iframes_batch','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
+  if(!['audit','audit_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','backup_skin','audit_emotes','clean_dead_emotes','deploy_skin','clean_motd_lucha','refresh_njpw_skin_motd','remove_legacy_uncertain_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native','retire_legacy_native','add_iframe','add_iframes_batch','remove_iframe','replace_iframe'].includes(raw.action))throw Error('Unsupported bridge action');
   // ScaryTube is authorized only for its exact public viewer endpoint.
   if(raw.action==='add_iframes_batch'){
     const verified=channel=>IFRAME_WRITE_CHANNELS.has(channel)&&
@@ -140,6 +140,14 @@ function validate(raw){
     return {schema:1,request_id:raw.request_id,channel:raw.channel,
       action:raw.action,items};
   }
+  if(raw.action==='remove_iframe'&&IFRAME_WRITE_CHANNELS.has(raw.channel)){
+    if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
+       raw.title!==undefined||raw.old_src!==undefined||raw.offset!==undefined||raw.limit!==undefined||
+       typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))
+      throw Error('Invalid approved tube iframe removal request');
+    return {schema:1,request_id:raw.request_id,channel:raw.channel,
+      action:raw.action,src:safeUrl(raw.src)};
+  }
   if(raw.action==='add_iframe'&&IFRAME_WRITE_CHANNELS.has(raw.channel)){
     if(!REGISTRY.some(c=>c.slug===raw.channel&&c.adminVerified&&c.backupVerified)||
        raw.old_src!==undefined||raw.offset!==undefined||raw.limit!==undefined||
@@ -158,7 +166,7 @@ function validate(raw){
       throw Error('Invalid ScaryTube public embed request');
     return {schema:1,request_id:raw.request_id,channel:raw.channel,action:raw.action,title:raw.title.trim(),src:raw.src};
   }
-  const approvedIframeWrite=['add_iframe','add_iframes_batch'].includes(raw.action)&&IFRAME_WRITE_CHANNELS.has(raw.channel);
+  const approvedIframeWrite=['add_iframe','add_iframes_batch','remove_iframe'].includes(raw.action)&&IFRAME_WRITE_CHANNELS.has(raw.channel);
   if(!ORIGINAL_CHANNELS.has(raw.channel)&&!approvedIframeWrite&&!['audit','audit_skin','backup_skin','audit_legacy_paths','plan_legacy_options','migrate_legacy_options','audit_emotes','clean_dead_emotes','audit_playlist_media','clean_dead_playlist','inventory_legacy_native'].includes(raw.action))throw Error('New channel is read-only until verified');
   if(ONBOARDING.has(raw.channel)&&!approvedIframeWrite&&!['audit','audit_skin','backup_skin','audit_legacy_paths','audit_emotes','audit_playlist_media','inventory_legacy_native'].includes(raw.action))throw Error('New channel onboarding is read-only');
   if(typeof raw.request_id!=='string'||!/^[a-zA-Z0-9_-]{6,80}$/.test(raw.request_id))throw Error('Invalid request_id');
@@ -244,6 +252,10 @@ async function waitFor(page,check,message,timeout=20000){
 }
 function exactMatches(state,src){return state.queue.filter(entry=>entry.src===src);}
 function mutationAllowed(state,action){
+  if(action==='remove_iframe'){
+    if(!state.permissions.remove)throw Error('Admin lacks permission to remove playlist entries');
+    return;
+  }
   if(!state.permissions.add||!state.permissions.custom)throw Error('Admin lacks permission to add custom iframes');
   if(action==='replace_iframe'&&(!state.permissions.move||!state.permissions.remove))
     throw Error('Admin lacks permission to move/delete existing entries');
@@ -708,6 +720,23 @@ async function run(request){
     if(!Number.isFinite(initial.rank)||initial.rank<3)
       throw Error('buttman-gpt does not have verified Admin rank on '+request.channel);
     mutationAllowed(initial,request.action);
+    if(request.action==='remove_iframe'){
+      const matches=exactMatches(initial,request.src);
+      if(matches.length>1)throw Error('Multiple matching iframes; refusing ambiguous removal');
+      if(matches.length===0)return {request_id:request.request_id,channel:request.channel,
+        action:request.action,status:'already-absent',src:request.src};
+      const target=matches[0];
+      if(String(target.uid)===String(initial.playing))
+        throw Error('Target iframe is currently playing; removal cancelled');
+      if(!Number.isFinite(initial.rank)||initial.rank<3||!initial.permissions.remove)
+        throw Error('Verified Admin removal permission is required');
+      await page.evaluate(uid=>window.socket.emit('delete',uid),target.uid);
+      const after=await waitFor(page,state=>exactMatches(state,request.src).length===0,
+        'Baked.live did not confirm iframe removal');
+      console.log('Verified iframe removed from '+request.channel+': '+request.src);
+      return {request_id:request.request_id,channel:request.channel,action:request.action,
+        status:'removed',src:request.src,items_before:initial.queue.length,items_after:after.queue.length};
+    }
     if(request.action==='add_iframes_batch'){
       const outcomes=[];
       const groups=[];
@@ -840,6 +869,9 @@ function selfTest(){
   const url='https://buttocks.github.io/suplex-baked-player/lucha-slamvision.html';
   assert.equal(validate({schema:1,request_id:'test_add_01',channel:'luchatube',
     action:'add_iframe',title:'Lucha',src:url}).src,url);
+  const removeUrl='https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=p-tv';
+  assert.equal(validate({schema:1,request_id:'test_remove_01',channel:'RetroWrestling',
+    action:'remove_iframe',src:removeUrl}).src,removeUrl);
   const scary={schema:1,request_id:'scarytube_public_test',channel:'ScaryTube',action:'add_iframe',title:'ScaryTube — 24/7 Horror Movies',src:'https://pc-mint.tail7c671f.ts.net:10000/'};
   assert.equal(validate(scary).src,scary.src);
   const verifyScary={schema:1,request_id:'scarytube_verify_test',channel:'ScaryTube',action:'verify_scarytube_playback'};

@@ -66,14 +66,14 @@ function multipartInfo(p) {
   const title=p.title.trim();
   // Known standalone song title, not a divided video.
   if(/^Billy Idol\s*[-–—:]\s*White Wedding\s+(?:Pt\.?|Part)\s*1$/i.test(title))return null;
-  const m=title.match(/^(.*?)[\\s_\\-–—:.(\\[]+(?:part|pt\\.?|disc|disk|cd)[\\s._-]*(\\d{1,3})(?:\\s*(?:of|\\/)\\s*(\\d{1,3}))?\\s*[)\\]]?\\s*$/i);
-  const seq=title.match(/^(.*?)[\\s_.-]+(\\d{3})\\s*$/);
+  const m=title.match(/^(.*?)[\s_\-–—:.(\[]+(?:part|pt\.?|disc|disk|cd)[\s._-]*(\d{1,3})(?:\s*(?:of|\/)\s*(\d{1,3}))?\s*[)\]]?\s*$/i);
+  const seq=title.match(/^(.*?)[\s_.-]+(\d{3})\s*$/);
   if(!m&&!seq)return null;
   const zeroBased=!m&&!!seq,hit=m||seq;
   if(!hit[1].trim())return null;
   const part=Number(hit[2]),total=m&&m[3]?Number(m[3]):null;
   if((zeroBased?(part>99):(part<1||part>100))||total!==null&&(total<part||total>100))return null;
-  const base=hit[1].normalize('NFKC').toLowerCase().replace(/[\\s_\\-–—:.,]+/g,' ').trim();
+  const base=hit[1].normalize('NFKC').toLowerCase().replace(/[\s_\-–—:.,]+/g,' ').trim();
   if(base.length<5)return null;
   // Different uploaders/providers can have different cuts of the same program.
   const owner=String(p.source_channel||p.owner||'').normalize('NFKC').toLowerCase().trim();

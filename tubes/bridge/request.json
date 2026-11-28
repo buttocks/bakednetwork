@@ -1,32 +1,6 @@
-[
-  {
-    "schema": 1,
-    "request_id": "native_retry_1_20261128",
-    "channel": "RetroWrestling",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_retry_2_20261128",
-    "channel": "Wrestling",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_retry_3_20261128",
-    "channel": "indies",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_retry_4_20261128",
-    "channel": "sumo",
-    "action": "inventory_legacy_native"
-  },
-  {
-    "schema": 1,
-    "request_id": "native_retry_5_20261128",
-    "channel": "wrestling5",
-    "action": "inventory_legacy_native"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "gallios_lair_inventory_20261128",
+  "channel": "Gallios_Lair",
+  "action": "inventory_legacy_native"
+}

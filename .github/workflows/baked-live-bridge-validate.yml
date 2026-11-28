@@ -13,6 +13,7 @@ on:
       - tubes/bridge/motd-cleanup.mjs
       - tubes/bridge/playlist-audit.mjs
       - tubes/bridge/native-legacy-cleanup.mjs
+      - tubes/bridge/native-acceptance.mjs
       - tubes/luchatube/arena-poster.css
       - tubes/bridge/emote-cleanup.mjs
       - .github/workflows/baked-live-bridge.yml

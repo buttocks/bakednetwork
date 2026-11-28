@@ -100,6 +100,37 @@ def archive(entry, defaults, cursor):
             if len(found)>=60:break
         if len(found)>=60:break
     return found
+def dailymotion(entry,defaults):
+    """Discover public metadata from configured Dailymotion profiles; never downloads media."""
+    found=[]
+    sources=entry.get("dailymotion_channels",[])
+    if not sources:return found
+    match=re.compile(entry.get("dailymotion_title_pattern",r"(?i)wrestling"))
+    excluded=re.compile(r"(?i)(?:\\bWWE\\s*2K\\d*\\b|\\bAEW Fight Forever\\b|\\bgameplay\\b|\\bvideo game\\b|\\bwatchalong\\b|\\bwatch along\\b|\\breaction\\b|\\bsimulation\\b)")
+    for source in sources:
+        if time.monotonic()-START>MAX_RUNTIME-20:break
+        username=str(source.get("username","")).strip()
+        name=str(source.get("name") or username).strip()
+        if not re.fullmatch(r"[A-Za-z0-9._-]{2,80}",username):continue
+        params=urlencode({"fields":"id,title,duration,owner,created_time","limit":100,"sort":"recent"})
+        data=get_json("https://api.dailymotion.com/user/"+quote(username,safe="")+"/videos?"+params)
+        rows=data.get("list",data.get("data",[])) if isinstance(data,dict) else []
+        if not isinstance(rows,list):continue
+        for video in rows:
+            if not isinstance(video,dict):continue
+            ident=str(video.get("id",""))
+            title=re.sub(r"\\s+"," ",str(video.get("title",""))).strip()
+            if not re.fullmatch(r"[A-Za-z0-9]{2,30}",ident) or len(title)<8:continue
+            if not match.search(title) or excluded.search(title):continue
+            try:seconds=int(float(video.get("duration") or 0))
+            except (ValueError,TypeError):continue
+            if not defaults["min_duration_seconds"]<=seconds<=defaults["max_duration_seconds"]:continue
+            found.append({"title":title[:160],"episode":name+" · Dailymotion wrestling upload",
+                "url":"https://www.dailymotion.com/video/"+ident,"dailymotion_id":ident,
+                "duration":seconds,"source":"Dailymotion","source_channel":name,
+                "source_username":username})
+    found.sort(key=lambda p:(p["source_username"].lower(),p["title"].lower()))
+    return found
 def youtube_api(entry,defaults,key):
     """Use official YouTube Data API metadata; no cookies or media downloads."""
     match=re.compile(entry["youtube_title_pattern"])
@@ -289,9 +320,12 @@ def refresh_one(entry,defaults,record):
     if not isinstance(seen,list):seen=[]
     skip=set(seen)
     if entry.get("archive_first"):
-        sources=[("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),6),("YouTube",youtube(entry,defaults),2)]
+        sources=[("Dailymotion",dailymotion(entry,defaults),defaults["max_dailymotion_per_run"]),
+                 ("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),6),
+                 ("YouTube",youtube(entry,defaults),2)]
     else:
-        sources=[("YouTube",youtube(entry,defaults),defaults["max_youtube_per_run"]),
+        sources=[("Dailymotion",dailymotion(entry,defaults),defaults["max_dailymotion_per_run"]),
+             ("YouTube",youtube(entry,defaults),defaults["max_youtube_per_run"]),
              ("Internet Archive",archive(entry,defaults,record.get("archive_cursor",0)),
               defaults["max_archive_per_run"])]
     additions=[]
@@ -313,7 +347,8 @@ def refresh_one(entry,defaults,record):
         record["last_added"]=datetime.now(timezone.utc).isoformat()
         print(entry["directory"]+"/"+key,"added",len(additions),
               "catalog",len(updated),"archive",sum(p["source"]=="Internet Archive" for p in additions),
-              "youtube",sum(p["source"]=="YouTube" for p in additions))
+              "youtube",sum(p["source"]=="YouTube" for p in additions),
+              "dailymotion",sum(p["source"]=="Dailymotion" for p in additions))
     else:print(entry["directory"]+"/"+key,"no new verified entries")
     record["seen"]=(seen+[p["url"] for p in additions])[-800:]
     record["archive_cursor"]=(record.get("archive_cursor",0)+1)%max(1,len(entry["archive_ids"]))
@@ -323,9 +358,9 @@ def main():
     config=load(CONFIG);state=load(STATE)
     defaults=config["defaults"]
     assert config["schema"]==1 and state["schema"]==1
-    assert defaults["source_priority"]==["YouTube","Internet Archive"]
+    assert defaults["source_priority"]==["Dailymotion","YouTube","Internet Archive"]
     assert 20<=defaults["max_catalog_items"]<=200
-    assert 1<=defaults["max_new_per_channel_per_run"]<=8
+    assert 1<=defaults["max_new_per_channel_per_run"]<=8\n    assert 1<=defaults["max_dailymotion_per_run"]<=8
     added=0
     entries=config["channels"]
     # Rotate discovery order so additional feeds are not starved by the budget.

@@ -20,7 +20,8 @@ START=time.monotonic()
 MAX_RUNTIME=420
 SEARCH_BLOCKED=False
 SEARCH_USED=0
-API_CACHE={}\nDAILYMOTION_CACHE={}
+API_CACHE={}
+DAILYMOTION_CACHE={}
 
 def load(p): return json.loads(p.read_text(encoding="utf8"))
 def write(p, obj):

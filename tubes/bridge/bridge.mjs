@@ -20,8 +20,8 @@ const PLAYER_ORIGIN='https://buttocks.github.io';
 const PLAYER_ROOT='/suplex-baked-player/';
 const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.json';
 const OUTPUT_PATH='tubes/bridge/result.json';
-const CLEAN_LOADER_COMMIT='969cb185f134f7f5a059cf856a5e6b25245ea135';
-const PREVIOUS_CLEAN_LOADER_COMMIT='cfda63ca19d17281a744256e8af88742c06c4690';
+const CLEAN_LOADER_COMMIT='4424280a63a9b44f02b994ca81bf440fcf4de1e0';
+const PREVIOUS_CLEAN_LOADER_COMMIT='969cb185f134f7f5a059cf856a5e6b25245ea135';
 const REVIEWED_CUSTOM_NATIVE_SOURCES=new Set([
   'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@cc229cd2e0ede537051e3d71ea4d3b2d3c61f7cf/tubes/RDH/rdh-custom-only-v1.8.js'
 ]);

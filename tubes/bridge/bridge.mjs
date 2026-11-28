@@ -226,6 +226,8 @@ function embedHtml(src){
 async function writeResult(result){
   await fs.writeFile(OUTPUT_PATH,JSON.stringify(result,null,2)+'\n','utf8');
   console.log('Bridge result: '+result.status+' / '+result.channel+' / '+result.action);
+  if(result.action==='verify_native_acceptance')
+    console.log('Native acceptance detail '+JSON.stringify(result));
 }
 async function snapshot(page){
   return page.evaluate(()=>{

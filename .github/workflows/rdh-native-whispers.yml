@@ -1,9 +1,9 @@
-name: Verify native RDH server whisper dissolve
+name: Remove RDH server whisper fade
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/rdh-native-whispers.yml','tubes/RDH/deploy-native-whispers.mjs']
+    paths: ['.github/workflows/rdh-native-whispers.yml','tubes/RDH/deploy-native-whispers.mjs','tubes/RDH/rdh-custom-only-v1.9.js']
 permissions:
   contents: read
 concurrency:

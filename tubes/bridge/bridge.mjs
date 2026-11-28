@@ -22,6 +22,9 @@ const REQUEST_PATH=process.env.BAKED_BRIDGE_REQUEST || 'tubes/bridge/request.jso
 const OUTPUT_PATH='tubes/bridge/result.json';
 const CLEAN_LOADER_COMMIT='969cb185f134f7f5a059cf856a5e6b25245ea135';
 const PREVIOUS_CLEAN_LOADER_COMMIT='cfda63ca19d17281a744256e8af88742c06c4690';
+const REVIEWED_CUSTOM_NATIVE_SOURCES=new Set([
+  'https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@cc229cd2e0ede537051e3d71ea4d3b2d3c61f7cf/tubes/RDH/rdh-custom-only-v1.8.js'
+]);
 const EXTERNAL_NATIVE_LOADERS=new Map([
   ['/js/channel-loaders/54a161ff3e9e926276646d75648cf9000be038a6ebfb782e1b5f3f396e2a1244.js','wrestletube.js'],
   ['/js/channel-loaders/ebd708a4686b9ebf5a59b922c6982bdf4a830c12ce49cf7930c253beb2692894.js','retrowrestling.js'],
@@ -535,7 +538,8 @@ async function run(request,session=null){
           const externalUrl=new URL(live.externaljs,SITE);
           const approvedPublicReviewSource=externalUrl.href==='https://files.catbox.moe/a76opy.js';
           const reviewedCleanAsset=reviewedCleanLoaderFilename(externalUrl.href);
-          if((externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname))||approvedPublicReviewSource||reviewedCleanAsset){
+          const reviewedCustomSource=REVIEWED_CUSTOM_NATIVE_SOURCES.has(externalUrl.href);
+          if((externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname))||approvedPublicReviewSource||reviewedCleanAsset||reviewedCustomSource){
             const response=await page.request.get(externalUrl.href,{timeout:20000});
             if(response.ok()){
               externalJsSource=await response.text();
@@ -876,6 +880,7 @@ function selfTest(){
   assert.equal(reviewedCleanLoaderFilename(cleanLoaderUrl('wrestletube.js')),'wrestletube.js');
   assert.equal(reviewedCleanLoaderFilename('https://cdn.jsdelivr.net/gh/other/repo@'+CLEAN_LOADER_COMMIT+'/tubes/bridge/cleaned-loaders/wrestletube.js'),null);
   assert.equal(reviewedCleanLoaderFilename(cleanLoaderUrl('unknown.js')),null);
+  assert.equal(REVIEWED_CUSTOM_NATIVE_SOURCES.has('https://cdn.jsdelivr.net/gh/buttocks/bakednetwork@cc229cd2e0ede537051e3d71ea4d3b2d3c61f7cf/tubes/RDH/rdh-custom-only-v1.8.js'),true);
   assert.throws(()=>validate({schema:1,request_id:'native_inventory_bad',channel:'ROH',action:'inventory_legacy_native'}));
   const audit=validate({schema:1,request_id:'test_audit_01',channel:'luchatube',action:'audit'});
   assert.equal(audit.action,'audit');

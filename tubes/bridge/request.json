@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "request_id": "trek_external_review_inventory_01",
-  "channel": "Trek",
-  "action": "inventory_legacy_native"
+  "request_id": "gallios_lair_native_backup_20261128",
+  "channel": "Gallios_Lair",
+  "action": "backup_skin"
 }

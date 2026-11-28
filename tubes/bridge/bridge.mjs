@@ -535,7 +535,7 @@ async function run(request,session=null){
           const externalUrl=new URL(live.externaljs,SITE);
           const approvedPublicReviewSource=externalUrl.href==='https://files.catbox.moe/a76opy.js';
           const reviewedCleanAsset=reviewedCleanLoaderFilename(externalUrl.href);
-          if((externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname))||approvedPublicReviewSource)||reviewedCleanAsset){
+          if((externalUrl.origin===SITE&&/^\/js\/channel-loaders\/[a-f0-9]{64}\.js$/i.test(externalUrl.pathname))||approvedPublicReviewSource||reviewedCleanAsset){
             const response=await page.request.get(externalUrl.href,{timeout:20000});
             if(response.ok()){
               externalJsSource=await response.text();

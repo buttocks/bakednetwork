@@ -1,178 +1,118 @@
-[
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_ajwc-tv",
-    "channel": "joshi",
-    "action": "add_iframe",
-    "title": "AJW Classics",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ajwc-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_jwp",
-    "channel": "joshi",
-    "action": "add_iframe",
-    "title": "JWP Wrestling",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=jwp"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-93",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1993 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-93"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-94",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1994 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-94"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-95",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1995 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-95"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-97",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1997 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-97"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-98",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1998 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-98"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-99",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1999 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-99"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-2000",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "2000 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-2000"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-2001",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "2001 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-2001"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_cc-tv",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "Thanksgiving Network Today",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=cc-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_raw-96",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "1996 RAW",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-96"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_piper",
-    "channel": "WWF-WWE",
-    "action": "add_iframe",
-    "title": "Roddy Piper",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=piper"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_xwf",
-    "channel": "indies",
-    "action": "add_iframe",
-    "title": "XWF Wrestling",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=xwf"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_hauwf",
-    "channel": "RetroWrestling",
-    "action": "add_iframe",
-    "title": "Herb Abrams Network",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=hauwf"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_hustle",
-    "channel": "puro",
-    "action": "add_iframe",
-    "title": "HUSTLE -",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=hustle"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_ij-tv",
-    "channel": "puro",
-    "action": "add_iframe",
-    "title": "IWA Japan",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ij-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_w1-tv",
-    "channel": "puro",
-    "action": "add_iframe",
-    "title": "Wrestle 1",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=w1-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_st-tv",
-    "channel": "RetroWrestling",
-    "action": "add_iframe",
-    "title": "SMW TV",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=st-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_ut-tv",
-    "channel": "RetroWrestling",
-    "action": "add_iframe",
-    "title": "USWA TV",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ut-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_ve-tv",
-    "channel": "RetroWrestling",
-    "action": "add_iframe",
-    "title": "Von Erich",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ve-tv"
-  },
-  {
-    "schema": 1,
-    "request_id": "slamvision_embed_p-tv",
-    "channel": "RetroWrestling",
-    "action": "add_iframe",
-    "title": "Portland Wrestling",
-    "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=p-tv"
-  }
-]
+{
+  "schema": 1,
+  "request_id": "slamvision_embed_batch_20261128",
+  "channel": "joshi",
+  "action": "add_iframes_batch",
+  "items": [
+    {
+      "channel": "joshi",
+      "title": "AJW Classics",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ajwc-tv"
+    },
+    {
+      "channel": "joshi",
+      "title": "JWP Wrestling",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=jwp"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1993 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-93"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1994 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-94"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1995 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-95"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1996 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-96"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1997 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-97"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1998 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-98"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "1999 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-99"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "2000 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-2000"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "2001 RAW",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=raw-2001"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "Thanksgiving Network Today",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=cc-tv"
+    },
+    {
+      "channel": "WWF-WWE",
+      "title": "Roddy Piper",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=piper"
+    },
+    {
+      "channel": "puro",
+      "title": "HUSTLE -",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=hustle"
+    },
+    {
+      "channel": "puro",
+      "title": "IWA Japan",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ij-tv"
+    },
+    {
+      "channel": "puro",
+      "title": "Wrestle 1",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=w1-tv"
+    },
+    {
+      "channel": "RetroWrestling",
+      "title": "Herb Abrams Network",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=hauwf"
+    },
+    {
+      "channel": "RetroWrestling",
+      "title": "SMW TV",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=st-tv"
+    },
+    {
+      "channel": "RetroWrestling",
+      "title": "USWA TV",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ut-tv"
+    },
+    {
+      "channel": "RetroWrestling",
+      "title": "Von Erich",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=ve-tv"
+    },
+    {
+      "channel": "RetroWrestling",
+      "title": "Portland Wrestling",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=p-tv"
+    },
+    {
+      "channel": "indies",
+      "title": "XWF Wrestling",
+      "src": "https://buttocks.github.io/suplex-baked-player/slamvision-feed.html?id=xwf"
+    }
+  ]
+}
